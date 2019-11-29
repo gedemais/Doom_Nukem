@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:25:21 by gedemais         ###   ########.fr       */
+/*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
+/*   Updated: 2019/11/29 06:10:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int	doom_nukem(t_env *env)
+int		render(void *param)
 {
-	if (setup(env))
-		return (-1);
-	mlx_hooks(env);
-	return (0);
-}
+	t_env	*env;
 
-int			main(void)
-{
-	t_env	env;
-
-	ft_memset(&env, 0, sizeof(t_env));
-	if (doom_nukem(&env))
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
+	env = ((t_env*)param);
+	handle_events(env);
 	return (0);
 }

@@ -16,7 +16,13 @@ endif
 
 # Source code files
 SRCS_NAME=	main.c\
-			mlx/init_mlx.c
+			setup.c\
+			render.c\
+			handle_events.c\
+			mlx/init_mlx.c\
+			mlx/events.c\
+			mlx/hooks.c
+
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
@@ -46,7 +52,7 @@ $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $@ -c $<
+	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
 	make -C $(MLX_PATH)

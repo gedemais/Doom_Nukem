@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:25:21 by gedemais         ###   ########.fr       */
+/*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
+/*   Updated: 2019/11/29 06:18:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int	doom_nukem(t_env *env)
+static void	load_values(t_env *env)
 {
-	if (setup(env))
-		return (-1);
-	mlx_hooks(env);
-	return (0);
+	env->mlx.half_hgt = HGT / 2;
+	env->mlx.half_wdt = WDT / 2;
 }
 
-int			main(void)
+int			setup(t_env *env)
 {
-	t_env	env;
-
-	ft_memset(&env, 0, sizeof(t_env));
-	if (doom_nukem(&env))
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
+	if (init_mlx(&env->mlx))
+		return (-1);
+	load_values(env);
 	return (0);
 }

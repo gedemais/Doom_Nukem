@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:25:21 by gedemais         ###   ########.fr       */
+/*   Created: 2019/11/29 01:37:34 by gedemais          #+#    #+#             */
+/*   Updated: 2019/11/29 02:06:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#ifndef ERRORS_H
+# define ERRORS_H
 
-static int	doom_nukem(t_env *env)
-{
-	if (setup(env))
-		return (-1);
-	mlx_hooks(env);
-	return (0);
-}
+/*
+** MLX
+*/
+# define MLX_INIT_FAIL "mlx_init() failed\n"
+# define MLX_NW_FAIL "mlx_new_window() failed\n"
+# define MLX_NI_FAIL "mlx_new_image() failed\n"
+# define MLX_GDA_FAIL "mlx_get_data_addr() failed\n"
 
-int			main(void)
-{
-	t_env	env;
-
-	ft_memset(&env, 0, sizeof(t_env));
-	if (doom_nukem(&env))
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
-	return (0);
-}
+#endif
