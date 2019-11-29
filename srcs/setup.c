@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:18:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/29 08:04:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			setup(t_env *env)
 {
 	if (init_mlx(&env->mlx))
 		return (-1);
+//		|| !(env->sprites = load_sprites(env->mlx)))
 	load_values(env);
 	return (0);
 }

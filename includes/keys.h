@@ -8,6 +8,8 @@
 # define KEY_PRESS_MASK (1L<<0)
 # define KEY_RELEASE_MASK (1L<<1)
 
+# define PSFE 
+
 # define KEY_ESCAPE		53
 # define KEY_F1 		122
 # define KEY_F2			120

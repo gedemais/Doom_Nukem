@@ -20,7 +20,10 @@ SRCS_NAME=	main.c\
 			render.c\
 			handle_events.c\
 			mlx/init_mlx.c\
+			mlx/load_sprites.c\
 			mlx/events.c\
+			mlx/basics.c\
+			mlx/bresenham.c\
 			mlx/hooks.c
 
 SRCS_PATH=srcs/

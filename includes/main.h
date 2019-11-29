@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:22:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/29 08:03:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdio.h>
+# include <time.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -25,8 +26,6 @@
 # define WDT 800
 # define HGT 600
 # define WINDOW_NAME "Doom Nukem"
-# define NB_HOOKS 3
-# define NB_BUTTONS 5
 
 typedef struct	s_mlx
 {
@@ -42,6 +41,8 @@ typedef struct	s_mlx
 	int			half_wdt;
 }				t_mlx;
 
+# define NB_BUTTONS 5
+
 typedef struct	s_events
 {
 	bool		keys[NB_KEYS];
@@ -51,11 +52,26 @@ typedef struct	s_events
 	int			mouse_y;
 }				t_events;
 
+# define NB_SPRITES 1
+
+typedef struct	s_sprite
+{
+	void		*img_ptr;
+	char		*img_data;
+	int			hgt;
+	int			wdt;
+	int			alpha;
+	int			pad;
+}				t_sprite;
+
 typedef struct	s_env
 {
 	t_mlx		mlx;
 	t_events	events;
 	int			pad;
+	t_sprite	*sprites;
+	int			padb;
+	int			padc;
 }				t_env;
 
 int		setup(t_env *env);
@@ -64,6 +80,7 @@ int		setup(t_env *env);
 ** MLX
 */
 int				init_mlx(t_mlx *mlx);
+t_sprite		*load_sprites(t_mlx mlx);
 void			mlx_hooks(t_env *env);
 int				key_press(int key, void *param);
 int				key_release(int key, void *param);
@@ -72,10 +89,13 @@ int				mouse_release(int button, int x, int y, void *param);
 int				mouse_position(int x, int y, void *param);
 bool			*mouse_freedom(void);
 
+void			draw_pixel(char *img, int x, int y, int color);
+
 /*
 ** Main Loop
 */
 int				render(void *param);
 void			handle_events(t_env *env);
 
+double			mesure_time(bool end);
 #endif
