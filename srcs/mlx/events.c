@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:24:28 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:21:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/29 21:05:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		mouse_position(int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	printf("x = %d y = %d\n", x, y);
+	env->events.mouse_x = x;
+	env->events.mouse_y = y;
+//	printf("x = %d y = %d\n", x, y);
 	return (0);
 }

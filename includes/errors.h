@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:34 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 07:37:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:40:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 # define MLX_GDA_FAIL "mlx_get_data_addr() failed\n"
 
 # define MLX_PNGTOIMG_FAIL "mlx_png_file_to_image() failed\n"
+
+# define SPRITE_LOADING "Sprite loader failed\n"
 
 #endif

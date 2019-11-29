@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 08:03:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:21:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int				mouse_position(int x, int y, void *param);
 bool			*mouse_freedom(void);
 
 void			draw_pixel(char *img, int x, int y, int color);
+char			*blit_sprite(char *img, t_sprite sprite, int x_y[2], float sc);
 
 /*
 ** Main Loop
