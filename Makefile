@@ -6,7 +6,7 @@ FLAGS= -Wall -Werror -Wextra -Weverything
 # Flags variables
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
-    FLAGS += -g3 -fsanitize=address
+    FLAGS += -g3 -fsanitize=address -fno-common
 endif
 
 OPTI ?= 0
@@ -21,6 +21,7 @@ SRCS_NAME=	main.c\
 			handle_events.c\
 			openal.c\
 			play_sound.c\
+			resources_paths.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\
@@ -73,5 +74,6 @@ clean:
 fclean: clean
 	make -C $(LIB_PATH) fclean
 	rm -rf $(NAME)
+	rm -rf $(NAME).dSYM
 
 re: fclean all

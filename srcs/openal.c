@@ -1,19 +1,12 @@
 #include "main.h"
 
-static char	*spaths(unsigned int index)
-{
-	static char		*paths[NB_SAMPLES] = {"resources/samples/sound.wav"};
-
-	return (paths[index]);
-}
-
 static int			create_buffers(t_sample *samples)
 {
 	unsigned int	i;
 	t_sample		*s;
 
 	i = 0;
-	while (i < NB_SAMPLES)
+	while (i < SAMPLE_MAX)
 	{
 		s = &samples[i];
 		alGenBuffers(1, &s->buffer);
@@ -30,7 +23,7 @@ static int			read_samples(t_sample *samples)
 	unsigned int	i;
 
 	i = 0;
-	while (i < NB_SAMPLES)
+	while (i < SAMPLE_MAX)
 	{
 		if (!(samples[i].sample = (ALshort*)malloc(sizeof(ALshort) * (unsigned)samples[i].nb_samples)))
 			return (-1);
@@ -50,13 +43,13 @@ static t_sample	*load_samples(void)
 	unsigned int	i;
 
 	i = 0;
-	if (!(dest = (t_sample*)malloc(sizeof(t_sample) * NB_SAMPLES)))
+	if (!(dest = (t_sample*)malloc(sizeof(t_sample) * SAMPLE_MAX)))
 		return (NULL);
-	while (i < NB_SAMPLES)
+	while (i < SAMPLE_MAX)
 	{
-		if (!(t.file = sf_open(spaths(i), SFM_READ, &t.infos)))
+		if (!(t.file = sf_open(samples_paths(i), SFM_READ, &t.infos)))
 		{
-			ft_putstr_fd(spaths(i), 2);
+			ft_putstr_fd(samples_paths(i), 2);
 			ft_putstr_fd(SAMPLE_NF, 2);
 			return (NULL);
 		}

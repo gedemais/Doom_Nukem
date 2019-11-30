@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/30 04:08:08 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/11/30 21:13:07 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <time.h>
 # include <limits.h>
+# include <assert.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -84,7 +85,7 @@ int		setup(t_env *env);
 /*
 ** MLX
 */
-int				init_mlx(t_mlx *mlx);
+int				init_mlx(t_env *env);
 t_sprite		*load_sprites(t_mlx mlx);
 void			mlx_hooks(t_env *env);
 int				key_press(int key, void *param);
@@ -102,13 +103,15 @@ void			draw_pixel(char *img, int x, int y, int color);
 /*
 ** Sprites
 */
+char			*sprites_paths(unsigned int index);
 char			*blit_sprite(char *img, t_sprite sprite, int x_y[2], float sc);
 
 /*
 ** OpenAl
 */
+char			*samples_paths(unsigned int index);
 int				init_openal(t_sound *env);
-void			play_sound(t_sample sample, float pos[3]);
+void			play_ambience(t_sample sample, bool play, bool stop);
 
 /*
 ** Main Loop

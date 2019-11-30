@@ -5,14 +5,13 @@
 # include "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/alc.h"
 # include <sndfile.h>
 
-# define NB_SAMPLES 1
-
-/*
 enum	e_sample_id
 {
-	
-}		t_sample_id;
-*/
+	MOB_WALKING_1,
+	AMB_1,
+	SAMPLE_MAX
+};
+
 
 typedef struct	s_sample
 {
@@ -31,7 +30,9 @@ typedef struct	s_sound
 {
 	ALCdevice	*device;
 	ALCcontext	*context;
-	t_sample		*samples;
+	t_sample	*samples;
+	ALuint		ambient;
+	int			pad;
 }				t_sound;
 
 #endif

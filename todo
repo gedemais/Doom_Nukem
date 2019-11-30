@@ -1,0 +1,6 @@
+Synchroniser la position du point d'ecoute avec celle du joueur a chaque frame (alListener)
+
+Samples:
+Switch ak47
+
+ajouter les sources d'openAL au projet
