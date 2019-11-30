@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2019/11/28 20:48:18 by gedemais         ###   ########.fr        #
+#    Updated: 2019/11/30 02:41:49 by demaisonc        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,17 @@ NAME = libft.a
 CC = gcc
 
 FLAGS = -Wall -Werror -Wextra
+
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    FLAGS += -g3 -fsanitize=address
+endif
+
+OPTI ?= 0
+ifeq ($(OPTI), 1)
+    FLAGS += -O3 -Ofast -march=native
+endif
+
 
 SRCS  =	ft_atoi.c \
 		ft_abs.c\

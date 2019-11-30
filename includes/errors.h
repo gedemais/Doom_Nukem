@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:34 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 19:40:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/30 01:55:35 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 # define MLX_PNGTOIMG_FAIL "mlx_png_file_to_image() failed\n"
 
-# define SPRITE_LOADING "Sprite loader failed\n"
+# define OPEN_DEVICE "alcOpenDevice() failed\n"
+# define CREATE_CONTEXT "alcCreateContext() failed\n"
+# define CONTEXT_CURRENT "alcMakeContextCurrent() failed\n"
+# define SAMPLE_NF " : sample not found\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 21:06:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/30 01:48:21 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*spaths(unsigned int index)
 {
-	static char		*paths[NB_SPRITES] = {"download.XPM"};
+	static char		*paths[NB_SPRITES] = {"resources/sprites/download.XPM"};
 
 	return (paths[index]);
 }
@@ -31,13 +31,10 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 	float	sample_y;
 
 	y = 0;
-	if (scale <= 0.0f || scale > 1.0f)
-		return (img);
-	(void)x_y;
-//	printf("wdt = %d | hgt = %d\n", sprite.wdt, sprite.hgt);
 	wdt = (int)((float)sprite.wdt * scale);
 	hgt = (int)((float)sprite.hgt * scale);
-	printf("prop wdt = %d | prop hgt = %d\n", wdt, hgt);
+	if (wdt + x_y[0] >= WDT || hgt + x_y[1] >= HGT)
+		return (img);
 	while (y < hgt)
 	{
 		x = 0;
@@ -45,9 +42,11 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 		while (x < wdt)
 		{
 			sample_x = (float)x / (float)wdt;
-			pos = (int)(sample_y * sprite.hgt - 1) * sprite.wdt + (int)(sample_x * sprite.wdt) * 4;
+			pos = ((int)(sample_y * sprite.hgt) - 1) * sprite.wdt;
+			pos += (int)(sample_x * sprite.wdt);
+			pos *= 4;
 			ft_memcpy(&color, &sprite.img_data[pos], 4);
-			draw_pixel(img, x + x_y[0], y + x_y[1], color);
+			draw_pixel(img, x + x_y[0], y + x_y[1], color); // A remplacer par un memcpy quand le pixloc sera actif
 			x++;
 		}
 		y++;

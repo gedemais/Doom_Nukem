@@ -19,6 +19,7 @@ SRCS_NAME=	main.c\
 			setup.c\
 			render.c\
 			handle_events.c\
+			openal.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\
@@ -52,7 +53,7 @@ LIB = libft/libft.a
 all: $(NAME)
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -framework OpenGL -framework AppKit
+	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -lsndfile -framework OpenAL -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) -o $@ -c $<

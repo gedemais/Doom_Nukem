@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 20:21:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/11/30 00:55:58 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include "errors.h"
 # include "keys.h"
+# include "sound.h"
 
 # define WDT 800
 # define HGT 600
@@ -69,9 +70,8 @@ typedef struct	s_env
 	t_mlx		mlx;
 	t_events	events;
 	int			pad;
+	t_sound		sound;
 	t_sprite	*sprites;
-	int			padb;
-	int			padc;
 }				t_env;
 
 int		setup(t_env *env);
@@ -91,6 +91,11 @@ bool			*mouse_freedom(void);
 
 void			draw_pixel(char *img, int x, int y, int color);
 char			*blit_sprite(char *img, t_sprite sprite, int x_y[2], float sc);
+
+/*
+** OpenAl
+*/
+int				init_openal(t_sound *env);
 
 /*
 ** Main Loop
