@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/30 00:55:58 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/11/30 04:08:08 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <time.h>
+# include <limits.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -64,7 +65,11 @@ typedef struct	s_sprite
 	int			alpha;
 	int			pad;
 }				t_sprite;
-
+/*
+typedef struct	s_player
+{
+}				t_player;
+*/
 typedef struct	s_env
 {
 	t_mlx		mlx;
@@ -88,14 +93,22 @@ int				mouse_press(int key, int x, int y, void *param);
 int				mouse_release(int button, int x, int y, void *param);
 int				mouse_position(int x, int y, void *param);
 bool			*mouse_freedom(void);
-
 void			draw_pixel(char *img, int x, int y, int color);
+
+/*
+** Player
+*/
+
+/*
+** Sprites
+*/
 char			*blit_sprite(char *img, t_sprite sprite, int x_y[2], float sc);
 
 /*
 ** OpenAl
 */
 int				init_openal(t_sound *env);
+void			play_sound(t_sample sample, float pos[3]);
 
 /*
 ** Main Loop

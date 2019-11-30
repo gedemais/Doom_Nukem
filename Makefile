@@ -20,6 +20,7 @@ SRCS_NAME=	main.c\
 			render.c\
 			handle_events.c\
 			openal.c\
+			play_sound.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\
