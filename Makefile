@@ -22,6 +22,9 @@ SRCS_NAME=	main.c\
 			openal.c\
 			play_sound.c\
 			resources_paths.c\
+			rasterizer.c\
+			camera.c\
+			matrices.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\

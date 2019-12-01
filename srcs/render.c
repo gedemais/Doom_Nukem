@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/30 21:14:09 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/01 03:13:23 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ int		render(void *param)
 
 	mesure_time(false);
 	env = ((t_env*)param);
+
 	handle_events(env);
 
+	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
+	rasterizer(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }
