@@ -25,6 +25,7 @@ SRCS_NAME=	main.c\
 			rasterizer.c\
 			camera.c\
 			matrices.c\
+			vectors.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\

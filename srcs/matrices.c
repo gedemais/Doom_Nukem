@@ -38,6 +38,21 @@ void	update_xrotation_matrix(t_cam *cam, float theta)
     cam->rx_m[3][3] = 1.0f;
 }
 
+void	update_zrotation_matrix(t_cam *cam, float theta)
+{
+	float	c;
+	float	s;
+
+	c = cosf(theta);
+	s = sinf(theta);
+	cam->rz_m[0][0] = c;
+    cam->rz_m[0][1] = s;
+    cam->rz_m[1][0] = -s;
+    cam->rz_m[1][1] = c;
+    cam->rz_m[2][2] = 1.0f;
+    cam->rz_m[3][3] = 1.0f;
+}
+
 void	init_matrices(t_cam *cam)
 {
 	flush_matrices(cam);
