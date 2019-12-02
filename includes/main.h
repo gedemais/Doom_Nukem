@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/01 02:40:36 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/02 22:37:32 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct	s_events
 
 typedef struct	s_sprite
 {
-	void		*img_ptr;
 	char		*img_data;
 	int			hgt;
 	int			wdt;

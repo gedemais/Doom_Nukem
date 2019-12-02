@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/30 20:05:24 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/02 22:59:15 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 t_sprite	*load_sprites(t_mlx mlx)
 {
 	unsigned int		i;
-	int					t;
+//	int					t;
 	t_sprite			*dest;
 
 	i = 0;
@@ -58,17 +58,17 @@ t_sprite	*load_sprites(t_mlx mlx)
 		return (NULL);
 	while (i < NB_SPRITES)
 	{
-		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx.img_ptr,
-			sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
-		{
-			ft_putstr_fd(MLX_PNGTOIMG_FAIL, 2);
-			return (NULL);
-		}
-		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))
+		(void)mlx;
+//		if (!(dest[i].img_data = bmp_read(sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
+//		{
+//			ft_putstr_fd(MLX_PNGTOIMG_FAIL, 2);
+//			return (NULL);
+//		}
+/*		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))
 		{
 			ft_putstr_fd(MLX_GDA_FAIL, 2);
 			return (NULL);
-		}
+		}*/
 		i++;
 	}
 	return (dest);
