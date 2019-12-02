@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/02 22:59:15 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/02 23:25:12 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,11 @@ t_sprite	*load_sprites(t_mlx mlx)
 	while (i < NB_SPRITES)
 	{
 		(void)mlx;
-//		if (!(dest[i].img_data = bmp_read(sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
-//		{
-//			ft_putstr_fd(MLX_PNGTOIMG_FAIL, 2);
-//			return (NULL);
-//		}
-/*		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))
+		if (!(dest[i].img_data = bmp_read(sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
 		{
-			ft_putstr_fd(MLX_GDA_FAIL, 2);
+			ft_putstr_fd(MLX_PNGTOIMG_FAIL, 2);
 			return (NULL);
-		}*/
+		}
 		i++;
 	}
 	return (dest);

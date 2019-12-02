@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/02 22:37:32 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/02 23:25:44 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WDT 800
 # define HGT 600
 # define WINDOW_NAME "Doom Nukem"
+
+# define BUFF_READ 16384
 
 typedef struct	s_mlx
 {
@@ -90,8 +92,10 @@ int		setup(t_env *env);
 */
 int				init_mlx(t_env *env);
 t_sprite		*load_sprites(t_mlx mlx);
+char			*bmp_read(char *path, int *wdt, int *hgt);
 int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
+char			*read_file(int fd);
 
 /*
 ** MLX

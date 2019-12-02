@@ -26,6 +26,8 @@ SRCS_NAME=	main.c\
 			camera.c\
 			matrices.c\
 			vectors.c\
+			read_file.c\
+			mlx/bmp_reader.c\
 			mlx/init_mlx.c\
 			mlx/load_sprites.c\
 			mlx/events.c\
