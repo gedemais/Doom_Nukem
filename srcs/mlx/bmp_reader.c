@@ -1,5 +1,5 @@
 #include "main.h"
-/*
+
 char	*ReadBMP(char *file)
 {
     int i;
@@ -26,10 +26,8 @@ char	*ReadBMP(char *file)
         }
 		i++;
     }
-
-    fclose(f);
-    return data;
-}*/
+    return (data);
+}
 
 char	*bmp_read(char *path, int *wdt, int *hgt)
 {

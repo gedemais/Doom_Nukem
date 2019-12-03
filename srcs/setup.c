@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/01 00:21:45 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/03 00:14:35 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int			setup(t_env *env)
 		|| !(env->sprites = load_sprites(env->mlx)))
 		return (-1);
 	load_values(env);
-	if (init_openal(&env->sound) != 0
-		|| init_camera(&env->cam) != 0)
+	if (init_openal(&env->sound) != 0)
 		return (-1);
+	init_camera(&env->cam);
 	return (0);
 }

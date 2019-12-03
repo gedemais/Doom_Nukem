@@ -1,6 +1,6 @@
 #include "main.h"
 
-int		init_camera(t_cam *cam)
+void	init_camera(t_cam *cam)
 {
 	cam->aspect_ratio = (float)HGT / (float)WDT;
 	cam->fnear = 0.1f;
@@ -9,7 +9,6 @@ int		init_camera(t_cam *cam)
 	cam->fovr = 1.0f / tanf((float)((float)(cam->fovd * 0.5f) / (180.0f * (float)M_PI)));
 	cam->fdelta = cam->ffar - cam->fnear;
 	init_matrices(cam);
-	return (0);
 }
 
 t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
