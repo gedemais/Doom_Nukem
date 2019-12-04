@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/04 06:09:49 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/04 07:44:12 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct	s_env
 	int			pada;
 }				t_env;
 
-int		setup(t_env *env);
+int				setup(t_env *env);
 
 /*
 ** Setup

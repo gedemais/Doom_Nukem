@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:11:52 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/04 07:41:03 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/04 07:43:02 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		mlx_hooks(t_env *env)
 	void			*win;
 
 	win = env->mlx.mlx_win;
-	constant_hooks(env, win);
 	mlx_hook(win, 2, E_KEY_PRESS, (int(*)(void))key_press, env);
 	mlx_hook(win, 3, E_KEY_RELEASE, (int(*)(void))key_release, env);
 	mlx_hook(win, 4, E_MOUSE_PRESS, (int(*)(void))mouse_press, env);
