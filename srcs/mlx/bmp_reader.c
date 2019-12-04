@@ -20,6 +20,8 @@ static int		read_bmp_header(int fd, int *wdt, int *hgt)
 	}
 	ft_memcpy(wdt, (void*)&header[18], sizeof(int));
 	ft_memcpy(hgt, (void*)&header[22], sizeof(int));
+	*wdt = abs(*wdt);
+	*hgt = abs(*hgt);
 	return (0);
 }
 
@@ -27,16 +29,18 @@ static char		*read_bmp_data(int fd, int wdt, int hgt, size_t line_size)
 {
 	char			*line;
 	char			*data;
-	size_t			data_size;
+	int				data_size;
 	unsigned int	i;
 	unsigned int	j;
 
-	i = 0;
 	j = 0;
 	(void)wdt;
-	data_size = line_size * (size_t)hgt;
-	if (!(data = ft_strnew(data_size)) || !(line = ft_strnew(line_size)))
+		printf("%zu\n", line_size);
+	data_size = (int)line_size * hgt * 2;
+	if (!(data = ft_strnew((size_t)data_size))
+		|| !(line = ft_strnew((size_t)line_size)))
 		return (NULL);
+	printf("%d\n", data_size);
 	while (read(fd, line, line_size) == (int)line_size)
 	{
 		i = 0;
@@ -44,8 +48,8 @@ static char		*read_bmp_data(int fd, int wdt, int hgt, size_t line_size)
 		{
 //			swap_bytes(&line[i], &line[i + 2]);
 //			line[i + 3] = 0;
-			ft_memcpy(&data[j], &line[i], 4);
-			i += 4;
+			ft_memcpy(&data[j], &line[i], 3);
+			i += 3;
 			j += 4;
 		}
 	}
@@ -64,7 +68,7 @@ char			*bmp_read(char *path, int *wdt, int *hgt)
 		return (NULL);
 	}
 	if (read_bmp_header(fd, wdt, hgt)
-		|| !(data = read_bmp_data(fd, *wdt, *hgt, (size_t)(*wdt * 4))))
+		|| !(data = read_bmp_data(fd, *wdt, *hgt, (size_t)(*wdt * 3))))
 	{
 		close(fd);
 		return (NULL);

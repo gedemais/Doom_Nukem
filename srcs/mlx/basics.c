@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/01 03:07:46 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/04 10:00:58 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	draw_pixel(char *img, int x, int y, int color)
 
 	if (x < 0 || x >= WDT || y < 0 || y >= HGT)
 		return ;
-	pos = ((y - 1) * WDT + x) * 4;
+	pos = (abs(y - 1) * WDT + x) * 4;
 	ft_memcpy(&img[pos], &color, 4);
 }
