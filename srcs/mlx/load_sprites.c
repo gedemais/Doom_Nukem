@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/02 23:25:12 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/04 03:44:32 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,19 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 	return (img);
 }
 
-t_sprite	*load_sprites(t_mlx mlx)
+t_sprite	*load_sprites(void)
 {
 	unsigned int		i;
-//	int					t;
 	t_sprite			*dest;
 
 	i = 0;
-	if (!(dest = (t_sprite*)malloc(sizeof(t_sprite) * NB_SPRITES)))
+	if (!(dest = (t_sprite*)malloc(sizeof(t_sprite) * SP_MAX)))
 		return (NULL);
-	while (i < NB_SPRITES)
+	while (i < SP_MAX)
 	{
-		(void)mlx;
 		if (!(dest[i].img_data = bmp_read(sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
 		{
-			ft_putstr_fd(MLX_PNGTOIMG_FAIL, 2);
+			ft_putstr_fd(BMP_READER, 2);
 			return (NULL);
 		}
 		i++;

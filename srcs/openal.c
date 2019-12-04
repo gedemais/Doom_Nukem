@@ -6,7 +6,7 @@ static int			create_buffers(t_sample *samples)
 	t_sample		*s;
 
 	i = 0;
-	while (i < SAMPLE_MAX)
+	while (i < SA_MAX)
 	{
 		s = &samples[i];
 		alGenBuffers(1, &s->buffer);
@@ -23,7 +23,7 @@ static int			read_samples(t_sample *samples)
 	unsigned int	i;
 
 	i = 0;
-	while (i < SAMPLE_MAX)
+	while (i < SA_MAX)
 	{
 		if (!(samples[i].sample = (ALshort*)malloc(sizeof(ALshort) * (unsigned)samples[i].nb_samples)))
 			return (-1);
@@ -43,9 +43,9 @@ static t_sample	*load_samples(void)
 	unsigned int	i;
 
 	i = 0;
-	if (!(dest = (t_sample*)malloc(sizeof(t_sample) * SAMPLE_MAX)))
+	if (!(dest = (t_sample*)malloc(sizeof(t_sample) * SA_MAX)))
 		return (NULL);
-	while (i < SAMPLE_MAX)
+	while (i < SA_MAX)
 	{
 		if (!(t.file = sf_open(samples_paths(i), SFM_READ, &t.infos)))
 		{

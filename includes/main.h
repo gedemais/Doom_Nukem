@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/03 00:14:21 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/04 06:09:49 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,21 @@
 # include "keys.h"
 # include "sound.h"
 # include "raster.h"
+# include "bmp.h"
 
 # define WDT 800
 # define HGT 600
 # define WINDOW_NAME "Doom Nukem"
-
 # define BUFF_READ 16384
+
+enum			s_context_id
+{
+	C_MAIN_MENU,
+	C_MAP_EDITOR,
+	C_CUSTOM,
+	C_CAMPAIN,
+	C_PAUSE_MENU
+};
 
 typedef struct	s_mlx
 {
@@ -48,8 +57,6 @@ typedef struct	s_mlx
 	int			half_wdt;
 }				t_mlx;
 
-# define NB_BUTTONS 5
-
 typedef struct	s_events
 {
 	bool		keys[NB_KEYS];
@@ -59,21 +66,6 @@ typedef struct	s_events
 	int			mouse_y;
 }				t_events;
 
-# define NB_SPRITES 1
-
-typedef struct	s_sprite
-{
-	char		*img_data;
-	int			hgt;
-	int			wdt;
-	int			alpha;
-	int			pad;
-}				t_sprite;
-/*
-typedef struct	s_player
-{
-}				t_player;
-*/
 typedef struct	s_env
 {
 	t_mlx		mlx;
@@ -91,8 +83,7 @@ int		setup(t_env *env);
 ** Setup
 */
 int				init_mlx(t_env *env);
-t_sprite		*load_sprites(t_mlx mlx);
-char			*bmp_read(char *path, int *wdt, int *hgt);
+t_sprite		*load_sprites(void);
 int				init_openal(t_sound *env);
 void			init_camera(t_cam *cam);
 char			*read_file(int fd);

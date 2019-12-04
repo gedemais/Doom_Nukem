@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/29 06:20:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/04 07:26:55 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ bool		*mouse_freedom(void)
 	return (&freedom);
 }
 
-static void	handle_keys(t_env *env, t_events *e)
-{
-	(void)e;
-	(void)env;
-}
-
-static void	handle_mouse(t_env *env, t_events *e)
-{
-	(void)e;
-	(void)env;
-}
-
 void		handle_events(t_env *env)
 {
 	t_events	*e;
@@ -38,6 +26,4 @@ void		handle_events(t_env *env)
 	e = &env->events;
 	if (!*mouse_freedom())
 		mlx_mouse_move(env->mlx.mlx_win, env->mlx.half_wdt, env->mlx.half_hgt);
-	handle_keys(env, e);
-	handle_mouse(env, e);
 }

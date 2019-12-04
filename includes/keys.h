@@ -1,6 +1,16 @@
 #ifndef KEYS_H
 # define KEYS_H
 
+enum		e_events_id
+{
+	E_KEY_PRESS = (1L << 0),
+	E_KEY_RELEASE = (1L << 1),
+	E_MOUSE_PRESS = (1L << 2),
+	E_MOUSE_RELEASE = (1L << 3),
+	E_MOUSE_POSITION = 0,
+	E_CLOSE = (1L << 17),
+};
+
 # define NB_KEYS 260
 
 # define KEY_PRESS 2
@@ -8,7 +18,7 @@
 # define KEY_PRESS_MASK (1L<<0)
 # define KEY_RELEASE_MASK (1L<<1)
 
-# define PSFE 
+# define NB_BUTTONS 5
 
 # define KEY_ESCAPE		53
 # define KEY_F1 		122

@@ -7,11 +7,9 @@
 
 enum	e_sample_id
 {
-	MOB_WALKING_1,
-	AMB_1,
-	SAMPLE_MAX
+	SA_AMB_1,
+	SA_MAX
 };
-
 
 typedef struct	s_sample
 {
