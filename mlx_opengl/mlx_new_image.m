@@ -108,7 +108,7 @@ unsigned int    mlx_get_color_value(mlx_ptr_t *mlx_ptr, int color)
   return (color);
 }
 
-int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, int color, unsigned char *string)
+int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, int color, unsigned char *string, int size)
 {
   mlx_img_ctx_t	*imgctx;
   int		gX;
@@ -118,7 +118,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
     return(0);
 
 #ifdef STRINGPUTX11
-  y -= (FONT_HEIGHT * 2)/3;
+  y -= (size * 2)/3;
 #endif
 
   [(id)(win_ptr->winid) selectGLContext];
@@ -129,14 +129,14 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
     {
       if (*string >= 32 && *string <= 127)
 	{
-	  gX = (FONT_WIDTH+2)*(*string-32);
+	  gX = (size+2)*(*string-32);
 	  gY = 0;
 	  //      printf("put char %c pos %d %d\n", *string, gX, gY);
 	  [(id)(win_ptr->winid) mlx_gl_draw_font:mlx_ptr->font andCtx:imgctx andX:x andY:y andColor:color glyphX:gX glyphY:gY];
 #ifdef STRINGPUTX11
-	  x += FONT_WIDTH/1.4;
+	  x += size/1.4;
 #else
-	  x += FONT_WIDTH;
+	  x += size;
 #endif
 	}
       string ++;

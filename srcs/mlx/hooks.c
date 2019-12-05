@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:11:52 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/04 07:43:02 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/05 06:10:29 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * Pour definir les hooks a utiliser par type d'event / contexte du programme,
  * on utilisera des tableaux de pointeurs sur fonction (1 par type d'evenement,
- * pour eviter les conflits de typage dans le tableau)
+ * pour eviter les conflits de typage)
  */
 
 void		mlx_hooks(t_env *env)

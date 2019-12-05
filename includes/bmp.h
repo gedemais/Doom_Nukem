@@ -11,6 +11,7 @@ enum				e_sprite_id
 
 typedef struct		s_sprite
 {
+	void			*img_ptr;
 	char			*img_data;
 	int				hgt;
 	int				wdt;

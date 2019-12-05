@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/04 07:44:12 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/05 06:09:02 by demaisonc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include "sound.h"
 # include "raster.h"
 # include "bmp.h"
+
+# include "title_screen.h"
 
 # define WDT 800
 # define HGT 600
@@ -62,8 +64,7 @@ typedef struct	s_events
 	bool		keys[NB_KEYS];
 	bool		buttons[NB_BUTTONS];
 	char		pad[3];
-	int			mouse_x;
-	int			mouse_y;
+	t_point		mouse_pos;
 }				t_events;
 
 typedef struct	s_env
@@ -83,7 +84,7 @@ int				setup(t_env *env);
 ** Setup
 */
 int				init_mlx(t_env *env);
-t_sprite		*load_sprites(void);
+t_sprite		*load_sprites(t_mlx *mlx);
 int				init_openal(t_sound *env);
 void			init_camera(t_cam *cam);
 char			*read_file(int fd);

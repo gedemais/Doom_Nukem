@@ -3,7 +3,7 @@
 char	*sprites_paths(unsigned int index)
 {
 	static char		*paths[SP_MAX] = {
-					"resources/sprites/download.bmp"};
+					"resources/sprites/singe.XPM"};
 
 	return (paths[index]);
 }
