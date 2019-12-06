@@ -27,13 +27,15 @@ SRCS_NAME=	main.c\
 			matrices.c\
 			vectors.c\
 			read_file.c\
+			dev_events.c\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
 			mlx/events.c\
 			mlx/basics.c\
 			mlx/bresenham.c\
 			mlx/hooks.c\
-			title_screen/events.c
+			title_screen/events.c\
+			title_screen/render.c
 
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))

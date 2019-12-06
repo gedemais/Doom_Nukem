@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/04 07:26:55 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/06 17:35:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void		handle_events(t_env *env)
 
 	e = &env->events;
 	if (!*mouse_freedom())
-		mlx_mouse_move(env->mlx.mlx_win, env->mlx.half_wdt, env->mlx.half_hgt);
+		mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
 }

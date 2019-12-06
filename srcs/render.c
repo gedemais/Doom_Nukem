@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/05 23:50:18 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/06 18:31:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,12 @@ double	mesure_time(bool end)
 		return ((double)(clock() - start) / CLOCKS_PER_SEC);
 }
 
+
 int		render(void *param)
 {
-	t_env	*env;
-	static float	av = 0.0f;
-	static int		it = 0;
+	static int	(*render_fts[C_MAX])(void*) = {render_dev, render_ts};
+	int			context;
 
-	mesure_time(false);
-	env = ((t_env*)param);
-
-	handle_events(env);
-
-	ft_memset(env->mlx.img_data, 50, sizeof(int) * WDT * HGT);
-	rasterizer(env);
-//	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 400, 100, 0xffffff, "Maboye sent le poney");
-	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-
-	av += ((double)1.0f / mesure_time(true));
-	if (it > 50)
-	{
-		av /= it;
-		printf("%f\n", (double)av);
-		av = 0.0f;
-		it = 0;
-	}
-	it++;
-	return (0);
+	context = ((t_env*)param)->context;
+	return (render_fts[context](param));
 }

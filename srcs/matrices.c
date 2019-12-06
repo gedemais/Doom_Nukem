@@ -32,8 +32,8 @@ void	update_xrotation_matrix(t_cam *cam, float theta)
 	s = sinf(theta * 0.5f);
 	cam->rx_m[0][0] = 1.0f;
     cam->rx_m[1][1] = c;
-    cam->rx_m[1][2] = s;
-    cam->rx_m[2][1] = -s;
+    cam->rx_m[1][2] = -s;
+    cam->rx_m[2][1] = s;
     cam->rx_m[2][2] = c;
     cam->rx_m[3][3] = 1.0f;
 }

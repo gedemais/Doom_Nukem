@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/06 02:29:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/06 19:36:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@
 
 enum			s_context_id
 {
+	C_DEV,
 	C_TITLE_SCREEN,
-	C_MAP_EDITOR,
-	C_CUSTOM,
-	C_CAMPAIN,
-	C_PAUSE_MENU,
 	C_MAX
 };
 
@@ -56,8 +53,6 @@ typedef struct	s_mlx
 	int			s_l;
 	int			endian;
 	int			pad;
-	int			half_hgt;
-	int			half_wdt;
 }				t_mlx;
 
 typedef struct	s_events
@@ -66,23 +61,17 @@ typedef struct	s_events
 	bool		buttons[NB_BUTTONS];
 	char		pad[3];
 	t_point		mouse_pos;
-	int			(*key_press_fts[C_MAX])(void*);
-	int			(*key_release_fts[C_MAX])(void*);
-	int			(*mouse_press_fts[C_MAX])(void*);
-	int			(*mouse_release_fts[C_MAX])(void*);
-	int			(*mouse_pos_fts[C_MAX])(void*);
-	int			(*render_fts[C_MAX])(void*);
+	int			padb;
 }				t_events;
 
 typedef struct	s_env
 {
 	t_mlx		mlx;
 	t_events	events;
-	int			pad;
 	t_sound		sound;
 	t_sprite	*sprites;
 	t_cam		cam;
-	int			pada;
+	int			context;
 }				t_env;
 
 int				setup(t_env *env);
@@ -110,7 +99,7 @@ void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 
 /*
-** Player
+** Rasterization
 */
 void			rasterizer(t_env *env);
 
@@ -133,4 +122,14 @@ int				render(void *param);
 void			handle_events(t_env *env);
 
 double			mesure_time(bool end);
+
+
+int		key_press_dev(int key, void *param);
+int		key_release_dev(int key, void *param);
+int		mouse_press_dev(int button, int x, int y, void *param);
+int		mouse_release_dev(int button, int x, int y, void *param);
+int		mouse_position_dev(int x, int y, void *param);
+int		render_dev(void *param);
+
+
 #endif

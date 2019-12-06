@@ -74,16 +74,16 @@ void	rasterizer(t_env *env)
 	{
 		ft_memcpy(&t, &mesh.tris[i], sizeof(t_triangle));
 
-		update_xrotation_matrix(&env->cam, (float)ft_to_radians((double)theta));
-		update_zrotation_matrix(&env->cam, (float)ft_to_radians((double)theta));
+		update_xrotation_matrix(&env->cam, theta);
+		update_zrotation_matrix(&env->cam, theta);
 
 		t.points[0] = multiply_matrix(env->cam.rz_m, t.points[0]);
 		t.points[1] = multiply_matrix(env->cam.rz_m, t.points[1]);
 		t.points[2] = multiply_matrix(env->cam.rz_m, t.points[2]);
 
-		t.points[0] = multiply_matrix(env->cam.rx_m, t.points[0]);
-		t.points[1] = multiply_matrix(env->cam.rx_m, t.points[1]);
-		t.points[2] = multiply_matrix(env->cam.rx_m, t.points[2]);
+	//	t.points[0] = multiply_matrix(env->cam.rx_m, t.points[0]);
+	//	t.points[1] = multiply_matrix(env->cam.rx_m, t.points[1]);
+	//	t.points[2] = multiply_matrix(env->cam.rx_m, t.points[2]);
 
 		t.points[0] = vec_add(t.points[0], (t_vec3d){1.5f, 1.5f, 4.0f});
 		t.points[1] = vec_add(t.points[1], (t_vec3d){1.5f, 1.5f, 4.0f});
@@ -100,19 +100,22 @@ void	rasterizer(t_env *env)
 		t.points[2].x += 5.0f;
 		t.points[2].y += 4.0f;
 
-		t.points[0].x *= 0.1f * (float)env->mlx.half_wdt;
-		t.points[0].y *= 0.1f * (float)env->mlx.half_hgt;
-		t.points[1].x *= 0.1f * (float)env->mlx.half_wdt;
-		t.points[1].y *= 0.1f * (float)env->mlx.half_hgt;
-		t.points[2].x *= 0.1f * (float)env->mlx.half_wdt;
-		t.points[2].y *= 0.1f * (float)env->mlx.half_hgt;
+		t.points[0].x *= 0.1f * (float)WDT / 2;
+		t.points[0].y *= 0.1f * (float)HGT / 2;
+		t.points[1].x *= 0.1f * (float)WDT / 2;
+		t.points[1].y *= 0.1f * (float)HGT / 2;
+		t.points[2].x *= 0.1f * (float)WDT / 2;
+		t.points[2].y *= 0.1f * (float)HGT / 2;
 
 		draw_triangle(&env->mlx, (t_point){(int)t.points[0].x, (int)t.points[0].y},
 					(t_point){(int)t.points[1].x, (int)t.points[1].y},
 					(t_point){(int)t.points[2].x, (int)t.points[2].y});
 		i++;
 	}
-	theta += 0.5f;
+//	printf("%f\n", theta);
+	theta += 0.01f;
+	if (theta > 10)
+		env->context = C_TITLE_SCREEN;
 }
 
 

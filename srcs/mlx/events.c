@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:24:28 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/05 06:10:55 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/06 18:43:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,50 @@
 
 int		key_press(int key, void *param)
 {
-	t_env	*env;
+	static int	(*key_press_fts[C_MAX])(int, void*) = {key_press_dev, key_press_ts};
+	t_env		*env;
 
 	env = ((t_env*)param);
-	if (key == KEY_ESCAPE)
-		exit(EXIT_SUCCESS);
-	if (key == KEY_M)
-	{
-		*mouse_freedom() = *mouse_freedom() ? false : true;
-		if (*mouse_freedom())
-			mlx_mouse_show();
-		else
-			mlx_mouse_hide();
-	}
 	env->events.keys[key] = true;
-	return (0);
+	return (key_press_fts[env->context](key, param));
 }
 
 int		key_release(int key, void *param)
 {
-	t_env	*env;
+	static int	(*key_release_fts[C_MAX])(int, void*) = {key_release_dev, key_release_ts};
+	t_env		*env;
 
 	env = ((t_env*)param);
 	env->events.keys[key] = false;
-	return (0);
+	return (key_release_fts[env->context](key, param));
 }
 
 int		mouse_press(int button, int x, int y, void *param)
 {
-	t_env	*env;
+	static int	(*mouse_press_fts[C_MAX])(int, int, int, void*) = {mouse_press_dev, mouse_press_ts};
+	t_env		*env;
 
 	env = ((t_env*)param);
 	env->events.buttons[button] = true;
-	printf("x = %d\ny = %d\nbutton = %d\n", x, y, button);
-	return (0);
+	return (mouse_press_fts[env->context](button, x, y, param));
 }
 
 int		mouse_release(int button, int x, int y, void *param)
 {
-	t_env	*env;
+	static int	(*mouse_release_fts[C_MAX])(int, int, int, void*) = {mouse_release_dev, mouse_release_ts};
+	t_env		*env;
 
 	env = ((t_env*)param);
 	env->events.buttons[button] = false;
-	printf("x = %d\ny = %d\nbutton = %d\n", x, y, button);
-	return (0);
+	return (mouse_release_fts[env->context](button, x, y, param));
 }
 
 int		mouse_position(int x, int y, void *param)
 {
-	t_env	*env;
+	static int	(*mouse_position_fts[C_MAX])(int, int, void*) = {mouse_position_dev, mouse_position_ts};
+	t_env		*env;
 
 	env = ((t_env*)param);
 	env->events.mouse_pos = (t_point){x, y};
-	printf("x = %d y = %d\n", x, y);
-	return (0);
+	return (mouse_position_fts[env->context](x, y, param));
 }
