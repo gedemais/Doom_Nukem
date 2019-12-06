@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:11:52 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/05 06:10:29 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/06 02:29:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 void		mlx_hooks(t_env *env)
 {
-	//static int	(*moves_fts[NB_MOVES])(t_env*) = {&swap_a, &swap_b};
 	void			*win;
 
 	win = env->mlx.mlx_win;

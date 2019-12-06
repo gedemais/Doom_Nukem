@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/05 06:09:02 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/06 02:29:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@
 
 enum			s_context_id
 {
-	C_MAIN_MENU,
+	C_TITLE_SCREEN,
 	C_MAP_EDITOR,
 	C_CUSTOM,
 	C_CAMPAIN,
-	C_PAUSE_MENU
+	C_PAUSE_MENU,
+	C_MAX
 };
 
 typedef struct	s_mlx
@@ -65,6 +66,12 @@ typedef struct	s_events
 	bool		buttons[NB_BUTTONS];
 	char		pad[3];
 	t_point		mouse_pos;
+	int			(*key_press_fts[C_MAX])(void*);
+	int			(*key_release_fts[C_MAX])(void*);
+	int			(*mouse_press_fts[C_MAX])(void*);
+	int			(*mouse_release_fts[C_MAX])(void*);
+	int			(*mouse_pos_fts[C_MAX])(void*);
+	int			(*render_fts[C_MAX])(void*);
 }				t_events;
 
 typedef struct	s_env

@@ -74,8 +74,8 @@ void	rasterizer(t_env *env)
 	{
 		ft_memcpy(&t, &mesh.tris[i], sizeof(t_triangle));
 
-		update_xrotation_matrix(&env->cam, theta);
-		update_zrotation_matrix(&env->cam, theta);
+		update_xrotation_matrix(&env->cam, (float)ft_to_radians((double)theta));
+		update_zrotation_matrix(&env->cam, (float)ft_to_radians((double)theta));
 
 		t.points[0] = multiply_matrix(env->cam.rz_m, t.points[0]);
 		t.points[1] = multiply_matrix(env->cam.rz_m, t.points[1]);
@@ -85,9 +85,9 @@ void	rasterizer(t_env *env)
 		t.points[1] = multiply_matrix(env->cam.rx_m, t.points[1]);
 		t.points[2] = multiply_matrix(env->cam.rx_m, t.points[2]);
 
-		t.points[0] = vec_add(t.points[0], (t_vec3d){1.5f, 1.5f, 3.0f});
-		t.points[1] = vec_add(t.points[1], (t_vec3d){1.5f, 1.5f, 3.0f});
-		t.points[2] = vec_add(t.points[2], (t_vec3d){1.5f, 1.5f, 3.0f});
+		t.points[0] = vec_add(t.points[0], (t_vec3d){1.5f, 1.5f, 4.0f});
+		t.points[1] = vec_add(t.points[1], (t_vec3d){1.5f, 1.5f, 4.0f});
+		t.points[2] = vec_add(t.points[2], (t_vec3d){1.5f, 1.5f, 4.0f});
 
 		t.points[0] = multiply_matrix(env->cam.p_m, t.points[0]);
 		t.points[1] = multiply_matrix(env->cam.p_m, t.points[1]);
@@ -112,7 +112,7 @@ void	rasterizer(t_env *env)
 					(t_point){(int)t.points[2].x, (int)t.points[2].y});
 		i++;
 	}
-	theta += 0.1f;
+	theta += 0.5f;
 }
 
 

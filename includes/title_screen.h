@@ -6,7 +6,7 @@ typedef struct		s_button
 	int				pourpakcasoividetacapte;
 }					t_button;
 
-typedef struct		s_ts_env;
+typedef struct		s_ts_env
 {
 	int				pourpakcasoividetacapte;
 }					t_ts_env;
