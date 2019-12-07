@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/06 19:36:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/07 16:38:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 */
 void			rasterizer(t_env *env);
 
+void			fill_triangle_unit(t_env *env, t_triangle t, int color);
 /*
 ** Sprites
 */

@@ -1,7 +1,7 @@
 NAME=doom-nukem
 
 CC=gcc
-FLAGS= -Wall -Werror -Wextra -Weverything
+FLAGS= -Wall -Werror -Wextra
 
 # Flags variables
 DEBUG ?= 0
@@ -23,6 +23,7 @@ SRCS_NAME=	main.c\
 			play_sound.c\
 			resources_paths.c\
 			rasterizer.c\
+			fill_triangle_unit.c\
 			camera.c\
 			matrices.c\
 			vectors.c\
