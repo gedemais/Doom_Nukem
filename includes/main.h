@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/07 23:08:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/08 11:07:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ typedef struct	s_env
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
-	t_mesh		*scene;
+	t_mesh		*maps[SCENE_MAX];
 	t_data		data;
 	t_cam		cam;
+	float		*z_buffer;
 	int			context;
 }				t_env;
 

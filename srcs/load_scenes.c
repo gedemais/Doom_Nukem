@@ -14,7 +14,7 @@ int			load_scenes(t_env *env)
 	i = 0;
 	while (i < SCENE_MAX)
 	{
-		if (!(env->scene = load_objects(objs_paths(i))))
+		if (!(env->maps[i] = load_objects(objs_paths(i))))
 			return (-1);
 		i++;
 	}
