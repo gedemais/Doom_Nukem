@@ -22,9 +22,9 @@ void	rasterizer(t_env *env)
 
 	light = (t_vec3d){0.0f, 1.0f, -1.0f};
 	vec_normalize(&light);
-	while (i < (unsigned)env->scene[0].nb_tris)
+	while (i < (unsigned)env->maps[0]->nb_tris)
 	{
-		ft_memcpy(&t, &env->scene[0].tris[i], sizeof(t_triangle));
+		ft_memcpy(&t, &env->maps[0]->tris[i], sizeof(t_triangle));
 
 		update_xrotation_matrix(&env->cam, thetaz * 1.25f);
 		update_zrotation_matrix(&env->cam, thetaz);
