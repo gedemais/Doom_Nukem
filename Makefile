@@ -28,6 +28,9 @@ SRCS_NAME=	main.c\
 			matrices.c\
 			vectors.c\
 			read_file.c\
+			load_scenes.c\
+			parse_obj.c\
+			parsing_utils.c\
 			dev_events.c\
 			mlx/init_mlx.c\
 			mlx/sprites.c\

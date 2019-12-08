@@ -53,14 +53,25 @@ int		render_dev(void *param)
 	t_env		*env;
 
 //	mesure_time(false);
+	static float	av = 0.0f;
+	static int		it = 0;
 	env = ((t_env*)param);
 
 	handle_events(env);
 
+	mesure_time(false);
 	ft_memset(env->mlx.img_data, 50, sizeof(int) * WDT * HGT);
 	rasterizer(env);
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
+	av += 1 / mesure_time(true);
+	if (av > 500000)
+	{
+		printf("%f\n", av / it);
+		av = 0.0f;
+		it = 0;
+	}
+	it++;
 	return (0);
 }

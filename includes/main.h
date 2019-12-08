@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/07 16:38:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/07 23:08:31 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,17 @@
 # define WINDOW_NAME "Doom Nukem"
 # define BUFF_READ 16384
 
-enum			s_context_id
+enum			e_context_id
 {
 	C_DEV,
 	C_TITLE_SCREEN,
 	C_MAX
+};
+
+enum			e_scene_id
+{
+	SCENE_TEST,
+	SCENE_MAX
 };
 
 typedef struct	s_mlx
@@ -64,12 +70,20 @@ typedef struct	s_events
 	int			padb;
 }				t_events;
 
+typedef struct	s_data
+{
+	float		half_wdt;
+	float		half_hgt;
+}				t_data;
+
 typedef struct	s_env
 {
 	t_mlx		mlx;
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
+	t_mesh		*scene;
+	t_data		data;
 	t_cam		cam;
 	int			context;
 }				t_env;
@@ -84,6 +98,8 @@ t_sprite		*load_sprites(t_mlx *mlx);
 int				init_openal(t_sound *env);
 void			init_camera(t_cam *cam);
 char			*read_file(int fd);
+int				load_scenes(t_env *env);
+t_mesh			*load_objects(char *path);
 
 /*
 ** MLX
@@ -95,6 +111,7 @@ int				mouse_press(int key, int x, int y, void *param);
 int				mouse_release(int button, int x, int y, void *param);
 int				mouse_position(int x, int y, void *param);
 bool			*mouse_freedom(void);
+int				shade_color(int color, float scale);
 void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 
@@ -123,6 +140,10 @@ int				render(void *param);
 void			handle_events(t_env *env);
 
 double			mesure_time(bool end);
+
+bool			cross_line(char *file, unsigned int *i);
+bool			cross_whites(char *file, unsigned int *i);
+bool			cross_floats(char *file, unsigned int *i);
 
 
 int		key_press_dev(int key, void *param);
