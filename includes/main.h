@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/08 11:07:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:45:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "sound.h"
 # include "raster.h"
 # include "bmp.h"
+# include "obj_parser.h"
 
 # include "title_screen.h"
 
@@ -82,10 +83,9 @@ typedef struct	s_env
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
-	t_mesh		*maps[SCENE_MAX];
+	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_cam		cam;
-	float		*z_buffer;
 	int			context;
 }				t_env;
 
@@ -98,9 +98,8 @@ int				init_mlx(t_env *env);
 t_sprite		*load_sprites(t_mlx *mlx);
 int				init_openal(t_sound *env);
 void			init_camera(t_cam *cam);
-char			*read_file(int fd);
-int				load_scenes(t_env *env);
-t_mesh			*load_objects(char *path);
+int				load_maps(t_env *env);
+int				laod_object(int fd, char *line);
 
 /*
 ** MLX
@@ -154,5 +153,10 @@ int		mouse_release_dev(int button, int x, int y, void *param);
 int		mouse_position_dev(int x, int y, void *param);
 int		render_dev(void *param);
 
+int		new_mesh(t_map *map, char *line, int *mesh);
+int		new_vertex(t_map *map, char *line, int *mesh);
+int		new_face(t_map *map, char *line, int *mesh);
+int		comment(t_map *map, char *line, int *mesh);
+int		vertex_end(t_map *map, char *line, int *mesh);
 
 #endif

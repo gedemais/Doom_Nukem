@@ -15,9 +15,10 @@ typedef struct	s_dynarray
 }				t_dynarray;
 
 int				init_dynarray(t_dynarray *arr, int cell_size, int nb_cells);
+void			free_dynarray(t_dynarray *arr);
 void			*dyacc(t_dynarray *arr, int index);
 
-int				pop_dynarray(t_dynarray *arr);
+int				pop_dynarray(t_dynarray *arr, bool front);
 int				push_dynarray(t_dynarray *arr, void *src, bool back);
 
 

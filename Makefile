@@ -22,16 +22,13 @@ SRCS_NAME=	main.c\
 			openal.c\
 			play_sound.c\
 			resources_paths.c\
-			rasterizer.c\
-			fill_triangle_unit.c\
 			camera.c\
 			matrices.c\
 			vectors.c\
-			read_file.c\
-			load_scenes.c\
-			parse_obj.c\
-			parsing_utils.c\
 			dev_events.c\
+			obj_parser/parser_utils.c\
+			obj_parser/load_maps.c\
+			obj_parser/obj_lines.c\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
 			mlx/events.c\
@@ -39,7 +36,9 @@ SRCS_NAME=	main.c\
 			mlx/bresenham.c\
 			mlx/hooks.c\
 			title_screen/events.c\
-			title_screen/render.c
+			title_screen/render.c\
+			rasterizer/fill_triangle_unit.c\
+			rasterizer/rasterizer.c
 
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))
@@ -62,6 +61,9 @@ MLX_OBJS_NAME = mlx_init_loop.o\
 
 LIB_PATH = libft/
 LIB = libft/libft.a
+
+LDYNARRAY_PATH = dynarray/
+LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 ##########################################################
 
 all: $(NAME)

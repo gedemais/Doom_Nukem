@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 10:21:21 by gedemais          #+#    #+#             */
-/*   Updated: 2019/01/05 17:28:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/08 21:12:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 4
+# define BUFF_SIZE 1024
 
 int		get_next_line(const int fd, char **line);
 

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/05 05:16:45 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/08 21:11:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 	while (y < hgt)
 	{
 		x = 0;
-//		sample_y = (float)y / (float)hgt;
 		sample_y += delta_y;
 		sample_x = 0.0f;
 		while (x < wdt)
@@ -65,16 +64,10 @@ t_sprite	*load_sprites(t_mlx *mlx)
 		return (NULL);
 	while (i < SP_MAX)
 	{
-/*		if (!(dest[i].img_data = bmp_read(sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
-		{
-			ft_putstr_fd(BMP_READER, 2);
-			return (NULL);
-		}*/
 		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
 			return (NULL);
 		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))
 			return (NULL);
-		printf("%s sprite loaded (%d, %d)\n", sprites_paths(i), dest[i].wdt, dest[i].hgt);
 		i++;
 	}
 	return (dest);

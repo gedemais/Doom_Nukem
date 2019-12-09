@@ -25,7 +25,6 @@ typedef struct	s_triangle
 typedef struct	s_mesh
 {
 	t_triangle	*tris;
-	int			nb_tris;
 }				t_mesh;
 
 typedef struct	s_filler
@@ -61,12 +60,12 @@ void			update_yrotation_matrix(t_cam *cam, float theta);
 void			update_zrotation_matrix(t_cam *cam, float theta);
 t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
 
-t_vec3d		vec_add(t_vec3d a, t_vec3d b);
-t_vec3d		vec_sub(t_vec3d a, t_vec3d b);
-t_vec3d		vec_mult(t_vec3d a, t_vec3d b);
-void		vec_swap(t_vec3d *a, t_vec3d *b);
-t_vec3d		vec_cross(t_vec3d a, t_vec3d b);
-void		vec_normalize(t_vec3d *vec);
-float		vec_dot(t_vec3d a, t_vec3d b);
+t_vec3d			vec_add(t_vec3d a, t_vec3d b);
+t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
+t_vec3d			vec_mult(t_vec3d a, t_vec3d b);
+void			vec_swap(t_vec3d *a, t_vec3d *b);
+t_vec3d			vec_cross(t_vec3d a, t_vec3d b);
+void			vec_normalize(t_vec3d *vec);
+float			vec_dot(t_vec3d a, t_vec3d b);
 
 #endif

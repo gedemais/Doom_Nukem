@@ -6,7 +6,7 @@
 /*   By: gedemais <gedemais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:05:11 by gedemais          #+#    #+#             */
-/*   Updated: 2019/10/13 18:45:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/08 20:52:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <string.h>
 # include <fcntl.h>
 # include <math.h>
+
+# include "dynarray.h"
 
 /*
 ** Strings functions

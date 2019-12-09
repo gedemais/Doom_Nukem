@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2019/11/30 02:41:49 by demaisonc        ###   ########.fr        #
+#    Updated: 2019/12/08 19:47:27 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ OPTI ?= 0
 ifeq ($(OPTI), 1)
     FLAGS += -O3 -Ofast -march=native
 endif
-
 
 SRCS  =	ft_atoi.c \
 		ft_abs.c\
@@ -117,10 +116,13 @@ SRCS  =	ft_atoi.c \
 		ft_constrain.c \
 		ft_to_degrees.c \
 		ft_strwlen.c\
-		ft_to_radians.c
+		ft_to_radians.c\
+		dynarray.c\
+		stack_stuff.c
 
 INC=libft.h\
-	get_next_line.h
+	get_next_line.h\
+	dynarray.h
 
 OBJS=$(SRCS:.c=.o)
 
