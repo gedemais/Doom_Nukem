@@ -25,6 +25,7 @@ typedef struct	s_triangle
 typedef struct	s_mesh
 {
 	t_triangle	*tris;
+	int			nb_tris;
 }				t_mesh;
 
 typedef struct	s_filler

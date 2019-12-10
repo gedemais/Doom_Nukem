@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2019/11/30 21:29:54 by demaisonc        ###   ########.fr       */
+/*   Updated: 2019/12/10 12:12:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	doom_nukem(t_env *env)
 {
 	if (setup(env))
 		return (-1);
+	env->context = C_DEV;
+	env->scene = SCENE_TEST;
 	mlx_hooks(env);
 	return (0);
 }

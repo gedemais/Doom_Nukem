@@ -16,10 +16,12 @@ typedef struct		s_map
 {
 	t_dynarray		meshs;
 	t_dynarray		pool;
+	int				nb_meshs;
+	int				tri;
 	char			pstate;
 }					t_map;
 
-bool	cross_whites(char *line, unsigned int *i);
-bool	cross_floats(char *line, unsigned int *i);
+bool				cross_whites(char *line, unsigned int *i);
+bool				cross_floats(char *line, unsigned int *i);
 
 #endif

@@ -22,24 +22,27 @@ void	rasterizer(t_env *env)
 
 	light = (t_vec3d){0.0f, 1.0f, -1.0f};
 	vec_normalize(&light);
-	while (i < 12)
+//	printf("nb_meshs = %d\n", env->maps[0].nb_meshs);
+	for (int j = 0; j < env->maps[0].nb_meshs; j++){
+		i = 0;
+	while ((int)i < ((t_mesh*)dyacc(&env->maps[0].meshs, j))->nb_tris)
 	{
-//		ft_memcpy(&t, &env->maps[0]->tris[i], sizeof(t_triangle));
+		ft_memcpy(&t, &(((t_mesh*)dyacc(&env->maps[0].meshs, j))->tris[i]), sizeof(t_triangle));
 
-		update_xrotation_matrix(&env->cam, thetaz * 1.25f);
+//		update_xrotation_matrix(&env->cam, thetaz * 1.25f);
 		update_zrotation_matrix(&env->cam, thetaz);
 
-		t.points[0] = multiply_matrix(env->cam.rx_m, t.points[0]);
+/*		t.points[0] = multiply_matrix(env->cam.rx_m, t.points[0]);
 		t.points[1] = multiply_matrix(env->cam.rx_m, t.points[1]);
-		t.points[2] = multiply_matrix(env->cam.rx_m, t.points[2]);
+		t.points[2] = multiply_matrix(env->cam.rx_m, t.points[2]);*/
 
 		t.points[0] = multiply_matrix(env->cam.rz_m, t.points[0]);
 		t.points[1] = multiply_matrix(env->cam.rz_m, t.points[1]);
 		t.points[2] = multiply_matrix(env->cam.rz_m, t.points[2]);
 
-		t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 3.0f});
-		t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 3.0f});
-		t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 3.0f});
+		t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 7.5f});
+		t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 7.5f});
+		t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 7.5f});
 
 		line1 = vec_sub(t.points[1], t.points[0]);
 		line2 = vec_sub(t.points[2], t.points[0]);
@@ -66,6 +69,7 @@ void	rasterizer(t_env *env)
 //						(t_point){(int)t.points[2].x, (int)t.points[2].y});
 		}
 		i++;
+	}
 	}
 //	printf("%f\n", theta);
 	thetaz += 0.012f;

@@ -61,7 +61,7 @@ int		render_dev(void *param)
 
 	mesure_time(false);
 	ft_memset(env->mlx.img_data, 50, sizeof(int) * WDT * HGT);
-//	rasterizer(env);
+	rasterizer(env);
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 

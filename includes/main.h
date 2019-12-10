@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/09 17:45:01 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/10 12:15:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_data
 {
 	float		half_wdt;
 	float		half_hgt;
+	int			data_size;
 }				t_data;
 
 typedef struct	s_env
@@ -87,6 +88,7 @@ typedef struct	s_env
 	t_data		data;
 	t_cam		cam;
 	int			context;
+	int			scene;
 }				t_env;
 
 int				setup(t_env *env);

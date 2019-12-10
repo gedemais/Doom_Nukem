@@ -30,9 +30,11 @@ static int	parse_map(t_map *map, char *path)
 	int		fd;
 	int		mesh;
 
-	mesh = 0;
+	mesh = -1;
 	if ((fd = open(path, O_RDONLY)) == -1
 		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0))
+		return (-1);
+	if (init_dynarray(&map->pool, sizeof(t_vec3d), 0))
 		return (-1);
 	map->pstate = PS_OBJ;
 	while (get_next_line(fd, &line))
@@ -44,6 +46,7 @@ static int	parse_map(t_map *map, char *path)
 		}
 		free(line);
 	}
+	map->nb_meshs = mesh + 1;
 	return (0);
 }
 

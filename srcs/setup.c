@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/09 10:30:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/10 12:37:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int				setup(t_env *env)
 		return (-1);
 	init_camera(&env->cam);
 	load_values(env, &env->data);
-	env->context = C_DEV;
 //	play_ambience(env->sound.samples[SA_AMB_1], true, false);
 	return (0);
 }
