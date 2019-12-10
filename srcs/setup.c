@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/10 12:37:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/10 16:45:29 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		load_values(t_env *env, t_data *data)
 	(void)env;
 	data->half_wdt = (float)WDT / 2;
 	data->half_hgt = (float)HGT / 2;
+	data->data_size = WDT * HGT * sizeof(int);
 }
 
 int				setup(t_env *env)

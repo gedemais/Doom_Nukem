@@ -47,6 +47,7 @@ typedef struct	s_cam
 	float		ry_m[4][4];
 	float		rz_m[4][4];
 	t_vec3d		pos;
+	t_vec3d		dir;
 	float		aspect_ratio;
 	float		fnear;
 	float		ffar;

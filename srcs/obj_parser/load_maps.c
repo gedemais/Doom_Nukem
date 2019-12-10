@@ -2,7 +2,8 @@
 
 static char	*maps_paths(unsigned int index)
 {
-	char	*paths[SCENE_MAX] = {"resources/maps/object.obj"};
+	char	*paths[SCENE_MAX] = {	"resources/maps/object.obj",
+									"resources/maps/ut.obj"};
 
 	return (paths[index]);
 }
@@ -21,16 +22,15 @@ static int	parse_line(t_map *map, char *line, int *mesh)
 			return (obj_lines[i](map, line, mesh));
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 static int	parse_map(t_map *map, char *path)
 {
 	char	*line;
 	int		fd;
-	int		mesh;
 
-	mesh = -1;
+	map->nmesh = -1;
 	if ((fd = open(path, O_RDONLY)) == -1
 		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0))
 		return (-1);
@@ -38,15 +38,16 @@ static int	parse_map(t_map *map, char *path)
 		return (-1);
 	map->pstate = PS_OBJ;
 	while (get_next_line(fd, &line))
-	{
-		if (parse_line(map, line, &mesh))
+		if (parse_line(map, line, &map->nmesh))
 		{
+			ft_putstr_fd(OBJ_LINE_FORMAT, 2);
+			ft_putendl_fd(path, 2);
 			free(line);
 			return (-1);
 		}
+		else
 		free(line);
-	}
-	map->nb_meshs = mesh + 1;
+	map->nmesh++;
 	return (0);
 }
 

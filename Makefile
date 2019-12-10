@@ -22,9 +22,6 @@ SRCS_NAME=	main.c\
 			openal.c\
 			play_sound.c\
 			resources_paths.c\
-			camera.c\
-			matrices.c\
-			vectors.c\
 			dev_events.c\
 			obj_parser/parser_utils.c\
 			obj_parser/load_maps.c\
@@ -38,7 +35,11 @@ SRCS_NAME=	main.c\
 			title_screen/events.c\
 			title_screen/render.c\
 			rasterizer/fill_triangle_unit.c\
-			rasterizer/rasterizer.c
+			rasterizer/rasterizer.c\
+			rasterizer/camera.c\
+			rasterizer/matrices.c\
+			rasterizer/matrix_ops.c\
+			rasterizer/vectors.c
 
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))

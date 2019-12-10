@@ -5,6 +5,8 @@ int		key_press_dev(int key, void *param)
 	t_env		*env;
 
 	env = ((t_env*)param);
+	if (key == KEY_ESCAPE)
+		exit(EXIT_SUCCESS);
 	if (key == KEY_C)
 		env->context = C_TITLE_SCREEN;
 	(void)key;
@@ -51,22 +53,21 @@ int		mouse_position_dev(int x, int y, void *param)
 int		render_dev(void *param)
 {
 	t_env		*env;
-
-//	mesure_time(false);
 	static float	av = 0.0f;
 	static int		it = 0;
+
+	mesure_time(false);
 	env = ((t_env*)param);
 
 	handle_events(env);
 
-	mesure_time(false);
-	ft_memset(env->mlx.img_data, 50, sizeof(int) * WDT * HGT);
+	ft_memset(env->mlx.img_data, 50, env->data.data_size);
 	rasterizer(env);
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	av += 1 / mesure_time(true);
-	if (av > 500000)
+	if (av > 20000)
 	{
 		printf("%f\n", av / it);
 		av = 0.0f;

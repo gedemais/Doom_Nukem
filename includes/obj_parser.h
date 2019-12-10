@@ -12,11 +12,18 @@ enum				e_pstate
 	PS_MAX
 };
 
+enum			e_scene_id
+{
+	SCENE_TEST,
+	SCENE_UT,
+	SCENE_MAX
+};
+
 typedef struct		s_map
 {
 	t_dynarray		meshs;
 	t_dynarray		pool;
-	int				nb_meshs;
+	int				nmesh;
 	int				tri;
 	char			pstate;
 }					t_map;

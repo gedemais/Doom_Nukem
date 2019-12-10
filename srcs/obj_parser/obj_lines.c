@@ -4,6 +4,11 @@ int		new_mesh(t_map *map, char *line, int *mesh)
 {
 	static char	zone[sizeof(t_triangle)] = {0};
 
+	if (map->pstate != PS_FACES)
+	{
+		if (map->pstate != PS_OBJ)
+			return (-1);
+	}
 	map->tri = 0;
 	map->pstate = PS_OBJ;
 	if (push_dynarray(&map->meshs, &zone[0], false))
@@ -27,7 +32,6 @@ int		new_vertex(t_map *map, char *line, int *mesh)
 			return (-1);
 		map->pstate = PS_VERTEXS;
 	}
-
 	if (cross_whites(line, &i))
 		return (-1);
 	v.x = atof(&line[i]);
@@ -37,9 +41,9 @@ int		new_vertex(t_map *map, char *line, int *mesh)
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
 	v.z = atof(&line[i]);
-	if (push_dynarray(&map->pool, &v, false))
+	if (push_dynarray(&map->pool, &v, false)
+		|| !(cross_floats(line, &i)))
 		return (-1);
-	//printf("new_vertex : %s (%f %f %f), %d\n", line, ((t_vec3d*)dyacc(&map->pool, map->pool.nb_cells - 1))->x, v.y, v.z, map->pool.nb_cells);
 	return (0);
 }
 
@@ -53,7 +57,6 @@ int		new_face(t_map *map, char *line, int *mesh)
 	obj = dyacc(&map->meshs, *mesh);
 	if (map->pstate != PS_FACES)
 	{
-		//printf("init mesh %d\n", *mesh);
 		if (map->pstate != PS_END_VERTEXS
 			|| !(obj->tris = (t_triangle*)malloc(sizeof(t_triangle)
 			* map->pool.nb_cells * 50)))
@@ -62,23 +65,20 @@ int		new_face(t_map *map, char *line, int *mesh)
 		map->pstate = PS_FACES;
 	}
 
-	//printf("new_face : %s\n", line);
 	if (cross_whites(line, &i))
 		return (-1);
 	n = ft_atoi(&line[i]) - 1;
-	//printf("%d : %f %f %f\n", n, ((t_vec3d*)dyacc(&map->pool, n))->x, ((t_vec3d*)dyacc(&map->pool, n))->y, ((t_vec3d*)dyacc(&map->pool, n))->z);
 	ft_memcpy(&obj->tris[map->tri].points[0], dyacc(&map->pool, n), sizeof(t_vec3d));
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
 	n = ft_atoi(&line[i]) - 1;
-	//printf("%d : %f %f %f\n", n, ((t_vec3d*)dyacc(&map->pool, n))->x, ((t_vec3d*)dyacc(&map->pool, n))->y, ((t_vec3d*)dyacc(&map->pool, n))->z);
 	ft_memcpy(&obj->tris[map->tri].points[1], dyacc(&map->pool, n), sizeof(t_vec3d));
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
 	n = ft_atoi(&line[i]) - 1;
-	//printf("%d : %f %f %f\n", n, ((t_vec3d*)dyacc(&map->pool, n))->x, ((t_vec3d*)dyacc(&map->pool, n))->y, ((t_vec3d*)dyacc(&map->pool, n))->z);
 	ft_memcpy(&obj->tris[map->tri].points[2], dyacc(&map->pool, n), sizeof(t_vec3d));
-
+	if (!(cross_floats(line, &i)))
+		return (-1);
 	map->tri++;
 	obj->nb_tris++;
 	return (0);

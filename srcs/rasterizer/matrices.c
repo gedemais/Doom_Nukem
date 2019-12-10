@@ -1,18 +1,5 @@
 #include "main.h"
 
-static void	flush_matrices(t_cam *cam)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		ft_memset(&cam->p_m[0][0], 0, sizeof(float) * 4);
-		ft_memset(&cam->rx_m[0][0], 0, sizeof(float) * 4);
-		i++;
-	}
-}
-
 static void	init_projection_matrix(t_cam *cam)
 {
 	cam->p_m[0][0] = cam->aspect_ratio * cam->fovr;
@@ -70,6 +57,14 @@ void	update_zrotation_matrix(t_cam *cam, float theta)
 
 void	init_matrices(t_cam *cam)
 {
-	flush_matrices(cam);
+	unsigned int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		ft_memset(&cam->p_m[0][0], 0, sizeof(float) * 4);
+		ft_memset(&cam->rx_m[0][0], 0, sizeof(float) * 4);
+		i++;
+	}
 	init_projection_matrix(cam);
 }

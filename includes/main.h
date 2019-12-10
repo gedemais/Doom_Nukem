@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/10 12:15:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/10 16:04:56 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,16 @@
 
 # include "title_screen.h"
 
-# define WDT 800
-# define HGT 600
+# define NB_THREADS 8
+# define WDT 1080
+# define HGT 720
 # define WINDOW_NAME "Doom Nukem"
-# define BUFF_READ 16384
 
 enum			e_context_id
 {
 	C_DEV,
 	C_TITLE_SCREEN,
 	C_MAX
-};
-
-enum			e_scene_id
-{
-	SCENE_TEST,
-	SCENE_MAX
 };
 
 typedef struct	s_mlx
