@@ -41,6 +41,7 @@ int		new_vertex(t_map *map, char *line, int *mesh)
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
 	v.z = atof(&line[i]);
+	v.w = 1.0f;
 	if (push_dynarray(&map->pool, &v, false)
 		|| !(cross_floats(line, &i)))
 		return (-1);
