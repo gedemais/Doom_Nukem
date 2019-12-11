@@ -29,13 +29,13 @@ t_vec3d		vec_sub(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
-t_vec3d		vec_fmult(t_vec3d a, float b)
+t_vec3d		vec_fmult(t_vec3d a, float n)
 {
 	t_vec3d		ret;
 
-	ret.x = a.x * b;
-	ret.y = a.y * b;
-	ret.z = a.z * b;
+	ret.x = a.x * n;
+	ret.y = a.y * n;
+	ret.z = a.z * n;
 	return (ret);
 }
 

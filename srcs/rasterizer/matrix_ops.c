@@ -1,38 +1,53 @@
 #include "main.h"
+/*
+void		matrix_m_matrix(float a[4][4], float b[4][4], float ret[4][4])
+{
+	unsigned int	i;
+	unsigned int	j;
 
-void		translate_matrix(float m[4][4], t_vec3d p)
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+
+		i++;
+	}
+}*/
+
+t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
+{
+	t_vec3d			ret;
+	float			w;
+
+	ret.x = o.x * m[0][0] + o.y * m[1][0] + o.z * m[2][0] + m[3][0];
+	ret.y = o.x * m[0][1] + o.y * m[1][1] + o.z * m[2][1] + m[3][1];
+	ret.z = o.x * m[0][2] + o.y * m[1][2] + o.z * m[2][2] + m[3][2];
+	w = o.x * m[0][3] + o.y * m[1][3] + o.z * m[2][3] + m[3][3];
+	if (w != 0.0f)
+	{
+		ret.x /= w;
+		ret.y /= w;
+		ret.z /= w;
+	}
+	return (ret);
+}
+
+void	translation_matrix(float m[4][4], t_vec3d v)
 {
 	m[0][0] = 1.0f;
 	m[1][1] = 1.0f;
 	m[2][2] = 1.0f;
 	m[3][3] = 1.0f;
-	m[3][0] = p.x;
-	m[3][1] = p.y;
-	m[3][2] = p.z;
+	m[3][0] = v.x;
+	m[3][1] = v.y;
+	m[3][2] = v.z;
 }
 
-void		matrix_m_matrix(float a[4][4], float b[4][4], float ret[4][4])
-{
-	unsigned int	r;
-	unsigned int	c;
-
-	r = 0;
-	while (r < 4)
-	{
-		c = 0;
-		while (c < 4)
-		{
-			ret[r][c] = a[r][0] * b[0][c] + a[r][1] * b[1][c] + a[r][2] * b[2][c] + a[r][3] * b[3][c];
-			c++;
-		}
-		r++;
-	}
-}
-
-void		matrix_point_at(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
+void	matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 {
 	t_vec3d		new_f;
-	t_vec3d		new_u;
+	t_vec3d		new_up;
 	t_vec3d		new_r;
 	t_vec3d		t;
 
@@ -40,22 +55,23 @@ void		matrix_point_at(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	vec_normalize(&new_f);
 
 	t = vec_fmult(new_f, vec_dot(up, new_f));
-	new_u = vec_sub(up, t);
-	vec_normalize(&new_u);
+	new_up = vec_sub(up, t);
+	vec_normalize(&new_up);
 
-	new_r = vec_cross(new_u, new_f);
+	new_r = vec_cross(new_up, new_f);
+
 	m[0][0] = new_r.x;
-	m[1][0] = new_u.x;
+	m[1][0] = new_up.x;
 	m[2][0] = new_f.x;
 	m[3][0] = pos.x;
 
 	m[0][1] = new_r.y;
-	m[1][1] = new_u.y;
+	m[1][1] = new_up.y;
 	m[2][1] = new_f.y;
 	m[3][1] = pos.y;
 
 	m[0][2] = new_r.z;
-	m[1][2] = new_u.z;
+	m[1][2] = new_up.z;
 	m[2][2] = new_f.z;
 	m[3][2] = pos.z;
 
@@ -65,7 +81,7 @@ void		matrix_point_at(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	m[3][3] = 1.0f;
 }
 
-void		quick_inverse_matrix(float m[4][4], float ret[4][4])
+void	inverse_matrix(float m[4][4], float ret[4][4]) // Only for Rotation/Translation Matrices
 {
 	ret[0][0] = m[0][0]; ret[0][1] = m[1][0]; ret[0][2] = m[2][0]; ret[0][3] = 0.0f;
 	ret[1][0] = m[0][1]; ret[1][1] = m[1][1]; ret[1][2] = m[2][1]; ret[1][3] = 0.0f;
@@ -76,13 +92,31 @@ void		quick_inverse_matrix(float m[4][4], float ret[4][4])
 	ret[3][3] = 1.0f;
 }
 
-t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
+void	matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4])
 {
-	t_vec3d			ret;
+	unsigned int	c;
+	unsigned int	r;
 
-	ret.x = o.x * m[0][0] + o.y * m[1][0] + o.z * m[2][0] + o.w * m[3][0];
-	ret.y = o.x * m[0][1] + o.y * m[1][1] + o.z * m[2][1] + o.w * m[3][1];
-	ret.z = o.x * m[0][2] + o.y * m[1][2] + o.z * m[2][2] + o.w * m[3][2];
-	ret.w = o.x * m[0][3] + o.y * m[1][3] + o.z * m[2][3] + o.w * m[3][3];
-	return (ret);
+	c = 0;
+	while (c < 4)
+	{
+		r = 0;
+		while (r < 4)
+		{
+			ret[r][c] = m1[r][0] * m2[0][c] + m1[r][1] * m2[1][c] + m1[r][2] * m2[2][c] + m1[r][3] * m2[3][c];
+			r++;
+		}
+		c++;
+	}
+}
+
+t_vec3d matrix_mult_vec(float m[4][4], t_vec3d i)
+{
+	t_vec3d v;
+
+	v.x = i.x * m[0][0] + i.y * m[1][0] + i.z * m[2][0] + i.w * m[3][0];
+	v.y = i.x * m[0][1] + i.y * m[1][1] + i.z * m[2][1] + i.w * m[3][1];
+	v.z = i.x * m[0][2] + i.y * m[1][2] + i.z * m[2][2] + i.w * m[3][2];
+	v.w = i.x * m[0][3] + i.y * m[1][3] + i.z * m[2][3] + i.w * m[3][3];
+	return (v);
 }

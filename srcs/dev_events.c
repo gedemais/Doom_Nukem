@@ -5,10 +5,17 @@ int		key_press_dev(int key, void *param)
 	t_env		*env;
 
 	env = ((t_env*)param);
+
 	if (key == KEY_W)
-		env->cam.pos.y += 0.5f;
+		env->cam.pos.z += 0.5f;
 	if (key == KEY_S)
-		env->cam.pos.y -= 0.5f;
+		env->cam.pos.z -= 0.5f;
+
+	if (key == KEY_A)
+		env->cam.pos.x += 0.5f;
+	if (key == KEY_D)
+		env->cam.pos.x -= 0.5f;
+
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
 	if (key == KEY_C)
