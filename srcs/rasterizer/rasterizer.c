@@ -21,16 +21,19 @@ void	rasterizer(t_env *env)
 
 	i = 0;
 
-	printf("cam : %f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
-	env->cam.dir = (t_vec3d){0, 1, 1, 1};
+//	printf("cam : %f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
+	env->cam.dir = (t_vec3d){0, 0, 1, 1};
 	up = (t_vec3d){0, 1, 0, 1};
 	target = vec_add(env->cam.pos, env->cam.dir);
 
 	light = (t_vec3d){0.0f, 1.0f, -1.0f, 0.0f};
 	vec_normalize(&light);
 
-	update_xrotation_matrix(&env->cam, thetaz * 1.25f);
-	update_zrotation_matrix(&env->cam, thetaz);
+	update_xrotation_matrix(&env->cam, 90);
+	update_zrotation_matrix(&env->cam, 0);
+
+	matrix_point_at(env->cam.c_m, env->cam.pos, target, up);
+	quick_inverse_matrix(env->cam.c_m, env->cam.v_m);
 
 	matrix_m_matrix(env->cam.rx_m, env->cam.rz_m, env->cam.w_m);
 	translate_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 20.0f, 1.0f});
@@ -53,10 +56,7 @@ void	rasterizer(t_env *env)
 
 		if (vec_dot(normale, vec_sub(t.points[0], env->cam.pos)) < 0.0f)
 		{
-			matrix_point_at(env->cam.c_m, env->cam.pos, target, up);
-			quick_inverse_matrix(env->cam.c_m, env->cam.v_m);
-
-//			t.points[0] = multiplg_matrix(env->cam.v_m, t.points[0]);
+//			t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
 //			t.points[1] = multiply_matrix(env->cam.v_m, t.points[1]);
 //			t.points[2] = multiply_matrix(env->cam.v_m, t.points[2]);
 

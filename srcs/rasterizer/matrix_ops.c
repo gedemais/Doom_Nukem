@@ -54,10 +54,10 @@ void		matrix_point_at(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	m[2][1] = new_f.y;
 	m[3][1] = pos.y;
 
-	m[0][1] = new_r.z;
-	m[1][1] = new_u.z;
-	m[2][1] = new_f.z;
-	m[3][1] = pos.z;
+	m[0][2] = new_r.z;
+	m[1][2] = new_u.z;
+	m[2][2] = new_f.z;
+	m[3][2] = pos.z;
 
 	m[0][3] = 0.0f;
 	m[1][3] = 0.0f;
