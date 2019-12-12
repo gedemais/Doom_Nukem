@@ -6,6 +6,15 @@ int		key_press_dev(int key, void *param)
 
 	env = ((t_env*)param);
 
+	if (key == KEY_LEFT)
+		env->cam.yaw -= 0.05f;
+	if (key == KEY_RIGHT)
+		env->cam.yaw += 0.05f;
+	if (key == KEY_UP)
+		env->cam.pitch += 0.05f;
+	if (key == KEY_DOWN)
+		env->cam.pitch -= 0.05f;
+
 	if (key == KEY_W)
 		env->cam.pos.z += 0.5f;
 	if (key == KEY_S)

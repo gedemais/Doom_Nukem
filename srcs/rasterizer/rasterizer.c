@@ -17,6 +17,10 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 	illum = vec_dot(normal, env->cam.light);
 
 	// Projection
+	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
+	t.points[1] = multiply_matrix(env->cam.v_m, t.points[1]);
+	t.points[2] = multiply_matrix(env->cam.v_m, t.points[2]);
+
 	t.points[0] = multiply_matrix(env->cam.p_m, t.points[0]);
 	t.points[1] = multiply_matrix(env->cam.p_m, t.points[1]);
 	t.points[2] = multiply_matrix(env->cam.p_m, t.points[2]);
@@ -68,20 +72,31 @@ void	rasterizer(t_env *env)
 	t_triangle			t;
 	static float		theta = 0.0f;
 
+	t_vec3d	lookdir;
+	t_vec3d	up;
+	t_vec3d	target;
+
 
 	j = 0;
+	env->cam.dir = (t_vec3d){0, 0, 1, 1};
 
-	env->cam.dir = (t_vec3d){0, 0, 1, 0};
-
-	update_xrotation_matrix(&env->cam, theta);
-	update_zrotation_matrix(&env->cam, theta * 1.5f);
+	update_xrotation_matrix(env->cam.rx_m, theta);
+	update_zrotation_matrix(env->cam.rz_m, theta * 1.5f);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
 
-	matrix_pointat(env->cam.c_m, env->cam.pos, vec_add(env->cam.pos, env->cam.dir), (t_vec3d){0, 1, 0, 0});
+	up = (t_vec3d){0, -1, 0, 1};
+	target = (t_vec3d){0, 0, 1, 1};
+	update_yrotation_matrix(env->cam.cry_m, env->cam.yaw);
+	update_xrotation_matrix(env->cam.crx_m, env->cam.pitch);
+	matrix_mult_matrix(env->cam.cry_m, env->cam.crx_m, env->cam.cr_m);
+	lookdir = matrix_mult_vec(env->cam.cr_m, target);
+	target = vec_add(env->cam.pos, lookdir);
+
+	matrix_pointat(env->cam.c_m, env->cam.pos, target, up);
 
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 //	translation_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
-	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
+//	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
 	while (j < env->maps[0].nmesh)
 	{
 		i = 0;

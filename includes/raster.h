@@ -47,6 +47,8 @@ typedef struct	s_cam
 	float		t_m[4][4];
 	float		c_m[4][4];
 	float		cr_m[4][4];
+	float		crx_m[4][4];
+	float		cry_m[4][4];
 	float		v_m[4][4];
 	float		p_m[4][4];
 	float		rx_m[4][4];
@@ -54,6 +56,8 @@ typedef struct	s_cam
 	float		rz_m[4][4];
 	t_vec3d		pos;
 	t_vec3d		dir;
+	float		yaw;
+	float		pitch;
 	t_vec3d		light;
 	float		aspect_ratio;
 	float		fnear;
@@ -64,9 +68,9 @@ typedef struct	s_cam
 }				t_cam;
 
 void			init_matrices(t_cam *cam);
-void			update_xrotation_matrix(t_cam *cam, float theta);
-void			update_yrotation_matrix(t_cam *cam, float theta);
-void			update_zrotation_matrix(t_cam *cam, float theta);
+void			update_xrotation_matrix(float m[4][4], float theta);
+void			update_yrotation_matrix(float m[4][4], float theta);
+void			update_zrotation_matrix(float m[4][4], float theta);
 t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
 t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
 void			matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4]);

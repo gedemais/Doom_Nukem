@@ -56,29 +56,22 @@ void	matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 
 	t = vec_fmult(new_f, vec_dot(up, new_f));
 	new_up = vec_sub(up, t);
-	vec_normalize(&new_up);
 
 	new_r = vec_cross(new_up, new_f);
 
 	m[0][0] = new_r.x;
-	m[1][0] = new_up.x;
-	m[2][0] = new_f.x;
-	m[3][0] = pos.x;
-
 	m[0][1] = new_r.y;
-	m[1][1] = new_up.y;
-	m[2][1] = new_f.y;
-	m[3][1] = pos.y;
-
 	m[0][2] = new_r.z;
+	m[1][0] = new_up.x;
+	m[1][1] = new_up.y;
 	m[1][2] = new_up.z;
+	m[2][0] = new_f.x;
+	m[2][1] = new_f.y;
 	m[2][2] = new_f.z;
+	m[3][0] = pos.x;
+	m[3][1] = pos.y;
 	m[3][2] = pos.z;
-
-	m[0][3] = 0.0f;
-	m[1][3] = 0.0f;
-	m[2][3] = 0.0f;
-	m[3][3] = 1.0f;
+	m[3][3] = 1;
 }
 
 void	inverse_matrix(float m[4][4], float ret[4][4]) // Only for Rotation/Translation Matrices
