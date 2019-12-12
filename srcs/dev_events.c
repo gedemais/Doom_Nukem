@@ -3,8 +3,13 @@
 int		key_press_dev(int key, void *param)
 {
 	t_env		*env;
+	t_vec3d		f;
+	t_vec3d		r;
 
 	env = ((t_env*)param);
+	f = vec_fmult(env->cam.dir, 0.5f);
+	r = vec_cross(env->cam.dir, f);
+	vec_normalize(&r);
 
 	if (key == KEY_LEFT)
 		env->cam.yaw -= 0.05f;
@@ -16,9 +21,9 @@ int		key_press_dev(int key, void *param)
 		env->cam.pitch -= 0.05f;
 
 	if (key == KEY_W)
-		env->cam.pos.z += 0.5f;
+		env->cam.pos = vec_add(env->cam.pos, f);
 	if (key == KEY_S)
-		env->cam.pos.z -= 0.5f;
+		env->cam.pos = vec_sub(env->cam.pos, f);
 
 	if (key == KEY_A)
 		env->cam.pos.x += 0.5f;

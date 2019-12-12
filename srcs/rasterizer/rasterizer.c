@@ -72,7 +72,6 @@ void	rasterizer(t_env *env)
 	t_triangle			t;
 	static float		theta = 0.0f;
 
-	t_vec3d	lookdir;
 	t_vec3d	up;
 	t_vec3d	target;
 
@@ -89,8 +88,8 @@ void	rasterizer(t_env *env)
 	update_yrotation_matrix(env->cam.cry_m, env->cam.yaw);
 	update_xrotation_matrix(env->cam.crx_m, env->cam.pitch);
 	matrix_mult_matrix(env->cam.cry_m, env->cam.crx_m, env->cam.cr_m);
-	lookdir = matrix_mult_vec(env->cam.cr_m, target);
-	target = vec_add(env->cam.pos, lookdir);
+	env->cam.dir = matrix_mult_vec(env->cam.cr_m, target);
+	target = vec_add(env->cam.pos, env->cam.dir);
 
 	matrix_pointat(env->cam.c_m, env->cam.pos, target, up);
 
