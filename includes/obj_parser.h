@@ -2,6 +2,7 @@
 # define OBJ_PARSER_H
 
 # define NB_LINES_TYPE 5
+# define MAGIC_VAL 42
 
 enum				e_pstate
 {
@@ -16,6 +17,7 @@ enum			e_scene_id
 {
 	SCENE_TEST,
 	SCENE_UT,
+	SCENE_UT2,
 	SCENE_MAX
 };
 

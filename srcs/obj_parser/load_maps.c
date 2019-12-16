@@ -3,7 +3,8 @@
 static char	*maps_paths(unsigned int index)
 {
 	char	*paths[SCENE_MAX] = {	"resources/maps/object.obj",
-									"resources/maps/ut.obj"};
+									"resources/maps/ut.obj",
+									"resources/maps/ut2.obj"};
 
 	return (paths[index]);
 }
@@ -32,10 +33,10 @@ static int	parse_map(t_map *map, char *path)
 
 	map->nmesh = -1;
 	if ((fd = open(path, O_RDONLY)) == -1
-		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0))
+		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0)
+		|| init_dynarray(&map->pool, sizeof(t_vec3d), 0))
 		return (-1);
-	if (init_dynarray(&map->pool, sizeof(t_vec3d), 0))
-		return (-1);
+	map->tri = MAGIC_VAL;
 	map->pstate = PS_OBJ;
 	while (get_next_line(fd, &line))
 		if (parse_line(map, line, &map->nmesh))
@@ -46,7 +47,7 @@ static int	parse_map(t_map *map, char *path)
 			return (-1);
 		}
 		else
-		free(line);
+			free(line);
 	map->nmesh++;
 	return (0);
 }
@@ -59,9 +60,9 @@ int			load_maps(t_env *env)
 	printf("Load maps\n");
 	while (i < SCENE_MAX)
 	{
-		printf("%s\n", maps_paths(i));
 		if (parse_map(&env->maps[i], maps_paths(i)) != 0)
 			return (-1);
+		printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);
 		i++;
 	}
 	return (0);

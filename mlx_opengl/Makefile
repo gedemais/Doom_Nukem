@@ -10,6 +10,16 @@ CFLAGS+=-O2
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11 -DGL_SILENCE_DEPRECATION
 
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+	CFLAGS += -g3 -fsanitize=address -fno-common
+endif
+
+OPTI ?= 0
+ifeq ($(OPTI), 1)
+	CFLAGS += -Ofast -march=native
+endif
+
 all: $(NOM)
 
 $(NOM):	$(OBJ)

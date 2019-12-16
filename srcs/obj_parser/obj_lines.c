@@ -4,18 +4,16 @@ int		new_mesh(t_map *map, char *line, int *mesh)
 {
 	static char	zone[sizeof(t_triangle)] = {0};
 
-	if (map->pstate != PS_FACES)
-	{
-		if (map->pstate != PS_OBJ)
-			return (-1);
-	}
-	map->tri = 0;
+//	printf("line %d in %s\n", __LINE__, __FILE__);
+	printf("%s\n", __FUNCTION__);
+	if (map->pstate != PS_FACES && map->pstate != PS_OBJ)
+		return (-1);
+	map->tri = MAGIC_VAL;
 	map->pstate = PS_OBJ;
 	if (push_dynarray(&map->meshs, &zone[0], false))
 		return (-1);
 	(*mesh)++;
 	(void)line;
-	//printf("new_mesh : %s\n", line);
 	return (0);
 }
 
@@ -25,7 +23,9 @@ int		new_vertex(t_map *map, char *line, int *mesh)
 	unsigned int	i;
 
 	(void)mesh;
+	printf("%s\n", __FUNCTION__);
 	i = 1;
+
 	if (map->pstate != PS_VERTEXS)
 	{
 		if (map->pstate != PS_OBJ)
@@ -56,6 +56,8 @@ int		new_face(t_map *map, char *line, int *mesh)
 
 	i = 1;
 	obj = dyacc(&map->meshs, *mesh);
+	printf("%s\n", __FUNCTION__);
+
 	if (map->pstate != PS_FACES)
 	{
 		if (map->pstate != PS_END_VERTEXS
@@ -72,14 +74,17 @@ int		new_face(t_map *map, char *line, int *mesh)
 	ft_memcpy(&obj->tris[map->tri].points[0], dyacc(&map->pool, n), sizeof(t_vec3d));
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
+
 	n = ft_atoi(&line[i]) - 1;
 	ft_memcpy(&obj->tris[map->tri].points[1], dyacc(&map->pool, n), sizeof(t_vec3d));
 	if (cross_floats(line, &i) || cross_whites(line, &i))
 		return (-1);
+
 	n = ft_atoi(&line[i]) - 1;
 	ft_memcpy(&obj->tris[map->tri].points[2], dyacc(&map->pool, n), sizeof(t_vec3d));
 	if (!(cross_floats(line, &i)))
 		return (-1);
+
 	map->tri++;
 	obj->nb_tris++;
 	return (0);
@@ -90,6 +95,7 @@ int		comment(t_map *map, char *line, int *mesh)
 	(void)map;
 	(void)mesh;
 	(void)line;
+	printf("%s\n", __FUNCTION__);
 	//printf("comment : %s\n", line);
 	return (0);
 }
@@ -98,7 +104,9 @@ int		vertex_end(t_map *map, char *line, int *mesh)
 {
 	(void)line;
 	(void)mesh;
+	printf("%s\n", __FUNCTION__);
 	map->pstate = PS_END_VERTEXS;
+	map->tri = 0;
 	//printf("vertex_end : %s\n", line);
 	return (0);
 }
