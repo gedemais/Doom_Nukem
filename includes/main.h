@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/10 16:04:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/20 02:21:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 /*
 ** Rasterization
 */
-void			rasterizer(t_env *env);
+void			rasterizer(t_env *env, int scene);
 
 void			fill_triangle_unit(t_env *env, t_triangle t, int color);
 /*
@@ -137,22 +137,11 @@ void			handle_events(t_env *env);
 
 double			mesure_time(bool end);
 
-bool			cross_line(char *file, unsigned int *i);
-bool			cross_whites(char *file, unsigned int *i);
-bool			cross_floats(char *file, unsigned int *i);
-
-
 int		key_press_dev(int key, void *param);
 int		key_release_dev(int key, void *param);
 int		mouse_press_dev(int button, int x, int y, void *param);
 int		mouse_release_dev(int button, int x, int y, void *param);
 int		mouse_position_dev(int x, int y, void *param);
 int		render_dev(void *param);
-
-int		new_mesh(t_map *map, char *line, int *mesh);
-int		new_vertex(t_map *map, char *line, int *mesh);
-int		new_face(t_map *map, char *line, int *mesh);
-int		comment(t_map *map, char *line, int *mesh);
-int		vertex_end(t_map *map, char *line, int *mesh);
 
 #endif

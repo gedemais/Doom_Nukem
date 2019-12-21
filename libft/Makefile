@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2019/12/08 19:47:27 by gedemais         ###   ########.fr        #
+#    Updated: 2019/12/19 01:14:44 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,9 @@ SRCS  =	ft_atoi.c \
 		ft_strwlen.c\
 		ft_to_radians.c\
 		dynarray.c\
-		stack_stuff.c
+		stack_stuff.c\
+		ft_free_ctab.c\
+		ft_tablen.c
 
 INC=libft.h\
 	get_next_line.h\

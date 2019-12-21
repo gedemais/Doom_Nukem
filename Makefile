@@ -6,7 +6,7 @@ FLAGS= -Wall -Werror -Wextra
 # Flags variables
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
-    FLAGS += -g3 -fsanitize=address -fno-common -pg
+    FLAGS += -g3 -fsanitize=address -fno-common
 endif
 
 OPTI ?= 0
@@ -24,9 +24,12 @@ SRCS_NAME=	main.c\
 			resources_paths.c\
 			dev_events.c\
 			\
-			obj_parser/parser_utils.c\
 			obj_parser/load_maps.c\
-			obj_parser/obj_lines.c\
+			obj_parser/lines_fts.c\
+			obj_parser/check_formats.c\
+			obj_parser/parse_map.c\
+			obj_parser/states.c\
+			obj_parser/read_file.c\
 			\
 			rasterizer/fill_triangle_unit.c\
 			rasterizer/rasterizer.c\

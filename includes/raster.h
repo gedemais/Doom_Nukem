@@ -25,7 +25,9 @@ typedef struct	s_triangle
 
 typedef struct	s_mesh
 {
-	t_triangle	*tris;
+	t_dynarray	tris;
+	t_dynarray	faces;
+	char		*name;
 	int			nb_tris;
 }				t_mesh;
 

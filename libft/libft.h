@@ -6,7 +6,7 @@
 /*   By: gedemais <gedemais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:05:11 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/08 20:52:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/12/19 01:14:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_pctab(char **tab);
+void				ft_free_ctab(char **tab);
 void				ft_pitab(int *tab, int size);
+int					ft_tablen(char **tab);
 /*
 ** Printing functions
 */
