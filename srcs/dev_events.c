@@ -8,7 +8,7 @@ int		key_press_dev(int key, void *param)
 
 	env = ((t_env*)param);
 	f = vec_fmult(env->cam.dir, 0.5f);
-	r = vec_cross(env->cam.dir, f);
+	r = (t_vec3d){f.z, f.y, -f.x, f.w};
 	vec_normalize(&r);
 
 	if (key == KEY_LEFT)
@@ -26,15 +26,14 @@ int		key_press_dev(int key, void *param)
 		env->cam.pos = vec_sub(env->cam.pos, f);
 
 	if (key == KEY_A)
-		env->cam.pos.x += 0.5f;
+		env->cam.pos = vec_add(env->cam.pos, r);
 	if (key == KEY_D)
-		env->cam.pos.x -= 0.5f;
+		env->cam.pos = vec_sub(env->cam.pos, r);
 
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
 	if (key == KEY_C)
 		env->context = C_TITLE_SCREEN;
-	(void)key;
 	return (0);
 }
 
@@ -98,6 +97,7 @@ int		render_dev(void *param)
 		av = 0.0f;
 		it = 0;
 	}
+	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
 	it++;
 	return (0);
 }

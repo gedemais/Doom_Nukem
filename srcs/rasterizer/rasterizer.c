@@ -100,19 +100,19 @@ void	rasterizer(t_env *env, int scene)
 	t_mesh		*m;
 	t_triangle	t;
 
-	j = 0;
+	i = 0;
 	compute_matrices(env);
-	while (j < env->maps[scene].nmesh)
+	while (i < env->maps[scene].nmesh)
 	{
-		i = 0;
-		if (!(m = dyacc(&env->maps[scene].meshs, j)))
+		j = 0;
+		if (!(m = dyacc(&env->maps[scene].meshs, i)))
 			return ;
-		while (i < m->faces.nb_cells)
+		while (j < m->faces.nb_cells)
 		{
-			ft_memcpy(&t, dyacc(&m->tris, i), sizeof(t_triangle));
+			ft_memcpy(&t, dyacc(&m->tris, j), sizeof(t_triangle));
 			triangle_pipeline(env, t);
-			i++;
+			j++;
 		}
-		j++;
+		i++;
 	}
 }
