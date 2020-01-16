@@ -14,13 +14,13 @@ int			load_maps(t_env *env)
 //		t_mesh	*m;
 
 	i = 0;
-	printf("Load maps\n");
+	ft_putendl("Loading maps...");
 	init_states(states);
 	while (i < SCENE_MAX)
 	{
 		if (parse_map(&env->maps[i], maps_paths(i), states) != 0)
 			return (-1);
-		printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);
+//		printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);
 /*		for (int j = 0; j < env->maps[i].nmesh; j++)
 		{
 			m = dyacc(&env->maps[i].meshs, j);

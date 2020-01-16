@@ -66,6 +66,7 @@ static t_sample	*load_samples(void)
 
 int			init_openal(t_sound *env)
 {
+	ft_putendl("OpenAL init...");
 	if (!(env->device = alcOpenDevice(NULL)))
 	{
 		ft_putstr_fd(OPEN_DEVICE, 2);

@@ -35,9 +35,9 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 
 	// Drawing triangles
 	fill_triangle_unit(env, t, shade_color(0xffffff, illum));
-//	draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
-//		(t_point){t.points[1].x, t.points[1].y},
-//		(t_point){t.points[2].x, t.points[2].y});
+	//draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
+	//	(t_point){t.points[1].x, t.points[1].y},
+	//	(t_point){t.points[2].x, t.points[2].y});
 }
 
 void	triangle_pipeline(t_env *env, t_triangle t)
@@ -72,11 +72,12 @@ void	compute_matrices(t_env *env)
 	static float		theta = 0.0f;
 
 
-	env->cam.dir = (t_vec3d){0, 0, 1, 1};
+	// Rotation
 	update_xrotation_matrix(env->cam.rx_m, theta);
 	update_zrotation_matrix(env->cam.rz_m, theta * 1.5f);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
 
+	env->cam.dir = (t_vec3d){0, 0, 1, 1};
 	up = (t_vec3d){0, -1, 0, 1};
 	target = (t_vec3d){0, 0, 1, 1};
 	update_yrotation_matrix(env->cam.cry_m, ft_to_radians(env->cam.yaw));
@@ -90,7 +91,7 @@ void	compute_matrices(t_env *env)
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 //	translation_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
 //	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
-//	theta -= 0.01f;
+	theta -= 0.01f;
 }
 
 void	rasterizer(t_env *env, int scene)

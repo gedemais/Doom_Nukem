@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/08 21:11:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/16 21:38:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_sprite	*load_sprites(t_mlx *mlx)
 	i = 0;
 	if (!(dest = (t_sprite*)malloc(sizeof(t_sprite) * SP_MAX)))
 		return (NULL);
+	ft_putendl("Loading sprites...");
 	while (i < SP_MAX)
 	{
 		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
