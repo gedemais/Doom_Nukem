@@ -18,7 +18,7 @@ endif
 SRCS_NAME=	main.c\
 			setup.c\
 			render.c\
-			handle_events.c\
+			dev_handle_events.c\
 			openal.c\
 			play_sound.c\
 			resources_paths.c\

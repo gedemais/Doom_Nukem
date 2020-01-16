@@ -34,7 +34,7 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 	t.points[2] = vec_mult(t.points[2], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
 
 	// Drawing triangles
-	fill_triangle_unit(env, t, shade_color(0xff0000, illum));
+	fill_triangle_unit(env, t, shade_color(0xffffff, illum));
 //	draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
 //		(t_point){t.points[1].x, t.points[1].y},
 //		(t_point){t.points[2].x, t.points[2].y});
@@ -79,9 +79,9 @@ void	compute_matrices(t_env *env)
 
 	up = (t_vec3d){0, -1, 0, 1};
 	target = (t_vec3d){0, 0, 1, 1};
-	update_yrotation_matrix(env->cam.cry_m, env->cam.yaw);
-	update_xrotation_matrix(env->cam.crx_m, env->cam.pitch);
-	matrix_mult_matrix(env->cam.cry_m, env->cam.crx_m, env->cam.cr_m);
+	update_yrotation_matrix(env->cam.cry_m, ft_to_radians(env->cam.yaw));
+	update_xrotation_matrix(env->cam.crx_m, ft_to_radians(env->cam.pitch));
+	matrix_mult_matrix(env->cam.crx_m, env->cam.cry_m, env->cam.cr_m);
 	env->cam.dir = matrix_mult_vec(env->cam.cr_m, target);
 	target = vec_add(env->cam.pos, env->cam.dir);
 
@@ -90,7 +90,7 @@ void	compute_matrices(t_env *env)
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 //	translation_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
 //	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
-	theta -= 0.01f;
+//	theta -= 0.01f;
 }
 
 void	rasterizer(t_env *env, int scene)

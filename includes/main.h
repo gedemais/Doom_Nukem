@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/20 02:21:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/16 05:32:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define WDT 1080
 # define HGT 720
 # define WINDOW_NAME "Doom Nukem"
+
+# define SENSI 0.05f
+# define WALK_SPEED 0.1f
 
 enum			e_context_id
 {
@@ -133,7 +136,7 @@ void			play_ambience(t_sample sample, bool play, bool stop);
 ** Main Loop
 */
 int				render(void *param);
-void			handle_events(t_env *env);
+void			dev_handle_events(t_env *env);
 
 double			mesure_time(bool end);
 

@@ -3,33 +3,8 @@
 int		key_press_dev(int key, void *param)
 {
 	t_env		*env;
-	t_vec3d		f;
-	t_vec3d		r;
 
 	env = ((t_env*)param);
-	f = vec_fmult(env->cam.dir, 0.5f);
-	r = (t_vec3d){f.z, f.y, -f.x, f.w};
-	vec_normalize(&r);
-
-	if (key == KEY_LEFT)
-		env->cam.yaw -= 0.05f;
-	if (key == KEY_RIGHT)
-		env->cam.yaw += 0.05f;
-	if (key == KEY_UP)
-		env->cam.pitch += 0.05f;
-	if (key == KEY_DOWN)
-		env->cam.pitch -= 0.05f;
-
-	if (key == KEY_W)
-		env->cam.pos = vec_add(env->cam.pos, f);
-	if (key == KEY_S)
-		env->cam.pos = vec_sub(env->cam.pos, f);
-
-	if (key == KEY_A)
-		env->cam.pos = vec_add(env->cam.pos, r);
-	if (key == KEY_D)
-		env->cam.pos = vec_sub(env->cam.pos, r);
-
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
 	if (key == KEY_C)
@@ -68,9 +43,34 @@ int		mouse_release_dev(int button, int x, int y, void *param)
 
 int		mouse_position_dev(int x, int y, void *param)
 {
-	(void)param;
-	(void)x;
-	(void)y;
+	t_env		*env;
+	int			hwdt;
+	int			hhgt;
+
+	hwdt = WDT / 2;
+	hhgt = HGT / 2;
+	env = ((t_env*)param);
+	if (x <= hwdt && y < hhgt) // L Up
+	{
+		env->cam.yaw -= fabs((hwdt - x) * SENSI);
+		env->cam.pitch += fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+	}
+	if (x < hwdt && y >= hhgt) // L Down
+	{
+		env->cam.yaw -= fabs((hwdt - x) * SENSI);
+		env->cam.pitch -= fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+	}
+	if (x >= hwdt && y < hhgt) // R Up
+	{
+		env->cam.yaw += fabs((hwdt - x) * SENSI);
+		env->cam.pitch += fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+	}
+	if (x > hwdt && y >= hhgt) // R Down
+	{
+		env->cam.yaw += fabs((hwdt - x) * SENSI);
+		env->cam.pitch -= fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+	}
+	mlx_mouse_move(env->mlx.mlx_win, hwdt, hhgt);
 	return (0);
 }
 
@@ -83,7 +83,7 @@ int		render_dev(void *param)
 	mesure_time(false);
 	env = ((t_env*)param);
 
-	handle_events(env);
+	dev_handle_events(env);
 
 	ft_memset(env->mlx.img_data, 50, env->data.data_size);
 	rasterizer(env, SCENE_TEST);
@@ -97,7 +97,7 @@ int		render_dev(void *param)
 		av = 0.0f;
 		it = 0;
 	}
-	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
+//	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
 	it++;
 	return (0);
 }
