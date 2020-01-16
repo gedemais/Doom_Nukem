@@ -44,34 +44,47 @@ int		mouse_release_dev(int button, int x, int y, void *param)
 int		mouse_position_dev(int x, int y, void *param)
 {
 	t_env		*env;
+
+	env = ((t_env*)param);
+	env->events.mouse_pos.x = x;
+	env->events.mouse_pos.y = y;
+	return (0);
+}
+
+static void camera(t_env *env)
+{
 	int			hwdt;
 	int			hhgt;
+	int			x;
+	int			y;
 
 	hwdt = WDT / 2;
 	hhgt = HGT / 2;
-	env = ((t_env*)param);
+	x = env->events.mouse_pos.x;
+	y = env->events.mouse_pos.y;
 	if (x <= hwdt && y < hhgt) // L Up
 	{
-		env->cam.yaw -= fabs((hwdt - x) * SENSI);
-		env->cam.pitch += fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
+		env->cam.pitch += fabs((hhgt - y) * SENSI);
 	}
-	if (x < hwdt && y >= hhgt) // L Down
+	else if (x < hwdt && y >= hhgt) // L Down
 	{
-		env->cam.yaw -= fabs((hwdt - x) * SENSI);
-		env->cam.pitch -= fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
+		env->cam.pitch -= fabs((hhgt - y) * SENSI);
 	}
-	if (x >= hwdt && y < hhgt) // R Up
+	else if (x >= hwdt && y < hhgt) // R Up
 	{
-		env->cam.yaw += fabs((hwdt - x) * SENSI);
-		env->cam.pitch += fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+		env->cam.yaw += fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
+		env->cam.pitch += fabs((hhgt - y) * SENSI);
 	}
-	if (x > hwdt && y >= hhgt) // R Down
+	else if (x > hwdt && y >= hhgt) // R Down
 	{
-		env->cam.yaw += fabs((hwdt - x) * SENSI);
-		env->cam.pitch -= fabs((hhgt - y) * SENSI) * env->cam.aspect_ratio;
+		env->cam.yaw += fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
+		env->cam.pitch -= fabs((hhgt - y) * SENSI);
 	}
 	mlx_mouse_move(env->mlx.mlx_win, hwdt, hhgt);
-	return (0);
+	env->events.mouse_pos.x = hwdt;
+	env->events.mouse_pos.y = hhgt;
 }
 
 int		render_dev(void *param)
@@ -86,6 +99,7 @@ int		render_dev(void *param)
 	dev_handle_events(env);
 
 	ft_memset(env->mlx.img_data, 50, env->data.data_size);
+	camera(env);
 	rasterizer(env, SCENE_TEST);
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
