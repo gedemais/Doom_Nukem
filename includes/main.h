@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/16 20:07:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/18 04:10:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.0001f
+# define WALK_SPEED 0.1f
 
 enum			e_context_id
 {
@@ -96,7 +96,7 @@ int				setup(t_env *env);
 int				init_mlx(t_env *env);
 t_sprite		*load_sprites(t_mlx *mlx);
 int				init_openal(t_sound *env);
-void			init_camera(t_cam *cam);
+int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);
 int				laod_object(int fd, char *line);
 
@@ -118,8 +118,9 @@ void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 ** Rasterization
 */
 void			rasterizer(t_env *env, int scene);
-
+int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 void			fill_triangle_unit(t_env *env, t_triangle t, int color);
+
 /*
 ** Sprites
 */

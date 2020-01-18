@@ -70,7 +70,7 @@ static int	load_map_data(t_map *map)
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
 		}
-	//printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
+		printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
 	}
 	return (0);
 }

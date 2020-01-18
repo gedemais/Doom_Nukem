@@ -43,6 +43,17 @@ typedef struct	s_filler
 	float		yend;
 }				t_filler;
 
+typedef struct	s_clipper
+{
+	t_vec3d		*in[3];
+	t_vec3d		*out[3];
+	int			inside;
+	int			outside;
+	float		d0;
+	float		d1;
+	float		d2;
+}				t_clipper;
+
 typedef struct	s_cam
 {
 	float		w_m[4][4];
@@ -56,6 +67,7 @@ typedef struct	s_cam
 	float		rx_m[4][4];
 	float		ry_m[4][4];
 	float		rz_m[4][4];
+	float		*z_buffer;
 	t_vec3d		pos;
 	t_vec3d		dir;
 	float		yaw;
@@ -88,5 +100,8 @@ void			vec_swap(t_vec3d *a, t_vec3d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);
 void			vec_normalize(t_vec3d *vec);
 float			vec_dot(t_vec3d a, t_vec3d b);
+float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
+t_vec3d			vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n,
+												t_vec3d l_start, t_vec3d l_end);
 
 #endif

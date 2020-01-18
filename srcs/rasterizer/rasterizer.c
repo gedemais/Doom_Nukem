@@ -9,35 +9,42 @@ static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 {
-	float	illum;
+	float		illum;
+	t_triangle	clipped[2];
+	int			nclip;
 
 	// Illumination computing
 	env->cam.light = (t_vec3d){0.0f, 0.0f, -1.0f, 0.0f};
 	vec_normalize(&env->cam.light);
 	illum = vec_dot(normal, env->cam.light);
 
-	// Projection
+	// View matrix
 	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
 	t.points[1] = multiply_matrix(env->cam.v_m, t.points[1]);
 	t.points[2] = multiply_matrix(env->cam.v_m, t.points[2]);
 
-	t.points[0] = multiply_matrix(env->cam.p_m, t.points[0]);
-	t.points[1] = multiply_matrix(env->cam.p_m, t.points[1]);
-	t.points[2] = multiply_matrix(env->cam.p_m, t.points[2]);
+	nclip = clip_triangle((t_vec3d){0.0f, 0.0f, 0.1f, 1.0f}, (t_vec3d){0.0f, 0.0f, 1.0f, 1.0f}, t, clipped);
 
-	// Scaling with screen
-	t.points[0] = vec_add(t.points[0], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
-	t.points[1] = vec_add(t.points[1], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
-	t.points[2] = vec_add(t.points[2], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
-	t.points[0] = vec_mult(t.points[0], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
-	t.points[1] = vec_mult(t.points[1], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
-	t.points[2] = vec_mult(t.points[2], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
+	for (int i = 0; i < nclip; i++){
+		// Projection
+		t.points[0] = multiply_matrix(env->cam.p_m, clipped[i].points[0]);
+		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
+		t.points[2] = multiply_matrix(env->cam.p_m, clipped[i].points[2]);
 
-	// Drawing triangles
-	fill_triangle_unit(env, t, shade_color(0xffffff, illum));
-	//draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
-	//	(t_point){t.points[1].x, t.points[1].y},
-	//	(t_point){t.points[2].x, t.points[2].y});
+		// Scaling with screen
+		t.points[0] = vec_add(t.points[0], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
+		t.points[1] = vec_add(t.points[1], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
+		t.points[2] = vec_add(t.points[2], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
+		t.points[0] = vec_mult(t.points[0], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
+		t.points[1] = vec_mult(t.points[1], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
+		t.points[2] = vec_mult(t.points[2], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
+
+		// Drawing triangles
+		fill_triangle_unit(env, t, shade_color(0xffffff, illum));
+	}
+//	draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
+//		(t_point){t.points[1].x, t.points[1].y},
+//		(t_point){t.points[2].x, t.points[2].y});
 }
 
 void	triangle_pipeline(t_env *env, t_triangle t)
@@ -74,12 +81,12 @@ void	compute_matrices(t_env *env)
 
 	// Rotation
 	update_xrotation_matrix(env->cam.rx_m, theta);
-	update_zrotation_matrix(env->cam.rz_m, theta * 1.5f);
+	update_zrotation_matrix(env->cam.rz_m, 0);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
 
-	env->cam.dir = (t_vec3d){0, 0, 1, 1};
-	up = (t_vec3d){0, -1, 0, 1};
-	target = (t_vec3d){0, 0, 1, 1};
+	env->cam.dir = (t_vec3d){0, 0, 1, 0};
+	up = (t_vec3d){0, -1, 0, 0};
+	target = (t_vec3d){0, 0, 1, 0};
 	update_yrotation_matrix(env->cam.cry_m, ft_to_radians(env->cam.yaw));
 	update_xrotation_matrix(env->cam.crx_m, ft_to_radians(env->cam.pitch));
 	matrix_mult_matrix(env->cam.crx_m, env->cam.cry_m, env->cam.cr_m);
@@ -91,7 +98,7 @@ void	compute_matrices(t_env *env)
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 //	translation_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
 //	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
-	theta -= 0.01f;
+//	theta -= 0.01f;
 }
 
 void	rasterizer(t_env *env, int scene)

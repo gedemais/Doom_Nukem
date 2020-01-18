@@ -31,6 +31,7 @@ SRCS_NAME=	main.c\
 			obj_parser/states.c\
 			obj_parser/read_file.c\
 			\
+			rasterizer/clipping.c\
 			rasterizer/fill_triangle_unit.c\
 			rasterizer/rasterizer.c\
 			rasterizer/camera.c\
