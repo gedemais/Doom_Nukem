@@ -1,11 +1,11 @@
 #include "main.h"
-
+/*
 static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 {
 	draw_line(mlx, a, b, 0);
 	draw_line(mlx, a, c, 0);
 	draw_line(mlx, b, c, 0);
-}
+}*/
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_mesh *m)
 {
@@ -108,15 +108,16 @@ static void	raster_triangles(t_env *env, t_dynarray *arr)
 	if (init_dynarray(&to_raster, sizeof(t_triangle), arr->nb_cells))// a n init qu une fois
 		return ;
 //	printf("arr %d\n", arr->nb_cells);
-	clip_mesh_triangles(arr, &to_raster);
+//	clip_mesh_triangles(arr, &to_raster);
 //	printf("to_raster %d\n", to_raster.nb_cells);
-	while (i < to_raster.nb_cells)
+	while (i < arr->nb_cells)
 	{
-		t = (t_triangle*)dyacc(&to_raster, i);
+//		t = (t_triangle*)dyacc(&to_raster, i);
+		t = (t_triangle*)dyacc(arr, i);
 		fill_triangle_unit(env, *t, shade_color(0xffffff, t->illum));
-		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
-			(t_point){t->points[1].x, t->points[1].y},
-			(t_point){t->points[2].x, t->points[2].y});
+//		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+//			(t_point){t->points[1].x, t->points[1].y},
+//			(t_point){t->points[2].x, t->points[2].y});
 		t += arr->cell_size;
 		i++;
 	}
