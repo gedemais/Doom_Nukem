@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/18 04:10:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/21 10:47:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 ** Rasterization
 */
 void			rasterizer(t_env *env, int scene);
-int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 void			fill_triangle_unit(t_env *env, t_triangle t, int color);
 
 /*

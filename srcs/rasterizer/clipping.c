@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/19 09:42:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/21 13:53:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,62 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		return (2);
 	}
 	return (0);
+}
+
+static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
+{
+	t_triangle	clipped[2];
+	int			to_add;
+	int			i;
+
+	i = 0;
+	to_add = 0;
+	if (p == 0)
+		to_add = clip_triangle((t_vec3d){0.0f, 0.0f, 0.0f, 0.0f},
+			(t_vec3d){0.0f, 1.0f, 0.0f, 0.0f}, t, clipped);
+	else if (p == 1)
+		to_add = clip_triangle((t_vec3d){0.0f, (float)(HGT - 1), 0.0f, 0.0f},
+			(t_vec3d){0.0f, -1.0f, 0.0f, 0.0f}, t, clipped);
+	else if (p == 2)
+		to_add = clip_triangle((t_vec3d){0.0f, 0.0f, 0.0f, 0.0f},
+			(t_vec3d){1.0f, 0.0f, 0.0f, 0.0f}, t, clipped);
+	else if (p == 3)
+		to_add = clip_triangle((t_vec3d){(float)(WDT - 1), 0.0f, 0.0f, 0.0f},
+			(t_vec3d){-1.0f, 0.0f, 0.0f, 0.0f}, t, clipped);
+	while (i < to_add)
+	{
+		if (push_dynarray(to_raster, &clipped[i], false))
+			return ;
+		i++;
+	}
+}
+
+void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
+{
+	t_triangle		*t;
+	unsigned int	p;
+	int				i;
+	int				nt;
+
+	i = 0;
+	nt = 1;
+	while (i < tris->nb_cells && tris->nb_cells > 0)
+	{
+		p = 0;
+		while (p < 4) // 4 planes
+		{
+			while (nt > 0)
+			{
+				t = (t_triangle*)tris->c;
+				pop_dynarray(tris, true); // a faire backward peut etre
+				clip_screen_edges(to_raster, *t, p);
+				nt--;
+			}
+			nt = tris->nb_cells;
+			p++;
+		}
+		i++;
+	}
 }
 
 int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2])

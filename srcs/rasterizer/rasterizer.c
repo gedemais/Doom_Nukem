@@ -7,16 +7,15 @@ static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 	draw_line(mlx, b, c, 0);
 }
 
-void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
+void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_mesh *m)
 {
-	float		illum;
 	t_triangle	clipped[2];
 	int			nclip;
 
 	// Illumination computing
 	env->cam.light = (t_vec3d){0.0f, 0.0f, -1.0f, 0.0f};
 	vec_normalize(&env->cam.light);
-	illum = vec_dot(normal, env->cam.light);
+	t.illum = vec_dot(normal, env->cam.light);
 
 	// View matrix
 	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
@@ -39,15 +38,12 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 		t.points[1] = vec_mult(t.points[1], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
 		t.points[2] = vec_mult(t.points[2], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
 
-		// Drawing triangles
-		fill_triangle_unit(env, t, shade_color(0xffffff, illum));
-		draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
-			(t_point){t.points[1].x, t.points[1].y},
-			(t_point){t.points[2].x, t.points[2].y});
+		if (push_dynarray(&m->to_raster, &t, false))
+			return ;
 	}
 }
 
-void	triangle_pipeline(t_env *env, t_triangle t)
+void	triangle_pipeline(t_env *env, t_triangle t, t_mesh *m)
 {
 	t_vec3d		normal;
 	t_vec3d		line1;
@@ -59,9 +55,9 @@ void	triangle_pipeline(t_env *env, t_triangle t)
 	t.points[2] = matrix_mult_vec(env->cam.w_m, t.points[2]);
 
 	// Translation
-	t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
-	t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
-	t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
+	t.points[0] = vec_add(t.points[0], (t_vec3d){1.0f, -0.33f, 10.0f, 0.0f});
+	t.points[1] = vec_add(t.points[1], (t_vec3d){1.0f, -0.33f, 10.0f, 0.0f});
+	t.points[2] = vec_add(t.points[2], (t_vec3d){1.0f, -0.33f, 10.0f, 0.0f});
 
 	line1 = vec_sub(t.points[1], t.points[0]);
 	line2 = vec_sub(t.points[2], t.points[0]);
@@ -69,7 +65,7 @@ void	triangle_pipeline(t_env *env, t_triangle t)
 	vec_normalize(&normal);
 
 	if (vec_dot(normal, vec_sub(t.points[0], env->cam.pos)) < 0.0f)
-		project_triangle(env, t, normal);
+		project_triangle(env, t, normal, m);
 }
 
 void	compute_matrices(t_env *env)
@@ -80,7 +76,8 @@ void	compute_matrices(t_env *env)
 
 
 	// Rotation
-	update_xrotation_matrix(env->cam.rx_m, theta);
+	update_xrotation_matrix(env->cam.rx_m, 0);
+	update_yrotation_matrix(env->cam.rx_m, 0);
 	update_zrotation_matrix(env->cam.rz_m, 0);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
 
@@ -98,10 +95,35 @@ void	compute_matrices(t_env *env)
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 //	translation_matrix(env->cam.t_m, (t_vec3d){0.0f, 0.0f, 25.0f, 0.0f});
 //	matrix_mult_matrix(env->cam.w_m, env->cam.v_m, env->cam.w_m);
-//	theta -= 0.01f;
+	theta -= 0.01f;
 }
 
-void	rasterizer(t_env *env, int scene)
+static void	raster_triangles(t_env *env, t_dynarray *arr)
+{
+	t_dynarray	to_raster;
+	t_triangle	*t;
+	int			i;
+
+	i = 0;
+	if (init_dynarray(&to_raster, sizeof(t_triangle), arr->nb_cells))// a n init qu une fois
+		return ;
+//	printf("arr %d\n", arr->nb_cells);
+	clip_mesh_triangles(arr, &to_raster);
+//	printf("to_raster %d\n", to_raster.nb_cells);
+	while (i < to_raster.nb_cells)
+	{
+		t = (t_triangle*)dyacc(&to_raster, i);
+		fill_triangle_unit(env, *t, shade_color(0xffffff, t->illum));
+		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+			(t_point){t->points[1].x, t->points[1].y},
+			(t_point){t->points[2].x, t->points[2].y});
+		t += arr->cell_size;
+		i++;
+	}
+	free_dynarray(&to_raster);//__
+}
+
+void		rasterizer(t_env *env, int scene)
 {
 	int			i;
 	int			j;
@@ -118,9 +140,11 @@ void	rasterizer(t_env *env, int scene)
 		while (j < m->faces.nb_cells)
 		{
 			ft_memcpy(&t, dyacc(&m->tris, j), sizeof(t_triangle));
-			triangle_pipeline(env, t);
+			triangle_pipeline(env, t, m);
 			j++;
 		}
+		raster_triangles(env, &m->to_raster);
+		clear_dynarray(&m->to_raster);
 		i++;
 	}
 }

@@ -57,7 +57,8 @@ static int	load_map_data(t_map *map)
 	{
 		j = -1;
 		if (!(m = dyacc(&map->meshs, i))
-			|| (init_dynarray(&m->tris, sizeof(t_triangle), 0)))
+			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells))
+			|| (init_dynarray(&m->to_raster, sizeof(t_triangle), m->faces.nb_cells)))
 			return (-1);
 		while (++j < m->faces.nb_cells)
 		{

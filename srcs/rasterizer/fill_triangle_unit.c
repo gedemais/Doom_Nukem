@@ -27,7 +27,7 @@ static void	flatbot(t_env *env, t_vec3d v[3], int color)
 	}
 }
 
-static void	flattop(t_env *env, t_vec3d v[3], int color)
+static void		flattop(t_env *env, t_vec3d v[3], int color)
 {
 	t_filler	fill;
 	int			x;
@@ -94,5 +94,7 @@ void	fill_triangle_unit(t_env *env, t_triangle t, int color)
 		flatbot(env, v, color);
 	}
 	else
+	{
 		classic(env, v, color);
+	}
 }

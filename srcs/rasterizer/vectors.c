@@ -112,3 +112,14 @@ float	distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p)
 	ret -= vec_dot(plane_n, plane_p);
 	return (ret);
 }
+
+float	vec_sdist(t_vec3d o, t_vec3d v)
+{
+	float	ret;
+
+	ret = 0.0f;
+	ret += o.x * v.x;
+	ret += o.y * v.y;
+	ret += o.z * v.z;
+	return (ret);
+}
