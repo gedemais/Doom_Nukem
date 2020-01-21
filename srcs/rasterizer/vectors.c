@@ -90,7 +90,7 @@ t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d l_start,
 	t_vec3d	l_s_end;
 	t_vec3d	l_to_int;
 
-	vec_normalize(&plane_p);
+	vec_normalize(&plane_n);
 
 	plane_d = -vec_dot(plane_n, plane_p);
 	ad = vec_dot(l_start, plane_n);

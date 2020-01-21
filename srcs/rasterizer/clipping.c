@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/18 07:03:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/19 09:42:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 	t_clipper	clip;
 
 	ft_memset(&clip, 0, sizeof(t_clipper));
-	vec_normalize(&plane_p);
+	vec_normalize(&plane_n);
 	clip.d0 = distance_to_plane(plane_n, plane_p, in.points[0]);
 	clip.d1 = distance_to_plane(plane_n, plane_p, in.points[1]);
 	clip.d2 = distance_to_plane(plane_n, plane_p, in.points[2]);
 
 	classify_triangle(&clip, in);
 
-	assert(clip.inside == 3);
 	if (clip.inside == 0) // No point in the triangle found inside
 		return (0);
 	else if (clip.inside == 3) // Every points of the triangle found inside

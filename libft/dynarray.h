@@ -11,7 +11,6 @@ typedef struct	s_dynarray
 	int			cell_size;
 	int			nb_cells;
 	int			byte_size;
-	int			t_byte_size;
 }				t_dynarray;
 
 int				init_dynarray(t_dynarray *arr, int cell_size, int nb_cells);

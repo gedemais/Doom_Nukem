@@ -1,11 +1,11 @@
 #include "main.h"
-/*
+
 static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 {
 	draw_line(mlx, a, b, 0);
 	draw_line(mlx, a, c, 0);
 	draw_line(mlx, b, c, 0);
-}*/
+}
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 {
@@ -41,10 +41,10 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal)
 
 		// Drawing triangles
 		fill_triangle_unit(env, t, shade_color(0xffffff, illum));
+		draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
+			(t_point){t.points[1].x, t.points[1].y},
+			(t_point){t.points[2].x, t.points[2].y});
 	}
-//	draw_triangle(&env->mlx, (t_point){t.points[0].x, t.points[0].y},
-//		(t_point){t.points[1].x, t.points[1].y},
-//		(t_point){t.points[2].x, t.points[2].y});
 }
 
 void	triangle_pipeline(t_env *env, t_triangle t)
