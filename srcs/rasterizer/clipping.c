@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/21 15:22:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:06:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 	return (0);
 }
 
-static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
+static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p, int *tmp)
 {
 	t_triangle	clipped[2];
 	int			to_add;
@@ -80,6 +80,7 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 			return ;
 		i++;
 	}
+	*tmp = to_add;
 }
 
 void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
@@ -88,22 +89,25 @@ void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
 	unsigned int	p;
 	int				i;
 	int				nt;
+	int				tmp;
 
 	i = 0;
 	nt = 1;
-	while (i < tris->nb_cells && tris->nb_cells > 0)
+	while (i < tris->nb_cells)
 	{
+		if (push_dynarray(to_raster, dyacc(tris, i), false))
+			return ;
 		p = 0;
 		while (p < 4) // 4 planes
 		{
 			while (nt > 0)
 			{
-				t = (t_triangle*)tris->c;
-				pop_dynarray(tris, true); // a faire backward peut etre
-				clip_screen_edges(to_raster, *t, p);
+				t = (t_triangle*)to_raster->c;
+				pop_dynarray(to_raster, true); // a faire backward peut etre
+				clip_screen_edges(to_raster, *t, p, &tmp);
 				nt--;
 			}
-			nt = tris->nb_cells;
+			nt = to_raster->nb_cells;
 			p++;
 		}
 		i++;

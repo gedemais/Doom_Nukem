@@ -33,17 +33,20 @@ int		pop_dynarray(t_dynarray *arr, bool front)
 
 int		push_dynarray(t_dynarray *arr, void *src, bool front)
 {
+	int		len;
+
+	len = arr->nb_cells * arr->cell_size;
 	if ((++arr->nb_cells) * arr->cell_size >= arr->byte_size)
 		while (arr->nb_cells * arr->cell_size >= arr->byte_size)
 			if (realloc_content(arr))
 				return (-1);
 	if (front)
 	{
-		ft_memcpy(arr->tmp, arr->c, arr->byte_size);
+		ft_memcpy(arr->tmp, arr->c, len);
 		ft_memcpy(arr->c, src, arr->cell_size);
-		ft_memcpy((void*)(arr->c + arr->cell_size), arr->tmp, arr->byte_size);
+		ft_memcpy((void*)(arr->c + arr->cell_size), arr->tmp, len);
 	}
 	else
-		ft_memcpy((void*)(arr->c + (arr->nb_cells - 1) * arr->cell_size), src, arr->cell_size);
+		ft_memcpy((void*)(arr->c + len), src, arr->cell_size);
 	return (0);
 }

@@ -98,7 +98,7 @@ int		render_dev(void *param)
 
 	dev_handle_events(env);
 
-	ft_memset(env->mlx.img_data, 50, env->data.data_size);
+	ft_memset(env->mlx.img_data, 0, env->data.data_size);
 	camera(env);
 	rasterizer(env, SCENE_TEST);
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
