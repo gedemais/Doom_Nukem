@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/21 19:06:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:36:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[0] = *(clip->in[0]);
 		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[1]);
+		out[0].color = 0xff0000;
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
@@ -45,16 +46,18 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[0] = *clip->in[0];
 		out[0].points[1] = *clip->in[1];
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
+		out[0].color = 0x0000ff;
 
 		out[1].points[0] = *clip->in[1];
 		out[1].points[1] = out[0].points[2];
 		out[1].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[1], *clip->out[0]);
+		out[0].color = 0x00ff00;
 		return (2);
 	}
 	return (0);
 }
 
-static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p, int *tmp)
+static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
 {
 	t_triangle	clipped[2];
 	int			to_add;
@@ -80,38 +83,58 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 			return ;
 		i++;
 	}
-	*tmp = to_add;
+}
+
+static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
+{
+	t_triangle		tmp;
+	unsigned int	p;
+	int				i;
+
+	p = 1;
+	clip_screen_edges(&arrs[0], t, 0);
+	while (p < 4)
+	{
+		i = 0;
+		while (i < arrs[p - 1].nb_cells)
+		{
+			tmp = *(t_triangle*)dyacc(&arrs[p - 1], i);
+			clip_screen_edges(&arrs[p], tmp, p);
+			i++;
+		}
+		clear_dynarray(&arrs[p - 1]);
+		p++;
+	}
+	i = -1;
+	while (++i < arrs[3].nb_cells)
+		push_dynarray(to_raster, dyacc(&arrs[3], i), false);
+	clear_dynarray(&arrs[3]);
 }
 
 void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
 {
+	t_dynarray		arrs[4];
 	t_triangle		*t;
-	unsigned int	p;
 	int				i;
-	int				nt;
-	int				tmp;
 
-	i = 0;
-	nt = 1;
+	i = -1;
+	while (++i < 4)
+		if (init_dynarray(&arrs[i], sizeof(t_triangle), 8))
+			return ;
+
 	while (i < tris->nb_cells)
 	{
-		if (push_dynarray(to_raster, dyacc(tris, i), false))
+		t = dyacc(tris, i);
+		if (t->inside && push_dynarray(to_raster, dyacc(tris, i), false))
 			return ;
-		p = 0;
-		while (p < 4) // 4 planes
-		{
-			while (nt > 0)
-			{
-				t = (t_triangle*)to_raster->c;
-				pop_dynarray(to_raster, true); // a faire backward peut etre
-				clip_screen_edges(to_raster, *t, p, &tmp);
-				nt--;
-			}
-			nt = to_raster->nb_cells;
-			p++;
-		}
+		else
+			fill_to_raster(to_raster, arrs, *t);
 		i++;
 	}
+
+	i = -1;
+	while (++i < 4)
+		free_dynarray(&arrs[i]);
 }
 
 int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2])
@@ -131,6 +154,8 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 	else if (clip.inside == 3) // Every points of the triangle found inside
 	{
 		out[0] = in;
+		out[0].color = 0xffffff;
+		out[0].inside = true;
 		return (1);
 	}
 	else

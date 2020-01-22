@@ -2,9 +2,9 @@
 /*
 static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 {
-	draw_line(mlx, a, b, 0);
-	draw_line(mlx, a, c, 0);
-	draw_line(mlx, b, c, 0);
+	draw_line(mlx, a, b, 0x000000);
+	draw_line(mlx, a, c, 0x000000);
+	draw_line(mlx, b, c, 0x000000);
 }*/
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris)
@@ -38,6 +38,8 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.points[1] = vec_mult(t.points[1], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
 		t.points[2] = vec_mult(t.points[2], (t_vec3d){env->data.half_wdt, env->data.half_hgt, 1.0f, 1.0f});
 
+		t.inside = clipped[i].inside;
+		t.color = clipped[i].color;
 		if (push_dynarray(tris, &t, false))
 			return ;
 	}
@@ -100,28 +102,24 @@ void	compute_matrices(t_env *env)
 
 static void	raster_triangles(t_env *env, t_dynarray *arr)
 {
-//	t_dynarray	to_raster;
+	t_dynarray	to_raster;
 	t_triangle	*t;
 	int			i;
 
 	i = 0;
-//	if (init_dynarray(&to_raster, sizeof(t_triangle), arr->nb_cells))// a n init qu une fois
-//		return ;
-//	printf("arr %d\n", arr->nb_cells);
-//	clip_mesh_triangles(arr, &to_raster);
-//	printf("to_raster %d\n", to_raster.nb_cells);
-	while (i < arr->nb_cells)
+	if (init_dynarray(&to_raster, sizeof(t_triangle), arr->nb_cells))// a n init qu une fois
+		return ;
+	clip_mesh_triangles(arr, &to_raster);
+	while (i < to_raster.nb_cells)
 	{
-//		t = (t_triangle*)dyacc(&to_raster, i);
-		t = (t_triangle*)dyacc(arr, i);
-		fill_triangle_unit(env, *t, shade_color(0xffffff, t->illum));
+		t = (t_triangle*)dyacc(&to_raster, i);
+		fill_triangle_unit(env, *t, shade_color(t->color, t->illum));
 //		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
 //			(t_point){t->points[1].x, t->points[1].y},
 //			(t_point){t->points[2].x, t->points[2].y});
-		t += arr->cell_size;
 		i++;
 	}
-//	free_dynarray(&to_raster);//__
+	free_dynarray(&to_raster);//__
 }
 
 void		rasterizer(t_env *env, int scene)
@@ -147,8 +145,8 @@ void		rasterizer(t_env *env, int scene)
 			triangle_pipeline(env, t, &to_raster);
 			j++;
 		}
-		raster_triangles(env, &to_raster);
-		clear_dynarray(&to_raster);
 		i++;
 	}
+	raster_triangles(env, &to_raster);
+	clear_dynarray(&to_raster);
 }
