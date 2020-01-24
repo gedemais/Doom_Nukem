@@ -64,7 +64,7 @@ static void camera(t_env *env)
 	y = env->events.mouse_pos.y;
 	if (x <= hwdt && y < hhgt) // L Up
 	{
-		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
+		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio; // A caper
 		env->cam.pitch += fabs((hhgt - y) * SENSI);
 	}
 	else if (x < hwdt && y >= hhgt) // L Down
@@ -104,6 +104,7 @@ int		render_dev(void *param)
 	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
+	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
 	av += 1 / mesure_time(true);
 	if (av > 20000)
 	{

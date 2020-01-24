@@ -62,12 +62,15 @@ void	matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	m[0][0] = new_r.x;
 	m[0][1] = new_r.y;
 	m[0][2] = new_r.z;
+	m[0][3] = -vec_dot(new_r, pos);
 	m[1][0] = new_up.x;
 	m[1][1] = new_up.y;
 	m[1][2] = new_up.z;
+	m[1][3] = -vec_dot(new_up, pos);
 	m[2][0] = new_f.x;
 	m[2][1] = new_f.y;
 	m[2][2] = new_f.z;
+	m[2][3] = -vec_dot(new_f, pos);
 	m[3][0] = pos.x;
 	m[3][1] = pos.y;
 	m[3][2] = pos.z;

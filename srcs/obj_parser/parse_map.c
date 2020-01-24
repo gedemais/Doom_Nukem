@@ -103,7 +103,10 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 	while (parser.lines[i])
 	{
 		if (parse_line(&parser, map, i, states))
+		{
+			printf("line %d\n", i);
 			return (-1);
+		}
 		i++;
 	}
 	if (load_map_data(map))

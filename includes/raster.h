@@ -23,7 +23,6 @@ typedef struct	s_triangle
 	t_vec3d		points[3];
 	float		illum;
 	int			color;
-	bool		inside;
 }				t_triangle;
 
 typedef struct	s_mesh
@@ -98,6 +97,7 @@ void			inverse_matrix(float m[4][4], float ret[4][4]);
 
 int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 void			clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster);
+void	print_matrix(float m[4][4]);
 
 t_vec3d			vec_add(t_vec3d a, t_vec3d b);
 t_vec3d			vec_sub(t_vec3d a, t_vec3d b);

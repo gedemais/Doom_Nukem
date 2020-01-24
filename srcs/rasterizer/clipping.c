@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/22 18:36:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:31:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[0] = *(clip->in[0]);
 		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[1]);
-		out[0].color = 0xff0000;
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
@@ -46,12 +45,10 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[0] = *clip->in[0];
 		out[0].points[1] = *clip->in[1];
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
-		out[0].color = 0x0000ff;
 
 		out[1].points[0] = *clip->in[1];
 		out[1].points[1] = out[0].points[2];
 		out[1].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[1], *clip->out[0]);
-		out[0].color = 0x00ff00;
 		return (2);
 	}
 	return (0);
@@ -125,14 +122,10 @@ void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
 	while (i < tris->nb_cells)
 	{
 		t = dyacc(tris, i);
-		if (t->inside && push_dynarray(to_raster, dyacc(tris, i), false))
-			return ;
-		else
-			fill_to_raster(to_raster, arrs, *t);
+		fill_to_raster(to_raster, arrs, *t);
 		i++;
 	}
 
-	i = -1;
 	while (++i < 4)
 		free_dynarray(&arrs[i]);
 }
@@ -155,7 +148,6 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 	{
 		out[0] = in;
 		out[0].color = 0xffffff;
-		out[0].inside = true;
 		return (1);
 	}
 	else
