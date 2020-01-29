@@ -3,7 +3,21 @@
 char	*sprites_paths(unsigned int index)
 {
 	static char		*paths[SP_MAX] = {
-					"resources/sprites/singe.XPM"};
+					"resources/sprites/buttons/campaign_clic.XPM", 
+					"resources/sprites/buttons/campaign_hover.XPM", 
+					"resources/sprites/buttons/campaign_off.XPM", 
+					"resources/sprites/buttons/custom_clic.XPM", 
+					"resources/sprites/buttons/custom_hover.XPM", 
+					"resources/sprites/buttons/custom_off.XPM", 
+					"resources/sprites/buttons/map_editor_clic.XPM", 
+					"resources/sprites/buttons/map_editor_hover.XPM", 
+					"resources/sprites/buttons/map_editor_off.XPM", 
+					"resources/sprites/buttons/options_clic.XPM", 
+					"resources/sprites/buttons/options_hover.XPM", 
+					"resources/sprites/buttons/options_off.XPM", 
+					"resources/sprites/buttons/quit_clic.XPM", 
+					"resources/sprites/buttons/quit_hover.XPM", 
+					"resources/sprites/buttons/quit_off.XPM"};
 
 	return (paths[index]);
 }

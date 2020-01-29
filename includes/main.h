@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/21 18:56:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/29 04:56:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "raster.h"
 # include "bmp.h"
 # include "obj_parser.h"
-
 # include "title_screen.h"
 
 # define NB_THREADS 8
@@ -84,6 +83,7 @@ typedef struct	s_env
 	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_cam		cam;
+	t_ts_env	ts_env;
 	int			context;
 	int			scene;
 }				t_env;
@@ -98,7 +98,8 @@ t_sprite		*load_sprites(t_mlx *mlx);
 int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);
-int				laod_object(int fd, char *line);
+int				load_object(int fd, char *line);
+int				setup_ts(t_env *env);
 
 /*
 ** MLX
@@ -113,6 +114,7 @@ bool			*mouse_freedom(void);
 int				shade_color(int color, float scale);
 void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
+
 
 /*
 ** Rasterization
@@ -146,5 +148,6 @@ int		mouse_press_dev(int button, int x, int y, void *param);
 int		mouse_release_dev(int button, int x, int y, void *param);
 int		mouse_position_dev(int x, int y, void *param);
 int		render_dev(void *param);
+
 
 #endif

@@ -4,9 +4,9 @@ int		key_press_ts(int key, void *param)
 {
 	t_env	*env;
 
-	env = ((t_env*)param); // Pointeur pour eviter le cast de merde a chaque acces
-
-	(void)key;
+	env = ((t_env*)param);
+	if (key == KEY_ESCAPE)
+		exit(EXIT_SUCCESS);
 	return (0);
 }
 

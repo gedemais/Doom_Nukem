@@ -46,6 +46,8 @@ SRCS_NAME=	main.c\
 			mlx/bresenham.c\
 			mlx/hooks.c\
 			\
+			title_screen/setup_ts.c\
+			title_screen/buttons.c\
 			title_screen/events.c\
 			title_screen/render.c
 

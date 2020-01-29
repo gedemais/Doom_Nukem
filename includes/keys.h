@@ -20,6 +20,12 @@ enum		e_events_id
 
 # define NB_BUTTONS 5
 
+# define BUTTON_LCLIC 1
+# define BUTTON_RCLIC 2
+# define BUTTON_SCLIC 3
+# define BUTTON_SUP 4
+# define BUTTON_SBACK 5
+
 # define KEY_ESCAPE		53
 # define KEY_F1 		122
 # define KEY_F2			120

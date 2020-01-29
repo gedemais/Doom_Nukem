@@ -5,7 +5,21 @@
 
 enum				e_sprite_id
 {
-	SP_MONKEY,
+	SP_TS_BUTTON_1C,
+	SP_TS_BUTTON_1H,
+	SP_TS_BUTTON_1O,
+	SP_TS_BUTTON_2C,
+	SP_TS_BUTTON_2H,
+	SP_TS_BUTTON_2O,
+	SP_TS_BUTTON_3C,
+	SP_TS_BUTTON_3H,
+	SP_TS_BUTTON_3O,
+	SP_TS_BUTTON_4C,
+	SP_TS_BUTTON_4H,
+	SP_TS_BUTTON_4O,
+	SP_TS_BUTTON_5C,
+	SP_TS_BUTTON_5H,
+	SP_TS_BUTTON_5O,
 	SP_MAX
 };
 
@@ -18,7 +32,5 @@ typedef struct		s_sprite
 	int				alpha;
 	int				pad;
 }					t_sprite;
-
-char		*bmp_read(char *path, int *wdt, int *hgt);
 
 #endif
