@@ -23,6 +23,7 @@ typedef struct	s_triangle
 	t_vec3d		points[3];
 	float		illum;
 	int			color;
+	bool		inside;
 }				t_triangle;
 
 typedef struct	s_mesh

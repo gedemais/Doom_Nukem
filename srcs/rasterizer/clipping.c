@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/24 14:31:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/29 00:59:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,29 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 			(t_vec3d){-1.0f, 0.0f, 0.0f, 0.0f}, t, clipped);
 	while (i < to_add)
 	{
+		clipped[i].color = t.color;
+		clipped[i].illum = t.illum;
 		if (push_dynarray(to_raster, &clipped[i], false))
 			return ;
 		i++;
 	}
 }
+
+static bool	is_triangle_in_screen(t_triangle t)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (t.points[i].x < 0 || t.points[i].x >= WDT
+			|| t.points[i].y < 0 || t.points[i].y >= HGT)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 
 static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
 {
@@ -89,6 +107,11 @@ static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle
 	int				i;
 
 	p = 1;
+	if (is_triangle_in_screen(t))
+	{
+		push_dynarray(to_raster, &t, false);
+		return ;
+	}
 	clip_screen_edges(&arrs[0], t, 0);
 	while (p < 4)
 	{
@@ -147,7 +170,6 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 	else if (clip.inside == 3) // Every points of the triangle found inside
 	{
 		out[0] = in;
-		out[0].color = 0xffffff;
 		return (1);
 	}
 	else

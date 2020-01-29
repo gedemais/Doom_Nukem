@@ -1,5 +1,7 @@
 
 
+Mettre render.c dans srcs/mlx/ pas srcs/
+
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
 
 Clipping

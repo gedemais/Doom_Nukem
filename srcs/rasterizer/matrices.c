@@ -1,7 +1,5 @@
 #include "main.h"
 
-
-
 void	init_projection_matrix(t_cam *cam)
 {
 	cam->p_m[0][0] = cam->aspect_ratio * cam->fovr;
