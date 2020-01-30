@@ -17,7 +17,8 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/options_off.XPM", 
 					"resources/sprites/buttons/quit_clic.XPM", 
 					"resources/sprites/buttons/quit_hover.XPM", 
-					"resources/sprites/buttons/quit_off.XPM"};
+					"resources/sprites/buttons/quit_off.XPM",
+					"resources/sprites/ts_background.XPM"};
 
 	return (paths[index]);
 }
@@ -29,4 +30,3 @@ char	*samples_paths(unsigned int index)
 
 	return (paths[index]);
 }
-

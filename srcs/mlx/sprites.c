@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 03:18:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/30 04:02:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 	hgt = (int)((float)sprite.hgt * scale);
 	delta_x = 1.0f / wdt;
 	delta_y = 1.0f / hgt;
-	if (wdt + x_y[0] >= WDT || hgt + x_y[1] >= HGT)
+	if (wdt + x_y[0] > WDT || hgt + x_y[1] > HGT)
 		return (img);
 	sample_y = 0.0f;
 	while (y < hgt)
@@ -45,7 +45,8 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 			pos += (int)(sample_x * sprite.wdt);
 			pos *= 4;
 			ft_memcpy(&color, &sprite.img_data[pos], 4);
-			draw_pixel(img, x + x_y[0], y + x_y[1], color); // A remplacer par un memcpy quand le pixloc sera actif
+			if (color != -16777216)
+				draw_pixel(img, x + x_y[0], y + x_y[1], color); // A remplacer par un memcpy quand le pixloc sera actif
 			x++;
 		}
 		y++;

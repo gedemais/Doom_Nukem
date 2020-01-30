@@ -51,6 +51,7 @@ int		render_ts(void *param)
 	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
 
 	handle_events(env);
+	blit_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (int[2]){0, 0}, 1.0f);
 	render_buttons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

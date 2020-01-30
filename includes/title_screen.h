@@ -26,7 +26,6 @@ typedef struct		s_button
 typedef struct		s_ts_env
 {
 	void			*env;
-	t_sprite		*background;
 	t_button		buttons[TS_BUTTON_MAX];
 }					t_ts_env;
 

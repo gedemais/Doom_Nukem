@@ -5,6 +5,9 @@
 
 enum				e_sprite_id
 {
+/*
+** Title screen
+*/
 	SP_TS_BUTTON_1C,
 	SP_TS_BUTTON_1H,
 	SP_TS_BUTTON_1O,
@@ -20,6 +23,7 @@ enum				e_sprite_id
 	SP_TS_BUTTON_5C,
 	SP_TS_BUTTON_5H,
 	SP_TS_BUTTON_5O,
+	SP_TS_BACKGROUND,
 	SP_MAX
 };
 
