@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/29 06:39:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/30 03:26:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	init_buttons(t_env *env)
 
 	i = 0;
 	sp = env->sprites;
-	y_offset = 200;
+	y_offset = 300;
 	while (i < TS_BUTTON_MAX)
 	{
 		init_button(&env->ts_env.buttons[i],
-		(t_point){400, y_offset},
+		(t_point){415, y_offset},
 		(t_sprite*[3]){&sp[i * 3], &sp[i * 3 + 1], &sp[i * 3 + 2]});
-		y_offset += 100;
+		y_offset += 80;
 		i++;
 	}
 }

@@ -1,27 +1,25 @@
 #include "main.h"
 
-static void		switch_context(t_env *env, unsigned int i)
-{
-	static int	contexts[TS_BUTTON_MAX] = {C_DEV, C_DEV, C_DEV, C_DEV, C_DEV};
-
-	env->context = contexts[i];
-}
-
 int				handle_events(t_env *env)
 {
-	static bool		clic = false;
-	unsigned int	i;
+	static bool	clic = false;
+	int			i;
 
-	i = 0;
+	i = -1;
 	if (env->events.keys[KEY_ESCAPE])
 		exit(EXIT_SUCCESS);
-	while (i < TS_BUTTON_MAX)
-	{
+	while (++i < TS_BUTTON_MAX)
 		if (is_on_button(env->events.mouse_pos, env->ts_env.buttons[i]))
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
-				switch_context(env, i);
+				if (i == TS_BUTTON_CAMPAIGN) //
+					switch_context(env, C_DEV);// Provisoire
+				else if (i == TS_BUTTON_QUIT)
+					exit(EXIT_SUCCESS);
+				else
+					switch_context(env, i + 2);
+				clic = false;
 				return (1);
 			}
 			clic = env->events.buttons[BUTTON_LCLIC];
@@ -29,8 +27,6 @@ int				handle_events(t_env *env)
 		}
 		else
 			env->ts_env.buttons[i].is_hover = false;
-		i++;
-	}
 	return (0);
 }
 

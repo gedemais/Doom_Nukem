@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/29 04:56:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/30 03:09:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@
 # include "raster.h"
 # include "bmp.h"
 # include "obj_parser.h"
+
 # include "title_screen.h"
+# include "campaign.h"
+# include "custom.h"
+# include "map_editor.h"
+# include "options.h"
+
 
 # define NB_THREADS 8
 # define WDT 1080
@@ -43,6 +49,10 @@ enum			e_context_id
 {
 	C_DEV,
 	C_TITLE_SCREEN,
+	C_CAMPAIGN,
+	C_CUSTOM,
+	C_MAP_EDITOR,
+	C_OPTIONS,
 	C_MAX
 };
 
@@ -89,6 +99,7 @@ typedef struct	s_env
 }				t_env;
 
 int				setup(t_env *env);
+int				switch_context(t_env *env, unsigned int i);
 
 /*
 ** Setup

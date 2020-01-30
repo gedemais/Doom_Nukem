@@ -5,32 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 03:09:54 by gedemais         ###   ########.fr       */
+/*   Created: 2020/01/30 02:37:10 by gedemais          #+#    #+#             */
+/*   Updated: 2020/01/30 02:50:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-double	mesure_time(bool end)
+int		render_custom(void *param)
 {
-	static clock_t	start;
+	t_env	*env;
 
-	if (!end)
-	{
-		start = clock();
-		return (0);
-	}
-	else
-		return ((double)(clock() - start) / CLOCKS_PER_SEC);
-}
+	env = ((t_env*)param);
 
+	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
+	if (env->events.keys[KEY_M])
+		switch_context(env, C_TITLE_SCREEN);
 
-int		render(void *param)
-{
-	static int	(*render_fts[C_MAX])(void*) = {render_dev, render_ts, render_camp, render_custom, render_maped, render_opt};
-	int			context;
-
-	context = ((t_env*)param)->context;
-	return (render_fts[context](param));
+	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : custom");
+	return (0);
 }

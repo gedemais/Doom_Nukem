@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/29 06:28:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/30 03:18:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 		x = 0;
 		sample_y += delta_y;
 		sample_x = 0.0f;
-		while (x < wdt)
+		while (x < wdt - 1)
 		{
 			sample_x += delta_x;
 			pos = (abs((int)(sample_y * sprite.hgt) - 1)) * sprite.wdt;

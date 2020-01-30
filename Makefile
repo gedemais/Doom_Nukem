@@ -18,11 +18,24 @@ endif
 SRCS_NAME=	main.c\
 			setup.c\
 			render.c\
+			switch_context.c\
 			dev_handle_events.c\
 			openal.c\
 			play_sound.c\
 			resources_paths.c\
 			dev_events.c\
+			\
+			campaign/render.c\
+			campaign/events.c\
+			\
+			custom_mode/render.c\
+			custom_mode/events.c\
+			\
+			map_editor/render.c\
+			map_editor/events.c\
+			\
+			options/render.c\
+			options/events.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/lines_fts.c\
