@@ -1,11 +1,11 @@
 #include "main.h"
-
+/*
 static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
 {
 	draw_line(mlx, a, b, 0x000000);
 	draw_line(mlx, a, c, 0x000000);
 	draw_line(mlx, b, c, 0x000000);
-}
+}*/
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris)
 {
@@ -126,9 +126,9 @@ static void	raster_triangles(t_env *env, t_dynarray *arr)
 	{
 		t = (t_triangle*)dyacc(&to_raster, i);
 		fill_triangle_unit(env, *t, shade_color(t->color, t->illum));
-		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
-			(t_point){t->points[1].x, t->points[1].y},
-			(t_point){t->points[2].x, t->points[2].y});
+//		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+//			(t_point){t->points[1].x, t->points[1].y},
+//			(t_point){t->points[2].x, t->points[2].y});
 		i++;
 	}
 	free_dynarray(&to_raster);//__
