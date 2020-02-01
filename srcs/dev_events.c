@@ -99,20 +99,22 @@ int		render_dev(void *param)
 	dev_handle_events(env);
 
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
+	for (int i = 0; i < HGT * WDT; i++)
+		env->cam.z_buffer[i] = INFINITY;
 	camera(env);
 	rasterizer(env, SCENE_TEST);
-	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
+	//blit_sprite(env->mlx.img_data, env->sprites[SP_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
+//	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 //	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
 	av += 1 / mesure_time(true);
-	if (av > 20000)
+	if (av > 2000)
 	{
 		printf("%f\n", av / it);
 		av = 0.0f;
 		it = 0;
 	}
-//	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
 	it++;
 	return (0);
 }

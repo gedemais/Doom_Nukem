@@ -47,7 +47,11 @@ static void		flattop(t_env *env, t_vec3d v[3], int color)
 		x = fill.xstart;
 		while (x < fill.xend)
 		{
-			draw_pixel(env->mlx.img_data, x, y, color);
+			if (env->cam.z_buffer[(y - 1) * WDT + x] > (v[0].z + v[1].z + v[2].z) / 3.0f)
+			{
+				draw_pixel(env->mlx.img_data, x, y, color);
+				env->cam.z_buffer[(y - 1) * WDT + x] = (v[0].z + v[1].z + v[2].z) / 3.0f;
+			}
 			x++;
 		}
 		y++;

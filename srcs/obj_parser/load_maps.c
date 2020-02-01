@@ -2,7 +2,7 @@
 
 static char	*maps_paths(unsigned int index)
 {
-	char	*paths[SCENE_MAX] = {	"resources/maps/cluster.obj"};
+	char	*paths[SCENE_MAX] = {	"resources/maps/e1.obj"};
 
 	return (paths[index]);
 }

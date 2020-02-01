@@ -6,7 +6,6 @@ typedef enum		e_ts_button_id
 	TS_BUTTON_CAMPAIGN,
 	TS_BUTTON_MAP_EDITOR,
 	TS_BUTTON_CUSTOM,
-	TS_BUTTON_PARAMS,
 	TS_BUTTON_QUIT,
 	TS_BUTTON_MAX
 }					t_ts_button_id;

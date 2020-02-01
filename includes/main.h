@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 03:09:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/01 04:01:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>
 # include <limits.h>
 # include <assert.h>
+# include <pthread.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -34,7 +35,6 @@
 # include "campaign.h"
 # include "custom.h"
 # include "map_editor.h"
-# include "options.h"
 
 
 # define NB_THREADS 8
@@ -52,7 +52,6 @@ enum			e_context_id
 	C_CAMPAIGN,
 	C_CUSTOM,
 	C_MAP_EDITOR,
-	C_OPTIONS,
 	C_MAX
 };
 
@@ -137,7 +136,6 @@ void			fill_triangle_unit(t_env *env, t_triangle t, int color);
 ** Sprites
 */
 char			*sprites_paths(unsigned int index);
-char			*blit_sprite(char *img, t_sprite sprite, int x_y[2], float sc);
 
 /*
 ** OpenAl

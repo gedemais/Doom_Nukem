@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 04:02:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/29 07:26:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:53:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	render_button(void *param, t_button button, unsigned int index)
 		if (env->events.buttons[BUTTON_LCLIC])
 		{
 			sprite = &env->sprites[index * 3];
-			blit_sprite(env->mlx.img_data, *sprite, (int[2]){button.l_up.x, button.l_up.y}, 1.0f);
+			blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 			clic = true;
 		}
 		else
@@ -63,5 +63,5 @@ void	render_button(void *param, t_button button, unsigned int index)
 	else
 		sprite = &env->sprites[index * 3 + 2];
 	if (!clic)
-		blit_sprite(env->mlx.img_data, *sprite, (int[2]){button.l_up.x, button.l_up.y}, 1.0f);
+		blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 }

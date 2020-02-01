@@ -34,13 +34,11 @@ SRCS_NAME=	main.c\
 			map_editor/render.c\
 			map_editor/events.c\
 			\
-			options/render.c\
-			options/events.c\
-			\
 			obj_parser/load_maps.c\
 			obj_parser/lines_fts.c\
 			obj_parser/check_formats.c\
 			obj_parser/parse_map.c\
+			obj_parser/sort_meshs.c\
 			obj_parser/states.c\
 			obj_parser/read_file.c\
 			\
@@ -93,7 +91,7 @@ LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 all: $(NAME)
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -lsndfile -framework OpenAL -framework OpenGL -framework AppKit
+	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -lsndfile -lpthread -framework OpenAL -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) -o $@ -c $<

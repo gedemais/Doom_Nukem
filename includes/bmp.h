@@ -17,13 +17,11 @@ enum				e_sprite_id
 	SP_TS_BUTTON_3C,
 	SP_TS_BUTTON_3H,
 	SP_TS_BUTTON_3O,
-	SP_TS_BUTTON_4C,
-	SP_TS_BUTTON_4H,
-	SP_TS_BUTTON_4O,
 	SP_TS_BUTTON_5C,
 	SP_TS_BUTTON_5H,
 	SP_TS_BUTTON_5O,
 	SP_TS_BACKGROUND,
+	SP_BLOC_GRASS,
 	SP_MAX
 };
 
@@ -37,4 +35,5 @@ typedef struct		s_sprite
 	int				pad;
 }					t_sprite;
 
+char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
 #endif

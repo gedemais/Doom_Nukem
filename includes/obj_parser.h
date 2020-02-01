@@ -47,6 +47,7 @@ typedef struct		s_parser
 char				*read_file(int fd);
 void				init_states(char states[NB_LINE_TYPES][NB_LINE_TYPES]);
 int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);
+void				sort_meshs(t_dynarray *meshs, int nmesh);
 
 bool				check_float(char *tok);
 bool				check_number(char *tok);

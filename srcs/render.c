@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 03:09:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/31 03:35:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	mesure_time(bool end)
 
 int		render(void *param)
 {
-	static int	(*render_fts[C_MAX])(void*) = {render_dev, render_ts, render_camp, render_custom, render_maped, render_opt};
+	static int	(*render_fts[C_MAX])(void*) = {render_dev, render_ts, render_camp, render_custom, render_maped};
 	int			context;
 
 	context = ((t_env*)param)->context;

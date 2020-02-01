@@ -12,13 +12,11 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/map_editor_clic.XPM", 
 					"resources/sprites/buttons/map_editor_hover.XPM", 
 					"resources/sprites/buttons/map_editor_off.XPM", 
-					"resources/sprites/buttons/options_clic.XPM", 
-					"resources/sprites/buttons/options_hover.XPM", 
-					"resources/sprites/buttons/options_off.XPM", 
 					"resources/sprites/buttons/quit_clic.XPM", 
 					"resources/sprites/buttons/quit_hover.XPM", 
 					"resources/sprites/buttons/quit_off.XPM",
-					"resources/sprites/ts_background.XPM"};
+					"resources/sprites/ts_background.XPM",
+					"resources/sprites/grass.XPM"};
 
 	return (paths[index]);
 }

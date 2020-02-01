@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 04:02:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:52:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
+char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 {
 	int		x;
 	int		y;
@@ -30,7 +30,7 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 	hgt = (int)((float)sprite.hgt * scale);
 	delta_x = 1.0f / wdt;
 	delta_y = 1.0f / hgt;
-	if (wdt + x_y[0] > WDT || hgt + x_y[1] > HGT)
+	if (wdt + o.x > WDT || hgt + o.y > HGT)
 		return (img);
 	sample_y = 0.0f;
 	while (y < hgt)
@@ -46,7 +46,7 @@ char	*blit_sprite(char *img, t_sprite sprite, int x_y[2], float scale)
 			pos *= 4;
 			ft_memcpy(&color, &sprite.img_data[pos], 4);
 			if (color != -16777216)
-				draw_pixel(img, x + x_y[0], y + x_y[1], color); // A remplacer par un memcpy quand le pixloc sera actif
+				draw_pixel(img, x + o.x, y + o.y, color); // A remplacer par un memcpy quand le pixloc sera actif
 			x++;
 		}
 		y++;

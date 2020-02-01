@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/29 00:59:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:25:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static bool	is_triangle_in_screen(t_triangle t)
 	return (true);
 }
 
-
 static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
 {
 	t_triangle		tmp;
@@ -131,33 +130,28 @@ static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle
 	clear_dynarray(&arrs[3]);
 }
 
-void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster)
+void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4])
 {
-	t_dynarray		arrs[4];
 	t_triangle		*t;
 	int				i;
 
-	i = -1;
-	while (++i < 4)
-		if (init_dynarray(&arrs[i], sizeof(t_triangle), 8))
-			return ;
-
+	i = 0;
 	while (i < tris->nb_cells)
 	{
 		t = dyacc(tris, i);
 		fill_to_raster(to_raster, arrs, *t);
 		i++;
 	}
-
+	i = -1;
 	while (++i < 4)
-		free_dynarray(&arrs[i]);
+		clear_dynarray(&arrs[i]);
 }
 
 int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2])
 {
 	t_clipper	clip;
 
-	ft_memset(&clip, 0, sizeof(t_clipper));
+	clip = (t_clipper){};
 	vec_normalize(&plane_n);
 	clip.d0 = distance_to_plane(plane_n, plane_p, in.points[0]);
 	clip.d1 = distance_to_plane(plane_n, plane_p, in.points[1]);

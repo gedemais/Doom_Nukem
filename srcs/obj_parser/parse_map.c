@@ -57,8 +57,7 @@ static int	load_map_data(t_map *map)
 	{
 		j = -1;
 		if (!(m = dyacc(&map->meshs, i))
-			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells))
-			|| (init_dynarray(&m->to_raster, sizeof(t_triangle), m->faces.nb_cells)))
+			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells)))
 			return (-1);
 		while (++j < m->faces.nb_cells)
 		{
@@ -68,10 +67,12 @@ static int	load_map_data(t_map *map)
 			ft_memcpy(&new.points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
 			ft_memcpy(&new.points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
 			ft_memcpy(&new.points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
+			if (i < 3)
+				new.color = 0xff0000;
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
 		}
-		printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
+//		printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
 	}
 	return (0);
 }
@@ -113,5 +114,11 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		return (-1);
 	ft_free_ctab(parser.lines);
 	free(file);
+	i = 0;
+/*	while (i < SCENE_MAX)
+	{
+		sort_meshs(&map[i].meshs, map[i].nmesh);
+		i++;
+	}*/
 	return (0);
 }
