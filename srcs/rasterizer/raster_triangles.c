@@ -1,0 +1,138 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raster_triangles.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
+/*   Updated: 2020/02/02 08:09:00 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "main.h"
+/*
+static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
+{
+	draw_line(mlx, a, b, 0xffffff);
+	draw_line(mlx, a, c, 0xffffff);
+	draw_line(mlx, b, c, 0xffffff);
+}
+*/
+
+static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)
+{
+	unsigned int	j;
+	unsigned int	t;
+	unsigned int	work;
+	unsigned int	max_work;
+
+	j = 0;
+	max_work = 0;
+	while (j < NB_THREADS)
+	{
+		work = threads[j].end - threads[j].index;
+		if (i != j && work > max_work)
+		{
+			max_work = work;
+			t = j;
+		}
+		j++;
+	}
+	threads[i].start = threads[t].index + (max_work / 2); // Placing new's start
+	threads[i].index = threads[i].start; // Placing new's start
+	threads[i].end = threads[t].end; // Placing new's end
+	threads[t].end = threads[i].start; // Copying on weak's end
+	threads[i].done = false;
+	threads[t].done = false;
+	if (pthread_create(&threads[i].thread, NULL, rasthreader, &threads[i]))
+		return (-1);
+	return (threads[i].start - threads[i].end);
+}
+
+static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
+{
+	unsigned int	i;
+	int				waste;
+	int				amount;
+
+	amount = INT_MAX;
+	waste = (arr->nb_cells / NB_THREADS);
+	while (amount > waste)
+	{
+		i = 0;
+		while (i < NB_THREADS)
+		{
+			if (threads[i].done)
+			{
+				amount = relaunch_thread(threads, i);
+				break ;
+			}
+			i++;
+		}
+	}
+}
+
+static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
+{
+	(void)rest;
+	thread->env = env;
+	thread->tris = &env->cam.to_raster;
+	thread->start = thread->id * part;
+	thread->index = thread->start;
+	thread->end = thread->start + part + (thread->id == NB_THREADS - 1 ? rest : 0);
+	thread->done = false;
+	thread->mono = false;
+	if (pthread_create(&thread->thread, NULL, rasthreader, thread))
+		return (-1);
+	return (0);
+}
+
+static int	switch_threads(t_env *env, t_rasthread threads[NB_THREADS],
+														int work_size, bool w)
+{
+	unsigned int	i;
+	int				rest;
+
+	i = 0;
+	rest = work_size % NB_THREADS;
+	while (i < NB_THREADS && i < (unsigned)work_size)
+	{
+		if (w)
+		{
+			if (pthread_join(threads[i].thread, NULL))
+				return (-1);
+		}
+		else
+		{
+			threads[i].id = (int)i;
+			if (launch_thread(env, &threads[i], work_size / NB_THREADS, rest))
+				return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int			raster_triangles(void *e, t_dynarray *arr)
+{
+	t_rasthread	threads[NB_THREADS];
+	t_env		*env;
+	int			i;
+
+	i = -1;
+	env = e;
+	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
+
+	if (env->cam.to_raster.nb_cells < NB_THREADS)
+		monothread_raster(env);
+	else
+	{
+		switch_threads(env, threads, env->cam.to_raster.nb_cells, false);
+		manage_threads(threads, &env->cam.to_raster);
+		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
+	}
+
+	clear_dynarray(&env->cam.to_raster);
+	return (0);
+}

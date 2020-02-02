@@ -6,13 +6,64 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/07 18:52:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/02 05:57:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		shade_color(int color, float scale)
+static int	**init_pixloc(void)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
+	int				**pixloc;
+
+	i = 0;
+	k = 0;
+	if (!(pixloc = (int**)malloc(sizeof(int*) * HGT)))
+		return (NULL);
+	while (i < HGT)
+	{
+		j = 0;
+		if (!(pixloc[i] = (int*)malloc(sizeof(int) * WDT)))
+			return (NULL);
+		while (j < WDT)
+		{
+			pixloc[i][j] = k;
+			k += 4;
+			j++;
+		}
+		i++;
+	}
+	return (pixloc);
+}
+
+static void	free_pixloc(int **screen)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < HGT)
+	{
+		free(screen[i]);
+		i++;
+	}
+	free(screen);
+}
+
+int			pixloc(int x, int y, bool free)
+{
+	static int	**screen = NULL;
+
+	if (!screen && !(screen = init_pixloc()))
+		return (-1);
+	else if (free)
+		free_pixloc(screen);
+	return (screen[y][x]);
+}
+
+int			shade_color(int color, float scale)
 {
 	unsigned char	*rgb;
 
@@ -28,12 +79,12 @@ int		shade_color(int color, float scale)
 	return (color);
 }
 
-void	draw_pixel(char *img, int x, int y, int color)
+void		draw_pixel(char *img, int x, int y, int color)
 {
-	int		pos;
+	int			pos;
 
 	if (x < 0 || x >= WDT || y < 0 || y >= HGT)
 		return ;
-	pos = (abs(y - 1) * WDT + x) * 4;
-	ft_memcpy(&img[pos], &color, 4);
+	pos = pixloc(x, y, false);
+	*(int*)&img[pos] = color;
 }

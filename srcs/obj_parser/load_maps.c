@@ -2,7 +2,7 @@
 
 static char	*maps_paths(unsigned int index)
 {
-	char	*paths[SCENE_MAX] = {	"resources/maps/e1.obj"};
+	char	*paths[SCENE_MAX] = {	"resources/maps/mountains.obj"};
 
 	return (paths[index]);
 }
@@ -30,3 +30,5 @@ int			load_maps(t_env *env)
 	}
 	return (0);
 }
+
+// tester si le pthread_create est necessaire

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/01 04:01:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/02 05:56:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct	s_env
 
 int				setup(t_env *env);
 int				switch_context(t_env *env, unsigned int i);
+int				free_env(t_env *env);
 
 /*
 ** Setup
@@ -122,6 +123,7 @@ int				mouse_release(int button, int x, int y, void *param);
 int				mouse_position(int x, int y, void *param);
 bool			*mouse_freedom(void);
 int				shade_color(int color, float scale);
+int				pixloc(int x, int y, bool free);
 void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 

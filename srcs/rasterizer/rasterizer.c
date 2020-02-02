@@ -1,18 +1,12 @@
 #include "main.h"
-/*
-static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
-{
-	draw_line(mlx, a, b, 0xffffff);
-	draw_line(mlx, a, c, 0xffffff);
-	draw_line(mlx, b, c, 0xffffff);
-}*/
 
 void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris)
 {
 	t_triangle	clipped[2];
 	int			nclip;
+	int			i;
 
-	// Illumination computing
+	i = 0;
 	t.illum = vec_dot(normal, env->cam.light);
 
 	// View matrix
@@ -22,7 +16,8 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 
 	nclip = clip_triangle((t_vec3d){0.0f, 0.0f, 0.1f, 1.0f}, (t_vec3d){0.0f, 0.0f, 1.0f, 1.0f}, t, clipped);
 
-	for (int i = 0; i < nclip; i++){
+	while (i < nclip)
+	{
 		// Projection
 		t.points[0] = multiply_matrix(env->cam.p_m, clipped[i].points[0]);
 		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
@@ -39,17 +34,8 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.color = 0xffffff;
 		if (push_dynarray(tris, &t, false))
 			return ;
+		i++;
 	}
-}
-
-void	print_matrix(float m[4][4])
-{
-	for (int i = 0; i < 4; i++){
-		for (int j = 0; j < 4; j++)
-			printf("%f ", m[i][j]);
-		printf("\n");
-	}
-	printf("\n");
 }
 
 void	triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
@@ -109,7 +95,7 @@ void	compute_matrices(t_env *env)
 	theta -= 0.01f;
 }
 
-static void		*rasthreader(void *param)
+void		*rasthreader(void *param)
 {
 	t_rasthread	*thr;
 	t_triangle	*t;
@@ -123,43 +109,40 @@ static void		*rasthreader(void *param)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
 		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
+//		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+//			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
 		thr->index++;
 	}
-	pthread_exit(NULL);
+	thr->done = true;
+	if (thr->mono)
+		return (NULL);
+	else
+		pthread_exit(NULL);
 }
 
-static int	raster_triangles(t_env *env, t_dynarray *arr)
+void	monothread_raster(void *e)
 {
-	t_rasthread	threads[NB_THREADS];
-	int			amount;
-	int			i;
+	t_rasthread		thread;
+	t_env			*env;
+	int				i;
 
 	i = 0;
-	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-	amount = env->cam.to_raster.nb_cells / NB_THREADS;
-	while (i < NB_THREADS)
+	env = e;
+	while (i < env->cam.to_raster.nb_cells)
 	{
-		threads[i].env = env;
-		threads[i].tris = &env->cam.to_raster;
-		threads[i].start = i * amount;
-		threads[i].index = threads[i].start;
-		threads[i].end = threads[i].start + amount;
-		if (pthread_create(&threads[i].thread, NULL, rasthreader, &threads[i]))
-			return (-1);
+		thread.env = env;
+		thread.tris = &env->cam.to_raster;
+		thread.start = i;
+		thread.index = i;
+		thread.end = i + 1;
+		thread.done = false;
+		thread.mono = true;
+		rasthreader(&thread);
 		i++;
 	}
-	i = 0;
-	while (i < NB_THREADS)
-	{
-		if (pthread_join(threads[i].thread, NULL))
-			return (-1);
-		i++;
-	}
-	clear_dynarray(&env->cam.to_raster);
-	return (0);
 }
 
-void		rasterizer(t_env *env, int scene)
+void	rasterizer(t_env *env, int scene)
 {
 	int			i;
 	int			j;

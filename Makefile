@@ -16,14 +16,15 @@ endif
 
 # Source code files
 SRCS_NAME=	main.c\
-			setup.c\
-			render.c\
-			switch_context.c\
+			dev_events.c\
 			dev_handle_events.c\
+			free.c\
 			openal.c\
 			play_sound.c\
+			render.c\
 			resources_paths.c\
-			dev_events.c\
+			setup.c\
+			switch_context.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
@@ -45,6 +46,7 @@ SRCS_NAME=	main.c\
 			rasterizer/clipping.c\
 			rasterizer/fill_triangle_unit.c\
 			rasterizer/rasterizer.c\
+			rasterizer/raster_triangles.c\
 			rasterizer/camera.c\
 			rasterizer/matrices.c\
 			rasterizer/matrix_ops.c\
