@@ -100,11 +100,9 @@ void		*rasthreader(void *param)
 	t_rasthread	*thr;
 	t_triangle	*t;
 	t_env		*env;
-	int			i;
 
 	thr = (t_rasthread*)param;
 	env = thr->env;
-	i = thr->start;
 	while (thr->index < thr->end)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);

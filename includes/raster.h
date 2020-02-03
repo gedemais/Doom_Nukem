@@ -126,6 +126,7 @@ void			inverse_matrix(float m[4][4], float ret[4][4]);
 int				raster_triangles(void *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
+void			draw_triangle(void *mlx, t_point a, t_point b, t_point c);
 
 int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 void			clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4]);

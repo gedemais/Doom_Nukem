@@ -6,19 +6,18 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/02 08:09:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/03 01:08:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-/*
-static void	draw_triangle(t_mlx *mlx, t_point a, t_point b, t_point c)
+
+void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)
 {
-	draw_line(mlx, a, b, 0xffffff);
-	draw_line(mlx, a, c, 0xffffff);
-	draw_line(mlx, b, c, 0xffffff);
+	draw_line((t_mlx*)mlx, a, b, 0x000000);
+	draw_line((t_mlx*)mlx, a, c, 0x000000);
+	draw_line((t_mlx*)mlx, b, c, 0x000000);
 }
-*/
 
 static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)
 {
@@ -55,6 +54,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 	unsigned int	i;
 	int				waste;
 	int				amount;
+	int				relaunched = 0;
 
 	amount = INT_MAX;
 	waste = (arr->nb_cells / NB_THREADS);
@@ -66,6 +66,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 			if (threads[i].done)
 			{
 				amount = relaunch_thread(threads, i);
+				relaunched++;
 				break ;
 			}
 			i++;

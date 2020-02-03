@@ -102,7 +102,5 @@ void	fill_triangle_unit(t_env *env, t_triangle t, int color)
 		flatbot(env, v, color);
 	}
 	else
-	{
 		classic(env, v, color);
-	}
 }
