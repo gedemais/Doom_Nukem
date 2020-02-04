@@ -38,6 +38,7 @@ typedef struct	s_triangle
 typedef struct	s_mesh
 {
 	t_dynarray	tris;
+	t_dynarray	txts;
 	t_dynarray	faces;
 	float		yaw;
 	float		pitch;

@@ -1,5 +1,12 @@
 #include "main.h"
 
+char	*maps_paths(unsigned int index)
+{
+	char	*paths[SCENE_MAX] = {	"resources/maps/cube_textured.obj"};
+
+	return (paths[index]);
+}
+
 char	*sprites_paths(unsigned int index)
 {
 	static char		*paths[SP_MAX] = {

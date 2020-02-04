@@ -1,18 +1,18 @@
 #include "main.h"
 
-int		new_mesh(t_parser *p, t_map *map, char **toks)
+int		new_mesh(t_map *map, char **toks)
 {
 	static char		zone[sizeof(t_mesh)] = {0};
 	t_mesh			*m;
 	unsigned int	i;
 
-	(void)p;
 	i = 1;
 	if (ft_tablen(toks) != 2)
 		return (-1);
 	if (push_dynarray(&map->meshs, &zone[0], false)
 		|| !(m = dyacc(&map->meshs, map->nmesh))
 		|| !(m->name = ft_strdup(toks[1]))
+		|| init_dynarray(&m->txts, sizeof(t_vec2d), 0)
 		|| init_dynarray(&m->faces, sizeof(t_face), 0))
 		return (-1);
 	map->nmesh++;
@@ -21,11 +21,10 @@ int		new_mesh(t_parser *p, t_map *map, char **toks)
 	return (0);
 }
 
-int		new_vertex(t_parser *p, t_map *map, char **toks)
+int		new_vertex(t_map *map, char **toks)
 {
 	t_vec3d		new;
 
-	(void)p;
 	if (ft_tablen(toks) != 4
 		|| !check_float(toks[1]) || !check_float(toks[2])
 		|| !check_float(toks[3]))
@@ -38,11 +37,23 @@ int		new_vertex(t_parser *p, t_map *map, char **toks)
 	return (0);
 }
 
-int		new_face(t_parser *p, t_map *map, char **toks)
+int		new_txt_vertex(t_map *map, char **toks)
+{
+	t_vec2d		txt_coor;
+
+	if (ft_tablen(toks) != 3 || !check_face(toks[1]) || !check_face(toks[2]))
+		return (-1);
+	txt_coor.u = atof(toks[1]);
+	txt_coor.v = atof(toks[2]);
+	if (push_dynarray(&map->txt_pool, &txt_coor, false))
+		return (-1);
+	return (0);
+}
+
+int		new_face(t_map *map, char **toks)
 {
 	t_face			face;
 	t_mesh			*m;
-	(void)p;
 	if (ft_tablen(toks) != 4
 		|| !check_number(toks[1]) || !check_number(toks[2])
 		|| !check_number(toks[3]))
@@ -56,17 +67,15 @@ int		new_face(t_parser *p, t_map *map, char **toks)
 	return (0);
 }
 
-int		vertex_end(t_parser *p, t_map *map, char **toks)
+int		vertex_end(t_map *map, char **toks)
 {
-	(void)p;
 	(void)map;
 	(void)toks;
 	return (0);
 }
 
-int		comment(t_parser *p, t_map *map, char **toks)
+int		comment(t_map *map, char **toks)
 {
-	(void)p;
 	(void)map;
 	(void)toks;
 	return (0);

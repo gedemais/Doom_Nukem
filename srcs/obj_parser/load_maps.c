@@ -1,12 +1,5 @@
 #include "main.h"
 
-static char	*maps_paths(unsigned int index)
-{
-	char	*paths[SCENE_MAX] = {	"resources/maps/mountains.obj"};
-
-	return (paths[index]);
-}
-
 int			load_maps(t_env *env)
 {
 	char			states[PS_MAX][PS_MAX];
@@ -30,5 +23,3 @@ int			load_maps(t_env *env)
 	}
 	return (0);
 }
-
-// tester si le pthread_create est necessaire

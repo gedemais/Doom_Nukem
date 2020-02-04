@@ -2,11 +2,11 @@
 
 static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX])
 {
-	char			*qualis[PS_MAX] = {"o", "v", "s", "f", "#"};
+	char			*qualis[PS_MAX] = {"o", "v", "vt", "s", "f", "#"};
 	unsigned int	i;
 
 	i = 0;
-	if (ft_strlen(c) != 1)
+	if (ft_strlen(c) != 1 && ft_strlen(c) != 2)
 		return (-1);
 	while (i < PS_MAX)
 	{
@@ -26,11 +26,9 @@ static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX
 
 static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MAX][PS_MAX])
 {
-	int				(*lines_fts[PS_MAX])(t_parser*, t_map*, char**) = {new_mesh,
-						new_vertex, vertex_end, new_face, comment};
+	int				(*lines_fts[PS_MAX])(t_map*, char**) = {new_mesh,
+						new_vertex, new_txt_vertex, vertex_end, new_face, comment};
 	unsigned int	j;
-	(void)map;
-	(void)lines_fts;
 
 	j = 0;
 	if (!(p->toks = ft_strsplit(p->lines[i], "\n\t\r "))
@@ -38,7 +36,7 @@ static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MA
 		return (-1);
 	if (p->state == PS_COMMENT)
 		return (0);
-	if (lines_fts[(int)p->state](p, map, p->toks))
+	if (lines_fts[(int)p->state](map, p->toks))
 		return (-1);
 	ft_free_ctab(p->toks);
 	return (0);
@@ -64,11 +62,14 @@ static int	load_map_data(t_map *map)
 			if (!(f = dyacc(&m->faces, j)) || (f->x - 1 >= map->pool.nb_cells
 				|| f->y - 1 >= map->pool.nb_cells || f->z - 1 >= map->pool.nb_cells))
 				return (-1);
+
 			ft_memcpy(&new.points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
 			ft_memcpy(&new.points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
 			ft_memcpy(&new.points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
-			if (i < 3)
-				new.color = 0xff0000;
+
+			ft_memcpy(&new.points[0], dyacc(&map->txt_pool, f->tx - 1), sizeof(t_vec3d));
+			ft_memcpy(&new.points[1], dyacc(&map->txt_pool, f->ty - 1), sizeof(t_vec3d));
+
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
 		}
@@ -90,6 +91,7 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		|| !(file = read_file(fd))
 		|| !(parser.lines = ft_strsplit(file, "\n"))
 		|| init_dynarray(&map->pool, sizeof(t_vec3d), 0)
+		|| init_dynarray(&map->txt_pool, sizeof(t_vec2d), 0)
 		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0))
 		return (-1);
 	parser.state = PS_COMMENT;
@@ -103,6 +105,10 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		return (-1);
 	while (parser.lines[i])
 	{
+		for (int j = 0; parser.lines[i][j]; j++)
+			printf("%c", parser.lines[i][j]);
+		printf("\n");
+		fflush(stdout);
 		if (parse_line(&parser, map, i, states))
 		{
 			printf("line %d\n", i);
@@ -114,11 +120,5 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		return (-1);
 	ft_free_ctab(parser.lines);
 	free(file);
-	i = 0;
-/*	while (i < SCENE_MAX)
-	{
-		sort_meshs(&map[i].meshs, map[i].nmesh);
-		i++;
-	}*/
 	return (0);
 }

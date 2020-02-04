@@ -36,10 +36,10 @@ SRCS_NAME=	main.c\
 			map_editor/events.c\
 			\
 			obj_parser/load_maps.c\
+			obj_parser/load_face.c\
 			obj_parser/lines_fts.c\
 			obj_parser/check_formats.c\
 			obj_parser/parse_map.c\
-			obj_parser/sort_meshs.c\
 			obj_parser/states.c\
 			obj_parser/read_file.c\
 			\
