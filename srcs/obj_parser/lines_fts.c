@@ -41,7 +41,7 @@ int		new_txt_vertex(t_map *map, char **toks)
 {
 	t_vec2d		txt_coor;
 
-	if (ft_tablen(toks) != 3 || !check_face(toks[1]) || !check_face(toks[2]))
+	if (ft_tablen(toks) != 3 || !check_float(toks[1]) || !check_float(toks[2]))
 		return (-1);
 	txt_coor.u = atof(toks[1]);
 	txt_coor.v = atof(toks[2]);
@@ -54,13 +54,12 @@ int		new_face(t_map *map, char **toks)
 {
 	t_face			face;
 	t_mesh			*m;
-	if (ft_tablen(toks) != 4
-		|| !check_number(toks[1]) || !check_number(toks[2])
-		|| !check_number(toks[3]))
+
+	if (ft_tablen(toks) != 4 || load_face(toks, map, &face))
 		return (-1);
-	face.x = ft_atoi(toks[1]);
-	face.y = ft_atoi(toks[2]);
-	face.z = ft_atoi(toks[3]);
+	//face.x = ft_atoi(toks[1]);
+	//face.y = ft_atoi(toks[2]);
+	//face.z = ft_atoi(toks[3]);
 	if (!(m = dyacc(&map->meshs, map->nmesh - 1))
 		|| push_dynarray(&m->faces, &face, false))
 		return (-1);

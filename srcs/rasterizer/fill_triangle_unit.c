@@ -10,14 +10,14 @@ static void	flatbot(t_env *env, t_vec3d v[3], int color)
 	fill.m1 = (v[2].x - v[0].x) / (v[2].y - v[0].y);
 	fill.ystart = (int)ceil(v[0].y - 0.5f);
 	fill.yend = (int)ceil(v[2].y - 0.5f);
-	y = fill.ystart;
+	y = fill.ystart > 0 ? fill.ystart : 1;
 	while (y < fill.yend)
 	{
 		fill.x0 = fill.m0 * (y + 0.5f - v[0].y) + v[0].x;
 		fill.x1 = fill.m1 * (y + 0.5f - v[0].y) + v[0].x;
 		fill.xstart = (int)(fill.x0 - 0.5f);
 		fill.xend = (int)(fill.x1 - 0.5f);
-		x = fill.xstart;
+		x = fill.xstart > 0 ? fill.xstart : 1 ;
 		while (x < fill.xend)
 		{
 			if (env->cam.z_buffer[(y - 1) * WDT + x] > (v[0].z + v[1].z + v[2].z) / 3.0f)
@@ -41,14 +41,14 @@ static void		flattop(t_env *env, t_vec3d v[3], int color)
 	fill.m1 = (v[2].x - v[1].x) / (v[2].y - v[1].y);
 	fill.ystart = (int)ceil(v[0].y - 0.5f);
 	fill.yend = (int)ceil(v[2].y - 0.5f);
-	y = fill.ystart;
+	y = fill.ystart > 0 ? fill.ystart : 1;
 	while (y < fill.yend)
 	{
 		fill.x0 = fill.m0 * (y + 0.5f - v[0].y) + v[0].x;
 		fill.x1 = fill.m1 * (y + 0.5f - v[1].y) + v[1].x;
 		fill.xstart = (int)(fill.x0 - 0.5f);
 		fill.xend = (int)(fill.x1 - 0.5f);
-		x = fill.xstart;
+		x = fill.xstart > 0 ? fill.xstart : 1 ;
 		while (x < fill.xend)
 		{
 			if (env->cam.z_buffer[(y - 1) * WDT + x] > (v[0].z + v[1].z + v[2].z) / 3.0f)

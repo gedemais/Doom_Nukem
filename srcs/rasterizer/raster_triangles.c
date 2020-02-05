@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/03 01:08:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/05 05:35:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)
 
 static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)
 {
+	int				t;
 	unsigned int	j;
-	unsigned int	t;
 	unsigned int	work;
 	unsigned int	max_work;
 
 	j = 0;
+	t = -1;
 	max_work = 0;
 	while (j < NB_THREADS)
 	{
@@ -38,6 +39,8 @@ static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)
 		}
 		j++;
 	}
+	if (t == -1)
+		return (0);
 	threads[i].start = threads[t].index + (max_work / 2); // Placing new's start
 	threads[i].index = threads[i].start; // Placing new's start
 	threads[i].end = threads[t].end; // Placing new's end

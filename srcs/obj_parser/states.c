@@ -5,7 +5,6 @@ void	init_states(char states[NB_LINE_TYPES][NB_LINE_TYPES])
 {
 	states[PS_OBJ][PS_OBJ] = 0;
 	states[PS_OBJ][PS_VERTEXS] = 1;
-	states[PS_OBJ][PS_TXT_VERTEXS] = 0;
 	states[PS_OBJ][PS_END_VERTEXS] = 0;
 	states[PS_OBJ][PS_FACES] = 0;
 	states[PS_OBJ][PS_COMMENT] = 1;

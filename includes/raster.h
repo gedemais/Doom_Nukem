@@ -43,7 +43,7 @@ typedef struct	s_mesh
 	float		yaw;
 	float		pitch;
 	float		roll;
-	bool		texture;
+	bool		textured;
 	char		*name;
 	int			nb_tris;
 }				t_mesh;

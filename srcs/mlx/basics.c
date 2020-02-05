@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/02 05:57:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/05 02:31:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int			pixloc(int x, int y, bool free)
 {
 	static int	**screen = NULL;
 
+	if (x < 0 || x >= WDT || y < 0 || y >= HGT)
+		return (-1);
 	if (!screen && !(screen = init_pixloc()))
 		return (-1);
 	else if (free)

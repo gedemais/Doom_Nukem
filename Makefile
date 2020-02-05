@@ -21,7 +21,6 @@ SRCS_NAME=	main.c\
 			free.c\
 			openal.c\
 			play_sound.c\
-			render.c\
 			resources_paths.c\
 			setup.c\
 			switch_context.c\
@@ -54,6 +53,7 @@ SRCS_NAME=	main.c\
 			\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
+			mlx/render.c\
 			mlx/events.c\
 			mlx/basics.c\
 			mlx/bresenham.c\

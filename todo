@@ -1,6 +1,3 @@
-Campaign:
-Demander le username et verifier son existance -> load les stats dans dooms() si il existe sinon init les stats as new player
-
 
 Mettre render.c dans srcs/mlx/ pas srcs/
 

@@ -29,7 +29,7 @@ int		init_camera(t_cam *cam)
 	if (allocate_clipping_arrays(cam->clip_arrs)
 		|| init_dynarray(&cam->to_clip, sizeof(t_triangle), MIN_TO_RASTER)
 		|| init_dynarray(&cam->to_raster, sizeof(t_triangle), MIN_TO_RASTER)
-		|| !(cam->z_buffer = (float*)malloc(sizeof(float) * HGT * WDT)))
+		|| !(cam->z_buffer = (float*)malloc(sizeof(float) * (HGT * WDT))))
 		return (-1);
 	return (0);
 }

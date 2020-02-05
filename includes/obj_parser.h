@@ -53,7 +53,7 @@ char				*read_file(int fd);
 char				*maps_paths(unsigned int index);
 void				init_states(char states[NB_LINE_TYPES][NB_LINE_TYPES]);
 int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);
-int					load_face(char **toks, t_face face);
+int					load_face(char **toks, t_map *map, t_face *face);
 
 bool				check_float(char *tok);
 bool				check_number(char *tok);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/02 05:56:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/05 05:59:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # include "map_editor.h"
 
 
-# define NB_THREADS 8
+# define NB_THREADS 16
 # define WDT 1080
 # define HGT 720
 # define WINDOW_NAME "Doom Nukem"
@@ -71,9 +71,7 @@ typedef struct	s_events
 {
 	bool		keys[NB_KEYS];
 	bool		buttons[NB_BUTTONS];
-	char		pad[3];
 	t_point		mouse_pos;
-	int			padb;
 }				t_events;
 
 typedef struct	s_data

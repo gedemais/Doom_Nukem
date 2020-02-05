@@ -6,7 +6,7 @@
 /*   By: gedemais <gedemais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:05:11 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/19 01:14:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/04 23:47:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 
 # include "dynarray.h"
 
@@ -119,6 +120,7 @@ void				ft_memdel(void **ap);
 ** Maths functions
 */
 int					ft_abs(int nb);
+bool				ft_inbounds(int val, int min, int max);
 int					ft_nb_len(long long int nb);
 void				ft_swap(int *a, int *b);
 int					ft_constrain(int val, int min, int max);

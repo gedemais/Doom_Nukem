@@ -42,6 +42,30 @@ static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MA
 	return (0);
 }
 
+static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
+{
+	t_vec2d	*t;
+
+	ft_memcpy(&new->points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
+	ft_memcpy(&new->points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
+	ft_memcpy(&new->points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
+
+	if (m->textured)
+	{
+		t = dyacc(&map->txt_pool, f->tx - 1);
+		new->txt[0].u = t->u;
+		new->txt[0].v = t->v;
+
+		t = dyacc(&map->txt_pool, f->ty - 1);
+		new->txt[1].u = t->u;
+		new->txt[1].v = t->v;
+
+		t = dyacc(&map->txt_pool, f->tz - 1);
+		new->txt[2].u = t->u;
+		new->txt[2].v = t->v;
+	}
+}
+
 static int	load_map_data(t_map *map)
 {
 	t_mesh		*m;
@@ -63,12 +87,7 @@ static int	load_map_data(t_map *map)
 				|| f->y - 1 >= map->pool.nb_cells || f->z - 1 >= map->pool.nb_cells))
 				return (-1);
 
-			ft_memcpy(&new.points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
-			ft_memcpy(&new.points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
-			ft_memcpy(&new.points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
-
-			ft_memcpy(&new.points[0], dyacc(&map->txt_pool, f->tx - 1), sizeof(t_vec3d));
-			ft_memcpy(&new.points[1], dyacc(&map->txt_pool, f->ty - 1), sizeof(t_vec3d));
+			access_faces(&new, map, f, m);
 
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
@@ -105,10 +124,6 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		return (-1);
 	while (parser.lines[i])
 	{
-		for (int j = 0; parser.lines[i][j]; j++)
-			printf("%c", parser.lines[i][j]);
-		printf("\n");
-		fflush(stdout);
 		if (parse_line(&parser, map, i, states))
 		{
 			printf("line %d\n", i);
