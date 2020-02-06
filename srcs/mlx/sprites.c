@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/31 21:52:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/05 23:35:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_sprite	*load_sprites(t_mlx *mlx)
 	ft_putendl("Loading sprites...");
 	while (i < SP_MAX)
 	{
+		printf("%s\n", sprites_paths(i));
 		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
 			return (NULL);
 		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))

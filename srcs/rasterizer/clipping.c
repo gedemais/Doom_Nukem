@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/01 00:25:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/06 06:42:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,81 @@
 static void	classify_triangle(t_clipper *clip, t_triangle in)
 {
 	if (clip->d0 >= 0.0f)
+	{
 		clip->in[clip->inside++] = &in.points[0];
+		clip->txt_in[clip->txt_inside++] = &in.txt[0];
+	}
 	else
+	{
 		clip->out[clip->outside++] = &in.points[0];
+		clip->txt_out[clip->txt_outside++] = &in.txt[0];
+	}
 
 	if (clip->d1 >= 0.0f)
+	{
 		clip->in[clip->inside++] = &in.points[1];
+		clip->txt_in[clip->txt_inside++] = &in.txt[1];
+	}
 	else
+	{
 		clip->out[clip->outside++] = &in.points[1];
+		clip->txt_out[clip->txt_outside++] = &in.txt[1];
+	}
 
 	if (clip->d2 >= 0.0f)
+	{
 		clip->in[clip->inside++] = &in.points[2];
+		clip->txt_in[clip->txt_inside++] = &in.txt[2];
+	}
 	else
+	{
 		clip->out[clip->outside++] = &in.points[2];
+		clip->txt_out[clip->txt_outside++] = &in.txt[2];
+	}
 }
 
 static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 											t_vec3d plane_p, t_vec3d plane_n)
 {
+	float	t;
+
 	if (clip->inside == 1 && clip->outside == 2)
 	{
-		out[0].points[0] = *(clip->in[0]);
-		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
-		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[1]);
+		out[0].points[0] = *clip->in[0];
+		out[0].txt[0] = *clip->txt_in[0];
+
+		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[0]}, &t);
+		out[0].txt[1].u = t * (clip->txt_out[0]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
+		out[0].txt[1].v = t * (clip->txt_out[0]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
+
+		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[1]}, &t);
+		out[0].txt[2].u = t * (clip->txt_out[1]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
+		out[0].txt[2].v = t * (clip->txt_out[1]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
+
+		//out[0].txt[0] = clip
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
 	{
 		out[0].points[0] = *clip->in[0];
 		out[0].points[1] = *clip->in[1];
-		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[0], *clip->out[0]);
+		out[0].txt[0] = *clip->txt_in[0];
+		out[0].txt[1] = *clip->txt_in[1];
+
+		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[0]}, &t);
+		out[0].txt[2].u = t * (clip->txt_out[0]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
+		out[0].txt[2].v = t * (clip->txt_out[0]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
 
 		out[1].points[0] = *clip->in[1];
+		out[1].txt[0] = *clip->txt_in[1];
+
 		out[1].points[1] = out[0].points[2];
-		out[1].points[2] = vec_intersect_plane(plane_p, plane_n, *clip->in[1], *clip->out[0]);
+		out[1].txt[1] = out[0].txt[2];
+
+		out[1].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[1], *clip->out[0]}, &t);
+		out[1].txt[2].u = t * (clip->txt_out[0]->u - clip->txt_in[1]->u) + clip->txt_in[1]->u;
+		out[1].txt[2].v = t * (clip->txt_out[0]->v - clip->txt_in[1]->v) + clip->txt_in[1]->v;
+
 		return (2);
 	}
 	return (0);
@@ -66,7 +107,7 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 		to_add = clip_triangle((t_vec3d){0.0f, 0.0f, 0.0f, 0.0f},
 			(t_vec3d){0.0f, 1.0f, 0.0f, 0.0f}, t, clipped);
 	else if (p == 1)
-		to_add = clip_triangle((t_vec3d){0.0f, (float)(HGT - 1), 0.0f, 0.0f},
+		to_add = clip_triangle((t_vec3d){0.0f, (float)(HGT - 1.0f), 0.0f, 0.0f},
 			(t_vec3d){0.0f, -1.0f, 0.0f, 0.0f}, t, clipped);
 	else if (p == 2)
 		to_add = clip_triangle((t_vec3d){0.0f, 0.0f, 0.0f, 0.0f},

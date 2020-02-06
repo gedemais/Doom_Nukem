@@ -64,6 +64,10 @@ typedef struct	s_clipper
 {
 	t_vec3d		*in[3];
 	t_vec3d		*out[3];
+	t_vec2d		*txt_in[3];
+	t_vec2d		*txt_out[3];
+	int			txt_inside;
+	int			txt_outside;
 	int			inside;
 	int			outside;
 	float		d0;
@@ -145,6 +149,6 @@ float			vec_dot(t_vec3d a, t_vec3d b);
 float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
 float			vec_sdist(t_vec3d o, t_vec3d v);
 t_vec3d			vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n,
-												t_vec3d l_start, t_vec3d l_end);
+													t_vec3d s_e[2], float *tmp);
 
 #endif

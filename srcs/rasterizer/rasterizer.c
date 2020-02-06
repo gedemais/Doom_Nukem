@@ -107,8 +107,8 @@ void		*rasthreader(void *param)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
 		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
-//		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
-//			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
+		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
 		thr->index++;
 	}
 	thr->done = true;

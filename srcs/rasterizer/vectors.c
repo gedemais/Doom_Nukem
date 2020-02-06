@@ -80,8 +80,7 @@ t_vec3d	vec_mult(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
-t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d l_start,
-																t_vec3d l_end)
+t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d s_e[2], float *tmp)
 {
 	float	plane_d;
 	float	ad;
@@ -93,14 +92,15 @@ t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d l_start,
 	vec_normalize(&plane_n);
 
 	plane_d = -vec_dot(plane_n, plane_p);
-	ad = vec_dot(l_start, plane_n);
-	bd = vec_dot(l_end, plane_n);
+	ad = vec_dot(s_e[0], plane_n);
+	bd = vec_dot(s_e[1], plane_n);
 
 	t = (-plane_d - ad) / (bd - ad);
+	*tmp = t;
 
-	l_s_end = vec_sub(l_end, l_start);
+	l_s_end = vec_sub(s_e[1], s_e[0]);
 	l_to_int = vec_fmult(l_s_end, t);
-	return (vec_add(l_start, l_to_int));
+	return (vec_add(s_e[0], l_to_int));
 }
 
 float	distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p)

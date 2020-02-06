@@ -39,10 +39,14 @@ int		new_vertex(t_map *map, char **toks)
 
 int		new_txt_vertex(t_map *map, char **toks)
 {
+	t_mesh		*m;
 	t_vec2d		txt_coor;
 
-	if (ft_tablen(toks) != 3 || !check_float(toks[1]) || !check_float(toks[2]))
+	if (!(m = dyacc(&map->meshs, map->nmesh - 1)) || ft_tablen(toks) != 3
+		|| !check_float(toks[1]) || !check_float(toks[2]))
 		return (-1);
+	if (!m->textured)
+		m->textured = true;
 	txt_coor.u = atof(toks[1]);
 	txt_coor.v = atof(toks[2]);
 	if (push_dynarray(&map->txt_pool, &txt_coor, false))
