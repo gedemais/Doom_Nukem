@@ -1,6 +1,9 @@
 
+fix le straff inverse en y
+
 Mettre render.c dans srcs/mlx/ pas srcs/
 
+souris vers le bas
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
 
 Textures

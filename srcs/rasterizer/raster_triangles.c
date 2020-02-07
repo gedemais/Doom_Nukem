@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/06 06:36:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/07 04:02:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)
 {
-	draw_line((t_mlx*)mlx, a, b, 0xffffff);
-	draw_line((t_mlx*)mlx, a, c, 0xffffff);
-	draw_line((t_mlx*)mlx, b, c, 0xffffff);
+	draw_line((t_mlx*)mlx, a, b, 0x000000);
+	draw_line((t_mlx*)mlx, a, c, 0x000000);
+	draw_line((t_mlx*)mlx, b, c, 0x000000);
 }
 
 static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)

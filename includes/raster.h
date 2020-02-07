@@ -60,6 +60,37 @@ typedef struct	s_filler
 	float		yend;
 }				t_filler;
 
+typedef struct	s_texturizer
+{
+	int			ax;
+	int			bx;
+
+	float		txt_su;
+	float		txt_sv;
+	float		txt_eu;
+	float		txt_ev;
+	float		txt_u;
+	float		txt_v;
+
+	int			dx1;
+	int			dy1;
+	int			dx2;
+	int			dy2;
+
+	float		du1;
+	float		dv1;
+	float		du2;
+	float		dv2;
+
+	float		ax_step;
+	float		bx_step;
+	float		u1_step;
+	float		v1_step;
+	float		u2_step;
+	float		v2_step;
+	float		t_step;
+}				t_texturizer;
+
 typedef struct	s_clipper
 {
 	t_vec3d		*in[3];

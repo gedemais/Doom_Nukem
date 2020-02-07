@@ -103,7 +103,7 @@ int		render_dev(void *param)
 		env->cam.z_buffer[i] = INFINITY;
 	camera(env);
 	rasterizer(env, SCENE_TEST);
-	//blit_sprite(env->mlx.img_data, env->sprites[SP_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
+//  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
