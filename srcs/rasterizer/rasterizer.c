@@ -63,9 +63,9 @@ void	triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 		project_triangle(env, t, normal, tris);
 }
 
-void	compute_rotation_matrices(t_env *env, t_mesh m)
+void	compute_rotation_matrices(t_env *env, t_mesh m, float t)
 {
-	update_xrotation_matrix(env->cam.rx_m, m.pitch);
+	update_xrotation_matrix(env->cam.rx_m, t);
 	update_yrotation_matrix(env->cam.ry_m, m.yaw);
 	update_zrotation_matrix(env->cam.rz_m, m.roll);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
@@ -147,6 +147,7 @@ void	rasterizer(t_env *env, int scene)
 	int			j;
 	t_mesh		*m;
 	t_triangle	t;
+	static float	te = 0.0f;
 
 	i = 0;
 	compute_matrices(env);
@@ -155,7 +156,7 @@ void	rasterizer(t_env *env, int scene)
 		j = 0;
 		if (!(m = dyacc(&env->maps[scene].meshs, i)))
 			return ;
-		compute_rotation_matrices(env, *m);
+		compute_rotation_matrices(env, *m, te);
 		while (j < m->faces.nb_cells)
 		{
 			t = *(t_triangle*)(dyacc(&m->tris, j));
@@ -167,4 +168,5 @@ void	rasterizer(t_env *env, int scene)
 	if (raster_triangles(env, &env->cam.to_clip))
 		return ;
 	clear_dynarray(&env->cam.to_clip);
+	te += 0.01f;
 }

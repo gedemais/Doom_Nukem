@@ -24,7 +24,7 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/quit_off.XPM",
 					"resources/sprites/ts_background.XPM",
 					"resources/textures/grass.XPM",
-					"resources/textures/wood.XPM"};
+					"resources/textures/texture.XPM"};
 
 	return (paths[index]);
 }

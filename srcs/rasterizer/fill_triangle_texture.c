@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/07 04:57:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/07 06:04:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,20 @@ static void	compute_gradients(t_texturizer *txt, t_triangle t)
 	if (txt->dy2)
 		txt->v2_step = txt->dv2 / fabs((float)txt->dy2);
 }
+/*
+static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
+{
+	
+}*/
 
-static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
+static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	unsigned int	i;
 	unsigned int	j;
 	float			tx;
 	int				color;
 
-	i = t.points[0].y + 1;
+	i = t.points[0].y;
 	while (i <= t.points[1].y)
 	{
 		txt->ax = t.points[0].x + (float)(i - t.points[0].y) * txt->ax_step;
@@ -110,8 +115,8 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
+			(t_point){env->sprites[TXT_WOOD].hgt, env->sprites[TXT_WOOD].wdt},
 			(t_vec2d){txt->txt_u, txt->txt_v});
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -119,6 +124,17 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 		}
 		i++;
 	}
+}
+
+
+static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
+{
+	unsigned int	i;
+	unsigned int	j;
+	float			tx;
+	int				color;
+
+	flattop(env, txt, t);
 
 	txt->dy1 = t.points[2].y - t.points[1].y; // *
 	txt->dx1 = t.points[2].x - t.points[1].x;
@@ -138,7 +154,7 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 	if (txt->dy1)
 		txt->v1_step = txt->dv1 / fabs((float)txt->dy1);
 	
-	i = t.points[1].y + 1;
+	i = t.points[1].y;
 	while (i <= t.points[2].y)
 	{
 		txt->ax = t.points[1].x + (float)(i - t.points[1].y) * txt->ax_step;
@@ -167,8 +183,8 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
+			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
+			(t_point){env->sprites[TXT_WOOD].wdt, env->sprites[TXT_WOOD].hgt},
 			(t_vec2d){txt->txt_u, txt->txt_v});
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
