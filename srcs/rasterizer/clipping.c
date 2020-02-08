@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/06 06:42:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/08 04:45:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].txt[2].u = t * (clip->txt_out[1]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
 		out[0].txt[2].v = t * (clip->txt_out[1]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
 
-		//out[0].txt[0] = clip
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)

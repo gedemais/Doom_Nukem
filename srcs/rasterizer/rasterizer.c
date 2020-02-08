@@ -23,6 +23,18 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
 		t.points[2] = multiply_matrix(env->cam.p_m, clipped[i].points[2]);
 
+		t.txt[0].u /= clipped[i].points[0].w;
+		t.txt[1].u /= clipped[i].points[1].w;
+		t.txt[2].u /= clipped[i].points[2].w;
+
+		t.txt[0].v /= clipped[i].points[0].w;
+		t.txt[1].v /= clipped[i].points[1].w;
+		t.txt[2].v /= clipped[i].points[2].w;
+
+		t.txt[0].w = 1.0f / clipped[i].points[0].w;
+		t.txt[1].w = 1.0f / clipped[i].points[1].w;
+		t.txt[2].w = 1.0f / clipped[i].points[2].w;
+
 		// Scaling with screen
 		t.points[0] = vec_add(t.points[0], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
 		t.points[1] = vec_add(t.points[1], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
@@ -63,9 +75,9 @@ void	triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 		project_triangle(env, t, normal, tris);
 }
 
-void	compute_rotation_matrices(t_env *env, t_mesh m, float t)
+void	compute_rotation_matrices(t_env *env, t_mesh m)
 {
-	update_xrotation_matrix(env->cam.rx_m, t);
+	update_xrotation_matrix(env->cam.rx_m, m.pitch);
 	update_yrotation_matrix(env->cam.ry_m, m.yaw);
 	update_zrotation_matrix(env->cam.rz_m, m.roll);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
@@ -106,10 +118,10 @@ void		*rasthreader(void *param)
 	while (thr->index < thr->end)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
-	//	fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
 		fill_triangle_texture((t_env*)thr->env, *t);
-//		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
-//			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
+//		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
+		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
+			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
 		thr->index++;
 	}
 	thr->done = true;
@@ -147,7 +159,6 @@ void	rasterizer(t_env *env, int scene)
 	int			j;
 	t_mesh		*m;
 	t_triangle	t;
-	static float	te = 0.0f;
 
 	i = 0;
 	compute_matrices(env);
@@ -156,7 +167,7 @@ void	rasterizer(t_env *env, int scene)
 		j = 0;
 		if (!(m = dyacc(&env->maps[scene].meshs, i)))
 			return ;
-		compute_rotation_matrices(env, *m, te);
+		compute_rotation_matrices(env, *m);
 		while (j < m->faces.nb_cells)
 		{
 			t = *(t_triangle*)(dyacc(&m->tris, j));
@@ -168,5 +179,4 @@ void	rasterizer(t_env *env, int scene)
 	if (raster_triangles(env, &env->cam.to_clip))
 		return ;
 	clear_dynarray(&env->cam.to_clip);
-	te += 0.01f;
 }
