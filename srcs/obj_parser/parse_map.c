@@ -56,17 +56,14 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 		new->txt[0].u = t->u;
 		new->txt[0].v = t->v;
 		new->txt[0].v = t->v;
-		new->txt[0].w = 1.0f;
 
 		t = dyacc(&map->txt_pool, f->ty - 1);
 		new->txt[1].u = t->u;
 		new->txt[1].v = t->v;
-		new->txt[1].w = 1.0f;
 
 		t = dyacc(&map->txt_pool, f->tz - 1);
 		new->txt[2].u = t->u;
 		new->txt[2].v = t->v;
-		new->txt[2].w = 1.0f;
 
 		new->mesh = m;
 	}

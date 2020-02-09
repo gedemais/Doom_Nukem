@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/08 04:49:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/09 06:04:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 			ft_swap(&txt->ax, &txt->bx);
 			swap_floats(&txt->txt_su, &txt->txt_eu);
 			swap_floats(&txt->txt_sv, &txt->txt_ev);
+			swap_floats(&txt->txt_sw, &txt->txt_ew);
 		}
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
@@ -130,7 +131,7 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 
 			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
 			(t_point){env->sprites[TXT_WOOD].hgt, env->sprites[TXT_WOOD].wdt},
-			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
+			(t_vec2d){txt->txt_u/* / txt->txt_w*/, txt->txt_v /*/ txt->txt_w*/, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -187,6 +188,7 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 			ft_swap(&txt->ax, &txt->bx);
 			swap_floats(&txt->txt_su, &txt->txt_eu);
 			swap_floats(&txt->txt_sv, &txt->txt_ev);
+			swap_floats(&txt->txt_sw, &txt->txt_ew);
 		}
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
@@ -203,7 +205,7 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 
 			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
 			(t_point){env->sprites[TXT_WOOD].wdt, env->sprites[TXT_WOOD].hgt},
-			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
+			(t_vec2d){txt->txt_u/* / txt->txt_w*/, txt->txt_v/* / txt->txt_w*/, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -219,7 +221,6 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 	t_texturizer	txt;
 
 	txt = (t_texturizer){};
-	(void)env;
 	starting_swap(&t);
 	compute_gradients(&txt, t);
 	blit_texture(env, &txt, t);

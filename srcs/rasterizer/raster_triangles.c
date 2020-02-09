@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/07 05:53:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/09 06:16:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ int			raster_triangles(void *e, t_dynarray *arr)
 	i = -1;
 	env = e;
 	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
 	else
@@ -136,7 +135,6 @@ int			raster_triangles(void *e, t_dynarray *arr)
 		manage_threads(threads, &env->cam.to_raster);
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
 	}
-
 	clear_dynarray(&env->cam.to_raster);
 	return (0);
 }

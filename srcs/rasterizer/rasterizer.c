@@ -115,15 +115,20 @@ void		*rasthreader(void *param)
 
 	thr = (t_rasthread*)param;
 	env = thr->env;
+	printf("There\n");
 	while (thr->index < thr->end)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
-		fill_triangle_texture((t_env*)thr->env, *t);
+		printf("There1\n");
+//		fill_triangle_texture((t_env*)thr->env, *t);
+		printf("There2\n");
 //		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
 		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
 			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
+		printf("There3\n");
 		thr->index++;
 	}
+	printf("There4\n");
 	thr->done = true;
 	if (thr->mono)
 		return (NULL);
@@ -135,22 +140,16 @@ void	monothread_raster(void *e)
 {
 	t_rasthread		thread;
 	t_env			*env;
-	int				i;
 
-	i = 0;
 	env = e;
-	while (i < env->cam.to_raster.nb_cells)
-	{
-		thread.env = env;
-		thread.tris = &env->cam.to_raster;
-		thread.start = i;
-		thread.index = i;
-		thread.end = i + 1;
-		thread.done = false;
-		thread.mono = true;
-		rasthreader(&thread);
-		i++;
-	}
+	thread.env = env;
+	thread.tris = &env->cam.to_raster;
+	thread.start = 0;
+	thread.index = 0;
+	thread.end = env->cam.to_raster.nb_cells;
+	thread.done = false;
+	thread.mono = true;
+	rasthreader(&thread);
 }
 
 void	rasterizer(t_env *env, int scene)

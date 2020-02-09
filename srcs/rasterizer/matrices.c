@@ -39,23 +39,6 @@ void	update_yrotation_matrix(float m[4][4], float theta)
     m[2][2] = c;
     m[3][3] = 1.0f;
 }
-/*
-void	update_yrotation_matrix(float m[4][4], float theta)
-{
-	float	c;
-	float	s;
-
-	c = cos(theta);
-	s = sin(theta);
-	printf("theta = %f | c = %f | s = %f\n", theta, c, s);
-	m[0][0] = c;
-    m[0][2] = s;
-    m[1][1] = 1.0f;
-    m[2][0] = -s;
-    m[2][2] = c;
-    m[3][3] = 1.0f;
-	printf("-- %f - %f - %f - %f\n", m[0][0], m[0][2], m[2][0], m[2][2]);
-}*/
 
 void	update_zrotation_matrix(float m[4][4], float theta)
 {

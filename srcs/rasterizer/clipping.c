@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/08 04:45:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/09 06:38:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[0]}, &t);
 		out[0].txt[1].u = t * (clip->txt_out[0]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
 		out[0].txt[1].v = t * (clip->txt_out[0]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
+		out[0].txt[1].w = t * (clip->txt_out[0]->w - clip->txt_in[0]->w) + clip->txt_in[0]->w;
 
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[1]}, &t);
 		out[0].txt[2].u = t * (clip->txt_out[1]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
 		out[0].txt[2].v = t * (clip->txt_out[1]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
+		out[0].txt[2].w = t * (clip->txt_out[1]->w - clip->txt_in[0]->w) + clip->txt_in[0]->w;
 
 		return (1);
 	}
@@ -78,6 +80,7 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[0], *clip->out[0]}, &t);
 		out[0].txt[2].u = t * (clip->txt_out[0]->u - clip->txt_in[0]->u) + clip->txt_in[0]->u;
 		out[0].txt[2].v = t * (clip->txt_out[0]->v - clip->txt_in[0]->v) + clip->txt_in[0]->v;
+		out[0].txt[2].w = t * (clip->txt_out[0]->w - clip->txt_in[0]->w) + clip->txt_in[0]->w;
 
 		out[1].points[0] = *clip->in[1];
 		out[1].txt[0] = *clip->txt_in[1];
@@ -88,6 +91,7 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[1].points[2] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){*clip->in[1], *clip->out[0]}, &t);
 		out[1].txt[2].u = t * (clip->txt_out[0]->u - clip->txt_in[1]->u) + clip->txt_in[1]->u;
 		out[1].txt[2].v = t * (clip->txt_out[0]->v - clip->txt_in[1]->v) + clip->txt_in[1]->v;
+		out[1].txt[2].w = t * (clip->txt_out[0]->w - clip->txt_in[1]->w) + clip->txt_in[1]->w;
 
 		return (2);
 	}
