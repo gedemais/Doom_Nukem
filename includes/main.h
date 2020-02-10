@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/07 02:01:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/10 03:52:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int				free_env(t_env *env);
 */
 int				init_mlx(t_env *env);
 t_sprite		*load_sprites(t_mlx *mlx);
+void			loading_bar(unsigned int i, unsigned int max, bool last);
 int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);

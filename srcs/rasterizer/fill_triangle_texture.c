@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/09 06:04:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/10 05:48:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
-			(t_point){env->sprites[TXT_WOOD].hgt, env->sprites[TXT_WOOD].wdt},
-			(t_vec2d){txt->txt_u/* / txt->txt_w*/, txt->txt_v /*/ txt->txt_w*/, 1.0f});
+			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -140,7 +140,6 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 		i++;
 	}
 }
-
 
 static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 {
@@ -203,9 +202,9 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-			color = sample_pixel(env->sprites[TXT_WOOD].img_data,
-			(t_point){env->sprites[TXT_WOOD].wdt, env->sprites[TXT_WOOD].hgt},
-			(t_vec2d){txt->txt_u/* / txt->txt_w*/, txt->txt_v/* / txt->txt_w*/, 1.0f});
+			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+			(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
+			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;

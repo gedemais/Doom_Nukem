@@ -102,10 +102,10 @@ typedef struct	s_texturizer
 
 typedef struct	s_clipper
 {
-	t_vec3d		*in[3];
-	t_vec3d		*out[3];
-	t_vec2d		*txt_in[3];
-	t_vec2d		*txt_out[3];
+	t_vec3d		in[3];
+	t_vec3d		out[3];
+	t_vec2d		txt_in[3];
+	t_vec2d		txt_out[3];
 	int			txt_inside;
 	int			txt_outside;
 	int			inside;
@@ -181,6 +181,7 @@ void			print_matrix(float m[4][4]);
 t_vec3d			vec_add(t_vec3d a, t_vec3d b);
 t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
 t_vec3d			vec_mult(t_vec3d a, t_vec3d b);
+t_vec3d			vec_fdiv(t_vec3d a, float n);
 t_vec3d			vec_fmult(t_vec3d a, float n);
 void			vec_swap(t_vec3d *a, t_vec3d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);

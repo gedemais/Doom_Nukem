@@ -22,7 +22,6 @@ enum				e_sprite_id
 	SP_TS_BUTTON_5O,
 	SP_TS_BACKGROUND,
 	TXT_BLOC_GRASS,
-	TXT_WOOD,
 	SP_MAX
 };
 

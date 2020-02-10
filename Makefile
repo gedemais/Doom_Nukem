@@ -55,6 +55,7 @@ SRCS_NAME=	main.c\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
 			mlx/render.c\
+			mlx/term_loading_bar.c\
 			mlx/events.c\
 			mlx/basics.c\
 			mlx/bresenham.c\

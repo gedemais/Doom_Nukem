@@ -23,13 +23,13 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
 		t.points[2] = multiply_matrix(env->cam.p_m, clipped[i].points[2]);
 
-		t.txt[0].u /= clipped[i].points[0].w;
-		t.txt[1].u /= clipped[i].points[1].w;
-		t.txt[2].u /= clipped[i].points[2].w;
+		t.txt[0].u = clipped[i].txt[0].u / clipped[i].points[0].w;
+		t.txt[1].u = clipped[i].txt[1].u / clipped[i].points[1].w;
+		t.txt[2].u = clipped[i].txt[2].u / clipped[i].points[2].w;
 
-		t.txt[0].v /= clipped[i].points[0].w;
-		t.txt[1].v /= clipped[i].points[1].w;
-		t.txt[2].v /= clipped[i].points[2].w;
+		t.txt[0].v = clipped[i].txt[0].v / clipped[i].points[0].w;
+		t.txt[1].v = clipped[i].txt[1].v / clipped[i].points[1].w;
+		t.txt[2].v = clipped[i].txt[2].v / clipped[i].points[2].w;
 
 		t.txt[0].w = 1.0f / clipped[i].points[0].w;
 		t.txt[1].w = 1.0f / clipped[i].points[1].w;
@@ -115,20 +115,19 @@ void		*rasthreader(void *param)
 
 	thr = (t_rasthread*)param;
 	env = thr->env;
-	printf("There\n");
 	while (thr->index < thr->end)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
-		printf("There1\n");
-//		fill_triangle_texture((t_env*)thr->env, *t);
-		printf("There2\n");
+		fill_triangle_texture((t_env*)thr->env, *t);
+//		printf("There2 (%f %f <-> %f %f <-> %f %f)\n", t->points[0].x, t->points[0].y, t->points[1].x, t->points[1].y, t->points[2].x, t->points[2].y);
+		//assert(t->points[0].x > 0.0f && t->points[0].y  > 0.0f&& t->points[1].x > 0.0f && t->points[1].y > 0.0f && t->points[2].x > 0.0f && t->points[2].y > 0.0f);
 //		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
-		draw_triangle(&env->mlx, (t_point){t->points[0].x, t->points[0].y},
-			(t_point){t->points[1].x, t->points[1].y}, (t_point){t->points[2].x, t->points[2].y});
-		printf("There3\n");
+		draw_triangle(&env->mlx,
+			(t_point){t->points[0].x, t->points[0].y},
+			(t_point){t->points[1].x, t->points[1].y},
+			(t_point){t->points[2].x, t->points[2].y});
 		thr->index++;
 	}
-	printf("There4\n");
 	thr->done = true;
 	if (thr->mono)
 		return (NULL);

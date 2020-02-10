@@ -80,6 +80,16 @@ t_vec3d	vec_mult(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
+t_vec3d	vec_fdiv(t_vec3d a, float n)
+{
+	t_vec3d		ret;
+
+	ret.x = a.x / n;
+	ret.y = a.y / n;
+	ret.z = a.z / n;
+	return (ret);
+}
+
 t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d s_e[2], float *tmp)
 {
 	float	plane_d;
@@ -94,8 +104,10 @@ t_vec3d	vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n, t_vec3d s_e[2], fl
 	plane_d = -vec_dot(plane_n, plane_p);
 	ad = vec_dot(s_e[0], plane_n);
 	bd = vec_dot(s_e[1], plane_n);
+//	printf("\n---------------\nplane_n : %f %f %f\nstart_point : %f %f %f\nend_point : %f %f %f\n", plane_n.x, plane_n.y, plane_n.z, s_e[0].x, s_e[0].y, s_e[0].z, s_e[1].x, s_e[1].y, s_e[1].z);
 
 	t = (-plane_d - ad) / (bd - ad);
+//	printf("intersect : ((%f - %f) / (%f - %f)) = %f\n--------------\n", -plane_d, ad, bd, ad, t);
 	*tmp = t;
 
 	l_s_end = vec_sub(s_e[1], s_e[0]);
