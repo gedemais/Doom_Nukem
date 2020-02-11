@@ -23,10 +23,12 @@ SRCS_NAME=	main.c\
 			play_sound.c\
 			resources_paths.c\
 			setup.c\
-			switch_context.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
+			\
+			contexts/switch_context.c\
+			contexts/routines.c\
 			\
 			custom_mode/render.c\
 			custom_mode/events.c\
@@ -61,6 +63,7 @@ SRCS_NAME=	main.c\
 			mlx/bresenham.c\
 			mlx/hooks.c\
 			\
+			title_screen/animation.c\
 			title_screen/setup_ts.c\
 			title_screen/buttons.c\
 			title_screen/events.c\

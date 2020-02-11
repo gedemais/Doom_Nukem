@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:34 by gedemais          #+#    #+#             */
-/*   Updated: 2019/12/10 15:03:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/11 04:40:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@
 # define OBJ_LINE_FORMAT "Unexpected line format in obj file : "
 
 # define BMP_HEADER "Wrong path or file format for "
+
+# define ICS_ERR "Illegal context switch. Abort"
 
 #endif

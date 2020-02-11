@@ -4,8 +4,8 @@
 typedef enum		e_ts_button_id
 {
 	TS_BUTTON_CAMPAIGN,
-	TS_BUTTON_MAP_EDITOR,
 	TS_BUTTON_CUSTOM,
+	TS_BUTTON_MAP_EDITOR,
 	TS_BUTTON_QUIT,
 	TS_BUTTON_MAX
 }					t_ts_button_id;
@@ -20,6 +20,7 @@ typedef struct		s_button
 	t_sprite		*off;
 	t_sprite		*hover;
 	bool			is_hover;
+	bool			in_place;
 }					t_button;
 
 typedef struct		s_ts_env
@@ -38,5 +39,7 @@ int					render_ts(void *param);
 void				init_button(t_button *button, t_point o, t_sprite *sp[3]);
 bool				is_on_button(t_point mouse, t_button button);
 void				render_button(void *param, t_button button, unsigned int index);
+
+void				animation(void *env);
 
 #endif

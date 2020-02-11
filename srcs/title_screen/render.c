@@ -44,20 +44,21 @@ static void	render_buttons(t_env *env)
 
 int		render_ts(void *param)
 {
-	static char	alpha = 127;
 	t_env		*env;
+	static int	anim = 90;
 
 	env = ((t_env*)param);
 
 	handle_events(env);
-	if (alpha >= 0)
-		*alpha_val() = alpha;
 
 	blit_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0}, 1.0f);
-	blit_sprite(env->mlx.img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50}, 1.0f);
+	if (anim > 0)
+		animation(param);
+	else
+		blit_sprite(env->mlx.img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50}, 1.0f);
 	render_buttons(env);
 
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-	alpha--;
+	anim--;
 	return (0);
 }

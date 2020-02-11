@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 02:40:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/11 03:32:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char		*alpha_val(void)
 {
-	static char		val = 127;
+	static char		val = 0;
 
 	return (&val);
 }

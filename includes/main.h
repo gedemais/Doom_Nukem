@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/10 03:52:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/11 05:11:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct	s_env
 }				t_env;
 
 int				setup(t_env *env);
-int				switch_context(t_env *env, unsigned int i);
 int				free_env(t_env *env);
 
 /*
@@ -147,6 +146,18 @@ char			*samples_paths(unsigned int index);
 void			play_ambience(t_sample sample, bool play, bool stop);
 
 /*
+** Contexts
+*/
+int				switch_context(t_env *env, unsigned int i);
+void			ts_to_dev(t_env *env);
+void			ts_to_campaign(t_env *env);
+void			ts_to_custom(t_env *env);
+void			ts_to_map_editor(t_env *env);
+void			campaign_to_ts(t_env *env);
+void			custom_to_ts(t_env *env);
+void			map_editor_to_ts(t_env *env);
+
+/*
 ** Main Loop
 */
 int				render(void *param);
@@ -154,12 +165,12 @@ void			dev_handle_events(t_env *env);
 
 double			mesure_time(bool end);
 
-int		key_press_dev(int key, void *param);
-int		key_release_dev(int key, void *param);
-int		mouse_press_dev(int button, int x, int y, void *param);
-int		mouse_release_dev(int button, int x, int y, void *param);
-int		mouse_position_dev(int x, int y, void *param);
-int		render_dev(void *param);
+int				key_press_dev(int key, void *param);
+int				key_release_dev(int key, void *param);
+int				mouse_press_dev(int button, int x, int y, void *param);
+int				mouse_release_dev(int button, int x, int y, void *param);
+int				mouse_position_dev(int x, int y, void *param);
+int				render_dev(void *param);
 
 
 #endif

@@ -47,6 +47,7 @@ static t_sample	*load_samples(void)
 		return (NULL);
 	while (i < SA_MAX)
 	{
+		loading_bar(i, SA_MAX, false);
 		if (!(t.file = sf_open(samples_paths(i), SFM_READ, &t.infos)))
 		{
 			ft_putstr_fd(samples_paths(i), 2);
@@ -57,8 +58,10 @@ static t_sample	*load_samples(void)
 		t.nb_samples = (ALsizei)(t.infos.channels * t.infos.frames);
 		t.format = t.infos.channels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 		ft_memcpy(&dest[i], &t, sizeof(t_sample));
+		ft_putchar(i == SA_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
+	loading_bar(i, SA_MAX, true);
 	if (read_samples(dest) || create_buffers(dest))
 		return (NULL);
 	return (dest);
@@ -82,6 +85,7 @@ int			init_openal(t_sound *env)
 		ft_putstr_fd(CONTEXT_CURRENT, 2);
 		return (-1);
 	}
+	ft_putendl("Loading samples...");
 	if (!(env->samples = load_samples()))
 		return (-1);
 	return (0);

@@ -1,26 +1,14 @@
 
-fix le straff inverse en y
-
-Mettre render.c dans srcs/mlx/ pas srcs/
-
+Fix:
+le straff inverse en y
 souris vers le bas
+
+Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
 
-Textures
-
+Todo:
 Securiser le parser d'obj
+Modeliser 42
 
-Scenario:
-
-Gameplay:
-
-Modelisation:
-42
-Armes
-Ennemis
-
-
-//
-allouer / free le dynarray to_raster a chaque
-sortie de contexte ou le moteur 3d est appele
-//
+Idees:
+Animation des boutons et du logo synchro sur un drop de metal a l'ecran titre

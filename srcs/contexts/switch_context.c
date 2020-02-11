@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:24:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/31 03:38:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/11 05:24:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,53 @@ void	open_gates(bool gates[C_MAX][C_MAX])
 	gates[C_MAP_EDITOR][C_CUSTOM] = false;
 }
 
+void	init_routines(void (*routines[C_MAX][C_MAX])(t_env*))
+{
+/*	routines[C_DEV][C_TITLE_SCREEN] = true;
+	routines[C_DEV][C_CAMPAIGN] = true;
+	routines[C_DEV][C_CUSTOM] = true;
+	routines[C_DEV][C_MAP_EDITOR] = true;*/
+
+	routines[C_TITLE_SCREEN][C_DEV] = &ts_to_dev;
+	routines[C_TITLE_SCREEN][C_CAMPAIGN] = ts_to_campaign;
+	routines[C_TITLE_SCREEN][C_CUSTOM] = ts_to_custom;
+	routines[C_TITLE_SCREEN][C_MAP_EDITOR] = ts_to_map_editor;
+
+	routines[C_CAMPAIGN][C_DEV] = NULL;
+	routines[C_CAMPAIGN][C_TITLE_SCREEN] = campaign_to_ts;
+	routines[C_CAMPAIGN][C_CUSTOM] = NULL;
+	routines[C_CAMPAIGN][C_MAP_EDITOR] = NULL;
+
+	routines[C_CUSTOM][C_DEV] = NULL;
+	routines[C_CUSTOM][C_TITLE_SCREEN] = custom_to_ts;
+	routines[C_CUSTOM][C_CAMPAIGN] = NULL;
+	routines[C_CUSTOM][C_MAP_EDITOR] = NULL;
+
+	routines[C_MAP_EDITOR][C_DEV] = NULL;
+	routines[C_MAP_EDITOR][C_TITLE_SCREEN] = map_editor_to_ts;
+	routines[C_MAP_EDITOR][C_CAMPAIGN] = NULL;
+	routines[C_MAP_EDITOR][C_CUSTOM] = NULL;
+}
+
 int		switch_context(t_env *env, unsigned int i)
 {
 	static bool		first = true;
 	static bool		gates[C_MAX][C_MAX] = {};
-	// tableau 2d [C_MAX][C_MAX] de psf correspondant a des routines de switch
+	static void		(*routines[C_MAX][C_MAX])(t_env*) = {};
 
 	if (first)
+	{
 		open_gates(gates);
+		init_routines(routines);
+	}
 	if (i >= C_MAX || !gates[env->context][i])
+	{
+		ft_putstr_fd(ICS_ERR, 2);
 		return (-1);
+	}
+	if (routines[env->context][i])
+		routines[env->context][i](env);
 	env->context = i;
-	// if (routines[env->context][i])
-	//	routines[env->context][i](env);
 	first = false;
 	return (0);
 }
