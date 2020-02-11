@@ -49,12 +49,14 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 	ft_memcpy(&new->points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
 	ft_memcpy(&new->points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
 	ft_memcpy(&new->points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
+	new->points[0].w = 1.0f;
+	new->points[1].w = 1.0f;
+	new->points[2].w = 1.0f;
 
 	if (m->textured)
 	{
 		t = dyacc(&map->txt_pool, f->tx - 1);
 		new->txt[0].u = t->u;
-		new->txt[0].v = t->v;
 		new->txt[0].v = t->v;
 
 		t = dyacc(&map->txt_pool, f->ty - 1);

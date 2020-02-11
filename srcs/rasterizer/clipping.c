@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/10 05:42:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/10 21:05:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 	{
 		out[0].points[0] = clip->in[0];
 		out[0].txt[0] = clip->txt_in[0];
-		//printf("1 2 (%f %f)\n", clip->out[1].x, clip->out[1].y);
 
 		out[0].points[1] = vec_intersect_plane(plane_p, plane_n, (t_vec3d[2]){clip->in[0], clip->out[0]}, &t);
 		out[0].txt[1].u = t * (clip->txt_out[0].u - clip->txt_in[0].u) + clip->txt_in[0].u;
@@ -79,15 +78,10 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[0].txt[2].u = t * (clip->txt_out[1].u - clip->txt_in[0].u) + clip->txt_in[0].u;
 		out[0].txt[2].v = t * (clip->txt_out[1].v - clip->txt_in[0].v) + clip->txt_in[0].v;
 		out[0].txt[2].w = t * (clip->txt_out[1].w - clip->txt_in[0].w) + clip->txt_in[0].w;
-		//printf("(%f %f | %f %f | %f %f)\n", out[0].points[0].x, out[0].points[0].y,
-			//								out[0].points[1].x, out[0].points[1].y,
-			//								out[0].points[2].x, out[0].points[2].y);
-		fflush(stdout);
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
 	{
-		//printf("2 1\n");
 		out[0].points[0] = clip->in[0];
 		out[0].points[1] = clip->in[1];
 		out[0].txt[0] = clip->txt_in[0];
@@ -108,14 +102,6 @@ static int	refactor_triangle(t_clipper *clip, t_triangle out[2],
 		out[1].txt[2].u = t * (clip->txt_out[0].u - clip->txt_in[1].u) + clip->txt_in[1].u;
 		out[1].txt[2].v = t * (clip->txt_out[0].v - clip->txt_in[1].v) + clip->txt_in[1].v;
 		out[1].txt[2].w = t * (clip->txt_out[0].w - clip->txt_in[1].w) + clip->txt_in[1].w;
-
-		//printf("(%f %f | %f %f | %f %f) | (%f %f | %f %f | %f %f)\n", out[0].points[0].x, out[0].points[0].y,
-			//																	out[0].points[1].x, out[0].points[1].y,
-			//																	out[0].points[2].x, out[0].points[2].y,
-			//																	out[1].points[0].x, out[1].points[0].y,
-			//																	out[1].points[1].x, out[1].points[1].y,
-			//																	out[1].points[2].x, out[1].points[2].y);
-	fflush(stdout);
 		return (2);
 	}
 	return (0);

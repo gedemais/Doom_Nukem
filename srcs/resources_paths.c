@@ -23,6 +23,7 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/quit_hover.XPM",
 					"resources/sprites/buttons/quit_off.XPM",
 					"resources/sprites/ts_background.XPM",
+					"resources/sprites/logo.XPM",
 					"resources/textures/texture.XPM"};
 
 	return (paths[index]);

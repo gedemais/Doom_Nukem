@@ -6,11 +6,18 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/10 03:56:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/11 02:40:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+char		*alpha_val(void)
+{
+	static char		val = 127;
+
+	return (&val);
+}
 
 char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 {
@@ -39,7 +46,7 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 		while (x < wdt - 1)
 		{
 			color = sample_pixel(sprite.img_data, (t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, sample_y, 0.0f});
-			if (color != -16777216)
+			if (color != ALPHA)
 				draw_pixel(img, x + o.x, y + o.y, color); // A remplacer par un memcpy quand le pixloc sera actif
 			sample_x += delta_x;
 			x++;

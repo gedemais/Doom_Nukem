@@ -1,7 +1,7 @@
 #ifndef BMP_H
 # define BMP_H
 
-# define BMP_HSIZE 54
+# define ALPHA -16777216
 
 enum				e_sprite_id
 {
@@ -21,6 +21,7 @@ enum				e_sprite_id
 	SP_TS_BUTTON_5H,
 	SP_TS_BUTTON_5O,
 	SP_TS_BACKGROUND,
+	SP_TS_LOGO,
 	TXT_BLOC_GRASS,
 	SP_MAX
 };
@@ -36,4 +37,6 @@ typedef struct		s_sprite
 }					t_sprite;
 
 char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
+char	*alpha_val(void);
+
 #endif
