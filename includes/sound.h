@@ -7,21 +7,21 @@
 
 enum	e_sample_id
 {
-	SA_AMB_1,
+	SA_TITLE_SCREEN_S,
+	SA_TITLE_SCREEN_L,
 	SA_MAX
 };
 
 typedef struct	s_sample
 {
 	ALuint		buffer;
-	int			pada;
 	ALshort		*sample;
 	SNDFILE		*file;
 	SF_INFO		infos;
 	ALenum		format;
-	int			pad;
 	ALsizei		sample_rate;
 	ALsizei		nb_samples;
+	float		length;
 }				t_sample;
 
 typedef struct	s_sound
@@ -30,7 +30,10 @@ typedef struct	s_sound
 	ALCcontext	*context;
 	t_sample	*samples;
 	ALuint		ambient;
-	int			pad;
 }				t_sound;
+
+char	*samples_paths(unsigned int index);
+int		play_ambience(t_sample sample, bool play, bool stop, bool keep);
+void	loop_sample(t_sample sample, bool launch, bool stop, bool keep);
 
 #endif

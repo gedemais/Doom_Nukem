@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 05:11:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/12 02:09:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,24 +126,12 @@ void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 int				sample_pixel(char *img, t_point size, t_vec2d point);
 
-
 /*
 ** Rasterization
 */
 void			rasterizer(t_env *env, int scene);
 void			fill_triangle_unit(t_env *env, t_triangle t, int color); //
 void			fill_triangle_texture(t_env *env, t_triangle t); // a bouger dans raster.h
-
-/*
-** Sprites
-*/
-char			*sprites_paths(unsigned int index);
-
-/*
-** OpenAl
-*/
-char			*samples_paths(unsigned int index);
-void			play_ambience(t_sample sample, bool play, bool stop);
 
 /*
 ** Contexts

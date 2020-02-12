@@ -78,16 +78,16 @@ typedef struct	s_texturizer
 	float		txt_w;
 
 	int			dx1;
-	int			dy1;
-	int			dw1;
 	int			dx2;
+	int			dy1;
 	int			dy2;
-	int			dw2;
 
 	float		du1;
 	float		dv1;
 	float		du2;
 	float		dv2;
+	float		dw1;
+	float		dw2;
 
 	float		ax_step;
 	float		bx_step;

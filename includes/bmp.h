@@ -44,6 +44,7 @@ typedef struct		s_sprite
 	int				pad;
 }					t_sprite;
 
+char	*sprites_paths(unsigned int index);
 char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
 char	*alpha_val(void);
 

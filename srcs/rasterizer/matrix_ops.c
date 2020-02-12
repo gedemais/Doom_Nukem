@@ -1,19 +1,4 @@
 #include "main.h"
-/*
-void		matrix_m_matrix(float a[4][4], float b[4][4], float ret[4][4])
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-
-		i++;
-	}
-}*/
 
 t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
 {

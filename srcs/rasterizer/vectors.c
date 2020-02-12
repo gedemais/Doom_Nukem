@@ -87,6 +87,7 @@ t_vec3d	vec_fdiv(t_vec3d a, float n)
 	ret.x = a.x / n;
 	ret.y = a.y / n;
 	ret.z = a.z / n;
+	ret.w = a.w / n;
 	return (ret);
 }
 

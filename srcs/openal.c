@@ -30,6 +30,7 @@ static int			read_samples(t_sample *samples)
 		if (sf_read_short(samples[i].file, samples[i].sample,
 			samples[i].nb_samples) < samples[i].nb_samples)
 			return (-1);
+		samples[i].length = samples[i].nb_samples / samples[i].sample_rate;
 		sf_close(samples[i].file);
 		i++;
 	}

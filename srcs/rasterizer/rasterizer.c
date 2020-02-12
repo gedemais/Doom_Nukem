@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/10 22:01:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/12 04:03:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.txt[1].v = clipped[i].txt[1].v / clipped[i].points[1].w;
 		t.txt[2].v = clipped[i].txt[2].v / clipped[i].points[2].w;
 
-		t.txt[0].w = 1.0f / clipped[i].points[0].w;
-		t.txt[1].w = 1.0f / clipped[i].points[1].w;
-		t.txt[2].w = 1.0f / clipped[i].points[2].w;
+		t.txt[0].w = 1.0f / t.points[0].w;
+		t.txt[1].w = 1.0f / t.points[1].w;
+		t.txt[2].w = 1.0f / t.points[2].w;
 
 		t.points[0] = vec_fdiv(t.points[0], t.points[0].w);
 		t.points[1] = vec_fdiv(t.points[1], t.points[1].w);
 		t.points[2] = vec_fdiv(t.points[2], t.points[2].w);
-
 		// Scaling with screen
 		t.points[0] = vec_add(t.points[0], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});
 		t.points[1] = vec_add(t.points[1], (t_vec3d){1.0f, 1.0f, 0.0f, 0.0f});

@@ -32,7 +32,8 @@ char	*sprites_paths(unsigned int index)
 char	*samples_paths(unsigned int index)
 {
 	static char		*paths[SA_MAX] = {
-					"resources/samples/ambiances/ambient_.wav"};
+					"resources/samples/ambiances/title_screen_intro.wav",
+					"resources/samples/ambiances/title_screen_loop.wav"};
 
 	return (paths[index]);
 }
