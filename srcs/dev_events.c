@@ -100,7 +100,7 @@ int		render_dev(void *param)
 
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
 	for (int i = 0; i < HGT * WDT; i++)
-		env->cam.z_buffer[i] = INFINITY;
+		env->cam.z_buffer[i] = 0.0f;
 	camera(env);
 	rasterizer(env, SCENE_TEST);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);

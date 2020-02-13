@@ -158,6 +158,9 @@ typedef struct	s_cam
 	float		fovr;
 }				t_cam;
 
+void	triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris);
+void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris);
+
 void			init_matrices(t_cam *cam);
 void			update_xrotation_matrix(float m[4][4], float theta);
 void			update_yrotation_matrix(float m[4][4], float theta);
@@ -183,7 +186,8 @@ t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
 t_vec3d			vec_mult(t_vec3d a, t_vec3d b);
 t_vec3d			vec_fdiv(t_vec3d a, float n);
 t_vec3d			vec_fmult(t_vec3d a, float n);
-void			vec_swap(t_vec3d *a, t_vec3d *b);
+void			vec3d_swap(t_vec3d *a, t_vec3d *b);
+void			vec2d_swap(t_vec2d *a, t_vec2d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);
 void			vec_normalize(t_vec3d *vec);
 float			vec_dot(t_vec3d a, t_vec3d b);

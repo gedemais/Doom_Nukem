@@ -1,7 +1,11 @@
 
+Code:
+Creer un vectors.h
+
 Fix:
 le straff inverse en y
 souris vers le bas
+loop_sample
 
 Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques

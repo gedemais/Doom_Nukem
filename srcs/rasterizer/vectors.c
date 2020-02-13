@@ -1,8 +1,17 @@
 #include "main.h"
 
-void		vec_swap(t_vec3d *a, t_vec3d *b)
+void		vec3d_swap(t_vec3d *a, t_vec3d *b)
 {
 	t_vec3d		t;
+
+	t = *a;
+	*a = *b;
+	*b = t;
+}
+
+void		vec2d_swap(t_vec2d *a, t_vec2d *b)
+{
+	t_vec2d		t;
 
 	t = *a;
 	*a = *b;

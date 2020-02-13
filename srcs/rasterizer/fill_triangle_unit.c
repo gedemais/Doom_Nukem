@@ -51,7 +51,7 @@ static void		flattop(t_env *env, t_vec3d v[3], int color)
 		x = fill.xstart > 0 ? fill.xstart : 1 ;
 		while (x < fill.xend)
 		{
-			if (env->cam.z_buffer[(y - 1) * WDT + x] > (v[0].z + v[1].z + v[2].z) / 3.0f)
+			if (env->cam.z_buffer[(y - 1) * WDT + x])
 			{
 				draw_pixel(env->mlx.img_data, x, y, color);
 				env->cam.z_buffer[(y - 1) * WDT + x] = (v[0].z + v[1].z + v[2].z) / 3.0f;
@@ -88,17 +88,18 @@ void	fill_triangle_unit(t_env *env, t_triangle t, int color)
 	t_vec3d	v[3];
 
 	ft_memcpy(&v[0], &t.points[0], sizeof(t_vec3d) * 3);
-	v[1].y < v[0].y ? vec_swap(&v[0], &v[1]) : 0;
-	v[2].y < v[1].y ? vec_swap(&v[1], &v[2]) : 0;
-	v[1].y < v[0].y ? vec_swap(&v[0], &v[1]) : 0;
+	v[1].y < v[0].y ? vec3d_swap(&v[0], &v[1]) : 0;
+	v[2].y < v[1].y ? vec3d_swap(&v[1], &v[2]) : 0;
+	v[1].y < v[0].y ? vec3d_swap(&v[0], &v[1]) : 0;
+
 	if (v[0].y == v[1].y)
 	{
-		v[1].x < v[0].x ? vec_swap(&v[0], &v[1]) : 0;
+		v[1].x < v[0].x ? vec3d_swap(&v[0], &v[1]) : 0;
 		flattop(env, v, color);
 	}
 	else if (v[1].y == v[2].y)
 	{
-		v[2].x < v[1].x ? vec_swap(&v[1], &v[2]) : 0;
+		v[2].x < v[1].x ? vec3d_swap(&v[1], &v[2]) : 0;
 		flatbot(env, v, color);
 	}
 	else

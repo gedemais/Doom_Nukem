@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/12 02:09:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 00:23:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "libft.h"
 # include "mlx.h"
 
+# include "typedefs.h"
 # include "errors.h"
 # include "keys.h"
 # include "sound.h"
