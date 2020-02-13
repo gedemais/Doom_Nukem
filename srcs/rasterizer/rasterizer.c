@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/12 04:03:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/13 05:34:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.points[0] = multiply_matrix(env->cam.p_m, clipped[i].points[0]);
 		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
 		t.points[2] = multiply_matrix(env->cam.p_m, clipped[i].points[2]);
+		t.txt[0] = clipped[i].txt[0];
+		t.txt[1] = clipped[i].txt[1];
+		t.txt[2] = clipped[i].txt[2];
 
 //		printf("%f %f %f\n", clipped[i].points[0].w, clipped[i].points[1].w, clipped[i].points[2].w);
 		t.txt[0].u = clipped[i].txt[0].u / clipped[i].points[0].w;
@@ -49,6 +52,7 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.txt[1].w = 1.0f / t.points[1].w;
 		t.txt[2].w = 1.0f / t.points[2].w;
 
+		//printf("%f %f %f\n------------------\n", t.txt[0].w, t.txt[1].w, t.txt[2].w);
 		t.points[0] = vec_fdiv(t.points[0], t.points[0].w);
 		t.points[1] = vec_fdiv(t.points[1], t.points[1].w);
 		t.points[2] = vec_fdiv(t.points[2], t.points[2].w);
@@ -139,10 +143,10 @@ void		*rasthreader(void *param)
 //		printf("There2 (%f %f <-> %f %f <-> %f %f)\n", t->points[0].x, t->points[0].y, t->points[1].x, t->points[1].y, t->points[2].x, t->points[2].y);
 		//assert(t->points[0].x > 0.0f && t->points[0].y  > 0.0f&& t->points[1].x > 0.0f && t->points[1].y > 0.0f && t->points[2].x > 0.0f && t->points[2].y > 0.0f);
 //		fill_triangle_unit((t_env*)thr->env, *t, shade_color(t->color, t->illum));
-	/*	draw_triangle(&env->mlx,
+		draw_triangle(&env->mlx,
 			(t_point){t->points[0].x, t->points[0].y},
 			(t_point){t->points[1].x, t->points[1].y},
-			(t_point){t->points[2].x, t->points[2].y});*/
+			(t_point){t->points[2].x, t->points[2].y});
 		thr->index++;
 	}
 	thr->done = true;

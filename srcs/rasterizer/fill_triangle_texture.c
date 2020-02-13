@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/12 06:05:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/13 05:35:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,36 @@ static void	swap_floats(float *a, float *b)
 
 static void	starting_swap(t_triangle *t)
 {
+//	printf("a : %f | b : %f\n", t->points[0].y, t->points[1].y);
 	if (t->points[1].y < t->points[0].y)
 	{
+//		printf("swap 1: b : %f | a : %f\n", t->points[1].y, t->points[0].y);
 		swap_floats(&t->points[0].y, &t->points[1].y);
 		swap_floats(&t->points[0].x, &t->points[1].x);
 		swap_floats(&t->txt[0].u, &t->txt[1].u);
 		swap_floats(&t->txt[0].v, &t->txt[1].v);
 		swap_floats(&t->txt[0].w, &t->txt[1].w);
+//		printf("post-swap 1: b : %f | a : %f\n", t->points[1].y, t->points[0].y);
 	}
 	if (t->points[2].y < t->points[0].y)
 	{
+//		printf("swap 2: c : %f | a : %f\n", t->points[2].y, t->points[0].y);
 		swap_floats(&t->points[2].y, &t->points[0].y);
 		swap_floats(&t->points[2].x, &t->points[0].x);
 		swap_floats(&t->txt[2].u, &t->txt[0].u);
 		swap_floats(&t->txt[2].v, &t->txt[0].v);
 		swap_floats(&t->txt[2].w, &t->txt[0].w);
+//		printf("post-swap 2: c : %f | a : %f\n", t->points[2].y, t->points[0].y);
 	}
 	if (t->points[2].y < t->points[1].y)
 	{
+//		printf("swap 3: c : %f | b : %f\n", t->points[2].y, t->points[1].y);
 		swap_floats(&t->points[2].y, &t->points[1].y);
 		swap_floats(&t->points[2].x, &t->points[1].x);
 		swap_floats(&t->txt[2].u, &t->txt[1].u);
 		swap_floats(&t->txt[2].v, &t->txt[1].v);
 		swap_floats(&t->txt[2].w, &t->txt[1].w);
+//		printf("post-swap 3: c : %f | b : %f\n", t->points[2].y, t->points[1].y);
 	}
 }
 
@@ -118,16 +125,18 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
 		tx = 0.0f;
 		j = txt->ax;
+		if (txt->t_step > 0.5f && ++i)
+			continue;
 		while (j < (unsigned)txt->bx)
 		{
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-			printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
+		//	printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
 			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
 			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-			(t_vec2d){txt->txt_u/* / txt->txt_w*/, txt->txt_v/* / txt->txt_w*/, 1.0f});
+			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -143,9 +152,6 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 	unsigned int	j;
 	float			tx;
 	int				color;
-
-	if (txt->dy1)
-		flattop(env, txt, t);
 
 	txt->dy1 = t.points[2].y - t.points[1].y; // *
 	txt->dx1 = t.points[2].x - t.points[1].x;
@@ -173,7 +179,7 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 
 		txt->txt_su = t.txt[1].u + (float)(i - t.points[1].y) * txt->u1_step;
 		txt->txt_sv = t.txt[1].v + (float)(i - t.points[1].y) * txt->v1_step;
-		txt->txt_sw = t.txt[0].w + (float)(i - t.points[1].y) * txt->w1_step;
+		txt->txt_sw = t.txt[1].w + (float)(i - t.points[1].y) * txt->w1_step;
 
 		txt->txt_eu = t.txt[0].u + (float)(i - t.points[0].y) * txt->u2_step;
 		txt->txt_ev = t.txt[0].v + (float)(i - t.points[0].y) * txt->v2_step;
@@ -193,17 +199,18 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
 		tx = 0.0f;
 		j = txt->ax;
-		printf("---------\n");
+		if (txt->t_step > 0.5f && ++i)
+			continue;
 		while (j < (unsigned)txt->bx)
 		{
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-			printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
+//			printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
 			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
 			(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
-			(t_vec2d){txt->txt_u /*/ txt->txt_w*/, txt->txt_v /*/ txt->txt_w*/, 1.0f});
+			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
 			color = shade_color(color, t.illum);
 			draw_pixel(env->mlx.img_data, j, i, color);
 			tx += txt->t_step;
@@ -219,7 +226,11 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 	t_texturizer	txt;
 
 	txt = (t_texturizer){};
+//	printf("%f %f %f\n", t.points[0].y, t.points[1].y, t.points[2].y);
 	starting_swap(&t);
+//	printf("%f %f %f\n----------------------------------\n", t.points[0].y, t.points[1].y, t.points[2].y);
 	compute_gradients(&txt, t);
+	if (txt.dy1)
+		flattop(env, &txt, t);
 	blit_texture(env, &txt, t);
 }
