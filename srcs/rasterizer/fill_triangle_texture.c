@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/13 05:35:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:41:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,23 +122,26 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
 
-		txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
+		if (txt->ax == txt->bx && ++i)
+			continue ;
+		txt->t_step = 1.0f / (float)(txt->bx - txt->ax); //inf
 		tx = 0.0f;
 		j = txt->ax;
-		if (txt->t_step > 0.5f && ++i)
-			continue;
 		while (j < (unsigned)txt->bx)
 		{
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-		//	printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
-			color = shade_color(color, t.illum);
-			draw_pixel(env->mlx.img_data, j, i, color);
+			if (txt->txt_w < env->cam.z_buffer[i * WDT + j])
+			{
+				env->cam.z_buffer[i * WDT + j] = txt->txt_w;
+				color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+				(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+				(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
+				color = shade_color(color, t.illum);
+				draw_pixel(env->mlx.img_data, j, i, color);
+			}
 			tx += txt->t_step;
 			j++;
 		}
@@ -160,16 +163,16 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 	txt->dw1 = t.txt[2].w - t.txt[1].w;
 
 	if (txt->dy1)
-		txt->ax_step = txt->dx1 / fabs((float)txt->dy1);
+		txt->ax_step = txt->dx1 / (float)abs(txt->dy1);
 	if (txt->dy2)
-		txt->bx_step = txt->dx2 / fabs((float)txt->dy2);
+		txt->bx_step = txt->dx2 / (float)abs(txt->dy2);
 
 	if (txt->dy1)
-		txt->u1_step = txt->du1 / fabs((float)txt->dy1);
+		txt->u1_step = txt->du1 / (float)abs(txt->dy1);
 	if (txt->dy1)
-		txt->v1_step = txt->dv1 / fabs((float)txt->dy1);
+		txt->v1_step = txt->dv1 / (float)abs(txt->dy1);
 	if (txt->dy1)
-		txt->w1_step = txt->dw1 / fabs((float)txt->dy1);
+		txt->w1_step = txt->dw1 / (float)abs(txt->dy1);
 	
 	i = t.points[1].y;
 	while (i <= t.points[2].y)
@@ -196,23 +199,26 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
 
+		if (txt->ax == txt->bx && ++i)
+			continue ;
 		txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
 		tx = 0.0f;
 		j = txt->ax;
-		if (txt->t_step > 0.5f && ++i)
-			continue;
 		while (j < (unsigned)txt->bx)
 		{
 			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
 			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
 			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
 
-//			printf("(1.0f - %f) * %f + %f * %f = %f\n", tx, txt->txt_sw, tx, txt->txt_ew, txt->txt_w);
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
-			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
-			color = shade_color(color, t.illum);
-			draw_pixel(env->mlx.img_data, j, i, color);
+			if (txt->txt_w < env->cam.z_buffer[i * WDT + j])
+			{
+				env->cam.z_buffer[i * WDT + j] = txt->txt_w;
+				color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+				(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
+				(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
+				color = shade_color(color, t.illum);
+				draw_pixel(env->mlx.img_data, j, i, color);
+			}
 			tx += txt->t_step;
 			j++;
 		}

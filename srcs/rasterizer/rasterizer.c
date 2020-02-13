@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/13 05:34:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:27:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,20 @@ void	project_triangle(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris
 		t.points[0] = multiply_matrix(env->cam.p_m, clipped[i].points[0]);
 		t.points[1] = multiply_matrix(env->cam.p_m, clipped[i].points[1]);
 		t.points[2] = multiply_matrix(env->cam.p_m, clipped[i].points[2]);
+
 		t.txt[0] = clipped[i].txt[0];
 		t.txt[1] = clipped[i].txt[1];
 		t.txt[2] = clipped[i].txt[2];
 
 //		printf("%f %f %f\n", clipped[i].points[0].w, clipped[i].points[1].w, clipped[i].points[2].w);
-		t.txt[0].u = clipped[i].txt[0].u / clipped[i].points[0].w;
-		t.txt[1].u = clipped[i].txt[1].u / clipped[i].points[1].w;
-		t.txt[2].u = clipped[i].txt[2].u / clipped[i].points[2].w;
+		t.txt[0].u /= t.points[0].w;
+		t.txt[1].u /= t.points[1].w;
+		t.txt[2].u /= t.points[2].w;
 		//printf("Then : %f %f %f\n", t.txt[0].u, t.txt[0].u, t.txt[0].u);
 
-		t.txt[0].v = clipped[i].txt[0].v / clipped[i].points[0].w;
-		t.txt[1].v = clipped[i].txt[1].v / clipped[i].points[1].w;
-		t.txt[2].v = clipped[i].txt[2].v / clipped[i].points[2].w;
+		t.txt[0].v /= t.points[0].w;
+		t.txt[1].v /= t.points[1].w;
+		t.txt[2].v /= t.points[2].w;
 
 		t.txt[0].w = 1.0f / t.points[0].w;
 		t.txt[1].w = 1.0f / t.points[1].w;
