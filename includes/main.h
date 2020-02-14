@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 00:23:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 02:44:24 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "mlx.h"
 
 # include "typedefs.h"
+# include "vectors.h"
 # include "errors.h"
 # include "keys.h"
 # include "sound.h"
@@ -46,7 +47,7 @@
 # define SENSI 0.1f
 # define WALK_SPEED 0.1f
 
-enum			e_context_id
+enum		e_context_id
 {
 	C_DEV,
 	C_TITLE_SCREEN,
@@ -56,7 +57,7 @@ enum			e_context_id
 	C_MAX
 };
 
-typedef struct	s_mlx
+struct		s_mlx
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
@@ -66,23 +67,23 @@ typedef struct	s_mlx
 	int			s_l;
 	int			endian;
 	int			pad;
-}				t_mlx;
+};
 
-typedef struct	s_events
+struct			s_events
 {
 	bool		keys[NB_KEYS];
 	bool		buttons[NB_BUTTONS];
 	t_point		mouse_pos;
-}				t_events;
+};
 
-typedef struct	s_data
+struct			s_data
 {
 	float		half_wdt;
 	float		half_hgt;
 	int			data_size;
-}				t_data;
+};
 
-typedef struct	s_env
+struct			s_env
 {
 	t_mlx		mlx;
 	t_events	events;
@@ -94,7 +95,7 @@ typedef struct	s_env
 	t_ts_env	ts_env;
 	int			context;
 	int			scene;
-}				t_env;
+};
 
 int				setup(t_env *env);
 int				free_env(t_env *env);

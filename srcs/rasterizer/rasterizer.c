@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 00:17:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 03:33:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,37 @@
 
 void	compute_rotation_matrices(t_env *env, t_mesh m)
 {
-	update_xrotation_matrix(env->cam.rx_m, m.pitch);
-	update_yrotation_matrix(env->cam.ry_m, m.yaw);
-	update_zrotation_matrix(env->cam.rz_m, m.roll);
-	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
+	update_xrotation_matrix(env->cam.stats.rx_m, m.pitch);
+	update_yrotation_matrix(env->cam.stats.ry_m, m.yaw);
+	update_zrotation_matrix(env->cam.stats.rz_m, m.roll);
+	matrix_mult_matrix(env->cam.stats.rz_m,
+									env->cam.stats.rx_m, env->cam.stats.w_m);
 }
 
 void	compute_matrices(t_env *env)
 {
 	t_vec3d	up;
 	t_vec3d	target;
-	static float		theta = 0.0f;
+	float	yaw_rad;
+	float	pitch_rad;
 
-	env->cam.dir = (t_vec3d){0, 0, 1, 0};
+	env->cam.stats.dir = (t_vec3d){0, 0, 1, 0};
 	up = (t_vec3d){0, -1, 0, 0};
 	target = (t_vec3d){0, 0, 1, 0};
 
-	update_yrotation_matrix(env->cam.cry_m, ft_to_radians(env->cam.yaw));
-	update_xrotation_matrix(env->cam.crx_m, ft_to_radians(env->cam.pitch));
-	matrix_mult_matrix(env->cam.crx_m, env->cam.cry_m, env->cam.cr_m);
+	yaw_rad = ft_to_radians(env->cam.stats.yaw);
+	
+	update_yrotation_matrix(env->cam.stats.cry_m, yaw_rad);
+	update_xrotation_matrix(env->cam.stats.crx_m, ft_to_radians(env->cam.stats.pitch));
+	matrix_mult_matrix(env->cam.stats.crx_m, env->cam.stats.cry_m, env->cam.stats.cr_m);
 
-	env->cam.dir = matrix_mult_vec(env->cam.cr_m, target);
-	up = matrix_mult_vec(env->cam.cr_m, (t_vec3d){0, -1, 0, 0});
-	target = vec_add(env->cam.pos, env->cam.dir);
+	env->cam.stats.dir = matrix_mult_vec(env->cam.stats.cr_m, target);
+	up = matrix_mult_vec(env->cam.stats.cr_m, (t_vec3d){0, -1, 0, 0});
+	target = vec_add(env->cam.stats.pos, env->cam.stats.dir);
 
-	matrix_pointat(env->cam.c_m, env->cam.pos, target, up);
+	matrix_pointat(env->cam.stats.c_m, env->cam.stats.pos, target, up);
 
-	inverse_matrix(env->cam.c_m, env->cam.v_m);
-	theta -= 0.01f;
+	inverse_matrix(env->cam.stats.c_m, env->cam.stats.v_m);
 }
 
 void		*rasthreader(void *param)

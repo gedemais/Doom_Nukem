@@ -64,23 +64,23 @@ static void camera(t_env *env)
 	y = env->events.mouse_pos.y;
 	if (x <= hwdt && y < hhgt) // L Up
 	{
-		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio; // A caper
-		env->cam.pitch += fabs((hhgt - y) * SENSI);
+		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio; // A caper
+		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
 	}
 	else if (x < hwdt && y >= hhgt) // L Down
 	{
-		env->cam.yaw -= fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
-		env->cam.pitch -= fabs((hhgt - y) * SENSI);
+		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
+		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
 	}
 	else if (x >= hwdt && y < hhgt) // R Up
 	{
-		env->cam.yaw += fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
-		env->cam.pitch += fabs((hhgt - y) * SENSI);
+		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
+		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
 	}
 	else if (x > hwdt && y >= hhgt) // R Down
 	{
-		env->cam.yaw += fabs((hwdt - x) * SENSI) * env->cam.aspect_ratio;
-		env->cam.pitch -= fabs((hhgt - y) * SENSI);
+		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
+		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
 	}
 	mlx_mouse_move(env->mlx.mlx_win, hwdt, hhgt);
 	env->events.mouse_pos.x = hwdt;
@@ -107,7 +107,7 @@ int		render_dev(void *param)
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
-//	printf("%f %f %f\n", env->cam.pos.x, env->cam.pos.y, env->cam.pos.z);
+//	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 	av += 1 / mesure_time(true);
 	if (av > 2000)
 	{

@@ -1,16 +1,16 @@
 #ifndef TITLE_SCREEN_H
 # define TITLE_SCREEN_H
 
-typedef enum		e_ts_button_id
+enum	e_ts_button_id
 {
 	TS_BUTTON_CAMPAIGN,
 	TS_BUTTON_CUSTOM,
 	TS_BUTTON_MAP_EDITOR,
 	TS_BUTTON_QUIT,
 	TS_BUTTON_MAX
-}					t_ts_button_id;
+};
 
-typedef struct		s_button
+struct	s_button
 {
 	t_point			l_up;
 	t_point			r_up;
@@ -21,13 +21,13 @@ typedef struct		s_button
 	t_sprite		*hover;
 	bool			is_hover;
 	bool			in_place;
-}					t_button;
+};
 
-typedef struct		s_ts_env
+struct	s_ts_env
 {
 	void			*env;
 	t_button		buttons[TS_BUTTON_MAX];
-}					t_ts_env;
+};
 
 int					key_press_ts(int key, void *param);
 int					key_release_ts(int key, void *param);

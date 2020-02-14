@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/21 11:30:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 03:25:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		f;
 	t_vec3d		r;
 
-	f = vec_fmult(env->cam.dir, WALK_SPEED);
+	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
 	r = (t_vec3d){f.z, 0, -f.x, f.w};
 
 	if (keys[KEY_W])
-		env->cam.pos = vec_add(env->cam.pos, f);
+		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 	if (keys[KEY_S])
-		env->cam.pos = vec_sub(env->cam.pos, f);
+		env->cam.stats.pos = vec_sub(env->cam.stats.pos, f);
 	if (keys[KEY_A])
-		env->cam.pos = vec_add(env->cam.pos, r);
+		env->cam.stats.pos = vec_add(env->cam.stats.pos, r);
 	if (keys[KEY_D])
-		env->cam.pos = vec_sub(env->cam.pos, r);
+		env->cam.stats.pos = vec_sub(env->cam.stats.pos, r);
 }
 
 static void	handle_keys(t_env *env, t_events *e)

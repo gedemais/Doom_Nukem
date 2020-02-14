@@ -4,7 +4,7 @@
 # define BUFF_READ 4194304
 # define NB_LINE_TYPES 6
 
-enum				e_pstate
+enum	e_pstate
 {
 	PS_OBJ,
 	PS_VERTEXS,
@@ -15,13 +15,13 @@ enum				e_pstate
 	PS_MAX
 };
 
-enum			e_scene_id
+enum	e_scene_id
 {
 	SCENE_TEST,
 	SCENE_MAX
 };
 
-typedef struct		s_face
+struct	s_face
 {
 	int				x;
 	int				y;
@@ -29,24 +29,24 @@ typedef struct		s_face
 	int				tx;
 	int				ty;
 	int				tz;
-}					t_face;
+};
 
-typedef struct		s_map
+struct	s_map
 {
 	t_dynarray		meshs;
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	int				nmesh;
-}					t_map;
+};
 
-typedef struct		s_parser
+struct	s_parser
 {
 	char			**lines;
 	char			**toks;
 	char			state;
 	char			tstate;
 	int				tri;
-}					t_parser;
+};
 
 
 char				*read_file(int fd);

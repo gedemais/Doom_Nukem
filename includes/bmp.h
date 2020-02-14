@@ -11,7 +11,7 @@
 # define GRA "\033[1m"
 # define STOP "\033[0m"
 
-enum				e_sprite_id
+enum	e_sprite_id
 {
 /*
 ** Title screen
@@ -34,7 +34,7 @@ enum				e_sprite_id
 	SP_MAX
 };
 
-typedef struct		s_sprite
+struct	s_sprite
 {
 	void			*img_ptr;
 	char			*img_data;
@@ -42,7 +42,7 @@ typedef struct		s_sprite
 	int				wdt;
 	int				alpha;
 	int				pad;
-}					t_sprite;
+};
 
 char	*sprites_paths(unsigned int index);
 char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
