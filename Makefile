@@ -48,6 +48,7 @@ SRCS_NAME=	main.c\
 			rasterizer/fill_triangle_unit.c\
 			rasterizer/fill_triangle_texture.c\
 			rasterizer/rasterizer.c\
+			rasterizer/raster_tools.c\
 			rasterizer/triangle_pipeline.c\
 			rasterizer/raster_triangles.c\
 			rasterizer/camera.c\

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 02:36:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 05:03:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 	t_vec3d		line2;
 
 	// Translation
-	t.points[0] = vec_add(t.points[0], (t_vec3d){5.0f, 3.0f, 5.0f, 0.0f});
-	t.points[1] = vec_add(t.points[1], (t_vec3d){5.0f, 3.0f, 5.0f, 0.0f});
-	t.points[2] = vec_add(t.points[2], (t_vec3d){5.0f, 3.0f, 5.0f, 0.0f});
+	t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
+	t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
+	t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
 
 	//Rotation
 	t.points[0] = matrix_mult_vec(env->cam.w_m, t.points[0]);
@@ -115,7 +115,7 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 	normal = vec_cross(line1, line2);
 	vec_normalize(&normal);
 
-	if (vec_dot(normal, vec_sub(t.points[0], env->cam.pos)) < 0.0f)
+	if (vec_dot(normal, vec_sub(t.points[0], env->cam.stats.pos)) < 0.0f)
 	{
 		if (clip_near_plane(env, t, normal, tris))
 			return (-1);

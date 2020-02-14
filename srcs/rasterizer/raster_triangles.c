@@ -6,39 +6,28 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 00:48:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 04:35:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)
-{
-	draw_line((t_mlx*)mlx, a, b, 0xffffff);
-	draw_line((t_mlx*)mlx, a, c, 0xffffff);
-	draw_line((t_mlx*)mlx, b, c, 0xffffff);
-}
-
-static int	relaunch_thread(t_rasthread threads[NB_THREADS], unsigned int i)
+static int	relaunch_thread(t_rasthread threads[NB_THREADS], int i)
 {
 	int				t;
-	unsigned int	j;
+	int				j;
 	unsigned int	work;
 	unsigned int	max_work;
 
-	j = 0;
+	j = -1;
 	t = -1;
 	max_work = 0;
-	while (j < NB_THREADS)
-	{
-		work = threads[j].end - threads[j].index;
-		if (i != j && work > max_work)
+	while (++j < NB_THREADS)
+		if (i != j && (work = threads[j].end - threads[j].index) > max_work)
 		{
 			max_work = work;
 			t = j;
 		}
-		j++;
-	}
 	if (t == -1)
 		return (0);
 	threads[i].start = threads[t].index + (max_work / 2); // Placing new's start
@@ -68,7 +57,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 		{
 			if (threads[i].done)
 			{
-				amount = relaunch_thread(threads, i);
+				amount = relaunch_thread(threads, (int)i);
 				relaunched++;
 				break ;
 			}

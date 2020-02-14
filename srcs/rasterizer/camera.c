@@ -16,13 +16,13 @@ int		allocate_clipping_arrays(t_dynarray arrays[4])
 
 int		init_camera(t_cam *cam)
 {
-	cam->aspect_ratio = (float)HGT / (float)WDT;
-	cam->fnear = 0.1f;
-	cam->ffar = 1000.0f;
-	cam->fovd = 70.0f;
-	cam->fovr = (float)(1.0f / tan(cam->fovd * 0.5f / 180.0f * 3.14159f));
-	cam->fdelta = cam->ffar - cam->fnear;
-	cam->pos = (t_vec3d){4.925508, 6.739945, -16.410669, 0.0f};
+	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
+	cam->stats.fnear = 0.1f;
+	cam->stats.ffar = 1000.0f;
+	cam->stats.fovd = 70.0f;
+	cam->stats.fovr = (float)(1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f));
+	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
+	cam->stats.pos = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	cam->light = (t_vec3d){5.0f, 8.0f, 8.0f, 0.0f};
 	vec_normalize(&cam->light);
 	init_matrices(cam);

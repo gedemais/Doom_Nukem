@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 00:13:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/14 05:31:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,60 @@ static void	starting_swap(t_triangle *t)
 	}
 }
 
-static void	compute_gradients(t_texturizer *txt, t_triangle t)
+static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, unsigned int i)
+{
+	unsigned int	j;
+	float			tx;
+	int				color;
+
+	j = txt->ax;
+	tx = 0.0f;
+	txt->t_step = 1.0f / (float)(txt->bx - txt->ax); //inf
+	while (j < (unsigned)txt->bx)
+	{
+		txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
+		txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
+		txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
+
+		if (txt->txt_w > env->cam.z_buffer[i * WDT + j])
+		{
+			env->cam.z_buffer[i * WDT + j] = txt->txt_w;
+			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+			(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
+			color = shade_color(color, t.illum);
+			draw_pixel(env->mlx.img_data, j, i, color);
+		}
+		tx += txt->t_step;
+		j++;
+	}
+}
+
+static void	compute_steps(t_texturizer *txt)
+{
+	float		abs_dy1;
+	float		abs_dy2;
+
+	abs_dy1 = fabs((float)txt->dy1);
+	abs_dy2 = fabs((float)txt->dy2);
+	if (txt->dy1)
+	{
+		txt->ax_step = txt->dx1 / abs_dy1;
+		txt->u1_step = txt->du1 / abs_dy1;
+		txt->v1_step = txt->dv1 / abs_dy1;
+		txt->w1_step = txt->dw1 / abs_dy1;
+	
+	}
+	if (txt->dy2)
+	{
+		txt->bx_step = txt->dx2 / abs_dy2;
+		txt->u2_step = txt->du2 / abs_dy2;
+		txt->v2_step = txt->dv2 / abs_dy2;
+		txt->w2_step = txt->dw2 / abs_dy2;
+	}
+}
+
+static void	compute_gradients_flattop(t_texturizer *txt, t_triangle t)
 {
 	txt->dx1 = t.points[1].x - t.points[0].x; // *
 	txt->dy1 = t.points[1].y - t.points[0].y;
@@ -63,32 +116,12 @@ static void	compute_gradients(t_texturizer *txt, t_triangle t)
 	txt->dv2 = t.txt[2].v - t.txt[0].v;
 	txt->dw2 = t.txt[2].w - t.txt[0].w;
 
-	if (txt->dy1)
-		txt->ax_step = txt->dx1 / fabs((float)txt->dy1);
-	if (txt->dy2)
-		txt->bx_step = txt->dx2 / fabs((float)txt->dy2);
-
-	if (txt->dy1)
-		txt->u1_step = txt->du1 / fabs((float)txt->dy1);
-	if (txt->dy1)
-		txt->v1_step = txt->dv1 / fabs((float)txt->dy1);
-	if (txt->dy1)
-		txt->w1_step = txt->dw1 / fabs((float)txt->dy1);
-
-	if (txt->dy2)
-		txt->u2_step = txt->du2 / fabs((float)txt->dy2);
-	if (txt->dy2)
-		txt->v2_step = txt->dv2 / fabs((float)txt->dy2);
-	if (txt->dy2)
-		txt->w2_step = txt->dw2 / fabs((float)txt->dy2);
+	compute_steps(txt);
 }
 
 static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	unsigned int	i;
-	unsigned int	j;
-	float			tx;
-	int				color;
 
 	i = t.points[0].y;
 	while (i <= t.points[1].y)
@@ -117,40 +150,17 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 
 		if (txt->ax == txt->bx && ++i)
 			continue ;
-		txt->t_step = 1.0f / (float)(txt->bx - txt->ax); //inf
-		tx = 0.0f;
-		j = txt->ax;
-		while (j < (unsigned)txt->bx)
-		{
-			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
-			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
-			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
-
-			if (txt->txt_w > env->cam.z_buffer[i * WDT + j])
-			{
-				env->cam.z_buffer[i * WDT + j] = txt->txt_w;
-				color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-				(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-				(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
-				color = shade_color(color, t.illum);
-				draw_pixel(env->mlx.img_data, j, i, color);
-			}
-			tx += txt->t_step;
-			j++;
-		}
+		draw_triangle_line(env, txt, t, i);
 		i++;
 	}
 }
 
-static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
+static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	unsigned int	i;
-	unsigned int	j;
-	float			tx;
-	int				color;
 
-	txt->dy1 = t.points[2].y - t.points[1].y; // *
 	txt->dx1 = t.points[2].x - t.points[1].x;
+	txt->dy1 = t.points[2].y - t.points[1].y; // *
 	txt->du1 = t.txt[2].u - t.txt[1].u;
 	txt->dv1 = t.txt[2].v - t.txt[1].v;
 	txt->dw1 = t.txt[2].w - t.txt[1].w;
@@ -194,27 +204,7 @@ static void	blit_texture(t_env *env, t_texturizer *txt, t_triangle t)
 
 		if (txt->ax == txt->bx && ++i)
 			continue ;
-		txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
-		tx = 0.0f;
-		j = txt->ax;
-		while (j < (unsigned)txt->bx)
-		{
-			txt->txt_u = (1.0f - tx) * txt->txt_su + tx * txt->txt_eu;
-			txt->txt_v = (1.0f - tx) * txt->txt_sv + tx * txt->txt_ev;
-			txt->txt_w = (1.0f - tx) * txt->txt_sw + tx * txt->txt_ew;
-
-			if (txt->txt_w > env->cam.z_buffer[i * WDT + j])
-			{
-				env->cam.z_buffer[i * WDT + j] = txt->txt_w;
-				color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-				(t_point){env->sprites[TXT_BLOC_GRASS].wdt, env->sprites[TXT_BLOC_GRASS].hgt},
-				(t_vec2d){txt->txt_u / txt->txt_w, txt->txt_v / txt->txt_w, 1.0f});
-				color = shade_color(color, t.illum);
-				draw_pixel(env->mlx.img_data, j, i, color);
-			}
-			tx += txt->t_step;
-			j++;
-		}
+		draw_triangle_line(env, txt, t, i);
 		i++;
 	}
 
@@ -226,8 +216,7 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 
 	txt = (t_texturizer){};
 	starting_swap(&t);
-	compute_gradients(&txt, t);
-	if (txt.dy1)
-		flattop(env, &txt, t);
-	blit_texture(env, &txt, t);
+	compute_gradients_flattop(&txt, t);
+	flattop(env, &txt, t);
+	flatbot(env, &txt, t);
 }

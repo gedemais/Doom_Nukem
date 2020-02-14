@@ -2,10 +2,10 @@
 
 void	init_projection_matrix(t_cam *cam)
 {
-	cam->p_m[0][0] = cam->aspect_ratio * cam->fovr;
-	cam->p_m[1][1] = cam->fovr;
-	cam->p_m[2][2] = cam->ffar / cam->fdelta;
-	cam->p_m[3][2] = (-cam->ffar * cam->fnear) / cam->fdelta;
+	cam->p_m[0][0] = cam->stats.aspect_ratio * cam->stats.fovr;
+	cam->p_m[1][1] = cam->stats.fovr;
+	cam->p_m[2][2] = cam->stats.ffar / cam->stats.fdelta;
+	cam->p_m[3][2] = (-cam->stats.ffar * cam->stats.fnear) / cam->stats.fdelta;
 	cam->p_m[2][3] = 1.0f;
 	cam->p_m[3][3] = 0.0f;
 }
