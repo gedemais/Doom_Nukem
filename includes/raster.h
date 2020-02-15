@@ -12,29 +12,6 @@ struct	s_point
 	int			y;
 };
 
-struct	s_triangle
-{
-	t_vec3d		points[3];
-	t_vec2d		txt[3];
-	float		illum;
-	int			color;
-	bool		textured;
-	void		*mesh;
-};
-
-struct	s_mesh
-{
-	t_dynarray	tris;
-	t_dynarray	txts;
-	t_dynarray	faces;
-	float		yaw;
-	float		pitch;
-	float		roll;
-	bool		textured;
-	char		*name;
-	int			nb_tris;
-};
-
 struct	s_filler
 {
 	float		m0;
@@ -51,7 +28,6 @@ struct	s_texturizer
 {
 	int			ax;
 	int			bx;
-
 	float		txt_su;
 	float		txt_sv;
 	float		txt_sw;
@@ -61,19 +37,16 @@ struct	s_texturizer
 	float		txt_u;
 	float		txt_v;
 	float		txt_w;
-
 	int			dx1;
 	int			dx2;
 	int			dy1;
 	int			dy2;
-
 	float		du1;
 	float		dv1;
 	float		du2;
 	float		dv2;
 	float		dw1;
 	float		dw2;
-
 	float		ax_step;
 	float		bx_step;
 	float		u1_step;
@@ -95,9 +68,7 @@ struct	s_clipper
 	int			txt_outside;
 	int			inside;
 	int			outside;
-	float		d0;
-	float		d1;
-	float		d2;
+	float		d[3];
 };
 
 struct	s_rasthread
@@ -148,27 +119,45 @@ struct	s_cam
 };
 
 int				triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris);
+int				raster_triangles(void *env, t_dynarray *arr);
+void			monothread_raster(void *env);
+void			*rasthreader(void *param);
+int				rasterizer(t_env *env, int scene);
 
+/*
+** Clipping
+*/
+int				allocate_clipping_arrays(t_dynarray arrays[4]);
+void			classify_triangle(t_clipper *clip, t_triangle in);
+bool			is_triangle_in_screen(t_triangle t);
+int				refactor_triangle(t_clipper *clip, t_triangle out[2],
+											t_vec3d plane_p, t_vec3d plane_n);
+void			clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4]);
+int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
+
+/*
+** Matrices
+*/
 void			init_matrices(t_cam *cam);
+void			translation_matrix(float m[4][4], t_vec3d v);
 void			update_xrotation_matrix(float m[4][4], float theta);
 void			update_yrotation_matrix(float m[4][4], float theta);
 void			update_zrotation_matrix(float m[4][4], float theta);
 t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
 t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
 void			matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4]);
-void			translation_matrix(float m[4][4], t_vec3d v);
 void			matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up);
 void			inverse_matrix(float m[4][4], float ret[4][4]);
-int				raster_triangles(void *env, t_dynarray *arr);
-void			monothread_raster(void *env);
-void			*rasthreader(void *param);
 
-float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
-
-int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
-void			clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4]);
-int				allocate_clipping_arrays(t_dynarray arrays[4]);
-void			print_matrix(float m[4][4]);
+/*
+** Texturing
+*/
+void			starting_swap(t_triangle *t);
+void			compute_steps(t_texturizer *txt);
+void			compute_gradients(t_texturizer *txt, t_triangle t, bool fbot);
+void			set_line_bounds_top(t_texturizer *txt, t_triangle t, float cur);
+void			set_line_bounds_bot(t_texturizer *t, t_triangle e, float c[2]);
+void			fill_triangle_texture(t_env *env, t_triangle t);
 
 /*
 ** Tools
@@ -176,5 +165,6 @@ void			print_matrix(float m[4][4]);
 void			draw_triangle(void *mlx, t_point a, t_point b, t_point c);
 void			compute_rotation_matrices(t_env *env, t_mesh m);
 void			compute_view_matrice(t_env *env);
+void			swap_floats(float *a, float *b);
 
 #endif

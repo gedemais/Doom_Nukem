@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 04:51:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 00:12:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ void	compute_view_matrice(t_env *env)
 	matrix_pointat(env->cam.c_m, env->cam.stats.pos, target, up);
 
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
+}
+
+void	swap_floats(float *a, float *b)
+{
+	float	c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
 }
 
 void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)

@@ -6,48 +6,11 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 05:31:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 00:34:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-static void	swap_floats(float *a, float *b)
-{
-	float	c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-
-static void	starting_swap(t_triangle *t)
-{
-	if (t->points[1].y < t->points[0].y)
-	{
-		swap_floats(&t->points[0].y, &t->points[1].y);
-		swap_floats(&t->points[0].x, &t->points[1].x);
-		swap_floats(&t->txt[0].u, &t->txt[1].u);
-		swap_floats(&t->txt[0].v, &t->txt[1].v);
-		swap_floats(&t->txt[0].w, &t->txt[1].w);
-	}
-	if (t->points[2].y < t->points[0].y)
-	{
-		swap_floats(&t->points[2].y, &t->points[0].y);
-		swap_floats(&t->points[2].x, &t->points[0].x);
-		swap_floats(&t->txt[2].u, &t->txt[0].u);
-		swap_floats(&t->txt[2].v, &t->txt[0].v);
-		swap_floats(&t->txt[2].w, &t->txt[0].w);
-	}
-	if (t->points[2].y < t->points[1].y)
-	{
-		swap_floats(&t->points[2].y, &t->points[1].y);
-		swap_floats(&t->points[2].x, &t->points[1].x);
-		swap_floats(&t->txt[2].u, &t->txt[1].u);
-		swap_floats(&t->txt[2].v, &t->txt[1].v);
-		swap_floats(&t->txt[2].w, &t->txt[1].w);
-	}
-}
 
 static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, unsigned int i)
 {
@@ -78,47 +41,6 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, unsi
 	}
 }
 
-static void	compute_steps(t_texturizer *txt)
-{
-	float		abs_dy1;
-	float		abs_dy2;
-
-	abs_dy1 = fabs((float)txt->dy1);
-	abs_dy2 = fabs((float)txt->dy2);
-	if (txt->dy1)
-	{
-		txt->ax_step = txt->dx1 / abs_dy1;
-		txt->u1_step = txt->du1 / abs_dy1;
-		txt->v1_step = txt->dv1 / abs_dy1;
-		txt->w1_step = txt->dw1 / abs_dy1;
-	
-	}
-	if (txt->dy2)
-	{
-		txt->bx_step = txt->dx2 / abs_dy2;
-		txt->u2_step = txt->du2 / abs_dy2;
-		txt->v2_step = txt->dv2 / abs_dy2;
-		txt->w2_step = txt->dw2 / abs_dy2;
-	}
-}
-
-static void	compute_gradients_flattop(t_texturizer *txt, t_triangle t)
-{
-	txt->dx1 = t.points[1].x - t.points[0].x; // *
-	txt->dy1 = t.points[1].y - t.points[0].y;
-	txt->du1 = t.txt[1].u - t.txt[0].u;
-	txt->dv1 = t.txt[1].v - t.txt[0].v;
-	txt->dw1 = t.txt[1].w - t.txt[0].w;
-
-	txt->dx2 = t.points[2].x - t.points[0].x;
-	txt->dy2 = t.points[2].y - t.points[0].y;
-	txt->du2 = t.txt[2].u - t.txt[0].u;
-	txt->dv2 = t.txt[2].v - t.txt[0].v;
-	txt->dw2 = t.txt[2].w - t.txt[0].w;
-
-	compute_steps(txt);
-}
-
 static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	unsigned int	i;
@@ -126,28 +48,10 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 	i = t.points[0].y;
 	while (i <= t.points[1].y)
 	{
-		txt->ax = t.points[0].x + (float)(i - t.points[0].y) * txt->ax_step;
-		txt->bx = t.points[0].x + (float)(i - t.points[0].y) * txt->bx_step;
-
-		txt->txt_su = t.txt[0].u + (float)(i - t.points[0].y) * txt->u1_step;
-		txt->txt_sv = t.txt[0].v + (float)(i - t.points[0].y) * txt->v1_step;
-		txt->txt_sw = t.txt[0].w + (float)(i - t.points[0].y) * txt->w1_step;
-
-		txt->txt_eu = t.txt[0].u + (float)(i - t.points[0].y) * txt->u2_step;
-		txt->txt_ev = t.txt[0].v + (float)(i - t.points[0].y) * txt->v2_step;
-		txt->txt_ew = t.txt[0].w + (float)(i - t.points[0].y) * txt->w2_step;
-
-		if (txt->ax > txt->bx)
-		{
-			ft_swap(&txt->ax, &txt->bx);
-			swap_floats(&txt->txt_su, &txt->txt_eu);
-			swap_floats(&txt->txt_sv, &txt->txt_ev);
-			swap_floats(&txt->txt_sw, &txt->txt_ew);
-		}
+		set_line_bounds_top(txt, t, (float)(i - t.points[0].y));
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
-
 		if (txt->ax == txt->bx && ++i)
 			continue ;
 		draw_triangle_line(env, txt, t, i);
@@ -159,55 +63,18 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	unsigned int	i;
 
-	txt->dx1 = t.points[2].x - t.points[1].x;
-	txt->dy1 = t.points[2].y - t.points[1].y; // *
-	txt->du1 = t.txt[2].u - t.txt[1].u;
-	txt->dv1 = t.txt[2].v - t.txt[1].v;
-	txt->dw1 = t.txt[2].w - t.txt[1].w;
-
-	if (txt->dy1)
-		txt->ax_step = txt->dx1 / (float)abs(txt->dy1);
-	if (txt->dy2)
-		txt->bx_step = txt->dx2 / (float)abs(txt->dy2);
-
-	if (txt->dy1)
-		txt->u1_step = txt->du1 / (float)abs(txt->dy1);
-	if (txt->dy1)
-		txt->v1_step = txt->dv1 / (float)abs(txt->dy1);
-	if (txt->dy1)
-		txt->w1_step = txt->dw1 / (float)abs(txt->dy1);
-	
 	i = t.points[1].y;
 	while (i <= t.points[2].y)
 	{
-		txt->ax = t.points[1].x + (float)(i - t.points[1].y) * txt->ax_step;
-		txt->bx = t.points[0].x + (float)(i - t.points[0].y) * txt->bx_step;
-
-		txt->txt_su = t.txt[1].u + (float)(i - t.points[1].y) * txt->u1_step;
-		txt->txt_sv = t.txt[1].v + (float)(i - t.points[1].y) * txt->v1_step;
-		txt->txt_sw = t.txt[1].w + (float)(i - t.points[1].y) * txt->w1_step;
-
-		txt->txt_eu = t.txt[0].u + (float)(i - t.points[0].y) * txt->u2_step;
-		txt->txt_ev = t.txt[0].v + (float)(i - t.points[0].y) * txt->v2_step;
-		txt->txt_ew = t.txt[0].w + (float)(i - t.points[0].y) * txt->w2_step;
-
-		if (txt->ax > txt->bx)
-		{
-			ft_swap(&txt->ax, &txt->bx);
-			swap_floats(&txt->txt_su, &txt->txt_eu);
-			swap_floats(&txt->txt_sv, &txt->txt_ev);
-			swap_floats(&txt->txt_sw, &txt->txt_ew);
-		}
+		set_line_bounds_bot(txt, t, (float[2]){(i - t.points[0].y), (i - t.points[1].y)});
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
-
 		if (txt->ax == txt->bx && ++i)
 			continue ;
 		draw_triangle_line(env, txt, t, i);
 		i++;
 	}
-
 }
 
 void		fill_triangle_texture(t_env *env, t_triangle t)
@@ -216,7 +83,8 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 
 	txt = (t_texturizer){};
 	starting_swap(&t);
-	compute_gradients_flattop(&txt, t);
+	compute_gradients(&txt, t, false);
 	flattop(env, &txt, t);
+	compute_gradients(&txt, t, true);
 	flatbot(env, &txt, t);
 }

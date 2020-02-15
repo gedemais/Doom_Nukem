@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 04:52:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:05:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*rasthreader(void *param)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
 //		if (t->textured)
-			fill_triangle_texture((t_env*)thr->env, *t);
+		fill_triangle_texture((t_env*)thr->env, *t);
 //		else
 //		fill_triangle_unit((t_env*)thr->env, *t, shade_color(0xffffff, t->illum));
 		draw_triangle(&env->mlx,
@@ -57,7 +57,7 @@ void	monothread_raster(void *e)
 	rasthreader(&thread);
 }
 
-void	rasterizer(t_env *env, int scene)
+int		rasterizer(t_env *env, int scene)
 {
 	int			i;
 	int			j;
@@ -70,7 +70,7 @@ void	rasterizer(t_env *env, int scene)
 	{
 		j = 0;
 		if (!(m = dyacc(&env->maps[scene].meshs, i)))
-			return ;
+			return (-1);
 		compute_rotation_matrices(env, *m);
 		while (j < m->faces.nb_cells)
 		{
@@ -81,6 +81,7 @@ void	rasterizer(t_env *env, int scene)
 		i++;
 	}
 	if (raster_triangles(env, &env->cam.to_clip))
-		return ;
+		return (-1);
 	clear_dynarray(&env->cam.to_clip);
+	return (0);
 }

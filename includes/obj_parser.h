@@ -31,6 +31,29 @@ struct	s_face
 	int				tz;
 };
 
+struct	s_triangle
+{
+	t_vec3d		points[3];
+	t_vec2d		txt[3];
+	float		illum;
+	int			color;
+	bool		textured;
+	void		*mesh;
+};
+
+struct	s_mesh
+{
+	t_dynarray	tris;
+	t_dynarray	txts;
+	t_dynarray	faces;
+	float		yaw;
+	float		pitch;
+	float		roll;
+	bool		textured;
+	char		*name;
+	int			nb_tris;
+};
+
 struct	s_map
 {
 	t_dynarray		meshs;

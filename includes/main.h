@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 02:44:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:07:08 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # include "errors.h"
 # include "keys.h"
 # include "sound.h"
+# include "obj_parser.h"
 # include "raster.h"
 # include "bmp.h"
-# include "obj_parser.h"
 
 # include "title_screen.h"
 # include "campaign.h"
@@ -127,13 +127,6 @@ int				pixloc(int x, int y, bool free);
 void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
 int				sample_pixel(char *img, t_point size, t_vec2d point);
-
-/*
-** Rasterization
-*/
-void			rasterizer(t_env *env, int scene);
-void			fill_triangle_unit(t_env *env, t_triangle t, int color); //
-void			fill_triangle_texture(t_env *env, t_triangle t); // a bouger dans raster.h
 
 /*
 ** Contexts

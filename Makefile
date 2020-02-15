@@ -29,6 +29,7 @@ SRCS_NAME=	main.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\
+			contexts/routines_bis.c\
 			\
 			custom_mode/render.c\
 			custom_mode/events.c\
@@ -45,16 +46,19 @@ SRCS_NAME=	main.c\
 			obj_parser/read_file.c\
 			\
 			rasterizer/clipping.c\
+			rasterizer/clipping_bis.c\
 			rasterizer/fill_triangle_unit.c\
 			rasterizer/fill_triangle_texture.c\
+			rasterizer/fill_triangle_texture_bis.c\
 			rasterizer/rasterizer.c\
 			rasterizer/raster_tools.c\
 			rasterizer/triangle_pipeline.c\
 			rasterizer/raster_triangles.c\
 			rasterizer/camera.c\
+			rasterizer/rotation_matrices.c\
 			rasterizer/matrices.c\
 			rasterizer/matrix_ops.c\
-			rasterizer/vectors.c\
+			rasterizer/matrix_tools.c\
 			\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
@@ -69,7 +73,13 @@ SRCS_NAME=	main.c\
 			title_screen/setup_ts.c\
 			title_screen/buttons.c\
 			title_screen/events.c\
-			title_screen/render.c
+			title_screen/render.c\
+			\
+			vectors/vectors.c\
+			vectors/vec2d_ops.c\
+			vectors/vec2d_tools.c\
+			vectors/vec3d_ops.c\
+			vectors/vec3d_tools.c
 
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))
