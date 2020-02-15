@@ -130,8 +130,7 @@ int				rasterizer(t_env *env, int scene);
 int				allocate_clipping_arrays(t_dynarray arrays[4]);
 void			classify_triangle(t_clipper *clip, t_triangle in);
 bool			is_triangle_in_screen(t_triangle t);
-int				refactor_triangle(t_clipper *clip, t_triangle out[2],
-											t_vec3d plane_p, t_vec3d plane_n);
+int				refactor_triangle(t_clipper *clip, t_triangle out[2], t_vec3d planes[2], t_triangle t);
 void			clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4]);
 int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 

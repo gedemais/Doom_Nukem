@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 01:00:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 16:14:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,6 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 		return (1);
 	}
 	else
-		return (refactor_triangle(&clip, out, plane_p, plane_n));
+		return (refactor_triangle(&clip, out, (t_vec3d[2]){plane_p, plane_n}, in));
 	return (0);
 }

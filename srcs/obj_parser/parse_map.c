@@ -2,12 +2,11 @@
 
 static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX])
 {
-	char			*qualis[PS_MAX] = {"o", "v", "vt", "s", "f", "#"};
+	char			*qualis[PS_MAX] = {"o", "v", "vt", "s", "f", "#", "mtllib",
+										"usemtl"};
 	unsigned int	i;
 
 	i = 0;
-	if (ft_strlen(c) != 1 && ft_strlen(c) != 2)
-		return (-1);
 	while (i < PS_MAX)
 	{
 		if (ft_strlen(c) == ft_strlen(qualis[i])
@@ -71,14 +70,17 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 		new->txt[2].w = 1.0f;
 
 		new->mesh = m;
+		new->textured = true;
 	}
+	else
+		new->textured = false;
 }
 
 static int	load_map_data(t_map *map)
 {
+	t_triangle	new;
 	t_mesh		*m;
 	t_face		*f;
-	t_triangle	new;
 	int			i;
 	int			j;
 
@@ -96,11 +98,12 @@ static int	load_map_data(t_map *map)
 				return (-1);
 
 			access_faces(&new, map, f, m);
+			new.color = 0xffffff;
 
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
 		}
-		printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
+		//printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
 	}
 	return (0);
 }

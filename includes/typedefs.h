@@ -6,19 +6,24 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 03:13:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 16:46:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
 
-typedef struct	s_sprite t_sprite;
 typedef struct	s_mlx t_mlx;
+typedef struct	s_sprite t_sprite;
+
 typedef struct	s_events t_events;
+
 typedef struct	s_data	t_data;
+
 typedef struct	s_env	t_env;
+
 typedef struct	s_face t_face;
+typedef struct	s_mtl t_mtl;
 typedef struct	s_map t_map;
 typedef struct	s_parser t_parser;
 

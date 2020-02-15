@@ -9,6 +9,7 @@ Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusque
 
 Todo:
 Securiser le parser d'obj
+Restaurer fill_triangle_unit
 Modeliser 42
 
 Idees:

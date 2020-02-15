@@ -2,7 +2,7 @@
 # define OBJ_PARSER_H
 
 # define BUFF_READ 4194304
-# define NB_LINE_TYPES 6
+# define NB_LINE_TYPES 8
 
 enum	e_pstate
 {
@@ -12,13 +12,22 @@ enum	e_pstate
 	PS_END_VERTEXS,
 	PS_FACES,
 	PS_COMMENT,
+	PS_MTLLIB,
+	PS_USEMTL,
 	PS_MAX
 };
 
 enum	e_scene_id
 {
-	SCENE_TEST,
+	SCENE_A,
+	SCENE_B,
+	SCENE_C,
 	SCENE_MAX
+};
+
+struct	s_mtl
+{
+	int	color;
 };
 
 struct	s_face

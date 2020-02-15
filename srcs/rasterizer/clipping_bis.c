@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:56:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 01:07:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 16:11:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,24 @@ static void	refactor_quad(t_clipper *clip, t_triangle out[2],
 }
 
 int			refactor_triangle(t_clipper *clip, t_triangle out[2],
-											t_vec3d plane_p, t_vec3d plane_n)
+											t_vec3d planes[2], t_triangle t)
 {
 	if (clip->inside == 1 && clip->outside == 2)
 	{
-		refactor_smaller(clip, out, plane_p, plane_n);
+		refactor_smaller(clip, out, planes[0], planes[1]);
+		out[0].textured = t.textured;
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
 	{
-		refactor_quad(clip, out, plane_p, plane_n);
+		refactor_quad(clip, out, planes[0], planes[1]);
+		out[0].textured = t.textured;
+		out[1].textured = t.textured;
 		return (2);
 	}
 	return (0);
 }
+
 void		classify_triangle(t_clipper *clip, t_triangle in)
 {
 	unsigned int	i;

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 05:03:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 15:32:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static int	project_triangle(t_env *env, t_triangle *t, t_triangle clipped, t_dyn
 
 	scale_to_screen(env, t);
 
-	t->color = 0xffffff;
+	t->color = clipped.color;
+	t->textured = clipped.textured;
 
 	if (push_dynarray(tris, t, false))
 		return (-1);

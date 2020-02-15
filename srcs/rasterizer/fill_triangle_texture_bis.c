@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:33:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 00:34:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 21:17:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,25 +90,24 @@ void	compute_gradients(t_texturizer *txt, t_triangle t, bool flatbot)
 
 void	set_line_bounds_top(t_texturizer *txt, t_triangle t, float current)
 {
-		txt->ax = t.points[0].x + current * txt->ax_step;
-		txt->bx = t.points[0].x + current * txt->bx_step;
+	txt->ax = t.points[0].x + current * txt->ax_step;
+	txt->bx = t.points[0].x + current * txt->bx_step;
 
-		txt->txt_su = t.txt[0].u + current * txt->u1_step;
-		txt->txt_sv = t.txt[0].v + current * txt->v1_step;
-		txt->txt_sw = t.txt[0].w + current * txt->w1_step;
+	txt->txt_su = t.txt[0].u + current * txt->u1_step;
+	txt->txt_sv = t.txt[0].v + current * txt->v1_step;
+	txt->txt_sw = t.txt[0].w + current * txt->w1_step;
 
-		txt->txt_eu = t.txt[0].u + current * txt->u2_step;
-		txt->txt_ev = t.txt[0].v + current * txt->v2_step;
-		txt->txt_ew = t.txt[0].w + current * txt->w2_step;
+	txt->txt_eu = t.txt[0].u + current * txt->u2_step;
+	txt->txt_ev = t.txt[0].v + current * txt->v2_step;
+	txt->txt_ew = t.txt[0].w + current * txt->w2_step;
 
-		if (txt->ax > txt->bx)
-		{
-			ft_swap(&txt->ax, &txt->bx);
-			swap_floats(&txt->txt_su, &txt->txt_eu);
-			swap_floats(&txt->txt_sv, &txt->txt_ev);
-			swap_floats(&txt->txt_sw, &txt->txt_ew);
-		}
-	
+	if (txt->ax > txt->bx)
+	{
+		ft_swap(&txt->ax, &txt->bx);
+		swap_floats(&txt->txt_su, &txt->txt_eu);
+		swap_floats(&txt->txt_sv, &txt->txt_ev);
+		swap_floats(&txt->txt_sw, &txt->txt_ew);
+	}
 }
 
 void	set_line_bounds_bot(t_texturizer *txt, t_triangle t, float currents[2])

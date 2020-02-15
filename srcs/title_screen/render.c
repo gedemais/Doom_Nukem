@@ -56,8 +56,8 @@ static void	play_sound(t_env *env)
 		loop = true;
 		loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], true, false, false);
 	}
-}
-*/
+}*/
+
 int			render_ts(void *param)
 {
 	t_env		*env;
