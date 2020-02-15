@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 02:07:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 03:15:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "sound.h"
 # include "obj_parser.h"
 # include "raster.h"
+# include "phy.h"
 # include "bmp.h"
 
 # include "title_screen.h"
@@ -91,6 +92,7 @@ struct			s_env
 	t_sprite	*sprites;
 	t_map		maps[SCENE_MAX];
 	t_data		data;
+	t_physics	phy_env;
 	t_cam		cam;
 	t_ts_env	ts_env;
 	int			context;

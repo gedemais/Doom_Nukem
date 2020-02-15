@@ -45,6 +45,10 @@ SRCS_NAME=	main.c\
 			obj_parser/states.c\
 			obj_parser/read_file.c\
 			\
+			physic_engine/init_engine.c\
+			physic_engine/report_collisions.c\
+			physic_engine/move_mesh.c\
+			\
 			rasterizer/clipping.c\
 			rasterizer/clipping_bis.c\
 			rasterizer/fill_triangle_unit.c\

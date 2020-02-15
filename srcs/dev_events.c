@@ -102,6 +102,7 @@ int		render_dev(void *param)
 	for (int i = 0; i < HGT * WDT; i++)
 		env->cam.z_buffer[i] = 0.0f;
 	camera(env);
+	translate_mesh(dyacc(&env->maps[SCENE_TEST].meshs, 1), (t_vec3d){0, 0, 0.01f, 0});
 	rasterizer(env, SCENE_TEST);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");

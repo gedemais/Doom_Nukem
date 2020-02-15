@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 00:12:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:58:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,16 @@ void	swap_floats(float *a, float *b)
 	*b = c;
 }
 
-void	draw_triangle(void *mlx, t_point a, t_point b, t_point c)
+void	draw_triangle(void *mlx, t_triangle t)
 {
-	draw_line((t_mlx*)mlx, a, b, 0xffffff);
-	draw_line((t_mlx*)mlx, a, c, 0xffffff);
-	draw_line((t_mlx*)mlx, b, c, 0xffffff);
+	t_point		a;
+	t_point		b;
+	t_point		c;
+
+	a = (t_point){t.points[0].x, t.points[0].y};
+	b = (t_point){t.points[1].x, t.points[1].y};
+	c = (t_point){t.points[2].x, t.points[2].y};
+	draw_line((t_mlx*)mlx, a, b, t.color);
+	draw_line((t_mlx*)mlx, a, c, t.color);
+	draw_line((t_mlx*)mlx, b, c, t.color);
 }

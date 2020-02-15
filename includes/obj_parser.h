@@ -46,10 +46,13 @@ struct	s_mesh
 	t_dynarray	tris;
 	t_dynarray	txts;
 	t_dynarray	faces;
+	t_vec3d		new_pos;
+	t_vec3d		pos;
 	float		yaw;
 	float		pitch;
 	float		roll;
 	bool		textured;
+	bool		phy;
 	char		*name;
 	int			nb_tris;
 };

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 02:05:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/15 03:33:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ void	*rasthreader(void *param)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
 //		if (t->textured)
-		fill_triangle_texture((t_env*)thr->env, *t);
+//		fill_triangle_texture((t_env*)thr->env, *t);
 //		else
 //		fill_triangle_unit((t_env*)thr->env, *t, shade_color(0xffffff, t->illum));
-		draw_triangle(&env->mlx,
-			(t_point){t->points[0].x, t->points[0].y},
-			(t_point){t->points[1].x, t->points[1].y},
-			(t_point){t->points[2].x, t->points[2].y});
+		draw_triangle(&env->mlx, *t);
 		thr->index++;
 	}
 	thr->done = true;
@@ -59,10 +56,10 @@ void	monothread_raster(void *e)
 
 int		rasterizer(t_env *env, int scene)
 {
-	int			i;
-	int			j;
 	t_mesh		*m;
 	t_triangle	t;
+	int			i;
+	int			j;
 
 	i = 0;
 	compute_view_matrice(env);
