@@ -16,8 +16,6 @@ int		new_mesh(t_map *map, char **toks)
 		|| init_dynarray(&m->faces, sizeof(t_face), 0))
 		return (-1);
 	map->nmesh++;
-	// ajouter un mesh a map->meshs et initialiser
-	// ses tableaux dynamiques de vertexs et de faces
 	return (0);
 }
 
@@ -61,9 +59,6 @@ int		new_face(t_map *map, char **toks)
 
 	if (ft_tablen(toks) != 4 || load_face(toks, map, &face))
 		return (-1);
-	//face.x = ft_atoi(toks[1]);
-	//face.y = ft_atoi(toks[2]);
-	//face.z = ft_atoi(toks[3]);
 	if (!(m = dyacc(&map->meshs, map->nmesh - 1))
 		|| push_dynarray(&m->faces, &face, false))
 		return (-1);
@@ -78,6 +73,28 @@ int		vertex_end(t_map *map, char **toks)
 }
 
 int		comment(t_map *map, char **toks)
+{
+	(void)map;
+	(void)toks;
+	return (0);
+}
+
+int		mtllib(t_map *map, char **toks)
+{
+	t_mesh		*m;
+	t_mtl		mtl;
+
+	if (ft_tablen(toks) != 2 || (map->mtls.nb_cells == 0
+		&& init_dynarray(&map->mtls, sizeof(t_mtl), 1))
+		|| !(m = dyacc(&map->meshs, map->nmesh - 1)))
+		return (-1);
+	else if (parse_mtl(toks[1]) || push_dynarray(&map->mtls, &mtl, false))
+		return (-1);
+	m->mtl = true;
+	return (0);
+}
+
+int		usemtl(t_map *map, char **toks)
 {
 	(void)map;
 	(void)toks;

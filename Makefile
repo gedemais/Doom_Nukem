@@ -42,6 +42,7 @@ SRCS_NAME=	main.c\
 			obj_parser/lines_fts.c\
 			obj_parser/check_formats.c\
 			obj_parser/parse_map.c\
+			obj_parser/parse_mtl.c\
 			obj_parser/states.c\
 			obj_parser/read_file.c\
 			\

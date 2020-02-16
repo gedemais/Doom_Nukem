@@ -11,6 +11,7 @@ Todo:
 Securiser le parser d'obj
 Restaurer fill_triangle_unit
 Modeliser 42
+Fermer les fd
 
 Idees:
 Animation des boutons et du logo synchro sur un drop de metal a l'ecran titre

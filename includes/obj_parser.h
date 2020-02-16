@@ -27,7 +27,8 @@ enum	e_scene_id
 
 struct	s_mtl
 {
-	int	color;
+	char	*name;
+	int		color;
 };
 
 struct	s_face
@@ -61,6 +62,7 @@ struct	s_mesh
 	float		pitch;
 	float		roll;
 	bool		textured;
+	bool		mtl;
 	bool		phy;
 	char		*name;
 	int			nb_tris;
@@ -71,6 +73,7 @@ struct	s_map
 	t_dynarray		meshs;
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
+	t_dynarray		mtls;
 	int				nmesh;
 };
 
@@ -93,11 +96,22 @@ int					load_face(char **toks, t_map *map, t_face *face);
 bool				check_float(char *tok);
 bool				check_number(char *tok);
 
+/*
+** Lines functions
+*/
 int					new_mesh(t_map *map, char **toks);
 int					new_vertex(t_map *map, char **toks);
 int					new_txt_vertex(t_map *map, char **toks);
 int					new_face(t_map *map, char **toks);
 int					vertex_end(t_map *map, char **toks);
 int					comment(t_map *map, char **toks);
+int					mtllib(t_map *map, char **toks);
+int					usemtl(t_map *map, char **toks);
+
+/*
+** Materials
+*/
+int					parse_mtl(char *file_name);
+int					get_material_color(t_mesh *m);
 
 #endif

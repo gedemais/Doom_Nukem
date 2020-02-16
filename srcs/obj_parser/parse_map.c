@@ -25,8 +25,9 @@ static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX
 
 static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MAX][PS_MAX])
 {
-	int				(*lines_fts[PS_MAX])(t_map*, char**) = {new_mesh,
-						new_vertex, new_txt_vertex, vertex_end, new_face, comment};
+	int				(*lines_fts[PS_MAX])(t_map*, char**) = {
+					new_mesh, new_vertex, new_txt_vertex, vertex_end, new_face,
+					comment, mtllib, usemtl};
 	unsigned int	j;
 
 	j = 0;
@@ -74,6 +75,9 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 	}
 	else
 		new->textured = false;
+	if (m->mtl)
+		new->color = get_material_color(m);
+
 }
 
 static int	load_map_data(t_map *map)

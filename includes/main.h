@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 03:15:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/16 05:10:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include "obj_parser.h"
 # include "raster.h"
 # include "phy.h"
-# include "bmp.h"
+# include "sprites.h"
 
 # include "title_screen.h"
 # include "campaign.h"
