@@ -1,8 +1,9 @@
 #include "dynarray.h"
+#include "stdio.h"
 
 void		*dyacc(t_dynarray *arr, int index)
 {
-	if (index >= arr->nb_cells || index < 0)
+	if (index > arr->nb_cells || index < 0)
 		return (NULL);
 	return ((void*)(arr->c + (index * arr->cell_size)));
 }

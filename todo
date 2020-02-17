@@ -1,8 +1,8 @@
-
 Fix:
 le straff inverse en y
 souris vers le bas
 loop_sample
+Lignes horizontales
 
 Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
@@ -12,6 +12,5 @@ Securiser le parser d'obj
 Restaurer fill_triangle_unit
 Modeliser 42
 Fermer les fd
-
-Idees:
-Animation des boutons et du logo synchro sur un drop de metal a l'ecran titre
+Recoder un atof
+Faire une fonction parse_error

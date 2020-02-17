@@ -81,15 +81,25 @@ int		comment(t_map *map, char **toks)
 
 int		mtllib(t_map *map, char **toks)
 {
-	t_mesh		*m;
-	t_mtl		mtl;
+	t_dynarray		mtl;
+	t_mesh			*m;
+	unsigned int	i;
 
-	if (ft_tablen(toks) != 2 || (map->mtls.nb_cells == 0
-		&& init_dynarray(&map->mtls, sizeof(t_mtl), 1))
-		|| !(m = dyacc(&map->meshs, map->nmesh - 1)))
+	i = 0;
+	if (ft_tablen(toks) != 2 || (map->mtls.byte_size == 0
+		&& init_dynarray(&map->mtls, sizeof(t_mtl), 2)))
 		return (-1);
-	else if (parse_mtl(toks[1]) || push_dynarray(&map->mtls, &mtl, false))
+	if (!(m = dyacc(&map->meshs, (map->nmesh > 0 ? map->nmesh - 1 : 0))))
 		return (-1);
+	if (parse_mtl(toks[1], &mtl))
+		return (-1);
+	while (i < (unsigned)mtl.nb_cells)
+	{
+		if (push_dynarray(&map->mtls, dyacc(&mtl, i), false))
+			return (-1);
+		i++;
+	}
+	free_dynarray(&mtl);
 	m->mtl = true;
 	return (0);
 }

@@ -2,7 +2,21 @@
 # define OBJ_PARSER_H
 
 # define BUFF_READ 4194304
-# define NB_LINE_TYPES 8
+
+enum	e_mtl
+{
+	MTL_COMMENT,
+	MTL_NEW,
+	MTL_NS,
+	MTL_KA,
+	MTL_KD,
+	MTL_KS,
+	MTL_KE,
+	MTL_NI,
+	MTL_D,
+	MTL_ILLUM,
+	MTL_MAX
+};
 
 enum	e_pstate
 {
@@ -81,6 +95,7 @@ struct	s_parser
 {
 	char			**lines;
 	char			**toks;
+	char			*file;
 	char			state;
 	char			tstate;
 	int				tri;
@@ -89,7 +104,7 @@ struct	s_parser
 
 char				*read_file(int fd);
 char				*maps_paths(unsigned int index);
-void				init_states(char states[NB_LINE_TYPES][NB_LINE_TYPES]);
+void				init_states(char states[PS_MAX][PS_MAX]);
 int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);
 int					load_face(char **toks, t_map *map, t_face *face);
 
@@ -111,7 +126,12 @@ int					usemtl(t_map *map, char **toks);
 /*
 ** Materials
 */
-int					parse_mtl(char *file_name);
+int					parse_mtl(char *file_name, t_dynarray *mtls);
 int					get_material_color(t_mesh *m);
+
+
+int					mtl_new(char **toks, t_dynarray *mtl);
+int					mtl_color(char **toks, t_dynarray *mtl);
+int					mtl_alpha(char **toks, t_dynarray *mtl);
 
 #endif

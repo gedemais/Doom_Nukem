@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/16 05:10:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/17 04:44:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@
 # include "custom.h"
 # include "map_editor.h"
 
+// TMP
+#define PUT ft_putstr("There\n"); fflush(stdout);
+#define PUT1 ft_putstr("There1\n"); fflush(stdout);
+#define PUT2 ft_putstr("There2\n"); fflush(stdout);
+#define PUT3 ft_putstr("There3\n"); fflush(stdout);
+#define PUT4 ft_putstr("There4\n"); fflush(stdout);
+#define PUT5 ft_putstr("There5\n"); fflush(stdout);
+#define PUT6 ft_putstr("There6\n"); fflush(stdout);
+#define PUT7 ft_putstr("There7\n"); fflush(stdout);
+#define PUT8 ft_putstr("There8\n"); fflush(stdout);
+#define PUT9 ft_putstr("There9\n"); fflush(stdout);
+
 
 # define NB_THREADS 16
 # define WDT 1080
@@ -53,8 +65,8 @@ enum		e_context_id
 	C_DEV,
 	C_TITLE_SCREEN,
 	C_CAMPAIGN,
-	C_CUSTOM,
 	C_MAP_EDITOR,
+	C_SURVIVE,
 	C_MAX
 };
 

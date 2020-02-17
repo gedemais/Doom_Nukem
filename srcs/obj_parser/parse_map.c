@@ -112,36 +112,47 @@ static int	load_map_data(t_map *map)
 	return (0);
 }
 
-int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
+static int	init_map_parser(t_map *map, t_parser *parser, char *path, char states[PS_MAX][PS_MAX])
 {
-	t_parser		parser;
-	char			*file;
-	int				fd;
 	unsigned int	i;
+	int				fd;
 
 	i = 0;
 	map->nmesh = 0;
 	if ((fd = open(path, O_RDONLY)) == -1
-		|| !(file = read_file(fd))
-		|| !(parser.lines = ft_strsplit(file, "\n"))
+		|| !(parser->file = read_file(fd))
+		|| !(parser->lines = ft_strsplit(parser->file, "\n"))
 		|| init_dynarray(&map->pool, sizeof(t_vec3d), 0)
 		|| init_dynarray(&map->txt_pool, sizeof(t_vec2d), 0)
 		|| init_dynarray(&map->meshs, sizeof(t_mesh), 0))
 		return (-1);
-	parser.state = PS_COMMENT;
-	while (parser.lines[i] && parser.state == PS_COMMENT)
+	parser->state = PS_COMMENT;
+	while (parser->lines[i] && parser->state == PS_COMMENT)
 	{
-		if (parse_line(&parser, map, i, states))
+		if (parse_line(parser, map, i, states))
 			return (-1);
 		i++;
 	}
-	if (!parser.lines[i] || parser.state != PS_OBJ)
+	if (!parser->lines[i]
+		|| (parser->state != PS_OBJ && parser->state != PS_MTLLIB))
+		return (-1);
+	return (0);
+}
+
+int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
+{
+	t_parser		parser;
+	unsigned int	i;
+
+	i = 0;
+	if (init_map_parser(map, &parser, path, states))
 		return (-1);
 	while (parser.lines[i])
 	{
+		//printf("|%s|\n", parser.lines[i]);
 		if (parse_line(&parser, map, i, states))
 		{
-			printf("line %d\n", i);
+		//	printf("line %d\n", i);
 			return (-1);
 		}
 		i++;
@@ -149,6 +160,6 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 	if (load_map_data(map))
 		return (-1);
 	ft_free_ctab(parser.lines);
-	free(file);
+	free(parser.file);
 	return (0);
 }
