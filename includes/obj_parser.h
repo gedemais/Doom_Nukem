@@ -42,7 +42,8 @@ enum	e_scene_id
 struct	s_mtl
 {
 	char	*name;
-	int		color;
+	unsigned char	color[4];
+	float	alpha;
 };
 
 struct	s_face
@@ -53,6 +54,7 @@ struct	s_face
 	int				tx;
 	int				ty;
 	int				tz;
+	int				color;
 };
 
 struct	s_triangle
@@ -61,6 +63,7 @@ struct	s_triangle
 	t_vec2d		txt[3];
 	float		illum;
 	int			color;
+	float		alpha;
 	bool		textured;
 	void		*mesh;
 };
@@ -76,7 +79,6 @@ struct	s_mesh
 	float		pitch;
 	float		roll;
 	bool		textured;
-	bool		mtl;
 	bool		phy;
 	char		*name;
 	int			nb_tris;
@@ -88,6 +90,7 @@ struct	s_map
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;
+	int				cmtl;
 	int				nmesh;
 };
 

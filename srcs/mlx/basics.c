@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 02:40:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/18 04:03:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void		draw_pixel(char *img, int x, int y, int color)
 	if (x < 0 || x >= WDT || y < 0 || y >= HGT)
 		return ;
 	*(int*)&img[pos] = color;
-	img[pos + 3] = *alpha_val();
+//	img[pos + 3] = *alpha_val();
 }

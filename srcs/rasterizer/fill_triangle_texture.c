@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 21:12:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/18 05:02:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
-		if (txt->ax == txt->bx && ++i)
-			continue ;
 		draw_triangle_line(env, txt, t, i);
 		i++;
 	}
@@ -85,8 +83,6 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
-		if (txt->ax == txt->bx && ++i)
-			continue ;
 		draw_triangle_line(env, txt, t, i);
 		i++;
 	}
@@ -99,7 +95,9 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 	txt = (t_texturizer){};
 	starting_swap(&t);
 	compute_gradients(&txt, t, false);
-	flattop(env, &txt, t);
+	if (txt.dy2)
+		flattop(env, &txt, t);
 	compute_gradients(&txt, t, true);
-	flatbot(env, &txt, t);
+	if (txt.dy1)
+		flatbot(env, &txt, t);
 }

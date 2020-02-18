@@ -1,16 +1,48 @@
 Fix:
-le straff inverse en y
 souris vers le bas
-loop_sample
-Lignes horizontales
 
 Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
+Synchroniser le drop et l'apparition du logo sur le title screen
 
 Todo:
-Securiser le parser d'obj
-Restaurer fill_triangle_unit
-Modeliser 42
-Fermer les fd
-Recoder un atof
-Faire une fonction parse_error
+	blender:
+		Finir de modeliser 42
+		Sadirac
+		Monstres
+		Armes
+		Talkie-Walkie
+		Grotte avec lac de lave
+
+	obj_parser:
+		Securiser le parser
+		Faire une fonction parse_error
+	rasterizer:
+		Restaurer fill_triangle_unit
+		Fix les lignes horizontales
+	OpenAL:
+		Faire un vrai sound system avec une data structure adaptee
+		Choper et compiler les sources d'OpenAL dans le Makefile
+	Autres:
+		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
+		Recoder un atof
+		Fermer les fd
+
+Scenario :
+Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque
+extraterrestre et vous etes seul, blesse, et enferme dans le labelec. Vous trouvez
+la note d'un gars expliquant qu'il vous a mis la pour vous sauver la vie
+en voyant que vous etiez blesse. A cote de la note, vous trouvez un talkie,
+a travers lequel un homme s'identifie comme l'auteur de la lettre, et vous
+offre son aide en vous guidant dans l'ecole grace aux cameras de surveillance.
+Il vous revele egalement l'emplacement d'un pistolet et d'un couteau dans le lab.
+Vous sortez du lab et vous rendez en E1 sur les conseils de votre interlocuteur,
+afin de trouver la cle de l'ascenswag. Il faudra nettoyer tous les clusters, de
+l'E1 a l'E3 (niveaux) pour finalement trouver la carte d'un tuteur, vous donnant
+acces au bocal (easter egg) pour trouver la cle de l'ascenswag. Une fois dans
+l'ascenswag, l'homme vous indique une sequence de boutons qui vous fait descendre
+a l'etage -420. L'ascenseur s'ouvre sur une grotte avec un lac de lave traverse
+par un petit pont en bois, endommage par les aliens si vous ne les tuez pas.
+Une fois sur l'autre rive, vous passez une porte et l'homme vous annonce au
+talkie que vous avez fait une grave erreur en venant ici. Sadirac apparait
+(boss final).

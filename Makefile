@@ -23,6 +23,7 @@ SRCS_NAME=	main.c\
 			play_sound.c\
 			resources_paths.c\
 			setup.c\
+			singletons.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
@@ -90,7 +91,21 @@ SRCS_NAME=	main.c\
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
-INCS_NAME=main.h
+INCS_NAME=	main.h\
+			campaign.h\
+			custom.h\
+			errors.h\
+			keys.h\
+			main.h\
+			map_editor.h\
+			obj_parser.h\
+			phy.h\
+			raster.h\
+			sound.h\
+			sprites.h\
+			title_screen.h\
+			typedefs.h
+
 INCS_PATH=includes/
 INCS=$(addprefix $(INCS_PATH), $(INCS_NAME))
 

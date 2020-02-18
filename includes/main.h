@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/17 04:44:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:16:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,11 @@ int				mouse_press_dev(int button, int x, int y, void *param);
 int				mouse_release_dev(int button, int x, int y, void *param);
 int				mouse_position_dev(int x, int y, void *param);
 int				render_dev(void *param);
+
+/*
+** Singletons
+*/
+bool			*init_parser(void);
 
 
 #endif

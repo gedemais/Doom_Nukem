@@ -7,6 +7,7 @@ int		new_mesh(t_map *map, char **toks)
 	unsigned int	i;
 
 	i = 1;
+	map->cmtl = -1;
 	if (ft_tablen(toks) != 2)
 		return (-1);
 	if (push_dynarray(&map->meshs, &zone[0], false)
@@ -56,9 +57,18 @@ int		new_face(t_map *map, char **toks)
 {
 	t_face			face;
 	t_mesh			*m;
+	t_mtl			*mtl;
 
 	if (ft_tablen(toks) != 4 || load_face(toks, map, &face))
 		return (-1);
+	if (map->cmtl >= 0)
+	{
+		if (!(mtl = dyacc(&map->mtls, map->cmtl)))
+			return (-1);
+		mtl->color[3] = (1.0f - mtl->alpha) * 255;
+		face.color = mtl->color[0] * 65536 + mtl->color[1] * 256;
+		face.color += mtl->color[2] + mtl->color[3];
+	}
 	if (!(m = dyacc(&map->meshs, map->nmesh - 1))
 		|| push_dynarray(&m->faces, &face, false))
 		return (-1);
@@ -81,32 +91,36 @@ int		comment(t_map *map, char **toks)
 
 int		mtllib(t_map *map, char **toks)
 {
-	t_dynarray		mtl;
-	t_mesh			*m;
 	unsigned int	i;
 
 	i = 0;
+	if (*init_parser())
+		return (0);
 	if (ft_tablen(toks) != 2 || (map->mtls.byte_size == 0
 		&& init_dynarray(&map->mtls, sizeof(t_mtl), 2)))
 		return (-1);
-	if (!(m = dyacc(&map->meshs, (map->nmesh > 0 ? map->nmesh - 1 : 0))))
+	if (parse_mtl(toks[1], &map->mtls))
 		return (-1);
-	if (parse_mtl(toks[1], &mtl))
-		return (-1);
-	while (i < (unsigned)mtl.nb_cells)
-	{
-		if (push_dynarray(&map->mtls, dyacc(&mtl, i), false))
-			return (-1);
-		i++;
-	}
-	free_dynarray(&mtl);
-	m->mtl = true;
 	return (0);
 }
 
 int		usemtl(t_map *map, char **toks)
 {
-	(void)map;
-	(void)toks;
-	return (0);
+	t_mtl	*m;
+	int		i;
+
+	i = 0;
+	if (ft_tablen(toks) != 2)
+		return (-1);
+	while (i < map->mtls.nb_cells)
+	{
+		if ((m = dyacc(&map->mtls, i)) && !ft_strcmp(toks[1], m->name))
+		{
+			map->cmtl = i;
+			return (0);
+		}
+		i++;
+	}
+	map->cmtl = -1;
+	return (-1);
 }

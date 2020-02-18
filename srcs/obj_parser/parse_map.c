@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
+/*   Updated: 2020/02/18 04:38:46 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX])
@@ -74,9 +86,11 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 		new->textured = true;
 	}
 	else
+	{
 		new->textured = false;
-	if (m->mtl)
-		new->color = get_material_color(m);
+		if (map->mtls.nb_cells > 0)
+			new->color = f->color;
+	}
 
 }
 
@@ -102,7 +116,7 @@ static int	load_map_data(t_map *map)
 				return (-1);
 
 			access_faces(&new, map, f, m);
-			new.color = 0xffffff;
+//			new.color = 0xffffff;
 
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
@@ -145,21 +159,23 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 	unsigned int	i;
 
 	i = 0;
+
+	*init_parser() = true;
 	if (init_map_parser(map, &parser, path, states))
 		return (-1);
+	*init_parser() = false;
+
 	while (parser.lines[i])
 	{
-		//printf("|%s|\n", parser.lines[i]);
+//		printf("%s\n", parser.lines[i]);
 		if (parse_line(&parser, map, i, states))
-		{
-		//	printf("line %d\n", i);
 			return (-1);
-		}
 		i++;
 	}
 	if (load_map_data(map))
 		return (-1);
 	ft_free_ctab(parser.lines);
 	free(parser.file);
+//	exit(0);
 	return (0);
 }
