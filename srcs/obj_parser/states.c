@@ -41,7 +41,7 @@ void	init_states(char states[PS_MAX][PS_MAX])
 	states[PS_FACES][PS_OBJ] = 1;
 	states[PS_FACES][PS_VERTEXS] = 0;
 	states[PS_FACES][PS_TXT_VERTEXS] = 1;
-	states[PS_FACES][PS_END_VERTEXS] = 0;
+	states[PS_FACES][PS_END_VERTEXS] = 1;
 	states[PS_FACES][PS_FACES] = 1;
 	states[PS_FACES][PS_COMMENT] = 1;
 	states[PS_FACES][PS_MTLLIB] = 0;

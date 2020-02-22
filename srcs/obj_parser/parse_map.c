@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/18 04:38:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/20 00:37:31 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MA
 	j = 0;
 	if (!(p->toks = ft_strsplit(p->lines[i], "\n\t\r "))
 		|| get_line_type(p->toks[0], p, states))
+	{
+		printf("Line %d\n", i);
 		return (-1);
+	}
 	if (p->state == PS_COMMENT)
 		return (0);
 	if (lines_fts[(int)p->state](map, p->toks))

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 04:35:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/18 18:22:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
 {
-	(void)rest;
 	thread->env = env;
 	thread->tris = &env->cam.to_raster;
 	thread->start = thread->id * part;
