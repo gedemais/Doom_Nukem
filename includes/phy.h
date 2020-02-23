@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 02:16:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 19:43:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 struct	s_corp
 {
 	t_vec3d		pos;
-	float		box_size;
+	t_vec3d		o;
+	t_vec3d		dims;
 };
 
 struct	s_collide
@@ -35,6 +36,7 @@ struct	s_physics
 
 int		physic_engine(t_env *env);
 int		init_physic_engine(t_env *env);
+int		init_bounding_box(t_mesh *m);
 int		report_collisions(t_env *env);
 
 void	translate_mesh(t_mesh *m, t_vec3d t);

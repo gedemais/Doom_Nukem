@@ -107,8 +107,8 @@ int		render_dev(void *param)
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
 	ft_memset(env->cam.z_buffer, 0, env->data.data_size);
 	camera(env);
-	translate_mesh(dyacc(&env->maps[env->scene].meshs, 1), (t_vec3d){0, 0, -0.01f, 0});
-	physic_engine(env);
+//	translate_mesh(dyacc(&env->maps[env->scene].meshs, 1), (t_vec3d){0, 0, -0.01f, 0});
+//	physic_engine(env);
 	rasterizer(env, env->scene);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");

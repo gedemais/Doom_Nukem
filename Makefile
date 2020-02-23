@@ -49,6 +49,7 @@ SRCS_NAME=	main.c\
 			obj_parser/read_file.c\
 			\
 			physic_engine/init_engine.c\
+			physic_engine/init_bounding_boxs.c\
 			physic_engine/engine.c\
 			physic_engine/report_collisions.c\
 			physic_engine/move_mesh.c\
