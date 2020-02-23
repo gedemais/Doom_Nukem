@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 20:58:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 21:32:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		init_mesh_physics(t_mesh *m)
 {
 	if (set_mesh_position(m) || init_bounding_box(m))
 		return (-1);
-	printf("%s | pos : %f %f %f | dims = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z);
+	printf("%s | pos : %f %f %f | origin : %f %f %f | dims = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.o.x, m->corp.o.y, m->corp.o.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z);
 	return (0);
 }
 
