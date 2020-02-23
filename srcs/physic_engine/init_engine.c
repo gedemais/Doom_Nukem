@@ -6,14 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 04:05:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 02:30:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-
-static int		set_mesh_position(t_mesh *m)
+static void		set_mesh_position(t_mesh *m)
 {
 	t_vec3d		average;
 	t_triangle	*t;
@@ -23,21 +22,44 @@ static int		set_mesh_position(t_mesh *m)
 	average = (t_vec3d){0, 0, 0, 0};
 	while (i < m->tris.nb_cells)
 	{
-		if (!(t = dyacc(&m->tris, i)))
-			return (-1);
+		t = dyacc(&m->tris, i);
 		average = vec_add(average, t->points[0]);
 		average = vec_add(average, t->points[1]);
 		average = vec_add(average, t->points[2]);
 		i++;
 	}
-	m->pos = vec_fdiv(average, (float)i);
-	return (0);
+	m->corp.pos = vec_fdiv(average, (float)i);
+}
+
+static void		get_box_size(t_mesh *m)
+{
+	t_triangle	*t;
+	float		max;
+	float		d;
+	int			i;
+	int			j;
+
+	i = 0;
+	max = 0.0f;
+	while (i < m->tris.nb_cells)
+	{
+		j = 0;
+		t = dyacc(&m->tris, i);
+		while (j < 3)
+		{
+			if ((d = vec_sdist(m->corp.pos, t->points[j])) > max)
+				max = d;
+			j++;
+		}
+		i++;
+	}
+	m->corp.box_size = max;
 }
 
 static int		init_mesh_physics(t_mesh *m)
 {
-	if (set_mesh_position(m))
-		return (-1);
+	set_mesh_position(m);
+	get_box_size(m);
 	return (0);
 }
 
@@ -59,7 +81,7 @@ int		init_physic_engine(t_env *env)
 	{
 		loading_bar(i, SCENE_MAX, false);
 		j = 0;
-		while (j < env->maps[i].nmesh)
+		while (j < env->maps[i].nmesh - 1)
 		{
 			if (!(m = dyacc(&env->maps[i].meshs, j)) || init_mesh_physics(m))
 				return (-1);

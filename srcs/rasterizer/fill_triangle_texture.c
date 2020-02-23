@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/22 03:27:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/22 20:54:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 	float			tx;
 	float			sub_tx;
 
-	j = txt->ax;
 	tx = 0.0f;
-	if (txt->ax == txt->bx)
-		return ;
-	txt->t_step = 1.0f / (float)(txt->bx - txt->ax);
+	j = txt->ax;
+	txt->t_step = 1.0f / (txt->bx - txt->ax);
 	while (j < txt->bx)
 	{
 		sub_tx = 1.0f - tx;
@@ -67,8 +65,8 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 	int		i;
 
 	i = t.points[0].y;
-	//printf("------------flattop------------------\n");
-	while (i < t.points[1].y)
+	//printf("flattop\n");
+	while (i <= t.points[1].y)
 	{
 		set_line_bounds_top(txt, t, fabs(i - t.points[0].y));
 		txt->txt_u = txt->txt_su;
@@ -83,9 +81,9 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	int		i;
 
-	i = t.points[1].y;
-//	printf("------------flatbot------------------\n");
-	while (i < t.points[2].y)
+	i = t.points[1].y ;
+//	printf("flatbot\n");
+	while (i <= t.points[2].y)
 	{
 		set_line_bounds_bot(txt, t, (float[2]){fabs(i - t.points[0].y), fabs(i - t.points[1].y)});
 		txt->txt_u = txt->txt_su;
@@ -106,6 +104,5 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 	if (txt.dy1)
 		flattop(env, &txt, t);
 	compute_gradients(&txt, t, true);
-	if (txt.dy1)
-		flatbot(env, &txt, t);
+	flatbot(env, &txt, t);
 }

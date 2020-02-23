@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:53:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 05:11:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 02:29:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	translate_mesh(t_mesh *m, t_vec3d t)
 		tri->points[2] = vec_add(tri->points[2], t);
 		i++;
 	}
+	m->corp.pos = vec_add(m->corp.pos, t);
 }

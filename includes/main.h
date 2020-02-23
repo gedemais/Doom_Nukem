@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/18 21:07:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 00:15:46 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # include "errors.h"
 # include "keys.h"
 # include "sound.h"
+# include "phy.h"
 # include "obj_parser.h"
 # include "raster.h"
-# include "phy.h"
 # include "sprites.h"
 
 # include "title_screen.h"

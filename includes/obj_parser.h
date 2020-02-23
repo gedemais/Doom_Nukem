@@ -74,7 +74,7 @@ struct	s_mesh
 	t_dynarray	txts;
 	t_dynarray	faces;
 	t_vec3d		new_pos;
-	t_vec3d		pos;
+	t_corp		corp;
 	float		yaw;
 	float		pitch;
 	float		roll;

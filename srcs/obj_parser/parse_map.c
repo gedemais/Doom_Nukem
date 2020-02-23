@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/20 00:37:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/23 01:00:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
 		new->textured = false;
 		if (map->mtls.nb_cells > 0)
 			new->color = f->color;
+		else
+			new->color = 0xffffff;
 	}
 
 }
