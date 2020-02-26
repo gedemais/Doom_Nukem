@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/14 03:25:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:09:04 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	r = (t_vec3d){f.z, 0, -f.x, f.w};
 
 	if (keys[KEY_W])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
-	if (keys[KEY_S])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, f);
-	if (keys[KEY_A])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, r);
-	if (keys[KEY_D])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, r);
+		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
+	if (keys[KEY_S])                                                       
+		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
+	if (keys[KEY_A])                                                        
+		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
+	if (keys[KEY_D])                                                        
+		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
 
 static void	handle_keys(t_env *env, t_events *e)

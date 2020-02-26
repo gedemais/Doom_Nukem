@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 19:42:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/25 19:29:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:27:13 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int		init_bounding_box(t_mesh *m)
 {
 	if (get_box_dims(m))
 		return (-1);
-	m->corp.o = vec_sub(m->corp.pos, m->corp.dims);
+	m->corp.o = vec_sub(m->corp.pos, vec_fdiv(m->corp.dims, 2.0f));
 	return (0);
 }

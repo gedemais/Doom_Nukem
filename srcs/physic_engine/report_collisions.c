@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:00:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/25 19:12:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:01:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static bool	check_collision(t_dynarray *meshs, int i, int j, t_collide *c)
 	b = dyacc(meshs, j);
 	c->a = a;
 	c->b = b;
-	printf("%s (%f %f %f) <-> %s (%f %f %F)\n", c->a->name, c->a->corp.pos.x, c->a->corp.pos.y, c->a->corp.pos.z, c->b->name, c->b->corp.pos.x, c->b->corp.pos.y, c->b->corp.pos.z);
-	fflush(stdout);
+//	printf("%s (%f %f %f) <-> %s (%f %f %F)\n", c->a->name, c->a->corp.pos.x, c->a->corp.pos.y, c->a->corp.pos.z, c->b->name, c->b->corp.pos.x, c->b->corp.pos.y, c->b->corp.pos.z);
+//	fflush(stdout);
 	return (aabb_collision(a->corp.o, b->corp.o, a->corp.dims, b->corp.dims));
 }
 
@@ -54,7 +54,7 @@ int			report_collisions(t_env *env)
 		j = 0;
 		while (j < env->maps[env->scene].nmesh)
 		{
-			if (i != j && check_collision(&env->maps[env->scene].meshs, 
+			if (i != j && check_collision(&env->maps[env->scene].meshs,
 				i, j, &c) && push_dynarray(&env->phy_env.collides, &c, false))
 				return (-1);
 			j++;
