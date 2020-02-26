@@ -28,7 +28,7 @@ static void	init_buttons_cmp(t_env *env)
 		(t_point){76 + j * 300, 568},
 		(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
 		j++;
-		i++;
+		i += 3;
 	}
 }
 

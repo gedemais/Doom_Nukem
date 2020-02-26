@@ -25,12 +25,10 @@ static int				handle_events_cp(t_env *env)
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
-//				if (i == TS_BUTTON_CAMPAIGN) //
-//					switch_context(env, C_DEV);// Provisoire
-				if (i == TS_BUTTON_QUIT)
-					exit(EXIT_SUCCESS);
-				else
-					switch_context(env, i + 2);
+				if (i == CMP_BTN_MMENU)
+					switch_context(env, C_TITLE_SCREEN);
+				else if (i == CMP_BTN_NWG)
+					switch_context(env, C_DEV);
 				clic = false;
 				return (1);
 			}
@@ -97,6 +95,9 @@ int		render_camp(void *param)
 	handle_events_cp(env);	
 	blit_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0}, 1.0f);
 	blit_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0}, 1.0f);
+//	blit_sprite(env->mlx.img_data, env->sprites[SP_CP_BUTTON_2C], (t_point){0, 0}, 1.0f);
+//	blit_sprite(env->mlx.img_data, env->sprites[SP_CP_BUTTON_2O], (t_point){0, 0}, 1.0f);
+//	blit_sprite(env->mlx.img_data, env->sprites[SP_CP_BUTTON_2H], (t_point){0, 0}, 1.0f);
 	render_buttons_cp(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
