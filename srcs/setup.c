@@ -24,6 +24,8 @@ static int		init_contexts(t_env *env)
 {
 	if (setup_ts(env))
 		return (-1);
+	if (setup_cmp(env))
+	   return(-1);	// = > t_cmpenv 
 	return (0);
 }
 
@@ -34,6 +36,7 @@ int				setup(t_env *env)
 		|| init_contexts(env) || init_physic_engine(env)
 		|| init_camera(&env->cam))
 		return (-1);
+	
 	load_values(env, &env->data);
 //	play_ambience(env->sound.samples[SA_AMB_1], true, false);
 	return (0);

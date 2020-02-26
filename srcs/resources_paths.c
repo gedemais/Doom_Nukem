@@ -26,7 +26,13 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/quit_off.XPM",
 					"resources/sprites/ts_background.XPM",
 					"resources/sprites/logo.XPM",
-					"resources/textures/texture.XPM"};
+					"resources/textures/texture.XPM",
+					"resources/sprites/main_txt_loader_campaign.XPM",
+					"resources/sprites/Doom_first_loader.XPM",
+					"resources/sprites/SP_CP_BUTTON_1C.XPM",
+					"resources/sprites/SP_CP_BUTTON_1O.XPM",
+					"resources/sprites/SP_CP_BUTTON_1H.XPM"
+	};
 
 	return (paths[index]);
 }

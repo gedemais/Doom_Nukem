@@ -50,4 +50,9 @@ typedef struct	s_collide t_collide;
 typedef struct	s_corp t_corp;
 typedef struct	s_physics t_physics;
 
+typedef	struct	s_camp_env t_cmpenv;
+typedef struct	s_savecmp t_savecmp;
+
+typedef	struct	s_menu	t_menu;
+
 #endif

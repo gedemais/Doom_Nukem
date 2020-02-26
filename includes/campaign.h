@@ -14,6 +14,36 @@
 # define CAMPAIGN_H
 
 
+
+enum	e_CMP_button_id
+{
+	CMP_BTN_MMENU,
+//	CMP_BUTTON_QUIT,
+	CMP_BUTTON_MAX
+};
+
+/*
+struct				s_menu
+{
+	int		cursor;
+	t_savecmp		save;
+
+}
+
+struct				s_savecmp
+{
+	
+};
+*/
+
+struct				s_camp_env
+{
+	t_env			*env;
+	t_button		buttons[CMP_BUTTON_MAX];
+		
+};
+
+int					setup_cmp(t_env *env);
 int					key_press_camp(int key, void *param);
 int					key_release_camp(int key, void *param);
 int					mouse_press_camp(int button, int x, int y, void *param);

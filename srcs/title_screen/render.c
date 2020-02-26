@@ -13,9 +13,9 @@ int				handle_events(t_env *env)
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
-				if (i == TS_BUTTON_CAMPAIGN) //
-					switch_context(env, C_DEV);// Provisoire
-				else if (i == TS_BUTTON_QUIT)
+//				if (i == TS_BUTTON_CAMPAIGN) //
+//					switch_context(env, C_DEV);// Provisoire
+				if (i == TS_BUTTON_QUIT)
 					exit(EXIT_SUCCESS);
 				else
 					switch_context(env, i + 2);
