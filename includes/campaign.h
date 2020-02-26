@@ -18,7 +18,7 @@
 enum	e_CMP_button_id
 {
 	CMP_BTN_MMENU,
-//	CMP_BUTTON_QUIT,
+	CMP_BTN_NWG,
 	CMP_BUTTON_MAX
 };
 

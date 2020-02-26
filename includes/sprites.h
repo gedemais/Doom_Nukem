@@ -36,6 +36,9 @@ enum	e_sprite_id
 	SP_CP_BUTTON_1C,
 	SP_CP_BUTTON_1H,
 	SP_CP_BUTTON_1O,
+	SP_CP_BUTTON_2C,
+	SP_CP_BUTTON_2H,
+	SP_CP_BUTTON_2O,
 	SP_MAX
 	//cree un titre
 };

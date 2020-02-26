@@ -11,14 +11,7 @@
 /* ************************************************************************** */
 
 #include "main.h"
-/*
-static void	(t_env *data)
-{
-	
 
-
-}
-*/
 static int				handle_events_cp(t_env *env)
 {
 	static bool	clic = false;
@@ -52,11 +45,12 @@ static int				handle_events_cp(t_env *env)
 static void	render_buttons_cp(t_env *env)
 {
 	unsigned int	i;
+//	unsigned int	j;
 
 	i = CMP_BTN_MMENU;
+//	j = 0;
 	while (i < CMP_BUTTON_MAX)
 	{
-		printf("a\n");
 		render_button(env, env->cmp_env.buttons[i], SP_CP_BUTTON_1C);
 		i++;
 	}
@@ -95,7 +89,7 @@ int		render_camp(void *param)
 
 	env = ((t_env*)param);
 
-	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
+//	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
 
 	if (env->events.keys[KEY_M])
 		switch_context(env, C_DEV);
@@ -103,8 +97,6 @@ int		render_camp(void *param)
 	handle_events_cp(env);	
 	blit_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0}, 1.0f);
 	blit_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0}, 1.0f);
-//	blit_sprite(env->mlx.img_data, env->sprites[SP_CP_BUTTON_1O], (t_point){100, 400}, 1.0f);
-	//render_button_cp
 	render_buttons_cp(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

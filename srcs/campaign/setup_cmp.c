@@ -25,9 +25,10 @@ static void	init_buttons_cmp(t_env *env)
 	while (j < CMP_BUTTON_MAX)
 	{
 		init_button(&env->cmp_env.buttons[j],
-		(t_point){100,  300},
+		(t_point){76 + j * 300, 568},
 		(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
 		j++;
+		i++;
 	}
 }
 

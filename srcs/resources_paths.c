@@ -31,7 +31,10 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/Doom_first_loader.XPM",
 					"resources/sprites/SP_CP_BUTTON_1C.XPM",
 					"resources/sprites/SP_CP_BUTTON_1O.XPM",
-					"resources/sprites/SP_CP_BUTTON_1H.XPM"
+					"resources/sprites/SP_CP_BUTTON_1H.XPM",
+					"resources/sprites/SP_CP_BUTTON_2C.XPM",
+					"resources/sprites/SP_CP_BUTTON_2O.XPM",
+					"resources/sprites/SP_CP_BUTTON_2H.XPM"
 	};
 
 	return (paths[index]);
