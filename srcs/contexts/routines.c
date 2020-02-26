@@ -23,7 +23,7 @@ void	ts_to_dev(t_env *env)
 void	ts_to_campaign(t_env *env)
 {
 	(void)env;
-//	mlx_mouse_hide();
+	mlx_mouse_hide();
 }
 
 void	ts_to_custom(t_env *env)

@@ -31,18 +31,12 @@ enum	e_sprite_id
 	SP_TS_BACKGROUND,
 	SP_TS_LOGO,
 	TXT_BLOC_GRASS,
-	SP_TXT_LOADER_CMP,
-	SP_BGD_LOADER_CMP,
-	SP_CP_BUTTON_1C,
-	SP_CP_BUTTON_1H,
-	SP_CP_BUTTON_1O,
 	SP_MAX
-	//cree un titre
 };
 
 struct	s_sprite
 {
-	void			*img_ptr; //
+	void			*img_ptr;
 	char			*img_data;
 	int				hgt;
 	int				wdt;

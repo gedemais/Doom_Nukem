@@ -66,7 +66,6 @@ enum		e_context_id
 	C_TITLE_SCREEN,
 	C_CAMPAIGN,
 	C_MAP_EDITOR,
-	//cree ontext pour sauvegarde
 	C_CUSTOM,
 	C_MAX
 };
@@ -100,7 +99,6 @@ struct			s_data
 struct			s_env
 {
 	t_mlx		mlx;
-	t_cmpenv	cmp_env;
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;

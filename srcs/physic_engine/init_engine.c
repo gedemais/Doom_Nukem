@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 21:32:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:23:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int		set_mesh_position(t_mesh *m)
 		i++;
 	}
 	m->corp.pos = vec_fdiv(average, (float)i);
+	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
 	return (0);
 }
 
@@ -58,7 +59,7 @@ int		init_physic_engine(t_env *env)
 	while (i < SCENE_MAX)
 	{
 //		loading_bar(i, SCENE_MAX, false);
-		printf("Scene %d (%d meshs)\n", i, env->maps[i].nmesh);
+		printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
 		while (j < env->maps[i].nmesh)
 		{

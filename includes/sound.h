@@ -4,6 +4,7 @@
 # include "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/al.h"
 # include "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenAL.framework/Versions/A/Headers/alc.h"
 # include <sndfile.h>
+
 enum	e_sample_id
 {
 	SA_TITLE_SCREEN_S,

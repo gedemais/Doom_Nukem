@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 15:32:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/24 23:09:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 	t_vec3d		line2;
 
 	// Translation
-	t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
-	t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
-	t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
+//	t.points[0] = vec_add(t.points[0], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
+//	t.points[1] = vec_add(t.points[1], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
+//	t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
 
 	//Rotation
 	t.points[0] = matrix_mult_vec(env->cam.w_m, t.points[0]);

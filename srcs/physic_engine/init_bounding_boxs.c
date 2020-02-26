@@ -6,20 +6,41 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 19:42:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 21:26:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:29:56 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
+static void	cmp_xyz(t_vec3d pos, t_vec3d p, t_vec3d *min, t_vec3d *max)
+{
+	if (p.x - pos.x < min->x)
+		min->x = p.x - pos.x;
+	else if (p.x - pos.x > max->x)
+		max->x = p.x - pos.x;
+
+	if (p.y - pos.y < min->y)
+		min->y = p.y - pos.y;
+	else if (p.y - pos.y > max->y)
+		max->y = p.y - pos.y;
+
+	if (p.z - pos.z < min->z)
+		min->z = p.z - pos.z;
+	else if (p.z - pos.z > max->z)
+		max->z = p.z - pos.z;
+}
+
 static int	get_box_dims(t_mesh *m)
 {
 	t_triangle	*t;
+	t_vec3d		min;
+	t_vec3d		max;
 	int			i;
 	int			j;
 
 	i = 0;
-	m->corp.dims = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
+	min = (t_vec3d){INFINITY, INFINITY, INFINITY, INFINITY};
+	max = (t_vec3d){-INFINITY, -INFINITY, -INFINITY, -INFINITY};
 	while (i < m->tris.nb_cells)
 	{
 		j = 0;
@@ -27,16 +48,12 @@ static int	get_box_dims(t_mesh *m)
 			return (-1);
 		while (j < 3)
 		{
-			if (m->corp.pos.x - t->points[j].x > m->corp.dims.x)
-				m->corp.dims.x = m->corp.pos.x - t->points[j].x;
-			if (m->corp.pos.y - t->points[j].y > m->corp.dims.y)
-				m->corp.dims.y = m->corp.pos.y - t->points[j].y;
-			if (m->corp.pos.z - t->points[j].z > m->corp.dims.z)
-				m->corp.dims.z = m->corp.pos.z - t->points[j].z;
+			cmp_xyz(m->corp.pos, t->points[j], &min, &max);
 			j++;
 		}
 		i++;
 	}
+	m->corp.dims = vec_sub(max, min);
 	return (0);
 }
 

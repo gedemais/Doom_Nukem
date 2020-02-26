@@ -49,20 +49,19 @@ void	render_button(void *param, t_button button, unsigned int index)
 
 	env = (t_env*)param;
 	clic = false;
-	(void)index;
 	if (button.is_hover)
 	{
 		if (env->events.buttons[BUTTON_LCLIC])
 		{
-			sprite = button.on;
+			sprite = &env->sprites[index * 3];
 			blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 			clic = true;
 		}
 		else
-			sprite = button.off;
+			sprite = &env->sprites[index * 3 + 1];
 	}
 	else
-		sprite = button.hover;
+		sprite = &env->sprites[index * 3 + 2];
 	if (!clic)
 		blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 }

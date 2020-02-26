@@ -27,7 +27,6 @@ SRCS_NAME=	main.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
-			campaign/setup_cmp.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\
@@ -134,7 +133,7 @@ LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 all: $(NAME)
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -L/usr/local/Cellar/openal-soft/1.20.1/lib -lopenal -L/usr/local/Cellar/libsndfile/1.0.28/lib -lsndfile -lsndfile -lpthread  -framework OpenGL -framework AppKit
+	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) -lsndfile -lpthread -framework OpenAL -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) -o $@ -c $<
