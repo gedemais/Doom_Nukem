@@ -19,6 +19,7 @@ enum	e_CMP_button_id
 {
 	CMP_BTN_MMENU,
 	CMP_BTN_NWG,
+	CMP_BTN_LDG,
 	CMP_BUTTON_MAX
 };
 

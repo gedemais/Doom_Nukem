@@ -25,8 +25,13 @@ static void	init_buttons_cmp(t_env *env)
 	while (j < CMP_BUTTON_MAX)
 	{
 		init_button(&env->cmp_env.buttons[j],
-		(t_point){76 + j * 300, 568},
+		(t_point){76 + j * 300, 588},
 		(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
+		if (j ==CMP_BTN_LDG)
+			init_button(&env->cmp_env.buttons[j],
+			(t_point){76, 500},
+			(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
+		
 		j++;
 		i += 3;
 	}

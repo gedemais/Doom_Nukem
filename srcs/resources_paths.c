@@ -34,7 +34,11 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/SP_CP_BUTTON_1H.XPM",
 					"resources/sprites/SP_CP_BUTTON_2C.XPM",
 					"resources/sprites/SP_CP_BUTTON_2O.XPM",
-					"resources/sprites/SP_CP_BUTTON_2H.XPM"
+					"resources/sprites/SP_CP_BUTTON_2H.XPM",
+					"resources/sprites/SP_CP_BUTTON_3C.XPM",
+					"resources/sprites/SP_CP_BUTTON_3O.XPM",
+					"resources/sprites/SP_CP_BUTTON_3H.XPM"
+
 	};
 
 	return (paths[index]);
