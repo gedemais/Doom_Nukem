@@ -5,6 +5,7 @@ Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
 Synchroniser le drop et l'apparition du logo sur le title screen
 Pixloc sur les fill_triangle
+srcs.mk pour subdiviser les sources
 
 Todo:
 	blender:

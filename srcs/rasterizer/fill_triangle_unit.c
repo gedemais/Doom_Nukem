@@ -1,10 +1,17 @@
 #include "main.h"
 
-static void	write_pixel(t_env *env, t_triangle t, t_point px, t_filler fill)
+static void	write_pixel(t_env *env, t_triangle t, t_point px, t_filler *fill)
 {
-	float	w;
+	int		p;
 
-	
+	p = (px.y - 1) * WDT + px.x;
+	fill->w = (1.0f - fill->tx) * fill->xstart + fill->tx * fill->xend;
+	if (fill->w > env->cam.z_buffer[p])
+	{
+		env->cam.z_buffer[p] = fill->w;
+		draw_pixel(env->mlx.img_data, px.x, px.y, shade_color(t.color, t.illum));
+	}
+	fill->tx += fill->step;
 }
 
 static void	flatbot(t_env *env, t_vec3d v[3], t_triangle t)
@@ -25,9 +32,12 @@ static void	flatbot(t_env *env, t_vec3d v[3], t_triangle t)
 		fill.xstart = (int)(fill.x0 - 0.5f);
 		fill.xend = (int)(fill.x1 - 0.5f);
 		x = fill.xstart > 0 ? fill.xstart : 1 ;
+
+		fill.tx = 0.0f;
+		fill.step = 1.0f / (fill.xstart - fill.xend);
 		while (x < fill.xend)
 		{
-			draw_pixel(env->mlx.img_data, x, y, shade_color(t.color, t.illum));
+			write_pixel(env, t, (t_point){x, y}, &fill);
 			x++;
 		}
 		y++;
@@ -54,16 +64,10 @@ static void		flattop(t_env *env, t_vec3d v[3], t_triangle t)
 		x = fill.xstart > 0 ? fill.xstart : 1;
 
 		fill.tx = 0.0f;
-		step = 1.0f / (fill.xend - fill.xstart);
+		fill.step = 1.0f / (fill.xstart - fill.xend);
 		while (x < fill.xend)
 		{
-			w = (1.0f - fill.tx) * fill.xstart + fill.tx * fill.xend;
-			if (w > env->cam.z_buffer[(y - 1) * WDT + x])
-			{
-				env->cam.z_buffer[(y - 1) * WDT + x] = w;
-				draw_pixel(env->mlx.img_data, x, y, shade_color(t.color, t.illum));
-			}
-			fill.tx += step;
+			write_pixel(env, t, (t_point){x, y}, &fill);
 			x++;
 		}
 		y++;
