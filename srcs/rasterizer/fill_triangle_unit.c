@@ -1,6 +1,13 @@
 #include "main.h"
 
-static void	flatbot(t_env *env, t_vec3d v[3], int color)
+static void	write_pixel(t_env *env, t_triangle t, t_point px, t_filler fill)
+{
+	float	w;
+
+	
+}
+
+static void	flatbot(t_env *env, t_vec3d v[3], t_triangle t)
 {
 	t_filler	fill;
 	int			x;
@@ -20,18 +27,14 @@ static void	flatbot(t_env *env, t_vec3d v[3], int color)
 		x = fill.xstart > 0 ? fill.xstart : 1 ;
 		while (x < fill.xend)
 		{
-			if (env->cam.z_buffer[(y - 1) * WDT + x] > (v[0].z + v[1].z + v[2].z) / 3.0f)
-			{
-				draw_pixel(env->mlx.img_data, x, y, color);
-				env->cam.z_buffer[(y - 1) * WDT + x] = (v[0].z + v[1].z + v[2].z) / 3.0f;
-			}
+			draw_pixel(env->mlx.img_data, x, y, shade_color(t.color, t.illum));
 			x++;
 		}
 		y++;
 	}
 }
 
-static void		flattop(t_env *env, t_vec3d v[3], int color)
+static void		flattop(t_env *env, t_vec3d v[3], t_triangle t)
 {
 	t_filler	fill;
 	int			x;
@@ -48,21 +51,26 @@ static void		flattop(t_env *env, t_vec3d v[3], int color)
 		fill.x1 = fill.m1 * (y + 0.5f - v[1].y) + v[1].x;
 		fill.xstart = (int)(fill.x0 - 0.5f);
 		fill.xend = (int)(fill.x1 - 0.5f);
-		x = fill.xstart > 0 ? fill.xstart : 1 ;
+		x = fill.xstart > 0 ? fill.xstart : 1;
+
+		fill.tx = 0.0f;
+		step = 1.0f / (fill.xend - fill.xstart);
 		while (x < fill.xend)
 		{
-			if (env->cam.z_buffer[(y - 1) * WDT + x])
+			w = (1.0f - fill.tx) * fill.xstart + fill.tx * fill.xend;
+			if (w > env->cam.z_buffer[(y - 1) * WDT + x])
 			{
-				draw_pixel(env->mlx.img_data, x, y, color);
-				env->cam.z_buffer[(y - 1) * WDT + x] = (v[0].z + v[1].z + v[2].z) / 3.0f;
+				env->cam.z_buffer[(y - 1) * WDT + x] = w;
+				draw_pixel(env->mlx.img_data, x, y, shade_color(t.color, t.illum));
 			}
+			fill.tx += step;
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	classic(t_env *env, t_vec3d v[3], int color)
+static void	classic(t_env *env, t_vec3d v[3], t_triangle t)
 {
 	t_vec3d	vi;
 	float	alpha;
@@ -73,17 +81,17 @@ static void	classic(t_env *env, t_vec3d v[3], int color)
     vi.z = v[0].z + (v[2].z - v[0].z) * alpha;
 	if (v[1].x < vi.x)
 	{
-		flatbot(env, (t_vec3d[3]){v[0], v[1], vi}, color);
-		flattop(env, (t_vec3d[3]){v[1], vi, v[2]}, color);
+		flatbot(env, (t_vec3d[3]){v[0], v[1], vi}, t);
+		flattop(env, (t_vec3d[3]){v[1], vi, v[2]}, t);
 	}
 	else
 	{
-		flatbot(env, (t_vec3d[3]){v[0], vi, v[1]}, color);
-		flattop(env, (t_vec3d[3]){vi, v[1], v[2]}, color);
+		flatbot(env, (t_vec3d[3]){v[0], vi, v[1]}, t);
+		flattop(env, (t_vec3d[3]){vi, v[1], v[2]}, t);
 	}
 }
 
-void	fill_triangle_unit(t_env *env, t_triangle t, int color)
+void	fill_triangle_unit(t_env *env, t_triangle t)
 {
 	t_vec3d	v[3];
 
@@ -95,13 +103,13 @@ void	fill_triangle_unit(t_env *env, t_triangle t, int color)
 	if (v[0].y == v[1].y)
 	{
 		v[1].x < v[0].x ? vec3d_swap(&v[0], &v[1]) : 0;
-		flattop(env, v, color);
+		flattop(env, v, t);
 	}
 	else if (v[1].y == v[2].y)
 	{
 		v[2].x < v[1].x ? vec3d_swap(&v[1], &v[2]) : 0;
-		flatbot(env, v, color);
+		flatbot(env, v, t);
 	}
 	else
-		classic(env, v, color);
+		classic(env, v, t);
 }

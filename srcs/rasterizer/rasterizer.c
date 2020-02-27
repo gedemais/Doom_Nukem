@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/22 19:51:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:29:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	*rasthreader(void *param)
 	while (thr->index < thr->end)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
-		fill_triangle_texture((t_env*)thr->env, *t);
+		if (t->textured)
+			fill_triangle_texture((t_env*)thr->env, *t);
+		else
+			fill_triangle_unit((t_env*)thr->env, *t);
 	//	draw_triangle(&env->mlx, *t);
 		thr->index++;
 	}
