@@ -22,8 +22,10 @@ struct	s_filler
 	float		xend;
 	float		ystart;
 	float		yend;
-	float		step;
+	float		xstep;
+	float		ystep;
 	float		tx;
+	float		ty;
 	float		w;
 };
 

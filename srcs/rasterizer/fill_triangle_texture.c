@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/22 20:54:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:27:04 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 
 	i = t.points[0].y;
 	//printf("flattop\n");
-	while (i <= t.points[1].y)
+	while (i <= t.points[1].y - 0.5f)
 	{
-		set_line_bounds_top(txt, t, fabs(i - t.points[0].y));
+		set_line_bounds_top(txt, t, ceil(i - t.points[0].y));
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
@@ -81,7 +81,7 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	int		i;
 
-	i = t.points[1].y ;
+	i = t.points[1].y;
 //	printf("flatbot\n");
 	while (i <= t.points[2].y)
 	{
