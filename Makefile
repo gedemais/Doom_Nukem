@@ -127,7 +127,9 @@ LIB_PATH = libft/
 LIB = libft/libft.a
 
 LOPENAL = $(shell pkg-config --libs openal)
+IOPENAL = $(shell pkg-config --cflags openal)
 LSNDFILE = $(shell pkg-config --libs sndfile)
+ISNDFILE = $(shell pkg-config --cflags sndfile)
 
 LDYNARRAY_PATH = dynarray/
 LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
@@ -139,7 +141,7 @@ $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
-	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) -o $@ -c $<
+	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
 	make -C $(MLX_PATH)
