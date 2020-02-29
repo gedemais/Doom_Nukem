@@ -29,15 +29,37 @@ char	*sprites_paths(unsigned int index)
 					"resources/textures/texture.XPM",
 					"resources/sprites/main_txt_loader_campaign.XPM",
 					"resources/sprites/Doom_first_loader.XPM",
+					"resources/sprites/SP_Board_Button.xpm",
 					"resources/sprites/SP_CP_BUTTON_1C.XPM",
-					"resources/sprites/SP_CP_BUTTON_1O.XPM",
 					"resources/sprites/SP_CP_BUTTON_1H.XPM",
+					"resources/sprites/SP_CP_BUTTON_1O.XPM",
 					"resources/sprites/SP_CP_BUTTON_2C.XPM",
-					"resources/sprites/SP_CP_BUTTON_2O.XPM",
 					"resources/sprites/SP_CP_BUTTON_2H.XPM",
+					"resources/sprites/SP_CP_BUTTON_2O.XPM",
 					"resources/sprites/SP_CP_BUTTON_3C.XPM",
+					"resources/sprites/SP_CP_BUTTON_3H.XPM",
 					"resources/sprites/SP_CP_BUTTON_3O.XPM",
-					"resources/sprites/SP_CP_BUTTON_3H.XPM"
+					"resources/sprites/map_editor_background.xpm",
+					"resources/sprites/ME_TITLE.xpm",
+					"resources/sprites/SP_ME_RECT_PRW.xpm",
+					"resources/sprites/SP_ME_RECT_BTN.xpm",
+					"resources/sprites/SP_ME_BUTTON_LD_C.xpm",
+					"resources/sprites/SP_ME_BUTTON_LD_H.xpm",
+					"resources/sprites/SP_ME_BUTTON_LD_O.xpm",
+					"resources/sprites/SP_ME_BUTTON_NW_C.xpm",
+					"resources/sprites/SP_ME_BUTTON_NW_H.xpm",
+					"resources/sprites/SP_ME_BUTTON_NW_O.xpm",
+					"resources/sprites/SP_ME_BUTTON_TX_C.xpm",
+					"resources/sprites/SP_ME_BUTTON_TX_H.xpm",
+					"resources/sprites/SP_ME_BUTTON_TX_O.xpm",
+					"resources/sprites/SP_ME_BUTTON_OBJ_C.xpm",
+					"resources/sprites/SP_ME_BUTTON_OBJ_H.xpm",
+					"resources/sprites/SP_ME_BUTTON_OBJ_O.xpm",
+					"resources/sprites/SP_ME_BUTTON_MN_C.xpm",
+					"resources/sprites/SP_ME_BUTTON_MN_H.xpm",
+					"resources/sprites/SP_ME_BUTTON_MN_O.xpm"
+
+
 
 	};
 

@@ -15,7 +15,7 @@
 void	ts_to_dev(t_env *env)
 {
 	(void)env;
-	mlx_mouse_hide();
+//	mlx_mouse_hide();
 	play_ambience(env->sound.samples[SA_TITLE_SCREEN_S], false, true, false);
 	loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], false, true, false);
 }
@@ -29,17 +29,17 @@ void	ts_to_campaign(t_env *env)
 void	ts_to_custom(t_env *env)
 {
 	(void)env;
-	mlx_mouse_hide();
+//	mlx_mouse_hide();
 }
 
 void	ts_to_map_editor(t_env *env)
 {
 	(void)env;
-	mlx_mouse_hide();
+//	mlx_mouse_hide();
 }
 
 void	campaign_to_ts(t_env *env)
 {
 	(void)env;
-	mlx_mouse_show();
+//	mlx_mouse_show();
 }

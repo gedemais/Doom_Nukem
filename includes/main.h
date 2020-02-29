@@ -101,6 +101,7 @@ struct			s_env
 {
 	t_mlx		mlx;
 	t_cmpenv	cmp_env;
+	t_edtenv	edit_env;
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;

@@ -38,6 +38,7 @@ SRCS_NAME=	main.c\
 			\
 			map_editor/render.c\
 			map_editor/events.c\
+			map_editor/setup_me.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/load_face.c\

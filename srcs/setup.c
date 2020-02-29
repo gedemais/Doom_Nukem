@@ -25,7 +25,9 @@ static int		init_contexts(t_env *env)
 	if (setup_ts(env))
 		return (-1);
 	if (setup_cmp(env))
-	   return(-1);	// = > t_cmpenv 
+		return (-1);	// = > t_cmpenv 
+	if (setup_medit(env))
+		return (-1);
 	return (0);
 }
 

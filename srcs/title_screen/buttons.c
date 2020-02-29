@@ -59,10 +59,10 @@ void	render_button(void *param, t_button button, unsigned int index)
 			clic = true;
 		}
 		else
-			sprite = button.off;
+			sprite = button.hover;
 	}
 	else
-		sprite = button.hover;
+		sprite = button.off;
 	if (!clic)
 		blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 }

@@ -12,6 +12,46 @@
 
 #include "main.h"
 
+static int				handle_events_me(t_env *env)
+{
+	static bool	clic = false;
+	int			i;
+
+	i = -1;
+	if (env->events.keys[KEY_ESCAPE])
+		exit(EXIT_SUCCESS);
+	while (++i < EDT_BUTTON_MAX)
+		if (is_on_button(env->events.mouse_pos, env->edit_env.buttons[i]))
+		{
+			if (!env->events.buttons[BUTTON_LCLIC] && clic)
+			{
+//				if (i == EDT_BTN_LOAD)
+//					switch_context(env, C_TITLE_SCREEN);
+//				else if (i == EDT_BTN_NEW)
+//					switch_context(env, C_DEV);
+				clic = false;
+				return (1);
+			}
+			clic = env->events.buttons[BUTTON_LCLIC];
+			env->edit_env.buttons[i].is_hover = true;
+		}
+		else
+			env->edit_env.buttons[i].is_hover = false;
+	return (0);
+}
+
+static void	render_buttons_me(t_env *env)
+{
+	unsigned int	i;
+
+	i = EDT_BTN_LOAD;
+	while (i < EDT_BUTTON_MAX)
+	{
+		render_button(env, env->edit_env.buttons[i], SP_CP_BUTTON_1C);
+		i++;
+	}
+}
+
 int		render_maped(void *param)
 {
 	t_env	*env;
@@ -23,6 +63,13 @@ int		render_maped(void *param)
 	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
 /********************************************/
 /********************************************/
+
+	handle_events_me(env);	
+	blit_sprite(env->mlx.img_data, env->sprites[SP_EDT_BGD], (t_point){0, 0}, 1.0f);
+	blit_sprite(env->mlx.img_data, env->sprites[SP_EDT_ME_TITLE], (t_point){328, 370}, 1.0f);
+	blit_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_BTN], (t_point){328, 430}, 1.0f);
+	blit_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_PRW], (t_point){751, 506}, 1.0f);
+	render_buttons_me(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	//mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : map editor");
 	return (0);

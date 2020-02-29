@@ -13,8 +13,6 @@
 #ifndef CAMPAIGN_H
 # define CAMPAIGN_H
 
-
-
 enum	e_CMP_button_id
 {
 	CMP_BTN_MMENU,
