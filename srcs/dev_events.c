@@ -106,7 +106,8 @@ int		render_dev(void *param)
 	dev_handle_events(env);
 
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
-	ft_memset(env->cam.z_buffer, 0, env->data.data_size);
+	for (int i = 0; i < HGT * WDT; i++)
+		env->cam.z_buffer[i] = INFINITY;
 	camera(env);
 //	translate_mesh(dyacc(&env->maps[env->scene].meshs, 1), (t_vec3d){back ? 0.01f : -0.01f, 0, 0, 0});
 	if (((t_mesh*)dyacc(&env->maps[env->scene].meshs, 1))->corp.pos.x < -5.0f)

@@ -6,9 +6,8 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/29 16:27:04 by gedemais         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*   Updated: 2020/03/01 20:06:55 by gedemais         ###   ########.fr       */
+/*                                                                            */ /* ************************************************************************** */
 
 #include "main.h"
 
@@ -20,19 +19,14 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[2])
 	int		px;
 
 	px = abs(pos[0] - 1) * WDT + pos[1];
-	if (txt->txt_w > env->cam.z_buffer[px])
+	if (1.0f / txt->txt_w <= env->cam.z_buffer[px])
 	{
 		cu = t.textured ? txt->txt_u / txt->txt_w : txt->txt_u;
 		cv = t.textured ? txt->txt_v / txt->txt_w : txt->txt_v;
 		env->cam.z_buffer[px] = txt->txt_w;
-		if (t.textured)
-		{
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-			(t_vec2d){cu, cv, 1.0f});
-		}
-		else
-			color = t.color;
+		color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+		(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+		(t_vec2d){cu, cv, 1.0f});
 		color = shade_color(color, t.illum);
 		draw_pixel(env->mlx.img_data, pos[1], pos[0], color);
 	}

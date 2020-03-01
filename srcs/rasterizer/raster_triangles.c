@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/27 16:07:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/01 17:33:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int			raster_triangles(void *e, t_dynarray *arr)
 	env = e;
 	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
 
-	printf("amont : %f\n", mesure_time(true));
-	mesure_time(false);
 //	printf("%d elements to raster\n", env->cam.to_raster.nb_cells);
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
@@ -128,6 +126,5 @@ int			raster_triangles(void *e, t_dynarray *arr)
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
 	}
 	clear_dynarray(&env->cam.to_raster);
-	printf("%s: %f\n", __FUNCTION__, mesure_time(true));
 	return (0);
 }

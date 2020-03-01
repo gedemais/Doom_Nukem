@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/24 23:09:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/01 20:08:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray 
 
 	i = 0;
 	t.illum = vec_dot(normal, env->cam.light);
+	t.color = shade_color(t.color, t.illum);
 
 	// View matrix
 	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
