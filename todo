@@ -1,5 +1,6 @@
 Fix:
 souris vers le bas
+Resoudre les merges conflicts pour le Makefile (install.sh, srcs.mk)
 
 Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques

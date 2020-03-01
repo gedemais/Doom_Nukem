@@ -5,7 +5,7 @@ static void	write_pixel(t_env *env, t_triangle t, t_point px, t_filler *fill)
 	int		p;
 
 	p = (px.y - 1) * WDT + px.x;
-	fill->w = (((1.0f - fill->tx) * t.txt[0].w) + (fill->tx * t.txt[1].w) + ((1.0f - fill->ty) * t.txt[0].w) + (fill->ty * t.txt[2].w)) / 4.0f;
+	fill->w = (t.txt[0].w + t.txt[1].w + t.txt[2].w) / 3.0f;
 	if (fill->w > env->cam.z_buffer[p])
 	{
 		env->cam.z_buffer[p] = fill->w;

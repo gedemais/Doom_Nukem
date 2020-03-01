@@ -1,3 +1,5 @@
+include srcs.mk
+
 NAME=doom-nukem
 
 CC=gcc
@@ -13,82 +15,6 @@ OPTI ?= 0
 ifeq ($(OPTI), 1)
     FLAGS += -Ofast -march=native
 endif
-
-# Source code files
-SRCS_NAME=	main.c\
-			dev_events.c\
-			dev_handle_events.c\
-			free.c\
-			openal.c\
-			play_sound.c\
-			resources_paths.c\
-			setup.c\
-			singletons.c\
-			\
-			campaign/render.c\
-			campaign/events.c\
-			\
-			contexts/switch_context.c\
-			contexts/routines.c\
-			contexts/routines_bis.c\
-			\
-			custom_mode/render.c\
-			custom_mode/events.c\
-			\
-			map_editor/render.c\
-			map_editor/events.c\
-			\
-			obj_parser/load_maps.c\
-			obj_parser/load_face.c\
-			obj_parser/lines_fts.c\
-			obj_parser/check_formats.c\
-			obj_parser/parse_map.c\
-			obj_parser/parse_mtl.c\
-			obj_parser/mtl_lines_fts.c\
-			obj_parser/states.c\
-			obj_parser/read_file.c\
-			\
-			physic_engine/init_engine.c\
-			physic_engine/init_bounding_boxs.c\
-			physic_engine/engine.c\
-			physic_engine/report_collisions.c\
-			physic_engine/move_mesh.c\
-			\
-			rasterizer/clipping.c\
-			rasterizer/clipping_bis.c\
-			rasterizer/fill_triangle_unit.c\
-			rasterizer/fill_triangle_texture.c\
-			rasterizer/fill_triangle_texture_bis.c\
-			rasterizer/rasterizer.c\
-			rasterizer/raster_tools.c\
-			rasterizer/triangle_pipeline.c\
-			rasterizer/raster_triangles.c\
-			rasterizer/camera.c\
-			rasterizer/rotation_matrices.c\
-			rasterizer/matrices.c\
-			rasterizer/matrix_ops.c\
-			rasterizer/matrix_tools.c\
-			\
-			mlx/init_mlx.c\
-			mlx/sprites.c\
-			mlx/render.c\
-			mlx/term_loading_bar.c\
-			mlx/events.c\
-			mlx/basics.c\
-			mlx/bresenham.c\
-			mlx/hooks.c\
-			\
-			title_screen/animation.c\
-			title_screen/setup_ts.c\
-			title_screen/buttons.c\
-			title_screen/events.c\
-			title_screen/render.c\
-			\
-			vectors/vectors.c\
-			vectors/vec2d_ops.c\
-			vectors/vec2d_tools.c\
-			vectors/vec3d_ops.c\
-			vectors/vec3d_tools.c
 
 SRCS_PATH=srcs/
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_NAME))
@@ -136,6 +62,9 @@ LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 ##########################################################
 
 all: $(NAME)
+
+install: install.sh
+	@bash install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework AppKit
