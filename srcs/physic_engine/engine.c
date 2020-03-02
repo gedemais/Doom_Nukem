@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/02 17:25:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:24:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		physic_engine(t_env *env)
 	t_mesh		*mesh;
 	t_triangle	*t;
 
+	printf("%f\n", env->phy_env.time);
 	report_collisions(env);
 	//printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	for (int i = 0; i < env->maps[env->scene].nmesh; i++)
@@ -44,6 +45,5 @@ int		physic_engine(t_env *env)
 		}
 	}
 	clear_dynarray(&env->phy_env.collides);
-			
 	return (0);
 }

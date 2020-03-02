@@ -2,7 +2,7 @@
 
 char	*maps_paths(unsigned int index)
 {
-	static char	*paths[SCENE_MAX] = {	"resources/maps/physic_01.obj",
+	static char	*paths[SCENE_MAX] = {	"resources/maps/physic_02.obj",
 										"resources/maps/test_map.obj",
 										"resources/maps/cube_textured.obj"};
 

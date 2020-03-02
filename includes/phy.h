@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 19:43:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:14:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 struct	s_corp
 {
+	t_vec3d		acc;
+	t_vec3d		vo;
 	t_vec3d		pos;
 	t_vec3d		o;
 	t_vec3d		dims;
@@ -31,6 +33,8 @@ struct	s_collide
 struct	s_physics
 {
 	t_dynarray	collides;
+	double		time;
+	double		prev_time;
 	float		gravity;
 };
 

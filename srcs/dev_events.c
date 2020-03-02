@@ -98,9 +98,8 @@ int		render_dev(void *param)
 	t_env		*env;
 	static float	av = 0.0f;
 	static int		it = 0;
-	static bool		back = 0;
 
-	mesure_time(false);
+	//mesure_time(false);
 	env = ((t_env*)param);
 
 	dev_handle_events(env);
@@ -109,9 +108,7 @@ int		render_dev(void *param)
 	for (int i = 0; i < WDT * HGT; i++)
 		env->cam.z_buffer[i] = -INFINITY;
 	camera(env);
-//	translate_mesh(dyacc(&env->maps[env->scene].meshs, 1), (t_vec3d){back ? 0.01f : -0.01f, 0, 0, 0});
-	if (((t_mesh*)dyacc(&env->maps[env->scene].meshs, 1))->corp.pos.x < -5.0f)
-		back = true;
+	translate_mesh(dyacc(&env->maps[env->scene].meshs, 0), (t_vec3d){0.0f, -0.01f, 0, 0});
 	physic_engine(env);
 	rasterizer(env, env->scene);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
@@ -119,7 +116,7 @@ int		render_dev(void *param)
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 //	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
-	av += 1 / mesure_time(true);
+//	av += 1 / mesure_time(true);
 	if (av > 2000)
 	{
 		printf("%f\n", av / it);
