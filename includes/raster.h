@@ -31,6 +31,10 @@ struct	s_filler
 
 struct	s_texturizer
 {
+	float		txt_u;
+	float		txt_v;
+	float		txt_w;
+	float		t_step;
 	int			ax;
 	int			bx;
 	float		txt_su;
@@ -39,9 +43,6 @@ struct	s_texturizer
 	float		txt_eu;
 	float		txt_ev;
 	float		txt_ew;
-	float		txt_u;
-	float		txt_v;
-	float		txt_w;
 	int			dx1;
 	int			dx2;
 	int			dy1;
@@ -60,7 +61,6 @@ struct	s_texturizer
 	float		u2_step;
 	float		v2_step;
 	float		w2_step;
-	float		t_step;
 };
 
 struct	s_clipper
@@ -157,7 +157,7 @@ void			inverse_matrix(float m[4][4], float ret[4][4]);
 ** Texturing
 */
 void			starting_swap(t_triangle *t);
-void			compute_steps(t_texturizer *txt);
+void			compute_steps(t_texturizer *txt, bool t);
 void			compute_gradients(t_texturizer *txt, t_triangle t, bool fbot);
 void			set_line_bounds_top(t_texturizer *txt, t_triangle t, float cur);
 void			set_line_bounds_bot(t_texturizer *t, t_triangle e, float c[2]);

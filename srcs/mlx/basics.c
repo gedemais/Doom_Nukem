@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/01 18:00:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 16:28:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,11 @@ int			shade_color(int color, float scale)
 	unsigned char	*rgb;
 
 	rgb = (unsigned char*)&color;
-	if (scale > -1.0f && scale < 1.0f)
-	{
-		scale += 1.0f;
-		scale /= 2.0f;
-		rgb[0] = (float)rgb[0] * scale;
-		rgb[1] = (float)rgb[1] * scale;
-		rgb[2] = (float)rgb[2] * scale;
-	}
+	scale += 1.0f;
+	scale /= 2.0f;
+	rgb[0] *= scale;
+	rgb[1] *= scale;
+	rgb[2] *= scale;
 	return (color);
 }
 
@@ -103,5 +100,4 @@ void		draw_pixel(char *img, int x, int y, int color)
 	if (x < 0 || x >= WDT || y < 0 || y >= HGT)
 		return ;
 	*(int*)&img[pos] = color;
-//	img[pos + 3] = *alpha_val();
 }

@@ -59,12 +59,12 @@ struct	s_face
 
 struct	s_triangle
 {
+	bool		textured;
+	float		illum;
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
-	float		illum;
 	int			color;
 	float		alpha;
-	bool		textured;
 	void		*mesh;
 };
 

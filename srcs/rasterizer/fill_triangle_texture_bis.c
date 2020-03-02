@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:33:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/22 20:20:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 17:09:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	starting_swap(t_triangle *t)
 	}
 }
 
-void	compute_steps(t_texturizer *txt)
+void	compute_steps(t_texturizer *txt, bool t)
 {
 	float		abs_dy1;
 	float		abs_dy2;
@@ -50,16 +50,20 @@ void	compute_steps(t_texturizer *txt)
 	if (txt->dy1)
 	{
 		txt->ax_step = txt->dx1 / abs_dy1;
-		txt->u1_step = txt->du1 / abs_dy1;
-		txt->v1_step = txt->dv1 / abs_dy1;
+		if (t)
+			txt->u1_step = txt->du1 / abs_dy1;
+		if (t)
+			txt->v1_step = txt->dv1 / abs_dy1;
 		txt->w1_step = txt->dw1 / abs_dy1;
 	
 	}
 	if (txt->dy2)
 	{
 		txt->bx_step = txt->dx2 / abs_dy2;
-		txt->u2_step = txt->du2 / abs_dy2;
-		txt->v2_step = txt->dv2 / abs_dy2;
+		if (t)
+			txt->u2_step = txt->du2 / abs_dy2;
+		if (t)
+			txt->v2_step = txt->dv2 / abs_dy2;
 		txt->w2_step = txt->dw2 / abs_dy2;
 	}
 }
@@ -85,7 +89,7 @@ void	compute_gradients(t_texturizer *txt, t_triangle t, bool flatbot)
 		txt->dv2 = t.textured ? t.txt[2].v - t.txt[0].v : 0;
 		txt->dw2 = t.txt[2].w - t.txt[0].w;
 	}
-	compute_steps(txt);
+	compute_steps(txt, t.textured);
 }
 
 void	set_line_bounds_top(t_texturizer *txt, t_triangle t, float current)

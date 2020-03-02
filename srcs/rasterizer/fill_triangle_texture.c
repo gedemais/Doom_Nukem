@@ -6,50 +6,86 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/01 20:06:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 17:12:08 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 
 #include "main.h"
 
-static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[2])
+static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 {
 	float	cu;
 	float	cv;
 	int		color;
-	int		px;
 
-	px = abs(pos[0] - 1) * WDT + pos[1];
-	if (1.0f / txt->txt_w <= env->cam.z_buffer[px])
+	if (txt->txt_w > env->cam.z_buffer[pos[2]])
 	{
-		cu = t.textured ? txt->txt_u / txt->txt_w : txt->txt_u;
-		cv = t.textured ? txt->txt_v / txt->txt_w : txt->txt_v;
-		env->cam.z_buffer[px] = txt->txt_w;
-		color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-		(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-		(t_vec2d){cu, cv, 1.0f});
-		color = shade_color(color, t.illum);
-		draw_pixel(env->mlx.img_data, pos[1], pos[0], color);
+		if (t.textured)
+		{
+			cu = txt->txt_u / txt->txt_w;
+			cv = txt->txt_v / txt->txt_w;
+			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
+			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
+			(t_vec2d){cu, cv, 1.0f});
+			color = shade_color(color, t.illum);
+		}
+		else
+			color = t.color;
+		env->cam.z_buffer[pos[2]] = txt->txt_w;
+		*(int*)(&env->mlx.img_data[pos[2] * 4]) = color;
 	}
+}
+
+static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simples[6])
+{
+	steps[0] = (txt->t_step * txt->txt_su);
+	steps[1] = (txt->t_step * txt->txt_eu);
+	steps[2] = (txt->t_step * txt->txt_sv);
+	steps[3] = (txt->t_step * txt->txt_ev);
+	steps[4] = (txt->t_step * txt->txt_sw);
+	steps[5] = (txt->t_step * txt->txt_ew);
+	simples[0] = 1.0f * txt->txt_su;
+	simples[1] = 0.0f;
+	simples[2] = 1.0f * txt->txt_sv;
+	simples[3] = 0.0f;
+	simples[4] = 1.0f * txt->txt_sw;
+	simples[5] = 0.0f;
+}
+
+static void	update_expr(float steps[6], float simples[6])
+{
+	simples[0] -= steps[0];
+	simples[1] += steps[1];
+	simples[2] -= steps[2];
+	simples[3] += steps[3];
+	simples[4] -= steps[4];
+	simples[5] += steps[5];
 }
 
 static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int i)
 {
-	int				j;
-	float			tx;
-	float			sub_tx;
+	int		j;
+	int		px;
+	float	steps[6];
+	float	simples[6];
+	float	tx;
 
 	tx = 0.0f;
 	j = txt->ax;
 	txt->t_step = 1.0f / (txt->bx - txt->ax);
+	px = abs(i - 1) * WDT + j;
+	simplify_interpolation(txt, steps, simples);
 	while (j < txt->bx)
 	{
-		sub_tx = 1.0f - tx;
-		txt->txt_u = t.textured ? sub_tx * txt->txt_su + tx * txt->txt_eu : 0;
-		txt->txt_v = t.textured ? sub_tx * txt->txt_sv + tx * txt->txt_ev : 0;
-		txt->txt_w = sub_tx * txt->txt_sw + tx * txt->txt_ew;
-
-		write_pixel(env, txt, t, (int[2]){i, j});
+		if (t.textured)
+		{
+			txt->txt_u = simples[0] + simples[1];
+			txt->txt_v = simples[2] + simples[3];
+		}
+		txt->txt_w = simples[4] + simples[5];
+		update_expr(steps, simples);
+		write_pixel(env, txt, t, (int[3]){i, j, px});
 		tx += txt->t_step;
+		px++;
 		j++;
 	}
 }
@@ -59,10 +95,9 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 	int		i;
 
 	i = t.points[0].y;
-	//printf("flattop\n");
 	while (i <= t.points[1].y - 0.5f)
 	{
-		set_line_bounds_top(txt, t, ceil(i - t.points[0].y));
+		set_line_bounds_top(txt, t, fabs(i - t.points[0].y));
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
@@ -76,7 +111,6 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 	int		i;
 
 	i = t.points[1].y;
-//	printf("flatbot\n");
 	while (i <= t.points[2].y)
 	{
 		set_line_bounds_bot(txt, t, (float[2]){fabs(i - t.points[0].y), fabs(i - t.points[1].y)});

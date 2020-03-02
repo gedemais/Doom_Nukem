@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/01 20:06:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:22:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_triangle(void *mlx, t_triangle t)
 	a = (t_point){t.points[0].x, t.points[0].y};
 	b = (t_point){t.points[1].x, t.points[1].y};
 	c = (t_point){t.points[2].x, t.points[2].y};
-	draw_line((t_mlx*)mlx, a, b, t.color);
-	draw_line((t_mlx*)mlx, a, c, t.color);
-	draw_line((t_mlx*)mlx, b, c, t.color);
+	draw_line((t_mlx*)mlx, a, b, 0x000000);
+	draw_line((t_mlx*)mlx, a, c, 0x000000);
+	draw_line((t_mlx*)mlx, b, c, 0x000000);
 }
