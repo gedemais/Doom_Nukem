@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:00:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 18:09:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/04 22:13:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,16 @@ int			report_collisions(t_env *env)
 	{
 		j = -1;
 		while (++j < env->maps[env->scene].nmesh)
-			if (i != j && !env->maps[env->scene].colls[j]
+			if (i != j && !env->maps[env->scene].stats[i]
 				&& check_coll(&env->maps[env->scene].meshs, i, j, &c))
+			{
+				printf("%s <-> %s\n", c.a->name, c.b->name);
 				if (push_dynarray(&env->phy_env.collides, &c, false))
 					return (-1);
+			}
 		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
+	printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	return (0);
 }

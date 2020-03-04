@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 19:24:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/04 21:03:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	scale_to_screen(t_env *env, t_triangle *t)
 	t->points[0] = vec_add(t->points[0], pad);
 	t->points[1] = vec_add(t->points[1], pad);
 	t->points[2] = vec_add(t->points[2], pad);
+
 	t->points[0] = vec_mult(t->points[0], scale);
 	t->points[1] = vec_mult(t->points[1], scale);
 	t->points[2] = vec_mult(t->points[2], scale);
