@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/01 20:08:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:24:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 	line1 = vec_sub(t.points[1], t.points[0]);
 	line2 = vec_sub(t.points[2], t.points[0]);
 	normal = vec_cross(line1, line2);
-	vec_normalize(&normal);
+	normal = vec_normalize(normal);
 
 	if (vec_dot(normal, vec_sub(t.points[0], env->cam.stats.pos)) < 0.0f)
 	{

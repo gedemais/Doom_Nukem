@@ -108,7 +108,6 @@ int		render_dev(void *param)
 	for (int i = 0; i < WDT * HGT; i++)
 		env->cam.z_buffer[i] = -INFINITY;
 	camera(env);
-	translate_mesh(dyacc(&env->maps[env->scene].meshs, 0), (t_vec3d){0.0f, -0.01f, 0, 0});
 	physic_engine(env);
 	rasterizer(env, env->scene);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);

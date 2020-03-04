@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:34:14 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 01:51:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:24:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	t_vec3d		t;
 
 	new_f = vec_sub(target, pos);
-	vec_normalize(&new_f);
+	new_f = vec_normalize(new_f);
 	t = vec_fmult(new_f, vec_dot(up, new_f));
 	new_up = vec_sub(up, t);
 	new_r = vec_cross(new_up, new_f);

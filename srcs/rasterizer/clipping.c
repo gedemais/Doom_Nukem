@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 16:14:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:24:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle 
 	t_clipper	clip;
 
 	clip = (t_clipper){};
-	vec_normalize(&plane_n);
+	plane_n = vec_normalize(plane_n);
 	clip.d[0] = distance_to_plane(plane_n, plane_p, in.points[0]);
 	clip.d[1] = distance_to_plane(plane_n, plane_p, in.points[1]);
 	clip.d[2] = distance_to_plane(plane_n, plane_p, in.points[2]);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:00:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/26 20:01:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:09:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	aabb_collision(t_vec3d abo, t_vec3d bbo, t_vec3d abd, t_vec3d bbd)
 	return (true);
 }
 
-static bool	check_collision(t_dynarray *meshs, int i, int j, t_collide *c)
+static bool	check_coll(t_dynarray *meshs, int i, int j, t_collide *c)
 {
 	t_mesh	*a;
 	t_mesh	*b;
@@ -51,14 +51,13 @@ int			report_collisions(t_env *env)
 		return (-1);
 	while (i < env->maps[env->scene].nmesh)
 	{
-		j = 0;
-		while (j < env->maps[env->scene].nmesh)
-		{
-			if (i != j && check_collision(&env->maps[env->scene].meshs,
-				i, j, &c) && push_dynarray(&env->phy_env.collides, &c, false))
-				return (-1);
-			j++;
-		}
+		j = -1;
+		while (++j < env->maps[env->scene].nmesh)
+			if (i != j && !env->maps[env->scene].colls[j]
+				&& check_coll(&env->maps[env->scene].meshs, i, j, &c))
+				if (push_dynarray(&env->phy_env.collides, &c, false))
+					return (-1);
+		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/25 19:23:36 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:35:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int		init_physic_engine(t_env *env)
 //		loading_bar(i, SCENE_MAX, false);
 		printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
+		if (!(env->maps[i].colls = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh))
+			|| !(env->maps[i].stats = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh)))
+			return (-1);
 		while (j < env->maps[i].nmesh)
 		{
 			printf("mesh %d\n", j);
@@ -71,6 +74,11 @@ int		init_physic_engine(t_env *env)
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
+	m = dyacc(&env->maps[env->scene].meshs, 0);
+	m->corp.vo = (t_vec3d){-0.03f, 0.03f, 0.0f, 0.0f};
+	env->maps[env->scene].stats[0] = false;
+	env->maps[env->scene].stats[1] = true;
+
 //	loading_bar(i, SCENE_MAX, true);
 	return (0);
 }

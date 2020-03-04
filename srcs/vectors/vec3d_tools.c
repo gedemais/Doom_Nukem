@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:18:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 01:19:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:29:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ t_vec3d		vec_cross(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
-void	vec_normalize(t_vec3d *vec)
+float	vec_norm(t_vec3d vec)
+{
+	return (sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+}
+
+t_vec3d	vec_normalize(t_vec3d vec)
 {
 	float	l;
 
-	l = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-	vec->x /= l;
-	vec->y /= l;
-	vec->z /= l;
+	l = sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	return ((t_vec3d){vec.x /= l, vec.y /= l, vec.z /= l, 0.0f});
 }
 
 float	vec_dot(t_vec3d a, t_vec3d b)

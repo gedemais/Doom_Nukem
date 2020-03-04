@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 02:39:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/15 02:00:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:29:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_vec3d			vec_fmult(t_vec3d a, float n);
 
 void			vec3d_swap(t_vec3d *a, t_vec3d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);
-void			vec_normalize(t_vec3d *vec);
+t_vec3d			vec_normalize(t_vec3d vec);
+float			vec_norm(t_vec3d vec);
 float			vec_dot(t_vec3d a, t_vec3d b);
 float			vec_sdist(t_vec3d o, t_vec3d v);
 t_vec3d			vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n,

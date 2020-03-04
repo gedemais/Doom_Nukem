@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 21:06:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:26:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 
 	i = 0;
 
-	printf("map %s\n", path);
 	*init_parser() = true;
 	if (init_map_parser(map, &parser, path, states))
 		return (-1);
@@ -173,7 +172,7 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 
 	while (parser.lines[i])
 	{
-//		printf("%s\n", parser.lines[i]);
+		printf("%s (line %d)\n", parser.lines[i], i);
 		if (parse_line(&parser, map, i, states))
 			return (-1);
 		i++;

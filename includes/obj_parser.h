@@ -90,6 +90,8 @@ struct	s_map
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;
+	bool			*colls;
+	bool			*stats;
 	int				cmtl;
 	int				nmesh;
 };

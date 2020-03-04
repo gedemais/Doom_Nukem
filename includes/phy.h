@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/02 22:14:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:01:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 struct	s_corp
 {
+	bool		stats;
 	t_vec3d		acc;
 	t_vec3d		vo;
 	t_vec3d		pos;
