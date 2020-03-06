@@ -11,27 +11,17 @@
 /* ************************************************************************** */
 
 #include "main.h"
-/*
-static int	vec_null_test(t_vec3d v)
-{
-	if (v.x == 0 && v.y == 0 && v.z == 0)
-		return (1);
-	else
-		return (0);
 
-}
-*/
 static void	phy_gravitax(t_env *env, t_mesh *m, int i)
 {
 	static  t_vec3d		gravitax;
 
-	gravitax = (t_vec3d){0, env->phy_env.gravity * env->phy_env.tps / 100, 0 ,0};
+	gravitax = (t_vec3d){0, env->phy_env.gravity * env->phy_env.tps , 0 ,0};
 	if (env->maps[env->scene].stats[i] == false)
 		m->corp.v = vec_sub(m->corp.v, gravitax);
-//	else if (env->maps[env->scene].stats[i] == false)
-//		m->corp.v = vec_sub(m->corp.v, gravitax);
 	env->phy_env.tps++;
 }
+
 
 
 static t_vec3d	update_angle(t_env *env, int index)
@@ -40,61 +30,64 @@ static t_vec3d	update_angle(t_env *env, int index)
 	t_vec3d		v;
 	t_vec3d		v2;
 	t_vec3d		norm;
-	t_mesh		*m;
-	float		dot;
-//	static int	i = 0;
-//	float		vnorm;
-//	float		angle;
-	m = dyacc(&env->maps[env->scene].meshs, index);
+	float		frott;
 
+	frott = 0.75;
 	c = dyacc(&env->phy_env.collides, index);
 	v = c->a->corp.v;
 	norm = c->b->corp.norm;
-
 	v2 = (t_vec3d){v.x, v.y, 0, 0.0f};
-
-	printf("v_avant = %f %f %f",v2.x, v2.y, v2.z);
-	printf("norm = %f %f %f",norm.x, norm.y, norm.z);
-	dot = vec_dot(norm, v);
-	printf("dot: %f\n", dot);
-	(void)dot;
-//	if (++i > 3)
-//		exit(EXIT_SUCCESS);
-	if (vec_dot(norm, v) > 0)
-		v2 = (t_vec3d){-v.x, v.y, 0, 0.0f};
-	else if (vec_dot(norm, v) < 0)
-		v2 = (t_vec3d){v.x, -v.y, 0, 0.0f};
-		
+	c->dot = vec_dot(norm, v);
+	printf("v %f %f %f \n",v2.x, v2.y, v2.z);
+	printf("norm %f %f %f \n",norm.x, norm.y, norm.z);
+	printf("dot = %f\n",c->dot);
+	if (fabs(norm.x) > 0)
+	{
+  	//signe de c.dot => signe de rotation
+  	//c.dot > 0 => rotation horaire 90
+  	//		< 0 => rotation antihoraire 90
+		printf("a\n");
+		v2 = (t_vec3d){-v.x * frott, v.y * frott, 0, 0.0f};
+	}
+	else if (fabs(norm.y) > 0)
+	{
+		v2 = (t_vec3d){v.x * frott, -(v.y * frott), 0, 0.0f};
+	}
 	return (v2);
+}
+static int	test_choc_vertical(t_env *env, t_collide	*c)
+{
+	t_mesh *m;
+
+	m = dyacc(&env->maps[env->scene].meshs, c->i_b);
+	if (c->dot > 0 && m->corp.norm.y == 1.0f)
+		return (1);
+	else
+		return (0);
+
 }
 
 static void	update_speeds(t_env *env)
 {
 	t_collide	*c;
 	int			i;
-	int			ratio;
-// || c->a->corp.v.y / env->phy_env.tps < env->phy_env.gravity)
+	float			ratio;
 
 	i = 0;
 	while (i < env->phy_env.collides.nb_cells)
 	{
 		c = dyacc(&env->phy_env.collides, i);
-		printf("%f %f %f\n", c->a->corp.v.x, c->a->corp.v.y, c->a->corp.v.z);
-		printf("norme = %f\n", vec_norm(c->a->corp.v));
-		printf("gr %f?\n",(c->a->corp.v.y / env->phy_env.tps) - vec_norm(c->a->corp.v));
-		printf("gr %f\n",env->phy_env.gravity);
 		ratio = c->a->corp.v.y / env->phy_env.tps - vec_norm(c->a->corp.v);
-		if (vec_norm(c->a->corp.v) > 0.060003f || abs(ratio) < 0.01)
-			c->a->corp.v = update_angle(env, i);
-		else
+		c->a->corp.v = update_angle(env, i);
+		printf("ratio : %f\n", fabs(ratio));
+		 if (test_choc_vertical(env, c) == 1 && fabs(ratio) < 0.07)
 		{
 			c->a->corp.v = (t_vec3d){0, 0, 0, 0};
 			env->maps[env->scene].stats[c->i_a] = true;
 			//tps = 0;
 		}
-		printf("v_apres x = %f y = %f z = %f\n---------------\n", c->a->corp.v.x, c->a->corp.v.y, c->a->corp.v.z);
-	//	exit(EXIT_SUCCESS);	
-		//c->b->corp.vo = update_angle(env, i);
+		else
+			printf("f_abs(ratio) v_apres x = %f y = %f z = %f\n---------------\n", c->a->corp.v.x, c->a->corp.v.y, c->a->corp.v.z);
 		i++;
 	}
 }
@@ -110,8 +103,8 @@ static void	update_positions(t_env *env)
 		m = dyacc(&env->maps[env->scene].meshs, i);		
 		if (env->maps[env->scene].stats[i] == false)
 		{
-			printf("x = %f y = %f z = %f\n",m->corp.v.x, m->corp.v.y,m->corp.v.z);
-			printf("%d\n",env->phy_env.tps);
+		//	printf("x = %f y = %f z = %f\n",m->corp.v.x, m->corp.v.y,m->corp.v.z);
+		//	printf("%d\n",env->phy_env.tps);
 			phy_gravitax(env, m, i);
 			translate_mesh(m, m->corp.v);
 		}

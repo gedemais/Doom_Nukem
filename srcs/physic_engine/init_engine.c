@@ -31,7 +31,6 @@ static int		set_mesh_position(t_mesh *m)
 	}
 	m->corp.pos = vec_fdiv(average, (float)i);
 	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
-	
    	return (0);
 }
 static int		init_mesh_physics(t_mesh *m)
@@ -39,8 +38,7 @@ static int		init_mesh_physics(t_mesh *m)
 
 	if (set_mesh_position(m) || init_bounding_box(m))
 		return (-1);
-	
-		return (0);
+	return (0);
 }
 
 static void	set_hparams(t_physics *phy)
@@ -57,9 +55,9 @@ static void	set_norm_face(t_env *env)
 	m = dyacc(&env->maps[env->scene].meshs, 1);
 	m->corp.norm = (t_vec3d){0, -1, 0, 0};
 	m = dyacc(&env->maps[env->scene].meshs, 2);
-	m->corp.norm = (t_vec3d){1, 0, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 3);
 	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
+	m = dyacc(&env->maps[env->scene].meshs, 3);
+	m->corp.norm = (t_vec3d){1, 0, 0, 0};
 }
 	
 int		init_physic_engine(t_env *env)
@@ -91,9 +89,9 @@ int		init_physic_engine(t_env *env)
 		i++;
 	}
 	m = dyacc(&env->maps[env->scene].meshs, 4);
-	m->corp.vo = (t_vec3d){0.06f, 0.01f, 0.0f, 0.0f};
+	m->corp.vo = (t_vec3d){-0.09f, 0.5f, 0.0f, 0.0f};
 	m->corp.v = m->corp.vo;
-	env->phy_env.gravity = 0.00981;
+	env->phy_env.gravity = 0.0000981;
 	env->phy_env.tps = 0;
 	set_norm_face(env);
 	env->maps[env->scene].stats[0] = true;

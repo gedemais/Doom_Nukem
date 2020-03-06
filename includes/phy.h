@@ -31,6 +31,7 @@ struct	s_collide
 	t_mesh	*b;
 	unsigned int i_a;
 	unsigned int i_b;
+	float dot;
 };
 
 // struct s_collde
