@@ -31,15 +31,16 @@ static int		set_mesh_position(t_mesh *m)
 	}
 	m->corp.pos = vec_fdiv(average, (float)i);
 	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
-	return (0);
+	
+   	return (0);
 }
-
 static int		init_mesh_physics(t_mesh *m)
 {
+
 	if (set_mesh_position(m) || init_bounding_box(m))
 		return (-1);
-	printf("%s | pos : %f %f %f | origin : %f %f %f | dims = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.o.x, m->corp.o.y, m->corp.o.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z);
-	return (0);
+	
+		return (0);
 }
 
 static void	set_hparams(t_physics *phy)
@@ -47,12 +48,27 @@ static void	set_hparams(t_physics *phy)
 	phy->gravity = 9.9f;
 }
 
+static void	set_norm_face(t_env *env)
+{
+	t_mesh		*m;
+
+	m = dyacc(&env->maps[env->scene].meshs, 0);
+	m->corp.norm = (t_vec3d){0, 1, 0, 0};
+	m = dyacc(&env->maps[env->scene].meshs, 1);
+	m->corp.norm = (t_vec3d){0, -1, 0, 0};
+	m = dyacc(&env->maps[env->scene].meshs, 2);
+	m->corp.norm = (t_vec3d){1, 0, 0, 0};
+	m = dyacc(&env->maps[env->scene].meshs, 3);
+	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
+}
+	
 int		init_physic_engine(t_env *env)
 {
 	t_mesh		*m;
 	int			i;
 	int			j;
-
+	static int x = 0;
+	
 	i = 0;
 	set_hparams(&env->phy_env);
 	ft_putendl("Init physic engine...");
@@ -75,12 +91,20 @@ int		init_physic_engine(t_env *env)
 		i++;
 	}
 	m = dyacc(&env->maps[env->scene].meshs, 4);
-	m->corp.vo = (t_vec3d){0.01f, 0.0f, 0.0f, 0.0f};
+	m->corp.vo = (t_vec3d){0.06f, 0.01f, 0.0f, 0.0f};
+	m->corp.v = m->corp.vo;
+	env->phy_env.gravity = 0.00981;
+	env->phy_env.tps = 0;
+	set_norm_face(env);
 	env->maps[env->scene].stats[0] = true;
 	env->maps[env->scene].stats[1] = true;
 	env->maps[env->scene].stats[2] = true;
 	env->maps[env->scene].stats[3] = true;
 	env->maps[env->scene].stats[4] = false;
+	
+//	printf("%s | pos : %f %f %f | origin : %f %f %f | dims = %f %f %f\n norm = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.o.x, m->corp.o.y, m->corp.o.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z, m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
+	if (++x > 5)
+		exit(EXIT_SUCCESS);
 
 //	loading_bar(i, SCENE_MAX, true);
 	return (0);

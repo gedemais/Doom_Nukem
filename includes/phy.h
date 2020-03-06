@@ -18,8 +18,10 @@ struct	s_corp
 	bool		stats;
 	t_vec3d		acc;
 	t_vec3d		vo;
+	t_vec3d		v;
 	t_vec3d		pos;
 	t_vec3d		o;
+	t_vec3d		norm;
 	t_vec3d		dims;
 };
 
@@ -27,16 +29,19 @@ struct	s_collide
 {
 	t_mesh	*a;
 	t_mesh	*b;
+	unsigned int i_a;
+	unsigned int i_b;
 };
 
 // struct s_collde
 
 struct	s_physics
 {
-	t_dynarray	collides;
-	double		time;
-	double		prev_time;
-	float		gravity;
+	t_dynarray		collides;
+	double			time;
+	double			prev_time;
+	unsigned int	tps;
+	float			gravity;
 };
 
 int		physic_engine(t_env *env);

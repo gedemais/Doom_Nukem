@@ -57,12 +57,14 @@ int			report_collisions(t_env *env)
 				&& check_coll(&env->maps[env->scene].meshs, i, j, &c))
 			{
 				printf("%s <-> %s\n", c.a->name, c.b->name);
+				c.i_a = i;
+				c.i_b = j;
 				if (push_dynarray(&env->phy_env.collides, &c, false))
 					return (-1);
 			}
 		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
-	printf("%d collisions\n", env->phy_env.collides.nb_cells);
+//	printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	return (0);
 }
