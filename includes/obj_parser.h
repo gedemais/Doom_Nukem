@@ -61,9 +61,11 @@ struct	s_triangle
 {
 	bool		textured;
 	float		illum;
+	t_vec3d		normal;
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
 	int			color;
+	t_sprite	*sp;
 	float		alpha;
 	void		*mesh;
 };
@@ -80,8 +82,8 @@ struct	s_mesh
 	float		roll;
 	bool		textured;
 	bool		phy;
-	char		*name;
 	int			nb_tris;
+	char		*name;
 };
 
 struct	s_map
@@ -106,6 +108,7 @@ struct	s_parser
 	int				tri;
 };
 
+int					check_line(t_map *map, t_mesh *m, char **stats, int mesh);
 
 char				*read_file(int fd);
 char				*maps_paths(unsigned int index);

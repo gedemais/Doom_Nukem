@@ -14,10 +14,6 @@ int		new_mesh(t_map *map, char **toks)
 		|| init_dynarray(&m->txts, sizeof(t_vec2d), 0)
 		|| init_dynarray(&m->faces, sizeof(t_face), 0))
 		return (-1);
-	printf("-------------- NEW_MESH -----------------\n");
-	for (int i = 0; toks[i]; i++)
-		printf("%s|", toks[i]);
-	printf("\n");
 	map->nmesh++;
 	return (0);
 }

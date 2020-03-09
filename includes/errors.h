@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 04:40:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:03:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +23,8 @@
 # define CREATE_CONTEXT "alcCreateContext() failed\n"
 # define CONTEXT_CURRENT "alcMakeContextCurrent() failed\n"
 # define SAMPLE_NF " : sample not found\n"
+
+# define NEL_MAP "Wrong number of lines in config file of map "
 
 # define OBJ_LINE_FORMAT "Unexpected line format in obj file : "
 

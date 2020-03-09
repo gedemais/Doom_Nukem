@@ -29,6 +29,8 @@ struct	s_ts_env
 	t_button		buttons[TS_BUTTON_MAX];
 };
 
+int					setup_ts(t_env *env);
+
 int					key_press_ts(int key, void *param);
 int					key_release_ts(int key, void *param);
 int					mouse_press_ts(int button, int x, int y, void *param);

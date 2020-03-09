@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/02 17:12:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 21:48:43 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 
 #include "main.h"
@@ -17,15 +17,14 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 	float	cv;
 	int		color;
 
-	if (txt->txt_w > env->cam.z_buffer[pos[2]])
+	if (pos[2] <= env->data.data_size && txt->txt_w > env->cam.z_buffer[pos[2]])
 	{
 		if (t.textured)
 		{
 			cu = txt->txt_u / txt->txt_w;
 			cv = txt->txt_v / txt->txt_w;
-			color = sample_pixel(env->sprites[TXT_BLOC_GRASS].img_data,
-			(t_point){env->sprites[TXT_BLOC_GRASS].hgt, env->sprites[TXT_BLOC_GRASS].wdt},
-			(t_vec2d){cu, cv, 1.0f});
+			color = sample_pixel(t.sp->img_data,
+			(t_point){t.sp->hgt, t.sp->wdt}, (t_vec2d){cu, cv, 1.0f});
 			color = shade_color(color, t.illum);
 		}
 		else
@@ -88,6 +87,8 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 		px++;
 		j++;
 	}
+	//mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	//mlx_do_sync(env->mlx.mlx_ptr);
 }
 
 static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)

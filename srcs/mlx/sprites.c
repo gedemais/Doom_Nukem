@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/26 16:37:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/10 00:00:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 		y++;
 	}
 	return (img);
+}
+
+int		load_texture(char *path, t_sprite *txt)
+{
+	int		t;
+
+	if (!(txt->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &txt->wdt, &txt->hgt)))
+		return (-1);
+	if (!(txt->img_data = mlx_get_data_addr(txt->img_ptr, &t, &t, &t)))
+		return (-1);
+	return (0);
 }
 
 t_sprite	*load_sprites(t_mlx *mlx)

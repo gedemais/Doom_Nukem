@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/04 17:32:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 22:47:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 
 static int	doom_nukem(t_env *env)
 {
+	srand(time(NULL));
 	if (setup(env))
 		return (-1);
+
+	t_mesh	*m;
+	t_triangle	*t;
+
+	mlx_mouse_hide();
+	m = (t_mesh*)env->maps[0].meshs.c;
+	for (int i = 0; i < m->tris.nb_cells; i++)
+	{
+		t = dyacc(&m->tris, i);
+		if (t->textured)
+			t->sp = &env->sprites[TXT_BLOC_GRASS];
+	}
 	env->context = C_DEV;
 	env->scene = SCENE_A;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);

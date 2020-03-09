@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 19:24:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 14:49:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 	{
 		clipped[i].color = t.color;
 		clipped[i].illum = t.illum;
+		clipped[i].sp = t.sp;
 		if (push_dynarray(to_raster, &clipped[i], false))
 			return ;
 		i++;

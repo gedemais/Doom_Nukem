@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:12:24 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/18 00:36:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/08 19:52:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static char		**start_check(char *file)
 		if (lines[i][0] == '#' && ++i)
 			continue ;
 		while (lines[i][++j])
-			if (!ft_isalnum(lines[i][j]) && !ft_is_whitespace(lines[i][j])
-				&& lines[i][j] != '.' && lines[i][j] != '_')
+			if (!ft_isprint(lines[i][j]))
 			{
 				ft_free_ctab(lines);
 				return (NULL);
@@ -78,6 +77,7 @@ static int		load_materials(t_dynarray *mtls, char **lines)
 	while (lines[i])
 	{
 		j = 0;
+		printf("%s (line %d)\n", lines[i], i);
 		if (!(toks = ft_strsplit(lines[i], " \n\r\t")))
 			return (-1);
 		while (j < MTL_MAX)

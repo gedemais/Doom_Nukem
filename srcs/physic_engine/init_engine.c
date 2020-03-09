@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/04 21:58:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 17:32:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_hparams(t_physics *phy)
 {
 	phy->gravity = 9.9f;
 }
-
+/*
 static void	set_norm_face(t_env *env)
 {
 	t_mesh		*m;
@@ -58,7 +58,7 @@ static void	set_norm_face(t_env *env)
 	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
 	m = dyacc(&env->maps[env->scene].meshs, 3);
 	m->corp.norm = (t_vec3d){1, 0, 0, 0};
-}
+}*/
 	
 int		init_physic_engine(t_env *env)
 {
@@ -75,8 +75,7 @@ int		init_physic_engine(t_env *env)
 //		loading_bar(i, SCENE_MAX, false);
 		printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
-		if (!(env->maps[i].colls = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh))
-			|| !(env->maps[i].stats = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh)))
+		if (!(env->maps[i].colls = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh)))
 			return (-1);
 		while (j < env->maps[i].nmesh)
 		{
@@ -88,17 +87,17 @@ int		init_physic_engine(t_env *env)
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
-	m = dyacc(&env->maps[env->scene].meshs, 4);
+//	m = dyacc(&env->maps[env->scene].meshs, 4);
 	m->corp.vo = (t_vec3d){-0.09f, 0.5f, 0.0f, 0.0f};
 	m->corp.v = m->corp.vo;
 	env->phy_env.gravity = 0.0000981;
 	env->phy_env.tps = 0;
-	set_norm_face(env);
-	env->maps[env->scene].stats[0] = true;
+//	set_norm_face(env);
+/*	env->maps[env->scene].stats[0] = true;
 	env->maps[env->scene].stats[1] = true;
 	env->maps[env->scene].stats[2] = true;
 	env->maps[env->scene].stats[3] = true;
-	env->maps[env->scene].stats[4] = false;
+	env->maps[env->scene].stats[4] = false;*/
 	
 //	printf("%s | pos : %f %f %f | origin : %f %f %f | dims = %f %f %f\n norm = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.o.x, m->corp.o.y, m->corp.o.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z, m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
 	if (++x > 5)

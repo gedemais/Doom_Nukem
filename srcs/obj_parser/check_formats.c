@@ -21,7 +21,7 @@ bool	check_float(char *tok)
 			return (false);
 		i++;
 	}
-	if (dots > 1 || last_dot >= i - 2)
+	if (dots > 1 || last_dot >= i - 1)
 		return (false);
 	return (true);
 }

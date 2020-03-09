@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 19:01:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 22:48:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		init_bounding_box(t_mesh *m);
 int		report_collisions(t_env *env);
 
 void	translate_mesh(t_mesh *m, t_vec3d t);
+void	tp_mesh(t_mesh *m, t_vec3d p);
 
 #endif

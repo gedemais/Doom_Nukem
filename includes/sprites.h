@@ -44,8 +44,10 @@ struct	s_sprite
 	int				pad;
 };
 
-char	*sprites_paths(unsigned int index);
-char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
-char	*alpha_val(void);
+char		*sprites_paths(unsigned int index);
+char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
+t_sprite	*load_sprites(t_mlx *mlx);
+int			load_texture(char *path, t_sprite *txt);
+char		*alpha_val(void);
 
 #endif

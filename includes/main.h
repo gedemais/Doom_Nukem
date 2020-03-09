@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 00:15:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/09 23:46:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "errno.h"
 
 # include "typedefs.h"
 # include "vectors.h"
@@ -30,9 +31,9 @@
 # include "keys.h"
 # include "sound.h"
 # include "phy.h"
+# include "sprites.h"
 # include "obj_parser.h"
 # include "raster.h"
-# include "sprites.h"
 
 # include "title_screen.h"
 # include "campaign.h"
@@ -118,13 +119,12 @@ int				free_env(t_env *env);
 ** Setup
 */
 int				init_mlx(t_env *env);
-t_sprite		*load_sprites(t_mlx *mlx);
 void			loading_bar(unsigned int i, unsigned int max, bool last);
 int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);
 int				load_object(int fd, char *line);
-int				setup_ts(t_env *env);
+int				load_map_config(t_map *map, char *map_path);
 
 /*
 ** MLX
