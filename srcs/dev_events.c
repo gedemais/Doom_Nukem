@@ -118,6 +118,7 @@ int		render_dev(void *param)
 
 //	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 //	av += 1 / mesure_time(true);
+//	printf("pos : %f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 	if (av > 2000)
 	{
 		printf("%f\n", av / it);

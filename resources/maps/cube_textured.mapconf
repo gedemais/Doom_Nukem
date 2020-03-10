@@ -1,4 +1,4 @@
 # Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
-Cube|{}|[]|true|()
+Cube|{}|[]|true|(resources/textures/texture.XPM)
