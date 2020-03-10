@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 23:46:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/10 12:17:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);
 int				load_object(int fd, char *line);
-int				load_map_config(t_map *map, char *map_path);
+int				load_map_config(t_env *env, t_map *map, char *map_path);
 
 /*
 ** MLX

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/10 00:00:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/10 12:08:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 	return (img);
 }
 
-int		load_texture(char *path, t_sprite *txt)
+int		load_texture(t_mlx *mlx, char *path, t_sprite *txt)
 {
 	int		t;
 

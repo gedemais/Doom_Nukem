@@ -74,7 +74,7 @@ struct	s_mesh
 {
 	t_dynarray	tris;
 	t_dynarray	txts;
-	t_dynarray	faces;
+	t_sprite	sprite;
 	t_vec3d		new_pos;
 	t_corp		corp;
 	float		yaw;
@@ -84,6 +84,8 @@ struct	s_mesh
 	bool		phy;
 	int			nb_tris;
 	char		*name;
+	int			index;
+	t_dynarray	faces;
 };
 
 struct	s_map
@@ -108,7 +110,7 @@ struct	s_parser
 	int				tri;
 };
 
-int					check_line(t_map *map, t_mesh *m, char **stats, int mesh);
+int					check_line(t_env *env, t_map *map, t_mesh *m, char **stats);
 
 char				*read_file(int fd);
 char				*maps_paths(unsigned int index);

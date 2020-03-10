@@ -22,7 +22,7 @@ int		init_camera(t_cam *cam)
 	cam->stats.fovd = 70.0f;
 	cam->stats.fovr = (float)(1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f));
 	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
-	cam->stats.pos = (t_vec3d){0.0f, 1.0f, 0.0f, 0.0f};
+	cam->stats.pos = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	cam->stats.dir = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
 	cam->stats.pitch = -8.5f;
 	cam->stats.yaw = -2.4f;

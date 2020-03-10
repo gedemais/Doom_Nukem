@@ -47,7 +47,7 @@ struct	s_sprite
 char		*sprites_paths(unsigned int index);
 char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
 t_sprite	*load_sprites(t_mlx *mlx);
-int			load_texture(char *path, t_sprite *txt);
+int			load_texture(t_mlx *mlx, char *path, t_sprite *txt);
 char		*alpha_val(void);
 
 #endif

@@ -14,6 +14,7 @@ int		new_mesh(t_map *map, char **toks)
 		|| init_dynarray(&m->txts, sizeof(t_vec2d), 0)
 		|| init_dynarray(&m->faces, sizeof(t_face), 0))
 		return (-1);
+	m->index = map->nmesh;
 	map->nmesh++;
 	return (0);
 }
