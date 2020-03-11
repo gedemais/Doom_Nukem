@@ -62,6 +62,7 @@ static int	get_pos_speed(t_mesh *m, char *s, bool pos)
 
 int			check_line(t_env *env, t_map *map, t_mesh *m, char **stats)
 {
+	t_triangle	*t;
 	int			i;
 
 	i = 0;
@@ -71,5 +72,12 @@ int			check_line(t_env *env, t_map *map, t_mesh *m, char **stats)
 	if (get_static_or_not(map, stats[3], m)
 		|| (ft_strlen(stats[4]) > 2 && get_txt_path(env, stats[4], m)))
 		return (-1);
+	if (ft_strlen(stats[4]) == 2)
+		while (i < m->tris.nb_cells)
+		{
+			t = dyacc(&m->tris, i);
+			t->textured = false;
+			i++;
+		}
 	return (0);
 }

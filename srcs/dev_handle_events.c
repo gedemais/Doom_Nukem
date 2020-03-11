@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/26 20:09:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:21:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		r;
 
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-	r = (t_vec3d){f.z, 0, -f.x, f.w};
+	r = vec_fmult((t_vec3d){f.z, 0, -f.x, f.w}, 0.5f);
 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_S])                                                       
+	if (keys[KEY_S])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_A])                                                        
+	if (keys[KEY_A])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
-	if (keys[KEY_D])                                                        
+	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
 

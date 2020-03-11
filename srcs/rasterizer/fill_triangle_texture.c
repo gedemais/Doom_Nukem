@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 21:48:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 01:14:03 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 
 #include "main.h"
@@ -42,11 +42,11 @@ static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simp
 	steps[3] = (txt->t_step * txt->txt_ev);
 	steps[4] = (txt->t_step * txt->txt_sw);
 	steps[5] = (txt->t_step * txt->txt_ew);
-	simples[0] = 1.0f * txt->txt_su;
+	simples[0] = txt->txt_su;
 	simples[1] = 0.0f;
-	simples[2] = 1.0f * txt->txt_sv;
+	simples[2] = txt->txt_sv;
 	simples[3] = 0.0f;
-	simples[4] = 1.0f * txt->txt_sw;
+	simples[4] = txt->txt_sw;
 	simples[5] = 0.0f;
 }
 
@@ -66,9 +66,7 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 	int		px;
 	float	steps[6];
 	float	simples[6];
-	float	tx;
 
-	tx = 0.0f;
 	j = txt->ax;
 	txt->t_step = 1.0f / (txt->bx - txt->ax);
 	px = abs(i - 1) * WDT + j;
@@ -83,22 +81,23 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 		txt->txt_w = simples[4] + simples[5];
 		update_expr(steps, simples);
 		write_pixel(env, txt, t, (int[3]){i, j, px});
-		tx += txt->t_step;
 		px++;
 		j++;
 	}
-	//mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-	//mlx_do_sync(env->mlx.mlx_ptr);
+//	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+//	mlx_do_sync(env->mlx.mlx_ptr);
 }
 
 static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	int		i;
+	int		end;
 
-	i = t.points[0].y;
-	while (i <= t.points[1].y - 0.5f)
+	i = ceil(t.points[0].y);
+	end = ceil(t.points[1].y);
+	while (i < end)
 	{
-		set_line_bounds_top(txt, t, fabs(i - t.points[0].y));
+		set_line_bounds_top(txt, t, i - t.points[0].y);
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
@@ -110,11 +109,13 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 {
 	int		i;
+	int		end;
 
-	i = t.points[1].y;
-	while (i <= t.points[2].y)
+	i = ceil(t.points[1].y);
+	end = ceil(t.points[2].y);
+	while (i < end)
 	{
-		set_line_bounds_bot(txt, t, (float[2]){fabs(i - t.points[0].y), fabs(i - t.points[1].y)});
+		set_line_bounds_bot(txt, t, (float[2]){i - t.points[0].y, i - t.points[1].y});
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;

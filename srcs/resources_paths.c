@@ -2,8 +2,8 @@
 
 char	*maps_paths(unsigned int index)
 {
-	static char	*paths[SCENE_MAX] = {	"resources/maps/untitled.obj",
-										"resources/maps/test_map.obj",
+	static char	*paths[SCENE_MAX] = {	"resources/maps/weapons.obj",
+										"resources/maps/e1.obj",
 										"resources/maps/cube_textured.obj"};
 
 	return (paths[index]);

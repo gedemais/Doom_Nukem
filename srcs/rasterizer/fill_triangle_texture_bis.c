@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:33:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/02 17:09:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/10 20:26:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,24 @@ void	starting_swap(t_triangle *t)
 
 void	compute_steps(t_texturizer *txt, bool t)
 {
-	float		abs_dy1;
-	float		abs_dy2;
-
-	abs_dy1 = fabs((float)txt->dy1);
-	abs_dy2 = fabs((float)txt->dy2);
 	if (txt->dy1)
 	{
-		txt->ax_step = txt->dx1 / abs_dy1;
+		txt->ax_step = txt->dx1 / txt->dy1;
 		if (t)
-			txt->u1_step = txt->du1 / abs_dy1;
+			txt->u1_step = txt->du1 / txt->dy1;
 		if (t)
-			txt->v1_step = txt->dv1 / abs_dy1;
-		txt->w1_step = txt->dw1 / abs_dy1;
+			txt->v1_step = txt->dv1 / txt->dy1;
+		txt->w1_step = txt->dw1 / txt->dy1;
 	
 	}
 	if (txt->dy2)
 	{
-		txt->bx_step = txt->dx2 / abs_dy2;
+		txt->bx_step = txt->dx2 / txt->dy2;
 		if (t)
-			txt->u2_step = txt->du2 / abs_dy2;
+			txt->u2_step = txt->du2 / txt->dy2;
 		if (t)
-			txt->v2_step = txt->dv2 / abs_dy2;
-		txt->w2_step = txt->dw2 / abs_dy2;
+			txt->v2_step = txt->dv2 / txt->dy2;
+		txt->w2_step = txt->dw2 / txt->dy2;
 	}
 }
 
@@ -107,7 +102,7 @@ void	set_line_bounds_top(t_texturizer *txt, t_triangle t, float current)
 
 	if (txt->ax > txt->bx)
 	{
-		ft_swap(&txt->ax, &txt->bx);
+		swap_floats(&txt->ax, &txt->bx);
 		t.textured ? swap_floats(&txt->txt_su, &txt->txt_eu) : 0;
 		t.textured ? swap_floats(&txt->txt_sv, &txt->txt_ev) : 0;
 		swap_floats(&txt->txt_sw, &txt->txt_ew);
@@ -129,7 +124,7 @@ void	set_line_bounds_bot(t_texturizer *txt, t_triangle t, float currents[2])
 
 	if (txt->ax > txt->bx)
 	{
-		ft_swap(&txt->ax, &txt->bx);
+		swap_floats(&txt->ax, &txt->bx);
 		t.textured ? swap_floats(&txt->txt_su, &txt->txt_eu) : 0;
 		t.textured ? swap_floats(&txt->txt_sv, &txt->txt_ev) : 0;
 		swap_floats(&txt->txt_sw, &txt->txt_ew);

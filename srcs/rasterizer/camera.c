@@ -17,13 +17,13 @@ int		allocate_clipping_arrays(t_dynarray arrays[4])
 int		init_camera(t_cam *cam)
 {
 	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
-	cam->stats.fnear = 0.1f;
+	cam->stats.fnear = 0.01f;
 	cam->stats.ffar = 1000.0f;
 	cam->stats.fovd = 70.0f;
 	cam->stats.fovr = (float)(1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f));
 	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
-	cam->stats.pos = (t_vec3d){-16.558176, 3.664689, -11.324295, 0};
-	cam->stats.dir = (t_vec3d){0.0f, 0.0f, 0.0f, 0.0f};
+	cam->stats.pos = (t_vec3d){0, 0, 0, 0};
+	cam->stats.dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
 	cam->stats.pitch = 0;
 	cam->stats.yaw = 0;
 	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
