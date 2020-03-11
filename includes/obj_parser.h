@@ -96,6 +96,7 @@ struct	s_map
 	t_dynarray		mtls;
 	bool			*colls;
 	bool			*stats;
+	bool			*stats_cpy;
 	int				cmtl;
 	int				nmesh;
 };

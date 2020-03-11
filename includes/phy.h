@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 22:48:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:07:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct	s_physics
 	double			prev_time;
 	unsigned int	tps;
 	float			gravity;
+	t_vec3d			gravitax;
 };
 
 int		physic_engine(t_env *env);
