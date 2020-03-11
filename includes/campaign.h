@@ -39,7 +39,7 @@ struct				s_camp_env
 {
 	t_env			*env;
 	t_button		buttons[CMP_BUTTON_MAX];
-		
+	t_point			pos[CMP_BUTTON_MAX];		
 };
 
 int					setup_cmp(t_env *env);

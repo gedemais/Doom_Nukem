@@ -12,6 +12,18 @@
 
 #include "main.h"
 
+static void init_context_me(t_env *env)
+{
+	t_button *but;
+
+	but = env->edit_env.buttons;
+
+	but[EDT_BTN_MMENU].context = C_TITLE_SCREEN;
+	but[EDT_BTN_NEW].context = C_DEV;
+
+
+}
+
 static void	init_pos_me(t_env *env)
 {
 	t_point *pt;
@@ -50,5 +62,6 @@ int		setup_medit(t_env *env)
 	env->ts_env.env = env;
 	init_pos_me(env);
 	init_buttons_me(env);
+	init_context_me(env);
 	return (0);
 }

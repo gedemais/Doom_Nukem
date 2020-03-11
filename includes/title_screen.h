@@ -19,6 +19,7 @@ struct	s_button
 	t_sprite		*on;
 	t_sprite		*off;
 	t_sprite		*hover;
+	int				context;
 	bool			is_hover;
 	bool			in_place;
 };

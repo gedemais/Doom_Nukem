@@ -12,6 +12,16 @@
 
 #include "main.h"
 
+static void	init_pos_cmp(t_env *env)
+{
+	t_point *pt;
+	
+	pt = env->cmp_env.pos;
+	pt[CMP_BTN_MMENU] = (t_point){69, 607};
+	pt[CMP_BTN_NWG] = (t_point){329, 607};
+	pt[CMP_BTN_LDG] = (t_point){69, 550}; 
+
+}
 
 static void	init_buttons_cmp(t_env *env)
 {
@@ -24,14 +34,8 @@ static void	init_buttons_cmp(t_env *env)
 	sp = env->sprites;
 	while (j < CMP_BUTTON_MAX)
 	{
-		init_button(&env->cmp_env.buttons[j],
-		(t_point){69 + j * 260, 607},
+		init_button(&env->cmp_env.buttons[j], env->cmp_env.pos[j],
 		(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
-		if (j == CMP_BTN_LDG)
-			init_button(&env->cmp_env.buttons[j],
-			(t_point){76, 550},
-			(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
-		
 		j++;
 		i += 3;
 	}
@@ -40,6 +44,7 @@ static void	init_buttons_cmp(t_env *env)
 int		setup_cmp(t_env *env)
 {
 	env->ts_env.env = env;
+	init_pos_cmp(env);
 	init_buttons_cmp(env);
 	return (0);
 }

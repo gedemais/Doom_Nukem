@@ -55,5 +55,6 @@ typedef	struct	s_edit_env t_edtenv;
 typedef struct	s_savecmp t_savecmp;
 
 typedef	struct	s_menu	t_menu;
+typedef enum	e_context_id e_contxt;
 
 #endif
