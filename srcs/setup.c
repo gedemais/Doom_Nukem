@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 17:05:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:57:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static void		load_values(t_env *env, t_data *data)
 static int		init_contexts(t_env *env)
 {
 	if (setup_ts(env))
+		return (-1);
+	if (setup_cmp(env))
+		return (-1);	// = > t_cmpenv 
+	if (setup_medit(env))
 		return (-1);
 	return (0);
 }

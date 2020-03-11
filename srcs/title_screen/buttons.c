@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 04:02:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/20 00:24:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:57:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	render_button(void *param, t_button button, unsigned int index)
 			clic = true;
 		}
 		else
-			sprite = &env->sprites[index * 3 + 1];
+			sprite = button.hover;
 	}
 	else
-		sprite = &env->sprites[index * 3 + 2];
+		sprite = button.off;
 	if (!clic)
 		blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
 }

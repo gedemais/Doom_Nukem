@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 18:06:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:51:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ struct			s_data
 struct			s_env
 {
 	t_mlx		mlx;
+	t_cmpenv	cmp_env;
+	t_edtenv	edit_env;
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;

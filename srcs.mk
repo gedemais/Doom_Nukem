@@ -1,4 +1,4 @@
-SRCS_NAME=	main.c\
+SRCS_NAME =	main.c\
 			dev_events.c\
 			dev_handle_events.c\
 			free.c\
@@ -10,6 +10,7 @@ SRCS_NAME=	main.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
+			campaign/setup_cmp.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\
@@ -20,6 +21,7 @@ SRCS_NAME=	main.c\
 			\
 			map_editor/render.c\
 			map_editor/events.c\
+			map_editor/setup_me.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/mapper.c\
