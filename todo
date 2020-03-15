@@ -1,5 +1,6 @@
 Fix:
 souris vers le bas
+Resoudre les merges conflicts pour le Makefile (install.sh, srcs.mk)
 
 Betters:
 Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
@@ -19,8 +20,11 @@ Todo:
 	obj_parser:
 		Securiser le parser
 		Faire une fonction parse_error
+	rasterizer:
+		Fix les lignes horizontales
 	OpenAL:
 		Faire un vrai sound system avec une data structure adaptee
+		Choper et compiler les sources d'OpenAL dans le Makefile
 	Autres:
 		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
 		Recoder un atof

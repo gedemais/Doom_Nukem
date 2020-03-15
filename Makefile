@@ -1,5 +1,5 @@
-include scripts/srcs.mk
-include scripts/incs.mk
+include srcs.mk
+include incs.mk
 
 NAME=doom-nukem
 
@@ -50,7 +50,7 @@ LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 all: $(NAME)
 
 install: install.sh
-	@bash scripts/install.sh
+	@bash install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework AppKit

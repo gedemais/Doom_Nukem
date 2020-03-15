@@ -60,7 +60,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.01f
+# define WALK_SPEED 0.5f
 
 enum		e_context_id
 {
