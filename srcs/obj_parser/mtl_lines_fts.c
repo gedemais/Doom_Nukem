@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 05:00:50 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/08 19:17:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/15 21:49:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		mtl_new(char **toks, t_dynarray *mtls)
 		j = 0;
 		while (toks[i][j])
 		{
-			if (!ft_isalnum(toks[i][j]) && toks[i][j] != '_' && toks[i][j] != '.')
+			if (!ft_isprint(toks[i][j]))
 				return (-1);
 			j++;
 		}
