@@ -1,0 +1,14 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+Payer_BOX_Cube.003|{}|[]|true|()
+Cube_Cube.004|{}|[]|true|()
+Pane.001|{}|[]|true|()
+smoke_Cube.001|{}|[]|true|()
+dragon_fireba_1_Cube.007|{}|[]|true|()
+smoke2_Cube.008|{}|[]|true|()
+dragon_fireba_2_Cube.009|{}|[]|true|()
+dragon_fireba_3_Cube.002|{}|[]|true|()

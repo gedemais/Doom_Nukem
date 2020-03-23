@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/02 16:28:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/21 21:13:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int			pixloc(int x, int y, bool free)
 	if (!screen && !(screen = init_pixloc()))
 		return (-1);
 	else if (free)
+	{
 		free_pixloc(screen);
+		return (0);
+	}
 	return (screen[y][x]);
 }
 

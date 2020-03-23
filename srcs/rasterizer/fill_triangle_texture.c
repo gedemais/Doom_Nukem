@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 01:14:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/21 21:13:04 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 
 #include "main.h"
@@ -19,7 +19,7 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 
 	if (pos[2] <= env->data.data_size && txt->txt_w > env->cam.z_buffer[pos[2]])
 	{
-		if (t.textured)
+		if (t.sp)
 		{
 			cu = txt->txt_u / txt->txt_w;
 			cv = txt->txt_v / txt->txt_w;

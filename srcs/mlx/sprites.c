@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 19:09:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/21 21:14:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 			color = sample_pixel(sprite.img_data, (t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, sample_y, 0.0f});
 			if (color != ALPHA)
 				draw_pixel(img, x + o.x, y + o.y, color); // A remplacer par un memcpy quand le pixloc sera actif
+			//ft_memcpy(&img[pixloc(x + o.x, y + o.y, false)], &color, sizeof(int)); // To try
 			sample_x += delta_x;
 			x++;
 		}
@@ -63,6 +64,7 @@ int		load_texture(t_mlx *mlx, char *path, t_sprite *txt)
 
 	if (!(txt->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &txt->wdt, &txt->hgt)))
 		return (-1);
+	printf("Sprite (%s) : %d by %d pixels\n", path, txt->wdt, txt->hgt);
 	if (!(txt->img_data = mlx_get_data_addr(txt->img_ptr, &t, &t, &t)))
 		return (-1);
 	return (0);

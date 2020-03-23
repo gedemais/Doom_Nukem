@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 05:00:50 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/15 21:49:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/21 17:05:08 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		mtl_new(char **toks, t_dynarray *mtls)
 	}
 	if (!(m.name = ft_strdup(toks[1])) || push_dynarray(mtls, &m, false))
 		return (-1);
-	//printf("Material loaded : |%s|\n", m.name);
 	return (0);
 }
 
@@ -58,7 +57,6 @@ int		mtl_color(char **toks, t_dynarray *mtls)
 		cm->color[i - 1] = (t * 255);
 		i++;
 	}
-	printf("\n-----------------------\n");
 	return (0);
 }
 

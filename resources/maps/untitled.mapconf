@@ -1,7 +1,10 @@
 # Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
-Sol_Plane|{0, 100, 0}|[]|true|(resources/textures/texture.XPM)
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+Sol_Plane|{}|[]|true|()
 Cube_Cube.001|{}|[]|true|()
 Cube.001_Cube.002|{}|[]|true|()
 Cone|{}|[]|true|()

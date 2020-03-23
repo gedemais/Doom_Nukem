@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 18:57:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/21 23:00:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int				setup(t_env *env)
 		|| init_camera(&env->cam))
 		return (-1);
 	load_values(env, &env->data);
+	for (int i = 0; i < SCENE_MAX; i++)
+		printf("%f %f %f\n", env->maps[i].spawn.x, env->maps[i].spawn.y, env->maps[i].spawn.z);
 //	play_ambience(env->sound.samples[SA_AMB_1], true, false);
 	return (0);
 }

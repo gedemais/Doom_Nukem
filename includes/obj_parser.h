@@ -3,6 +3,18 @@
 
 # define BUFF_READ 4194304
 
+enum	e_mapper
+{
+	MAPPER_NAME,
+	MAPPER_POSITION,
+	MAPPER_SPEED,
+	MAPPER_STATIC,
+	MAPPER_TEXTURE,
+	MAPPER_SPAWN,
+	MAPPER_CAMDIR,
+	MAPPER_MAX
+};
+
 enum	e_mtl
 {
 	MTL_COMMENT,
@@ -42,8 +54,9 @@ enum	e_scene_id
 struct	s_mtl
 {
 	char	*name;
-	unsigned char	color[4];
+	char	color[4];
 	float	alpha;
+	bool	textured;
 };
 
 struct	s_face
@@ -94,6 +107,8 @@ struct	s_map
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;
+	t_vec3d			spawn;
+	t_vec2d			cam_dir;
 	bool			*colls;
 	bool			*stats;
 	bool			*stats_cpy;
@@ -140,9 +155,28 @@ int					usemtl(t_map *map, char **toks);
 int					parse_mtl(char *file_name, t_dynarray *mtls);
 int					get_material_color(t_mesh *m);
 
-
 int					mtl_new(char **toks, t_dynarray *mtl);
 int					mtl_color(char **toks, t_dynarray *mtl);
 int					mtl_alpha(char **toks, t_dynarray *mtl);
+
+int					get_spawn_position(t_map *map, char **line);
+int					get_cam_direction(t_map *map, char **line);
+
+/*
+** Parser tools
+*/
+int					cross_whitespaces(char *line, int *i);
+int					cross_floats(char *line, int *i);
+t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
+t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
+
+/*
+** Mapper functions
+*/
+int					mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok);
+int					mapper_position(t_env *env, t_map *map, t_mesh *m, char *tok);
+int					mapper_speed(t_env *env, t_map *map, t_mesh *m, char *tok);
+int					mapper_static(t_env *env, t_map *map, t_mesh *m, char *tok);
+int					mapper_deps(t_env *env, t_map *map, t_mesh *m, char *tok);
 
 #endif

@@ -1,5 +1,18 @@
 #include "main.h"
 
+void	map_spawn(t_cam *cam, t_map *map)
+{
+	static t_map	*add = NULL;
+
+	if (add != map)
+	{
+		cam->stats.pos = map->spawn;
+		cam->stats.yaw = map->cam_dir.u;
+		cam->stats.pitch = map->cam_dir.v;
+		add = map;
+	}
+}
+
 int		allocate_clipping_arrays(t_dynarray arrays[4])
 {
 	unsigned int	i;

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 17:32:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/22 18:41:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ int		init_physic_engine(t_env *env)
 	
 	i = 0;
 	set_hparams(&env->phy_env);
-	ft_putendl("Init physic engine...");
+	//ft_putendl("Init physic engine...");
 	while (i < SCENE_MAX)
 	{
 //		loading_bar(i, SCENE_MAX, false);
-		printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
+		//printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
 		if (!(env->maps[i].colls = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh)))
 			return (-1);
 		while (j < env->maps[i].nmesh)
 		{
-			printf("mesh %d\n", j);
+			//printf("mesh %d\n", j);
 			if (!(m = dyacc(&env->maps[i].meshs, j)) || init_mesh_physics(m))
 				return (-1);
 			j++;

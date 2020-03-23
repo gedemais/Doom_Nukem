@@ -25,6 +25,7 @@ SRCS_NAME =	main.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/mapper.c\
+			obj_parser/mapper_fts.c\
 			obj_parser/mapper_values.c\
 			obj_parser/load_face.c\
 			obj_parser/lines_fts.c\
@@ -32,8 +33,9 @@ SRCS_NAME =	main.c\
 			obj_parser/parse_map.c\
 			obj_parser/parse_mtl.c\
 			obj_parser/mtl_lines_fts.c\
-			obj_parser/states.c\
 			obj_parser/read_file.c\
+			obj_parser/states.c\
+			obj_parser/tools.c\
 			\
 			physic_engine/init_engine.c\
 			physic_engine/init_bounding_boxs.c\

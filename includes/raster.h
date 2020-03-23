@@ -128,6 +128,7 @@ int				raster_triangles(void *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
 int				rasterizer(t_env *env, int scene);
+void			map_spawn(t_cam *cam, t_map *map);
 
 /*
 ** Clipping

@@ -14,7 +14,8 @@ static int		open_mapconf(char *map_name)
 		i++;
 	while (tmp[++i])
 		tmp[i] = 0;
-	new_path = ft_strjoin(tmp, "mapconf");
+	if (!(new_path = ft_strjoin(tmp, "mapconf")))
+		return (-1);
 	free(tmp);
 	if (!new_path)
 		return (-1);
@@ -45,7 +46,7 @@ char	**get_file_lines(int fd)
 
 static int	load_mesh_config(t_env *env, t_map *map, t_mesh *m, char *line)
 {
-	char			**stats;
+	char		**stats;
 
 	if (!(stats = ft_strsplit(line, "|")))
 		return (-1);
@@ -57,12 +58,25 @@ static int	load_mesh_config(t_env *env, t_map *map, t_mesh *m, char *line)
 	return (0);
 }
 
-static t_mesh	*find_mesh(t_map *map, char **line)
+static t_mesh	*find_mesh(t_map *map, char **line, bool *prop)
 {
 	t_mesh	*m;
 	int		i;
 
 	i = 0;
+	*prop = true;
+	if (!ft_strcmp(line[0], "spawn"))
+	{
+		if (get_spawn_position(map, line))
+			return (NULL);
+	}
+	else if (!ft_strcmp(line[0], "orientation"))
+	{
+		if (get_cam_direction(map, line))
+			return (NULL);
+	}
+	else
+		*prop = false;
 	while (i < map->nmesh)
 	{
 		m = dyacc(&map->meshs, i);
@@ -78,13 +92,14 @@ int			load_map_config(t_env *env, t_map *map, char *map_path)
 {
 	char			**lines;
 	t_mesh			*m;
+	bool			prop;
 	int				fd;
 	int				i;
 
-	i = 2;
+	i = 3;
 	if ((fd = open_mapconf(map_path)) == -1 || !(lines = get_file_lines(fd)))
-		return (-1);
-	if (ft_tablen(lines) - 3 != map->nmesh)
+		return (0);
+	if (ft_tablen(lines) - 6 != map->nmesh)
 	{
 		ft_putstr_fd(NEL_MAP, 2);
 		ft_putendl_fd(map_path, 2);
@@ -92,8 +107,8 @@ int			load_map_config(t_env *env, t_map *map, char *map_path)
 		return (-1);
 	}
 	while (lines[++i])
-		if (!(m = find_mesh(map, ft_strsplit(lines[i], "|")))
-			|| load_mesh_config(env, map, m, lines[i]))
+		if ((!(m = find_mesh(map, ft_strsplit(lines[i], "|"), &prop)) && !prop)
+			|| (!prop && load_mesh_config(env, map, m, lines[i])))
 		{
 			ft_free_ctab(lines);
 			return (-1);
