@@ -1,4 +1,4 @@
-#include "main.h"
+# include "main.h"
 
 int			get_spawn_position(t_map *map, char **line)
 {

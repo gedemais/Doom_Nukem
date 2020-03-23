@@ -110,7 +110,7 @@ int		render_dev(void *param)
 	for (int i = 0; i < WDT * HGT; i++)
 		env->cam.z_buffer[i] = -INFINITY;
 	camera(env);
-//	physic_engine(env);
+	//physic_engine(env);
 	rasterizer(env, env->scene);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");

@@ -3,5 +3,5 @@
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map
 spawn|{0.0, 0.0, -10.0}
-orientation|{+10.0, -10.0}
-Cube.001|{}|[]|true|(resources/textures/grass.xpm)
+orientation|{0.0, 0.0}
+Cube.001|{0, 0, 0}|[0.0, 10.0, 0.0]|true|(resources/textures/grass.xpm)

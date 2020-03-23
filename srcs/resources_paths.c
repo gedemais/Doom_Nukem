@@ -4,7 +4,7 @@ char	*maps_paths(unsigned int index)
 {
 	static char	*paths[SCENE_MAX] = {	"resources/maps/cube_textured.obj",
 										"resources/maps/e1.obj",
-										"resources/maps/weapons.obj"};
+										"resources/maps/axis.obj"};
 	return (paths[index]);
 }
 
@@ -56,8 +56,7 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/SP_ME_BUTTON_OBJ_O.xpm",
 					"resources/sprites/SP_ME_BUTTON_MN_C.xpm",
 					"resources/sprites/SP_ME_BUTTON_MN_H.xpm",
-					"resources/sprites/SP_ME_BUTTON_MN_O.xpm"
-	};
+					"resources/sprites/SP_ME_BUTTON_MN_O.xpm"};
 
 	return (paths[index]);
 }

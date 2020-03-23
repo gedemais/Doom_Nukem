@@ -59,10 +59,10 @@ $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
-	make -C $(MLX_PATH)
+	make -C $(MLX_PATH) -j
 
 $(LIB): $(LIB_PATH)
-	make -C $(LIB_PATH)
+	make -C $(LIB_PATH) -j
 
 clean:
 	rm -rf $(OBJS)

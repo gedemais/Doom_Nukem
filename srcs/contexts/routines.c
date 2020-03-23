@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 04:59:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/23 03:40:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/23 21:07:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ts_to_dev(t_env *env)
 {
 	(void)env;
-//	mlx_mouse_hide();
+	mlx_mouse_hide();
 	play_ambience(env->sound.samples[SA_TITLE_SCREEN_S], false, true, false);
 	loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], false, true, false);
 }
