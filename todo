@@ -1,3 +1,6 @@
+creer une fonction qui map une couleur int sur un float (0 - 1)
+utiliser read_vec3d dans le parser d'obj
+
 Fix:
 souris vers le bas
 

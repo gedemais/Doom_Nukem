@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/23 17:53:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/25 23:19:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	relaunch_thread(t_rasthread threads[NB_THREADS], int i)
 	return (threads[i].start - threads[i].end);
 }
 
-static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
+static void	manage_threads(t_rasthread threads[NB_THREADS])
 {
 	unsigned int	i;
 	int				waste;
@@ -49,7 +49,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 	int				relaunched = 0;
 
 	amount = INT_MAX;
-	waste = (arr->nb_cells / NB_THREADS);
+	waste = NB_THREADS;
 	while (amount > waste)
 	{
 		i = 0;
@@ -64,6 +64,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS], t_dynarray *arr)
 			i++;
 		}
 	}
+	//printf("%d threads relauncheds on this frame\n", relaunched);
 }
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
@@ -106,23 +107,20 @@ static int	switch_threads(t_env *env, t_rasthread threads[NB_THREADS],
 	return (0);
 }
 
-int			raster_triangles(void *e, t_dynarray *arr)
+int			raster_triangles(t_env *env, t_dynarray *arr)
 {
 	t_rasthread	threads[NB_THREADS];
-	t_env		*env;
 	int			i;
 
 	i = -1;
-	env = e;
 	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-
-//	printf("%d elements to raster\n", env->cam.to_raster.nb_cells);
+	//printf("%d elements to raster\n", env->cam.to_raster.nb_cells);
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
 	else
 	{
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, false);
-		manage_threads(threads, &env->cam.to_raster);
+		manage_threads(threads);
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
 	}
 	clear_dynarray(&env->cam.to_raster);

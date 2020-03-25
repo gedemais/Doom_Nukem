@@ -63,3 +63,20 @@ t_vec2d	read_vec2d(char *tok, char start_sep, char end_sep)
 		return ((t_vec2d){INFINITY, INFINITY, INFINITY});
 	return (ret);
 }
+
+int		assign_triangle_texture(t_mesh *m , void *ptr)
+{
+	t_triangle	*t;
+	int			i;
+
+	i = 0;
+	while (i < m->tris.nb_cells)
+	{
+		if (!(t = dyacc(&m->tris, ++i)))
+			return (-1);
+		t->sp = ptr;
+		t->textured = ptr == NULL ? false : true;
+		i++;
+	}
+	return (0);
+}

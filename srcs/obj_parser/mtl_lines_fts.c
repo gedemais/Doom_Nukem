@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 05:00:50 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/21 17:05:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/25 23:13:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		mtl_new(char **toks, t_dynarray *mtls)
 		}
 		i++;
 	}
+	m.textured = false;
 	if (!(m.name = ft_strdup(toks[1])) || push_dynarray(mtls, &m, false))
 		return (-1);
 	return (0);
@@ -57,6 +58,7 @@ int		mtl_color(char **toks, t_dynarray *mtls)
 		cm->color[i - 1] = (t * 255);
 		i++;
 	}
+	cm->color[3] = (1.0f - cm->alpha) * 255;
 	return (0);
 }
 
@@ -68,5 +70,15 @@ int		mtl_alpha(char **toks, t_dynarray *mtls)
 		return (-1);
 	if ((cm->alpha = atof(toks[1])) < 0.0 || cm->alpha > 1.0f)
 		return (-1);
+	return (0);
+}
+
+int		mtl_map_texture(char **toks, t_dynarray *mtls)
+{
+	t_mtl			*cm;
+
+	if (!(cm = dyacc(mtls, mtls->nb_cells - 1)) || ft_tablen(toks) != 2)
+		return (-1);
+	cm->textured = true;
 	return (0);
 }

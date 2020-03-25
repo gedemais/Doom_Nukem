@@ -124,7 +124,7 @@ struct	s_cam
 };
 
 int				triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris);
-int				raster_triangles(void *env, t_dynarray *arr);
+int				raster_triangles(t_env *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
 int				rasterizer(t_env *env, int scene);

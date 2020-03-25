@@ -99,13 +99,13 @@ int		render_dev(void *param)
 	static float	av = 0.0f;
 	static int		it = 0;
 
-	//mesure_time(false);
+	mesure_time(false);
 	env = ((t_env*)param);
 
 	dev_handle_events(env);
 
 	//printf("%f %f\n", env->cam.stats.pitch, env->cam.stats.yaw);
-	printf("%f %f %f | %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z, env->cam.stats.yaw, env->cam.stats.pitch);
+//	printf("%f %f %f | %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z, env->cam.stats.yaw, env->cam.stats.pitch);
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
 	for (int i = 0; i < WDT * HGT; i++)
 		env->cam.z_buffer[i] = -INFINITY;
@@ -117,7 +117,7 @@ int		render_dev(void *param)
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 //	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
-//	av += 1 / mesure_time(true);
+	av += 1 / mesure_time(true);
 //	printf("pos : %f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 	if (av > 2000)
 	{

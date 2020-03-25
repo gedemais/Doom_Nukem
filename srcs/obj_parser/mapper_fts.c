@@ -8,13 +8,10 @@ int		mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok)
 
 	(void)map;
 	i = -1;
+	while ((t = dyacc(&m->tris, ++i)))
+		t->sp = NULL;
 	if (ft_strlen(tok) <= 2)
 		return (0);
-	if (!m->textured)
-	{
-		ft_putendl_fd("No texture vertexs for this mesh", 2);
-		return (-1);
-	}
 	if (tok[0] != '(' || tok[ft_strlen(tok) - 1] != ')')
 	{
 		ft_putendl_fd("Missing parentheses", 2);
@@ -25,8 +22,9 @@ int		mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok)
 	if (load_texture(&env->mlx, path, &m->sprite))
 		return (-1);
 	free(path);
+	i = -1;
 	while ((t = dyacc(&m->tris, ++i)))
-		t->sp = &m->sprite;
+		t->sp = t->textured ? &m->sprite : NULL;
 	return (0);
 }
 

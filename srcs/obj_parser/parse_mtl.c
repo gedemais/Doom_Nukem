@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:12:24 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/21 17:04:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/25 19:15:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ static char		**start_check(char *file)
 static int		load_mtl_data(t_dynarray *mtls, char **toks, unsigned int j)
 {
 	static char		*qualis[MTL_MAX] = {"#", "newmtl", "Ns", "Ka", "Kd", "Ks",
-													"Ke", "Ni", "d", "illum"};
+													"Ke", "Ni", "d", "illum", "map_Kd"};
 	static int	(*mtl_lines_fts[MTL_MAX])(char**, t_dynarray*) = {0, mtl_new, 0,
-										0, mtl_color, 0, 0, 0, mtl_alpha, 0};
+										0, mtl_color, 0, 0, 0, mtl_alpha, 0,
+										mtl_map_texture};
 	
 	if (!ft_strcmp(qualis[j], toks[0]))
 	{

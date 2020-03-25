@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 03:53:16 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/05 05:12:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/25 19:32:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ static void	load_indexes(char **toks, t_face *face, t_mesh *m)
 {
 	int		offset;
 
+	(void)m;
 	face->x = ft_atoi(toks[1]);
-	if (m->textured)
+	if (face->textured)
 	{
 		offset = count_digits(toks[1]) + 1;
 		face->tx = ft_atoi(&toks[1][offset]);
 	}
 	face->y = ft_atoi(toks[2]);
-	if (m->textured)
+	if (face->textured)
 	{
 		offset = count_digits(toks[2]) + 1;
 		face->ty = ft_atoi(&toks[2][offset]);
 	}
 	face->z = ft_atoi(toks[3]);
-	if (m->textured)
+	if (face->textured)
 	{
 		offset = count_digits(toks[3]) + 1;
 		face->tz = ft_atoi(&toks[3][offset]);

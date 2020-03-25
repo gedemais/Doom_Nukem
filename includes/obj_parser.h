@@ -27,6 +27,7 @@ enum	e_mtl
 	MTL_NI,
 	MTL_D,
 	MTL_ILLUM,
+	MTL_MAP_KD,
 	MTL_MAX
 };
 
@@ -68,6 +69,7 @@ struct	s_face
 	int				ty;
 	int				tz;
 	int				color;
+	bool			textured;
 };
 
 struct	s_triangle
@@ -158,6 +160,7 @@ int					get_material_color(t_mesh *m);
 int					mtl_new(char **toks, t_dynarray *mtl);
 int					mtl_color(char **toks, t_dynarray *mtl);
 int					mtl_alpha(char **toks, t_dynarray *mtl);
+int					mtl_map_texture(char **toks, t_dynarray *mtls);
 
 int					get_spawn_position(t_map *map, char **line);
 int					get_cam_direction(t_map *map, char **line);
@@ -169,6 +172,7 @@ int					cross_whitespaces(char *line, int *i);
 int					cross_floats(char *line, int *i);
 t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
 t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
+int					assign_triangle_texture(t_mesh *m , void *ptr);
 
 /*
 ** Mapper functions

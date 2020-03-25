@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/22 15:28:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/25 23:56:29 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.025f
+# define WALK_SPEED 0.2f
 
 enum		e_context_id
 {

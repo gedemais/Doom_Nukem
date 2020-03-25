@@ -4,7 +4,7 @@ char	*maps_paths(unsigned int index)
 {
 	static char	*paths[SCENE_MAX] = {	"resources/maps/cube_textured.obj",
 										"resources/maps/e1.obj",
-										"resources/maps/axis.obj"};
+										"resources/maps/italy.obj"};
 	return (paths[index]);
 }
 
