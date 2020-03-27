@@ -86,10 +86,23 @@ int		mapper_static(t_env *env, t_map *map, t_mesh *m, char *tok)
 
 int		mapper_deps(t_env *env, t_map *map, t_mesh *m, char *tok)
 {
+	t_mesh	*slave;
+	int		i;
+
 	(void)env;
-	(void)map;
-	(void)m;
-	(void)tok;
+	i = -1;
+	slave = NULL;
+	while ((slave = dyacc(&map->meshs, ++i)))
+		if (!ft_strcmp(m->name, tok))
+			break ;
+	if (!slave)
+	{
+		ft_putendl_fd("Dependencie not found", 2);
+		return (-1);
+	}
+	if (m->deps.byte_size == 0 && init_dynarray(&m->deps, sizeof(t_mesh*), 0))
+		return (-1);
+	else if (push_dynarray(&m->deps, &slave, false))
+		return (-1);
 	return (0);
 }
-

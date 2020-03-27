@@ -89,8 +89,8 @@ struct	s_mesh
 {
 	t_dynarray	tris;
 	t_dynarray	txts;
+	t_dynarray	deps;
 	t_sprite	sprite;
-	t_vec3d		new_pos;
 	t_corp		corp;
 	float		yaw;
 	float		pitch;
@@ -129,6 +129,7 @@ struct	s_parser
 };
 
 int					check_line(t_env *env, t_map *map, t_mesh *m, char **stats);
+t_mesh				*find_mesh(t_map *map, char **line, bool *prop);
 
 char				*read_file(int fd);
 char				*maps_paths(unsigned int index);

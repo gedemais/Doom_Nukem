@@ -58,7 +58,7 @@ static int	load_mesh_config(t_env *env, t_map *map, t_mesh *m, char *line)
 	return (0);
 }
 
-static t_mesh	*find_mesh(t_map *map, char **line, bool *prop)
+t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 {
 	t_mesh	*m;
 	int		i;
