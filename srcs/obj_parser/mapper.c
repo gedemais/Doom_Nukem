@@ -44,13 +44,13 @@ char	**get_file_lines(int fd)
 	return (ret);
 }
 
-static int	load_mesh_config(t_env *env, t_map *map, t_mesh *m, char *line)
+static int	load_mesh_config(t_env *env, t_mesh *m, char *line)
 {
 	char		**stats;
 
 	if (!(stats = ft_strsplit(line, "|")))
 		return (-1);
-	if (check_line(env, map, m, stats))
+	if (check_line(env, m, stats))
 	{
 		free(stats);
 		return (-1);
@@ -65,6 +65,9 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 
 	i = 0;
 	*prop = true;
+	PUT
+	if (!line)
+		return (NULL);
 	if (!ft_strcmp(line[0], "spawn"))
 	{
 		if (get_spawn_position(map, line))
@@ -80,6 +83,7 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 	while (i < map->nmesh)
 	{
 		m = dyacc(&map->meshs, i);
+		printf("|%s|%s|\n", m->name, line[0]);
 		if (!ft_strcmp(m->name, line[0]))
 			return (m);
 		i++;
@@ -99,16 +103,9 @@ int			load_map_config(t_env *env, t_map *map, char *map_path)
 	i = 3;
 	if ((fd = open_mapconf(map_path)) == -1 || !(lines = get_file_lines(fd)))
 		return (0);
-	if (ft_tablen(lines) - 6 != map->nmesh)
-	{
-		ft_putstr_fd(NEL_MAP, 2);
-		ft_putendl_fd(map_path, 2);
-		ft_free_ctab(lines);
-		return (-1);
-	}
 	while (lines[++i])
 		if ((!(m = find_mesh(map, ft_strsplit(lines[i], "|"), &prop)) && !prop)
-			|| (!prop && load_mesh_config(env, map, m, lines[i])))
+			|| (!prop && load_mesh_config(env, m, lines[i])))
 		{
 			ft_free_ctab(lines);
 			return (-1);

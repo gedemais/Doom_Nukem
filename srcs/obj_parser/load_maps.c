@@ -21,7 +21,7 @@ int			load_maps(t_env *env)
 		for (int j = 0; j < env->maps[i].nmesh; j++)
 		{
 			m = dyacc(&env->maps[i].meshs, j);
-  		printf("%s : %d triangles\n", m->name, m->tris.nb_cells);
+			printf("%s : %d triangles\n", m->name, m->tris.nb_cells);
 		}
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;

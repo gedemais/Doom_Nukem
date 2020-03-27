@@ -1,12 +1,11 @@
 #include "main.h"
 
-int		mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok)
+int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 {
 	t_triangle	*t;
 	char		*path;
 	int			i;
 
-	(void)map;
 	i = -1;
 	while ((t = dyacc(&m->tris, ++i)))
 		t->sp = NULL;
@@ -28,12 +27,10 @@ int		mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok)
 	return (0);
 }
 
-int		mapper_position(t_env *env, t_map *map, t_mesh *m, char *tok)
+int		mapper_position(t_env *env, t_mesh *m, char *tok)
 {
 	t_vec3d		pos;
 
-	(void)env;
-	(void)map;
 	if (ft_strlen(tok) <= 2)
 		return (0);
 	else
@@ -43,16 +40,15 @@ int		mapper_position(t_env *env, t_map *map, t_mesh *m, char *tok)
 		ft_putendl_fd("Invalid mesh position's vector", 2);
 		return (-1);
 	}
-	tp_mesh(m, pos);
+	tp_mesh(&env->maps[env->scene], m, pos);
 	return (0);
 }
 
-int		mapper_speed(t_env *env, t_map *map, t_mesh *m, char *tok)
+int		mapper_speed(t_env *env, t_mesh *m, char *tok)
 {
 	t_vec3d		speed;
 
 	(void)env;
-	(void)map;
 	if (ft_strlen(tok) <= 2)
 		return (0);
 	else
@@ -66,10 +62,9 @@ int		mapper_speed(t_env *env, t_map *map, t_mesh *m, char *tok)
 	return (0);
 }
 
-int		mapper_static(t_env *env, t_map *map, t_mesh *m, char *tok)
+int		mapper_static(t_env *env, t_mesh *m, char *tok)
 {
 	(void)env;
-	(void)map;
 	if (!ft_inbounds(ft_strlen(tok), 4, 5))
 		return (-1);
 	if (!ft_strcmp(tok, "false"))
@@ -84,25 +79,32 @@ int		mapper_static(t_env *env, t_map *map, t_mesh *m, char *tok)
 	return (0);
 }
 
-int		mapper_deps(t_env *env, t_map *map, t_mesh *m, char *tok)
+int		mapper_deps(t_env *env, t_mesh *m, char *tok)
 {
-	t_mesh	*slave;
+	t_mesh	*master;
 	int		i;
 
-	(void)env;
 	i = -1;
-	slave = NULL;
-	while ((slave = dyacc(&map->meshs, ++i)))
-		if (!ft_strcmp(m->name, tok))
-			break ;
-	if (!slave)
+	if (!tok || !tok[0])
+		return (0);
+	while (++i < env->maps[env->scene].meshs.nb_cells)
 	{
-		ft_putendl_fd("Dependencie not found", 2);
+		master = dyacc(&env->maps[env->scene].meshs, i);
+		if (!ft_strcmp(master->name, tok) && ft_strcmp(m->name, tok))
+			break ;
+	}
+	if (i == env->maps[env->scene].meshs.nb_cells || (!master->deps.byte_size
+		&& init_dynarray(&master->deps, sizeof(int), 0)))
+	{
+		ft_putendl_fd("Mesh dependencie not found", 2);
 		return (-1);
 	}
-	if (m->deps.byte_size == 0 && init_dynarray(&m->deps, sizeof(t_mesh*), 0))
+	if (push_dynarray(&master->deps, &m->index, false))
 		return (-1);
-	else if (push_dynarray(&m->deps, &slave, false))
+	if (check_deps_cycle(master->deps))
+	{
+		ft_putendl_fd("Dependencie cycle detected", 2);
 		return (-1);
+	}
 	return (0);
 }

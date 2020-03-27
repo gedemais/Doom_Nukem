@@ -2,6 +2,13 @@
 
 echo "Dependencies check..."
 
+if brew ls --versions pkg-config > /dev/null; then
+	echo "pkg-config found"
+else
+	echo "pkg-config missing, installing it with brew..."
+	brew install pkg-config && brew link pkg-config
+fi
+
 if brew ls --versions libsndfile > /dev/null; then
 	echo "libsndfile found"
 else

@@ -49,7 +49,7 @@ LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 
 all: $(NAME)
 
-install: install.sh
+install: scripts/install.sh
 	@bash scripts/install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)

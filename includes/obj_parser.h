@@ -128,7 +128,7 @@ struct	s_parser
 	int				tri;
 };
 
-int					check_line(t_env *env, t_map *map, t_mesh *m, char **stats);
+int					check_line(t_env *env, t_mesh *m, char **stats);
 t_mesh				*find_mesh(t_map *map, char **line, bool *prop);
 
 char				*read_file(int fd);
@@ -136,6 +136,8 @@ char				*maps_paths(unsigned int index);
 void				init_states(char states[PS_MAX][PS_MAX]);
 int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);
 int					load_face(char **toks, t_map *map, t_face *face);
+
+int					load_map_config(t_env *env, t_map *map, char *map_path);
 
 bool				check_float(char *tok);
 bool				check_number(char *tok);
@@ -178,10 +180,10 @@ int					assign_triangle_texture(t_mesh *m , void *ptr);
 /*
 ** Mapper functions
 */
-int					mapper_texture(t_env *env, t_map *map, t_mesh *m, char *tok);
-int					mapper_position(t_env *env, t_map *map, t_mesh *m, char *tok);
-int					mapper_speed(t_env *env, t_map *map, t_mesh *m, char *tok);
-int					mapper_static(t_env *env, t_map *map, t_mesh *m, char *tok);
-int					mapper_deps(t_env *env, t_map *map, t_mesh *m, char *tok);
+int					mapper_texture(t_env *env, t_mesh *m, char *tok);
+int					mapper_position(t_env *env, t_mesh *m, char *tok);
+int					mapper_speed(t_env *env, t_mesh *m, char *tok);
+int					mapper_static(t_env *env, t_mesh *m, char *tok);
+int					mapper_deps(t_env *env, t_mesh *m, char *tok);
 
 #endif

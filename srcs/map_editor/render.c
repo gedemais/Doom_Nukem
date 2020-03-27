@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/10 22:04:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/27 16:29:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		render_maped(void *param)
 /********************************************/
 /********************************************/
 
-	handle_events_me(env);	
+	handle_events_me(env);
 	
 	
 	blit_sprite(env->mlx.img_data, env->sprites[SP_EDT_BGD], (t_point){0, 0}, 1.0f);

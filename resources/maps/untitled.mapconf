@@ -4,18 +4,18 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Sol_Plane|{}|[]|true|()
-Cube_Cube.001|{}|[]|true|()
-Cube.001_Cube.002|{}|[]|true|()
-Cone|{}|[]|true|()
-Marche_Cube.003|{}|[]|true|()
-Marches-1_Cube.004|{}|[]|true|()
-Marches-3_Cube.008|{}|[]|true|()
-Marches-2_Cube.007|{}|[]|true|()
-Marches-6_Cube.012|{}|[]|true|()
-Marches-7_Cube.011|{}|[]|true|()
-Marches-5_Cube.010|{}|[]|true|()
-Marches-4_Cube.009|{}|[]|true|()
-Marelle_1_Plane.001|{}|[]|true|()
-Marelle-2_Cube.013|{}|[]|true|()
-Marelle-3_Cube.014|{}|[]|true|()
+Sol_Plane|{}|[]|true|()|
+Cube_Cube.001|{}|[]|true|()|
+Cube.001_Cube.002|{}|[]|true|()|
+Cone|{}|[]|true|()|
+Marche_Cube.003|{}|[]|true|()|
+Marches-1_Cube.004|{}|[]|true|()|
+Marches-3_Cube.008|{}|[]|true|()|
+Marches-2_Cube.007|{}|[]|true|()|
+Marches-6_Cube.012|{}|[]|true|()|
+Marches-7_Cube.011|{}|[]|true|()|
+Marches-5_Cube.010|{}|[]|true|()|
+Marches-4_Cube.009|{}|[]|true|()|
+Marelle_1_Plane.001|{}|[]|true|()|
+Marelle-2_Cube.013|{}|[]|true|()|
+Marelle-3_Cube.014|{}|[]|true|()|

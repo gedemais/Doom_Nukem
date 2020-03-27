@@ -4,8 +4,8 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Esfera.002_Esfera.006|{}|[]|true|()
-Esfera.003_Esfera.007|{}|[]|true|()
-hands&leg.001_ice.003|{}|[]|true|()
-head.001_ice.004|{}|[]|true|()
-torso.001_ice.005|{}|[]|true|()
+Esfera.002_Esfera.006|{}|[]|true|()|
+Esfera.003_Esfera.007|{}|[]|true|()|
+hands&leg.001_ice.003|{}|[]|true|()|
+head.001_ice.004|{}|[]|true|()|
+torso.001_ice.005|{}|[]|true|()|

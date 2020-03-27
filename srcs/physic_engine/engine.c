@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/10 15:02:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/27 20:06:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	update_positions(t_env *env)
 		//	printf("x = %f y = %f z = %f\n",m->corp.v.x, m->corp.v.y,m->corp.v.z);
 		//	printf("%d\n",env->phy_env.tps);
 			phy_gravitax(env, m, i);
-			translate_mesh(m, m->corp.v);
+			translate_mesh(&env->maps[env->scene], m, m->corp.v);
 		}
 		i++;
 	}

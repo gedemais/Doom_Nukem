@@ -38,17 +38,17 @@ int			get_cam_direction(t_map *map, char **line)
 	return (0);
 }
 
-int			check_line(t_env *env, t_map *map, t_mesh *m, char **stats)
+int			check_line(t_env *env, t_mesh *m, char **stats)
 {
 	unsigned int	i;
-	static int		(*mapper_fts[PS_MAX])(t_env*, t_map*, t_mesh*, char*) = {
+	static int		(*mapper_fts[PS_MAX])(t_env*, t_mesh*, char*) = {
 											NULL, mapper_position, mapper_speed,
 											mapper_static, mapper_texture,
 											mapper_deps};
 	 i = 1;
 	while (stats[i])
 	{
-		if (mapper_fts[i](env, map, m, stats[i]))
+		if (mapper_fts[i](env, m, stats[i]))
 			return (-1);
 		i++;
 	}

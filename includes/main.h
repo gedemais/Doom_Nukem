@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 23:56:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/27 20:26:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.2f
+# define WALK_SPEED 0.1f
 
 enum		e_context_id
 {
@@ -127,7 +127,6 @@ int				init_openal(t_sound *env);
 int				init_camera(t_cam *cam);
 int				load_maps(t_env *env);
 int				load_object(int fd, char *line);
-int				load_map_config(t_env *env, t_map *map, char *map_path);
 
 /*
 ** MLX

@@ -4,21 +4,21 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Plane|{}|[]|true|()
-Plane.001|{}|[]|true|()
-Plane.002|{}|[]|true|()
-Plane.003|{}|[]|true|()
-Plane.004|{}|[]|true|()
-Sphere|{}|[]|true|()
-Sphere.001|{}|[]|true|()
-Sphere.002|{}|[]|true|()
-Cube_Cube.001|{}|[]|true|()
-Cube.001_Cube.002|{}|[]|true|()
-Cube.002_Cube.003|{}|[]|true|()
-Cube.005_Cube.006|{}|[]|true|()
-Cube.004_Cube.005|{}|[]|true|()
-Cube.003_Cube.004|{}|[]|true|()
-Cube.006_Cube.007|{}|[]|true|()
-Cube.007_Cube.008|{}|[]|true|()
-Cube.008_Cube.009|{}|[]|true|()
-Plane.005|{}|[]|true|()
+Plane|{}|[]|true|()|
+Plane.001|{}|[]|true|()|
+Plane.002|{}|[]|true|()|
+Plane.003|{}|[]|true|()|
+Plane.004|{}|[]|true|()|
+Sphere|{}|[]|true|()|
+Sphere.001|{}|[]|true|()|
+Sphere.002|{}|[]|true|()|
+Cube_Cube.001|{}|[]|true|()|
+Cube.001_Cube.002|{}|[]|true|()|
+Cube.002_Cube.003|{}|[]|true|()|
+Cube.005_Cube.006|{}|[]|true|()|
+Cube.004_Cube.005|{}|[]|true|()|
+Cube.003_Cube.004|{}|[]|true|()|
+Cube.006_Cube.007|{}|[]|true|()|
+Cube.007_Cube.008|{}|[]|true|()|
+Cube.008_Cube.009|{}|[]|true|()|
+Plane.005|{}|[]|true|()|

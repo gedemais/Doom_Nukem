@@ -9,6 +9,6 @@ echo "# Coordonnees d'apparition sur la map " >> tmp
 echo "spawn|{0.0, 0.0, 0.0}" >> tmp
 echo "orientation|{0.0, 0.0}" >> tmp
 
-cat $2 | sed -e 's/$/|{}|[]|true|()/' >> tmp
+cat $2 | sed -e 's/$/|{}|[]|true|()|/' >> tmp
 
-cat tmp > $2 # rajoute un pipe a la fin de la ligne
+cat tmp > $2

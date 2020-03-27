@@ -4,5 +4,5 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-teeth_Cube.002|{}|[]|true|()
-body_Cube|{}|[]|true|()
+teeth_Cube.002|{}|[]|true|()|
+body_Cube|{}|[]|true|()|

@@ -4,4 +4,7 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Cube|{}|[]|true|()
+Cube|{}|[]|true|()|
+Sphere|{}|[]|true|()|Cube
+Sphere.001|{}|[]|true|()|Cube
+Sphere.002|{}|[]|true|()|Cube

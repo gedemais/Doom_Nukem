@@ -4,9 +4,9 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Cube.002_Cube.003|{}|[]|true|()
-Gun_Cube.001|{}|[]|true|()
-Cube.005_Cube.000|{}|[]|true|()
-Gun_trigger_Cube.002|{}|[]|true|()
-hulle_Cube|{}|[]|true|()
-bullet_Cube.005|{}|[]|true|()
+Cube.002_Cube.003|{}|[]|true|()|
+Gun_Cube.001|{}|[]|true|()|
+Cube.005_Cube.000|{}|[]|true|()|
+Gun_trigger_Cube.002|{}|[]|true|()|
+hulle_Cube|{}|[]|true|()|
+bullet_Cube.005|{}|[]|true|()|
