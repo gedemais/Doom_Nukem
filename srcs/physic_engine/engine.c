@@ -16,7 +16,7 @@ static void	phy_gravitax(t_env *env, t_mesh *m, int i)
 {
 	static  t_vec3d		gravitax;
 
-	gravitax = (t_vec3d){0, env->phy_env.gravity * env->phy_env.tps , 0 ,0};
+	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity , 0 ,0};
 	if (env->maps[env->scene].stats[i] == false)
 	{
 		m->corp.v = vec_sub(m->corp.v, gravitax);
@@ -36,23 +36,36 @@ static t_vec3d	update_angle(t_env *env, int index)
 	t_vec3d		norm;
 	float		frott;
 
-	frott = 0.85;
+	frott = 0.95;
 	c = dyacc(&env->phy_env.collides, index);
 	v = c->a->corp.v;
 	norm = c->b->corp.norm;
 	v2 = (t_vec3d){v.x, v.y, v.z, 0.0f};
 	c->dot = vec_dot(norm, v);
-	if (fabs(norm.x) > 0)									//bounce vertical x
-		v2 = (t_vec3d){-v.x * frott, v.y * frott, 0, 0.0f}; 
-	else if (fabs(norm.y) > 0)								//bounce vertical y
+	printf("norm x %f y %f z %f\n", norm.x, norm.y, norm.z);
+	printf("fabs norm x %f y %f z %f\n", fabs(norm.x), fabs(norm.y), fabs(norm.z));
+	if (fabs(norm.x) == 1)									//bounce vertical x
 	{
-		v2 = (t_vec3d){v.x * frott, -(v.y) * frott, 0, 0.0f};
+		printf("a\n");
+		v2 = (t_vec3d){-v.x * frott, v.y, v.z, 0.0f}; 
+	}
+	else if (fabs(norm.y) == 1)								//bounce vertical y
+	{
+		printf("b\n");
+		v2 = (t_vec3d){v.x * frott, -(v.y) * frott, v.z * frott, 0.0f};
 		if ((((fabs(v2.y) < 0.3 || vec_norm(v2) > 20) && norm.y == 1)))
 		{
 			env->phy_env.tps = 0;							//stop gravity
 			env->maps[env->scene].stats[c->i_a] = true;		//turn to static
 			v2 = (t_vec3d){v2.x, 0, 0, 0};					//stop motion
 		}
+	}
+	else if (fabs(norm.z) == 1)
+	{
+		printf("c\n");
+		printf("v2 = x %f y %f z %f\n", v2.x, v2.y, v2.z);
+
+		v2 = (t_vec3d){v.x, v.y, -v.z, 0.0f};
 	}
 	return (v2);
 }

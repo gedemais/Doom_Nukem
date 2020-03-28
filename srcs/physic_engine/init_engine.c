@@ -117,8 +117,8 @@ int		init_physic_engine(t_env *env)
 		env->maps[i].stats_cpy[j] = env->maps[env->scene].stats[j];
 		if (nb_m == 0)
 		{
-			m->corp.vo = (t_vec3d){0, 0.5, 0.0f, 0.0f};
-			m->corp.pos = (t_vec3d){0, 3, 0.0f, 0.0f};
+			m->corp.vo = (t_vec3d){0, 0.2, 0.2f, 0.0f};
+			m->corp.pos = (t_vec3d){9, 10000, 0.0f, 0.0f};
 			m->corp.v = m->corp.vo;
 			printf("name = %s\n", m->name);
 			printf("------v%f %f %f-------\n",m->corp.v.x, m->corp.v.y, m->corp.v.z);
