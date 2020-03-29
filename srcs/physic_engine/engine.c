@@ -128,6 +128,7 @@ static void pause_position(t_env *env)
 				vec3d_swap(&m->corp.v, &m->corp.v_cpy); // cancel v and save in vec_cpy
 			else
 			{
+				
 				vec3d_swap(&m->corp.v_cpy, &m->corp.v); // swap in v and cancel the vec_cpy
 				m->corp.v_cpy = zero_vector();
 			}	

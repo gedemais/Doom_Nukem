@@ -39,6 +39,13 @@ int		nonzero_vector(t_vec3d vec)
 		return (0);
 }
 
+void	print_vec(t_vec3d vec)
+{
+	printf("vec.x = %f",vec.x);
+	printf(" vec.y = %f",vec.y);
+	printf(" vec.z = %f\n",vec.z);
+}
+
 t_vec3d zero_vector()
 {
 	return ((t_vec3d){0,0,0,0});

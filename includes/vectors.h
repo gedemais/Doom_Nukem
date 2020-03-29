@@ -44,6 +44,7 @@ float			vec_sdist(t_vec3d o, t_vec3d v);
 t_vec3d			vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n,
 												t_vec3d s_e[2], float *tmp);
 
+void			print_vec(t_vec3d vec);
 float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
 
 void			vec2d_swap(t_vec2d *a, t_vec2d *b);
