@@ -19,6 +19,7 @@ struct	s_corp
 	t_vec3d		acc;
 	t_vec3d		vo;
 	t_vec3d		v;
+	t_vec3d		v_cpy; //pause
 	t_vec3d		pos;
 	t_vec3d		o;
 	t_vec3d		norm;
