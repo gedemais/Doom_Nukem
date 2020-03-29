@@ -80,7 +80,7 @@ static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray 
 	i = 0;
 	t.illum = vec_dot(normal, env->cam.light);
 	t.color = shade_color(t.color, t.illum);
-
+	t.normal = normal;
 	// View matrix
 	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);
 	t.points[1] = multiply_matrix(env->cam.v_m, t.points[1]);
@@ -91,7 +91,6 @@ static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray 
 
 	while (i < nclip)
 	{
-		clipped[i].sp = t.sp;
 		if (project_triangle(env, &t, clipped[i], tris))
 			return (-1);
 		i++;
@@ -99,7 +98,7 @@ static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray 
 	return (0);
 }
 
-int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
+int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris, t_mesh *m)
 {
 	t_vec3d		normal;
 	t_vec3d		line1;
@@ -114,12 +113,12 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris)
 	t.points[0] = matrix_mult_vec(env->cam.w_m, t.points[0]);
 	t.points[1] = matrix_mult_vec(env->cam.w_m, t.points[1]);
 	t.points[2] = matrix_mult_vec(env->cam.w_m, t.points[2]);
-
 	line1 = vec_sub(t.points[1], t.points[0]);
 	line2 = vec_sub(t.points[2], t.points[0]);
 	normal = vec_cross(line1, line2);
 	normal = vec_normalize(normal);
-
+	m->corp.norm = normal;
+	
 	if (vec_dot(normal, vec_sub(t.points[0], env->cam.stats.pos)) < 0.0f)
 	{
 		if (clip_near_plane(env, t, normal, tris))

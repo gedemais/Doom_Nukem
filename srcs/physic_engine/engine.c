@@ -16,10 +16,15 @@ static void	phy_gravitax(t_env *env, t_mesh *m, int i)
 {
 	static  t_vec3d		gravitax;
 
-	gravitax = (t_vec3d){0, env->phy_env.gravity * env->phy_env.tps , 0 ,0};
+	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity , 0 ,0};
+	printf("%f\n",gravitax.y);
 	if (env->maps[env->scene].stats[i] == false)
+	{
 		m->corp.v = vec_sub(m->corp.v, gravitax);
-	env->phy_env.tps++;
+//		printf("tps ? %d\n",env->phy_env.tps);
+		if (env->phy_env.tps < 900)
+			env->phy_env.tps++;
+	}
 }
 
 
@@ -32,38 +37,27 @@ static t_vec3d	update_angle(t_env *env, int index)
 	t_vec3d		norm;
 	float		frott;
 
-	frott = 0.75;
+	frott = 0.95;
 	c = dyacc(&env->phy_env.collides, index);
 	v = c->a->corp.v;
 	norm = c->b->corp.norm;
-	v2 = (t_vec3d){v.x, v.y, 0, 0.0f};
+	v2 = (t_vec3d){v.x, v.y, v.z, 0.0f};
 	c->dot = vec_dot(norm, v);
-	printf("v %f %f %f \n",v2.x, v2.y, v2.z);
-	printf("norm %f %f %f \n",norm.x, norm.y, norm.z);
-	printf("dot = %f\n",c->dot);
-	if (fabs(norm.x) > 0)
+	if (fabs(norm.x) == 1)									//bounce vertical x
+		v2 = (t_vec3d){-v.x * frott, v.y, v.z, 0.0f}; 
+	else if (fabs(norm.y) == 1)								//bounce vertical y
 	{
-  	//signe de c.dot => signe de rotation
-  	//c.dot > 0 => rotation horaire 90
-  	//		< 0 => rotation antihoraire 90
-		printf("a\n");
-		v2 = (t_vec3d){-v.x * frott, v.y * frott, 0, 0.0f};
+		v2 = (t_vec3d){v.x * frott, -(v.y) * frott, v.z * frott, 0.0f};
+		if ((((fabs(v2.y) < 0.3 || vec_norm(v2) > 20) && norm.y == 1)))
+		{
+			env->phy_env.tps = 0;							//stop gravity
+			env->maps[env->scene].stats[c->i_a] = true;		//turn to static
+			v2 = (t_vec3d){v2.x, 0, 0, 0};					//stop motion
+		}
 	}
-	else if (fabs(norm.y) > 0)
-	{
-		v2 = (t_vec3d){v.x * frott, -(v.y * frott), 0, 0.0f};
-	}
+	else if (fabs(norm.z) == 1)
+		v2 = (t_vec3d){v.x, v.y, -v.z * frott, 0.0f};
 	return (v2);
-}
-static int	test_choc_vertical(t_env *env, t_collide	*c)
-{
-	t_mesh *m;
-
-	m = dyacc(&env->maps[env->scene].meshs, c->i_b);
-	if (c->dot > 0 && m->corp.norm.y == 1.0f)
-		return (1);
-	else
-		return (0);
 }
 
 static void	update_speeds(t_env *env)
@@ -71,46 +65,84 @@ static void	update_speeds(t_env *env)
 	t_collide	*c;
 	int			i;
 	float			ratio;
-
+	t_vec3d		norm;
+	
 	i = 0;
-	while (i < env->phy_env.collides.nb_cells)
+	while (i < env->phy_env.collides.nb_cells) //if collides
 	{
 		c = dyacc(&env->phy_env.collides, i);
 		ratio = c->a->corp.v.y / env->phy_env.tps - vec_norm(c->a->corp.v);
-		c->a->corp.v = update_angle(env, i);
-		printf("ratio : %f\n", fabs(ratio));
-		 if (test_choc_vertical(env, c) == 1 && fabs(ratio) < 0.07)
+		c->a->corp.v = update_angle(env, i); //bounce
+		norm = c->b->corp.norm;
+
+
+	/* try to stop it ... may be after two or three bounce?? 	
+		if (((fabs(c->a->corp.v.y) < 0.005 && fabs(c->a->corp.v.x) < 0.005) && norm.y == 1 && c->a->corp.pos.y < 2))
 		{
-			c->a->corp.v = (t_vec3d){0, 0, 0, 0};
 			env->maps[env->scene].stats[c->i_a] = true;
-			//tps = 0;
+			c->a->corp.v = (t_vec3d){0, 0, 0, 0};
+			env->phy_env.tps = 0;
 		}
-		else
-			printf("f_abs(ratio) v_apres x = %f y = %f z = %f\n---------------\n", c->a->corp.v.x, c->a->corp.v.y, c->a->corp.v.z);
-		i++;
+	*/	i++;
 	}
 }
 
+
 static void	update_positions(t_env *env)
 {
-	t_mesh *m;
-	int		i;
-
-	i= 0;
+	t_vec3d		save;
+	t_events	*e;
+	t_mesh		*m;
+	int			i;
+	
+	e = &env->events;
+	i = 0;
+	save = (t_vec3d){0,0,0,0};
 	while (i < env->maps[env->scene].meshs.nb_cells)
 	{
 		m = dyacc(&env->maps[env->scene].meshs, i);		
 		if (env->maps[env->scene].stats[i] == false)
 		{
-		//	printf("x = %f y = %f z = %f\n",m->corp.v.x, m->corp.v.y,m->corp.v.z);
-		//	printf("%d\n",env->phy_env.tps);
 			phy_gravitax(env, m, i);
 			translate_mesh(&env->maps[env->scene], m, m->corp.v);
 		}
+		/* try put object inside the map after stop speeds */	
+//		else if (m->corp.vo.x != 0 || m->corp.vo.y != 0|| m->corp.vo.z != 0)
+//			off_plan(env, m, i);	
 		i++;
 	}
 }
-/*
+
+static void pause_position(t_env *env)
+{
+	t_mesh		*m;		
+	int			i;
+
+	i = 0;
+	while (i < env->maps[env->scene].meshs.nb_cells)
+	{
+		m = dyacc(&env->maps[env->scene].meshs, i);		
+		if (env->maps[env->scene].stats[i] == false)
+		{
+			if (nonzero_vector(m->corp.v))
+				vec3d_swap(&m->corp.v, &m->corp.v_cpy); // cancel v and save in vec_cpy
+			else
+			{
+				
+				vec3d_swap(&m->corp.v_cpy, &m->corp.v); // swap in v and cancel the vec_cpy
+				m->corp.v_cpy = zero_vector();
+			}	
+			if (env->phy_env.gravity != 0)
+				env->phy_env.gravity = 0;
+			else
+				env->phy_env.gravity = 0.0000981;
+		}
+		i++;
+	}	
+		
+
+}
+
 static void	color_collides(t_env *env)
 {
 	t_collide	*m;
@@ -140,20 +172,20 @@ static void	color_collides(t_env *env)
 			t->color = 0xff0000;
 		}
 	}
-}*/
-
+}
 int		physic_engine(t_env *env)
 {
-	unsigned int	i;
-	
-	i = 0;
+	t_events	*e;
 
+	e = &env->events;
 	ft_memset(env->maps[env->scene].colls, 0, env->maps[env->scene].nmesh);
 	report_collisions(env);
-//	color_collides(env);
+	color_collides(env);
 	update_speeds(env);
 	update_positions(env);
-	//printf("%d collisions\n", env->phy_env.collides.nb_cells);
+	if (e->keys[KEY_P])
+		pause_position(env);
+//	stop_speed(env);
 	clear_dynarray(&env->phy_env.collides);
 	return (0);
 }

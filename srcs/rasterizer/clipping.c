@@ -34,6 +34,7 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 	{
 		clipped[i].color = t.color;
 		clipped[i].illum = t.illum;
+		clipped[i].normal = t.normal;
 		clipped[i].sp = t.sp;
 		if (push_dynarray(to_raster, &clipped[i], false))
 			return ;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mtl_lines_fts.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 05:00:50 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 23:13:53 by gedemais         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "main.h"
 
 int		mtl_new(char **toks, t_dynarray *mtls)
@@ -26,7 +14,7 @@ int		mtl_new(char **toks, t_dynarray *mtls)
 		j = 0;
 		while (toks[i][j])
 		{
-			if (!ft_isprint(toks[i][j]))
+			if (!ft_isalnum(toks[i][j]) && toks[i][j] != '_' && toks[i][j] != '.')
 				return (-1);
 			j++;
 		}

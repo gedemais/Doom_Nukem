@@ -49,6 +49,7 @@ enum	e_scene_id
 	SCENE_A,
 	SCENE_B,
 	SCENE_C,
+	SCENE_D,
 	SCENE_MAX
 };
 

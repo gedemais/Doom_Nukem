@@ -69,7 +69,9 @@ int		rasterizer(t_env *env, int scene)
 		while (j < m->faces.nb_cells)
 		{
 			t = *(t_triangle*)(dyacc(&m->tris, j));
-			triangle_pipeline(env, t, &env->cam.to_clip);
+			triangle_pipeline(env, t, &env->cam.to_clip, m);
+		//	printf("------%f %f %f-------\n",m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
+		//	printf("------%s-------\n",m->name);
 			j++;
 		}
 	}

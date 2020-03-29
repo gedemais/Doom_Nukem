@@ -12,3 +12,4 @@ echo "orientation|{0.0, 0.0}" >> tmp
 cat $2 | sed -e 's/$/|{}|[]|true|()|/' >> tmp
 
 cat tmp > $2
+rm tmp

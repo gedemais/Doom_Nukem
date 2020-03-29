@@ -174,7 +174,9 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 			return (-1);
 		i++;
 	}
-	if (load_map_data(map))
+	if (load_map_data(map)
+		|| !(map->stats = (bool*)malloc(sizeof(bool) * map->nmesh))
+		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh)))
 		return (-1);
 	ft_free_ctab(parser.lines);
 	free(parser.file);
