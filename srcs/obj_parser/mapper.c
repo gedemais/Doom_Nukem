@@ -65,7 +65,6 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 
 	i = 0;
 	*prop = true;
-	PUT
 	if (!line)
 		return (NULL);
 	if (!ft_strcmp(line[0], "spawn"))
@@ -83,7 +82,6 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 	while (i < map->nmesh)
 	{
 		m = dyacc(&map->meshs, i);
-		printf("|%s|%s|\n", m->name, line[0]);
 		if (!ft_strcmp(m->name, line[0]))
 			return (m);
 		i++;
@@ -111,5 +109,7 @@ int			load_map_config(t_env *env, t_map *map, char *map_path)
 			return (-1);
 		}
 	ft_free_ctab(lines);
+	if (check_deps_cycle(&map->meshs))
+		return (-1);
 	return (0);
 }

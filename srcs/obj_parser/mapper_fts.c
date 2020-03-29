@@ -90,7 +90,7 @@ int		mapper_deps(t_env *env, t_mesh *m, char *tok)
 	while (++i < env->maps[env->scene].meshs.nb_cells)
 	{
 		master = dyacc(&env->maps[env->scene].meshs, i);
-		if (!ft_strcmp(master->name, tok) && ft_strcmp(m->name, tok))
+		if (!ft_strcmp(master->name, tok))
 			break ;
 	}
 	if (i == env->maps[env->scene].meshs.nb_cells || (!master->deps.byte_size
@@ -101,10 +101,5 @@ int		mapper_deps(t_env *env, t_mesh *m, char *tok)
 	}
 	if (push_dynarray(&master->deps, &m->index, false))
 		return (-1);
-	if (check_deps_cycle(master->deps))
-	{
-		ft_putendl_fd("Dependencie cycle detected", 2);
-		return (-1);
-	}
 	return (0);
 }

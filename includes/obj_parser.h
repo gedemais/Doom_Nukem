@@ -186,4 +186,6 @@ int					mapper_speed(t_env *env, t_mesh *m, char *tok);
 int					mapper_static(t_env *env, t_mesh *m, char *tok);
 int					mapper_deps(t_env *env, t_mesh *m, char *tok);
 
+int					check_deps_cycle(t_dynarray *meshs);
+
 #endif

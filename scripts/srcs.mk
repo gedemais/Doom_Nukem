@@ -24,6 +24,7 @@ SRCS_NAME =	main.c\
 			map_editor/setup_me.c\
 			\
 			obj_parser/load_maps.c\
+			obj_parser/dependencies.c\
 			obj_parser/mapper.c\
 			obj_parser/mapper_fts.c\
 			obj_parser/mapper_values.c\
