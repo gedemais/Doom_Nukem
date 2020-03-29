@@ -58,24 +58,30 @@ int		mapper_speed(t_env *env, t_mesh *m, char *tok)
 		ft_putendl_fd("Invalid mesh speed's vector", 2);
 		return (-1);
 	}
-	m->corp.vo = speed;
+	if (!strcmp(m->name, "Cube"))
+		print_vec(speed);
+	m->corp.v = speed;
 	return (0);
 }
 
 int		mapper_static(t_env *env, t_mesh *m, char *tok)
 {
+	t_map	*map;
+
 	(void)env;
+	map = *current_map();
 	if (!ft_inbounds(ft_strlen(tok), 4, 5))
 		return (-1);
 	if (!ft_strcmp(tok, "false"))
-		m->corp.stats = false;
+		map->stats[m->index] = false;
 	else if (!ft_strcmp(tok, "true"))
-		m->corp.stats = true;
+		map->stats[m->index] = true;
 	else
 	{
 		ft_putendl_fd("Invalid static qualifier", 2);
 		return (-1);
 	}
+	map->stats_cpy[m->index]= map->stats[m->index];
 	return (0);
 }
 

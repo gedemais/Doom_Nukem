@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 20:49:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/29 21:25:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ int		init_physic_engine(t_env *env)
 //		loading_bar(i, SCENE_MAX, false);
 		//printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
-		if (!(env->maps[i].stats_cpy = (bool*)malloc(sizeof(bool) * env->maps[i].nmesh)))
-			return (-1);
 		while (j < env->maps[i].nmesh)
 		{
 			//printf("mesh %d\n", j);
@@ -111,10 +109,9 @@ int		init_physic_engine(t_env *env)
 		i++;
 	}
 	i--;
-	while (++nb_m < 7)
+/*	while (++nb_m < 7)
 	{
 		m = dyacc(&env->maps[i].meshs, nb_m);
-		env->maps[i].stats_cpy[j] = env->maps[env->scene].stats[j];
 		if (nb_m == 0)
 		{
 			m->corp.vo = (t_vec3d){0, 0.2, 0.2f, 0.0f};
@@ -127,7 +124,7 @@ int		init_physic_engine(t_env *env)
 			printf("numero = %d\n", i);
 			printf("state = %d\n", env->maps[i].stats[j]);
 		}
-	}
+	}*/
 	env->phy_env.tps = 0;
 	env->phy_env.gravity = 0.0000981;
 //	set_norm_face(env);

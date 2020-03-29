@@ -14,7 +14,9 @@ int			load_maps(t_env *env)
 		loading_bar(i, SCENE_MAX, false);
 		if (parse_map(&env->maps[i], maps_paths(i), states) != 0)
 			return (-1);
+		*current_map() = &env->maps[i];
 		if (!(env->maps[i].stats = (bool*)malloc(env->maps[i].nmesh))
+			|| !(env->maps[i].stats_cpy = (bool*)malloc(env->maps[i].nmesh))
 			|| load_map_config(env, &env->maps[i], maps_paths(i)))
 			return (-1);
 		printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);

@@ -189,4 +189,6 @@ int					mapper_deps(t_env *env, t_mesh *m, char *tok);
 
 int					check_deps_cycle(t_dynarray *meshs);
 
+t_map				**current_map(void);
+
 #endif
