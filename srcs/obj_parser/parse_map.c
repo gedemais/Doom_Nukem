@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 19:32:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/29 21:56:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static int	load_map_data(t_map *map)
 	int			i;
 	int			j;
 
-	i = -1;
+	i = 0; // Camera == mesh n 0
 	while (++i < map->nmesh)
 	{
 		j = -1;
@@ -174,6 +174,7 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 			return (-1);
 		i++;
 	}
+	map->nmesh++; // Camera
 	if (load_map_data(map)
 		|| !(map->stats = (bool*)malloc(sizeof(bool) * map->nmesh))
 		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh)))

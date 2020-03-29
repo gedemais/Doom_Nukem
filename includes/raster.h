@@ -133,6 +133,7 @@ void			map_spawn(t_cam *cam, t_map *map);
 /*
 ** Clipping
 */
+int				init_camera(t_env *env, t_cam *cam);
 int				allocate_clipping_arrays(t_dynarray arrays[4]);
 void			classify_triangle(t_clipper *clip, t_triangle in);
 bool			is_triangle_in_screen(t_triangle t);

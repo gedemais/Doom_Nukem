@@ -27,7 +27,24 @@ int		allocate_clipping_arrays(t_dynarray arrays[4])
 	return (0);
 }
 
-int		init_camera(t_cam *cam)
+int		init_cameras_meshs(t_env *env, t_cam *cam)
+{
+	t_mesh		cam;
+	int			i;
+
+	i = 0;
+	while (i < SCENE_MAX)
+	{
+		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f))
+		cam.corp.pos = env->maps[i].spawn;
+		cam.corp.dims = (t_vec3d){1.0f, 2.0f, 1.0f, 1.0f};
+		print_vec(cam.pos);
+		i++;
+	}
+	return (0);
+}
+
+int		init_camera(t_env *env, t_cam *cam)
 {
 	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
 	cam->stats.fnear = 0.01f;
