@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:00:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/04 22:13:36 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:15:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int			report_collisions(t_env *env)
 		&& init_dynarray(&env->phy_env.collides,
 		sizeof(t_collide), env->maps[env->scene].nmesh))
 		return (-1);
-	while (i < env->maps[env->scene].nmesh)
+	while (i < env->maps[env->scene].nmesh + 1)
 	{
 		j = -1;
-		while (++j < env->maps[env->scene].nmesh)
+		while (++j < env->maps[env->scene].nmesh + 1)
 			if (i != j && !env->maps[env->scene].stats[i]
 				&& check_coll(&env->maps[env->scene].meshs, i, j, &c))
 			{

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 16:41:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:27:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,9 @@ int		rasterizer(t_env *env, int scene)
 		j = 0;
 		if (!(m = dyacc(&env->maps[scene].meshs, i)))
 			return (-1);
-		printf("mesh %s (%d triangles)\n", m->name, m->tris.nb_cells);
 		compute_rotation_matrices(env, *m);
 		while (j < m->tris.nb_cells)
 		{
-			if (j == 0)
-				printf("Rasterizing\n");
 			t = (t_triangle*)(dyacc(&m->tris, j));
 			triangle_pipeline(env, *t, &env->cam.to_clip, m);
 		//	printf("------%f %f %f-------\n",m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
@@ -80,7 +77,6 @@ int		rasterizer(t_env *env, int scene)
 	}
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);
-	sleep(10);
 	clear_dynarray(&env->cam.to_clip);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 21:05:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:36:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	phy_gravitax(t_env *env, t_mesh *m, int i)
 	static  t_vec3d		gravitax;
 
 	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity , 0 ,0};
-	printf("%f\n",gravitax.y);
+	//printf("%f\n",gravitax.y);
 	if (env->maps[env->scene].stats[i] == false)
 	{
 		m->corp.v = vec_sub(m->corp.v, gravitax);
@@ -90,17 +90,20 @@ static void	update_speeds(t_env *env)
 
 static void	update_positions(t_env *env)
 {
-	t_vec3d		save;
 	t_events	*e;
 	t_mesh		*m;
 	int			i;
 	
 	e = &env->events;
 	i = 0;
-	save = (t_vec3d){0,0,0,0};
-	while (i < env->maps[env->scene].meshs.nb_cells)
+	while (i < env->maps[env->scene].nmesh + 1)
 	{
 		m = dyacc(&env->maps[env->scene].meshs, i);		
+		if (i == env->maps[env->scene].meshs.nb_cells)
+		{
+			printf("camera o : ");
+			print_vec(m->corp.o);
+		}
 		if (env->maps[env->scene].stats[i] == false)
 		{
 			phy_gravitax(env, m, i);
@@ -139,8 +142,6 @@ static void pause_position(t_env *env)
 		}
 		i++;
 	}	
-		
-
 }
 
 static void	color_collides(t_env *env)
@@ -158,6 +159,7 @@ static void	color_collides(t_env *env)
 			t->color = 0xffffff;
 		}
 	}
+
 	for (int i = 0; i < env->phy_env.collides.nb_cells; i++)
 	{
 		m = dyacc(&env->phy_env.collides, i);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 22:48:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/30 17:09:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static int	load_map_data(t_map *map)
 	int			i;
 	int			j;
 
-	i = 0; // Camera == mesh n 0
+	i = -1;
 	while (++i < map->nmesh)
 	{
 		j = -1;

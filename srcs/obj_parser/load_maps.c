@@ -17,7 +17,7 @@ int			load_maps(t_env *env)
 		*current_map() = &env->maps[i];
 		if (load_map_config(env, &env->maps[i], maps_paths(i)))
 			return (-1);
-		printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);
+		//printf("%s (%d meshs)\n", maps_paths(i), env->maps[i].nmesh);
 		for (int j = 0; j < env->maps[i].nmesh; j++)
 		{
 			m = dyacc(&env->maps[i].meshs, j);
