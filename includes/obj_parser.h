@@ -117,6 +117,7 @@ struct	s_map
 	bool			*stats_cpy;
 	int				cmtl;
 	int				nmesh;
+	t_collide		cam_floor;
 };
 
 struct	s_parser

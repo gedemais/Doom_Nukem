@@ -102,7 +102,6 @@ int			report_collisions(t_env *env)
 			{
 				c.i_a = i;
 				c.i_b = j;
-				print_collide(c);
 				if (push_dynarray(&env->phy_env.collides, &c, false))
 					return (-1);
 			}

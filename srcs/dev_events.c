@@ -111,6 +111,8 @@ int		render_dev(void *param)
 	for (int i = 0; i < WDT * HGT; i++)
 		env->cam.z_buffer[i] = -INFINITY;
 	camera(env);
+//	printf("camera");
+//	print_vec(env->cam.stats.dir);
 	physic_engine(env);
 	rasterizer(env, env->scene);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);

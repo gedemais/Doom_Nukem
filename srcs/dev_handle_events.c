@@ -56,13 +56,29 @@ static void	handle_object(t_env *env, bool keys[NB_KEYS])
 	}
 }
 
-static void	real_move(t_env *env, bool keys[NB_KEYS])
+/*
+static void	fps_move_dir()
 {
+
+
+
+}
+*/
+
+// idee : save dans une structure la collide de la camera avec le sol du moment 
+
+static void	fps_move(t_env *env, bool keys[NB_KEYS])
+{
+	t_mesh		*cam;
 	t_vec3d		f;
 	t_vec3d		r;
 
+	printf("---------------FPS_MOVE--------------\n");
+	print_vec(env->cam.stats.dir);
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
+	f.y = 0; // for now
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
+
 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
@@ -72,6 +88,9 @@ static void	real_move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
 	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
+	
+	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
+	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 
 }
 
@@ -82,8 +101,12 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		r;
 
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
+//	printf("\nf");
+//	print_vec(f);
 	r = vec_fmult((t_vec3d){f.z, 0, -f.x, f.w}, 0.5f);
-
+//	printf("\nr");
+//	print_vec(r);
+	
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
 	if (keys[KEY_S])
@@ -102,19 +125,25 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 static void	handle_keys(t_env *env, t_events *e)
 {
 	static int move_i = 0;
+	int on_floor;
 	t_vec3d dir;
 	t_vec3d pos;
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
+	on_floor = env->cam.stats.onfloor;
+	printf("move_i = %d\n",move_i);
 //	printf("----------dir---------\n");
 //	print_vec(dir);
 //	printf("----------pos---------\n");
 //	print_vec(pos);
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 0) 
-		move(env, e->keys);
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 1) 
-		real_move(env, e->keys);
+	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
+	{
+		if (move_i == 0)
+			move(env, e->keys);
+		else
+			fps_move(env, e->keys);
+	}
 	else if (e->keys[KEY_E] || e->keys[KEY_P])
 		handle_object(env, e->keys); //try to grab and throw objects ? 
 	else if (e->keys[KEY_N])

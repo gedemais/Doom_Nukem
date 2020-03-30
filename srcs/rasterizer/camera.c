@@ -83,6 +83,7 @@ int		init_camera(t_env *env, t_cam *cam)
 	cam->stats.dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
 	cam->stats.pitch = 0;
 	cam->stats.yaw = 0;
+	cam->stats.onfloor = 1;
 	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
 	cam->light = vec_normalize(cam->light);
 	init_matrices(cam);
