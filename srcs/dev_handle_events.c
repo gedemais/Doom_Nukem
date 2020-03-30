@@ -56,7 +56,7 @@ static void	handle_object(t_env *env, bool keys[NB_KEYS])
 	}
 }
 
-static void	move(t_env *env, bool keys[NB_KEYS])
+static void	real_move(t_env *env, bool keys[NB_KEYS])
 {
 	t_vec3d		f;
 	t_vec3d		r;
@@ -72,9 +72,10 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
 	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
+
 }
 
-static void	real_move(t_env *env, bool keys[NB_KEYS])
+static void	move(t_env *env, bool keys[NB_KEYS])
 {
 	t_mesh		*cam;
 	t_vec3d		f;

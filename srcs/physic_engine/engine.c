@@ -48,7 +48,7 @@ static t_vec3d	update_angle(t_env *env, int index)
 	else if (fabs(norm.y) == 1)								//bounce vertical y
 	{
 		v2 = (t_vec3d){v.x * frott, -(v.y) * frott, v.z * frott, 0.0f};
-		if ((((fabs(v2.y) < 0.3 || vec_norm(v2) > 20) && norm.y == 1)))
+		if ((fabs(v2.y) < 0.3 || vec_norm(v2) > 20) && norm.y == 1)
 		{
 			env->phy_env.tps = 0;							//stop gravity
 			env->maps[env->scene].stats[c->i_a] = true;		//turn to static
@@ -62,18 +62,22 @@ static t_vec3d	update_angle(t_env *env, int index)
 
 static void	update_speeds(t_env *env)
 {
-	t_collide	*c;
-	int			i;
-	float			ratio;
-	t_vec3d		norm;
+	t_collide			*c;
+	int					i;
+	unsigned int	n_mesh;
 	
+	n_mesh = env->maps[env->scene].nmesh;
 	i = 0;
-	while (i < env->phy_env.collides.nb_cells) //if collides
+	while (i < env->phy_env.collides.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides, i);
-		ratio = c->a->corp.v.y / env->phy_env.tps - vec_norm(c->a->corp.v);
-		c->a->corp.v = update_angle(env, i); //bounce
-		norm = c->b->corp.norm;
+		printf("%d\n", c->i_a);
+		printf("%d\n", c->i_b);
+		printf("%d\n", env->maps[env->scene].nmesh);
+		if (c->i_a == n_mesh)
+			print_collide(*c);
+		else
+			c->a->corp.v = update_angle(env, i); //bounce
 
 
 	/* try to stop it ... may be after two or three bounce?? 	
@@ -99,12 +103,12 @@ static void	update_positions(t_env *env)
 	while (i < env->maps[env->scene].nmesh + 1)
 	{
 		m = dyacc(&env->maps[env->scene].meshs, i);		
-		if (i == env->maps[env->scene].meshs.nb_cells)
+		if (i == env->maps[env->scene].nmesh)
 		{
-			printf("camera o : ");
+			printf("camera : i =  %d\n",i);
 			print_vec(m->corp.o);
 		}
-		if (env->maps[env->scene].stats[i] == false)
+		else if (env->maps[env->scene].stats[i] == false)
 		{
 			phy_gravitax(env, m, i);
 			translate_mesh(&env->maps[env->scene], m, m->corp.v);
@@ -131,7 +135,6 @@ static void pause_position(t_env *env)
 				vec3d_swap(&m->corp.v, &m->corp.v_cpy); // cancel v and save in vec_cpy
 			else
 			{
-				
 				vec3d_swap(&m->corp.v_cpy, &m->corp.v); // swap in v and cancel the vec_cpy
 				m->corp.v_cpy = zero_vector();
 			}	

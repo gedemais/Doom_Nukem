@@ -52,5 +52,6 @@ int		report_collisions(t_env *env);
 
 void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t);
 void	tp_mesh(t_map *map, t_mesh *m, t_vec3d t);
-
+void	print_mesh_corp(t_mesh m);
+void	print_collide(t_collide c);
 #endif
