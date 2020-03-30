@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 21:56:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/29 22:48:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,10 +174,10 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 			return (-1);
 		i++;
 	}
-	map->nmesh++; // Camera
 	if (load_map_data(map)
-		|| !(map->stats = (bool*)malloc(sizeof(bool) * map->nmesh))
-		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh)))
+		|| !(map->stats = (bool*)malloc(sizeof(bool) * map->nmesh + 1))
+		|| !(map->stats_cpy = (bool*)malloc(sizeof(bool) * map->nmesh + 1))
+		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh + 1)))
 		return (-1);
 	ft_free_ctab(parser.lines);
 	free(parser.file);

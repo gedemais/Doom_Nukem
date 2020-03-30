@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:53:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/27 20:04:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/29 22:52:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
 	int			i;
 
 	i = 0;
+	printf("%d\n", m->tris.nb_cells);
 	while (i < m->tris.nb_cells)
 	{
 		tri = dyacc(&m->tris, i);

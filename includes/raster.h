@@ -174,4 +174,5 @@ void			compute_rotation_matrices(t_env *env, t_mesh m);
 void			compute_view_matrice(t_env *env);
 void			swap_floats(float *a, float *b);
 
+void		print_first_mesh(t_env *env);
 #endif

@@ -3,12 +3,18 @@
 void	map_spawn(t_cam *cam, t_map *map)
 {
 	static t_map	*add = NULL;
+	t_mesh			*cam_mesh;
 
+	cam_mesh = dyacc(&map->meshs, map->nmesh);
 	if (add != map)
 	{
 		cam->stats.pos = map->spawn;
+		cam_mesh->corp.pos = map->spawn;
+		cam_mesh->corp.o = vec_sub(cam_mesh->corp.pos, vec_fdiv(cam_mesh->corp.dims, 2.0f));
+
 		cam->stats.yaw = map->cam_dir.u;
 		cam->stats.pitch = map->cam_dir.v;
+
 		add = map;
 	}
 }
@@ -27,18 +33,35 @@ int		allocate_clipping_arrays(t_dynarray arrays[4])
 	return (0);
 }
 
-int		init_cameras_meshs(t_env *env, t_cam *cam)
+void		print_first_mesh(t_env *env)
+{
+	t_mesh		*m;
+	int			i;
+	
+	i = 0;
+	while (i < SCENE_MAX)
+	{
+		m = dyacc(&env->maps[i].meshs, 0);
+		printf("scene %d : mesh 0 : %d triangles\n", i, m->tris.nb_cells);
+		i++;
+	}
+}
+
+static int	init_cameras_meshs(t_env *env)
 {
 	t_mesh		cam;
 	int			i;
 
 	i = 0;
+	ft_memset(&cam, 0, sizeof(t_mesh));
 	while (i < SCENE_MAX)
 	{
-		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f))
 		cam.corp.pos = env->maps[i].spawn;
+		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f));
 		cam.corp.dims = (t_vec3d){1.0f, 2.0f, 1.0f, 1.0f};
-		print_vec(cam.pos);
+
+		if (push_dynarray(&env->maps[i].meshs, &cam, false))
+			return (-1);
 		i++;
 	}
 	return (0);
@@ -59,7 +82,7 @@ int		init_camera(t_env *env, t_cam *cam)
 	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
 	cam->light = vec_normalize(cam->light);
 	init_matrices(cam);
-	if (allocate_clipping_arrays(cam->clip_arrs)
+	if (init_cameras_meshs(env) || allocate_clipping_arrays(cam->clip_arrs)
 		|| init_dynarray(&cam->to_clip, sizeof(t_triangle), MIN_TO_RASTER)
 		|| init_dynarray(&cam->to_raster, sizeof(t_triangle), MIN_TO_RASTER)
 		|| !(cam->z_buffer = (float*)malloc(sizeof(float) * (HGT * WDT))))
