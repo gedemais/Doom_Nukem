@@ -82,20 +82,21 @@ static void	update_speeds(t_env *env)
 {
 	t_collide			*c;
 	int					i;
-	unsigned int	n_mesh;
+	int					n_mesh;
 	
 	n_mesh = env->maps[env->scene].nmesh;
 	i = 0;
 	while (i < env->phy_env.collides.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides, i);
-		if (c->i_a == n_mesh)
+		if (c->i_a == (unsigned)n_mesh)
 		{	
-			if (c->b->corp.norm.y == 1)
-			{
+//			if (c->b->corp.norm.y == 1)
+//			{
 				env->maps[env->scene].cam_floor = *c;
 				env->cam.stats.onfloor = 1; // save the main collide
-			}
+//			}
+			// save the next collide here 
 //			camera_physics(env, c);
 //			print_collide(*c);
 		}
@@ -112,6 +113,8 @@ static void	update_speeds(t_env *env)
 		}
 	*/	i++;
 	}
+	if (i == 0)
+		env->cam.stats.onfloor = 0; // save the main collide
 }
 /*
 static void	camera_gravity(t_env *env, t_mesh *m)

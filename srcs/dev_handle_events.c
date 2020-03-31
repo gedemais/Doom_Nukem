@@ -55,15 +55,43 @@ static void	handle_object(t_env *env, bool keys[NB_KEYS])
 		i++;
 	}
 }
-
-/*
-static void	fps_move_dir()
+static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 {
+	t_triangle *tri;
+	t_vec3d v;
+	t_vec3d w;
+	t_vec3d	p;
+	t_vec3d	*new_dir;
 
 
-
+	new_dir = dir;
+	tri = dyacc(&m->tris, 0);
+	v = tri->points[0];
+	w = tri->points[1];
+	p.x = v.y * w.z - (w.y * v.z);
+	p.y = v.z * w.x - (w.z * v.x);
+	p.z = v.x * w.y - (v.y * w.x);
+	new_dir->y = -(p.x * new_dir->x + p.z * new_dir->z) / p.y;
+	return (new_dir);
 }
-*/
+
+static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir)
+{
+	t_mesh *b;
+	b = c->b;
+	t_vec3d f;	
+
+	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED);
+	return (f);
+//	printf("print f\n");
+//print triangle de la mesh du plan pour trouver l'equation de plan 
+//pour pouvoir orienter la direction ou le y de la camera 
+	//	i = -1;
+//	while (++i < 3)
+//		print_vec(b->triangle[i]);	
+//	return (r);
+}
+
 
 // idee : save dans une structure la collide de la camera avec le sol du moment 
 
@@ -73,12 +101,10 @@ static void	fps_move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		f;
 	t_vec3d		r;
 
-	printf("---------------FPS_MOVE--------------\n");
-	print_vec(env->cam.stats.dir);
-	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-	f.y = 0; // for now
+	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+//	f.y = 0; // for now
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
-
+	
 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
@@ -133,21 +159,25 @@ static void	handle_keys(t_env *env, t_events *e)
 	pos = env->cam.stats.pos;
 	on_floor = env->cam.stats.onfloor;
 	printf("move_i = %d\n",move_i);
-//	printf("----------dir---------\n");
-//	print_vec(dir);
-//	printf("----------pos---------\n");
-//	print_vec(pos);
+	printf("on_floor = %d\n",on_floor);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
 	{
 		if (move_i == 0)
 			move(env, e->keys);
-		else
+		else if (on_floor == 1)
 			fps_move(env, e->keys);
 	}
 	else if (e->keys[KEY_E] || e->keys[KEY_P])
 		handle_object(env, e->keys); //try to grab and throw objects ? 
 	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;
+	else if (e->keys[KEY_T])
+	{
+		printf("----------dir---------\n");
+		print_vec(dir);
+		printf("----------pos---------\n");
+		print_vec(pos);
+	}
 }
 
 void		dev_handle_events(t_env *env)

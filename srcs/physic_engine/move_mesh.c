@@ -38,6 +38,23 @@ void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
 	m->corp.o = vec_add(m->corp.o, t);
 }
 
+void	tp_mesh_print(t_mesh *m)
+{
+	t_triangle	*tri;
+	int			i;
+
+	i = 0;
+	while (i < m->tris.nb_cells)
+	{
+		tri = dyacc(&m->tris, i);
+		print_vec(tri->points[0]);
+		print_vec(tri->points[1]);
+		print_vec(tri->points[2]);
+		i++;
+	}
+	if (i == m->tris.nb_cells)
+		printf("%d \n", i);
+}
 void	tp_mesh(t_map *map, t_mesh *m, t_vec3d p)
 {
 	t_triangle	*tri;
