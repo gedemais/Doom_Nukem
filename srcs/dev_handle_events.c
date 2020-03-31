@@ -168,13 +168,16 @@ static void	handle_keys(t_env *env, t_events *e)
 	on_floor = env->cam.stats.onfloor;
 	on_plan = env->cam.stats.onplan;
 //	printf("move_i = %d\n",move_i);
-//	printf("on_floor = %d\n",on_floor);
+	printf("on_floor = %d\n",on_floor);
+	printf("on_plan = %d\n",on_plan);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
 	{
 		if (move_i == 0)
 			move(env, e->keys);
 		else if (on_floor == 1 || on_plan == 1)
 			fps_move(env, e->keys, on_plan);
+//		else if (on_floor == 1 && on_plan == 1)
+
 	}
 	else if (e->keys[KEY_E] || e->keys[KEY_P])
 		handle_object(env, e->keys); //try to grab and throw objects ? 
