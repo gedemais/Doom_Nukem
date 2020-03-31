@@ -91,11 +91,24 @@ static void	update_speeds(t_env *env)
 		c = dyacc(&env->phy_env.collides, i);
 		if (c->i_a == (unsigned)n_mesh)
 		{	
-//			if (c->b->corp.norm.y == 1)
-//			{
-				env->maps[env->scene].cam_floor = *c;
-				env->cam.stats.onfloor = 1; // save the main collide
-//			}
+			if (fabs(c->b->corp.norm.x) == 1 || fabs(c->b->corp.norm.z) == 1)
+			{
+				env->cam.stats.onfloor = 0;
+				env->cam.stats.onplan = 0;
+			}
+			else
+			{
+				printf("NORM\n");
+				print_vec(c->b->corp.norm);
+				if (c->b->corp.norm.y == 1)
+					env->cam.stats.onfloor = 1; // save the main collide
+				else
+				{
+					env->cam.stats.onplan = 1;
+					env->cam.stats.onfloor = 0; // save the main collide
+					env->maps[env->scene].cam_floor = *c;
+				}
+			}
 			// save the next collide here 
 //			camera_physics(env, c);
 //			print_collide(*c);

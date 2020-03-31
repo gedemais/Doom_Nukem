@@ -60,7 +60,7 @@ static int	init_cameras_meshs(t_env *env)
 			return (-1);
 		cam.corp.pos = env->maps[i].spawn;
 		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f));
-		cam.corp.dims = (t_vec3d){0.5f, 1.0f, 0.5f, 1.0f};
+		cam.corp.dims = (t_vec3d){0.5f, 3.0f, 0.5f, 1.0f};
 		env->maps[i].stats[env->maps[i].nmesh] = false;
 		env->maps[i].stats_cpy[env->maps[i].nmesh] = false;
 
@@ -83,7 +83,9 @@ int		init_camera(t_env *env, t_cam *cam)
 	cam->stats.dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
 	cam->stats.pitch = 0;
 	cam->stats.yaw = 0;
-	cam->stats.onfloor = 1;
+	// faire apres quand on a teste le plan en dessous du joueur ?
+	cam->stats.onfloor = 0;
+	cam->stats.onplan = 0;
 	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
 	cam->light = vec_normalize(cam->light);
 	init_matrices(cam);

@@ -95,14 +95,21 @@ static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir)
 
 // idee : save dans une structure la collide de la camera avec le sol du moment 
 
-static void	fps_move(t_env *env, bool keys[NB_KEYS])
+static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
 {
 	t_mesh		*cam;
 	t_vec3d		f;
 	t_vec3d		r;
 
 	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
-//	f.y = 0; // for now
+	if (on_plan == 0)
+	{
+		f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
+		f.y = 0;
+	}
+	else
+		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+	print_vec(f);
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
 	
 
@@ -152,20 +159,22 @@ static void	handle_keys(t_env *env, t_events *e)
 {
 	static int move_i = 0;
 	int on_floor;
+	int on_plan;
 	t_vec3d dir;
 	t_vec3d pos;
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
 	on_floor = env->cam.stats.onfloor;
-	printf("move_i = %d\n",move_i);
-	printf("on_floor = %d\n",on_floor);
+	on_plan = env->cam.stats.onplan;
+//	printf("move_i = %d\n",move_i);
+//	printf("on_floor = %d\n",on_floor);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
 	{
 		if (move_i == 0)
 			move(env, e->keys);
-		else if (on_floor == 1)
-			fps_move(env, e->keys);
+		else if (on_floor == 1 || on_plan == 1)
+			fps_move(env, e->keys, on_plan);
 	}
 	else if (e->keys[KEY_E] || e->keys[KEY_P])
 		handle_object(env, e->keys); //try to grab and throw objects ? 
