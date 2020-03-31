@@ -63,8 +63,8 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 	t_vec3d	p;
 	t_vec3d	*new_dir;
 
-
 	new_dir = dir;
+	printf("------------coeff_dir---------\n");
 	tri = dyacc(&m->tris, 0);
 	v = tri->points[0];
 	w = tri->points[1];
@@ -72,6 +72,12 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 	p.y = v.z * w.x - (w.z * v.x);
 	p.z = v.x * w.y - (v.y * w.x);
 	new_dir->y = -(p.x * new_dir->x + p.z * new_dir->z) / p.y;
+	if (new_dir->y < 0.2 && new_dir->y > 0)
+	{
+		new_dir->y = 0.2;
+		printf("go %f\n", new_dir->y);
+	}
+	printf("y = %f\n",new_dir->y);
 	return (new_dir);
 }
 
@@ -101,7 +107,7 @@ static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
 	t_vec3d		f;
 	t_vec3d		r;
 
-	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+//	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	if (on_plan == 0)
 	{
 		f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
@@ -168,8 +174,8 @@ static void	handle_keys(t_env *env, t_events *e)
 	on_floor = env->cam.stats.onfloor;
 	on_plan = env->cam.stats.onplan;
 //	printf("move_i = %d\n",move_i);
-	printf("on_floor = %d\n",on_floor);
-	printf("on_plan = %d\n",on_plan);
+//	printf("on_floor = %d\n",on_floor);
+//	printf("on_plan = %d\n",on_plan);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
 	{
 		if (move_i == 0)

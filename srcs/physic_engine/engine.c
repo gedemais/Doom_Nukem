@@ -100,7 +100,7 @@ static void	update_speeds(t_env *env)
 			else
 			{
 				printf("NORM\n");
-				print_vec(c->b->corp.norm);
+//				print_vec(c->b->corp.norm);
 				if (c->b->corp.norm.y == 1)
 				{
 					env->cam.stats.onfloor = 1;
