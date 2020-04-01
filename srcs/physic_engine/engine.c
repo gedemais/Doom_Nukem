@@ -21,7 +21,7 @@ static void	phy_gravitax_cam(t_env *env, t_mesh *m)
 		m->corp.v = vec_sub(m->corp.v, gravitax);
 //		printf("tps ? %d\n",env->phy_env.tps);
 		if (env->phy_env.tps < 10)
-			env->phy_env.tps += 1.5;
+			env->phy_env.tps += 2.5;
 }
 
 
@@ -72,26 +72,35 @@ static t_vec3d	update_angle(t_env *env, int index)
 		v2 = (t_vec3d){v.x, v.y, -v.z * frott, 0.0f};
 	return (v2);
 }
-/*
-static void	camera_physics(t_env *env, t_collide *c)
+
+static void	type_of_plan(t_env *env, t_collide *c)
 {
-	t_mesh	*mesh_cam;
-	t_mesh	*plan;
-	t_vect	*dir;
-	t_cam	*cam;
-
-
-//tester la normal au plan pour savoir quel type de collision et pour bloquer quel mouvement
-
-	cam = c->a;
-	plan = c->b;
-	env->cam->stats.onfloor = 1;
-	env->cam->;
-	dir = env->cam->stats.dir;
+	test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
+	ft_putendl("norm");
+	print_vec(c->b->corp.norm);
+	if (fabs(c->b->corp.norm.x) == 1 || fabs(c->b->corp.norm.z) == 1)
+	{
+		env->maps[env->scene].cam_wall = *c;
+		env->cam.stats.onwall = 1;
+	}
+	else
+	{
+		c->a->corp.v = zero_vector(); //stop la gravity
+		env->phy_env.tps = 0;			// need to be variable by mesh 
+		if (c->b->corp.norm.y == 1)
+		{
+			env->cam.stats.onfloor = 1; //2 
+			env->cam.stats.onplan = 0;
+		}	// save the main collide
+		else
+		{
+			env->cam.stats.onplan = 1; //3
+			env->cam.stats.onfloor = 0; // save the main collide
+		}
+	}
 }
 
-*/
-static void	update_speeds(t_env *env)
+static void	update_speeds_collide(t_env *env)
 {
 	t_collide			*c;
 	int					i;
@@ -101,49 +110,15 @@ static void	update_speeds(t_env *env)
 	i = 0;
 	while (i < env->phy_env.collides.nb_cells) //if collides but no camera ! 
 	{
-		c = dyacc(&env->phy_env.collides, i);
-		env->maps[env->scene].cam_floor = *c;
-		if (c->i_a == (unsigned)n_mesh)
-		{	
-			test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
-			ft_putendl("norm");
-			print_vec(c->b->corp.norm);
-			if (fabs(c->b->corp.norm.x) == 1 || fabs(c->b->corp.norm.z) == 1)
-			{
-				env->cam.stats.onfloor = 0;
-				env->cam.stats.onplan = 0;
-			}
-			else
-			{
-				c->a->corp.v = zero_vector();
-				env->phy_env.tps = 0;
-				if (c->b->corp.norm.y == 1)
-				{
-					env->cam.stats.onfloor = 1;
-					env->cam.stats.onplan = 0;
-				}	// save the main collide
-				else
-				{
-					env->cam.stats.onplan = 1;
-					env->cam.stats.onfloor = 0; // save the main collide
-				}
-			}
-			// save the next collide here 
-//			camera_physics(env, c);
-//			print_collide(*c);
+		if (c->i_a == (unsigned)n_mesh) // detect type of plan
+		{
+			c = dyacc(&env->phy_env.collides, i);
+			env->maps[env->scene].cam_floor = *c;
+			type_of_plan(env, c);	
 		}
 		else
-			c->a->corp.v = update_angle(env, i); //bounce
-
-
-	/* try to stop it ... may be after two or three bounce?? 	
-		if (((fabs(c->a->corp.v.y) < 0.005 && fabs(c->a->corp.v.x) < 0.005) && norm.y == 1 && c->a->corp.pos.y < 2))
-		{
-			env->maps[env->scene].stats[c->i_a] = true;
-			c->a->corp.v = (t_vec3d){0, 0, 0, 0};
-			env->phy_env.tps = 0;
-		}
-	*/	i++;
+			c->a->corp.v = update_angle(env, i);
+		i++;
 	}
 	if (i == 0)
 	{
@@ -151,12 +126,8 @@ static void	update_speeds(t_env *env)
 		env->cam.stats.onplan = 0;
 	}	// save the main collide
 }
-/*
-static void	camera_gravity(t_env *env, t_mesh *m)
-{
-}
-*/
-static void	update_positions(t_env *env)
+
+static void	update_positions_gravity(t_env *env)
 {
 	t_events	*e;
 	t_mesh		*m;
@@ -253,8 +224,8 @@ int		physic_engine(t_env *env)
 	ft_memset(env->maps[env->scene].colls, 0, env->maps[env->scene].nmesh);
 	report_collisions(env);
 	color_collides(env);
-	update_speeds(env);
-	update_positions(env);
+	update_speeds_collide(env); //report type of collision cam_floor // et update angle 
+	update_positions_gravity(env); // gravity 
 	if (e->keys[KEY_P])
 		pause_position(env);
 //	stop_speed(env);

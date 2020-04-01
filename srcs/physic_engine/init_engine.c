@@ -47,8 +47,9 @@ static	void init_physic_engine2(t_env *env)
 	env->phy_env.tps = 0;
 	env->phy_env.gravity = 0.0000981;
 	// faire apres quand on a teste le plan en dessous du joueur ?
-	env->cam.stats.onfloor = 1;
+	env->cam.stats.onfloor = 0;
 	env->cam.stats.onplan = 0;
+	env->cam.stats.onwall = 0;
 	//other type of plan 
 }
 

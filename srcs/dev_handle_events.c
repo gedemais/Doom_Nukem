@@ -38,9 +38,9 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir)
 {
 	t_mesh *b;
-	b = c->b;
 	t_vec3d f;	
 
+	b = c->b;
 	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED);
 	return (f);
 }
@@ -52,63 +52,40 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
 	float diff;
 
 	y_cam = cam_vec->y;
-	printf("pos cam\n");
+//	printf("pos cam\n");
 	print_vec(*cam_vec);
 	y_plan = c.b->corp.pos.y;
-	printf("pos plan\n");
+//	printf("pos plan\n");
 	print_vec(c.b->corp.pos);
 	diff = cam_vec->y - c.b->corp.pos.y;
-	printf("diff %f\n",diff);
+//	printf("diff %f\n",diff);
 	while (cam_vec->y - c.b->corp.pos.y < 0.1)
 		cam_vec->y += 0.1;
 
 }
 // idee : save dans une structure la collide de la camera avec le sol du moment 
 
-static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
+static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 {
-	t_mesh		*cam;
-	t_vec3d		f;
-	t_vec3d		r;
-	int			i;
+	t_vec3d f;
+	t_cam_stats cam_stats;
 
-//	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
-	if (on_plan == 0)
+	cam_stats = env->cam.stats;
+	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
+	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E])
 	{
-		f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-		f.y = 0;
+		if (keys[KEY_E])
+			f.y = 0.1;
+		else if (cam_stats.onfloor == 1)
+			f.y = 0;
+		else if (cam_stats.onplan == 1)
+			f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	}
-	else
-		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
-	i = 0;
-	print_vec(f);
-	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
-	if (keys[KEY_W])
-	{
-		i = 1;
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	}
-	if (keys[KEY_S])
-	{
-		i = -1;
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	}
-	if (keys[KEY_A])
-	{
-		i = 1;
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
-		f = r;
-	}
-	if (keys[KEY_D])
-	{
-		i = -1;
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
-		f = r;
-	}
-	
-	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
-	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
-	cam->corp.v = vec_fmult(f, 3 * i);
+	//	else if (cam_stats.onwall == 1)
+		//fct
+		
+	return (f);
+
 }
 
 static void	move(t_env *env, bool keys[NB_KEYS])
@@ -116,56 +93,42 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_mesh		*cam;
 	t_vec3d		f;
 	t_vec3d		r;
+	int			i;
 
-	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-//	printf("\nf");
-//	print_vec(f);
-	r = vec_fmult((t_vec3d){f.z, 0, -f.x, f.w}, 0.5f);
-//	printf("\nr");
-//	print_vec(r);
-	
-	if (keys[KEY_W])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_S])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_A])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
-	if (keys[KEY_D])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
-
-	// actualise camera's stats into camera mesh for collisions
+//	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+	/*	MOVE ?		*/
+	i = 0;
 	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
+	f = set_y_dir(env, keys);
+	print_vec(f);
+	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
+	if (keys[KEY_W])
+		f = vec_add(f, vec_fmult(f, 3.0f));
+	if (keys[KEY_S])
+		f = vec_add(f, vec_fmult(f, -3.0f));
+	if (keys[KEY_A])
+		f = vec_add(f, vec_fmult(r, 3.0f));
+	if (keys[KEY_D])
+		f = vec_add(f, vec_fmult(r, -3.0f));
+	
+	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
-	cam->corp.v = vec_fmult(f, 3);
+	cam->corp.v = f;
+
 }
+
+
 
 static void	handle_keys(t_env *env, t_events *e)
 {
 	static int move_i = 1;
-	int on_floor;
-	int on_plan;
 	t_vec3d dir;
 	t_vec3d pos;
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
-	on_floor = env->cam.stats.onfloor;
-	on_plan = env->cam.stats.onplan;
-//	printf("move_i = %d\n",move_i);
-//
-	printf("on_floor = %d\n",on_floor);
-	printf("on_plan = %d\n",on_plan);
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
-	{
-		if (move_i == 0)
+	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) || e->keys[KEY_E]) 
 			move(env, e->keys);
-		else if (on_floor == 1 || on_plan == 1)
-			fps_move(env, e->keys, on_plan);
-//		else if (on_floor == 1 && on_plan == 1)
-
-	}
-//	else if (e->keys[KEY_E] || e->keys[KEY_P])
-//		handle_object(env, e->keys); //try to grab and throw objects ? 
 	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;
 	else if (e->keys[KEY_T])

@@ -118,6 +118,7 @@ struct	s_map
 	int				cmtl;
 	int				nmesh;
 	t_collide		cam_floor;
+	t_collide		cam_wall;
 };
 
 struct	s_parser
