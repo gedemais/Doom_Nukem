@@ -64,18 +64,29 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
 
 }
 // idee : save dans une structure la collide de la camera avec le sol du moment 
+static int simple_test_floor(t_env *env)
+{
+	t_cam_stats cam_stats;
+
+	cam_stats = env->cam.stats;
+	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1)
+		return (1);
+	else
+		return (0);
+}
 
 static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 {
 	t_vec3d f;
 	t_cam_stats cam_stats;
 
+
 	cam_stats = env->cam.stats;
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
 	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E])
 	{
-		if (keys[KEY_E] && (cam_stats.onfloor == 1 || cam_stats.onplan == 1))
-			f.y = 0.5;
+		if (keys[KEY_E] && (simple_test_floor(env) == 1))
+			f.y = 0.1;
 		else if (cam_stats.onfloor == 1)
 			f.y = 0;
 		else if (cam_stats.onplan == 1)
@@ -117,7 +128,14 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 
 }
 
+static int key_move(bool keys[NB_KEYS])
+{
+	if ((keys[KEY_W] || keys[KEY_S] || keys[KEY_A] || keys[KEY_D]) || keys[KEY_E]) 
+		return (1);
+	else
+		return (0);
 
+}
 
 static void	handle_keys(t_env *env, t_events *e)
 {
@@ -127,8 +145,8 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) || e->keys[KEY_E]) 
-			move(env, e->keys);
+	if (key_move(e->keys) && simple_test_floor(env)) 
+		move(env, e->keys);
 	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;
 	else if (e->keys[KEY_T])
