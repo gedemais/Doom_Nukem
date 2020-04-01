@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 04:59:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/23 21:07:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/31 21:44:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	ts_to_map_editor(t_env *env)
 void	campaign_to_ts(t_env *env)
 {
 	(void)env;
-//	mlx_mouse_show();
+	mlx_mouse_show();
 }

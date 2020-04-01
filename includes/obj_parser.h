@@ -177,6 +177,7 @@ int					cross_floats(char *line, int *i);
 t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
 t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
 int					assign_triangle_texture(t_mesh *m , void *ptr);
+void				swap_bytes(char *a, char *b);
 
 /*
 ** Mapper functions

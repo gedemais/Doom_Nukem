@@ -1,0 +1,36 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+poignee_ak-47.004|{}|[]|true|()|
+garde_gachette_ak-47.005|{}|[]|true|()|
+ak-47.021|{}|[]|true|()|
+ak-47.025|{}|[]|true|()|
+ak-47.026|{}|[]|true|()|
+corps-bot_ak-47.028|{}|[]|true|()|
+corps-top_ak-47.047|{}|[]|true|()|
+ak-47.050|{}|[]|true|()|
+ak-47.051|{}|[]|true|()|
+ak-47.052|{}|[]|true|()|
+ak-47.053|{}|[]|true|()|
+ak-47.054|{}|[]|true|()|
+ak-47.055|{}|[]|true|()|
+canon_ak-47.056|{}|[]|true|()|
+ak-47.057|{}|[]|true|()|
+ak-47.058|{}|[]|true|()|
+ak-47.059|{}|[]|true|()|
+garde-main_ak-47.064|{}|[]|true|()|
+ak-47.065|{}|[]|true|()|
+cache-douille_ak-47.066|{}|[]|true|()|
+culasse_ak-47.067|{}|[]|true|()|
+chargeur_ak-47.071|{}|[]|true|()|
+ak-47.072|{}|[]|true|()|
+ak-47.085|{}|[]|true|()|
+trigger_ak-47.086|{}|[]|true|()|
+crosse_ak-47.087|{}|[]|true|()|
+ak-47.088|{}|[]|true|()|
+ak-47.089|{}|[]|true|()|
+viseur.002_ak-47.091|{}|[]|true|()|
+viseur.003_ak-47.092|{}|[]|true|()|

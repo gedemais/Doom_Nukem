@@ -97,7 +97,7 @@ int		mtllib(t_map *map, char **toks)
 	if (*init_parser())
 		return (0);
 	if (ft_tablen(toks) != 2 || (map->mtls.byte_size == 0
-		&& init_dynarray(&map->mtls, sizeof(t_mtl), 2)))
+		&& init_dynarray(&map->mtls, sizeof(t_mtl), 0)))
 		return (-1);
 	if (parse_mtl(toks[1], &map->mtls))
 		return (-1);

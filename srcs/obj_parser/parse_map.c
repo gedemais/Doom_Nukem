@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 17:09:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/03/31 21:48:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,14 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 	while (parser.lines[i])
 	{
 		if (parse_line(&parser, map, i, states))
+		{
+			ft_putstr_fd("Error parsing map ", 2);
+			ft_putstr_fd(path, 2);
+			ft_putstr_fd(" at line ", 2);
+			ft_putnbr_fd(i, 2);
+			ft_putchar_fd('\n', 2);
 			return (-1);
+		}
 		i++;
 	}
 	if (load_map_data(map)

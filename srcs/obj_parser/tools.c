@@ -80,3 +80,12 @@ int		assign_triangle_texture(t_mesh *m , void *ptr)
 	}
 	return (0);
 }
+
+void	swap_bytes(char *a, char *b)
+{
+	char	c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
