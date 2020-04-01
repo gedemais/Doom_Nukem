@@ -74,8 +74,8 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
 	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E])
 	{
-		if (keys[KEY_E])
-			f.y = 0.1;
+		if (keys[KEY_E] && (cam_stats.onfloor == 1 || cam_stats.onplan == 1))
+			f.y = 0.5;
 		else if (cam_stats.onfloor == 1)
 			f.y = 0;
 		else if (cam_stats.onplan == 1)
