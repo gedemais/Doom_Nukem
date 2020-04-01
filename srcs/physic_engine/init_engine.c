@@ -40,46 +40,17 @@ static int		init_mesh_physics(t_mesh *m)
 		return (-1);
 	return (0);
 }
-/*
-static void	set_hparams(t_physics *phy)
+
+
+static	void init_physic_engine2(t_env *env)
 {
-	phy->gravity = 9.9f;
+	env->phy_env.tps = 0;
+	env->phy_env.gravity = 0.0000981;
+	// faire apres quand on a teste le plan en dessous du joueur ?
+	env->cam.stats.onfloor = 1;
+	env->cam.stats.onplan = 0;
+	//other type of plan 
 }
-
-
-static void	set_norm_face(t_env *env)
-{
-	t_mesh		*m;
-
-	m = dyacc(&env->maps[env->scene].meshs, 1);
-	m->corp.norm = (t_vec3d){0, 1, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 2);
-	m->corp.norm = (t_vec3d){0, -1, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 3);
-	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 4);
-	m->corp.norm = (t_vec3d){1, 0, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 5);
-	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
-	m = dyacc(&env->maps[env->scene].meshs, 6);
-	m->corp.norm = (t_vec3d){-1, 0, 0, 0};
-
-}
-
-static void	init_static_physic(t_env *env)
-{
-	int i;
-
-	i = -1;
-	env->maps[env->scene].stats[0] = true;
-	env->maps[env->scene].stats[1] = true;
-	env->maps[env->scene].stats[2] = true;
-	env->maps[env->scene].stats[3] = true;
-	env->maps[env->scene].stats[4] = false;
-	while (++i < 5)
-		env->maps[env->scene].stats_cpy[i] = env->maps[env->scene].stats[i];
-}
-*/	
 
 int		init_physic_engine(t_env *env)
 {
@@ -91,16 +62,12 @@ int		init_physic_engine(t_env *env)
 	
 	i = 0;
 	nb_m = -1;
-//	set_hparams(&env->phy_env);
 	ft_putendl("Init physic engine...");
 	while (i < SCENE_MAX)
 	{
-//		loading_bar(i, SCENE_MAX, false);
-		//printf("----------------------\nScene %d (%d meshs)\n", i, env->maps[i].nmesh);
 		j = 0;
 		while (j < env->maps[i].nmesh)
 		{
-			//printf("mesh %d\n", j);
 			if (!(m = dyacc(&env->maps[i].meshs, j)) || init_mesh_physics(m))
 				return (-1);
 			j++;
@@ -108,35 +75,9 @@ int		init_physic_engine(t_env *env)
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
-	i--;
-/*	while (++nb_m < 7)
-	{
-		m = dyacc(&env->maps[i].meshs, nb_m);
-		if (nb_m == 0)
-		{
-			m->corp.vo = (t_vec3d){0, 0.2, 0.2f, 0.0f};
-			m->corp.pos = (t_vec3d){0, 20, 0.0f, 0.0f};
-			m->corp.v = m->corp.vo;
-			printf("name = %s\n", m->name);
-			printf("------v%f %f %f-------\n",m->corp.v.x, m->corp.v.y, m->corp.v.z);
-			printf("------vo %f %f %f-------\n",m->corp.vo.x, m->corp.vo.y, m->corp.vo.z);
-			printf("------pos %f %f %f-------\n",m->corp.pos.x, m->corp.pos.y, m->corp.pos.z);
-			printf("numero = %d\n", i);
-			printf("state = %d\n", env->maps[i].stats[j]);
-		}
-	}*/
-	env->phy_env.tps = 0;
-	env->phy_env.gravity = 0.0000981;
-//	set_norm_face(env);
-/*	env->maps[env->scene].stats[0] = true;
-	env->maps[env->scene].stats[1] = true;
-	env->maps[env->scene].stats[2] = true;
-	env->maps[env->scene].stats[3] = true;
-	env->maps[env->scene].stats[4] = false;*/
-//	printf("%s | pos : %f %f %f | origin : %f %f %f | dims = %f %f %f\n norm = %f %f %f\n", m->name, m->corp.pos.x, m->corp.pos.y, m->corp.pos.z, m->corp.o.x, m->corp.o.y, m->corp.o.z, m->corp.dims.x, m->corp.dims.y, m->corp.dims.z, m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
+	init_physic_engine2(env);
 	if (++x > 5)
 		exit(EXIT_SUCCESS);
 
-//	loading_bar(i, SCENE_MAX, true);
 	return (0);
 }

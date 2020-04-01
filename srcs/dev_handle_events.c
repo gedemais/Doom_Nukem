@@ -98,7 +98,24 @@ static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir)
 //	return (r);
 }
 
+void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
+{
+	int y_cam;
+	int y_plan;
+	float diff;
 
+	y_cam = cam_vec->y;
+	printf("pos cam\n");
+	print_vec(*cam_vec);
+	y_plan = c.b->corp.pos.y;
+	printf("pos plan\n");
+	print_vec(c.b->corp.pos);
+	diff = cam_vec->y - c.b->corp.pos.y;
+	printf("diff %f\n",diff);
+	while (cam_vec->y - c.b->corp.pos.y < 0.1)
+		cam_vec->y += 0.1;
+
+}
 // idee : save dans une structure la collide de la camera avec le sol du moment 
 
 static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
@@ -117,8 +134,6 @@ static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
 		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	print_vec(f);
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
-	
-
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
 	if (keys[KEY_S])
@@ -130,7 +145,7 @@ static void	fps_move(t_env *env, bool keys[NB_KEYS], int on_plan)
 	
 	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
-
+	cam->corp.v = vec_fmult(f, 3);
 }
 
 static void	move(t_env *env, bool keys[NB_KEYS])
@@ -163,7 +178,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 
 static void	handle_keys(t_env *env, t_events *e)
 {
-	static int move_i = 0;
+	static int move_i = 1;
 	int on_floor;
 	int on_plan;
 	t_vec3d dir;
@@ -174,8 +189,9 @@ static void	handle_keys(t_env *env, t_events *e)
 	on_floor = env->cam.stats.onfloor;
 	on_plan = env->cam.stats.onplan;
 //	printf("move_i = %d\n",move_i);
-//	printf("on_floor = %d\n",on_floor);
-//	printf("on_plan = %d\n",on_plan);
+//
+	printf("on_floor = %d\n",on_floor);
+	printf("on_plan = %d\n",on_plan);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D])) 
 	{
 		if (move_i == 0)

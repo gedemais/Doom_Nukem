@@ -160,7 +160,7 @@ void			map_editor_to_ts(t_env *env);
 */
 int				render(void *param);
 void			dev_handle_events(t_env *env);
-
+void			test_distance_camplan(t_collide c, t_vec3d *cam_vec);
 double			mesure_time(bool end);
 
 int				key_press_dev(int key, void *param);

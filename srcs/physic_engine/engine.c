@@ -12,6 +12,19 @@
 
 #include "main.h"
 
+static void	phy_gravitax_cam(t_env *env, t_mesh *m)
+{
+	static  t_vec3d		gravitax;
+
+	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
+	printf("gravit = %f\n",gravitax.y);
+		m->corp.v = vec_sub(m->corp.v, gravitax);
+//		printf("tps ? %d\n",env->phy_env.tps);
+		if (env->phy_env.tps < 10)
+			env->phy_env.tps += 1.5;
+}
+
+
 static void	phy_gravitax(t_env *env, t_mesh *m, int i)
 {
 	static  t_vec3d		gravitax;
@@ -92,6 +105,9 @@ static void	update_speeds(t_env *env)
 		env->maps[env->scene].cam_floor = *c;
 		if (c->i_a == (unsigned)n_mesh)
 		{	
+			test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
+			ft_putendl("norm");
+			print_vec(c->b->corp.norm);
 			if (fabs(c->b->corp.norm.x) == 1 || fabs(c->b->corp.norm.z) == 1)
 			{
 				env->cam.stats.onfloor = 0;
@@ -99,8 +115,8 @@ static void	update_speeds(t_env *env)
 			}
 			else
 			{
-				printf("NORM\n");
-//				print_vec(c->b->corp.norm);
+				c->a->corp.v = zero_vector();
+				env->phy_env.tps = 0;
 				if (c->b->corp.norm.y == 1)
 				{
 					env->cam.stats.onfloor = 1;
@@ -153,7 +169,11 @@ static void	update_positions(t_env *env)
 		m = dyacc(&env->maps[env->scene].meshs, i);		
 		if (i == env->maps[env->scene].nmesh)
 		{
-			//print_mesh_corp(*m);
+			if (env->cam.stats.onfloor == 0 && env->cam.stats.onplan == 0)
+				phy_gravitax_cam(env, m);
+
+			env->cam.stats.pos = vec_add(env->cam.stats.pos, m->corp.v);
+			m->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(m->corp.dims, 2.0f));
 		}
 		else if (env->maps[env->scene].stats[i] == false)
 		{
