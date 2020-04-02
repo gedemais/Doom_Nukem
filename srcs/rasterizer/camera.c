@@ -60,7 +60,7 @@ static int	init_cameras_meshs(t_env *env)
 			return (-1);
 		cam.corp.pos = env->maps[i].spawn;
 		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f));
-		cam.corp.dims = (t_vec3d){0.5f, 1.0f, 0.5f, 1.0f};
+		cam.corp.dims = (t_vec3d){2, 1.0f, 2, 1.0f};
 		env->maps[i].stats[env->maps[i].nmesh] = false;
 		env->maps[i].stats_cpy[env->maps[i].nmesh] = false;
 

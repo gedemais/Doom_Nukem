@@ -92,11 +92,45 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 		else if (cam_stats.onplan == 1)
 			f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	}
-	//	else if (cam_stats.onwall == 1)
-		//fct
-		
 	return (f);
 
+}
+/*
+static void print_on_smth(t_env *env)
+{
+
+}
+*/
+static t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
+{
+	t_mesh *cam;
+	t_mesh wall;
+	t_vec3d pos_cam;
+	t_vec3d v_cam;
+	t_vec3d pos_wall;
+	t_vec3d norm_wall;
+
+	(void)env;
+	cam = c->a;
+	wall = *(c->b);
+	pos_cam = cam->corp.pos;
+	pos_wall = wall.corp.pos;
+	v_cam = wall.corp.v;
+	norm_wall = wall.corp.norm;
+	printf("pos_cam = ");
+	print_vec(pos_cam);
+	printf("pos_wall = ");
+	print_vec(pos_wall);
+	printf("pos_cam = ");
+	print_vec(pos_cam);
+	printf("norm_wall");
+	print_vec(norm_wall);
+	printf("speed = ");
+	print_vec(f);
+	if (vec_dot(f, norm_wall) < 0)
+		return (zero_vector());
+	else
+		return (f);
 }
 
 static void	move(t_env *env, bool keys[NB_KEYS])
@@ -121,7 +155,8 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		f = vec_add(f, vec_fmult(r, 3.0f));
 	if (keys[KEY_D])
 		f = vec_add(f, vec_fmult(r, -3.0f));
-	
+	if (env->cam.stats.onwall == 1)
+		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	cam->corp.v = f;

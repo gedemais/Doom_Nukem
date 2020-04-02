@@ -75,7 +75,6 @@ static t_vec3d	update_angle(t_env *env, int index)
 
 static void	type_of_plan(t_env *env, t_collide *c)
 {
-	test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
 	ft_putendl("norm");
 	print_vec(c->b->corp.norm);
 	if (fabs(c->b->corp.norm.x) == 1 || fabs(c->b->corp.norm.z) == 1)
@@ -85,8 +84,10 @@ static void	type_of_plan(t_env *env, t_collide *c)
 	}
 	else
 	{
+		test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
 		c->a->corp.v = zero_vector(); //stop la gravity
 		env->phy_env.tps = 0;			// need to be variable by mesh 
+		env->cam.stats.onwall = 0;
 		if (c->b->corp.norm.y == 1)
 		{
 			env->cam.stats.onfloor = 1; //2 
