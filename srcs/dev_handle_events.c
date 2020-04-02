@@ -59,8 +59,8 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
 	print_vec(c.b->corp.pos);
 	diff = cam_vec->y - c.b->corp.pos.y;
 //	printf("diff %f\n",diff);
-	while (cam_vec->y - c.b->corp.pos.y < 0.1)
-		cam_vec->y += 0.1;
+	while (cam_vec->y - c.b->corp.pos.y < 1)
+		cam_vec->y += 1;
 
 }
 // idee : save dans une structure la collide de la camera avec le sol du moment 
@@ -95,12 +95,8 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 	return (f);
 
 }
-/*
-static void print_on_smth(t_env *env)
-{
 
-}
-*/
+
 static t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 {
 	t_mesh *cam;

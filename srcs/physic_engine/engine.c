@@ -12,16 +12,29 @@
 
 #include "main.h"
 
-static void	phy_gravitax_cam(t_env *env, t_mesh *m)
+static void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats)
 {
 	static  t_vec3d		gravitax;
+	static	int			chute_libre = 0;
 
+	(void)stats;
 	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
-	printf("gravit = %f\n",gravitax.y);
-		m->corp.v = vec_sub(m->corp.v, gravitax);
+	m->corp.v = vec_sub(m->corp.v, gravitax);
+	printf("tps = %u\n",env->phy_env.tps);
 //		printf("tps ? %d\n",env->phy_env.tps);
 		if (env->phy_env.tps < 10)
 			env->phy_env.tps += 2.5;
+		else
+		{
+			printf("chute = %u\n",++chute_libre);
+			if (chute_libre > 150)
+			{
+				chute_libre = 0;
+				env->phy_env.tps = 0;
+				stats->pos = zero_vector();
+				m->corp.v = zero_vector();
+			}
+		}
 }
 
 
@@ -142,7 +155,7 @@ static void	update_positions_gravity(t_env *env)
 		if (i == env->maps[env->scene].nmesh)
 		{
 			if (env->cam.stats.onfloor == 0 && env->cam.stats.onplan == 0)
-				phy_gravitax_cam(env, m);
+				phy_gravitax_cam(env, m, &env->cam.stats);
 
 			env->cam.stats.pos = vec_add(env->cam.stats.pos, m->corp.v);
 			m->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(m->corp.dims, 2.0f));
@@ -152,9 +165,6 @@ static void	update_positions_gravity(t_env *env)
 			phy_gravitax(env, m, i);
 			translate_mesh(&env->maps[env->scene], m, m->corp.v);
 		}
-		/* try put object inside the map after stop speeds */	
-//		else if (m->corp.vo.x != 0 || m->corp.vo.y != 0|| m->corp.vo.z != 0)
-//			off_plan(env, m, i);	
 		i++;
 	}
 }
