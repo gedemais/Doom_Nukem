@@ -53,7 +53,7 @@ install: scripts/install.sh
 	@bash scripts/install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework AppKit
+	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework OpenCL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<

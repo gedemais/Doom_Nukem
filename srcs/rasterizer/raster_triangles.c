@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 23:19:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/04 02:50:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int			raster_triangles(t_env *env, t_dynarray *arr)
 
 	i = -1;
 	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-	//printf("%d elements to raster\n", env->cam.to_raster.nb_cells);
+
+	gpu_raster_triangles(env, arr);
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
 	else

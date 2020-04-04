@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 21:43:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/02 22:58:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "keys.h"
 # include "sound.h"
 # include "phy.h"
+# include "gpu.h"
 # include "sprites.h"
 # include "obj_parser.h"
 # include "raster.h"
@@ -101,6 +102,7 @@ struct			s_data
 struct			s_env
 {
 	t_mlx		mlx;
+	t_opencl	cl_env;
 	t_cmpenv	cmp_env;
 	t_edtenv	edit_env;
 	t_events	events;

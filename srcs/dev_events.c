@@ -108,11 +108,12 @@ int		render_dev(void *param)
 	//printf("%f %f %f | %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z, env->cam.stats.yaw, env->cam.stats.pitch);
 //	translate_mesh(&env->maps[0], (t_mesh*)env->maps[0].meshs.c, (t_vec3d){0.01f, 0, 0, 0});
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
-	for (int i = 0; i < WDT * HGT; i++)
-		env->cam.z_buffer[i] = -INFINITY;
+//	for (int i = 0; i < WDT * HGT; i++)
+//		env->cam.z_buffer[i] = -INFINITY;
 	camera(env);
 //	physic_engine(env);
-	rasterizer(env, env->scene);
+	if (rasterizer(env, env->scene))
+		exit(EXIT_FAILURE);
 //  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
 //	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

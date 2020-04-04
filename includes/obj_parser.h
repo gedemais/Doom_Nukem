@@ -50,6 +50,8 @@ enum	e_scene_id
 	SCENE_B,
 	SCENE_C,
 	SCENE_D,
+	SCENE_E,
+	SCENE_F,
 	SCENE_MAX
 };
 
@@ -82,6 +84,7 @@ struct	s_triangle
 	t_vec2d		txt[3];
 	int			color;
 	t_sprite	*sp;
+	int			sp_id;
 	float		alpha;
 	void		*mesh;
 };

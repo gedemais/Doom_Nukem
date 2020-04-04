@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 18:55:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/02 22:55:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef	struct	s_edit_env t_edtenv;
 typedef struct	s_savecmp t_savecmp;
 
 typedef	struct	s_menu	t_menu;
-typedef enum	e_context_id e_contxt;
+
+typedef struct	s_opencl t_opencl;
 
 #endif

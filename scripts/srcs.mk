@@ -38,6 +38,10 @@ SRCS_NAME =	main.c\
 			obj_parser/states.c\
 			obj_parser/tools.c\
 			\
+			OpenCL/setup_opencl.c\
+			OpenCL/cl_boilerplate.c\
+			OpenCL/gpu_rasterizer.c\
+			\
 			physic_engine/init_engine.c\
 			physic_engine/init_bounding_boxs.c\
 			physic_engine/engine.c\
