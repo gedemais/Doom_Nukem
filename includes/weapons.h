@@ -1,7 +1,7 @@
 #ifndef WEAPONS_H
 # define WEAPONS_H
 
-# define ACC_START 15
+# define ACC_START 16
 
 struct	s_weapon
 {
@@ -15,7 +15,7 @@ struct	s_weapon
 	int		ammos; // Nombre de balles total
 };
 
-int		handle_weapons(t_env *env);
-void	draw_reticule(t_env *env);
+int			handle_weapons(t_env *env);
+void		draw_reticule(t_env *env);
 
 #endif

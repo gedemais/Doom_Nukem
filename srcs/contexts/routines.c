@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 04:59:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/31 21:44:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 07:28:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	ts_to_dev(t_env *env)
 
 void	ts_to_campaign(t_env *env)
 {
-	(void)env;
-	mlx_mouse_hide();
+	env->cmp_env.sub_context = CMP_SC_MENU;
 }
 
 void	ts_to_custom(t_env *env)

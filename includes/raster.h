@@ -129,6 +129,7 @@ void			monothread_raster(void *env);
 void			*rasthreader(void *param);
 int				rasterizer(t_env *env, int scene);
 void			map_spawn(t_cam *cam, t_map *map);
+void			camera_aim(t_env *env);
 
 /*
 ** Clipping
@@ -173,6 +174,7 @@ void			draw_triangle(void *mlx, t_triangle t);
 void			compute_rotation_matrices(t_env *env, t_mesh m);
 void			compute_view_matrice(t_env *env);
 void			swap_floats(float *a, float *b);
+void			clear_screen_buffers(t_env *env);
 
 void		print_first_mesh(t_env *env);
 #endif

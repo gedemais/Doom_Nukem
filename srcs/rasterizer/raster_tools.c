@@ -6,11 +6,25 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/19 20:56:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 09:14:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	clear_screen_buffers(t_env *env)
+{
+	static int		size = HGT * WDT;
+	int				i;
+
+	i = 0;
+	ft_memset(env->mlx.img_data, 0, env->data.data_size);
+	while (i < size)
+	{
+		env->cam.z_buffer[i] = -INFINITY;
+		i++;
+	}
+}
 
 void	compute_rotation_matrices(t_env *env, t_mesh m)
 {

@@ -31,5 +31,6 @@
 # define BMP_HEADER "Wrong path or file format for "
 
 # define ICS_ERR "Illegal context switch. Abort"
+# define ISCS_ERR "Illegal sub_context switch. Abort"
 
 #endif

@@ -6,9 +6,13 @@ int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 	char		*path;
 	int			i;
 
-	i = -1;
-	while ((t = dyacc(&m->tris, ++i)))
+	i = 0;
+	while (i < m->tris.nb_cells)
+	{
+		t = dyacc(&m->tris, i);
 		t->sp = NULL;
+		i++;
+	}
 	if (ft_strlen(tok) <= 2)
 		return (0);
 	if (tok[0] != '(' || tok[ft_strlen(tok) - 1] != ')')

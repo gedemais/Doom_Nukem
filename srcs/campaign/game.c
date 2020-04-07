@@ -1,60 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dev_handle_events.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/07 08:47:27 by gedemais         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "main.h"
-/*
-static void	try_math_cube(t_vec3d dir, t_vec3d pos, t_vec3d pos_cube)
-{
-	int dx;
-	int dy; 
-	int dz;
-
-	dx = 1;
-	dy = 1;
-	dz = 1;
-	
-
-}
-*/
-static void	handle_object(t_env *env, bool keys[NB_KEYS])
-{
-	t_vec3d dir;
-	t_vec3d pos;
-	t_vec3d go;
-	t_vec3d *pos_cube;
-	t_mesh *m;
-	int		i;
-
-	i = 0;
-	dir = env->cam.stats.dir;
-	pos = env->cam.stats.pos;
-	go = (t_vec3d){0,1,0,0};
-	(void)keys;
-	(void)pos_cube;
-	while (i < env->maps[env->scene].meshs.nb_cells)
-	{
-		m = dyacc(&env->maps[env->scene].meshs, i);		
-		if (env->maps[env->scene].stats[i] == false)
-		{
-	//		if (keys[KEY_E])
-	//			translate_mesh(m, go);
-	//		else if (keys[KEY_P])
-	//		{
-	//			pos_cube = &m->corp.pos;
-	//		}
-		}
-		i++;
-	}
-}
 
 static void	move(t_env *env, bool keys[NB_KEYS])
 {
@@ -110,16 +54,29 @@ static void	handle_keys(t_env *env, t_events *e)
 		move(env, e->keys);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 1) 
 		real_move(env, e->keys);
-	else if (e->keys[KEY_E] || e->keys[KEY_P])
-		handle_object(env, e->keys); //try to grab and throw objects ? 
 	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;
 }
 
-void		dev_handle_events(t_env *env)
+static void	cmp_game_handle_events(t_env *env)
 {
 	t_events	*e;
 
 	e = &env->events;
 	handle_keys(env, e);
+}
+
+int		cmp_game(void *param)
+{
+	t_env *env;
+
+	env = (t_env*)param;
+	cmp_game_handle_events(env);
+	clear_screen_buffers(env);
+	camera_aim(env);
+	if (rasterizer(env, env->scene))
+		exit(EXIT_FAILURE);
+	handle_weapons(env);
+	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	return (0);
 }

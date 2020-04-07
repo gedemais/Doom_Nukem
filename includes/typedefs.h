@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/07 03:50:36 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 10:21:08 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ typedef struct	s_collide t_collide;
 typedef struct	s_corp t_corp;
 typedef struct	s_physics t_physics;
 
-typedef	struct	s_camp_env t_cmpenv;
+typedef	struct	s_camp_env t_camp_env;
 typedef	struct	s_edit_env t_edtenv;
-typedef struct	s_savecmp t_savecmp;
 
-typedef	struct	s_menu	t_menu;
+typedef struct	s_player t_player;
+typedef struct	s_sector t_sector;
 
 typedef struct	s_weapon t_weapon;
 
