@@ -53,25 +53,30 @@ install: scripts/install.sh
 	@bash scripts/install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework OpenCL -framework AppKit
+	@tput cnorm
+	@$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework OpenCL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
-	$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<
+	@tput civis
+	@printf "Compiling $<"
+	@printf "                                       \\r"
+	@tput cnorm
+	@$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
-	make -C $(MLX_PATH) -j
+	@make -C $(MLX_PATH) -j
 
 $(LIB): $(LIB_PATH)
-	make -C $(LIB_PATH) -j
+	@make -C $(LIB_PATH)
 
 clean:
-	rm -rf $(OBJS)
-	make -C $(LIB_PATH) clean
-	make -C $(MLX_PATH) clean
+	@rm -rf $(OBJS)
+	@make -C $(LIB_PATH) clean
+	@make -C $(MLX_PATH) clean
 
 fclean: clean
-	make -C $(LIB_PATH) fclean
-	rm -rf $(NAME)
-	rm -rf $(NAME).dSYM
+	@make -C $(LIB_PATH) fclean
+	@rm -rf $(NAME)
+	@rm -rf $(NAME).dSYM
 
 re: fclean all

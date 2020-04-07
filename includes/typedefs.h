@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/02 22:55:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 03:50:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ typedef struct	s_savecmp t_savecmp;
 
 typedef	struct	s_menu	t_menu;
 
-typedef struct	s_opencl t_opencl;
+typedef struct	s_weapon t_weapon;
 
 #endif

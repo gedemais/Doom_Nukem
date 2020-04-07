@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/03 01:03:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 01:27:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int				setup(t_env *env)
 		|| init_contexts(env) || init_physic_engine(env)
 		|| init_camera(env, &env->cam))
 		return (-1);
-	if (setup_opencl(env, &env->cl_env))
-		ft_putendl_fd("GPU computation unavailable. Launching on CPU mode.", 2);
 	load_values(env, &env->data);
 //	play_ambience(env->sound.samples[SA_AMB_1], true, false);
 	return (0);
