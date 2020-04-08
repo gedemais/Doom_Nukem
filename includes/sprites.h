@@ -77,6 +77,7 @@ struct	s_sprite
 
 char		*sprites_paths(unsigned int index);
 char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
+void		map_sprite(char *img, t_sprite sprite, t_point o);
 t_sprite	*load_sprites(t_mlx *mlx);
 int			load_texture(t_mlx *mlx, char *path, t_sprite *txt);
 char		*alpha_val(void);

@@ -39,7 +39,7 @@ static void	render_buttons(t_env *env)
 		i++;
 	}
 }
-/*
+
 static void	play_sound(t_env *env)
 {
 	static bool		first = true;
@@ -54,26 +54,37 @@ static void	play_sound(t_env *env)
 		loop = true;
 		loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], true, false, false);
 	}
-}*/
+}
 
 int			render_ts(void *param)
 {
 	t_env		*env;
 	static int	anim = 120;
+	static int	frame = 0;
+	float		t;
 
+	mesure_time(false);
 	env = ((t_env*)param);
 
 	handle_events(env);
 
-//	play_sound(env);
-	blit_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0}, 1.0f);
+	play_sound(env);
+	map_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
 	if (anim > 0)
+	{
+		frame++;
 		animation(env);
+	}
 	else
-		blit_sprite(env->mlx.img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50}, 1.0f);
+		map_sprite(env->mlx.img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50});
 	render_buttons(env);
 
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	if (anim > 0)
+	{
+		t = mesure_time(true);
+		usleep(13500 - t);
+	}
 	anim--;
 	return (0);
 }

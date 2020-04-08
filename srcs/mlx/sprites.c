@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/21 21:14:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/08 12:44:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,32 @@ char		*alpha_val(void)
 	static char		val = 0;
 
 	return (&val);
+}
+
+void	map_sprite(char *img, t_sprite sprite, t_point o)
+{
+	int		x;
+	int		y;
+	int		k;
+	int		xbound;
+	int		ybound;
+
+	xbound = o.x + sprite.wdt;
+	ybound = o.y + sprite.hgt;
+	k = 0;
+	y = o.y;
+	while (y < ybound)
+	{
+		x = o.x;
+		while (x < xbound)
+		{
+			if (*(int*)(&sprite.img_data[k]) != ALPHA)
+				draw_pixel(img, x, y, *(int*)(&sprite.img_data[k]));
+			k += 4;
+			x++;
+		}
+		y++;
+	}
 }
 
 char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)

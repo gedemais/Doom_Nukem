@@ -49,7 +49,7 @@ int		cmp_menu(void *param)
 	if (env->events.keys[KEY_M])
 		switch_context(env, C_TITLE_SCREEN);
 
-	blit_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0}, 1.0f);
+	map_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0});
 	blit_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0}, 1.0f);
 
 	render_buttons_cmp_menu(env);
