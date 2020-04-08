@@ -1,7 +1,8 @@
 #ifndef WEAPONS_H
 # define WEAPONS_H
 
-# define ACC_START 16
+# define ACC_START 16 // a remplacer par le calcul de precision
+# define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
 
 struct	s_weapon
 {

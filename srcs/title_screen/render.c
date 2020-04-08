@@ -68,7 +68,7 @@ int			render_ts(void *param)
 //	play_sound(env);
 	blit_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0}, 1.0f);
 	if (anim > 0)
-		animation(param);
+		animation(env);
 	else
 		blit_sprite(env->mlx.img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50}, 1.0f);
 	render_buttons(env);

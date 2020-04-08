@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/07 10:22:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/08 07:19:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <limits.h>
 # include <assert.h>
 # include <pthread.h>
+# include <ft2build.h>
+# include FT_FREETYPE_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -35,6 +37,7 @@
 # include "sprites.h"
 # include "obj_parser.h"
 # include "raster.h"
+# include "text.h"
 # include "weapons.h"
 
 # include "title_screen.h"
@@ -102,18 +105,19 @@ struct			s_data
 struct			s_env
 {
 	t_mlx		mlx;
+	t_ts_env	ts_env;
 	t_camp_env	cmp_env;
 	t_edtenv	edit_env;
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
+	t_ttf		ttfs;
 	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_physics	phy_env;
 	t_cam		cam;
-	t_ts_env	ts_env;
 	int			context;
-	int			scene;
+	int			scene; // a tej quand C_DEV sera supprime
 };
 
 int				setup(t_env *env);

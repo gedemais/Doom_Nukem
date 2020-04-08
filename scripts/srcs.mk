@@ -7,6 +7,7 @@ SRCS_NAME =	main.c\
 			resources_paths.c\
 			setup.c\
 			singletons.c\
+			text.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
@@ -15,6 +16,7 @@ SRCS_NAME =	main.c\
 			campaign/game.c\
 			campaign/routines.c\
 			campaign/sectors.c\
+			campaign/hud.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\

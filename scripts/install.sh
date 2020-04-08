@@ -22,3 +22,10 @@ else
 	echo "openal-soft missing, installing it with brew..."
 	brew install openal-soft && brew link openal-soft
 fi
+
+if brew ls --versions libpng > /dev/null; then
+	echo "libpng found"
+else
+	echo "libpng missing, installing it with brew..."
+	brew install libpng && brew link libpng
+fi

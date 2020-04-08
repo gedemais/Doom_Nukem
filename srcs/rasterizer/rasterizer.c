@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/03 01:02:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/08 04:55:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		rasterizer(t_env *env, int scene)
 	int			j;
 
 	i = -1;
-	map_spawn(&env->cam, &env->maps[env->scene]);
+	map_spawn(&env->cam, &env->maps[scene]);
 	compute_view_matrice(env);
 	while (++i < env->maps[scene].nmesh)
 	{
@@ -70,8 +70,6 @@ int		rasterizer(t_env *env, int scene)
 		{
 			t = (t_triangle*)(dyacc(&m->tris, j));
 			triangle_pipeline(env, *t, &env->cam.to_clip, m);
-		//	printf("------%f %f %f-------\n",m->corp.norm.x, m->corp.norm.y, m->corp.norm.z);
-		//	printf("------%s-------\n",m->name);
 			j++;
 		}
 	}

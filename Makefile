@@ -42,9 +42,13 @@ LOPENAL = $(shell pkg-config --libs openal)
 IOPENAL = $(shell pkg-config --cflags openal)
 LSNDFILE = $(shell pkg-config --libs sndfile)
 ISNDFILE = $(shell pkg-config --cflags sndfile)
+LFREETYPE = freetype-2.10.1/libfreetype.a
+IFREETYPE = -Ifreetype-2.10.1/include/ 
+LPNG = $(shell pkg-config --libs libpng)
+IPNG = $(shell pkg-config --cflags libpng)
+LBZ2 = /usr/local/Cellar/bzip2/1.0.8/lib/libbz2.a
+IBZ2 = -I/usr/local/opt/bzip2/include/
 
-LDYNARRAY_PATH = dynarray/
-LDYNARRAY = $(LDYNARRAY_PATH)ldynarray.a
 ##########################################################
 
 all: $(NAME)
@@ -53,20 +57,21 @@ install: scripts/install.sh
 	@bash scripts/install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
-	@tput cnorm
-	@$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) -lpthread -framework OpenGL -framework OpenCL -framework AppKit
+	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) $(IBZ2) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) $(LFREETYPE) $(LPNG) $(LBZ2) -lpthread -framework OpenGL -framework AppKit
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	@tput civis
 	@printf "Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
-	@$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) -o $@ -c $<
+	@$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) $(IFREETYPE) $(IPNG) $(IBZ2) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
+	@echo "Making MinilibX..."
 	@make -C $(MLX_PATH) -j
 
 $(LIB): $(LIB_PATH)
+	@echo "Making Libft..."
 	@make -C $(LIB_PATH)
 
 clean:

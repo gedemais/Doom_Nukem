@@ -2,9 +2,9 @@
 
 int		handle_weapons(t_env *env)
 {
+	// Determiner la taille du reticule :
 	draw_reticule(env);
 	// Deplacer l'arme avec le joueur
-	// Determiner la taille du reticule :
 	// (Position du joueur (up, crouch, jump) | Vitesse du joueur)
 
 	// Dessiner le reticule

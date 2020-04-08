@@ -50,6 +50,7 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
+
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 0) 
 		move(env, e->keys);
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 1) 
@@ -74,9 +75,10 @@ int		cmp_game(void *param)
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
 	camera_aim(env);
-	if (rasterizer(env, env->scene))
-		exit(EXIT_FAILURE);
+	if (rasterizer(env, env->cmp_env.sector))
+		return (-1);
 	handle_weapons(env);
+	cmp_hud(env, &env->cmp_env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

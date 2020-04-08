@@ -73,3 +73,10 @@ char	*samples_paths(unsigned int index)
 
 	return (paths[index]);
 }
+
+char	*fonts_paths(unsigned int index)
+{
+	static char		*paths[FONT_MAX] = {"resources/fonts/amazdoom.ttf"};
+	
+	return (paths[index]);
+}

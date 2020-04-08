@@ -33,4 +33,6 @@
 # define ICS_ERR "Illegal context switch. Abort"
 # define ISCS_ERR "Illegal sub_context switch. Abort"
 
+# define FT_LIB "FreeType lib initilization failed"
+
 #endif

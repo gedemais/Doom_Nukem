@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/07 10:23:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/08 06:30:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct			s_sector
 struct			s_player
 {
 	t_dynarray	weapons;
+	t_weapon	current; // a remplacer par un ptr
 	t_mesh		*body;
 	int			hp;
 };
@@ -54,6 +55,7 @@ struct			s_camp_env
 	t_sector	sectors[SECTOR_MAX];
 	t_player	player;
 	t_env		*env;
+	int			sector;
 	int			sub_context;
 };
 
@@ -80,4 +82,8 @@ int					cmp_game(void *param);
 void				cmp_menu_to_game(t_env *env);
 void				cmp_game_to_menu(t_env *env);
 
+/*
+** UI
+*/
+void				cmp_hud(t_env *env, t_camp_env *cmp_env);
 #endif
