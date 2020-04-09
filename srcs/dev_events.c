@@ -73,14 +73,14 @@ int		render_dev(void *param)
 //	translate_mesh(&env->maps[0], (t_mesh*)env->maps[0].meshs.c, (t_vec3d){0.01f, 0, 0, 0});
 	clear_screen_buffers(env);
 	camera_aim(env);
-//	physic_engine(env);
+	physic_engine(env);
 	if (rasterizer(env, env->scene))
 		exit(EXIT_FAILURE);
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	av += 1 / mesure_time(true);
-	if (av > 2000)
+	if (av > 5000)
 	{
 		printf("%f\n", av / it);
 		av = 0.0f;

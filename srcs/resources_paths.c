@@ -76,7 +76,8 @@ char	*samples_paths(unsigned int index)
 
 char	*fonts_paths(unsigned int index)
 {
-	static char		*paths[FONT_MAX] = {"resources/fonts/amazdoom.ttf"};
+	//static char		*paths[FONT_MAX] = {"resources/fonts/AmazDooMRight.ttf"};
+	static char		*paths[FONT_MAX] = {"/usr/local/Homebrew/Library/Homebrew/vendor/portable-ruby/2.6.3/lib/ruby/2.6.0/rdoc/generator/template/darkfish/fonts/SourceCodePro-Bold.ttf"};
 	
 	return (paths[index]);
 }

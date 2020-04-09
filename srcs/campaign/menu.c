@@ -50,7 +50,7 @@ int		cmp_menu(void *param)
 		switch_context(env, C_TITLE_SCREEN);
 
 	map_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0});
-	blit_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0}, 1.0f);
+	map_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0});
 
 	render_buttons_cmp_menu(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

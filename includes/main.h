@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 07:19:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/09 09:53:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ struct			s_env
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
-	t_ttf		ttfs;
 	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_physics	phy_env;
 	t_cam		cam;
 	int			context;
 	int			scene; // a tej quand C_DEV sera supprime
+	t_ttf		ttfs;
 };
 
 int				setup(t_env *env);

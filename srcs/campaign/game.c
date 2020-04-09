@@ -79,6 +79,7 @@ int		cmp_game(void *param)
 		return (-1);
 	handle_weapons(env);
 	cmp_hud(env, &env->cmp_env);
+	my_string_put(env, (t_point){50, 100}, FONT_AMAZDOOM, "FDP_DE_PUTE");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

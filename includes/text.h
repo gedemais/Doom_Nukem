@@ -14,5 +14,7 @@ struct	s_ttf
 };
 
 char	*fonts_paths(unsigned int index);
+int		load_fonts(t_env *env);
+void	my_string_put(t_env *env, t_point o, int font, char *s);
 
 #endif

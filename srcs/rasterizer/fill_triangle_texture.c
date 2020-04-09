@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 17:22:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/09 08:31:16 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 		px++;
 		j++;
 	}
-//	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-//	mlx_do_sync(env->mlx.mlx_ptr);
 }
 
 static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
@@ -135,5 +133,6 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 	if (txt.dy1)
 		flattop(env, &txt, t);
 	compute_gradients(&txt, t, true);
-	flatbot(env, &txt, t);
+	if (txt.dy1)
+		flatbot(env, &txt, t);
 }

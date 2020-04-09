@@ -39,7 +39,7 @@ static void	render_buttons(t_env *env)
 		i++;
 	}
 }
-
+/*
 static void	play_sound(t_env *env)
 {
 	static bool		first = true;
@@ -54,7 +54,7 @@ static void	play_sound(t_env *env)
 		loop = true;
 		loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], true, false, false);
 	}
-}
+}*/
 
 int			render_ts(void *param)
 {
@@ -68,7 +68,7 @@ int			render_ts(void *param)
 
 	handle_events(env);
 
-	play_sound(env);
+//	play_sound(env);
 	map_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
 	if (anim > 0)
 	{
