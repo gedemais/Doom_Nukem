@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 06:30:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:46:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ struct			s_camp_env
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];		
 	t_sector	sectors[SECTOR_MAX];
+	t_weapon	weapons[W_MAX];
 	t_player	player;
 	t_env		*env;
 	int			sector;

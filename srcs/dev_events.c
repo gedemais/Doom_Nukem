@@ -13,7 +13,7 @@ int		key_press_dev(int key, void *param)
 	{
 		env->scene++;
 		if (env->scene == SCENE_MAX)
-			env->scene = SCENE_A;
+			env->scene = 0;
 	}
 	return (0);
 }

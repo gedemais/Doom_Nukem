@@ -61,7 +61,7 @@ $(NAME): $(LIB) $(MLX) $(OBJS)
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	@tput civis
-	@printf "Compiling $<"
+	@printf " Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
 	@$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) $(IFREETYPE) $(IPNG) $(IBZ2) -o $@ -c $<

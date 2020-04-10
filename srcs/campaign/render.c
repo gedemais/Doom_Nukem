@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/10 10:48:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 16:27:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int		render_camp(void *param)
 	static float	av = 0.0f;
 	static int		it = 0;
 
+	mesure_time(false);
 	env = ((t_env*)param);
 	cmp_env = &env->cmp_env;
-	mesure_time(false);
 	if (cmp_sub_contexts[cmp_env->sub_context](env))
 		return (-1);
 	av += 1 / mesure_time(true);
-	if (av > 2000)
+	if (av > 5000)
 	{
 		printf("%f\n", av / it);
 		env->cmp_env.player.current.loaded--;

@@ -46,12 +46,12 @@ enum	e_pstate
 
 enum	e_scene_id
 {
-	SCENE_A,
-	SCENE_B,
-	SCENE_C,
-	SCENE_D,
-	SCENE_E,
-	SCENE_F,
+	SCENE_FAMAS,
+	SCENE_AK47,
+	SCENE_SAWED_OFF,
+	SCENE_GLOCK_18,
+	SCENE_AUG,
+	SCENE_UMP45,
 	SCENE_MAX
 };
 

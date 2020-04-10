@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2020/04/08 06:25:51 by gedemais         ###   ########.fr        #
+#    Updated: 2020/04/10 16:25:07 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,7 +138,7 @@ $(NAME): $(OBJS)
 
 ./%.o: ./%.c $(INC)
 	@tput civis
-	@printf "Compiling $<"
+	@printf " Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
 	@$(CC) $(FLAGS) -c $<

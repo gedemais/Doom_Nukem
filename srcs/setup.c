@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/10 10:11:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 17:02:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int				setup(t_env *env)
 	if (init_mlx(env) != 0 || !(env->sprites = load_sprites(&env->mlx))
 		|| init_openal(&env->sound) != 0 || load_maps(env) != 0
 		|| init_contexts(env) || init_physic_engine(env)
-		|| init_camera(env, &env->cam) || load_fonts(env))
+		|| init_camera(env, &env->cam) || load_fonts(env)
+		|| init_weapons(env)) // Reorganiser le foutoir
 		return (-1);
 	load_values(env, &env->data);
 	return (0);
