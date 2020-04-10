@@ -26,20 +26,28 @@ static void	real_move(t_env *env, bool keys[NB_KEYS])
 
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
 	r = vec_fmult((t_vec3d){f.z, 0, -f.x, f.w}, 0.5f);
+	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
 
 	if (keys[KEY_W])
+	{
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
+		translate_mesh(&env->maps[env->scene], cam, vec_fmult(f, 3.0f));
+	}
 	if (keys[KEY_S])
+	{
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
+		translate_mesh(&env->maps[env->scene], cam, vec_fmult(vec_fmult(f, 3.0f), -1.0f));
+	}
 	if (keys[KEY_A])
+	{
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
+		translate_mesh(&env->maps[env->scene], cam, vec_fmult(r, 3.0f));
+	}
 	if (keys[KEY_D])
+	{
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
-
-	// actualise camera's stats into camera mesh for collisions
-	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
-//	cam.corp.pos = ;
-	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+		translate_mesh(&env->maps[env->scene], cam, vec_fmult(vec_fmult(r, 3.0f), -1.0f));
+	}
 }
 
 static void	handle_keys(t_env *env, t_events *e)
