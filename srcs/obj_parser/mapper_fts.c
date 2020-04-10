@@ -34,17 +34,20 @@ int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 int		mapper_position(t_env *env, t_mesh *m, char *tok)
 {
 	t_vec3d		pos;
+	t_map		*map;
 
+	(void)env;
 	if (ft_strlen(tok) <= 2)
 		return (0);
 	else
 		pos = read_vec3d(tok, '{', '}');
+	map = *current_map();
 	if (pos.x == INFINITY)
 	{
 		ft_putendl_fd("Invalid mesh position's vector", 2);
 		return (-1);
 	}
-	tp_mesh(&env->maps[env->scene], m, pos);
+	tp_mesh(map, m, pos);
 	return (0);
 }
 
@@ -92,18 +95,21 @@ int		mapper_static(t_env *env, t_mesh *m, char *tok)
 int		mapper_deps(t_env *env, t_mesh *m, char *tok)
 {
 	t_mesh	*master;
+	t_map	*map;
 	int		i;
 
+	(void)env;
 	i = -1;
 	if (!tok || !tok[0])
 		return (0);
-	while (++i < env->maps[env->scene].meshs.nb_cells)
+	map = *current_map();
+	while (++i < map->meshs.nb_cells)
 	{
-		master = dyacc(&env->maps[env->scene].meshs, i);
+		master = dyacc(&map->meshs, i);
 		if (!ft_strcmp(master->name, tok))
 			break ;
 	}
-	if (i == env->maps[env->scene].meshs.nb_cells || (!master->deps.byte_size
+	if (i == map->meshs.nb_cells || (!master->deps.byte_size
 		&& init_dynarray(&master->deps, sizeof(int), 0)))
 	{
 		ft_putendl_fd("Mesh dependencie not found", 2);

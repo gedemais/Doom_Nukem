@@ -1,18 +1,4 @@
 #include "main.h"
-/*
-static char	dec_to_hex(char c)
-{
-	static char	hex[127] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-							15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, ' ',
-							'!', '"', '#', '$', '%', '&', 39, '(', ')', '*',
-							'+', ',', '-', '.', '/', '0', '1', '2', '3', '4',
-							'5', '6', '7', '8', '9', ':',  ';', '<', '=', '>',
-							'?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\',
-							']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z',
-							'{', '|', '}', '~'};
-
-	return (hex[(int)c]);
-}*/
 
 static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
 {
@@ -48,24 +34,23 @@ static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
 	}
 }
 
-void		my_string_put(t_env *env, t_point o, int font, char *s)
+void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 {
-	FT_UInt	glyph_index;
-	t_ttf	*ttf;
-	int		i;
+	t_ttf_config	*conf;
+	t_ttf			*ttf;
+	int				i;
 
 	i = 0;
+	conf = ttf_config();
 	ttf = &env->ttfs;
-	FT_Set_Char_Size(ttf->faces[font], 0, 6*64, 300, 120);
+	FT_Set_Char_Size(ttf->faces[font], 0, conf->size * 64, 300, 100);
 	while (s[i])
 	{
-		if (!(glyph_index = FT_Get_Char_Index(ttf->faces[font], s[i] - 5)))
-			return ;
-		if (FT_Load_Char(ttf->faces[font], glyph_index, FT_LOAD_RENDER))
-			return ;
+		if (i == 0 || s[i - 1] != s[i])
+			if (FT_Load_Char(ttf->faces[font], s[i], FT_LOAD_RENDER) && ++i)
+				continue ;
 		map_letter(env, ttf->faces[font]->glyph->bitmap, o);
-		o.x += ttf->faces[font]->glyph->advance.x >> 6;
-		o.y += ttf->faces[font]->glyph->advance.y >> 6;
+		o.x += conf->size;
 		i++;
 	}
 }

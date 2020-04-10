@@ -70,6 +70,7 @@ static void	cmp_game_handle_events(t_env *env)
 int		cmp_game(void *param)
 {
 	t_env *env;
+//	unsigned char	s[1024] = "30 /120";
 
 	env = (t_env*)param;
 	cmp_game_handle_events(env);
@@ -79,7 +80,7 @@ int		cmp_game(void *param)
 		return (-1);
 	handle_weapons(env);
 	cmp_hud(env, &env->cmp_env);
-	my_string_put(env, (t_point){50, 100}, FONT_AMAZDOOM, "FDP_DE_PUTE");
+	//my_string_put(env, (t_point){900, 670}, FONT_AMMOS, s);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

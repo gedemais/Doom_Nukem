@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/09 08:20:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 10:48:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ int		render_camp(void *param)
 	if (av > 2000)
 	{
 		printf("%f\n", av / it);
+		env->cmp_env.player.current.loaded--;
+		if (env->cmp_env.player.current.loaded == 0)
+		{
+			env->cmp_env.player.current.loaded = env->cmp_env.player.current.magazine;
+			env->cmp_env.player.current.ammos -= env->cmp_env.player.current.magazine;
+		}
 		av = 0.0f;
 		it = 0;
 	}

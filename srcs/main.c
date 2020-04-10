@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 04:52:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 09:52:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ static int	doom_nukem(t_env *env)
 			t->sp = &env->sprites[TXT_BLOC_GRASS];
 	}*/
 	//mlx_mouse_hide();
-	env->context = C_TITLE_SCREEN;
+	env->cmp_env.player.current.ammos = 120;
+	env->cmp_env.player.current.magazine = 30;
+	env->cmp_env.player.current.loaded = 30;
+
+
+	env->context = C_CAMPAIGN;
 	env->scene = SCENE_A;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
 	mlx_hooks(env);

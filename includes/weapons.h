@@ -3,6 +3,7 @@
 
 # define ACC_START 16 // a remplacer par le calcul de precision
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
+# define AMMO_FONT_SIZE 20
 
 struct	s_weapon
 {
@@ -13,10 +14,18 @@ struct	s_weapon
 	float	accuracy;
 	float	damages; // 0-1
 	int		magazine; // Capacite du chargeur
-	int		ammos; // Nombre de balles total
+	int		loaded; // Nombre de balles dans le chargeur
+	int		ammos; // Nombre de balles en stock
+};
+
+struct	s_ttf_config
+{
+	int		color;
+	int		size;
 };
 
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);
+int			print_ammos(t_env *env, t_weapon w);
 
 #endif

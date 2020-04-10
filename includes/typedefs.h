@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 07:20:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/10 10:23:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_player t_player;
 typedef struct	s_sector t_sector;
 
 typedef struct	s_ttf t_ttf;
+typedef struct	s_ttf_config t_ttf_config;
 
 typedef struct	s_weapon t_weapon;
 

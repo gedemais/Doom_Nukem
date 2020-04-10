@@ -1,22 +1,20 @@
-
-
 Betters:
-Synchroniser le drop et l'apparition du logo sur le title screen
+Colorier les digits des ammos en rouge en fonction du chargeur / stock +/- low
+
 
 Todo:
 	blender:
-		Finir de modeliser 42
-		Sadirac
-		Monstres
-		Armes
-		Talkie-Walkie
-		Grotte avec lac de lave
+		Finir de modeliser 42 | Moguy
+		Sadirac | gneheheeeee
+		Monstres | gneheheeee
+		Armes | bibax
+		Talkie-Walkie | bibax
+		Grotte avec lac de lave | bibax
 
 	obj_parser:
 		Faire une fonction parse_error
 	OpenAL:
 		Faire un vrai sound system avec une data structure adaptee
-		Choper et compiler les sources d'OpenAL dans le Makefile
 	Autres:
 		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
 		Recoder un atof

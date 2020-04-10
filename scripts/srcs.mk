@@ -88,4 +88,5 @@ SRCS_NAME =	main.c\
 			vectors/vec3d_tools.c\
 			\
 			weapons/weapons.c\
+			weapons/ammos.c\
 			weapons/reticule.c
