@@ -9,7 +9,7 @@ static unsigned char	*make_string(t_weapon w)
 
 	if (!(l = ft_itoa(w.loaded)))
 		return (NULL);
-	if (!(tmp = ft_strjoin(l, " /")))
+	if (!(tmp = ft_strjoin(l, ft_strlen(l) == 1 ? " /" : "/")))
 	{
 		free(l);
 		return (NULL);

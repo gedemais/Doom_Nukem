@@ -3,7 +3,7 @@
 
 # define ACC_START 16 // a remplacer par le calcul de precision
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
-# define AMMO_FONT_SIZE 20
+# define AMMO_FONT_SIZE 24
 
 struct	s_weapon
 {

@@ -16,8 +16,8 @@ static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
 		dst = (unsigned char*)&env->mlx.img_data[((o.y + (y - 1)) * WDT + o.x) * 4];
 		while (x < bmp.pitch - 3)
 		{
-			if (bmp.buffer[i + x] == 0 && bmp.buffer[i + x + 1] == 0
-				&& bmp.buffer[i + x + 2] == 0)
+			if (!bmp.buffer[i + x] && !bmp.buffer[i + x + 1]
+				&& !bmp.buffer[i + x + 2])
 			{
 				x += 3;
 				z += 4;
@@ -36,6 +36,7 @@ static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
 
 void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 {
+	FT_GlyphSlot	slot;
 	t_ttf_config	*conf;
 	t_ttf			*ttf;
 	int				i;
@@ -43,14 +44,17 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 	i = 0;
 	conf = ttf_config();
 	ttf = &env->ttfs;
-	FT_Set_Char_Size(ttf->faces[font], 0, conf->size * 64, 300, 100);
+	FT_Set_Char_Size(ttf->faces[font], conf->size * 128, conf->size * 64, 100, 72);
 	while (s[i])
 	{
 		if (i == 0 || s[i - 1] != s[i])
 			if (FT_Load_Char(ttf->faces[font], s[i], FT_LOAD_RENDER) && ++i)
 				continue ;
-		map_letter(env, ttf->faces[font]->glyph->bitmap, o);
+		slot = ttf->faces[font]->glyph;
+		map_letter(env, ttf->faces[font]->glyph->bitmap,
+			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
 		o.x += conf->size;
+		o.y += slot->advance.y >> 6;
 		i++;
 	}
 }
