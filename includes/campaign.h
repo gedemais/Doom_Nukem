@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/10 16:46:36 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/13 18:30:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ struct			s_sector
 struct			s_player
 {
 	t_dynarray	weapons;
-	t_weapon	current; // a remplacer par un ptr
+	t_weapon	*current;
 	t_mesh		*body;
 	int			hp;
 };

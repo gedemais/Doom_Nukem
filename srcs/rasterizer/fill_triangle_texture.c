@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/09 08:31:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/12 15:32:29 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 {
-	float	cu;
-	float	cv;
-	int		color;
+	t_sprite	*sp;
+	float		cu;
+	float		cv;
+	int			color;
 
 	if (pos[2] <= env->data.data_size && txt->txt_w > env->cam.z_buffer[pos[2]])
 	{
-		if (t.sp && t.textured)
+		if (t.sp >= 0 && t.textured)
 		{
+			sp = dyacc(&env->maps[env->scene].txts, t.sp);
 			cu = txt->txt_u / txt->txt_w;
 			cv = txt->txt_v / txt->txt_w;
-			color = sample_pixel(t.sp->img_data,
-			(t_point){t.sp->hgt, t.sp->wdt}, (t_vec2d){cu, cv, 1.0f});
+			color = sample_pixel(sp->img_data,
+			(t_point){sp->hgt, sp->wdt}, (t_vec2d){cu, cv, 1.0f});
 			color = shade_color(color, t.illum);
 		}
 		else

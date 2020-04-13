@@ -6,4 +6,3 @@ int		link_weapon_to_cam(t_env *env, t_weapon w)
 
 // supprime le mesh de la scene (quand le personnage switch d'arme)
 int		unlink_weapon(t_env *env, t_weapon w)
-

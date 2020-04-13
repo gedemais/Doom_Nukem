@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/09 06:41:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/12 16:39:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		rasterizer(t_env *env, int scene)
 			j++;
 		}
 	}
+	env->scene = scene;
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);
 	clear_dynarray(&env->cam.to_clip);

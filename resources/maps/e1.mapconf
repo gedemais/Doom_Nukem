@@ -5,14 +5,14 @@
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
 Sol_Plane|{}|[]|true|()|
-Mur_nord_Plane.001|{}|[]|true|()|
-Mur_sud_Plane.002|{}|[]|true|()|
-Mur_ouest_Plane.004|{}|[]|true|()|
-Mur_est_Plane.003|{}|[]|true|()|
+Wall_West_Plane.001|{}|[]|true|()|
+Wall_East_Plane.002|{}|[]|true|()|
+Wall_North_Plane.003|{}|[]|true|()|
+Wall_South_Plane.004|{}|[]|true|()|
 Cube_Cube.001|{}|[]|true|()|
-Desk_6_places_Cube.002|{}|[]|true|()|
-Desk_7_places_Cube.003|{}|[]|true|()|
-Desk_8_places_Cube.004|{}|[]|true|()|
-Desk_9_places_Cube.005|{}|[]|true|()|
-Support_Cube.009|{}|[]|true|()|
-Imac_Cube.000|{}|[]|true|()|
+Cube.001_Cube.002|{}|[]|true|()|
+Cube.002_Cube.003|{}|[]|true|()|
+Cube.003_Cube.004|{}|[]|true|()|
+Cube.004_Cube.005|{}|[]|true|()|
+Cube.005_Cube.006|{}|[]|true|(resources/textures/keyboard.XPM)|
+Cube.006_Cube|{}|[]|true|(resources/textures/keyboard.XPM)|

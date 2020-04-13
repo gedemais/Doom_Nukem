@@ -4,6 +4,7 @@
 # define ACC_START 16 // a remplacer par le calcul de precision
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
 # define AMMO_FONT_SIZE 24
+# define W_NAME_FONT_SIZE 16
 
 enum	e_weapons
 {
@@ -18,9 +19,9 @@ enum	e_weapons
 
 struct	s_weapon
 {
-	char	*name;
-	t_mesh	*mesh; // Mesh central de l'arme
 	t_vec3d	p_offset; // Offset de la position de l'arme au joueur
+	t_mesh	*mesh; // Mesh central de l'arme
+	char	*name;
 	float	pitch; // Angles de l'arme dans le referentiel du joueur
 	float	yaw; // ___
 	float	accuracy; // 0-1
@@ -28,6 +29,7 @@ struct	s_weapon
 	int		magazine; // Capacite du chargeur
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock
+	int		index;
 	//	Son
 	//	Cadence de tir
 	//	sprite de flamme ?
@@ -43,6 +45,8 @@ int			init_weapons(t_env *env);
 
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);
-int			print_ammos(t_env *env, t_weapon w);
+int			print_ammos(t_env *env, t_weapon *w);
+
+void		switch_current_weapon(t_camp_env *cmp_env, int button);
 
 #endif

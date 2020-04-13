@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/31 21:48:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/12 13:04:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ static int	load_map_data(t_map *map)
 				|| f->y - 1 >= map->pool.nb_cells || f->z - 1 >= map->pool.nb_cells))
 				return (-1);
 
+			ft_memset(&new, 0, sizeof(t_triangle));
 			access_faces(&new, map, f, m);
 
 			if (push_dynarray(&m->tris, &new, false))

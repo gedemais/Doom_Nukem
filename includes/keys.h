@@ -11,20 +11,23 @@ enum		e_events_id
 	E_CLOSE = (1L << 17),
 };
 
+enum		e_mouse_events
+{
+	BUTTON_NONE,
+	BUTTON_LCLIC,
+    BUTTON_RCLIC,
+    BUTTON_SCLIC,
+    BUTTON_SCROLL_UP,
+    BUTTON_SCROLL_DOWN,
+	BUTTON_MAX
+};
+
 # define NB_KEYS 260
 
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define KEY_PRESS_MASK (1L<<0)
 # define KEY_RELEASE_MASK (1L<<1)
-
-# define NB_BUTTONS 5
-
-# define BUTTON_LCLIC 1
-# define BUTTON_RCLIC 2
-# define BUTTON_SCLIC 3
-# define BUTTON_SUP 4
-# define BUTTON_SBACK 5
 
 # define KEY_ESCAPE		53
 # define KEY_F1 		122

@@ -2,7 +2,7 @@
 
 int		dup_names(t_camp_env *cmp_env)
 {
-	const char	*names[W_MAX] = {"Famas", "AK-47", "Sawed-Off", "Glock-18",
+	const char	*names[W_MAX] = {"FAMAS", "AK-47", "Sawed-Off", "Glock-18",
 									"AUG", "UMP45"};
 	unsigned int	i;
 
@@ -11,6 +11,7 @@ int		dup_names(t_camp_env *cmp_env)
 	{
 		if (!(cmp_env->weapons[i].name = ft_strdup((char*)names[i])))
 			return (-1);
+		cmp_env->weapons[i].index = (int)i;
 		i++;
 	}
 	return (0);
@@ -40,6 +41,7 @@ int		init_weapons(t_env *env)
 	if (dup_names(cmp_env))
 		return (-1);
 	assign_meshs(env, cmp_env);
-
+	if (init_dynarray(&cmp_env->player.weapons, sizeof(t_weapon), 0))
+		return (-1);
 	return (0);
 }

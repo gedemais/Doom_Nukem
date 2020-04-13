@@ -2,19 +2,32 @@
 
 int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 {
+	t_sprite	sprite;
+	t_map		*map;
 	t_triangle	*t;
 	char		*path;
 	int			i;
 
 	i = 0;
+	map = *current_map();
 	while (i < m->tris.nb_cells)
 	{
 		t = dyacc(&m->tris, i);
-		t->sp = NULL;
+		t->sp = -1;
 		i++;
 	}
 	if (ft_strlen(tok) <= 2)
+	{
+		i = 0;
+		while (i < m->tris.nb_cells)
+		{
+			t = dyacc(&m->tris, i);
+			if (t->textured)
+				t->color = 0xff007f;
+			i++;
+		}
 		return (0);
+	}
 	if (tok[0] != '(' || tok[ft_strlen(tok) - 1] != ')')
 	{
 		ft_putendl_fd("Missing parentheses", 2);
@@ -22,12 +35,20 @@ int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 	}
 	if (!(path = ft_strndup(&tok[1], ft_strlen(&tok[1]) - 1)))
 		return (-1);
-	if (load_texture(&env->mlx, path, &m->sprite))
+	if (load_texture(&env->mlx, path, &sprite))
 		return (-1);
 	free(path);
-	i = -1;
-	while ((t = dyacc(&m->tris, ++i)))
-		t->sp = t->textured ? &m->sprite : NULL;
+	if ((!map->txts.byte_size && init_dynarray(&map->txts, sizeof(t_sprite), 0))
+		|| push_dynarray(&map->txts, &sprite, false))
+		return (-1);
+	i = 0;
+	while (i < m->tris.nb_cells)
+	{
+		t = dyacc(&m->tris, i);
+		if (t->textured)
+			t->sp = map->txts.nb_cells - 1;
+		i++;
+	}
 	return (0);
 }
 

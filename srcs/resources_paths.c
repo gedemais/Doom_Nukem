@@ -7,7 +7,9 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/sawed-off.obj",
 										"resources/maps/glock-18.obj",
 										"resources/maps/aug.obj",
-										"resources/maps/ump45.obj"};
+										"resources/maps/ump45.obj",
+										"resources/maps/e1.obj",
+										"resources/maps/cube.obj"};
 
 	return (paths[index]);
 }
@@ -76,8 +78,8 @@ char	*samples_paths(unsigned int index)
 
 char	*fonts_paths(unsigned int index)
 {
-	static char		*paths[FONT_MAX] = {"resources/fonts/AmazDooMRight.ttf",
-										"resources/fonts/font.ttf"};
+	static char		*paths[FONT_MAX] = {"resources/fonts/arial.ttf",
+										"resources/fonts/ammos.ttf"};
 
 	return (paths[index]);
 }

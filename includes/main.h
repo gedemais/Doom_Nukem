@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/09 09:53:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:32:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.1f
+# define WALK_SPEED 0.03f
 
 enum		e_context_id
 {
@@ -91,7 +91,7 @@ struct		s_mlx
 struct			s_events
 {
 	bool		keys[NB_KEYS];
-	bool		buttons[NB_BUTTONS];
+	bool		buttons[BUTTON_MAX];
 	t_point		mouse_pos;
 };
 

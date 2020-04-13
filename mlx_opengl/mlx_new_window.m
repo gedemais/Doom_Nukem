@@ -299,14 +299,14 @@ int get_mouse_button(NSEventType eventtype)
   button = 0;
   thepoint = [theEvent locationInWindow];
   sens = [theEvent deltaY];
-  if (sens > 0.2)
+  if (sens > 0.1)
     button = 4;
-  if (sens < -0.2)
+  if (sens < -0.1)
     button = 5;
   sens = [theEvent deltaX];
-  if (sens > 0.2)
+  if (sens > 0.1)
     button = 6;
-  if (sens < -0.2)
+  if (sens < -0.1)
     button = 7;
   if (button != 0)
     event_funct[4](button, (int)(thepoint.x), size_y - 1 - (int)(thepoint.y), event_param[4]);

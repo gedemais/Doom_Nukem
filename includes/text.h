@@ -3,7 +3,7 @@
 
 enum	e_font_id
 {
-	FONT_AMAZDOOM,
+	FONT_ARIAL,
 	FONT_AMMOS,
 	FONT_MAX
 };

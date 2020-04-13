@@ -52,6 +52,8 @@ enum	e_scene_id
 	SCENE_GLOCK_18,
 	SCENE_AUG,
 	SCENE_UMP45,
+	SCENE_E1,
+	SCENE_CUBE,
 	SCENE_MAX
 };
 
@@ -83,10 +85,9 @@ struct	s_triangle
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
 	int			color;
-	t_sprite	*sp;
-	int			sp_id;
+	int			sp;
 	float		alpha;
-	void		*mesh;
+	t_mesh		*mesh;
 };
 
 struct	s_mesh
@@ -110,6 +111,7 @@ struct	s_mesh
 struct	s_map
 {
 	t_dynarray		meshs;
+	t_dynarray		txts;
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;

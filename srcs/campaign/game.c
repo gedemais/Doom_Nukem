@@ -6,8 +6,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		r;
 
 	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);
-
+	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio); 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
 	if (keys[KEY_S])
@@ -78,7 +77,6 @@ static void	cmp_game_handle_events(t_env *env)
 int		cmp_game(void *param)
 {
 	t_env *env;
-//	unsigned char	s[1024] = "30 /120";
 
 	env = (t_env*)param;
 	cmp_game_handle_events(env);

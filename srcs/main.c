@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/10 17:00:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/13 19:17:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ static int	doom_nukem(t_env *env)
 			t->sp = &env->sprites[TXT_BLOC_GRASS];
 	}*/
 	//mlx_mouse_hide();
-	env->cmp_env.player.current.ammos = 120;
-	env->cmp_env.player.current.magazine = 30;
-	env->cmp_env.player.current.loaded = 30;
+
+	for (int i = 0; i < W_MAX; i++)
+		push_dynarray(&env->cmp_env.player.weapons, &env->cmp_env.weapons[i], false);
+
+	env->cmp_env.player.current = dyacc(&env->cmp_env.player.weapons, W_FAMAS);
+	env->cmp_env.player.current->ammos = 120;
+	env->cmp_env.player.current->magazine = 30;
+	env->cmp_env.player.current->loaded = 30;
+
 
 
 	env->context = C_CAMPAIGN;
