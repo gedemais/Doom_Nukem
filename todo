@@ -17,6 +17,9 @@ Todo:
 		Recoder un atof
 		Fermer les fd
 
+Optis : 
+- clear_screen (multithread / loop_unrolling)
+
 Scenario :
 Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque
 extraterrestre et vous etes seul, blesse, et enferme dans le labelec. Vous trouvez
