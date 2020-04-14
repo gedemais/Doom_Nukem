@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 17:36:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 17:20:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ static void pause_position(t_env *env)
 		i++;
 	}	
 }
-
+/*
 static void	color_collides(t_env *env)
 {
 	t_collide	*m;
@@ -174,7 +174,7 @@ static void	color_collides(t_env *env)
 			t->color = 0xff0000;
 		}
 	}
-}
+}*/
 int		physic_engine(t_env *env)
 {
 	t_events	*e;
@@ -182,7 +182,7 @@ int		physic_engine(t_env *env)
 	e = &env->events;
 	ft_memset(env->maps[env->scene].colls, 0, env->maps[env->scene].nmesh);
 	report_collisions(env);
-	color_collides(env);
+//	color_collides(env);
 	update_speeds(env);
 	update_positions(env);
 	if (e->keys[KEY_P])

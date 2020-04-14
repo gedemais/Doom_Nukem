@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/07 09:14:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 17:27:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	clear_screen_buffers(t_env *env)
 
 	i = 0;
 	ft_memset(env->mlx.img_data, 0, env->data.data_size);
-	while (i < size)
+	while (i < size - 4)
 	{
 		env->cam.z_buffer[i] = -INFINITY;
-		i++;
+		env->cam.z_buffer[i + 1] = -INFINITY;
+		env->cam.z_buffer[i + 2] = -INFINITY;
+		env->cam.z_buffer[i + 3] = -INFINITY;
+		i += 4; // Loop unrolling, about 5 fps of gain
 	}
 }
 

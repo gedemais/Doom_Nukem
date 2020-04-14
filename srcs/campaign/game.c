@@ -76,17 +76,20 @@ static void	cmp_game_handle_events(t_env *env)
 
 int		cmp_game(void *param)
 {
-	t_env *env;
+	t_env		*env;
+	t_camp_env	*cmp_env;
 
 	env = (t_env*)param;
+	cmp_env = &env->cmp_env;
+	env->scene = cmp_env->sectors[cmp_env->sector].map;
+	//physic_engine(env);
+	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	camera_aim(env);
-	if (rasterizer(env, env->cmp_env.sector))
+	if (rasterizer(env, env->scene))
 		return (-1);
 	handle_weapons(env);
 	cmp_hud(env, &env->cmp_env);
-	//my_string_put(env, (t_point){900, 670}, FONT_AMMOS, s);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

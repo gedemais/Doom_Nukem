@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 04:02:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/11 18:57:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:12:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,16 @@ void	render_button(void *param, t_button button, unsigned int index)
 		sprite = button.off;
 	if (!clic)
 		blit_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y}, 1.0f);
+}
+
+void	render_buttons(t_env *env)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < TS_BUTTON_MAX)
+	{
+		render_button(env, env->ts_env.buttons[i], i);
+		i++;
+	}
 }

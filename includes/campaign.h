@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/13 18:30:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 16:14:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,23 @@ enum	e_cmp_menu_buttons_id
 
 enum	e_sector_id
 {
-	SECTOR_FAMAS,
+	SECTOR_SA,
+	SECTOR_SB,
+	SECTOR_SC,
 	SECTOR_MAX
+};
+
+struct			s_door
+{
+	t_vec3d	pos;
+	int		from;
+	int		to;
+	float	max_dist;
 };
 
 struct			s_sector
 {
+	t_door		doors[SECTOR_MAX];
 	bool		accesses[SECTOR_MAX];
 	int			map;
 };
@@ -61,7 +72,6 @@ struct			s_camp_env
 };
 
 int					setup_cmp(t_env *env);
-void				init_sectors(t_env *env);
 
 int					key_press_camp(int key, void *param);
 int					key_release_camp(int key, void *param);
@@ -69,6 +79,12 @@ int					mouse_press_camp(int button, int x, int y, void *param);
 int					mouse_release_camp(int button, int x, int y, void *param);
 int					mouse_position_camp(int x, int y, void *param);
 int					render_camp(void *param);
+
+/*
+** Sectors
+*/
+void				init_sectors(t_env *env);
+void				check_doors(t_env *env, t_camp_env *cmp_env);
 
 /*
 ** Sub_contexts functions
@@ -86,5 +102,5 @@ void				cmp_game_to_menu(t_env *env);
 /*
 ** UI
 */
-void				cmp_hud(t_env *env, t_camp_env *cmp_env);
+int					cmp_hud(t_env *env, t_camp_env *cmp_env);
 #endif

@@ -20,6 +20,7 @@ enum	e_weapons
 struct	s_weapon
 {
 	t_vec3d	p_offset; // Offset de la position de l'arme au joueur
+	t_map	*w_map; // map du .obj de l'arme
 	t_mesh	*mesh; // Mesh central de l'arme
 	char	*name;
 	float	pitch; // Angles de l'arme dans le referentiel du joueur

@@ -8,13 +8,10 @@ Todo:
 		Sadirac | gneheheeeee
 		Monstres | gneheheeee
 		Armes | bibax
-		Talkie-Walkie | bibax
 		Grotte avec lac de lave | bibax
 
 	obj_parser:
 		Faire une fonction parse_error
-	OpenAL:
-		Faire un vrai sound system avec une data structure adaptee
 	Autres:
 		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
 		Recoder un atof

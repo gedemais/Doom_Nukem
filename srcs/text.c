@@ -44,7 +44,7 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 	i = 0;
 	conf = ttf_config();
 	ttf = &env->ttfs;
-	FT_Set_Char_Size(ttf->faces[font], conf->size * 128, conf->size * 64, 100, 72);
+	FT_Set_Char_Size(ttf->faces[font], conf->size * 96, conf->size * 64, 160, 80);
 	while (s[i])
 	{
 		if (i == 0 || s[i - 1] != s[i])
@@ -57,6 +57,27 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 		o.y += slot->advance.y >> 6;
 		i++;
 	}
+}
+
+void		textual_hint(t_env *env, char button, char *action)
+{
+	t_ttf_config	*conf;
+	t_point			o;
+	int				x_offset; // Centrer le texte
+	char			s[1024];
+
+	conf = ttf_config();
+	conf->size = 20;
+	ft_strcpy(s, "Press [");
+	ft_strncat(s, &button, 1);
+	ft_strcat(s, "] to ");
+	ft_strcat(s, action);
+
+	x_offset = (ft_strlen(s)) / 2 * conf->size;
+	o.x = env->data.half_wdt - x_offset;
+	o.y = HGT / 3;
+
+	my_string_put(env, o, FONT_TXT_HINT, (unsigned char*)s);
 }
 
 int		load_fonts(t_env *env)

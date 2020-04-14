@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/13 20:04:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:10:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		key_press_camp(int key, void *param)
 	if (key == KEY_SPACE)
 	{
 		env->cmp_env.sector++;
-		if (env->cmp_env.sector == SCENE_MAX)
-			env->cmp_env.sector = 0;
+		if (env->cmp_env.sector == SECTOR_MAX)
+			env->cmp_env.sector = SECTOR_SA;
 	}
 	return (0);
 }

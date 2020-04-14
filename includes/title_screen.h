@@ -42,6 +42,7 @@ int					render_ts(void *param);
 void				init_button(t_button *button, t_point o, t_sprite *sp[3]);
 bool				is_on_button(t_point mouse, t_button button);
 void				render_button(void *param, t_button button, unsigned int index);
+void				render_buttons(t_env *env);
 
 void				animation(t_env *env);
 

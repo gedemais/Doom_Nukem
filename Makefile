@@ -40,12 +40,16 @@ LIB = libft/libft.a
 
 LOPENAL = $(shell pkg-config --libs openal)
 IOPENAL = $(shell pkg-config --cflags openal)
+
 LSNDFILE = $(shell pkg-config --libs sndfile)
 ISNDFILE = $(shell pkg-config --cflags sndfile)
+
 LFREETYPE = freetype-2.10.1/libfreetype.a
 IFREETYPE = -Ifreetype-2.10.1/include/ 
+
 LPNG = $(shell pkg-config --libs libpng)
 IPNG = $(shell pkg-config --cflags libpng)
+
 LBZ2 = /usr/local/Cellar/bzip2/1.0.8/lib/libbz2.a
 IBZ2 = -I/usr/local/opt/bzip2/include/
 
@@ -59,6 +63,7 @@ install: scripts/install.sh
 $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) $(IBZ2) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) $(LFREETYPE) $(LPNG) $(LBZ2) -lpthread -framework OpenGL -framework AppKit
 
+
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	@tput civis
 	@printf " Compiling $<"
@@ -69,6 +74,8 @@ $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 $(MLX): $(MLX_PATH)
 	@echo "Making MinilibX..."
 	@make -C $(MLX_PATH) -j
+	@echo "MinilibX successfully compiled !"
+	@echo "Making Doom_Nukem..."
 
 $(LIB): $(LIB_PATH)
 	@echo "Making Libft..."
@@ -77,6 +84,7 @@ $(LIB): $(LIB_PATH)
 clean:
 	@rm -rf $(OBJS)
 	@make -C $(LIB_PATH) clean
+	@echo "Libft clean"
 	@make -C $(MLX_PATH) clean
 
 fclean: clean

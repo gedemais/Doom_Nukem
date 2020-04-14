@@ -53,7 +53,9 @@ enum	e_scene_id
 	SCENE_AUG,
 	SCENE_UMP45,
 	SCENE_E1,
-	SCENE_CUBE,
+	SCENE_SA,
+	SCENE_SB,
+	SCENE_SC,
 	SCENE_MAX
 };
 
