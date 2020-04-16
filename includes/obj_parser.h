@@ -46,6 +46,7 @@ enum	e_pstate
 
 enum	e_scene_id
 {
+	SCENE_PHYSIC_02,
 	SCENE_FAMAS,
 	SCENE_AK47,
 	SCENE_SAWED_OFF,
