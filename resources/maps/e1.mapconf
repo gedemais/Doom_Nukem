@@ -14,5 +14,6 @@ Cube.001_Cube.002|{}|[]|true|()|
 Cube.002_Cube.003|{}|[]|true|()|
 Cube.003_Cube.004|{}|[]|true|()|
 Cube.004_Cube.005|{}|[]|true|()|
-Cube.005_Cube.006|{}|[]|true|(resources/textures/keyboard.XPM)|
-Cube.006_Cube|{}|[]|true|(resources/textures/keyboard.XPM)|
+Cube.005_Cube.006|{}|[]|true|()|
+Cube.006_Cube|{}|[]|true|(resources/textures/keyboard.xpm)|
+Cube.007|{}|[]|true|()|

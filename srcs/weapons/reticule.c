@@ -1,13 +1,13 @@
 #include "main.h"
 
-static void	draw_vertical(t_data *data, t_mlx *mlx, int size)
+static void	draw_vertical(t_data *data, t_mlx *mlx, int size, float spread)
 {
 	int		x;
 	int		y;
 	float	pre_bound;
 	int		bound;
 
-	pre_bound = (size * ACC_SPREAD);
+	pre_bound = (size * (1.2f - spread));
 	bound = data->half_hgt + size;
 	x = data->half_wdt;
 	y = data->half_hgt - size - 1;
@@ -19,14 +19,14 @@ static void	draw_vertical(t_data *data, t_mlx *mlx, int size)
 		}
 }
 
-static void	draw_horizontal(t_data *data, t_mlx *mlx, int size)
+static void	draw_horizontal(t_data *data, t_mlx *mlx, int size, float spread)
 {
 	int		x;
 	int		y;
 	float	pre_bound;
 	int		bound;
 
-	pre_bound = (size * ACC_SPREAD);
+	pre_bound = (size * (1.2f - spread));
 	bound = data->half_wdt + size;
 	x = data->half_wdt - size - 1;
 	y = data->half_hgt;
@@ -40,19 +40,18 @@ static void	draw_horizontal(t_data *data, t_mlx *mlx, int size)
 
 void	draw_reticule(t_env *env)
 {
-	static float	size = 1.0f;
 	t_data			*data;
 	t_mlx			*mlx;
-	int				lines_size;
+	int				line_size;
 
 	data = &env->data;
 	mlx = &env->mlx;
-	lines_size = size * ACC_START;
+	line_size = env->cmp_env.player.current->reticle;
 	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt, 0x00ff00);
 	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt, 0x00ff00);
 	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt - 1, 0x00ff00);
 	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt - 1, 0x00ff00);
 
-	draw_vertical(data, mlx, lines_size);
-	draw_horizontal(data, mlx, lines_size);
+	draw_vertical(data, mlx, line_size, env->cmp_env.player.current->accuracy);
+	draw_horizontal(data, mlx, line_size, env->cmp_env.player.current->accuracy);
 }

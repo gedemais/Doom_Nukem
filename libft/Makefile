@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2020/04/14 18:57:38 by gedemais         ###   ########.fr        #
+#    Updated: 2020/04/14 20:32:16 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,7 +136,7 @@ $(NAME): $(OBJS)
 	@ranlib $(NAME)
 	@echo "$(GRE)Libft successfully compiled !$(DEF)"
 
-./%.o: ./%.c $(INC)
+%.o: %.c $(INC)
 	@tput civis
 	@printf " Compiling $<"
 	@printf "                                       \\r"

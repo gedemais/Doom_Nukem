@@ -46,7 +46,7 @@ int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 	{
 		t = dyacc(&m->tris, i);
 		if (t->textured)
-			t->sp = map->txts.nb_cells - 1;
+			t->sp = t->textured ? map->txts.nb_cells - 1 : -1;
 		i++;
 	}
 	return (0);

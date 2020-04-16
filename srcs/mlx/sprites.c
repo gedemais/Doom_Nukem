@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 12:44:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/15 20:35:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 	return (img);
 }
 
-int		load_texture(t_mlx *mlx, char *path, t_sprite *txt)
+int			load_texture(t_mlx *mlx, char *path, t_sprite *txt)
 {
 	int		t;
 
@@ -93,6 +93,7 @@ int		load_texture(t_mlx *mlx, char *path, t_sprite *txt)
 	printf("Sprite (%s) : %d by %d pixels\n", path, txt->wdt, txt->hgt);
 	if (!(txt->img_data = mlx_get_data_addr(txt->img_ptr, &t, &t, &t)))
 		return (-1);
+	reverse_texture(txt);
 	return (0);
 }
 

@@ -68,6 +68,7 @@ SRCS_NAME =	main.c\
 			\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
+			mlx/sprites_effects.c\
 			mlx/render.c\
 			mlx/term_loading_bar.c\
 			mlx/events.c\

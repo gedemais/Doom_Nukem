@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/12 14:56:59 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/16 16:15:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 	int				relaunched = 0;
 
 	amount = INT_MAX;
-	waste = NB_THREADS;
+	waste = NB_THREADS + 1;
 	while (amount > waste)
 	{
 		i = 0;
@@ -64,7 +64,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 			i++;
 		}
 	}
-	//printf("%d threads relauncheds on this frame\n", relaunched);
+//	printf("%d threads relauncheds on this frame\n", relaunched);
 }
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)

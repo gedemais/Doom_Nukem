@@ -1,7 +1,7 @@
 #ifndef WEAPONS_H
 # define WEAPONS_H
 
-# define ACC_START 16 // a remplacer par le calcul de precision
+# define ACC_START 24 // a remplacer par le calcul de precision
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
 # define AMMO_FONT_SIZE 24
 # define W_NAME_FONT_SIZE 16
@@ -20,13 +20,13 @@ enum	e_weapons
 struct	s_weapon
 {
 	t_vec3d	p_offset; // Offset de la position de l'arme au joueur
+	t_vec3d	p_angle;// Angles de l'arme dans le referentiel du joueur
 	t_map	*w_map; // map du .obj de l'arme
 	t_mesh	*mesh; // Mesh central de l'arme
 	char	*name;
-	float	pitch; // Angles de l'arme dans le referentiel du joueur
-	float	yaw; // ___
 	float	accuracy; // 0-1
-	float	damages; // 0-100
+	int		reticle;
+	int		damages; // 0-100
 	int		magazine; // Capacite du chargeur
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock

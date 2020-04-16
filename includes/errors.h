@@ -38,4 +38,6 @@
 
 # define NSFD_ERR " : No such file or directory"
 
+# define NO_UVS_ERR "No UVs vertices found for this mesh"
+
 #endif
