@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 17:31:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/16 19:11:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
-	if (key_move(e->keys) && simple_test_floor(env)) 
+	if (key_move(e->keys) && simple_test_floor(env))
 		move(env, e->keys);
 	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;

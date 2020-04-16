@@ -10,6 +10,8 @@ INCS_NAME=	main.h\
 			raster.h\
 			sound.h\
 			sprites.h\
+			weapons.h\
+			text.h\
 			title_screen.h\
 			typedefs.h
 

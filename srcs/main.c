@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/22 15:46:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 18:26:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,20 @@ static int	doom_nukem(t_env *env)
 		if (t->textured)
 			t->sp = &env->sprites[TXT_BLOC_GRASS];
 	}*/
-	env->context = C_CAMPAIGN;
-	env->scene = SCENE_A;
+	//mlx_mouse_hide();
+
+	for (int i = 0; i < W_MAX; i++)
+		push_dynarray(&env->cmp_env.player.weapons, &env->cmp_env.weapons[i], false);
+
+	env->cmp_env.player.current = dyacc(&env->cmp_env.player.weapons, W_FAMAS);
+	env->cmp_env.player.current->ammos = 120;
+	env->cmp_env.player.current->magazine = 30;
+	env->cmp_env.player.current->loaded = 30;
+
+
+
+	env->context = C_TITLE_SCREEN;
+	env->scene = SCENE_FAMAS;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
 	mlx_hooks(env);
 	return (0);

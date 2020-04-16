@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 05:27:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/12 00:17:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/08 12:10:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,14 @@ static void	cross_step(t_button *button, int i)
 		button->in_place = true;
 }
 
-void		animation(void *e)
+void		animation(t_env *env)
 {
-	t_env		*env;
 	static int	i = TS_BUTTON_MAX - 1;
 
 	if (i == -1)
 		return ;
-	env = (t_env*)e;
 	if (env->ts_env.buttons[i].in_place)
 		i--;
-	cross_step(&env->ts_env.buttons[i], i);
+	if (i >= 0)
+		cross_step(&env->ts_env.buttons[i], i);
 }

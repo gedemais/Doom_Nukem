@@ -43,6 +43,7 @@ int		new_txt_vertex(t_map *map, char **toks)
 	if (!(m = dyacc(&map->meshs, map->nmesh - 1)) || ft_tablen(toks) != 3
 		|| !check_float(toks[1]) || !check_float(toks[2]))
 		return (-1);
+	m->textured = true;
 	txt_coor.u = atof(toks[1]);
 	txt_coor.v = atof(toks[2]);
 	if (push_dynarray(&map->txt_pool, &txt_coor, false))
@@ -97,7 +98,7 @@ int		mtllib(t_map *map, char **toks)
 	if (*init_parser())
 		return (0);
 	if (ft_tablen(toks) != 2 || (map->mtls.byte_size == 0
-		&& init_dynarray(&map->mtls, sizeof(t_mtl), 2)))
+		&& init_dynarray(&map->mtls, sizeof(t_mtl), 0)))
 		return (-1);
 	if (parse_mtl(toks[1], &map->mtls))
 		return (-1);

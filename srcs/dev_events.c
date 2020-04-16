@@ -13,7 +13,7 @@ int		key_press_dev(int key, void *param)
 	{
 		env->scene++;
 		if (env->scene == SCENE_MAX)
-			env->scene = SCENE_A;
+			env->scene = 0;
 	}
 	return (0);
 }
@@ -57,42 +57,6 @@ int		mouse_position_dev(int x, int y, void *param)
 	return (0);
 }
 
-static void camera(t_env *env)
-{
-	int			hwdt;
-	int			hhgt;
-	int			x;
-	int			y;
-
-	hwdt = WDT / 2;
-	hhgt = HGT / 2;
-	x = env->events.mouse_pos.x;
-	y = env->events.mouse_pos.y;
-	if (x <= hwdt && y < hhgt) // L Up
-	{
-		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio; // A caper
-		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
-	}
-	else if (x < hwdt && y >= hhgt) // L Down
-	{
-		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
-	}
-	else if (x >= hwdt && y < hhgt) // R Up
-	{
-		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
-	}
-	else if (x > hwdt && y >= hhgt) // R Down
-	{
-		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
-	}
-	mlx_mouse_move(env->mlx.mlx_win, hwdt, hhgt);
-	env->events.mouse_pos.x = hwdt;
-	env->events.mouse_pos.y = hhgt;
-}
-
 int		render_dev(void *param)
 {
 	t_env		*env;
@@ -106,23 +70,16 @@ int		render_dev(void *param)
 
 	//printf("%f %f\n", env->cam.stats.pitch, env->cam.stats.yaw);
 	//printf("%f %f %f | %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z, env->cam.stats.yaw, env->cam.stats.pitch);
-	translate_mesh(&env->maps[0], (t_mesh*)env->maps[0].meshs.c, (t_vec3d){0.01f, 0, 0, 0});
-	ft_memset(env->mlx.img_data, 0, env->data.data_size);
-	for (int i = 0; i < WDT * HGT; i++)
-		env->cam.z_buffer[i] = -INFINITY;
-	camera(env);
-//	printf("camera");
-//	print_vec(env->cam.stats.dir);
+	clear_screen_buffers(env);
+	camera_aim(env);
 	physic_engine(env);
-	rasterizer(env, env->scene);
-//  blit_sprite(env->mlx.img_data, env->sprites[TXT_BLOC_GRASS], (t_point){0.0f, 0.0f}, 1.0f);
-//	mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : dev");
+	if (rasterizer(env, env->scene))
+		exit(EXIT_FAILURE);
+	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
-//	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 	av += 1 / mesure_time(true);
-//	printf("pos : %f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
-	if (av > 2000)
+	if (av > 5000)
 	{
 		printf("%f\n", av / it);
 		av = 0.0f;

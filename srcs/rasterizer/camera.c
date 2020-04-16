@@ -56,8 +56,6 @@ static int	init_cameras_meshs(t_env *env)
 	ft_memset(&cam, 0, sizeof(t_mesh));
 	while (i < SCENE_MAX)
 	{
-		if (!(cam.name = ft_strdup("CAMERA")))
-			return (-1);
 		cam.corp.pos = env->maps[i].spawn;
 		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f));
 		cam.corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};

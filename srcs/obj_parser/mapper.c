@@ -21,7 +21,6 @@ static int		open_mapconf(char *map_name)
 		return (-1);
 	if ((fd = open(new_path, O_RDONLY)) == -1)
 	{
-		ft_putstr_fd(strerror(errno), 2);
 		free(new_path);
 		return (-1);
 	}

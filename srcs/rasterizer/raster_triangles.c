@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 23:19:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/16 16:15:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 	int				relaunched = 0;
 
 	amount = INT_MAX;
-	waste = NB_THREADS;
+	waste = NB_THREADS + 1;
 	while (amount > waste)
 	{
 		i = 0;
@@ -64,7 +64,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 			i++;
 		}
 	}
-	//printf("%d threads relauncheds on this frame\n", relaunched);
+//	printf("%d threads relauncheds on this frame\n", relaunched);
 }
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
@@ -110,11 +110,9 @@ static int	switch_threads(t_env *env, t_rasthread threads[NB_THREADS],
 int			raster_triangles(t_env *env, t_dynarray *arr)
 {
 	t_rasthread	threads[NB_THREADS];
-	int			i;
 
-	i = -1;
 	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-	//printf("%d elements to raster\n", env->cam.to_raster.nb_cells);
+
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
 	else

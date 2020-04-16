@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 01:54:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/14 15:10:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 int		key_press_camp(int key, void *param)
 {
-	t_env	*env;
+	t_env		*env;
 
 	env = ((t_env*)param);
+
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
+
+	if (key == KEY_SPACE)
+	{
+		env->cmp_env.sector++;
+		if (env->cmp_env.sector == SECTOR_MAX)
+			env->cmp_env.sector = SECTOR_SA;
+	}
 	return (0);
 }
 
@@ -34,13 +42,16 @@ int		key_release_camp(int key, void *param)
 
 int		mouse_press_camp(int button, int x, int y, void *param)
 {
-	t_env	*env;
+	t_camp_env	*env;
 
-	env = ((t_env*)param);
+	env = &((t_env*)param)->cmp_env;
 	
-	(void)button;
 	(void)x;
 	(void)y;
+	if (env->sub_context == CMP_SC_GAME)
+		if ((button == BUTTON_SCROLL_UP || button == BUTTON_SCROLL_DOWN)
+			&& env->player.current)
+		switch_current_weapon(env, button);
 	return (0);
 }
 

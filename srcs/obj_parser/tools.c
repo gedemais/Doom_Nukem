@@ -64,19 +64,11 @@ t_vec2d	read_vec2d(char *tok, char start_sep, char end_sep)
 	return (ret);
 }
 
-int		assign_triangle_texture(t_mesh *m , void *ptr)
+void	swap_bytes(char *a, char *b)
 {
-	t_triangle	*t;
-	int			i;
+	char	c;
 
-	i = 0;
-	while (i < m->tris.nb_cells)
-	{
-		if (!(t = dyacc(&m->tris, ++i)))
-			return (-1);
-		t->sp = ptr;
-		t->textured = ptr == NULL ? false : true;
-		i++;
-	}
-	return (0);
+	c = *a;
+	*a = *b;
+	*b = c;
 }

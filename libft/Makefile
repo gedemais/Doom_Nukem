@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2020/02/14 23:58:49 by gedemais         ###   ########.fr        #
+#    Updated: 2020/04/14 20:32:16 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,18 +132,22 @@ OBJS=$(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 	@echo "$(GRE)Libft successfully compiled !$(DEF)"
 
-./%.o: ./%.c $(INC)
-	$(CC) $(FLAGS) -c $<
+%.o: %.c $(INC)
+	@tput civis
+	@printf " Compiling $<"
+	@printf "                                       \\r"
+	@tput cnorm
+	@$(CC) $(FLAGS) -c $<
 
 clean: 
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 

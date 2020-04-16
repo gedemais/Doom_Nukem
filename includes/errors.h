@@ -31,5 +31,13 @@
 # define BMP_HEADER "Wrong path or file format for "
 
 # define ICS_ERR "Illegal context switch. Abort"
+# define ISCS_ERR "Illegal sub_context switch. Abort"
+
+# define FT_LIB "FreeType lib initilization failed"
+# define FT_LIB "FreeType lib initilization failed"
+
+# define NSFD_ERR " : No such file or directory"
+
+# define NO_UVS_ERR "No UVs vertices found for this mesh"
 
 #endif

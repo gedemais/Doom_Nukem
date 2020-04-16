@@ -2,10 +2,16 @@
 
 char	*maps_paths(unsigned int index)
 {
-	static char	*paths[SCENE_MAX] = {	"resources/maps/physic.obj",
-										"resources/maps/first.obj",
-										"resources/maps/cs_italy.obj",
-										"resources/maps/e1.obj"};
+	static char	*paths[SCENE_MAX] = {	"resources/maps/famas.obj",
+										"resources/maps/ak47.obj",
+										"resources/maps/sawed-off.obj",
+										"resources/maps/glock-18.obj",
+										"resources/maps/aug.obj",
+										"resources/maps/ump45.obj",
+										"resources/maps/e1.obj",
+										"resources/maps/sector_a.obj",
+										"resources/maps/sector_b.obj",
+										"resources/maps/sector_c.obj"};
 
 	return (paths[index]);
 }
@@ -68,6 +74,15 @@ char	*samples_paths(unsigned int index)
 	static char		*paths[SA_MAX] = {
 					"resources/samples/ambiances/title_screen_intro.wav",
 					"resources/samples/ambiances/title_screen_loop.wav"};
+
+	return (paths[index]);
+}
+
+char	*fonts_paths(unsigned int index)
+{
+	static char		*paths[FONT_MAX] = {"resources/fonts/arial.ttf",
+										"resources/fonts/ammos.ttf",
+										"resources/fonts/Courier.dfont"};
 
 	return (paths[index]);
 }

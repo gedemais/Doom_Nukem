@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:56:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/26 20:04:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/12 14:47:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,25 @@ int			refactor_triangle(t_clipper *clip, t_triangle out[2],
 		refactor_smaller(clip, out, planes[0], planes[1]);
 		out[0].textured = t.textured;
 		out[0].color = t.color;
+		out[0].normal = t.normal;
+		out[0].sp = t.sp;
+		out[0].mesh = t.mesh;
 		return (1);
 	}
 	else if (clip->inside == 2 && clip->outside == 1)
 	{
 		refactor_quad(clip, out, planes[0], planes[1]);
 		out[0].textured = t.textured;
-		out[1].textured = t.textured;
+		out[0].normal = t.normal;
 		out[0].color = t.color;
+		out[0].mesh = t.mesh;
+		out[0].sp = t.sp;
+
+		out[1].textured = t.textured;
+		out[1].normal = t.normal;
 		out[1].color = t.color;
+		out[1].mesh = t.mesh;
+		out[1].sp = t.sp;
 		return (2);
 	}
 	return (0);

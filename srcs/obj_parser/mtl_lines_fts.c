@@ -46,7 +46,7 @@ int		mtl_color(char **toks, t_dynarray *mtls)
 		cm->color[i - 1] = (t * 255);
 		i++;
 	}
-	cm->color[3] = (1.0f - cm->alpha) * 255;
+	swap_bytes(&cm->color[0], &cm->color[2]);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:24:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/18 21:07:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/07 09:25:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,16 @@ void	open_gates(bool gates[C_MAX][C_MAX])
 
 void	init_routines(void (*routines[C_MAX][C_MAX])(t_env*))
 {
-/*	routines[C_DEV][C_TITLE_SCREEN] = true;
-	routines[C_DEV][C_CAMPAIGN] = true;
-	routines[C_DEV][C_CUSTOM] = true;
-	routines[C_DEV][C_MAP_EDITOR] = true;*/
-
-	routines[C_TITLE_SCREEN][C_DEV] = &ts_to_dev;
+	routines[C_TITLE_SCREEN][C_DEV] = ts_to_dev;
 	routines[C_TITLE_SCREEN][C_CAMPAIGN] = ts_to_campaign;
 	routines[C_TITLE_SCREEN][C_CUSTOM] = ts_to_custom;
 	routines[C_TITLE_SCREEN][C_MAP_EDITOR] = ts_to_map_editor;
 
-	routines[C_CAMPAIGN][C_DEV] = NULL;
 	routines[C_CAMPAIGN][C_TITLE_SCREEN] = campaign_to_ts;
-	routines[C_CAMPAIGN][C_CUSTOM] = NULL;
-	routines[C_CAMPAIGN][C_MAP_EDITOR] = NULL;
 
-	routines[C_CUSTOM][C_DEV] = NULL;
 	routines[C_CUSTOM][C_TITLE_SCREEN] = custom_to_ts;
-	routines[C_CUSTOM][C_CAMPAIGN] = NULL;
-	routines[C_CUSTOM][C_MAP_EDITOR] = NULL;
 
-	routines[C_MAP_EDITOR][C_DEV] = NULL;
 	routines[C_MAP_EDITOR][C_TITLE_SCREEN] = map_editor_to_ts;
-	routines[C_MAP_EDITOR][C_CAMPAIGN] = NULL;
-	routines[C_MAP_EDITOR][C_CUSTOM] = NULL;
 }
 
 int		switch_context(t_env *env, unsigned int i)

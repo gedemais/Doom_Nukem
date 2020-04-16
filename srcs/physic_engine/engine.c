@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 17:36:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/16 19:13:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ static void	color_collides(t_env *env)
 		}
 	}
 }
+
 int		physic_engine(t_env *env)
 {
 	t_events	*e;

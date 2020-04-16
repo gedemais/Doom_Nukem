@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/29 21:43:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/16 16:15:56 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <limits.h>
 # include <assert.h>
 # include <pthread.h>
+# include <ft2build.h>
+# include FT_FREETYPE_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -35,6 +37,8 @@
 # include "sprites.h"
 # include "obj_parser.h"
 # include "raster.h"
+# include "text.h"
+# include "weapons.h"
 
 # include "title_screen.h"
 # include "campaign.h"
@@ -60,7 +64,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.1f
+# define WALK_SPEED 0.03f
 
 enum		e_context_id
 {
@@ -87,7 +91,7 @@ struct		s_mlx
 struct			s_events
 {
 	bool		keys[NB_KEYS];
-	bool		buttons[NB_BUTTONS];
+	bool		buttons[BUTTON_MAX];
 	t_point		mouse_pos;
 };
 
@@ -101,7 +105,8 @@ struct			s_data
 struct			s_env
 {
 	t_mlx		mlx;
-	t_cmpenv	cmp_env;
+	t_ts_env	ts_env;
+	t_camp_env	cmp_env;
 	t_edtenv	edit_env;
 	t_events	events;
 	t_sound		sound;
@@ -110,9 +115,9 @@ struct			s_env
 	t_data		data;
 	t_physics	phy_env;
 	t_cam		cam;
-	t_ts_env	ts_env;
 	int			context;
-	int			scene;
+	int			scene; // a tej quand C_DEV sera supprime
+	t_ttf		ttfs;
 };
 
 int				setup(t_env *env);

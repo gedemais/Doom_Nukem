@@ -7,10 +7,16 @@ SRCS_NAME =	main.c\
 			resources_paths.c\
 			setup.c\
 			singletons.c\
+			text.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
 			campaign/setup_cmp.c\
+			campaign/menu.c\
+			campaign/game.c\
+			campaign/routines.c\
+			campaign/sectors.c\
+			campaign/hud.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\
@@ -54,6 +60,7 @@ SRCS_NAME =	main.c\
 			rasterizer/triangle_pipeline.c\
 			rasterizer/raster_triangles.c\
 			rasterizer/camera.c\
+			rasterizer/aim.c\
 			rasterizer/rotation_matrices.c\
 			rasterizer/matrices.c\
 			rasterizer/matrix_ops.c\
@@ -61,6 +68,7 @@ SRCS_NAME =	main.c\
 			\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
+			mlx/sprites_effects.c\
 			mlx/render.c\
 			mlx/term_loading_bar.c\
 			mlx/events.c\
@@ -78,4 +86,9 @@ SRCS_NAME =	main.c\
 			vectors/vec2d_ops.c\
 			vectors/vec2d_tools.c\
 			vectors/vec3d_ops.c\
-			vectors/vec3d_tools.c
+			vectors/vec3d_tools.c\
+			\
+			weapons/weapons.c\
+			weapons/ammos.c\
+			weapons/init_weapons.c\
+			weapons/reticule.c

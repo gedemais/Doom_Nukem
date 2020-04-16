@@ -1,37 +1,24 @@
-creer une fonction qui map une couleur int sur un float (0 - 1)
-utiliser read_vec3d dans le parser d'obj
-
-Fix:
-souris vers le bas
-Resoudre les merges conflicts pour le Makefile (install.sh, srcs.mk)
-
 Betters:
-Caper la valeur d'eloignement du curseur pour eviter les mouvements trop brusques
-Synchroniser le drop et l'apparition du logo sur le title screen
-Pixloc sur les fill_triangle
-srcs.mk pour subdiviser les sources
+Colorier les digits des ammos en rouge en fonction du chargeur / stock +/- low
+
 
 Todo:
 	blender:
-		Finir de modeliser 42
-		Sadirac
-		Monstres
-		Armes
-		Talkie-Walkie
-		Grotte avec lac de lave
+		Finir de modeliser 42 | Moguy
+		Sadirac | gneheheeeee
+		Monstres | gneheheeee
+		Armes | bibax
+		Grotte avec lac de lave | bibax
 
 	obj_parser:
-		Securiser le parser
 		Faire une fonction parse_error
-	rasterizer:
-		Fix les lignes horizontales
-	OpenAL:
-		Faire un vrai sound system avec une data structure adaptee
-		Choper et compiler les sources d'OpenAL dans le Makefile
 	Autres:
 		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
 		Recoder un atof
 		Fermer les fd
+
+Optis : 
+- clear_screen (multithread / loop_unrolling)
 
 Scenario :
 Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque

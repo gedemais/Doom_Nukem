@@ -46,10 +46,16 @@ enum	e_pstate
 
 enum	e_scene_id
 {
-	SCENE_A,
-	SCENE_B,
-	SCENE_C,
-	SCENE_D,
+	SCENE_FAMAS,
+	SCENE_AK47,
+	SCENE_SAWED_OFF,
+	SCENE_GLOCK_18,
+	SCENE_AUG,
+	SCENE_UMP45,
+	SCENE_E1,
+	SCENE_SA,
+	SCENE_SB,
+	SCENE_SC,
 	SCENE_MAX
 };
 
@@ -81,9 +87,9 @@ struct	s_triangle
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
 	int			color;
-	t_sprite	*sp;
+	int			sp;
 	float		alpha;
-	void		*mesh;
+	t_mesh		*mesh;
 };
 
 struct	s_mesh
@@ -107,6 +113,7 @@ struct	s_mesh
 struct	s_map
 {
 	t_dynarray		meshs;
+	t_dynarray		txts;
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;
@@ -179,6 +186,7 @@ int					cross_floats(char *line, int *i);
 t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
 t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
 int					assign_triangle_texture(t_mesh *m , void *ptr);
+void				swap_bytes(char *a, char *b);
 
 /*
 ** Mapper functions
