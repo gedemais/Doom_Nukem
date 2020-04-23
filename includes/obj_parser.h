@@ -118,6 +118,7 @@ struct	s_map
 	t_dynarray		pool;
 	t_dynarray		txt_pool;
 	t_dynarray		mtls;
+	t_mesh			cam;
 	t_vec3d			spawn;
 	t_vec2d			cam_dir;
 	bool			*colls;

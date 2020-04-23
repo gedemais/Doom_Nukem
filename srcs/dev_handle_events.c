@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/16 19:34:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/23 14:15:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 //	f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	/*	MOVE ?		*/
 	i = 0;
-	cam = dyacc(&env->maps[env->scene].meshs, env->maps[env->scene].nmesh);
+	cam = &env->maps[env->scene].cam;
 	f = set_y_dir(env, keys);
 	print_vec(f);
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio);

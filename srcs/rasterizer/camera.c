@@ -2,20 +2,18 @@
 
 void	map_spawn(t_cam *cam, t_map *map)
 {
-	static t_map	*add = NULL;
-	t_mesh			*cam_mesh;
+	static t_map	*address = NULL;
 
-	cam_mesh = dyacc(&map->meshs, map->nmesh);
-	if (add != map)
+	if (address != map)
 	{
 		cam->stats.pos = map->spawn;
-		cam_mesh->corp.pos = map->spawn;
-		cam_mesh->corp.o = vec_sub(cam_mesh->corp.pos, vec_fdiv(cam_mesh->corp.dims, 2.0f));
+		map->cam.corp.pos = map->spawn;
+		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
 
 		cam->stats.yaw = map->cam_dir.u;
 		cam->stats.pitch = map->cam_dir.v;
 
-		add = map;
+		address = map;
 	}
 }
 
@@ -49,21 +47,18 @@ void		print_first_mesh(t_env *env)
 
 static int	init_cameras_meshs(t_env *env)
 {
-	t_mesh		cam;
+	t_mesh		*cam;
 	int			i;
 
 	i = 0;
-	ft_memset(&cam, 0, sizeof(t_mesh));
 	while (i < SCENE_MAX)
 	{
-		cam.corp.pos = env->maps[i].spawn;
-		cam.corp.o = vec_sub(cam.corp.pos, vec_fdiv(cam.corp.dims, 2.0f));
-		cam.corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};
-		env->maps[i].stats[env->maps[i].nmesh] = false;
-		env->maps[i].stats_cpy[env->maps[i].nmesh] = false;
-
-		if (push_dynarray(&env->maps[i].meshs, &cam, false))
-			return (-1);
+		cam = &env->maps[i].cam;
+		cam->yaw = env->maps[i].cam_dir.u;
+		cam->pitch = env->maps[i].cam_dir.v;
+		cam->corp.pos = env->maps[i].spawn;
+		cam->corp.o = vec_sub(cam->corp.pos, vec_fdiv(cam->corp.dims, 2.0f));
+		cam->corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};
 		i++;
 	}
 	return (0);

@@ -20,6 +20,8 @@ Todo:
 Optis : 
 - clear_screen (multithread / loop_unrolling)
 
+Recompiler bzip2 et freetype
+
 Scenario :
 Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque
 extraterrestre et vous etes seul, blesse, et enferme dans le labelec. Vous trouvez
