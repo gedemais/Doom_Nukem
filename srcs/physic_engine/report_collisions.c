@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:00:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/30 17:15:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/23 20:06:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,18 @@ static bool	check_coll(t_dynarray *meshs, int i, int j, t_collide *c)
 //	fflush(stdout);
 	return (aabb_collision(a->corp.o, b->corp.o, a->corp.dims, b->corp.dims));
 }
+/*
+int			report_cam_collisions(t_env *env)
+{
+	int			i;
+
+	i = 0;
+	while (i < env->maps[env->scene].nmesh)
+	{
+		i++;
+	}
+	return (0);
+}*/
 
 int			report_collisions(t_env *env)
 {
@@ -93,10 +105,10 @@ int			report_collisions(t_env *env)
 		&& init_dynarray(&env->phy_env.collides,
 		sizeof(t_collide), env->maps[env->scene].nmesh))
 		return (-1);
-	while (i < env->maps[env->scene].nmesh + 1)
+	while (i < env->maps[env->scene].nmesh)
 	{
 		j = -1;
-		while (++j < env->maps[env->scene].nmesh + 1)
+		while (++j < env->maps[env->scene].nmesh)
 			if (i != j && !env->maps[env->scene].stats[i]
 				&& check_coll(&env->maps[env->scene].meshs, i, j, &c))
 			{
@@ -108,6 +120,7 @@ int			report_collisions(t_env *env)
 		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
+	//report_cam_collisions(env);
 //	printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	return (0);
 }

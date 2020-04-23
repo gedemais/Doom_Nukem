@@ -25,8 +25,9 @@ SRCS_NAME =	main.c\
 			custom_mode/render.c\
 			custom_mode/events.c\
 			\
-			map_editor/render.c\
 			map_editor/events.c\
+			map_editor/input_field.c\
+			map_editor/render.c\
 			map_editor/setup_me.c\
 			\
 			obj_parser/load_maps.c\
@@ -74,6 +75,7 @@ SRCS_NAME =	main.c\
 			mlx/events.c\
 			mlx/basics.c\
 			mlx/bresenham.c\
+			mlx/shapes.c\
 			mlx/hooks.c\
 			\
 			title_screen/animation.c\

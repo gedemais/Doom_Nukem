@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/23 13:56:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/23 20:07:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	doom_nukem(t_env *env)
 
 
 	env->context = C_TITLE_SCREEN;
-	env->scene = SCENE_PHYSIC_02;
+	env->scene = SCENE_SA;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
 	mlx_hooks(env);
 	return (0);

@@ -41,4 +41,8 @@ int					mouse_release_maped(int button, int x, int y, void *param);
 int					mouse_position_maped(int x, int y, void *param);
 int					render_maped(void *param);
 
+
+int					input_field(t_env *env);
+void				draw_rectangle(char *img, t_point o, t_point dims, int color);
+
 #endif

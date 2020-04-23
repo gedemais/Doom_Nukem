@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/27 16:29:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/23 20:32:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int		render_maped(void *param)
 	blit_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_PRW], (t_point){751, 506}, 1.0f);
 	//faire un sous context pour le render
 	render_buttons_me(env);
+
+	input_field(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	//mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : map editor");
 	return (0);
