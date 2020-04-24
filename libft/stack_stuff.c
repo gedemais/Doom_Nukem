@@ -50,3 +50,13 @@ int		push_dynarray(t_dynarray *arr, void *src, bool front)
 		ft_memcpy((void*)(arr->c + len), src, arr->cell_size);
 	return (0);
 }
+/*
+int		insert_dynarray(t_dynarray *arr, void *src, int index)
+{
+	return (0);
+}
+
+int		extract_dynarray(t_dynarray *arr, int index)
+{
+	return (0);
+}*/

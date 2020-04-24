@@ -14,7 +14,7 @@ int		mtl_new(char **toks, t_dynarray *mtls)
 		j = 0;
 		while (toks[i][j])
 		{
-			if (!ft_isalnum(toks[i][j]) && toks[i][j] != '_' && toks[i][j] != '.')
+			if (!ft_isprint(toks[i][j]))
 				return (-1);
 			j++;
 		}

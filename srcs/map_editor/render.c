@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/23 20:32:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/24 16:14:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		render_maped(void *param)
 //	static bool		first = true;
 //	static void (*sub_context[])(t_env *env) = {};
 	t_env		*env;
-	
+
 	env = ((t_env*)param);
 
 	if (env->events.keys[KEY_M])
@@ -73,14 +73,14 @@ int		render_maped(void *param)
 	handle_events_me(env);
 	
 	
-	blit_sprite(env->mlx.img_data, env->sprites[SP_EDT_BGD], (t_point){0, 0}, 1.0f);
-	blit_sprite(env->mlx.img_data, env->sprites[SP_EDT_ME_TITLE], (t_point){328, 370}, 1.0f);
-	blit_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_BTN], (t_point){328, 430}, 1.0f);
-	blit_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_PRW], (t_point){751, 506}, 1.0f);
+	map_sprite(env->mlx.img_data, env->sprites[SP_EDT_BGD], (t_point){0, 0});
+	map_sprite(env->mlx.img_data, env->sprites[SP_EDT_ME_TITLE], (t_point){328, 370});
+	map_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_BTN], (t_point){328, 430});
+	map_sprite(env->mlx.img_data, env->sprites[SP_ME_RECT_PRW], (t_point){751, 506});
 	//faire un sous context pour le render
 	render_buttons_me(env);
 
-	input_field(env);
+	input_field(env, (t_point){300, 300}, NULL);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	//mlx_string_put(env->mlx.mlx_ptr, env->mlx.mlx_win, 10, 10, 0xffffff, "Contexte : map editor");
 	return (0);

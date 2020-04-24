@@ -57,6 +57,7 @@ enum	e_scene_id
 	SCENE_SA,
 	SCENE_SB,
 	SCENE_SC,
+	SCENE_CUBE,
 	SCENE_MAX
 };
 

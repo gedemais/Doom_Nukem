@@ -12,7 +12,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/e1.obj",
 										"resources/maps/sector_a.obj",
 										"resources/maps/sector_b.obj",
-										"resources/maps/sector_c.obj"};
+										"resources/maps/sector_c.obj",
+										"resources/maps/cube.obj"};
 
 	return (paths[index]);
 }
