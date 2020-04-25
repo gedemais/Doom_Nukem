@@ -21,17 +21,17 @@ int		dup_names(t_camp_env *cmp_env)
 static void		assign_meshs(t_env *env, t_camp_env	*cmp_env)
 {
 	cmp_env->weapons[W_FAMAS].mesh = (t_mesh*)env->maps[SCENE_FAMAS].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_FAMAS].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_FAMAS].mesh->name);
 	cmp_env->weapons[W_AK47].mesh = (t_mesh*)env->maps[SCENE_AK47].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_AK47].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_AK47].mesh->name);
 	cmp_env->weapons[W_SAWED_OFF].mesh = (t_mesh*)env->maps[SCENE_SAWED_OFF].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_SAWED_OFF].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_SAWED_OFF].mesh->name);
 	cmp_env->weapons[W_GLOCK_18].mesh = (t_mesh*)env->maps[SCENE_GLOCK_18].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_GLOCK_18].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_GLOCK_18].mesh->name);
 	cmp_env->weapons[W_AUG].mesh = (t_mesh*)env->maps[SCENE_AUG].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_AUG].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_AUG].mesh->name);
 	cmp_env->weapons[W_UMP45].mesh = (t_mesh*)env->maps[SCENE_UMP45].meshs.c;
-	printf("%s\n", cmp_env->weapons[W_UMP45].mesh->name);
+//	printf("%s\n", cmp_env->weapons[W_UMP45].mesh->name);
 }
 
 static void		assign_weapons_stats(t_camp_env *cmp_env)

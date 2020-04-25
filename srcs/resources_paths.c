@@ -35,7 +35,6 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/quit_off.XPM",
 					"resources/sprites/ts_background.XPM",
 					"resources/sprites/logo.XPM",
-					"resources/textures/texture.XPM",
 					"resources/sprites/main_txt_loader_campaign.XPM",
 					"resources/sprites/Doom_first_loader.XPM",
 					"resources/sprites/SP_Board_Button.xpm",
@@ -73,9 +72,9 @@ char	*sprites_paths(unsigned int index)
 
 char	*samples_paths(unsigned int index)
 {
-	static char		*paths[SA_MAX] = {
-					"resources/samples/ambiances/title_screen_intro.wav",
-					"resources/samples/ambiances/title_screen_loop.wav"};
+	static char		*paths[SA_MAX] = {"resources/samples/ambiances/title_screen_intro.wav",
+					"resources/samples/ambiances/title_screen_loop.wav",
+					"resources/samples/loop.wav"};
 
 	return (paths[index]);
 }

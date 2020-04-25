@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/24 16:14:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/25 02:16:24 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ int		render_maped(void *param)
 
 	env = ((t_env*)param);
 
-	if (env->events.keys[KEY_M])
-		switch_context(env, C_TITLE_SCREEN);
-	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
 /********************************************/
 /********************************************/
 

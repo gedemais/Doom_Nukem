@@ -16,14 +16,21 @@ static char	matcher(int key_id)
 
 static int	add_char(t_dynarray *txt, bool keys[NB_KEYS])
 {
+	static int	last = 0;
 	char		c;
 	int			i;
 
 	i = 0;
+	if (last)
+	{
+		last--;
+		return (0);
+	}
 	while (i < NB_KEYS)
 	{
 		if (keys[i] && (c = matcher(i)))
 		{
+			last = 8;
 			if (push_dynarray(txt, &c, false))
 				return (-1);
 		}

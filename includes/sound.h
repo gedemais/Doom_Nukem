@@ -9,6 +9,7 @@ enum	e_sample_id
 {
 	SA_TITLE_SCREEN_S,
 	SA_TITLE_SCREEN_L,
+	SA_PNL,
 	SA_MAX
 };
 
