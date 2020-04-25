@@ -4,8 +4,7 @@ Colorier les digits des ammos en rouge en fonction du chargeur / stock +/- low
 
 Todo:
 	blender:
-		Finir de modeliser 42 | Moguy
-		Sadirac | gneheheeeee
+		Modelisation campagne | Moguy
 		Monstres | gneheheeee
 		Armes | bibax
 		Grotte avec lac de lave | bibax
@@ -20,7 +19,7 @@ Todo:
 Optis : 
 - clear_screen (multithread / loop_unrolling)
 
-Recompiler bzip2 et freetype
+Recompiler bzip2 et freetype en creeant leurs regles
 
 Scenario :
 Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque
