@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_cmp.c                                         :+:      :+:    :+:   */
+/*   setup_me.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 05:50:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/25 18:15:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
+/*
 static void init_context_me(t_env *env)
 {
 	t_button *but;
@@ -55,13 +55,14 @@ static void	init_buttons_me(t_env *env)
 		j++;
 		i += 3;
 	}
-}
+}*/
 
 int		setup_medit(t_env *env)
 {
-	env->ts_env.env = env;
-	init_pos_me(env);
-	init_buttons_me(env);
-	init_context_me(env);
+	env->edit_env.env = env;
+	env->edit_env.sub_context = MAPED_SC_MENU;
+//	init_pos_me(env);
+//	init_buttons_me(env);
+//	init_context_me(env);
 	return (0);
 }

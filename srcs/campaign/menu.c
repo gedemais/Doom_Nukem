@@ -40,16 +40,16 @@ static void	render_buttons_cmp_menu(t_env *env)
 	}
 }
 
-int		cmp_menu(void *param)
+int			cmp_menu(void *param)
 {
 	t_env *env;
 
 	env = (t_env*)param;
-	handle_events_cmp_menu(env);	
+	handle_events_cmp_menu(env);
 	if (env->events.keys[KEY_M])
 		switch_context(env, C_TITLE_SCREEN);
 
-	map_sprite(env->mlx.img_data, env->sprites[SP_BGD_LOADER_CMP], (t_point){0, 0});
+	map_sprite(env->mlx.img_data, env->sprites[SP_CMP_TS_BACKGROUND], (t_point){0, 0});
 	map_sprite(env->mlx.img_data, env->sprites[SP_TXT_LOADER_CMP], (t_point){0, 0});
 
 	render_buttons_cmp_menu(env);

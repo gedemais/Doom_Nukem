@@ -1,37 +1,42 @@
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
-enum	e_EDIT_button_id
+# define MAX_NAME_LENGTH 64
+
+enum	e_maped_sc_id
 {
-	EDT_BTN_LOAD,
-	EDT_BTN_NEW,
-	EDT_BTN_TXT,
-	EDT_BTN_OBJ,
-	EDT_BTN_MMENU,
-	//	EDT_QUIT,
+	MAPED_SC_MENU,
+	MAPED_NEW_MAP,
+	MAPED_CREA,
+	MAPED_SC_MAX
+};
+
+enum	e_maped_cmp_button_id
+{
 	EDT_BUTTON_MAX
 };
 
-enum	e_EDIT_subctxt_id
+struct				s_ed_map
 {
-	EDT_SUB_LOAD,
-	EDT_SUB_NEW,
-	EDT_SUB_TXT,
-	EDT_SUB_OBJ,
-	EDT_SUB_MMENU,
-	//	EDT_QUIT,
-	EDT_SUB_MAX
+	t_sprite	*textures[256];
+	char		***map;
+	t_sprite	*skybox;
+	char		name[MAX_NAME_LENGTH];
+	int			width;
+	int			height;
+	int			depth;
 };
 
-//t_env	
 struct				s_edit_env
 {
 	t_env			*env;
 	t_button		buttons[EDT_BUTTON_MAX];
 	t_point			pos[EDT_BUTTON_MAX];
+	t_dynarray		maps;
+	t_ed_map		new_map;
+	int				sub_context;
 };
 
-/*          Creation de sous context pour le render du mode editeur            */
 
 int					setup_medit(t_env *env);
 int					key_press_maped(int key, void *param);
@@ -41,6 +46,8 @@ int					mouse_release_maped(int button, int x, int y, void *param);
 int					mouse_position_maped(int x, int y, void *param);
 int					render_maped(void *param);
 
+/*          sous contextes du mode editeur            */
+int					maped_menu(t_env *env);
 
 int					input_field(t_env *env, t_point o, char **ret);
 void				draw_rectangle(char *img, t_point o, t_point dims, int color);

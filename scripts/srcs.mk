@@ -25,10 +25,11 @@ SRCS_NAME =	main.c\
 			custom_mode/render.c\
 			custom_mode/events.c\
 			\
-			map_editor/events.c\
-			map_editor/input_field.c\
-			map_editor/render.c\
 			map_editor/setup_me.c\
+			map_editor/render.c\
+			map_editor/events.c\
+			map_editor/menu.c\
+			map_editor/input_field.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/dependencies.c\
