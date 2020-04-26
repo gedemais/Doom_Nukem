@@ -29,6 +29,10 @@ SRCS_NAME =	main.c\
 			map_editor/render.c\
 			map_editor/events.c\
 			map_editor/menu.c\
+			map_editor/new_map.c\
+			map_editor/file.c\
+			map_editor/routines.c\
+			map_editor/sub_context.c\
 			map_editor/input_field.c\
 			\
 			obj_parser/load_maps.c\

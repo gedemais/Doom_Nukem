@@ -1,6 +1,6 @@
 #include "main.h"
 
-int				handle_events(t_env *env)
+static int				handle_events(t_env *env)
 {
 	static bool	clic = false;
 	int			i;
@@ -26,6 +26,18 @@ int				handle_events(t_env *env)
 		else
 			env->ts_env.buttons[i].is_hover = false;
 	return (0);
+}
+
+static void			render_buttons(t_env *env)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < TS_BUTTON_MAX)
+	{
+		render_button(env, env->ts_env.buttons[i]);
+		i++;
+	}
 }
 
 static void			wait_frame(void)

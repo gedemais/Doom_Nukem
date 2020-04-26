@@ -6,14 +6,16 @@
 enum	e_maped_sc_id
 {
 	MAPED_SC_MENU,
-	MAPED_NEW_MAP,
-	MAPED_CREA,
+	MAPED_SC_NEW_MAP,
+	MAPED_SC_CREATIVE,
 	MAPED_SC_MAX
 };
 
-enum	e_maped_cmp_button_id
+enum	e_maped_menu_button_id
 {
-	EDT_BUTTON_MAX
+	MAPED_MENU_BUTTON_NEW_MAP,
+	MAPED_MENU_BUTTON_MAIN_MENU,
+	MAPED_MENU_BUTTON_MAX
 };
 
 struct				s_ed_map
@@ -30,8 +32,8 @@ struct				s_ed_map
 struct				s_edit_env
 {
 	t_env			*env;
-	t_button		buttons[EDT_BUTTON_MAX];
-	t_point			pos[EDT_BUTTON_MAX];
+	t_button		buttons[MAPED_MENU_BUTTON_MAX];
+	t_point			pos[MAPED_MENU_BUTTON_MAX];
 	t_dynarray		maps;
 	t_ed_map		new_map;
 	int				sub_context;
@@ -47,9 +49,20 @@ int					mouse_position_maped(int x, int y, void *param);
 int					render_maped(void *param);
 
 /*          sous contextes du mode editeur            */
+int					switch_mecontext(t_env *env, unsigned int i);
 int					maped_menu(t_env *env);
+int					maped_new_map(t_env *env);
+
+// Routines
+int					me_menu_to_new_map(t_env *env);
+int					me_menu_to_creative(t_env *env);
+int					me_new_map_to_creative(t_env *env);
+int					me_new_map_to_menu(t_env *env);
+int					me_creative_to_menu(t_env *env);
 
 int					input_field(t_env *env, t_point o, char **ret);
 void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 
+// Saves
+int					write_infile(char *f_path, char *str, int len, bool token);
 #endif

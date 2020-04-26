@@ -53,7 +53,7 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 		slot = ttf->faces[font]->glyph;
 		map_letter(env, ttf->faces[font]->glyph->bitmap,
 			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
-		o.x += conf->size;
+		o.x += (slot->lsb_delta + conf->size);
 		o.y += slot->advance.y >> 6;
 		i++;
 	}

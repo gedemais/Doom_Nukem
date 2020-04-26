@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/24 22:31:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/26 16:50:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ enum	e_cmp_sub_contexts
 
 enum	e_cmp_menu_buttons_id
 {
-	CMP_BTN_MMENU,
-	CMP_BTN_NWG,
-	CMP_BTN_LDG,
+	CMP_BUTTON_MAIN_MENU,
+	CMP_BUTTON_NEW_GAME,
 	CMP_BUTTON_MAX
 };
 

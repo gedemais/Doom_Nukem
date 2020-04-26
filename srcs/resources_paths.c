@@ -34,20 +34,20 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/quit_hover.XPM",
 					"resources/sprites/buttons/quit_off.XPM",
 					"resources/sprites/logo.XPM",
-					"resources/sprites/main_txt_loader_campaign.XPM",
-					"resources/sprites/SP_Board_Button.xpm",
-					"resources/sprites/SP_CP_BUTTON_1C.XPM",
-					"resources/sprites/SP_CP_BUTTON_1H.XPM",
-					"resources/sprites/SP_CP_BUTTON_1O.XPM",
-					"resources/sprites/SP_CP_BUTTON_2C.XPM",
-					"resources/sprites/SP_CP_BUTTON_2H.XPM",
-					"resources/sprites/SP_CP_BUTTON_2O.XPM",
-					"resources/sprites/SP_CP_BUTTON_3C.XPM",
-					"resources/sprites/SP_CP_BUTTON_3H.XPM",
-					"resources/sprites/SP_CP_BUTTON_3O.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_1C.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_1H.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_1O.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_2C.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_2H.XPM",
+					"resources/sprites/buttons/SP_CP_BUTTON_2O.XPM",
+					"resources/sprites/buttons/SP_ME_BUTTON_2C.XPM",
+					"resources/sprites/buttons/SP_ME_BUTTON_2H.XPM",
+					"resources/sprites/buttons/SP_ME_BUTTON_2O.XPM",
 					"resources/sprites/ts_background.XPM",
 					"resources/sprites/cmp_ts_background.XPM",
-					"resources/sprites/map_editor_background.xpm"};
+					"resources/sprites/main_txt_loader_campaign.XPM",
+					"resources/sprites/map_editor_background.xpm",
+					"resources/sprites/me_new_map_background.xpm"};
 
 	return (paths[index]);
 }

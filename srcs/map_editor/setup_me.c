@@ -6,63 +6,36 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/25 18:15:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/26 22:06:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-/*
-static void init_context_me(t_env *env)
+
+static void	init_buttons(t_env *env)
 {
-	t_button *but;
+	t_edit_env	*me_env;
+	t_button	*b;
+	t_sprite	*sps[3];
 
-	but = env->edit_env.buttons;
+	me_env = &env->edit_env;
+	b = &me_env->buttons[MAPED_MENU_BUTTON_MAIN_MENU];
+	sps[0] = &env->sprites[SP_CP_BUTTON_1C];
+	sps[1] = &env->sprites[SP_CP_BUTTON_1H];
+	sps[2] = &env->sprites[SP_CP_BUTTON_1O];
+	init_button(b, (t_point){800, 600}, sps);
 
-	but[EDT_BTN_MMENU].context = C_TITLE_SCREEN;
-	but[EDT_BTN_NEW].context = C_DEV;
-
-
+	b = &me_env->buttons[MAPED_MENU_BUTTON_NEW_MAP];
+	sps[0] = &env->sprites[SP_ME_BUTTON_2C];
+	sps[1] = &env->sprites[SP_ME_BUTTON_2H];
+	sps[2] = &env->sprites[SP_ME_BUTTON_2O];
+	init_button(b, (t_point){800, 500}, sps);
 }
-
-static void	init_pos_me(t_env *env)
-{
-	t_point *pt;
-	
-	pt = env->edit_env.pos;
-	pt[EDT_BTN_LOAD] = (t_point){338, 450};
-	pt[EDT_BTN_NEW] = (t_point){538, 450};
-	pt[EDT_BTN_TXT] = (t_point){338, 575};
-	pt[EDT_BTN_OBJ] = (t_point){538, 575};
-	pt[EDT_BTN_MMENU] = (t_point){751, 450};
-
-}
-
-static void	init_buttons_me(t_env *env)
-{
-	t_sprite		*sp;
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	y_s;
-
-	j = EDT_BTN_LOAD;
-	i = SP_ME_BUTTON_LD_O;
-	sp = env->sprites;
-	y_s = 0;
-	while (j < EDT_BUTTON_MAX)
-	{
-		init_button(&env->edit_env.buttons[j], env->edit_env.pos[j],
-		(t_sprite*[3]){&sp[i], &sp[i + 1], &sp[i + 2]});
-		j++;
-		i += 3;
-	}
-}*/
 
 int		setup_medit(t_env *env)
 {
 	env->edit_env.env = env;
 	env->edit_env.sub_context = MAPED_SC_MENU;
-//	init_pos_me(env);
-//	init_buttons_me(env);
-//	init_context_me(env);
+	init_buttons(env);
 	return (0);
 }
