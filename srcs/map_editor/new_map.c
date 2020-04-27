@@ -29,7 +29,10 @@ static void	render_fields(t_env *env)
 	conf = ttf_config();
 	conf->size = 24;
 	my_string_put(env, (t_point){100, 80}, FONT_ARIAL, (unsigned char*)"Width");
-	input_field(env, (t_point){100, 100}, NULL);
+	input_field(env, (t_point){100, 100}, FIELD_MAP_WIDTH, NULL);
+
+	my_string_put(env, (t_point){100, 180}, FONT_ARIAL, (unsigned char*)"Height");
+	input_field(env, (t_point){100, 200}, FIELD_MAP_HEIGHT, NULL);
 }
 
 int			maped_new_map(t_env *env)

@@ -18,6 +18,13 @@ enum	e_maped_menu_button_id
 	MAPED_MENU_BUTTON_MAX
 };
 
+enum	e_input_fields_id
+{
+	FIELD_MAP_WIDTH,
+	FIELD_MAP_HEIGHT,
+	FIELD_MAX
+};
+
 struct				s_ed_map
 {
 	t_sprite	*textures[256];
@@ -60,7 +67,7 @@ int					me_new_map_to_creative(t_env *env);
 int					me_new_map_to_menu(t_env *env);
 int					me_creative_to_menu(t_env *env);
 
-int					input_field(t_env *env, t_point o, char **ret);
+int					input_field(t_env *env, t_point o, int nfield, char **ret);
 void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 
 // Saves

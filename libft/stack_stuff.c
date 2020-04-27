@@ -27,7 +27,10 @@ int		pop_dynarray(t_dynarray *arr, bool front)
 		ft_memcpy(arr->tmp, (void*)(arr->c + arr->cell_size), len);
 		ft_memcpy(arr->c, arr->tmp, len);
 	}
-	arr->nb_cells--;
+	if (arr->nb_cells)
+		arr->nb_cells--;
+	else
+		return (-1);
 	return (0);
 }
 
