@@ -1,8 +1,6 @@
 Reparer les espacements dans my_string_put
 
-listpath
-
-
+Modifier read_file pour qu'il stat le fichier afin de connaitre sa taille
 
 Todo:
 	blender:

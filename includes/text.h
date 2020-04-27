@@ -1,6 +1,8 @@
 #ifndef TEXT_H
 # define TEXT_H
 
+# define FONT_NB_CHARS 96
+
 enum	e_font_id
 {
 	FONT_ARIAL,
@@ -9,10 +11,17 @@ enum	e_font_id
 	FONT_MAX
 };
 
+struct	s_kerning
+{
+	float	*left_pad;
+	float	*right_pad;
+};
+
 struct	s_ttf
 {
 	FT_Library	fontlib;
 	FT_Face		faces[FONT_MAX - 1];
+	t_kerning	kernings[FONT_MAX - 1];
 };
 
 char			*fonts_paths(unsigned int index);
