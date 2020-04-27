@@ -22,6 +22,7 @@ enum	e_input_fields_id
 {
 	FIELD_MAP_WIDTH,
 	FIELD_MAP_HEIGHT,
+	FIELD_MAP_DEPTH,
 	FIELD_MAX
 };
 

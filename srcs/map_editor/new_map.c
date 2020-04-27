@@ -27,12 +27,17 @@ static void	render_fields(t_env *env)
 	t_ttf_config	*conf;
 
 	conf = ttf_config();
-	conf->size = 24;
+	conf->size = 20;
 	my_string_put(env, (t_point){100, 80}, FONT_ARIAL, (unsigned char*)"Width");
 	input_field(env, (t_point){100, 100}, FIELD_MAP_WIDTH, NULL);
 
+	conf->size = 20;
 	my_string_put(env, (t_point){100, 180}, FONT_ARIAL, (unsigned char*)"Height");
 	input_field(env, (t_point){100, 200}, FIELD_MAP_HEIGHT, NULL);
+
+	conf->size = 20;
+	my_string_put(env, (t_point){100, 280}, FONT_ARIAL, (unsigned char*)"Bonjour tout le monde comment ca va ?");
+	input_field(env, (t_point){100, 300}, FIELD_MAP_DEPTH, NULL);
 }
 
 int			maped_new_map(t_env *env)

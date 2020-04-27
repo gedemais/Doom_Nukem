@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/23 02:15:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/16 19:13:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/27 19:57:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ static void	update_positions_gravity(t_env *env)
 	
 	e = &env->events;
 	i = 0;
-	while (i < env->maps[env->scene].nmesh + 1)
+	while (i < env->maps[env->scene].nmesh)
 	{
 		m = dyacc(&env->maps[env->scene].meshs, i);		
 		if (i == env->maps[env->scene].nmesh)

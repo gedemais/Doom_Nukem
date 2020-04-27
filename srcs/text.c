@@ -111,7 +111,10 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 		slot = ttf->faces[font]->glyph;
 		map_letter(env, slot->bitmap,
 			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
-		o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)s[i]] + conf->size / 2;
+		if (s[i] == ' ')
+			o.x += conf->size;
+		else
+			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)s[i]] + conf->size / 2;
 		o.y += slot->advance.y >> 6;
 		i++;
 	}
