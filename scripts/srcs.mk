@@ -31,6 +31,7 @@ SRCS_NAME =	main.c\
 			map_editor/menu.c\
 			map_editor/new_map.c\
 			map_editor/file.c\
+			map_editor/listpath.c\
 			map_editor/routines.c\
 			map_editor/input_field.c\
 			\

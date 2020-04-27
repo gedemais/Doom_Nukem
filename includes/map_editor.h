@@ -72,4 +72,5 @@ void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);
+char				**listpath(char *d_path, char *format);
 #endif
