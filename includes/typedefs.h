@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/27 17:37:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/28 23:26:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ typedef struct	s_ed_map t_ed_map;
 typedef struct	s_scroll t_scroll;
 
 typedef struct	s_kerning t_kerning;
+struct			s_text_box t_text_box;
 
 #endif

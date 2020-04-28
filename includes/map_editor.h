@@ -18,14 +18,6 @@ enum	e_maped_menu_button_id
 	MAPED_MENU_BUTTON_MAX
 };
 
-enum	e_input_fields_id
-{
-	FIELD_MAP_WIDTH,
-	FIELD_MAP_HEIGHT,
-	FIELD_MAP_DEPTH,
-	FIELD_MAX
-};
-
 struct				s_scroll
 {
 	int		case_size;

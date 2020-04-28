@@ -1,7 +1,6 @@
 #ifndef TEXT_H
 # define TEXT_H
 
-# define FONT_NB_CHARS 96
 # define MAX_STR_CHARS 1024
 
 enum	e_font_id
@@ -10,6 +9,24 @@ enum	e_font_id
 	FONT_AMMOS,
 	FONT_TXT_HINT,
 	FONT_MAX
+};
+
+enum	e_input_fields_id
+{
+	FIELD_MAP_WIDTH,
+	FIELD_MAP_HEIGHT,
+	FIELD_MAP_DEPTH,
+	FIELD_NAME,
+	FIELD_MAX
+};
+
+struct	s_text_box
+{
+	t_dynarray		str;
+	unsigned char	*name;
+	t_point			o;
+	int				offset;
+	bool			in;
 };
 
 struct	s_kerning
@@ -29,6 +46,7 @@ struct	s_ttf
 	FT_Library	fontlib;
 	FT_Face		faces[FONT_MAX - 1];
 	t_kerning	kernings[FONT_MAX - 1];
+	t_text_box	fields[FIELD_MAX];
 };
 
 char			*fonts_paths(unsigned int index);

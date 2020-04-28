@@ -47,7 +47,9 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/cmp_ts_background.XPM",
 					"resources/sprites/main_txt_loader_campaign.XPM",
 					"resources/sprites/map_editor_background.xpm",
-					"resources/sprites/me_new_map_background.xpm"};
+					"resources/sprites/me_new_map_background.xpm",
+					"resources/sprites/map_editor_menu_title.xpm",
+					"resources/sprites/map_editor_new_map_title.xpm"};
 
 	return (paths[index]);
 }
