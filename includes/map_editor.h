@@ -30,7 +30,10 @@ struct				s_scroll
 {
 	int		case_size;
 	int		current;
+	int		max;
 	int		nb_case;
+	t_point	d;
+	t_point	o;
 };
 
 struct				s_ed_map
