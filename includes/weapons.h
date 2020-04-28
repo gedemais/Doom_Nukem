@@ -36,12 +36,6 @@ struct	s_weapon
 	//	sprite de flamme ?
 };
 
-struct	s_ttf_config
-{
-	int		color;
-	int		size;
-};
-
 int			init_weapons(t_env *env);
 
 int			handle_weapons(t_env *env);

@@ -1,49 +1,49 @@
 #include "main.h"
 
-static unsigned char	*make_string(t_weapon *w)
+static int		make_string(t_weapon *w, unsigned char s[MAX_STR_CHARS])
 {
-	unsigned char	*dest;
-	char			*l;
-	char			*m;
-	char			*tmp;
+	char	*dest;
+	char	*tmp;
+	char	*l;
+	char	*m;
 
 	if (!(l = ft_itoa(w->loaded)))
-		return (NULL);
+		return (-1);
 	if (!(tmp = ft_strjoin(l, ft_strlen(l) == 1 ? " /" : "/")))
 	{
 		free(l);
-		return (NULL);
+		return (-1);
 	}
 	free(l);
 	if (!(m  = ft_itoa(w->ammos)))
 	{
 		free(tmp);
-		return (NULL);
+		return (-1);
 	}
-	if (!(dest = (unsigned char*)ft_strjoin(tmp, m)))
+	if (!(dest = ft_strjoin(tmp, m)))
 	{
 		free(m);
 		free(tmp);
-		return (NULL);
+		return (-1);
 	}
 	free(m);
 	free(tmp);
-	return (dest);
+	ft_strcpy((char*)s, dest);
+	free(dest);
+	return (0);
 }
 
 int					print_ammos(t_env *env, t_weapon *w)
 {
-	unsigned char	*s;
 	t_ttf_config	*conf;
 
-	if (!(s = make_string(w)))
-		return (-1);
 	conf = ttf_config();
+	if (make_string(w, conf->s))
+		return (-1);
 	conf->size = AMMO_FONT_SIZE;
-	my_string_put(env, (t_point){900, 670}, FONT_AMMOS, s);
-	free(s);
+	my_string_put(env, env->mlx.img_data, (t_point){900, 670}, FONT_AMMOS);
 	conf->size = W_NAME_FONT_SIZE;
-	s = (unsigned char*)w->name;
-	my_string_put(env, (t_point){900, 630}, FONT_ARIAL, s);
+	ft_strcpy((char*)conf->s, w->name);
+	my_string_put(env, env->mlx.img_data, (t_point){900, 630}, FONT_ARIAL);
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
+static void	map_letter(char *img, FT_Bitmap bmp, t_point o)
 {
 	int				x;
 	unsigned int	y;
@@ -13,7 +13,7 @@ static void	map_letter(t_env *env, FT_Bitmap bmp, t_point o)
 	while (y < bmp.rows && !(x = 0))
 	{
 		z = 0;
-		dst = (unsigned char*)&env->mlx.img_data[((o.y + (y - 1)) * WDT + o.x) * 4];
+		dst = (unsigned char*)&img[((o.y + (y - 1)) * WDT + o.x) * 4];
 		while (x < bmp.pitch - 3)
 		{
 			if (!bmp.buffer[i + x] && !bmp.buffer[i + x + 1]
@@ -92,7 +92,7 @@ static int	compute_kernings(t_ttf *ttf, FT_Face face, int font)
 	return (0);
 }
 
-void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
+void		my_string_put(t_env *env, char *img, t_point o, int font)
 {
 	FT_GlyphSlot	slot;
 	t_ttf_config	*conf;
@@ -103,18 +103,18 @@ void		my_string_put(t_env *env, t_point o, int font, unsigned char *s)
 	conf = ttf_config();
 	ttf = &env->ttfs;
 	FT_Set_Char_Size(ttf->faces[font], conf->size * 96, conf->size * 64, 160, 80);
-	while (s[i])
+	while (conf->s[i])
 	{
-		if (i == 0 || s[i - 1] != s[i])
-			if (FT_Load_Char(ttf->faces[font], s[i], FT_LOAD_RENDER) && ++i)
+		if (i == 0 || conf->s[i - 1] != conf->s[i])
+			if (FT_Load_Char(ttf->faces[font], conf->s[i], FT_LOAD_RENDER) && ++i)
 				continue ;
 		slot = ttf->faces[font]->glyph;
-		map_letter(env, slot->bitmap,
+		map_letter(img, slot->bitmap,
 			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
-		if (s[i] == ' ')
+		if (conf->s[i] == ' ')
 			o.x += conf->size;
 		else
-			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)s[i]] + conf->size / 2;
+			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)conf->s[i]] + conf->size / 2;
 		o.y += slot->advance.y >> 6;
 		i++;
 	}
@@ -125,20 +125,19 @@ void		textual_hint(t_env *env, char button, char *action)
 	t_ttf_config	*conf;
 	t_point			o;
 	int				x_offset; // Centrer le texte
-	char			s[1024];
 
 	conf = ttf_config();
 	conf->size = 20;
-	ft_strcpy(s, "Press [");
-	ft_strncat(s, &button, 1);
-	ft_strcat(s, "] to ");
-	ft_strcat(s, action);
+	ft_strcpy((char*)conf->s, "Press [");
+	ft_strncat((char*)conf->s, &button, 1);
+	ft_strcat((char*)conf->s, "] to ");
+	ft_strcat((char*)conf->s, action);
 
-	x_offset = (ft_strlen(s)) / 2 * conf->size;
+	x_offset = (ft_strlen((char*)conf->s)) / 2 * conf->size;
 	o.x = env->data.half_wdt - x_offset;
 	o.y = HGT / 3;
 
-	my_string_put(env, o, FONT_TXT_HINT, (unsigned char*)s);
+	my_string_put(env, env->mlx.img_data, o, FONT_TXT_HINT);
 }
 
 int		load_fonts(t_env *env)

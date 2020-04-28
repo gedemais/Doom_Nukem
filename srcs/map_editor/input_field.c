@@ -65,8 +65,9 @@ static void	write_text(t_env *env, t_point o, unsigned char *s, int len)
 
 	conf = ttf_config();
 	conf->size = 24;
-	s[len] = 0;
-	my_string_put(env, (t_point){o.x, o.y + conf->size + 2}, FONT_AMMOS, s);
+	ft_memset((char*)conf->s, 0, sizeof(char) * MAX_STR_CHARS);
+	ft_strncpy((char*)conf->s, (char*)s, len);
+	my_string_put(env, env->mlx.img_data, (t_point){o.x, o.y + conf->size + 2}, FONT_AMMOS);
 }
 
 static t_dynarray	*init_fields(void)
