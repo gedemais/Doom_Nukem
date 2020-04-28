@@ -28,7 +28,9 @@ enum	e_input_fields_id
 
 struct				s_scroll
 {
+	int		case_size;
 	int		current;
+	int		nb_case;
 };
 
 struct				s_ed_map
@@ -49,7 +51,7 @@ struct				s_edit_env
 	t_point			pos[MAPED_MENU_BUTTON_MAX];
 	t_dynarray		maps;
 	t_ed_map		new_map;
-	t_scroll		scroll;
+	t_scroll			scroll;
 	int				sub_context;
 };
 
