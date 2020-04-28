@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/23 20:07:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/28 16:35:29 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ static int	doom_nukem(t_env *env)
 	env->cmp_env.player.current->magazine = 30;
 	env->cmp_env.player.current->loaded = 30;
 
-
-
 	env->context = C_MAP_EDITOR;
 	env->scene = SCENE_SA;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
+
 	mlx_hooks(env);
 	return (0);
 }

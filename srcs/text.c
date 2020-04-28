@@ -7,17 +7,21 @@ static void	map_letter(char *img, FT_Bitmap bmp, t_point o)
 	unsigned int	z;
 	unsigned int	i;
 	unsigned char	*dst;
+	int				pos;
 
 	i = 0;
 	y = 0;
 	while (y < bmp.rows && !(x = 0))
 	{
 		z = 0;
-		dst = (unsigned char*)&img[((o.y + (y - 1)) * WDT + o.x) * 4];
+		pos = ((o.y + (y - 1)) * WDT + o.x) * 4;
+		if (pos < 0 && (++y))
+			continue ;
+		dst = (unsigned char*)&img[pos];
 		while (x < bmp.pitch - 3)
 		{
-			if (!bmp.buffer[i + x] && !bmp.buffer[i + x + 1]
-				&& !bmp.buffer[i + x + 2])
+			if ((!bmp.buffer[i + x] && !bmp.buffer[i + x + 1]
+				&& !bmp.buffer[i + x + 2]))
 			{
 				x += 3;
 				z += 4;
