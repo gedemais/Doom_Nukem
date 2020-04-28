@@ -29,9 +29,13 @@ enum	e_input_fields_id
 struct				s_scroll
 {
 	int		case_size;
+	int		color;
 	int		current;
+	int		font;
 	int		max;
+	int		mouse_index;
 	int		nb_case;
+	char	*s_path;
 	t_point	d;
 	t_point	o;
 };

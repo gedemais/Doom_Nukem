@@ -12,18 +12,6 @@
 
 #include "main.h"
 
-static void     tab_free(void **add, int len)
-{
-	int i;
-
-	if (add == NULL)
-		return ;
-	i = -1;
-	while (++i < len && add[i])
-		ft_memdel(&add[i]);
-	ft_memdel(add);
-}
-
 static char		*ft_strlcpy(char *dst, const char *src, size_t len)
 {
 	int		i;
@@ -57,25 +45,52 @@ static void		display_str(t_env *env, char **path_list, t_point police, int i)
 		if (pos > len - 1)
 			pos = pos - len;
 		ft_strlcpy((char *)conf->s, path_list[pos], size);
+		if (env->edit_env.scroll.mouse_index == i)
+		{
+			ft_strdel(&env->edit_env.scroll.s_path);
+			env->edit_env.scroll.s_path = ft_strdup(path_list[pos]);
+		}
 	}
-	my_string_put(env, env->mlx.img_data, police, 1);
+	my_string_put(env, env->mlx.img_data, police, env->edit_env.scroll.font);
+}
+
+static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
+{
+	int		mouse_x;
+	int		mouse_y;
+
+	mouse_x = env->events.mouse_pos.x;
+	mouse_y = env->events.mouse_pos.y;
+	if (mouse_x > pos.x && mouse_x < pos.x + rect_d.x
+	&& mouse_y > pos.y && mouse_y < pos.y + rect_d.y)
+		env->edit_env.scroll.mouse_index = i;
 }
 
 static void		display_file(t_env *env, char **path_list, t_point o, t_point d)
 {
+	int				color;
 	t_point			pos;
 	t_point			police;
+	t_point			rect_d;
 
 	if (path_list == NULL)
 		return ;
+	if (env->edit_env.scroll.current < 0)
+		env->edit_env.scroll.current = env->edit_env.scroll.max;
+	if (env->edit_env.scroll.current > env->edit_env.scroll.max)
+		env->edit_env.scroll.current = 0;
 	for (int i = 0; i < env->edit_env.scroll.nb_case; i++)
 	{
-		pos.x = o.x;	
-		pos.y = o.y + i * env->edit_env.scroll.case_size + i;
+		pos = (t_point){ o.x, o.y + i * env->edit_env.scroll.case_size + i };
+		rect_d = (t_point){ d.x, env->edit_env.scroll.case_size };
+		get_mouse_index(env, pos, rect_d, i);
+		if (env->edit_env.scroll.mouse_index == i)
+			color = 0x00ffff;
+		else
+			color = env->edit_env.scroll.color;
+		draw_rectangle(env->mlx.img_data, pos, rect_d, color);
 		police.x = pos.x + 10;
 		police.y = pos.y + env->edit_env.scroll.case_size - 10;
-		draw_rectangle(env->mlx.img_data,
-			pos, (t_point){ d.x, env->edit_env.scroll.case_size }, 0xff00ff);
 		display_str(env, path_list, police, i);
 	}
 }
@@ -87,22 +102,22 @@ static void		scroll_file(t_env *env)
 	t_point	o;
 	t_point	d;
 
-	o.x = 0;
-	o.y = 0;
-	d.x = WDT;
-	d.y = HGT;
-	env->edit_env.scroll.case_size = 50;
-	path_list = listpath("./resources/maps", ".map");
+	o = (t_point){ 0, 0 };
+	d = (t_point){ WDT, HGT };
 	env->edit_env.scroll.d = d;
 	env->edit_env.scroll.o = o;
 	env->edit_env.scroll.case_size = 50;
 	env->edit_env.scroll.nb_case = d.y / env->edit_env.scroll.case_size - 1;
+	path_list = listpath("./resources/maps", ".map");
 	len = ft_tablen(path_list);
 	env->edit_env.scroll.max = len;
 	if (env->edit_env.scroll.nb_case > len)
 		env->edit_env.scroll.nb_case = len;
+	env->edit_env.scroll.color = 0xff00ff;
+	env->edit_env.scroll.font = 1;
+	env->edit_env.scroll.mouse_index = -1;
 	display_file(env, path_list, o, d);
-	tab_free((void **)path_list, len);
+	ft_free_ctab(path_list);
 }
 
 int				render_custom(void *param)

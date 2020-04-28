@@ -19,14 +19,6 @@ int		key_press_custom(int key, void *param)
 	env = ((t_env*)param);
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
-	else if (key == KEY_UP)
-		env->edit_env.scroll.current++;
-	else if (key == KEY_DOWN)
-		env->edit_env.scroll.current--;
-	if (env->edit_env.scroll.current < 0)
-		env->edit_env.scroll.current = env->edit_env.scroll.max;
-	if (env->edit_env.scroll.current > env->edit_env.scroll.max)
-		env->edit_env.scroll.current = 0;
 	return (0);
 }
 
@@ -46,7 +38,12 @@ int		mouse_press_custom(int button, int x, int y, void *param)
 
 	env = ((t_env*)param);
 	
-	(void)button;
+	if (button == BUTTON_SCROLL_UP)
+		++env->edit_env.scroll.current;
+	else if (button == BUTTON_SCROLL_DOWN)
+		--env->edit_env.scroll.current;
+	else if (button == BUTTON_LCLIC)
+		printf("selected path: %s\n", env->edit_env.scroll.s_path);
 	(void)x;
 	(void)y;
 	return (0);
