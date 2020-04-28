@@ -41,7 +41,7 @@ static int	doom_nukem(t_env *env)
 
 
 
-	env->context = C_TITLE_SCREEN;
+	env->context = C_MAP_EDITOR;
 	env->scene = SCENE_SA;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);
 	mlx_hooks(env);

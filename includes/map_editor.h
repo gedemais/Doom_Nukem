@@ -26,6 +26,11 @@ enum	e_input_fields_id
 	FIELD_MAX
 };
 
+struct				s_scroll
+{
+	int		current;
+};
+
 struct				s_ed_map
 {
 	t_sprite	*textures[256];
@@ -44,6 +49,7 @@ struct				s_edit_env
 	t_point			pos[MAPED_MENU_BUTTON_MAX];
 	t_dynarray		maps;
 	t_ed_map		new_map;
+	t_scroll		scroll;
 	int				sub_context;
 };
 

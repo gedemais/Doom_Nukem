@@ -64,6 +64,7 @@ typedef struct	s_ttf_config t_ttf_config;
 typedef struct	s_weapon t_weapon;
 
 typedef struct	s_ed_map t_ed_map;
+typedef struct	s_scroll t_scroll;
 
 typedef struct	s_kerning t_kerning;
 
