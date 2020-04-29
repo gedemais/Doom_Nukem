@@ -118,7 +118,7 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 		if (conf->s[i] == ' ')
 			o.x += conf->size;
 		else
-			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)conf->s[i]] + conf->size / 2;
+			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)conf->s[i]] + conf->size / 3;
 		o.y += slot->advance.y >> 6;
 		i++;
 	}

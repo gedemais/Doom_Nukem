@@ -1,5 +1,5 @@
 #include "main.h"
-
+/*
 static char	matcher(int key_id)
 {
 	static char	chars[NB_KEYS] = {'a', 's', 'd', 'f', 'h', 'g', 'z', 'x', 'c',
@@ -40,77 +40,59 @@ static int	add_char(t_dynarray *txt, bool keys[NB_KEYS])
 		i++;
 	}
 	return (0);
-}
+}*/
 
-static int	inside(t_env *env, t_dynarray *txt, t_point o)
+static int	get_boxs(t_ttf *ttfs, t_dynarray *boxs)
 {
-	t_ttf_config	*conf;
-	t_point	insert_o;
-	int		offset;
-	//enter : 36
-	//backspace : 51
-
-	conf = ttf_config();
-	offset = (txt->nb_cells * conf->size) + (txt->nb_cells ? -5 : 5);
-	insert_o = (t_point){o.x + offset, o.y + 2};
-	draw_rectangle(env->mlx.img_data, insert_o, (t_point){2, 26}, 0x888888);
-	if (add_char(txt, env->events.keys))
-		return (-1);
-	return (0);
-}
-
-static void	write_text(t_env *env, t_point o, unsigned char *s, int len)
-{
-	t_ttf_config	*conf;
-
-	conf = ttf_config();
-	conf->size = 24;
-	ft_memset((char*)conf->s, 0, sizeof(char) * MAX_STR_CHARS);
-	ft_strncpy((char*)conf->s, (char*)s, len);
-	my_string_put(env, env->mlx.img_data, (t_point){o.x, o.y + conf->size + 2}, FONT_AMMOS);
-}
-
-static t_dynarray	*init_fields(void)
-{
-	t_dynarray		*fields;
+	void			*tmp;
 	unsigned int	i;
 
 	i = 0;
-	if (!(fields = (t_dynarray*)malloc(sizeof(t_dynarray) * FIELD_MAX)))
-		return (NULL);
+	if (init_dynarray(boxs, sizeof(void*), 0))
+		return (-1);
 	while (i < FIELD_MAX)
 	{
-		fields[i].byte_size = 0;
-		fields[i].nb_cells = 0;
+		tmp = &ttfs->fields[i];
+		if (ttfs->fields[i].rendered)
+			if (push_dynarray(boxs, &tmp, false))
+				return (-1);
 		i++;
 	}
-	return (fields);
+	return (0);
 }
 
-int			input_field(t_env *env, t_point o, int nfield, char **ret)
+static void			render_field(t_env *env, void *addr)
 {
-	static t_dynarray	*fields = NULL;
-	static bool			in = false;
-	t_dynarray			*field;
+	t_ttf_config	*conf;
+	t_point			box_pos;
+	t_point			name_pos;
+	t_text_box		*box;
 
-	(void)ret;
-	if (!(fields = init_fields()))
-		return (-1);
-	field = &fields[nfield];
-	if (field->byte_size == 0 && (init_dynarray(field, sizeof(unsigned char), 0)))
-		return (-1);
-	draw_rectangle(env->mlx.img_data, o, (t_point){200, 30}, 0x333333);
-	write_text(env, o, field->c, field->nb_cells);
+	ft_memcpy(&box, addr, sizeof(void*));
+	conf = ttf_config();
+	conf->size = 20;
+	ft_strcpy((char*)conf->s, box->name);
+	name_pos = (t_point){box->o.x + 50, box->o.y};
+	my_string_put(env, env->mlx.img_data, name_pos, FONT_COOLVETICA);
 
-	if (env->events.buttons[BUTTON_LCLIC])
+	box_pos = (t_point){box->o.x, box->o.y + conf->size};
+	draw_rectangle(env->mlx.img_data, box_pos, TEXT_BOX_DIMS, TEXT_BOX_COLOR);
+}
+
+int					input_fields(t_env *env, bool refresh)
+{
+	static t_dynarray	boxs;
+	static bool			first = true;
+	int					i;
+
+	i = 0;
+	if ((refresh || first) && get_boxs(&env->ttfs, &boxs))
+		return (-1);
+	while (i < boxs.nb_cells)
 	{
-		if (ft_inbounds(env->events.mouse_pos.x, o.x, o.x + 200)
-			&& ft_inbounds(env->events.mouse_pos.y, o.y, o.y + 30))
-			in = true;
-		else
-			in = false;
+		render_field(env, dyacc(&boxs, i));
+		i++;
 	}
-	if (in && inside(env, field, o)) // Si on est focus sur le field, on dessine la barre d'insertion
-		return (-1);
+	first = false;
 	return (0);
 }

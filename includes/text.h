@@ -3,29 +3,34 @@
 
 # define MAX_STR_CHARS 1024
 
+# define TEXT_BOX_DIMS (t_point){200, 30}
+# define TEXT_BOX_COLOR 0x333333
+
 enum	e_font_id
 {
 	FONT_ARIAL,
 	FONT_AMMOS,
 	FONT_TXT_HINT,
+	FONT_COOLVETICA,
 	FONT_MAX
 };
 
 enum	e_input_fields_id
 {
-	FIELD_MAP_WIDTH,
-	FIELD_MAP_HEIGHT,
-	FIELD_MAP_DEPTH,
-	FIELD_NAME,
+	FIELD_NM_MAP_WIDTH,
+	FIELD_NM_MAP_HEIGHT,
+	FIELD_NM_MAP_DEPTH,
+	FIELD_NM_NAME,
 	FIELD_MAX
 };
 
 struct	s_text_box
 {
 	t_dynarray		str;
-	unsigned char	*name;
+	char			*name;
 	t_point			o;
 	int				offset;
+	bool			rendered;
 	bool			in;
 };
 
@@ -53,6 +58,7 @@ char			*fonts_paths(unsigned int index);
 int				load_fonts(t_env *env);
 void			my_string_put(t_env *env, char *img, t_point o, int font);
 void			textual_hint(t_env *env, char button, char *action);
+int				input_fields(t_env *env, bool refresh);
 t_ttf_config	*ttf_config();
 
 #endif

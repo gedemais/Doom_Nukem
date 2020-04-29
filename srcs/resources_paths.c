@@ -67,7 +67,8 @@ char	*fonts_paths(unsigned int index)
 {
 	static char		*paths[FONT_MAX] = {"resources/fonts/arial.ttf",
 										"resources/fonts/ammos.ttf",
-										"resources/fonts/Courier.dfont"};
+										"resources/fonts/Courier.dfont",
+										"resources/fonts/coolvetica.ttf"};
 
 	return (paths[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/29 00:11:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/29 03:05:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ static int	init_fields(t_env *env)
 {
 	t_ttf	*ttf;
 
-	ttf = &env->edit_env.ttfs;
-	ttf->fields[0] = {.o = (t_point){100, 100}, .offset = 0, .in = false};
-	ttf->fields[1] = {.o = (t_point){200, 200}, .offset = 0, .in = false};
-	ttf->fields[2] = {.o = (t_point){300, 300}, .offset = 0, .in = false};
-	ttf->fields[3] = {.o = (t_point){400, 400}, .offset = 0, .in = false};
+	ttf = &env->ttfs;
+	ft_memset(&ttf->fields, 0, sizeof(t_text_box) * FIELD_MAX);
+	ttf->fields[0].o = (t_point){140, 350};
+	ttf->fields[1].o = (t_point){440, 350};
+	ttf->fields[2].o = (t_point){740, 350};
+	ttf->fields[3].o = (t_point){440, 200};
 
-	if (!(ttf->fields[0].name = (unsigned char*)ft_strdup("Width"))
-		|| !(ttf->fields[1].name = (unsigned char*)ft_strdup("Height"))
-		|| !(ttf->fields[2].name = (unsigned char*)ft_strdup("Height"))
-		|| !(ttf->fields[3].name = (unsigned char*)ft_strdup("Name")))
+	if (!(ttf->fields[0].name = ft_strdup("Width"))
+		|| !(ttf->fields[1].name = ft_strdup("Height"))
+		|| !(ttf->fields[2].name = ft_strdup("Depth"))
+		|| !(ttf->fields[3].name = ft_strdup("Name")))
 		return (-1);
 
 	if (init_dynarray(&ttf->fields[0].str, sizeof(char), 0)
