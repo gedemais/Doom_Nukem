@@ -113,6 +113,8 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 			if (FT_Load_Char(ttf->faces[font], conf->s[i], FT_LOAD_RENDER) && ++i)
 				continue ;
 		slot = ttf->faces[font]->glyph;
+		if (conf->s[i] == 'j')
+			o.x += conf->size / 2;
 		map_letter(img, slot->bitmap,
 			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
 		if (conf->s[i] == ' ')

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 10:06:00 by gedemais          #+#    #+#             */
-/*   Updated: 2019/01/14 12:51:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/29 19:59:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ char			*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 	val = ft_getval(nbr, base_from);
 	len_base = ft_strlen(base_to);
-	res = (char*)malloc(sizeof(char) * (32));
+	if (!(res = (char*)malloc(sizeof(char) * (32))))
+		return (NULL);
 	i = 0;
 	if (val)
 		while (val > 0)

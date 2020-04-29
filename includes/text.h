@@ -5,6 +5,8 @@
 
 # define TEXT_BOX_DIMS (t_point){200, 30}
 # define TEXT_BOX_COLOR 0x333333
+# define TEXT_BOX_DELETE_DELAY 100000
+# define CURSOR_COLOR 0xaaaaaa
 
 enum	e_font_id
 {
@@ -20,6 +22,7 @@ enum	e_input_fields_id
 	FIELD_NM_MAP_WIDTH,
 	FIELD_NM_MAP_HEIGHT,
 	FIELD_NM_MAP_DEPTH,
+	FIELD_NM_CUBE_SIZE,
 	FIELD_NM_NAME,
 	FIELD_MAX
 };
@@ -29,7 +32,7 @@ struct	s_text_box
 	t_dynarray		str;
 	char			*name;
 	t_point			o;
-	int				offset;
+	t_point			b_o;
 	bool			rendered;
 	bool			in;
 };
