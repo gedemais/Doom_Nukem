@@ -1,17 +1,5 @@
 #include "main.h"
 
-static void     tab_free(void **add, int len)
-{
-	int i;
-
-	if (add == NULL)
-		return ;
-	i = -1;
-	while (++i < len && add[i])
-		ft_memdel(&add[i]);
-	ft_memdel(add);
-}
-
 static char     **tab_add(char **tab, const char *str)
 {
 	int		i;
@@ -31,29 +19,26 @@ static char     **tab_add(char **tab, const char *str)
 			error = 1;
 	if (error == 1 || !(ret[i] = ft_strdup(str)))
 		error = 1;
-	if (error == 1)
-		tab_free((void **)ret, ft_tablen(ret));
+	if (error == 1 && ret)
+		ft_free_ctab(ret);
 	else
 		ret[++i] = NULL;
-	tab_free((void **)tab, ft_tablen(tab));
+	ft_free_ctab(tab);
 	return (ret);
 }
 
 static int      good_format(char *str, char *format)
 {
-	int     i;
 	int     len;
 
 	len = ft_strlen(format);
-	i = -1;
-	while (++i < len)
-		if (!ft_isalnum(format[i]) && !(format[i] == '.'))
+	while (len--)
+		if (!ft_isalnum(format[len]) && !(format[len] == '.'))
 			return (0);
 	return (!ft_strcmp(str, format) ? 1 : 0);
 }
 
-static int      check_format(char ***path_tab, struct dirent *read,
-		char *format, int *len)
+static int      check_format(char ***path_tab, struct dirent *read, char *format)
 {
 	int size;
 
@@ -69,7 +54,6 @@ static int      check_format(char ***path_tab, struct dirent *read,
 				return (0);
 		if (!(*path_tab = tab_add(*path_tab, read->d_name)))
 			return (-1);
-		++(*len);
 		return (1);
 	}
 	return (0);
@@ -77,7 +61,6 @@ static int      check_format(char ***path_tab, struct dirent *read,
 
 char        **listpath(char *d_path, char *format)
 {
-	int             len;
 	char            **path_tab;
 	DIR             *dir;
 	struct dirent   *read;
@@ -86,11 +69,10 @@ char        **listpath(char *d_path, char *format)
 	dir = opendir(d_path);
 	if (dir)
 	{
-		len = 0;
 		if (!(path_tab = (char **)ft_memalloc(sizeof(char *) * 1)))
 			return (NULL);
 		while ((read = readdir(dir)))
-			if (check_format(&path_tab, read, format, &len) == -1)
+			if (check_format(&path_tab, read, format) == -1)
 				break ;
 		closedir(dir);
 	}
