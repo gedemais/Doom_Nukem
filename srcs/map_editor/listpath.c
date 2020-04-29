@@ -2,7 +2,7 @@
 
 static char     **tab_add(char **tab, const char *str)
 {
-	int		i;
+	int	i;
 	int     error;
 	char	**ret;
 
@@ -10,8 +10,8 @@ static char     **tab_add(char **tab, const char *str)
 	if (tab == NULL || str == NULL)
 		error = 1;
 	if (error == 1
-			|| !(ret = (char **)ft_memalloc(sizeof(char *)
-					* (ft_tablen(tab) + 2))))
+	|| !(ret = (char **)ft_memalloc(sizeof(char *)
+		* (ft_tablen(tab) + 2))))
 		error = 1;
 	i = -1;
 	while (error == 0 && tab[++i])
@@ -19,7 +19,7 @@ static char     **tab_add(char **tab, const char *str)
 			error = 1;
 	if (error == 1 || !(ret[i] = ft_strdup(str)))
 		error = 1;
-	if (error == 1 && ret)
+	if (error == 1)
 		ft_free_ctab(ret);
 	else
 		ret[++i] = NULL;
