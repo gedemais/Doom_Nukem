@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/27 10:44:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/30 17:15:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			switch_mecontext(t_env *env, unsigned int i)
 
 int		render_maped(void *param)
 {
-	static int	(*sub_contexts[MAPED_SC_MAX])(t_env *env) = {maped_menu, maped_new_map, NULL};
+	static int	(*sub_contexts[MAPED_SC_MAX])(t_env *env) = {maped_menu, maped_new_map, maped_creative};
 	t_env		*env;
 
 	env = ((t_env*)param);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/27 16:58:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/30 16:02:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ struct			s_env
 	t_physics	phy_env;
 	t_cam		cam;
 	int			context;
-	int			scene; // a tej quand C_DEV sera supprime
+	int			scene;
 	t_ttf		ttfs;
 };
 

@@ -136,7 +136,7 @@ static int			field_content(t_env *env, t_text_box *box)
 		return (0);
 	if (add_char(&box->str, env->events.keys))
 		return (-1);
-	c_o = (t_point){box->b_o.x + (box->str.nb_cells * 17) + 3, box->b_o.y + 2};
+	c_o = (t_point){box->b_o.x + (box->str.nb_cells * 16) + 3, box->b_o.y + 2};
 	draw_rectangle(env->mlx.img_data, c_o, (t_point){1, 26}, CURSOR_COLOR);
 	return (0);
 }

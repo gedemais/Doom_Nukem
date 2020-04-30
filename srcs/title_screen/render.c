@@ -6,8 +6,6 @@ static int				handle_events(t_env *env)
 	int			i;
 
 	i = -1;
-	if (env->events.keys[KEY_ESCAPE])
-		exit(EXIT_SUCCESS);
 	while (++i < TS_BUTTON_MAX)
 		if (is_on_button(env->events.mouse_pos, env->ts_env.buttons[i]))
 		{

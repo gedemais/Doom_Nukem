@@ -2,6 +2,7 @@
 # define MAP_EDITOR_H
 
 # define MAX_NAME_LENGTH 64
+# define MAX_CHUNKS 200000
 
 enum	e_maped_sc_id
 {
@@ -9,6 +10,15 @@ enum	e_maped_sc_id
 	MAPED_SC_NEW_MAP,
 	MAPED_SC_CREATIVE,
 	MAPED_SC_MAX
+};
+
+enum	e_create_map_error_id
+{
+	CM_ERR_NONE,
+	CM_ERR_TOO_MANY_CHUNKS,
+	CM_ERR_INVALID_SCALE,
+	CM_ERR_INVALID_DIM,
+	CM_ERR_MAX
 };
 
 enum	e_maped_menu_button_id
@@ -52,6 +62,7 @@ struct				s_edit_env
 	t_dynarray		maps;
 	t_ed_map		new_map;
 	t_scroll			scroll;
+	int				error;
 	int				sub_context;
 };
 
@@ -68,6 +79,7 @@ int					render_maped(void *param);
 int					switch_mecontext(t_env *env, unsigned int i);
 int					maped_menu(t_env *env);
 int					maped_new_map(t_env *env);
+int					maped_creative(t_env *env);
 
 // Routines
 int					me_menu_to_new_map(t_env *env);
@@ -78,6 +90,9 @@ int					me_creative_to_menu(t_env *env);
 
 int					input_field(t_env *env, t_point o, int nfield, char **ret);
 void				draw_rectangle(char *img, t_point o, t_point dims, int color);
+
+// Map
+int					create_me_map(t_env *env);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);
