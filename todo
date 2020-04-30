@@ -1,12 +1,12 @@
-Gerer les input_fields mutliples (refactor)
-
 Se doc sur le moteur physique
 
+Rajouter un bouton "Map_Editor" dans le menu new_map
+
+exit_malloc() a tous les mallocs / surcouches qui appellent malloc
 
 
 Modifier read_file pour qu'il mmap le fichier
-
-Todo:
+	
 	blender:
 		Modelisation campagne | Moguy
 		Monstres | gneheheeee
@@ -17,7 +17,6 @@ Todo:
 		Faire une fonction parse_error
 	Autres:
 		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
-		Recoder un atof
 		Fermer les fd
 
 Optis : 

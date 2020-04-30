@@ -6,7 +6,7 @@
 /*   By: gedemais <gedemais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:05:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/04 23:47:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/30 18:51:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int					ft_strfind(const char *str, int c);
 char				*ft_strrealloc(char *s, size_t size);
 int					get_next_line(const int fd, char **line);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
+float				ft_atof(const char *str);
 /*
 ** Strings functions
 */

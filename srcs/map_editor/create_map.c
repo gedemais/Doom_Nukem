@@ -39,11 +39,48 @@ static int		get_dimensions(t_env *env)
 	return (0);
 }
 
+static int	get_map_name(t_env *env)
+{
+	char	*input;
+	int		i;
+
+	i = 0;
+	input = env->ttfs.fields[FIELD_NM_NAME].str.c;
+	while (input[i])
+	{
+		if (!ft_isalnum(input[i]))
+			return (CM_ERR_INVALID_NAME);
+		i++;
+	}
+	if (!(env->edit_env.new_map.name = ft_strdup(input)))
+		return (CM_ERR_INVALID_NAME);
+	return (0);
+}
+
+static int	get_map_scale(t_env *env)
+{
+	char			*input;
+	long long int	nb;
+
+	input = env->ttfs.fields[FIELD_NM_CUBE_SIZE].str.c;
+	if (check_digits(input))
+		return (-1);
+	nb = ft_atoi(input);
+	if (!ft_inbounds(nb, 1, 100))
+		return (-1);
+	env->edit_env.new_map.scale = (int)nb;
+	return (0);
+}
+
 int			create_me_map(t_env *env)
 {
 	int		errcode;
 
 	if ((errcode = get_dimensions(env)))
+		return (errcode);
+	if ((errcode = get_map_name(env)))
+		return (errcode);
+	if ((errcode = get_map_scale(env)))
 		return (errcode);
 	return (0);
 }

@@ -1,0 +1,70 @@
+char                *flat_map(t_map map)
+{
+    int        x;
+    int        y;
+    int        z;
+    char    *flat_map;
+
+    if (!(flat_map = ft_memalloc((sizeof(char)
+            * ((map.w + 1) * (map.h + 2) * map.d + 1)))))
+        return (NULL);
+    x = -1;
+    while (++x < map.w)
+    {
+        y = -1;
+        while (++y < map.h)
+        {
+            z = -1;
+            while (++z < map.w)
+                *flat_map++ = map.map[x][y][z];
+            *flat_map++ = '/n';
+        }
+        *flat_map++ = '/n';
+        *flat_map++ = '/n';
+    }
+    *flat_map = '/0';
+    return (flat_map);
+}
+
+static char        *free_map_matrice(char ***map, int width, int height)
+{
+    int        i;
+    int        j;
+
+    if (map == NULL)
+        return (NULL);
+    i = -1;
+    while (*map && ++i < width)
+    {
+        j = -1;
+        while (**map && ++j < height)
+            ft_strdel(&map[i][j]);
+        ft_strdel(map[i]);
+    }
+    free(map);
+    map = NULL;
+    return (NULL);
+}
+
+char            ***init_map_matrice(int w, int h, int d)
+{
+    int        x;
+    int        y;
+    char    ***map;
+
+    if (!(map = (char ***)ft_memalloc(sizeof(char **) * w)))
+        return (free_map_matrice(map, w, h));
+    x = -1;
+    while (++x < w)
+    {
+        if (!(map[x] = (char **)ft_memalloc(sizeof(char *) * h)))
+            return (free_map_matrice(map, w, h));
+        y = -1;
+        while (++y < h)
+        {
+            if (!(map[x][y] = (char *)ft_memalloc(sizeof(char) * d)))
+                return (free_map_matrice(map, w, h));
+        }
+    }
+    return (map);
+}

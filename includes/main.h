@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 16:02:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/04/30 19:58:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int				init_mlx(t_env *env);
 void			loading_bar(unsigned int i, unsigned int max, bool last);
 int				init_openal(t_sound *env);
 int				load_maps(t_env *env);
-int				load_object(int fd, char *line);
 
 /*
 ** MLX

@@ -1,7 +1,6 @@
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
-# define MAX_NAME_LENGTH 64
 # define MAX_CHUNKS 200000
 
 enum	e_maped_sc_id
@@ -18,6 +17,7 @@ enum	e_create_map_error_id
 	CM_ERR_TOO_MANY_CHUNKS,
 	CM_ERR_INVALID_SCALE,
 	CM_ERR_INVALID_DIM,
+	CM_ERR_INVALID_NAME,
 	CM_ERR_MAX
 };
 
@@ -48,7 +48,8 @@ struct				s_ed_map
 	t_sprite	*textures[256];
 	char		***map;
 	t_sprite	*skybox;
-	char		name[MAX_NAME_LENGTH];
+	char		*name;
+	int			scale;
 	int			width;
 	int			height;
 	int			depth;

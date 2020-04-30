@@ -5,7 +5,6 @@
 
 # define TEXT_BOX_DIMS (t_point){200, 30}
 # define TEXT_BOX_COLOR 0x333333
-# define TEXT_BOX_DELETE_DELAY 100000
 # define CURSOR_COLOR 0xaaaaaa
 
 enum	e_font_id
