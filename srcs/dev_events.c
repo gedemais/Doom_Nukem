@@ -63,7 +63,7 @@ int		render_dev(void *param)
 	static float	av = 0.0f;
 	static int		it = 0;
 
-	mesure_time(false);
+//	mesure_time(false);
 	env = ((t_env*)param);
 
 	dev_handle_events(env);
