@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 19:58:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/01 18:45:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <dirent.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 # include <time.h>
 # include <math.h>
 # include <limits.h>

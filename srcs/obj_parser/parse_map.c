@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 19:42:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/01 19:04:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,6 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh)))
 		return (-1);
 	ft_free_ctab(parser.lines);
-	free(parser.file);
+	munmap(parser.file, ft_strlen(parser.file));
 	return (0);
 }

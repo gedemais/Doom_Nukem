@@ -1,23 +1,48 @@
 #include "libft.h"
 
-float	ft_atof(const char *str)
+static double	part2(const char *str)
 {
-	int			len;
-	int			res1;
-	float		res2;
-	const char	*c;
+	int        count;
+	double    res2;
 
-	c = str;
-	res1 = (int)ft_atoi(c);
-	while (*c && *c != '.')
-		++c;
-	if (*c != '.')
-		return (res1);
-	res2 = (float)ft_abs(ft_atoi(++c));
-	len = 0;
-	while (ft_isdigit(c[len]))
-		++len;
-	while (len--)
+	count = 0;
+	res2 = ft_abs(ft_atoi(str));
+	while (*str >= '0' && *str <= '9')
+	{
+		str++;
+		count++;
+	}
+	while (count > 0)
+	{
 		res2 /= 10;
-	return (res1 + (res1 > 0 ? res2 : -res2));
+		count--;
+	}
+	return (res2);
+}
+
+double			ft_atof(const char *str)
+{
+	double    res;
+	double    res1;
+	int        count;
+	int        neg;
+
+	neg = 1;
+	if (*str == '-')
+	{
+		neg = -1;
+		str++;
+	}
+	count = 0;
+	res1 = ft_abs(ft_atoi(str));
+	while (*str >= '0' && *str <= '9')
+	{
+		str++;
+		count++;
+	}
+	if (!*str || *str != '.')
+		return (neg * res1);
+	str++;
+	res = res1 + part2(str);
+	return (neg * res);
 }

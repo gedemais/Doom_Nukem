@@ -27,9 +27,9 @@ int		new_vertex(t_map *map, char **toks)
 		|| !check_float(toks[1]) || !check_float(toks[2])
 		|| !check_float(toks[3]))
 		return (-1);
-	new.x = atof(toks[1]);
-	new.y = atof(toks[2]);
-	new.z = atof(toks[3]);
+	new.x = ft_atof(toks[1]);
+	new.y = ft_atof(toks[2]);
+	new.z = ft_atof(toks[3]);
 	if (push_dynarray(&map->pool, &new, false))
 		return (-1);
 	return (0);
@@ -44,8 +44,8 @@ int		new_txt_vertex(t_map *map, char **toks)
 		|| !check_float(toks[1]) || !check_float(toks[2]))
 		return (-1);
 	m->textured = true;
-	txt_coor.u = atof(toks[1]);
-	txt_coor.v = atof(toks[2]);
+	txt_coor.u = ft_atof(toks[1]);
+	txt_coor.v = ft_atof(toks[2]);
 	if (push_dynarray(&map->txt_pool, &txt_coor, false))
 		return (-1);
 	return (0);

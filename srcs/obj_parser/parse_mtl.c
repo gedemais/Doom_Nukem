@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:12:24 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 19:38:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/01 19:02:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				parse_mtl(char *file_name, t_dynarray *mtls)
 	if (!(lines = start_check(file)) || load_materials(mtls, lines))
 		return (-1);
 	ft_free_ctab(lines);
-	free(file);
+	munmap(file, ft_strlen(file));
 	close(fd);
 	return (0);
 }

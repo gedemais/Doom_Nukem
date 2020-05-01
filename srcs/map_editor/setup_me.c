@@ -6,11 +6,33 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 00:09:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/01 20:28:46 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+static void	init_new_map_buttons(t_env *env)
+{
+	t_edit_env	*me_env;
+	t_button	*b;
+	t_sprite	*sps[3];
+
+	me_env = &env->edit_env;
+	b = &me_env->buttons[MAPED_NM_BUTTON_CREATE];
+	sps[0] = &env->sprites[SP_ME_BUTTON_CREATE_1C];
+	sps[1] = &env->sprites[SP_ME_BUTTON_CREATE_1H];
+	sps[2] = &env->sprites[SP_ME_BUTTON_CREATE_1O];
+	init_button(b, (t_point){600, 500}, sps);
+	b->r_down = (t_point){600 + env->sprites[SP_ME_BUTTON_CREATE_1C].wdt, 500 + env->sprites[SP_ME_BUTTON_CREATE_1C].hgt};
+
+	b = &me_env->buttons[MAPED_NM_BUTTON_MAPED];
+	sps[0] = &env->sprites[SP_NM_BUTTON_MAPED_2C];
+	sps[1] = &env->sprites[SP_NM_BUTTON_MAPED_2H];
+	sps[2] = &env->sprites[SP_NM_BUTTON_MAPED_2O];
+	init_button(b, (t_point){200, 500}, sps);
+	b->r_down = (t_point){200 + env->sprites[SP_NM_BUTTON_MAPED_2C].wdt, 500 + env->sprites[SP_NM_BUTTON_MAPED_2C].hgt};
+}
 
 static void	init_buttons(t_env *env)
 {
@@ -33,12 +55,7 @@ static void	init_buttons(t_env *env)
 	init_button(b, (t_point){800, 500}, sps);
 	b->r_down = (t_point){800 + env->sprites[SP_ME_BUTTON_2C].wdt, 500 + env->sprites[SP_CP_BUTTON_2C].hgt};
 
-	b = &me_env->buttons[MAPED_NM_BUTTON_CREATE];
-	sps[0] = &env->sprites[SP_ME_BUTTON_CREATE_1C];
-	sps[1] = &env->sprites[SP_ME_BUTTON_CREATE_1H];
-	sps[2] = &env->sprites[SP_ME_BUTTON_CREATE_1O];
-	init_button(b, (t_point){400, 500}, sps);
-	b->r_down = (t_point){800 + env->sprites[SP_ME_BUTTON_CREATE_1C].wdt, 600 + env->sprites[SP_ME_BUTTON_CREATE_1C].hgt};
+	init_new_map_buttons(env);
 }
 
 static int	init_fields(t_env *env)

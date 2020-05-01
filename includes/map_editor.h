@@ -26,8 +26,16 @@ enum	e_maped_menu_button_id
 	MAPED_MENU_BUTTON_NEW_MAP,
 	MAPED_MENU_BUTTON_MAIN_MENU,
 	MAPED_NM_BUTTON_CREATE,
+	MAPED_NM_BUTTON_MAPED,
 	MAPED_MENU_BUTTON_MAX
 };
+/*
+enum	e_blocs_textures_ids
+{
+	BTXT_NONE,
+	BTXT_
+	BTXT_MAX
+}*/
 
 struct				s_scroll
 {
@@ -47,7 +55,6 @@ struct				s_ed_map
 {
 	t_sprite	*textures[256];
 	char		***map;
-	t_sprite	*skybox;
 	char		*name;
 	int			scale;
 	int			width;

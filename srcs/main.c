@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/28 16:35:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/01 19:16:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,7 @@ static int	doom_nukem(t_env *env)
 	if (setup(env))
 		return (-1);
 
-/*	t_mesh	*m;
-	t_triangle	*t;
-
-	mlx_mouse_hide();
-	m = (t_mesh*)env->maps[0].meshs.c;
-	for (int i = 0; i < m->tris.nb_cells; i++)
-	{
-		t = dyacc(&m->tris, i);
-		if (t->textured)
-			t->sp = &env->sprites[TXT_BLOC_GRASS];
-	}*/
-	//mlx_mouse_hide();
-
+	// Ajouter toutes les armes dans l'inventaire du joueur
 	for (int i = 0; i < W_MAX; i++)
 		push_dynarray(&env->cmp_env.player.weapons, &env->cmp_env.weapons[i], false);
 

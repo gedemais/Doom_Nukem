@@ -40,7 +40,7 @@ int		mtl_color(char **toks, t_dynarray *mtls)
 	{
 		if (!check_float(toks[i]))
 			return (-1);
-		t = atof(toks[i]);
+		t = ft_atof(toks[i]);
 		if (t < 0.0f || t > 1.0f)
 			return (-1);
 		cm->color[i - 1] = (t * 255);
@@ -56,7 +56,7 @@ int		mtl_alpha(char **toks, t_dynarray *mtls)
 
 	if (!(cm = dyacc(mtls, mtls->nb_cells - 1)) || ft_tablen(toks) != 2)
 		return (-1);
-	if ((cm->alpha = atof(toks[1])) < 0.0 || cm->alpha > 1.0f)
+	if ((cm->alpha = ft_atof(toks[1])) < 0.0 || cm->alpha > 1.0f)
 		return (-1);
 	return (0);
 }

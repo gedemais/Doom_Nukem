@@ -36,11 +36,11 @@ t_vec3d	read_vec3d(char *tok, char start_sep, char end_sep)
 		return ((t_vec3d){INFINITY, INFINITY, INFINITY, INFINITY});
 	}
 	i = 1;
-	if (cross_whitespaces(tok, &i) || (ret.x = atof(&tok[i])) == INFINITY
+	if (cross_whitespaces(tok, &i) || (ret.x = ft_atof(&tok[i])) == INFINITY
 		|| cross_floats(tok, &i) || cross_whitespaces(tok, &i) || tok[i++] != ','
-		|| cross_whitespaces(tok, &i) || (ret.y = atof(&tok[i])) == INFINITY
+		|| cross_whitespaces(tok, &i) || (ret.y = ft_atof(&tok[i])) == INFINITY
 		|| cross_floats(tok, &i) || cross_whitespaces(tok, &i) || tok[i++] != ','
-		|| cross_whitespaces(tok, &i) || (ret.z = atof(&tok[i])) == INFINITY)
+		|| cross_whitespaces(tok, &i) || (ret.z = ft_atof(&tok[i])) == INFINITY)
 		return ((t_vec3d){INFINITY, INFINITY, INFINITY, INFINITY});
 	return (ret);
 }
@@ -57,9 +57,9 @@ t_vec2d	read_vec2d(char *tok, char start_sep, char end_sep)
 		return ((t_vec2d){INFINITY, INFINITY, INFINITY});
 	}
 	i = 1;
-	if (cross_whitespaces(tok, &i) || (ret.u = atof(&tok[i])) == INFINITY
+	if (cross_whitespaces(tok, &i) || (ret.u = ft_atof(&tok[i])) == INFINITY
 		|| cross_floats(tok, &i) || cross_whitespaces(tok, &i) || tok[i++] != ','
-		|| cross_whitespaces(tok, &i) || (ret.v = atof(&tok[i])) == INFINITY)
+		|| cross_whitespaces(tok, &i) || (ret.v = ft_atof(&tok[i])) == INFINITY)
 		return ((t_vec2d){INFINITY, INFINITY, INFINITY});
 	return (ret);
 }
