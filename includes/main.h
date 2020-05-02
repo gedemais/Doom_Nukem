@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 01:58:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 01:28:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 #define PUT9 ft_putstr("There9\n"); fflush(stdout);
 
 
-# define NB_THREADS 16
+# define NB_THREADS 8
 # define WDT 1080
 # define HGT 720
 # define WINDOW_NAME "Doom Nukem"

@@ -6,8 +6,8 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 23:53:38 by gedemais         ###   ########.fr       */
-/*                                                                            */ /* ************************************************************************** */
+/*   Updated: 2020/05/03 01:23:51 by gedemais         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -18,7 +18,7 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[4])
 	float		cv;
 	int			color;
 
-	if (txt->txt_w <= env->cam.z_buffer[pos[2]])
+	if (txt->txt_w < env->cam.z_buffer[pos[2]])
 		return ;
 	if (t.sp >= 0 && t.textured)
 	{
