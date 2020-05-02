@@ -4,11 +4,11 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Cube|{}|[]|true|(resources/textures/map_editor/brique.xpm)|
-Cube.001|{}|[]|true|(resources/textures/map_editor/brique_dark.xpm)|
-Cube.002|{}|[]|true|(resources/textures/map_editor/stone.xpm)|
-Cube.003|{}|[]|true|(resources/textures/map_editor/clean_stone.xpm)|
-Cube.004|{}|[]|true|(resources/textures/map_editor/glace.xpm)|
-Cube.005|{}|[]|true|(resources/textures/map_editor/sand.xpm)|
-Cube.006|{}|[]|true|(resources/textures/map_editor/dirt.xpm)|
-Cube.007|{}|[]|true|(resources/textures/map_editor/dirt_grass.xpm)|
+Cube|{}|[]|true|()|
+Cube.001|{}|[]|true|()|
+Cube.002|{}|[]|true|()|
+Cube.003|{}|[]|true|()|
+Cube.004|{}|[]|true|()|
+Cube.005|{}|[]|true|()|
+Cube.006|{}|[]|true|()|
+Cube.007|{}|[]|true|()|

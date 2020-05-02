@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/01 18:45:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 01:58:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,5 @@ int				render_dev(void *param);
 ** Singletons
 */
 bool			*init_parser(void);
-
 
 #endif

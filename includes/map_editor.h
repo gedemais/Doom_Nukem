@@ -29,13 +29,35 @@ enum	e_maped_menu_button_id
 	MAPED_NM_BUTTON_MAPED,
 	MAPED_MENU_BUTTON_MAX
 };
-/*
+
 enum	e_blocs_textures_ids
 {
 	BTXT_NONE,
-	BTXT_
+	BTXT_DARK_BRICK,
+	BTXT_BRICK,
+	BTXT_CLEAN_STONE,
+	BTXT_DIRT_GRASS,
+	BTXT_DIRT_SNOW,
+	BTXT_DIRT,
+	BTXT_ICE,
+	BTXT_GOLD,
+	BTXT_IRON,
+	BTXT_LIBRARY,
+	BTXT_LIGHT,
+	BTXT_OBSIDIENNE,
+	BTXT_SAND,
+	BTXT_STONE,
+	BTXT_WOOD_A_CUT,
+	BTXT_WOOD_A,
+	BTXT_WOOD_B_CUT,
+	BTXT_WOOD_B,
+	BTXT_WOOD_C_CUT,
+	BTXT_WOOD_C,
+	BTXT_WOOD_D_CUT,
+	BTXT_WOOD_D,
+	BTXT_JUKEBOX,
 	BTXT_MAX
-}*/
+};
 
 struct				s_scroll
 {
@@ -65,17 +87,21 @@ struct				s_ed_map
 struct				s_edit_env
 {
 	t_env			*env;
+	t_sprite		btxts[BTXT_MAX];
 	t_button		buttons[MAPED_MENU_BUTTON_MAX];
 	t_point			pos[MAPED_MENU_BUTTON_MAX];
-	t_dynarray		maps;
 	t_ed_map		new_map;
-	t_scroll			scroll;
+	t_map			map;
+	t_scroll		scroll;
 	int				error;
 	int				sub_context;
 };
 
 
 int					setup_medit(t_env *env);
+char				*blocs_txt_paths(unsigned int index);
+
+
 int					key_press_maped(int key, void *param);
 int					key_release_maped(int key, void *param);
 int					mouse_press_maped(int button, int x, int y, void *param);
@@ -101,6 +127,9 @@ void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 
 // Map
 int					create_me_map(t_env *env);
+int					build_map(t_env *env, t_ed_map *new);
+int					map_to_scene(t_env *env);
+int					free_map_matrice(char ***map, int width, int height);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);

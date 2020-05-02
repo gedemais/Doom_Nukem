@@ -86,7 +86,7 @@ int			create_me_map(t_env *env)
 		return (errcode);
 	if ((errcode = get_map_scale(env)))
 		return (errcode);
-//	if (build_map(&env->edit_env.new_map))
-//		return (-1);
+	if (build_map(env, &env->edit_env.new_map))
+		return (-1);
 	return (0);
 }

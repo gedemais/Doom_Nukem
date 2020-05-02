@@ -25,12 +25,14 @@ SRCS_NAME =	main.c\
 			custom_mode/render.c\
 			custom_mode/events.c\
 			\
+			map_editor/build_map.c\
 			map_editor/create_map.c\
 			map_editor/creative.c\
 			map_editor/setup_me.c\
 			map_editor/render.c\
 			map_editor/events.c\
 			map_editor/menu.c\
+			map_editor/map_to_scene.c\
 			map_editor/new_map.c\
 			map_editor/file.c\
 			map_editor/listpath.c\

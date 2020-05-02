@@ -9,7 +9,8 @@ int			load_maps(t_env *env)
 	i = 0;
 	ft_putendl("Loading maps...");
 	init_states(states);
-	while (i < SCENE_MAX) {
+	while (i < SCENE_MAX)
+	{
 		loading_bar(i, SCENE_MAX, false);
 		if (parse_map(&env->maps[i], maps_paths(i), states) != 0)
 			return (-1);

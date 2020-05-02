@@ -99,7 +99,6 @@ struct	s_mesh
 	t_dynarray	tris;
 	t_dynarray	txts;
 	t_dynarray	deps;
-	t_sprite	sprite;
 	t_corp		corp;
 	float		yaw;
 	float		pitch;

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/01 20:28:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 01:53:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,28 @@ static int	init_fields(t_env *env)
 	return (0);
 }
 
+static int	load_blocs_textures(t_env *env)
+{
+	unsigned int	i;
+	t_mlx			*mlx;
+
+	i = 0;
+		mlx = &env->mlx;
+	while (i < BTXT_MAX)
+	{
+		if (load_texture(mlx, blocs_txt_paths(i), &env->edit_env.btxts[i]))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 
 int			setup_medit(t_env *env)
 {
 	env->edit_env.env = env;
 	env->edit_env.sub_context = MAPED_SC_MENU;
 	init_buttons(env);
-	if (init_fields(env))
+	if (init_fields(env) || load_blocs_textures(env))
 		return (-1);
 	return (0);
 }

@@ -1,12 +1,12 @@
 #include "main.h"
 
-static int	free_map_matrice(char ***map, int width, int height)
+int				free_map_matrice(char ***map, int width, int height)
 {
     int        i;
     int        j;
 
     if (map == NULL)
-        return (NULL);
+        return (-1);
     i = -1;
     while (*map && ++i < width)
     {
@@ -38,11 +38,12 @@ static char		***init_map_matrice(int w, int h, int d)
 		{
 			if (!(map[x][y] = (char *)ft_memalloc(sizeof(char) * d)))
 				exit(1);
+			ft_memset(map[x][y], BTXT_NONE, sizeof(char) * d);
 		}
 	}
 	return (map);
 }
-/*
+
 static void	fill_map_bottom(t_ed_map *new)
 {
 	int		x;
@@ -53,15 +54,22 @@ static void	fill_map_bottom(t_ed_map *new)
 	y = new->height - 1;
 	while (x < new->width)
 	{
-		
+		z = 0;
+		while (z < new->depth)
+		{
+			new->map[x][y][z] = BTXT_OBSIDIENNE;
+			z++;
+		}
 		x++;
 	}
-}*/
+}
 
-int			build_map(t_ed_map *new)
+int			build_map(t_env *env, t_ed_map *new)
 {
-	if (!(new->map = init_map_matrice(new->width, new->heigth, new->depth)))
+	if (!(new->map = init_map_matrice(new->width, new->height, new->depth)))
 		return (-1);
-//	fill_map_bottom(new->map);
+	fill_map_bottom(new);
+	if (map_to_scene(env))
+		return (-1);
 	return (0);
 }

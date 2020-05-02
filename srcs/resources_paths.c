@@ -60,6 +60,37 @@ char	*sprites_paths(unsigned int index)
 	return (paths[index]);
 }
 
+char	*blocs_txt_paths(unsigned int index)
+{
+	static char		*paths[BTXT_MAX] = {
+		"resources/textures/blocs/brique.xpm",
+		"resources/textures/blocs/brique_dark.xpm",
+		"resources/textures/blocs/clean_stone.xpm",
+		"resources/textures/blocs/dirt.xpm",
+		"resources/textures/blocs/dirt_grass.xpm",
+		"resources/textures/blocs/dirt_snow.xpm",
+		"resources/textures/blocs/glace.xpm",
+		"resources/textures/blocs/gold.xpm",
+		"resources/textures/blocs/iron.xpm",
+		"resources/textures/blocs/jukebox.xpm",
+		"resources/textures/blocs/library.xpm",
+		"resources/textures/blocs/light.xpm",
+		"resources/textures/blocs/obsidienne.xpm",
+		"resources/textures/blocs/sand.xpm",
+		"resources/textures/blocs/stone.xpm",
+		"resources/textures/blocs/wood_a.xpm",
+		"resources/textures/blocs/wood_a_cut.xpm",
+		"resources/textures/blocs/wood_b.xpm",
+		"resources/textures/blocs/wood_b_cut.xpm",
+		"resources/textures/blocs/wood_c.xpm",
+		"resources/textures/blocs/wood_c_cut.xpm",
+		"resources/textures/blocs/wood_d.xpm",
+		"resources/textures/blocs/wood_d_cut.xpm",
+		"resources/textures/blocs/jukebox.xpm"};
+
+	return (paths[index]);
+}
+
 char	*samples_paths(unsigned int index)
 {
 	static char		*paths[SA_MAX] = {"resources/samples/ambiances/title_screen_intro.wav",
