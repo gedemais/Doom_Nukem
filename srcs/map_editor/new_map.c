@@ -51,12 +51,12 @@ static void	handle_events(t_env *env)
 	env->edit_env.buttons[MAPED_NM_BUTTON_CREATE].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC]
 		&& !(env->edit_env.error = create_me_map(env)))
-		env->edit_env.sub_context = MAPED_SC_CREATIVE;
+		switch_mecontext(env, MAPED_SC_CREATIVE);
 
 	ret = is_on_button(env->events.mouse_pos, env->edit_env.buttons[MAPED_NM_BUTTON_MAPED]);
 	env->edit_env.buttons[MAPED_NM_BUTTON_MAPED].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC])
-		env->edit_env.sub_context = MAPED_SC_MENU;
+		switch_mecontext(env, MAPED_SC_MENU);
 
 
 	if (env->edit_env.error == -1)

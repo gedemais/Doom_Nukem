@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 23:34:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 23:53:38 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
+static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[4])
 {
 	float		cu;
 	float		cv;
@@ -32,7 +32,7 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 	else
 		color = t.color;
 	env->cam.z_buffer[pos[2]] = txt->txt_w;
-	*(int*)(&env->mlx.img_data[pos[2] * 4]) = color;
+	*(int*)(&env->mlx.img_data[pos[3]]) = color;
 }
 
 static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simples[6])
@@ -65,12 +65,14 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 {
 	int		j;
 	int		px;
+	int		addr;
 	float	steps[6];
 	float	simples[6];
 
 	j = txt->ax;
 	txt->t_step = 1.0f / (txt->bx - txt->ax);
 	px = abs(i - 1) * WDT + j;
+	addr = px * 4;
 	simplify_interpolation(txt, steps, simples);
 	while (j < txt->bx)
 	{
@@ -81,7 +83,8 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 		}
 		txt->txt_w = simples[4] + simples[5];
 		update_expr(steps, simples);
-		write_pixel(env, txt, t, (int[3]){i, j, px});
+		write_pixel(env, txt, t, (int[4]){i, j, px, addr});
+		addr += 4;
 		px++;
 		j++;
 	}

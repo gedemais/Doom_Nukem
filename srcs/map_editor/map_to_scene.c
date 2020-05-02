@@ -83,6 +83,8 @@ int			create_block(t_env *env, t_map *scene, char type, int *pos)
 {
 	t_mesh	new;
 
+//	if (type == BTXT_NONE)
+//		return (0);
 	new.type = type;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
 	if (ft_inbounds(type, 0, 31) && create_cube(env, &new, type))

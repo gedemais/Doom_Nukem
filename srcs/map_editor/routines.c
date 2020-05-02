@@ -21,6 +21,7 @@ int	me_menu_to_creative(t_env *env)
 int	me_new_map_to_creative(t_env *env)
 {
 	(void)env;
+	mlx_mouse_hide();
 	return (0);
 }
 

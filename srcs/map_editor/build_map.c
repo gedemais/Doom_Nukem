@@ -57,7 +57,7 @@ static void	fill_map_bottom(t_ed_map *new)
 		z = 0;
 		while (z < new->depth)
 		{
-			new->map[x][y][z] = BTXT_OBSIDIENNE;
+			new->map[x][y][z] = BTXT_BRICK;
 			z++;
 		}
 		x++;
