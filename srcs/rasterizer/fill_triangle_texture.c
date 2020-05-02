@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/01 22:02:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 23:34:24 by gedemais         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[3])
 {
-	t_sprite	*sp;
 	float		cu;
 	float		cv;
 	int			color;
 
-	if (txt->txt_w > env->cam.z_buffer[pos[2]])
+	if (txt->txt_w <= env->cam.z_buffer[pos[2]])
+		return ;
+	if (t.sp >= 0 && t.textured)
 	{
-		if (t.sp >= 0 && t.textured)
-		{
-			sp = env->maps[env->scene].txts.c + (t.sp * sizeof(t_sprite));
-			cu = txt->txt_u / txt->txt_w;
-			cv = txt->txt_v / txt->txt_w;
-			color = sample_pixel(sp->img_data,
-			(t_point){sp->hgt, sp->wdt}, (t_vec2d){cu, cv, 1.0f});
-			color = shade_color(color, t.illum);
-		}
-		else
-			color = t.color;
-		env->cam.z_buffer[pos[2]] = txt->txt_w;
-		*(int*)(&env->mlx.img_data[pos[2] * 4]) = color;
+		cu = txt->txt_u / txt->txt_w;
+		cv = txt->txt_v / txt->txt_w;
+		color = sample_pixel(txt->texture->img_data,
+			(t_point){txt->texture->hgt, txt->texture->wdt},
+			(t_vec2d){cu, cv, 1.0f});
+		color = shade_color(color, t.illum);
 	}
+	else
+		color = t.color;
+	env->cam.z_buffer[pos[2]] = txt->txt_w;
+	*(int*)(&env->mlx.img_data[pos[2] * 4]) = color;
 }
 
 static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simples[6])
@@ -131,6 +129,11 @@ void		fill_triangle_texture(t_env *env, t_triangle t)
 
 	txt = (t_texturizer){};
 	starting_swap(&t);
+	if (t.voxel)
+		txt.texture = &env->edit_env.btxts[t.sp];
+	else
+		txt.texture = env->maps[env->scene].txts.c + (t.sp * sizeof(t_sprite));
+
 	compute_gradients(&txt, t, false);
 	if (txt.dy1)
 		flattop(env, &txt, t);

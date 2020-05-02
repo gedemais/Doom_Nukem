@@ -17,39 +17,10 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
 
-static void	real_move(t_env *env, bool keys[NB_KEYS])
-{
-	t_vec3d		f;
-	t_vec3d		r;
-
-	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
-	r = vec_fmult((t_vec3d){f.z, 0, -f.x, f.w}, 0.5f);
-
-	if (keys[KEY_W])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_S])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, 3.0f));
-	if (keys[KEY_A])
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
-	if (keys[KEY_D])
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
-}
-
 static void	handle_keys(t_env *env, t_events *e)
 {
-	static int move_i = 0;
-	t_vec3d dir;
-	t_vec3d pos;
-
-	dir = env->cam.stats.dir;
-	pos = env->cam.stats.pos;
-
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 0) 
+	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]) && move_i == 1) 
-		real_move(env, e->keys);
-	else if (e->keys[KEY_N])
-		move_i = (move_i == 0) ? 1 : 0;
 }
 
 static void	cmp_game_handle_events(t_env *env)
@@ -75,7 +46,7 @@ int		cmp_game(void *param)
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	if (rasterizer(env, env->scene))
+	if (rasterizer(env, &env->maps[env->scene]))
 		return (-1);
 	handle_weapons(env);
 	cmp_hud(env, &env->cmp_env);

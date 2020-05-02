@@ -31,6 +31,7 @@ struct	s_filler
 
 struct	s_texturizer
 {
+	t_sprite	*texture;
 	float		txt_u;
 	float		txt_v;
 	float		txt_w;
@@ -130,7 +131,7 @@ int				triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris, t_mesh *m);
 int				raster_triangles(t_env *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
-int				rasterizer(t_env *env, int scene);
+int				rasterizer(t_env *env, t_map *map);
 void			map_spawn(t_cam *cam, t_map *map);
 void			camera_aim(t_env *env);
 

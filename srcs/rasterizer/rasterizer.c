@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/25 00:38:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 23:11:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*rasthreader(void *param)
 	{
 		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
 		fill_triangle_texture((t_env*)thr->env, *t);
-		//draw_triangle(&env->mlx, *t);
+//		draw_triangle(&env->mlx, *t);
 		thr->index++;
 	}
 	thr->done = true;
@@ -50,7 +50,7 @@ void	monothread_raster(void *e)
 	rasthreader(&thread);
 }
 
-int		rasterizer(t_env *env, int scene)
+int		rasterizer(t_env *env, t_map *map)
 {
 	t_mesh		*m;
 	t_triangle	*t;
@@ -58,13 +58,15 @@ int		rasterizer(t_env *env, int scene)
 	int			j;
 
 	i = -1;
-	map_spawn(&env->cam, &env->maps[scene]);
+	map_spawn(&env->cam, map);
 	compute_view_matrice(env);
-	while (++i < env->maps[scene].nmesh)
+	while (++i < map->nmesh)
 	{
 		j = 0;
-		if (!(m = dyacc(&env->maps[scene].meshs, i)))
+		if (!(m = dyacc(&map->meshs, i)))
 			return (-1);
+		if (m->type == BTXT_NONE)
+			continue ;
 		compute_rotation_matrices(env, *m);
 		while (j < m->tris.nb_cells)
 		{
@@ -73,7 +75,6 @@ int		rasterizer(t_env *env, int scene)
 			j++;
 		}
 	}
-	env->scene = scene;
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);
 	clear_dynarray(&env->cam.to_clip);

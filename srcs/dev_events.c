@@ -59,7 +59,7 @@ int		mouse_position_dev(int x, int y, void *param)
 
 int		render_dev(void *param)
 {
-	t_env		*env;
+	t_env			*env;
 	static float	av = 0.0f;
 	static int		it = 0;
 
@@ -73,7 +73,7 @@ int		render_dev(void *param)
 	clear_screen_buffers(env);
 	camera_aim(env);
 	physic_engine(env);
-	if (rasterizer(env, env->scene))
+	if (rasterizer(env, &env->maps[env->scene]))
 		exit(EXIT_FAILURE);
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

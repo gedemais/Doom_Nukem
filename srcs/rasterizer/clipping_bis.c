@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 00:56:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/12 14:47:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 21:57:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			refactor_triangle(t_clipper *clip, t_triangle out[2],
 	{
 		refactor_smaller(clip, out, planes[0], planes[1]);
 		out[0].textured = t.textured;
+		out[0].voxel = t.voxel;
 		out[0].color = t.color;
 		out[0].normal = t.normal;
 		out[0].sp = t.sp;
@@ -75,12 +76,14 @@ int			refactor_triangle(t_clipper *clip, t_triangle out[2],
 	{
 		refactor_quad(clip, out, planes[0], planes[1]);
 		out[0].textured = t.textured;
+		out[0].voxel = t.voxel;
 		out[0].normal = t.normal;
 		out[0].color = t.color;
 		out[0].mesh = t.mesh;
 		out[0].sp = t.sp;
 
 		out[1].textured = t.textured;
+		out[1].voxel = t.voxel;
 		out[1].normal = t.normal;
 		out[1].color = t.color;
 		out[1].mesh = t.mesh;

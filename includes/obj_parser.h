@@ -93,6 +93,7 @@ struct	s_triangle
 	int			color;
 	int			sp;
 	bool		textured;
+	bool		voxel;
 };
 
 struct	s_mesh
@@ -102,6 +103,7 @@ struct	s_mesh
 	t_dynarray	deps;
 	t_dynarray	faces;
 	t_corp		corp;
+	int			m_pos[3];
 	char		*name;
 	float		yaw;
 	float		pitch;
@@ -109,6 +111,7 @@ struct	s_mesh
 	int			index;
 	bool		textured;
 	bool		phy;
+	char		type;
 };
 
 struct	s_map

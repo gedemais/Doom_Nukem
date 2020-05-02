@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/09 15:04:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/02 21:58:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int	project_triangle(t_env *env, t_triangle *t, t_triangle clipped, t_dyn
 
 	t->color = clipped.color;
 	t->textured = clipped.textured;
+	t->voxel = clipped.voxel;
 	t->sp = clipped.sp;
 
 	if (push_dynarray(tris, t, false))
