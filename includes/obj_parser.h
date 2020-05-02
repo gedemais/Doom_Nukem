@@ -83,15 +83,15 @@ struct	s_face
 
 struct	s_triangle
 {
-	bool		textured;
-	float		illum;
-	t_vec3d		normal;
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
+	t_vec3d		normal;
+	t_mesh		*mesh;
+	float		illum;
+	float		alpha;
 	int			color;
 	int			sp;
-	float		alpha;
-	t_mesh		*mesh;
+	bool		textured;
 };
 
 struct	s_mesh
@@ -99,16 +99,15 @@ struct	s_mesh
 	t_dynarray	tris;
 	t_dynarray	txts;
 	t_dynarray	deps;
+	t_dynarray	faces;
 	t_corp		corp;
+	char		*name;
 	float		yaw;
 	float		pitch;
 	float		roll;
+	int			index;
 	bool		textured;
 	bool		phy;
-	int			nb_tris;
-	char		*name;
-	int			index;
-	t_dynarray	faces;
 };
 
 struct	s_map

@@ -86,8 +86,6 @@ int		mapper_speed(t_env *env, t_mesh *m, char *tok)
 		ft_putendl_fd("Invalid mesh speed's vector", 2);
 		return (-1);
 	}
-	if (!strcmp(m->name, "Cube"))
-		print_vec(speed);
 	m->corp.v = speed;
 	return (0);
 }

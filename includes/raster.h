@@ -79,8 +79,8 @@ struct	s_clipper
 struct	s_rasthread
 {
 	void		*env;
-	pthread_t	thread;
 	t_dynarray	*tris;
+	pthread_t	thread;
 	int			start;
 	int			end;
 	bool		done;
