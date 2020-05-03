@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 21:24:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/04 00:19:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[4])
+static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4])
 {
 	float		cu;
 	float		cv;
@@ -20,21 +20,21 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[4])
 
 	if (txt->txt_w < env->cam.z_buffer[pos[2]])
 		return ;
-	if (t.voxel)
+	if (t->voxel)
 		if (pos[0] == env->data.half_hgt)
 			if (pos[1] == env->data.half_wdt)
-				env->mid = t;
-	if (t.sp >= 0 && t.textured)
+				env->mid = *t;
+	if (t->sp >= 0 && t->textured)
 	{
 		cu = txt->txt_u / txt->txt_w;
 		cv = txt->txt_v / txt->txt_w;
 		color = sample_pixel(txt->texture->img_data,
 			(t_point){txt->texture->hgt, txt->texture->wdt},
 			(t_vec2d){cu, cv, 1.0f});
-		color = shade_color(color, t.illum);
+		color = shade_color(color, t->illum);
 	}
 	else
-		color = t.color;
+		color = t->color;
 	env->cam.z_buffer[pos[2]] = txt->txt_w;
 	*(int*)(&env->mlx.img_data[pos[3]]) = color;
 }
@@ -87,7 +87,7 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 		}
 		txt->txt_w = simples[4] + simples[5];
 		update_expr(steps, simples);
-		write_pixel(env, txt, t, (int[4]){i, j, px, addr});
+		write_pixel(env, txt, &t, (int[4]){i, j, px, addr});
 		addr += 4;
 		px++;
 		j++;
