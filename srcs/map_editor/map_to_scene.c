@@ -72,7 +72,7 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 		t.textured = true;
 		t.voxel = true;
 		t.sp = new->type;
-		t.mesh = new;
+//		t.mesh = new;
 		if (push_dynarray(&new->tris, &t, false))
 			return (-1);
 		i++;

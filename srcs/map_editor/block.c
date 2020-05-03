@@ -42,6 +42,7 @@ int			put_block(t_env *env)
 
 	i = 0;
 	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
+	//printf("clic on %d %d %d\n", env->mid.mesh->m_pos[0], env->mid.mesh->m_pos[1], env->mid.mesh->m_pos[2]);
 	replace_with_face(pos, env->mid.face_i);
 	new = get_blockindex(&env->edit_env.map, pos);
 	new->type = BTXT_IRON;
@@ -49,6 +50,7 @@ int			put_block(t_env *env)
 	{
 		t = dyacc(&new->tris, i);
 		t->sp = new->type;
+		t->mesh = new;
 		i++;
 	}
 	return (0);
