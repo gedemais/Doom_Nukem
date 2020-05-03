@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 15:18:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/04 00:11:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	init_fields(t_env *env)
 	ttf->fields[0].o = (t_point){140, 350};
 	ttf->fields[1].o = (t_point){440, 350};
 	ttf->fields[2].o = (t_point){740, 350};
-	ttf->fields[3].o = (t_point){420, 200};
+	ttf->fields[3].o = (t_point){440, 200};
 
 	if (!(ttf->fields[0].name = ft_strdup("Width"))
 		|| !(ttf->fields[1].name = ft_strdup("Height"))

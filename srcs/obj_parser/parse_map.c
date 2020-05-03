@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/01 19:04:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/04 00:10:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static int	load_map_data(t_map *map)
 		if (!(m = dyacc(&map->meshs, i))
 			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells)))
 			return (-1);
+		m->type = 1;
 		while (++j < m->faces.nb_cells)
 		{
 			if (!(f = dyacc(&m->faces, j)) || (f->x - 1 >= map->pool.nb_cells
