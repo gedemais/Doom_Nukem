@@ -59,23 +59,6 @@ static int	get_map_name(t_env *env)
 	return (0);
 }
 
-static int	get_map_scale(t_env *env)
-{
-	char			*input;
-	long long int	nb;
-
-	input = env->ttfs.fields[FIELD_NM_CUBE_SIZE].str.c;
-	if (!input || !input[0])
-		return (CM_ERR_INVALID_SCALE);
-	if (check_digits(input))
-		return (CM_ERR_INVALID_SCALE);
-	nb = ft_atoi(input);
-	if (!ft_inbounds(nb, 1, 100))
-		return (CM_ERR_INVALID_SCALE);
-	env->edit_env.new_map.scale = (int)nb;
-	return (0);
-}
-
 int			create_me_map(t_env *env)
 {
 	int		errcode;
@@ -83,8 +66,6 @@ int			create_me_map(t_env *env)
 	if ((errcode = get_dimensions(env)))
 		return (errcode);
 	if ((errcode = get_map_name(env)))
-		return (errcode);
-	if ((errcode = get_map_scale(env)))
 		return (errcode);
 	if (build_map(env, &env->edit_env.new_map))
 		return (-1);

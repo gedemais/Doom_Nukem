@@ -29,3 +29,10 @@ else
 	echo "libpng missing, installing it with brew..."
 	brew install libpng && brew link libpng
 fi
+
+if brew ls --versions bzip2 > /dev/null; then
+	echo "bzip2 found"
+else
+	echo "bzip2 missing, installing it with brew..."
+	brew install bzip2 && brew link bzip2
+fi

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 01:23:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 18:42:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle t, int pos[4])
 
 	if (txt->txt_w < env->cam.z_buffer[pos[2]])
 		return ;
+	if (t.voxel)
+		if (pos[0] == env->data.half_hgt)
+			if (pos[1] == env->data.half_wdt)
+				env->mid = t;
 	if (t.sp >= 0 && t.textured)
 	{
 		cu = txt->txt_u / txt->txt_w;

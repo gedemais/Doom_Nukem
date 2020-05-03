@@ -15,7 +15,6 @@ enum	e_create_map_error_id
 {
 	CM_ERR_NONE,
 	CM_ERR_TOO_MANY_CHUNKS,
-	CM_ERR_INVALID_SCALE,
 	CM_ERR_INVALID_DIM,
 	CM_ERR_INVALID_NAME,
 	CM_ERR_MAX
@@ -30,15 +29,26 @@ enum	e_maped_menu_button_id
 	MAPED_MENU_BUTTON_MAX
 };
 
+enum	e_bloc_faces_id
+{
+	FACE_NORD,
+	FACE_SUD,
+	FACE_EST,
+	FACE_OUEST,
+	FACE_UP,
+	FACE_BOTTOM,
+	FACE_MAX
+};
+
 enum	e_blocs_textures_ids
 {
 	BTXT_NONE,
-	BTXT_DARK_BRICK,
 	BTXT_BRICK,
+	BTXT_DARK_BRICK,
 	BTXT_CLEAN_STONE,
+	BTXT_DIRT,
 	BTXT_DIRT_GRASS,
 	BTXT_DIRT_SNOW,
-	BTXT_DIRT,
 	BTXT_ICE,
 	BTXT_GOLD,
 	BTXT_IRON,
@@ -47,14 +57,14 @@ enum	e_blocs_textures_ids
 	BTXT_OBSIDIENNE,
 	BTXT_SAND,
 	BTXT_STONE,
-	BTXT_WOOD_A_CUT,
 	BTXT_WOOD_A,
-	BTXT_WOOD_B_CUT,
+	BTXT_WOOD_A_CUT,
 	BTXT_WOOD_B,
-	BTXT_WOOD_C_CUT,
+	BTXT_WOOD_B_CUT,
 	BTXT_WOOD_C,
-	BTXT_WOOD_D_CUT,
+	BTXT_WOOD_C_CUT,
 	BTXT_WOOD_D,
+	BTXT_WOOD_D_CUT,
 	BTXT_JUKEBOX,
 	BTXT_MAX
 };
@@ -101,7 +111,6 @@ struct				s_edit_env
 int					setup_medit(t_env *env);
 char				*blocs_txt_paths(unsigned int index);
 
-
 int					key_press_maped(int key, void *param);
 int					key_release_maped(int key, void *param);
 int					mouse_press_maped(int button, int x, int y, void *param);
@@ -130,6 +139,9 @@ int					create_me_map(t_env *env);
 int					build_map(t_env *env, t_ed_map *new);
 int					map_to_scene(t_env *env);
 int					free_map_matrice(char ***map, int width, int height);
+
+// Events
+int					put_block(t_env *env);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);

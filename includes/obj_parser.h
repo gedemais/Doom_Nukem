@@ -92,6 +92,7 @@ struct	s_triangle
 	float		alpha;
 	int			color;
 	int			sp;
+	char		face_i;
 	bool		textured;
 	bool		voxel;
 };

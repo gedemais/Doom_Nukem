@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 01:53:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 15:18:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,18 @@ static int	init_fields(t_env *env)
 	ttf->fields[0].o = (t_point){140, 350};
 	ttf->fields[1].o = (t_point){440, 350};
 	ttf->fields[2].o = (t_point){740, 350};
-	ttf->fields[3].o = (t_point){540, 200};
-	ttf->fields[4].o = (t_point){300, 200};
+	ttf->fields[3].o = (t_point){420, 200};
 
 	if (!(ttf->fields[0].name = ft_strdup("Width"))
 		|| !(ttf->fields[1].name = ft_strdup("Height"))
 		|| !(ttf->fields[2].name = ft_strdup("Depth"))
-		|| !(ttf->fields[3].name = ft_strdup("Scale"))
-		|| !(ttf->fields[4].name = ft_strdup("Name")))
+		|| !(ttf->fields[3].name = ft_strdup("Name")))
 		return (-1);
 
 	if (init_dynarray(&ttf->fields[0].str, sizeof(char), 0)
 		|| init_dynarray(&ttf->fields[1].str, sizeof(char), 0)
 		|| init_dynarray(&ttf->fields[2].str, sizeof(char), 0)
-		|| init_dynarray(&ttf->fields[3].str, sizeof(char), 0)
-		|| init_dynarray(&ttf->fields[4].str, sizeof(char), 0))
+		|| init_dynarray(&ttf->fields[3].str, sizeof(char), 0))
 		return (-1);
 	return (0);
 }
@@ -91,8 +88,8 @@ static int	load_blocs_textures(t_env *env)
 	unsigned int	i;
 	t_mlx			*mlx;
 
-	i = 0;
-		mlx = &env->mlx;
+	i = 1;
+	mlx = &env->mlx;
 	while (i < BTXT_MAX)
 	{
 		if (load_texture(mlx, blocs_txt_paths(i), &env->edit_env.btxts[i]))

@@ -1,12 +1,9 @@
 Se doc sur le moteur physique
 
-Rajouter un bouton "Map_Editor" dans le menu new_map
+Virer fill_triangle_unit.c
 
 exit_malloc() a tous les mallocs / surcouches qui appellent malloc
 
-
-Modifier read_file pour qu'il mmap le fichier
-	
 	blender:
 		Modelisation campagne | Moguy
 		Monstres | gneheheeee

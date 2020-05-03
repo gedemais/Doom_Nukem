@@ -63,7 +63,7 @@ char	*sprites_paths(unsigned int index)
 
 char	*blocs_txt_paths(unsigned int index)
 {
-	static char		*paths[BTXT_MAX] = {
+	static char		*paths[BTXT_MAX] = {"",
 		"resources/textures/blocs/brique.xpm",
 		"resources/textures/blocs/brique_dark.xpm",
 		"resources/textures/blocs/clean_stone.xpm",
@@ -73,7 +73,6 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/glace.xpm",
 		"resources/textures/blocs/gold.xpm",
 		"resources/textures/blocs/iron.xpm",
-		"resources/textures/blocs/jukebox.xpm",
 		"resources/textures/blocs/library.xpm",
 		"resources/textures/blocs/light.xpm",
 		"resources/textures/blocs/obsidienne.xpm",

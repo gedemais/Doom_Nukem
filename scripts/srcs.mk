@@ -26,6 +26,7 @@ SRCS_NAME =	main.c\
 			custom_mode/events.c\
 			\
 			map_editor/build_map.c\
+			map_editor/block.c\
 			map_editor/create_map.c\
 			map_editor/creative.c\
 			map_editor/setup_me.c\

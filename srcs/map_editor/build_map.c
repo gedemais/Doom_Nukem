@@ -47,17 +47,15 @@ static char		***init_map_matrice(int w, int h, int d)
 static void	fill_map_bottom(t_ed_map *new)
 {
 	int		x;
-	int		y;
 	int		z;
 
 	x = 0;
-	y = new->height - 1;
 	while (x < new->width)
 	{
 		z = 0;
 		while (z < new->depth)
 		{
-			new->map[x][y][z] = BTXT_BRICK;
+			new->map[x][0][z] = BTXT_OBSIDIENNE;
 			z++;
 		}
 		x++;

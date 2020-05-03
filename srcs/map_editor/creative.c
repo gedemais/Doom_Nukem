@@ -21,6 +21,11 @@ static void	handle_keys(t_env *env, t_events *e)
 {
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
+
+	if (e->buttons[BUTTON_LCLIC] && env->mid.mesh)
+		put_block(env);
+//	else if (e->buttons[BUTTON_RCLIC])
+//		del_block(env);
 }
 
 int		maped_creative(t_env *env)

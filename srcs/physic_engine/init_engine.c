@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/25 01:56:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 17:07:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		init_physic_engine(t_env *env)
 	int			i;
 	int			j;
 	int			nb_m;
-	static int x = 0;
 	
 	i = 0;
 	nb_m = -1;
@@ -77,8 +76,5 @@ int		init_physic_engine(t_env *env)
 		i++;
 	}
 	init_physic_engine2(env);
-	if (++x > 5)
-		exit(EXIT_SUCCESS);
-
 	return (0);
 }

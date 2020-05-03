@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:53:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/29 17:13:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 14:27:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	map_editor_to_ts(t_env *env)
 	env->ttfs.fields[1].rendered = false;
 	env->ttfs.fields[2].rendered = false;
 	env->ttfs.fields[3].rendered = false;
-	env->ttfs.fields[4].rendered = false;
 
 	mlx_mouse_show(); // ?
 }

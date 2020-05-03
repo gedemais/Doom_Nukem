@@ -31,7 +31,6 @@ static void	display_new_map_error(t_env *env, int error)
 	t_ttf_config			*conf;
 	static char				*err_msg[CM_ERR_MAX] = {"",
 		"Too many chunks. width * height * depth must be <= 200000",
-		"Invalid / empty scale param. Scale should an integer from 1 to 100",
 		"Invalid / empty dimensions param. Should be an integer",
 		"Invalid / empty name"};
 

@@ -1,18 +1,16 @@
 #include "main.h"
 
-static void	translate_triangle(t_env *env, t_mesh *new, t_triangle *t)
+static void	translate_triangle(t_mesh *new, t_triangle *t)
 {
 	int		i;
-	int		scale;
 
 	i = 0;
-	scale = env->edit_env.new_map.scale / 50;
 	while (i < 3)
 	{
 		// modifier la taille des cubes
-		t->points[i].x += new->m_pos[0] * scale;
-		t->points[i].y += new->m_pos[1] * scale;
-		t->points[i].z += new->m_pos[2] * scale;
+		t->points[i].x += new->m_pos[0] * 2;
+		t->points[i].y += new->m_pos[1] * 2;
+		t->points[i].z += new->m_pos[2] * 2;
 		i++;
 	}
 }
@@ -49,6 +47,7 @@ static int	get_type(t_env *env, t_mesh *new, char type)
 	(void)new;
 	(void)type;
 	ret = (int)type % 32;
+	printf("%d\n", ret);
 //	if (env->context == C_CUSTOM)
 //		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
 //			ret = BTXT_NONE;
@@ -62,30 +61,44 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 	int			i;
 
 	i = 0;
+	new->type = get_type(env, new, type);
 	mesh = dyacc(&env->maps[SCENE_CUBE].meshs, 0);
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);
 	while (i < mesh->tris.nb_cells)
 	{
 		ft_memcpy(&t, dyacc(&mesh->tris, i), sizeof(t_triangle));
-		translate_triangle(env, new, &t);
-		t.sp = get_type(env, new, type);
+		translate_triangle(new, &t);
 		t.textured = true;
 		t.voxel = true;
+		t.sp = new->type;
+		t.mesh = new;
 		if (push_dynarray(&new->tris, &t, false))
 			return (-1);
 		i++;
 	}
+	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_NORD;
+	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_NORD;
+	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_OUEST;
+	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_OUEST;
+	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_UP;
+	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_UP;
+	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
 	return (0);
 }
 
-int			create_block(t_env *env, t_map *scene, char type, int *pos)
+static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 {
 	t_mesh	new;
 
-//	if (type == BTXT_NONE)
-//		return (0);
-	new.type = type;
+	new.pitch = 0;
+	new.yaw = 0;
+	new.roll = 0;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
 	if (ft_inbounds(type, 0, 31) && create_cube(env, &new, type))
 		return (-1);
@@ -99,6 +112,7 @@ int			create_block(t_env *env, t_map *scene, char type, int *pos)
 		return (create_slope_est(env, &new, type));*/
 	if (push_dynarray(&scene->meshs, &new, false))
 		return (-1);
+	scene->nmesh = scene->meshs.nb_cells;
 	return (0);
 }
 
@@ -128,6 +142,5 @@ int			map_to_scene(t_env *env)
 		}
 	}
 	scene->spawn = (t_vec3d){0, 0, 0, 0};
-	scene->nmesh = scene->meshs.nb_cells;
 	return (0);
 }

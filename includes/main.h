@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 01:28:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/03 17:55:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ struct			s_env
 	t_events	events;
 	t_sound		sound;
 	t_sprite	*sprites;
+	t_triangle	mid;
 	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_physics	phy_env;
