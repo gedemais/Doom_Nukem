@@ -25,13 +25,16 @@ void	init_matrices(t_cam *cam)
 		ft_memset(&cam->cry_m[i][0], 0, sizeof(float) * 4);
 		i++;
 	}
-	for (int i = 0; i < 4; i++){
+	i = 0;
+	while (i < 4)
+	{
 		cam->p_m[i][i] = 1.0f;
 		cam->rx_m[i][i] = 1.0f;
 		cam->ry_m[i][i] = 1.0f;
 		cam->rz_m[i][i] = 1.0f;
 		cam->crx_m[i][i] = 1.0f;
 		cam->cry_m[i][i] = 1.0f;
-	};
+		i++;
+	}
 	init_projection_matrix(cam);
 }

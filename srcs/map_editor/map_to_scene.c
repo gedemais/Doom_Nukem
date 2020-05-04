@@ -159,13 +159,6 @@ int			map_to_scene(t_env *env)
 					return (-1);
 		}
 	}
-	t_mesh		*m;
-	t_triangle	*t;
-	for (int i = 0; i < scene->nmesh; i++)
-	{
-		m = dyacc(&scene->meshs, i);
-		t = dyacc(&m->tris, 0);
-	}
 	scene->spawn = (t_vec3d){0, 0, 0, 0};
 	return (0);
 }

@@ -3,9 +3,16 @@
 
 # define MAX_CHUNKS 200000
 
+# define MAPED_WALK_SPEED 0.07f
+
 # define CROSSHAIR_SIZE 16
 # define CROSSHAIR_THICKNESS 2
 # define CROSSHAIR_COLOR 0xffffff
+# define MAP_MAGIC_NUMBER 0x12ff89
+# define PUT_BLOCK_DELAY 15
+
+# define MAX_MAP_PATH_LEN 128
+# define MAPED_SAVE_PATH "./resources/custom_maps/"
 
 enum	e_maped_sc_id
 {
@@ -91,8 +98,8 @@ struct				s_ed_map
 {
 	t_sprite	*textures[256];
 	char		***map;
+	char		*flat;
 	char		*name;
-	int			scale;
 	int			width;
 	int			height;
 	int			depth;
@@ -143,6 +150,8 @@ int					create_me_map(t_env *env);
 int					build_map(t_env *env, t_ed_map *new);
 int					map_to_scene(t_env *env);
 void				free_matrice(t_ed_map *env);
+int					export_maped_map(t_edit_env *env);
+int					flat_map(t_ed_map *env, int *len);
 
 // Events
 void				maped_crosshair(t_env *env);

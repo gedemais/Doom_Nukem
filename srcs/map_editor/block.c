@@ -97,7 +97,6 @@ int			put_block(t_env *env)
 
 	i = 0;
 	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
-	printf("Face %d\n", env->mid.face_i);
 	if (replace_with_face(env, pos, env->mid.face_i))
 		return (0);
 	new = get_blockindex(&env->edit_env.map, pos, &m_index);

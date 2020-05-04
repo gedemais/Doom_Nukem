@@ -27,12 +27,15 @@ SRCS_NAME =	main.c\
 			\
 			map_editor/build_map.c\
 			map_editor/block.c\
+			map_editor/convert_matrice.c\
 			map_editor/crosshair.c\
 			map_editor/create_map.c\
 			map_editor/creative.c\
+			map_editor/export.c\
 			map_editor/setup_me.c\
 			map_editor/render.c\
 			map_editor/events.c\
+			map_editor/import.c\
 			map_editor/menu.c\
 			map_editor/map_to_scene.c\
 			map_editor/new_map.c\
@@ -52,7 +55,6 @@ SRCS_NAME =	main.c\
 			obj_parser/parse_map.c\
 			obj_parser/parse_mtl.c\
 			obj_parser/mtl_lines_fts.c\
-			obj_parser/read_file.c\
 			obj_parser/states.c\
 			obj_parser/tools.c\
 			\
