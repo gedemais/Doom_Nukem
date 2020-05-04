@@ -1,47 +1,49 @@
 #include "main.h"
 
-int				free_map_matrice(char ***map, int width, int height)
+void			free_matrice(t_ed_map *env)
 {
-    int        i;
-    int        j;
+	int		i;
+	int		j;
 
-    if (map == NULL)
-        return (-1);
-    i = -1;
-    while (*map && ++i < width)
-    {
-        j = -1;
-        while (**map && ++j < height)
-            ft_strdel(&map[i][j]);
-        ft_strdel(map[i]);
-    }
-    free(map);
-    map = NULL;
-    return (0);
+	if (env->map == NULL)
+		return ;
+	i = -1;
+	while (*env->map && ++i < env->width)
+	{
+		j = -1;
+		while (**env->map && ++j < env->height)
+			ft_strdel(&env->map[i][j]);
+		ft_strdel(env->map[i]);
+	}
+	free(env->map);
+	env->map = NULL;
 }
 
-static char		***init_map_matrice(int w, int h, int d)
+static int			init_matrice(t_ed_map *env)
 {
-	char	***map;
 	int		x;
 	int		y;
+	int     error;
 
-	if (!(map = (char ***)ft_memalloc(sizeof(char **) * w)))
-		exit(1);
+	error = 0;
+	if (!(env->map = (char ***)ft_memalloc(sizeof(char **) * env->width)))
+		error = 1;
 	x = -1;
-	while (++x < w)
+	while (error == 0 && ++x < env->width)
 	{
-		if (!(map[x] = (char **)ft_memalloc(sizeof(char *) * h)))
-			exit(1);
+		if (!(env->map[x] = (char **)ft_memalloc(sizeof(char *) * env->height)))
+			error = 1;
 		y = -1;
-		while (++y < h)
+		while (error == 0 && ++y < env->height)
 		{
-			if (!(map[x][y] = (char *)ft_memalloc(sizeof(char) * d)))
-				exit(1);
-			ft_memset(map[x][y], BTXT_NONE, sizeof(char) * d);
+			if (!(env->map[x][y] = (char *)ft_memalloc(sizeof(char)
+							* env->depth)))
+				error = 1;
 		}
 	}
-	return (map);
+	if (error == 1)
+		free_matrice(env);
+	return (error == 1 ? 0 : 1);
 }
 
 static void	fill_map_bottom(t_ed_map *new)
@@ -64,7 +66,7 @@ static void	fill_map_bottom(t_ed_map *new)
 
 int			build_map(t_env *env, t_ed_map *new)
 {
-	if (!(new->map = init_map_matrice(new->width, new->height, new->depth)))
+	if (!init_matrice(new))
 		return (-1);
 	fill_map_bottom(new);
 	if (map_to_scene(env))

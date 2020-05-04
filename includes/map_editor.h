@@ -3,6 +3,10 @@
 
 # define MAX_CHUNKS 200000
 
+# define CROSSHAIR_SIZE 16
+# define CROSSHAIR_THICKNESS 2
+# define CROSSHAIR_COLOR 0xffffff
+
 enum	e_maped_sc_id
 {
 	MAPED_SC_MENU,
@@ -138,10 +142,14 @@ void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 int					create_me_map(t_env *env);
 int					build_map(t_env *env, t_ed_map *new);
 int					map_to_scene(t_env *env);
-int					free_map_matrice(char ***map, int width, int height);
+void				free_matrice(t_ed_map *env);
 
 // Events
+void				maped_crosshair(t_env *env);
 int					put_block(t_env *env);
+int					del_block(t_env *env);
+void				del_door(t_env *env);
+void				attribute_mesh(t_map *scene, int index);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);

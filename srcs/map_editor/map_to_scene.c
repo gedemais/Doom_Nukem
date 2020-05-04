@@ -72,30 +72,47 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 		t.textured = true;
 		t.voxel = true;
 		t.sp = new->type;
-//		t.mesh = new;
 		if (push_dynarray(&new->tris, &t, false))
 			return (-1);
 		i++;
 	}
-	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_EST;
-	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
+	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
+	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_BOTTOM;
 	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_OUEST;
 	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_OUEST;
 	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_UP;
 	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_EST;
 	return (0);
+}
+
+void	attribute_mesh(t_map *scene, int index)
+{
+	t_mesh		*mesh;
+	t_triangle	*t;
+	int		i;
+
+	i = 0;
+	mesh = dyacc(&scene->meshs, index);
+	while (i < mesh->tris.nb_cells)
+	{
+		t = dyacc(&mesh->tris, i);
+		t->mesh = mesh;
+		i++;
+	}
 }
 
 static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 {
 	t_mesh	new;
+	int		i;
 
+	i = 0;
 	new.pitch = 0;
 	new.yaw = 0;
 	new.roll = 0;
@@ -112,6 +129,7 @@ static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 		return (create_slope_est(env, &new, type));*/
 	if (push_dynarray(&scene->meshs, &new, false))
 		return (-1);
+	attribute_mesh(scene, scene->nmesh);
 	scene->nmesh = scene->meshs.nb_cells;
 	return (0);
 }
@@ -127,7 +145,7 @@ int			map_to_scene(t_env *env)
 	x = -1;
 	edit_env = &env->edit_env;
 	scene = &edit_env->map;
-	if (init_dynarray(&scene->meshs, sizeof(t_mesh), 0))
+	if (init_dynarray(&scene->meshs, sizeof(t_mesh), MAX_CHUNKS))
 		return (-1);
 	while (++x < edit_env->new_map.width)
 	{
@@ -140,6 +158,13 @@ int			map_to_scene(t_env *env)
 						(int[3]){x, y, z}))
 					return (-1);
 		}
+	}
+	t_mesh		*m;
+	t_triangle	*t;
+	for (int i = 0; i < scene->nmesh; i++)
+	{
+		m = dyacc(&scene->meshs, i);
+		t = dyacc(&m->tris, 0);
 	}
 	scene->spawn = (t_vec3d){0, 0, 0, 0};
 	return (0);

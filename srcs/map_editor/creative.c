@@ -22,10 +22,13 @@ static void	handle_keys(t_env *env, t_events *e)
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
 
+	if (e->keys[KEY_E])
+		del_door(env);
+
 	if (e->buttons[BUTTON_LCLIC] && env->mid.mesh)
 		put_block(env);
-//	else if (e->buttons[BUTTON_RCLIC])
-//		del_block(env);
+	else if (e->buttons[BUTTON_RCLIC])
+		del_block(env);
 }
 
 int		maped_creative(t_env *env)
@@ -35,6 +38,7 @@ int		maped_creative(t_env *env)
 	camera_aim(env);
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
+	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }
