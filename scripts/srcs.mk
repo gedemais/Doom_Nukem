@@ -68,7 +68,6 @@ SRCS_NAME =	main.c\
 			\
 			rasterizer/clipping.c\
 			rasterizer/clipping_bis.c\
-			rasterizer/fill_triangle_unit.c\
 			rasterizer/fill_triangle_texture.c\
 			rasterizer/fill_triangle_texture_bis.c\
 			rasterizer/rasterizer.c\

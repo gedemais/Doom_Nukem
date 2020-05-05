@@ -126,7 +126,7 @@ struct				s_ed_map
 struct				s_edit_env
 {
 	t_env			*env;
-	t_cube_pallet	*pallet;
+	t_cube_pallet	pallet[BTXT_MAX];
 	t_sprite		btxts[BTXT_MAX];
 	t_button		buttons[MAPED_MENU_BUTTON_MAX];
 	t_point			pos[MAPED_MENU_BUTTON_MAX];

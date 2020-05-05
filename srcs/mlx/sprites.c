@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 15:49:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:41:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		crop_sprite(t_env *env, t_sprite base, t_sprite *crop, t_vec2d csize[2])
 	y = (csize[0].v * base.hgt);
 	bounds[0] = (csize[1].u * base.wdt);
 	bounds[1] = (csize[1].v * base.hgt);
+	printf("allocating %d x %d sprite\n", bounds[0] - xstart, bounds[1] - y);
 	if (allocate_mlx_image(env, crop, bounds[0] - xstart, bounds[1] - y))
 		return (-1);
 	while (y < bounds[1])
@@ -44,8 +45,9 @@ int		crop_sprite(t_env *env, t_sprite base, t_sprite *crop, t_vec2d csize[2])
 		x = xstart;
 		while (x < bounds[0])
 		{
-			color = base.img_data[(abs(y - 1) * base.wdt + x) * 4];
-			crop->img_data[z] = color;
+			//color = base.img_data[(abs(y - 1) * base.wdt + x) * 4];
+			color = 0xffffff;
+			ft_memcpy(&crop->img_data[z], &color, sizeof(int));
 			x++;
 			z += 4;
 		}

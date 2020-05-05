@@ -169,7 +169,6 @@ void			compute_gradients(t_texturizer *txt, t_triangle t, bool fbot);
 void			set_line_bounds_top(t_texturizer *txt, t_triangle t, float cur);
 void			set_line_bounds_bot(t_texturizer *t, t_triangle e, float c[2]);
 void			fill_triangle_texture(t_env *env, t_triangle t);
-void			fill_triangle_unit(t_env *env, t_triangle t);
 
 /*
 ** Tools

@@ -57,7 +57,7 @@ int		maped_creative(t_env *env)
 	camera_aim(env);
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
-	//render_pallet(env);
+	render_pallet(env);
 	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

@@ -28,7 +28,7 @@ static void	set_renderable(t_cube_pallet *p)
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
-static void	draw_pallet_box(t_env *env, t_cube_pallet *pallet)
+static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX])
 {
 	unsigned int	i;
 	unsigned int	nb;
@@ -59,15 +59,14 @@ static void	draw_pallet_box(t_env *env, t_cube_pallet *pallet)
 
 int			render_pallet(t_env *env)
 {
-	t_cube_pallet	*pallet;
 	unsigned int	i;
 
 	i = 0;
-	pallet = env->edit_env.pallet;
-	draw_pallet_box(env, pallet);
+	draw_pallet_box(env, env->edit_env.pallet);
 	while (i < BTXT_MAX - 1)
 	{
-		map_sprite(env->mlx.img_data, pallet[i].sprite, (t_point){400, 400});
+		printf("mapping %d x %d\n", env->edit_env.pallet[i].sprite.wdt, env->edit_env.pallet[i].sprite.hgt);
+		map_sprite(env->mlx.img_data, env->edit_env.pallet[i].sprite, (t_point){400, 400});
 		i++;
 	}
 	return (0);
@@ -77,14 +76,10 @@ int			init_cubes_pallet(t_env *env, t_edit_env *edit_env)
 {
 	t_vec2d			crop_size[2];
 	unsigned int	i;
-	size_t			size;
 
 	i = 0;
 	crop_size[0] = (t_vec2d){0.25f, 0.25f, 0};
 	crop_size[1] = (t_vec2d){0.5f, 0.5f, 0};
-	size = sizeof(t_cube_pallet) * BTXT_MAX;
-	if (!(edit_env->pallet = (t_cube_pallet*)malloc(size)))
-		return (-1);
 	set_renderable(edit_env->pallet);
 	while (i < BTXT_MAX - 1)
 	{

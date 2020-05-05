@@ -1,14 +1,36 @@
-Se doc sur le moteur physique
 
-Virer fill_triangle_unit.c
+---------- Campaign -------------
 
-Pauffiner scroll_files
+_________________________________
+
+---------- Custom -------------
+
+Bibi:
+
+Maboye:
+- Pathfinding 3D avec les cubes/pentes
+- Systeme de jukebox (musique au hasard, sinon oblige de faire choisir une musique par l'user dans le maped)
+_________________________________
+
+---------- Map Editor -------------
 
 Finir l'export et le tester
 
 Implementer la palette
 
 Implementer les pentes
+
+Implementer les objs interactifs
+_________________________________
+
+---------- Autres -------------
+
+Se doc sur le moteur physique
+
+Virer fill_triangle_unit.c
+
+Pauffiner scroll_files
+_________________________________
 
 
 
