@@ -8,9 +8,10 @@
 # define CROSSHAIR_SIZE 16
 # define CROSSHAIR_THICKNESS 2
 # define CROSSHAIR_COLOR 0xffffff
-# define MAP_MAGIC_NUMBER 0x12ff89
+# define MAP_MAGIC_NUMBER 0x12ff8969
 # define PUT_BLOCK_DELAY 15
 
+# define SCROLL_FILE_FONT FONT_ARIAL
 # define MAX_MAP_PATH_LEN 128
 # define MAPED_SAVE_PATH "./resources/custom_maps/"
 
@@ -80,8 +81,17 @@ enum	e_blocs_textures_ids
 	BTXT_MAX
 };
 
+enum	e_bloc_type
+{
+	BC_CUBE,
+	BC_SLOPE,
+	BC_OBJ,
+	BC_MAX
+};
+
 struct				s_scroll
 {
+	char	**list;
 	int		case_size;
 	int		color;
 	int		current;
@@ -92,6 +102,14 @@ struct				s_scroll
 	char	*s_path;
 	t_point	d;
 	t_point	o;
+};
+
+struct				s_cube_pallet
+{
+	t_sprite		sprite;
+	bool			cube;
+	bool			slope;
+	bool			obj;
 };
 
 struct				s_ed_map
@@ -108,12 +126,14 @@ struct				s_ed_map
 struct				s_edit_env
 {
 	t_env			*env;
+	t_cube_pallet	*pallet;
 	t_sprite		btxts[BTXT_MAX];
 	t_button		buttons[MAPED_MENU_BUTTON_MAX];
 	t_point			pos[MAPED_MENU_BUTTON_MAX];
 	t_ed_map		new_map;
 	t_map			map;
 	t_scroll		scroll;
+	int				current_bc;
 	int				error;
 	int				sub_context;
 };
@@ -149,9 +169,20 @@ void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 int					create_me_map(t_env *env);
 int					build_map(t_env *env, t_ed_map *new);
 int					map_to_scene(t_env *env);
+int					init_matrice(t_ed_map *env);
 void				free_matrice(t_ed_map *env);
 int					export_maped_map(t_edit_env *env);
+int					import_maped_map(t_edit_env *env, char *path);
 int					flat_map(t_ed_map *env, int *len);
+int					flat_to_matrice(t_ed_map *env, int offset);
+
+// Pallet
+int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
+int					render_pallet(t_env *env);
+
+// Scroll
+int					init_maped_scroll_file(t_env *env);
+void				display_file(t_env *env);
 
 // Events
 void				maped_crosshair(t_env *env);

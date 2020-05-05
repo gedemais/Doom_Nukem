@@ -8,6 +8,7 @@ SRCS_NAME =	main.c\
 			setup.c\
 			singletons.c\
 			text.c\
+			scroll_file.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
@@ -39,6 +40,7 @@ SRCS_NAME =	main.c\
 			map_editor/menu.c\
 			map_editor/map_to_scene.c\
 			map_editor/new_map.c\
+			map_editor/pallet.c\
 			map_editor/file.c\
 			map_editor/listpath.c\
 			map_editor/routines.c\

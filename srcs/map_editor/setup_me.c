@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/04 00:11:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/05 15:40:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ int			setup_medit(t_env *env)
 	env->edit_env.env = env;
 	env->edit_env.sub_context = MAPED_SC_MENU;
 	init_buttons(env);
-	if (init_fields(env) || load_blocs_textures(env))
+	if (init_fields(env) || load_blocs_textures(env)
+		|| init_cubes_pallet(env, &env->edit_env))
 		return (-1);
 	return (0);
 }

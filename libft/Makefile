@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2020/04/30 18:55:55 by gedemais         ###   ########.fr        #
+#    Updated: 2020/05/05 16:51:46 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ endif
 
 SRCS  =	ft_atoi.c \
 		ft_atof.c\
+		ft_strlcpy.c\
 		ft_abs.c\
 		ft_inbounds.c\
 		ft_bzero.c \

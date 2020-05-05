@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:37:15 by gedemais          #+#    #+#             */
-/*   Updated: 2020/01/30 02:38:13 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/05 17:21:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,7 @@ int		mouse_press_custom(int button, int x, int y, void *param)
 
 	env = ((t_env*)param);
 	
-	if (button == BUTTON_SCROLL_UP)
-		++env->edit_env.scroll.current;
-	else if (button == BUTTON_SCROLL_DOWN)
-		--env->edit_env.scroll.current;
-	else if (button == BUTTON_LCLIC)
-		printf("selected path: %s\n", env->edit_env.scroll.s_path);
+	(void)button;
 	(void)x;
 	(void)y;
 	return (0);

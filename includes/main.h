@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 17:55:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/05 17:17:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ enum		e_context_id
 	C_DEV,
 	C_TITLE_SCREEN,
 	C_CAMPAIGN,
-	C_MAP_EDITOR,
 	C_CUSTOM,
+	C_MAP_EDITOR,
 	C_MAX
 };
 

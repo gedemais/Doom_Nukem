@@ -19,7 +19,7 @@ void			free_matrice(t_ed_map *env)
 	env->map = NULL;
 }
 
-static int			init_matrice(t_ed_map *env)
+int			init_matrice(t_ed_map *env)
 {
 	int		x;
 	int		y;

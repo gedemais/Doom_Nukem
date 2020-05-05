@@ -67,9 +67,9 @@ struct	s_sprite
 char		*sprites_paths(unsigned int index);
 char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
 void		map_sprite(char *img, t_sprite sprite, t_point o);
+int			crop_sprite(t_env *env, t_sprite base, t_sprite *crop, t_vec2d csize[2]);
 t_sprite	*load_sprites(t_mlx *mlx);
 int			load_texture(t_mlx *mlx, char *path, t_sprite *txt);
 void		reverse_texture(t_sprite *txt);
-char		*alpha_val(void);
 
 #endif

@@ -2,6 +2,16 @@ Se doc sur le moteur physique
 
 Virer fill_triangle_unit.c
 
+Pauffiner scroll_files
+
+Finir l'export et le tester
+
+Implementer la palette
+
+Implementer les pentes
+
+
+
 exit_malloc() a tous les mallocs / surcouches qui appellent malloc
 
 	blender:

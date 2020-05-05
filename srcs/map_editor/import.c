@@ -1,35 +1,24 @@
 #include "main.h"
 
-static char	*get_file_name(char *path)
+static int	ft_strclen(char *s, char c)
 {
-	char	**split;
-	char	*name;
-	int		len;
-	int		i;
+	int	i;
 
 	i = 0;
-	if (!(split = ft_strsplit(path, "/")))
-		return (NULL);
-	len = ft_tablen(split);
-	while (split[len - 1][i] && split[len - 1][i] != '.')
+	while (s[i] && s[i] != c)
 		i++;
-	if (!split[len - 1][i])
-	{
-		ft_free_ctab(split);
-		return (NULL);
-	}
-	if (!(name = ft_strndup(split[len - 1], i)))
-	{
-		ft_free_ctab(split);
-		return (NULL);
-	}
-	ft_free_ctab(split);
-	return (name);
+	return (i);
 }
 
-int			check_header(char *file, char *path)
+static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 {
-	char	*name;
+	ft_bzero(path, MAX_MAP_PATH_LEN);
+	ft_strcpy(path, MAPED_SAVE_PATH);
+	ft_strcat(path, name);
+}
+
+int			check_header(char *file, char *name, int *len)
+{
 	int		magic;
 
 	magic = *(int*)file;
@@ -38,34 +27,38 @@ int			check_header(char *file, char *path)
 		free(file);
 		return (-1);
 	}
-	if (!(name = get_file_name(path))
-		|| ft_strncmp(&file[sizeof(int)], name, ft_strlen(name)))
+	if (ft_strncmp(&file[sizeof(int)], name, ft_strclen(name, '.')))
 	{
 		free(file);
 		return (-1);
 	}
-	free(file);
+	*len = 4 + ft_strclen(name, '.');
 	return (0);
 }
 
-int		import_maped_map(t_edit_env *env, char *path)
+int		import_maped_map(t_edit_env *env, char *name)
 {
-	(void)env;
-	(void)path;
-	/*char	*file;
+	char	path[MAX_MAP_PATH_LEN];
+	char	*file;
 	int		len;
 	int		fd;
 
+	gen_path(path, name);
 	if ((fd = open(path, O_RDONLY)) == -1)
+	{
+		perror(strerror(errno));
 		return (-1);
+	}
 	if (!(file = read_file(fd)))
 	{
 		close(fd);
 		return (-1);
 	}
 	close(fd);
-	if (check_header(file, path))
+	if (check_header(file, name, &len))
 		return (-1);
-	//if (!())*/
+	env->new_map.flat = file;
+	if (!flat_to_matrice(&env->new_map, len))
+		return (-1);
 	return (0);
 }

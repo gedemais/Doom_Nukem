@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:02:32 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 00:10:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/05 17:33:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,37 @@ static void	render_buttons(t_env *env)
 	render_button(env, env->edit_env.buttons[MAPED_MENU_BUTTON_MAIN_MENU]);
 }
 
+static int	select_map(t_env *env)
+{
+	t_scroll	*s;
+
+	s = &env->edit_env.scroll;
+	display_file(env);
+	if (s->s_path)
+	{
+		if (import_maped_map(&env->edit_env, s->s_path))
+		{
+			printf("Parsing Failed for map |%s|\n", s->s_path);
+			exit(0);
+			return (-1);
+		}
+		if (map_to_scene(env))
+			return (-1);
+		switch_mecontext(env, MAPED_SC_CREATIVE);
+	}
+	ft_strdel(&s->s_path);
+	return (0);
+}
+
 int			maped_menu(t_env *env)
 {
-	// Scroller fichiers maps
-
-	// Bouton new map
-
 	handle_events(env);
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_BACKGROUND], (t_point){0, 0});
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_MENU_TITLE], (t_point){420, 60});
+
+	if (select_map(env))
+		return (-1);
+
 	render_buttons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

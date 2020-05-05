@@ -1,11 +1,11 @@
 #include "main.h"
 
+
 static void	move(t_env *env, bool keys[NB_KEYS])
 {
 	t_vec3d		f;
 	t_vec3d		r;
-
-	f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
+f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio); 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
@@ -16,7 +16,6 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
-
 static void	handle_mouse(t_env *env, t_events *e)
 {
 	static int	put_delay = PUT_BLOCK_DELAY;
@@ -58,6 +57,7 @@ int		maped_creative(t_env *env)
 	camera_aim(env);
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
+	//render_pallet(env);
 	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

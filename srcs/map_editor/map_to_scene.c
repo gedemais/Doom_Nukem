@@ -14,7 +14,7 @@ static void	translate_triangle(t_mesh *new, t_triangle *t)
 		i++;
 	}
 }
-/*
+
 static int      test_neighbours(t_ed_map *map, int x, int y , int z)
 {
 	if (x < 0 || x > map->width - 1
@@ -36,7 +36,7 @@ static bool		full_neighbours(t_ed_map *map, int *pos)
 	neighbours += test_neighbours(map, pos[0], pos[1], pos[2] - 1);
 	neighbours += test_neighbours(map, pos[0], pos[1], pos[2] + 1);
 	return (neighbours == 6);
-}*/
+}
 
 
 static int	get_type(t_env *env, t_mesh *new, char type)
@@ -47,10 +47,9 @@ static int	get_type(t_env *env, t_mesh *new, char type)
 	(void)new;
 	(void)type;
 	ret = (int)type % 32;
-	printf("%d\n", ret);
-//	if (env->context == C_CUSTOM)
-//		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
-//			ret = BTXT_NONE;
+	if (env->context == C_CUSTOM)
+		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
+			ret = BTXT_NONE;
 	return (ret);
 }
 
