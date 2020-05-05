@@ -1,0 +1,29 @@
+/* XPM */
+static char *wood_a_cut_ico[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 7 1 ",
+"  c #4C3D26",
+". c #695433",
+"X c #735E39",
+"o c #7C623E",
+"O c #9F844D",
+"+ c #B4905A",
+"@ c #BC9862",
+/* pixels */
+"@OOOO@@+O@@@@@@O",
+"@@+X++OOOOO+O+@O",
+"@@OOOO++X@@+@@@O",
+"...XXXXXXX....XX",
+"@OOOO@@O@OOX+++@",
+"OOX+++@O++++OOOO",
+"@@@+@@@OOOX@@@@@",
+"XX.....XXX....XX",
+"@@@@@XO@@+++@@@O",
+"OOOOO@++OOOX@OOO",
+"@+++@@OOOO+++++O",
+"X.XX...XXXXX...X",
+"@@@@@O@OOXOO+@@@",
+"+OX@@@@O@++OOOO+",
+"@@OOO@@O@@O+@@@@",
+"XXXo..o.XXX. ..X"
+};

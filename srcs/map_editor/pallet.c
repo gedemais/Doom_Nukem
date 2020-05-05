@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	set_renderable(t_cube_pallet *p)
+static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 {
 	p[BTXT_BRICK - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_DARK_BRICK - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
@@ -28,7 +28,7 @@ static void	set_renderable(t_cube_pallet *p)
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
-static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX])
+static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX], t_point *start)
 {
 	unsigned int	i;
 	unsigned int	nb;
@@ -48,6 +48,7 @@ static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX])
 		i++;
 	}
 	o = (t_point){env->data.half_wdt - (nb / 2 * 36), 600};
+	*start = (t_point){o.x + 4, o.y + 2};
 	dims = (t_point){(nb / 2 * 36) * 2, 2};
 	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
 	draw_rectangle(env->mlx.img_data, o, (t_point){2, 34}, 0xffffff);
@@ -59,14 +60,15 @@ static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX])
 
 int			render_pallet(t_env *env)
 {
+	t_point			o;
 	unsigned int	i;
 
 	i = 0;
-	draw_pallet_box(env, env->edit_env.pallet);
+	draw_pallet_box(env, env->edit_env.pallet, &o);
 	while (i < BTXT_MAX - 1)
 	{
-		printf("mapping %d x %d\n", env->edit_env.pallet[i].sprite.wdt, env->edit_env.pallet[i].sprite.hgt);
-		map_sprite(env->mlx.img_data, env->edit_env.pallet[i].sprite, (t_point){400, 400});
+		blit_sprite(env->mlx.img_data, env->edit_env.pallet[i].sprite, o, 2.0f);
+		o.x += 34;
 		i++;
 	}
 	return (0);
@@ -74,17 +76,26 @@ int			render_pallet(t_env *env)
 
 int			init_cubes_pallet(t_env *env, t_edit_env *edit_env)
 {
-	t_vec2d			crop_size[2];
+	static char		*paths[BTXT_MAX] = {"brick_ico.xpm", "clean_stone_ico.xpm",
+					"dark_brick_ico.xpm", "dirt_grass_ico.xpm", "dirt_ico.xpm",
+					"dirt_snow_ico.xpm", "glace_ico.xpm", "gold_ico.xpm",
+					"iron_ico.xpm", "jukebox_ico.xpm", "library_ico.xpm",
+					"light_ico.xpm", "obsidienne_ico.xpm", "sand_ico.xpm",
+					"stone_ico.xpm", "wood_a_cut_ico.xpm", "wood_a_ico.xpm",
+					"wood_b_cut_ico.xpm", "wood_b_ico.xpm",
+					"wood_c_cut_ico.xpm", "wood_c_ico.xpm",
+					"wood_d_cut_ico.xpm", "wood_d_ico.xpm"};
+	char			path[256];
 	unsigned int	i;
 
 	i = 0;
-	crop_size[0] = (t_vec2d){0.25f, 0.25f, 0};
-	crop_size[1] = (t_vec2d){0.5f, 0.5f, 0};
 	set_renderable(edit_env->pallet);
 	while (i < BTXT_MAX - 1)
 	{
-		if (crop_sprite(env, edit_env->btxts[i + 1],
-			&edit_env->pallet[i].sprite, crop_size))
+		ft_bzero(path, 256);
+		ft_strcpy(path, MAPED_ICONE_PATH);
+		ft_strcat(path, paths[i]);
+		if (load_texture(&env->mlx, path, &edit_env->pallet[i].sprite, false))
 			return (-1);
 		i++;
 	}

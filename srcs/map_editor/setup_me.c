@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 15:40:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 00:35:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	load_blocs_textures(t_env *env)
 	mlx = &env->mlx;
 	while (i < BTXT_MAX)
 	{
-		if (load_texture(mlx, blocs_txt_paths(i), &env->edit_env.btxts[i]))
+		if (load_texture(mlx, blocs_txt_paths(i), &env->edit_env.btxts[i], 1))
 			return (-1);
 		i++;
 	}

@@ -35,7 +35,7 @@ int		mapper_texture(t_env *env, t_mesh *m, char *tok)
 	}
 	if (!(path = ft_strndup(&tok[1], ft_strlen(&tok[1]) - 1)))
 		return (-1);
-	if (load_texture(&env->mlx, path, &sprite))
+	if (load_texture(&env->mlx, path, &sprite, true))
 		return (-1);
 	free(path);
 	if ((!map->txts.byte_size && init_dynarray(&map->txts, sizeof(t_sprite), 0))

@@ -6,55 +6,11 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 19:41:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 00:34:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-static int	allocate_mlx_image(t_env *env, t_sprite *sprite, int wdt, int hgt)
-{
-	int		t;
-
-	if (!(sprite->img_ptr = mlx_new_image(env->mlx.mlx_ptr, wdt, hgt)))
-		return (-1);
-	if (!(sprite->img_data = mlx_get_data_addr(sprite->img_ptr, &t, &t, &t)))
-		return (-1);
-	return (0);
-}
-
-int		crop_sprite(t_env *env, t_sprite base, t_sprite *crop, t_vec2d csize[2])
-{
-	int		x;
-	int		y;
-	int		z;
-	int		xstart;
-	int		bounds[2];
-	int		color;
-
-	z = 0;
-	xstart = (csize[0].u * base.wdt);
-	y = (csize[0].v * base.hgt);
-	bounds[0] = (csize[1].u * base.wdt);
-	bounds[1] = (csize[1].v * base.hgt);
-	printf("allocating %d x %d sprite\n", bounds[0] - xstart, bounds[1] - y);
-	if (allocate_mlx_image(env, crop, bounds[0] - xstart, bounds[1] - y))
-		return (-1);
-	while (y < bounds[1])
-	{
-		x = xstart;
-		while (x < bounds[0])
-		{
-			//color = base.img_data[(abs(y - 1) * base.wdt + x) * 4];
-			color = 0xffffff;
-			ft_memcpy(&crop->img_data[z], &color, sizeof(int));
-			x++;
-			z += 4;
-		}
-		y++;
-	}
-	return (0);
-}
 
 void	map_sprite(char *img, t_sprite sprite, t_point o)
 {
@@ -121,7 +77,7 @@ char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 	return (img);
 }
 
-int			load_texture(t_mlx *mlx, char *path, t_sprite *txt)
+int			load_texture(t_mlx *mlx, char *path, t_sprite *txt, bool rev)
 {
 	int		t;
 
@@ -129,7 +85,8 @@ int			load_texture(t_mlx *mlx, char *path, t_sprite *txt)
 		return (-1);
 	if (!(txt->img_data = mlx_get_data_addr(txt->img_ptr, &t, &t, &t)))
 		return (-1);
-	reverse_texture(txt);
+	if (rev)
+		reverse_texture(txt);
 	return (0);
 }
 

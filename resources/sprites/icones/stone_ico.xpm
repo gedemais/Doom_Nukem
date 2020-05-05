@@ -1,0 +1,37 @@
+/* XPM */
+static char *stone_ico[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 15 1 ",
+"  c #4C4C4C",
+". c gray33",
+"X c #5D5D5D",
+"o c #626262",
+"O c DimGray",
+"+ c #777777",
+"@ c gray49",
+"# c #868686",
+"$ c #898989",
+"% c #909090",
+"& c gray60",
+"* c #A0A0A0",
+"= c gray68",
+"- c gray69",
+"; c gray75",
+/* pixels */
+"@oo-=@O=*@o.XO==",
+"$o==#O=#-$$oo*@#",
+"o&@@@ =%#@#Xoo%#",
+"oo&@+.@#$#..*oo.",
+"&=...XO@..=&#@o+",
+"=@+=*=o.o;&#$##o",
+"@#X&#@@ooo@$$%XX",
+"+++.  .#*#Xo+.Xo",
+"o**=#X=%==$O*$oo",
+"o#$@$.o+=*O#.o==",
+".X$# ooOX@# X=*#",
+".o.Xo*=#+ Xo-#$#",
+"o&&&X@*%=*oo=##.",
+"*=$#oX.o+#@o@#@.",
+"o$*#+@#XoX#XO..o",
+"#.@##.o*@@.O*=o#"
+};

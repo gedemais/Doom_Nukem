@@ -9,11 +9,12 @@
 # define CROSSHAIR_THICKNESS 2
 # define CROSSHAIR_COLOR 0xffffff
 # define MAP_MAGIC_NUMBER 0x12ff8969
-# define PUT_BLOCK_DELAY 15
+# define PUT_BLOCK_DELAY 10
 
 # define SCROLL_FILE_FONT FONT_ARIAL
 # define MAX_MAP_PATH_LEN 128
 # define MAPED_SAVE_PATH "./resources/custom_maps/"
+# define MAPED_ICONE_PATH "./resources/sprites/icones/"
 
 enum	e_maped_sc_id
 {

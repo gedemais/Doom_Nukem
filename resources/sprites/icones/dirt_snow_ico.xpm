@@ -1,0 +1,31 @@
+/* XPM */
+static char *dirt_snow_ico[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 9 1 ",
+"  c #593D29",
+". c #79553A",
+"X c #6C6C6C",
+"o c #966C4A",
+"O c #B9855C",
+"+ c gray53",
+"@ c #E3F3F3",
+"# c #EEFFFF",
+"$ c white",
+/* pixels */
+"$$$#$$#$$$##@@$$",
+"$$$## #@@$##@$$@",
+"# #@@ # $##@ $# ",
+" X  $   $ # .  .",
+"o.oO o..   X.o .",
+". oo.o   .. ...O",
+"O ..+..OO.OO.o.o",
+"O.OOoo..o oo..oo",
+"o..o.o. .oo... .",
+"oo ..  .....OO.o",
+"oo.OO.Oo OO.oo+.",
+"o..ooO.oXoo. o. ",
+". o.ooO.......OO",
+".o.. .oo. O .Ooo",
+"o. O. . ... ..oo",
+"o.Ooo.+ooo..oo. "
+};

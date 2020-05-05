@@ -42,7 +42,7 @@ int		cmp_game(void *param)
 	env = (t_env*)param;
 	cmp_env = &env->cmp_env;
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
-	physic_engine(env);
+	//physic_engine(env);
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
