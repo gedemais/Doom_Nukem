@@ -49,6 +49,7 @@ static int	select_map(t_env *env)
 	t_scroll	*s;
 
 	s = &env->edit_env.scroll;
+	init_maped_scroll_file(env);
 	display_file(env);
 	if (s->s_path)
 	{

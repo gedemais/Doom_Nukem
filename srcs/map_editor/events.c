@@ -23,8 +23,6 @@ int		key_press_maped(int key, void *param)
 		exit(EXIT_SUCCESS);
 	if (env->edit_env.sub_context == MAPED_SC_CREATIVE && env->events.keys[KEY_P])
 		export_maped_map(&env->edit_env);
-
-
 	return (0);
 }
 
@@ -55,7 +53,13 @@ int		mouse_release_maped(int button, int x, int y, void *param)
 
 	env = ((t_env*)param);
 	
-	(void)button;
+	if (env->edit_env.scroll.mouse_index > -1)
+	{
+		if (button == BUTTON_SCROLL_UP)
+			++env->edit_env.scroll.current;
+		else if (button == BUTTON_SCROLL_DOWN)
+			--env->edit_env.scroll.current;
+	}
 	(void)x;
 	(void)y;
 	return (0);
