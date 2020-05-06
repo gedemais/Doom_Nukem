@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
@@ -52,7 +52,6 @@ int		mouse_release_maped(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	if (env->edit_env.scroll.mouse_index > -1)
 	{
 		if (button == BUTTON_SCROLL_UP)
