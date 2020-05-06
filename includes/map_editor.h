@@ -180,6 +180,12 @@ int					import_maped_map(t_edit_env *env, char *path);
 int					flat_map(t_ed_map *env, int *len);
 int					flat_to_matrice(t_ed_map *env, int offset);
 
+// Blocks
+int					create_cube(t_env *env, t_mesh *new, char type);
+int					create_slope_north(t_env *env, t_mesh *new, char type);
+int					get_block_type(t_env *env, t_mesh *new, char type);
+void				translate_triangle(t_mesh *new, t_triangle *t);
+
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
 int					render_pallet(t_env *env);

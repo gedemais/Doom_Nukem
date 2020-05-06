@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/04 00:10:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 18:01:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,12 @@ static int	init_map_parser(t_map *map, t_parser *parser, char *path, char states
 {
 	unsigned int	i;
 	int				fd;
+	int				len;
 
 	i = 0;
 	map->nmesh = 0;
 	if ((fd = open(path, O_RDONLY)) == -1
-		|| !(parser->file = read_file(fd))
+		|| !(parser->file = read_file(fd, &len)) || len == 0
 		|| !(parser->lines = ft_strsplit(parser->file, "\n"))
 		|| init_dynarray(&map->pool, sizeof(t_vec3d), 0)
 		|| init_dynarray(&map->txt_pool, sizeof(t_vec2d), 0)

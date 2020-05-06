@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:12:24 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/01 19:02:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 18:02:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,11 @@ int				parse_mtl(char *file_name, t_dynarray *mtls)
 {
 	char	**lines;
 	char	*file;
+	int		len;
 	int		fd;
 
-	if ((fd = open_mtl_file(file_name)) == -1 || !(file = read_file(fd)))
+	if ((fd = open_mtl_file(file_name)) == -1 || !(file = read_file(fd, &len))
+		|| len == 0)
 		return (-1);
 	if (*init_parser())
 	{

@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	translate_triangle(t_mesh *new, t_triangle *t)
+void	translate_triangle(t_mesh *new, t_triangle *t)
 {
 	int		i;
 
@@ -39,56 +39,21 @@ static bool		full_neighbours(t_ed_map *map, int *pos)
 }
 
 
-static int	get_type(t_env *env, t_mesh *new, char type)
+int		get_block_type(t_env *env, t_mesh *new, char type)
 {
 	int		ret;
 
-	(void)env;
-	(void)new;
-	(void)type;
-	ret = (int)type % 32;
+	if (ft_inbounds(type, 0, 160))
+		ret = (int)type % 32;
+	else
+		ret = 0;
 	if (env->context == C_CUSTOM)
 		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
 			ret = BTXT_NONE;
 	return (ret);
 }
 
-int			create_cube(t_env *env, t_mesh *new, char type)
-{
-	t_mesh		*mesh;
-	t_triangle	t;
-	int			i;
 
-	i = 0;
-	new->type = get_type(env, new, type);
-	mesh = dyacc(&env->maps[SCENE_CUBE].meshs, 0);
-	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
-		return (-1);
-	while (i < mesh->tris.nb_cells)
-	{
-		ft_memcpy(&t, dyacc(&mesh->tris, i), sizeof(t_triangle));
-		translate_triangle(new, &t);
-		t.textured = true;
-		t.voxel = true;
-		t.sp = new->type;
-		if (push_dynarray(&new->tris, &t, false))
-			return (-1);
-		i++;
-	}
-	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
-	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
-	return (0);
-}
 
 void	attribute_mesh(t_map *scene, int index)
 {
@@ -116,11 +81,11 @@ static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 	new.yaw = 0;
 	new.roll = 0;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
-	if (ft_inbounds(type, 0, 31) && create_cube(env, &new, type))
+	if (ft_inbounds(type, 0, 31) && create_slope_north(env, &new, type))
 		return (-1);
-	/*	else if (ft_inbounds(type, 32, 63))
-		return (create_slope_north(env, &new, type));
-		else if (ft_inbounds(type, 64, 95))
+//	else if (ft_inbounds(type, 32, 63) && create_slope_north(env, &new, type))
+//		return (-1);
+	/*	else if (ft_inbounds(type, 64, 95))
 		return (create_slope_south(env, &new, type));
 		else if (ft_inbounds(type, 96, 127))
 		return (create_slope_west(env, &new, type));

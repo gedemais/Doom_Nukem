@@ -37,6 +37,7 @@ SRCS_NAME =	main.c\
 			map_editor/render.c\
 			map_editor/events.c\
 			map_editor/import.c\
+			map_editor/load_shapes.c\
 			map_editor/menu.c\
 			map_editor/map_to_scene.c\
 			map_editor/new_map.c\

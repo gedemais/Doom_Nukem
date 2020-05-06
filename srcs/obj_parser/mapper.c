@@ -32,8 +32,9 @@ char	**get_file_lines(int fd)
 {
 	char	**ret;
 	char	*file;
+	int		len;
 
-	if (!(file = read_file(fd)) || !file[0])
+	if (!(file = read_file(fd, &len)) || len == 0)
 		return (NULL);
 	if (!(ret = ft_strsplit(file, "\n")))
 	{

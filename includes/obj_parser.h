@@ -147,7 +147,7 @@ struct	s_parser
 int					check_line(t_env *env, t_mesh *m, char **stats);
 t_mesh				*find_mesh(t_map *map, char **line, bool *prop);
 
-char				*read_file(int fd);
+char				*read_file(int fd, int *len);
 char				*maps_paths(unsigned int index);
 void				init_states(char states[PS_MAX][PS_MAX]);
 int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);

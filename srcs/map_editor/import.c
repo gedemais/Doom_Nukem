@@ -21,6 +21,8 @@ int			check_header(char *file, char *name, int *len)
 {
 	int		magic;
 
+	if (ft_strlen(file) <= 4)
+		return (-1);
 	magic = *(int*)file;
 	if (magic != MAP_MAGIC_NUMBER)
 	{
@@ -49,7 +51,7 @@ int		import_maped_map(t_edit_env *env, char *name)
 		perror(strerror(errno));
 		return (-1);
 	}
-	if (!(file = read_file(fd)))
+	if (!(file = read_file(fd, &len)) || len < 6)
 	{
 		close(fd);
 		return (-1);
