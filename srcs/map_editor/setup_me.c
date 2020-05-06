@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/06 00:35:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 02:41:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ static int	load_blocs_textures(t_env *env)
 int			setup_medit(t_env *env)
 {
 	env->edit_env.env = env;
+	env->edit_env.current_bt = BTXT_BRICK;
+	env->edit_env.current_bc = BC_CUBE;
 	env->edit_env.sub_context = MAPED_SC_MENU;
 	init_buttons(env);
 	if (init_fields(env) || load_blocs_textures(env)

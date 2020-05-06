@@ -134,7 +134,8 @@ struct				s_edit_env
 	t_ed_map		new_map;
 	t_map			map;
 	t_scroll		scroll;
-	int				current_bc;
+	char			current_bc;
+	char			current_bt;
 	int				error;
 	int				sub_context;
 };

@@ -30,26 +30,24 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 
 static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX], t_point *start)
 {
-	unsigned int	i;
+	int				i;
 	unsigned int	nb;
+	unsigned int	xdims;
 	t_point			o;
 	t_point			dims;
 
-	i = 0;
+	i = -1;
 	nb = 0;
-	while (i < BTXT_MAX) //  a simplifier, le nombre de cubes sera connu avant le rendu
-	{
-		if (env->edit_env.current_bc == BC_CUBE && pallet[i].cube)
+	while (++i < BTXT_MAX) //  a simplifier, le nombre de cubes sera connu avant le rendu
+		if ((env->edit_env.current_bc == BC_CUBE && pallet[i].cube)
+			|| (env->edit_env.current_bc == BC_SLOPE && pallet[i].slope)
+			|| (env->edit_env.current_bc == BC_OBJ && pallet[i].obj))
 			nb++;
-		if (env->edit_env.current_bc == BC_SLOPE && pallet[i].slope)
-			nb++;
-		if (env->edit_env.current_bc == BC_OBJ && pallet[i].obj)
-			nb++;
-		i++;
-	}
-	o = (t_point){env->data.half_wdt - (nb / 2 * 36), 600};
-	*start = (t_point){o.x + 4, o.y + 2};
-	dims = (t_point){(nb / 2 * 36) * 2, 2};
+	nb++;
+	xdims = nb / 2 * 34;
+	o = (t_point){env->data.half_wdt - xdims, 600};
+	*start = (t_point){o.x + 2, o.y + 2};
+	dims = (t_point){xdims * 2 + (nb % 2) * 34, 2};
 	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
 	draw_rectangle(env->mlx.img_data, o, (t_point){2, 34}, 0xffffff);
 	draw_rectangle(env->mlx.img_data, (t_point){o.x + dims.x, o.y},
@@ -61,16 +59,25 @@ static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX], t_point 
 int			render_pallet(t_env *env)
 {
 	t_point			o;
+	t_point			current;
 	unsigned int	i;
+	int				index;
 
 	i = 0;
+	index = env->edit_env.current_bt;
+	printf("%d\n", index);
 	draw_pallet_box(env, env->edit_env.pallet, &o);
+	current = o;
 	while (i < BTXT_MAX - 1)
 	{
 		blit_sprite(env->mlx.img_data, env->edit_env.pallet[i].sprite, o, 2.0f);
 		o.x += 34;
 		i++;
 	}
+	current.x += index * 34;
+	draw_rectangle(env->mlx.img_data, current, (t_point){2, 34}, 0xffffff);
+	current.x += 31;
+	draw_rectangle(env->mlx.img_data, current, (t_point){2, 34}, 0xffffff);
 	return (0);
 }
 

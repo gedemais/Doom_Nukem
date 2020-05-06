@@ -16,6 +16,27 @@ f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
 	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
+
+//static void	switch_slope_block_type(t_env *env, t_events *e)
+static void	switch_cube_block_type(t_env *env, t_events *e)
+{
+	char	*bt;
+
+	bt = &env->edit_env.current_bt;
+	if (e->buttons[BUTTON_SCROLL_UP])
+	{
+		PUT
+		if (env->edit_env.current_bc == BC_CUBE)
+			*bt = (*bt > BTXT_WOOD_D_CUT) ? BTXT_BRICK : *bt + 1;
+	}
+	else if (e->buttons[BUTTON_SCROLL_DOWN])
+	{
+		PUT
+		if (env->edit_env.current_bc == BC_CUBE)
+			*bt = (*bt == BTXT_NONE) ? BTXT_WOOD_D_CUT : *bt - 1;
+	}
+}
+
 static void	handle_mouse(t_env *env, t_events *e)
 {
 	static int	put_delay = PUT_BLOCK_DELAY;
@@ -25,16 +46,15 @@ static void	handle_mouse(t_env *env, t_events *e)
 		put_delay = 0;
 	if (!e->buttons[BUTTON_RCLIC])
 		del_delay = 0;
-	if (e->buttons[BUTTON_LCLIC] && env->mid.mesh && put_delay <= 0)
-	{
+	if (e->buttons[BUTTON_LCLIC] && env->mid.mesh && put_delay <= 0
+		&& (put_delay = PUT_BLOCK_DELAY))
 		put_block(env);
-		put_delay = PUT_BLOCK_DELAY;
-	}
-	else if (e->buttons[BUTTON_RCLIC] && del_delay <= 0)
-	{
+	else if (e->buttons[BUTTON_RCLIC] && del_delay <= 0
+		&& (del_delay = PUT_BLOCK_DELAY))
 		del_block(env);
-		del_delay = PUT_BLOCK_DELAY;
-	}
+	switch_cube_block_type(env, e);
+	e->buttons[BUTTON_SCROLL_UP] = false;
+	e->buttons[BUTTON_SCROLL_DOWN] = false;
 	put_delay--;
 	del_delay--;
 }
@@ -55,6 +75,7 @@ int		maped_creative(t_env *env)
 	handle_mouse(env, &env->events);
 	clear_screen_buffers(env);
 	camera_aim(env);
+	env->mid.mesh = NULL;
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
 	render_pallet(env);

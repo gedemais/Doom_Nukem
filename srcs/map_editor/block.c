@@ -100,7 +100,7 @@ int			put_block(t_env *env)
 	if (replace_with_face(env, pos, env->mid.face_i))
 		return (0);
 	new = get_blockindex(&env->edit_env.map, pos, &m_index);
-	new->type = BTXT_IRON;
+	new->type = env->edit_env.current_bt;
 	while (i < new->tris.nb_cells)
 	{
 		t = dyacc(&new->tris, i);

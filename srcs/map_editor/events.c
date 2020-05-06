@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/04 18:30:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/06 03:30:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		mouse_press_maped(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)button;
 	(void)x;
 	(void)y;
