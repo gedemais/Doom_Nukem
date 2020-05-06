@@ -27,7 +27,6 @@ int		key_release_custom(int key, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)key;
 	return (0);
 }
@@ -37,15 +36,9 @@ int		mouse_press_custom(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
+	(void)button;
 	(void)x;
 	(void)y;
-	if (env->edit_env.scroll.mouse_index > -1)
-	{
-		if (button == BUTTON_SCROLL_UP)
-			++env->edit_env.scroll.current;
-		else if (button == BUTTON_SCROLL_DOWN)
-			--env->edit_env.scroll.current;
-	}
 	return (0);
 }
 

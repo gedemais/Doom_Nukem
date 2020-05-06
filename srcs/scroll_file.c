@@ -59,7 +59,7 @@ static void		display_str(t_env *env, t_point police, int i)
 		if (pos > s->max - 1)
 			pos = pos - s->max;
 		ft_strlcpy((char *)conf->s, s->list[pos], size);
-		if (s->mouse_index == i)
+		if (s->mouse_index == i && env->events.buttons[BUTTON_LCLIC])
 		{
 			ft_strdel(&s->s_path);
 			s->s_path = ft_strdup(s->list[pos]);
@@ -77,13 +77,25 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 	s = &env->edit_env.scroll;
 	mouse_x = env->events.mouse_pos.x;
 	mouse_y = env->events.mouse_pos.y;
-
 	if (mouse_x > pos.x && mouse_x < pos.x + rect_d.x
 	&& mouse_y > pos.y && mouse_y < pos.y + rect_d.y)
 		s->mouse_index = i;
-	if (mouse_x < s->o.x || mouse_x > s->o.x + s->d.x
+	else if (mouse_x < s->o.x || mouse_x > s->o.x + s->d.x
 	|| mouse_y < s->o.y || mouse_y > s->o.y + s->d.y)
 		s->mouse_index = -1;
+}
+
+static void	events_scroll_file(t_env *env)
+{
+	if (env->edit_env.scroll.mouse_index > -1)
+	{
+		if (env->events.buttons[BUTTON_SCROLL_UP])
+			++env->edit_env.scroll.current;
+		else if (env->events.buttons[BUTTON_SCROLL_DOWN])
+			--env->edit_env.scroll.current;
+	}
+	env->events.buttons[BUTTON_SCROLL_UP] = false;
+	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 }
 
 void		display_file(t_env *env)
@@ -92,12 +104,12 @@ void		display_file(t_env *env)
 	t_point			pos;
 	t_scroll		*s;
 
-	i = -1;
 	s = &env->edit_env.scroll;
 	if (s->list == NULL)
 		return ;
 	s->current = s->current < 0 ? s->max : s->current;
 	s->current = s->current > s->max ? 0 : s->current;
+	i = -1;
 	while (++i < s->nb_case)
 	{
 		pos = (t_point){s->o.x, s->o.y + i * s->case_size + i};
@@ -108,5 +120,6 @@ void		display_file(t_env *env)
 	}
 	if (s->mouse_index == -1)
 		ft_strdel(&s->s_path);
+	events_scroll_file(env);
 }
 
