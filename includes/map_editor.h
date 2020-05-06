@@ -11,6 +11,8 @@
 # define MAP_MAGIC_NUMBER 0x12ff8969
 # define PUT_BLOCK_DELAY 10
 
+# define NB_CUBES_ICONES 22
+
 # define SCROLL_FILE_FONT FONT_ARIAL
 # define MAX_MAP_PATH_LEN 128
 # define MAPED_SAVE_PATH "./resources/custom_maps/"
@@ -181,6 +183,7 @@ int					flat_to_matrice(t_ed_map *env, int offset);
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
 int					render_pallet(t_env *env);
+void				render_cube_pallet(t_env *env, t_cube_pallet *pallet, t_point o);
 
 // Scroll
 int					init_maped_scroll_file(t_env *env);

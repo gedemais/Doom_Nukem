@@ -25,15 +25,13 @@ static void	switch_cube_block_type(t_env *env, t_events *e)
 	bt = &env->edit_env.current_bt;
 	if (e->buttons[BUTTON_SCROLL_UP])
 	{
-		PUT
 		if (env->edit_env.current_bc == BC_CUBE)
-			*bt = (*bt > BTXT_WOOD_D_CUT) ? BTXT_BRICK : *bt + 1;
+			*bt = (*bt >= NB_CUBES_ICONES - 1) ? 0 : *bt + 1;
 	}
 	else if (e->buttons[BUTTON_SCROLL_DOWN])
 	{
-		PUT
 		if (env->edit_env.current_bc == BC_CUBE)
-			*bt = (*bt == BTXT_NONE) ? BTXT_WOOD_D_CUT : *bt - 1;
+			*bt = (*bt == BTXT_NONE) ? NB_CUBES_ICONES - 1 : *bt - 1;
 	}
 }
 

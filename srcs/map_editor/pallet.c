@@ -11,7 +11,7 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	p[BTXT_ICE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_GOLD - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_IRON - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_LIBRARY - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
+	p[BTXT_LIBRARY - 1] = (t_cube_pallet){.cube = 1, .slope = 0, .obj = 0};
 	p[BTXT_LIGHT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_OBSIDIENNE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_SAND - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
@@ -28,70 +28,52 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
-static void	draw_pallet_box(t_env *env, t_cube_pallet pallet[BTXT_MAX], t_point *start)
+static void	draw_pallet_bbox(t_env *env, int nb_icones, t_point *origin)
 {
-	int				i;
-	unsigned int	nb;
-	unsigned int	xdims;
-	t_point			o;
-	t_point			dims;
+	t_point	o;
+	t_point	dims;
+	t_point	s_dims;
+	int		offset;
 
-	i = -1;
-	nb = 0;
-	while (++i < BTXT_MAX) //  a simplifier, le nombre de cubes sera connu avant le rendu
-		if ((env->edit_env.current_bc == BC_CUBE && pallet[i].cube)
-			|| (env->edit_env.current_bc == BC_SLOPE && pallet[i].slope)
-			|| (env->edit_env.current_bc == BC_OBJ && pallet[i].obj))
-			nb++;
-	nb++;
-	xdims = nb / 2 * 34;
-	o = (t_point){env->data.half_wdt - xdims, 600};
-	*start = (t_point){o.x + 2, o.y + 2};
-	dims = (t_point){xdims * 2 + (nb % 2) * 34, 2};
-	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
-	draw_rectangle(env->mlx.img_data, o, (t_point){2, 34}, 0xffffff);
-	draw_rectangle(env->mlx.img_data, (t_point){o.x + dims.x, o.y},
-		(t_point){2, 36}, 0xffffff);
-	o.y += 34;
-	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
+	offset = nb_icones * 34;
+	o = (t_point){env->data.half_wdt - (offset / 2), 600}; // bbox origin
+	*origin = o;
+	dims = (t_point){offset, 2};
+	s_dims = (t_point){2, 34};
+
+	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // top
+	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff); // sides
+	o.x += offset;
+	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff);
+	o.x -= offset;
+	dims.x += 2;
+	o.y += s_dims.y;
+	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // bottom
 }
 
 int			render_pallet(t_env *env)
 {
-	t_point			o;
-	t_point			current;
-	unsigned int	i;
-	int				index;
+	t_point		o;
 
-	i = 0;
-	index = env->edit_env.current_bt;
-	printf("%d\n", index);
-	draw_pallet_box(env, env->edit_env.pallet, &o);
-	current = o;
-	while (i < BTXT_MAX - 1)
+	if (env->edit_env.current_bc == BC_CUBE)
 	{
-		blit_sprite(env->mlx.img_data, env->edit_env.pallet[i].sprite, o, 2.0f);
-		o.x += 34;
-		i++;
+		draw_pallet_bbox(env, NB_CUBES_ICONES, &o);
+		render_cube_pallet(env, env->edit_env.pallet, o);
 	}
-	current.x += index * 34;
-	draw_rectangle(env->mlx.img_data, current, (t_point){2, 34}, 0xffffff);
-	current.x += 31;
-	draw_rectangle(env->mlx.img_data, current, (t_point){2, 34}, 0xffffff);
 	return (0);
 }
 
 int			init_cubes_pallet(t_env *env, t_edit_env *edit_env)
 {
-	static char		*paths[BTXT_MAX] = {"brick_ico.xpm", "clean_stone_ico.xpm",
-					"dark_brick_ico.xpm", "dirt_grass_ico.xpm", "dirt_ico.xpm",
+	static char		*paths[BTXT_MAX] = {"brick_ico.xpm", "dark_brick_ico.xpm",
+					"clean_stone_ico.xpm", "dirt_ico.xpm", "dirt_grass_ico.xpm",
 					"dirt_snow_ico.xpm", "glace_ico.xpm", "gold_ico.xpm",
-					"iron_ico.xpm", "jukebox_ico.xpm", "library_ico.xpm",
-					"light_ico.xpm", "obsidienne_ico.xpm", "sand_ico.xpm",
-					"stone_ico.xpm", "wood_a_cut_ico.xpm", "wood_a_ico.xpm",
-					"wood_b_cut_ico.xpm", "wood_b_ico.xpm",
-					"wood_c_cut_ico.xpm", "wood_c_ico.xpm",
-					"wood_d_cut_ico.xpm", "wood_d_ico.xpm"};
+					"iron_ico.xpm", "library_ico.xpm", "light_ico.xpm",
+					"obsidienne_ico.xpm", "sand_ico.xpm", "stone_ico.xpm",
+					"wood_a_ico.xpm", "wood_a_cut_ico.xpm",
+					"wood_b_ico.xpm", "wood_b_cut_ico.xpm",
+					"wood_c_ico.xpm", "wood_c_cut_ico.xpm",
+					"wood_d_ico.xpm", "wood_d_cut_ico.xpm", "jukebox_ico.xpm"};
 	char			path[256];
 	unsigned int	i;
 

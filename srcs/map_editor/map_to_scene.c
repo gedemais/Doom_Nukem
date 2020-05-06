@@ -75,18 +75,18 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 			return (-1);
 		i++;
 	}
-	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
 	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
 	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_EST;
-	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
+	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_OUEST;
+	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_OUEST;
+	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_UP;
+	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
+	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
+	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
 	return (0);
 }
 
