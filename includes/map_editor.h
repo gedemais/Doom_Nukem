@@ -178,7 +178,7 @@ void				free_matrice(t_ed_map *env);
 int					export_maped_map(t_edit_env *env);
 int					import_maped_map(t_edit_env *env, char *path);
 int					flat_map(t_ed_map *env, int *len);
-int					flat_to_matrice(t_ed_map *env, int offset);
+int					flat_to_matrice(t_ed_map *env, int offset, int len);
 
 // Blocks
 int					create_cube(t_env *env, t_mesh *new, char type);

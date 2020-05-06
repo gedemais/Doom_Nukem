@@ -7,7 +7,6 @@ void	translate_triangle(t_mesh *new, t_triangle *t)
 	i = 0;
 	while (i < 3)
 	{
-		// modifier la taille des cubes
 		t->points[i].x += new->m_pos[0] * 2;
 		t->points[i].y += new->m_pos[1] * 2;
 		t->points[i].z += new->m_pos[2] * 2;
@@ -21,7 +20,7 @@ static int      test_neighbours(t_ed_map *map, int x, int y , int z)
 		|| y < 0 || y > map->height - 1
 		|| z < 0 || z > map->depth - 1)
 		return (0);
-	return (map->map[x][y][z] > BTXT_NONE ? 1 : 0);
+	return (map->map[x][y][z] > BTXT_NONE);
 }
 
 static bool		full_neighbours(t_ed_map *map, int *pos)
@@ -118,8 +117,8 @@ int			map_to_scene(t_env *env)
 		{
 			z = -1;
 			while (++z < edit_env->new_map.depth)
-				if (create_block(env, scene, edit_env->new_map.map[x][y][z],
-						(int[3]){x, y, z}))
+				if (create_block(env, scene,
+					edit_env->new_map.map[x][y][z], (int[3]){x, y, z}))
 					return (-1);
 		}
 	}

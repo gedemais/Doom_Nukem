@@ -43,6 +43,7 @@ int		import_maped_map(t_edit_env *env, char *name)
 	char	path[MAX_MAP_PATH_LEN];
 	char	*file;
 	int		len;
+	int		offset;
 	int		fd;
 
 	gen_path(path, name);
@@ -57,10 +58,10 @@ int		import_maped_map(t_edit_env *env, char *name)
 		return (-1);
 	}
 	close(fd);
-	if (check_header(file, name, &len))
+	if (check_header(file, name, &offset))
 		return (-1);
 	env->new_map.flat = file;
-	if (!flat_to_matrice(&env->new_map, len))
+	if (!flat_to_matrice(&env->new_map, offset, len))
 		return (-1);
 	return (0);
 }
