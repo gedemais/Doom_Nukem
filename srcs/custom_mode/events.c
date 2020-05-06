@@ -37,7 +37,6 @@ int		mouse_press_custom(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)x;
 	(void)y;
 	if (env->edit_env.scroll.mouse_index > -1)

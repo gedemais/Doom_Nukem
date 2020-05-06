@@ -70,15 +70,20 @@ static void		display_str(t_env *env, t_point police, int i)
 
 static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 {
-	int		mouse_x;
-	int		mouse_y;
+	int			mouse_x;
+	int			mouse_y;
+	t_scroll	*s;
 
+	s = &env->edit_env.scroll;
 	mouse_x = env->events.mouse_pos.x;
 	mouse_y = env->events.mouse_pos.y;
 
 	if (mouse_x > pos.x && mouse_x < pos.x + rect_d.x
 	&& mouse_y > pos.y && mouse_y < pos.y + rect_d.y)
-		env->edit_env.scroll.mouse_index = i;
+		s->mouse_index = i;
+	if (mouse_x < s->o.x || mouse_x > s->o.x + s->d.x
+	|| mouse_y < s->o.y || mouse_y > s->o.y + s->d.y)
+		s->mouse_index = -1;
 }
 
 void		display_file(t_env *env)
