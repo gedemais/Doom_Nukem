@@ -1,73 +1,36 @@
+Benjamin :
+- Moteur physique, adapte a la campagne et au custom (2 versions si besoin)
 
----------- Campaign -------------
+Geoffrey:
+- Finir le map_editor avec Maboye
+- Finir les armes (deplacement, flash lumineux du tir, cadence, son)
+- Mettre en place le mode custom avec Maboye
+- Adapter le rasterizer sur GPU
 
-_________________________________
-
----------- Custom -------------
-
-Bibi:
+Lise:
+- Compresser toutes les ressources dans un fichier / les decompresser au launch
+- Saves du mode campagne (quand le mode campagne sera pret)
 
 Maboye:
+- Finir le map_editor avec Geoffrey
 - Pathfinding 3D avec les cubes/pentes
-- Systeme de jukebox (musique au hasard, sinon oblige de faire choisir une musique par l'user dans le maped)
-_________________________________
+- Pauffiner scroll_files
 
----------- Map Editor -------------
+Moguy:
+- Modeliser les maps du mode campagne
 
-Finir l'export et le tester
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Implementer la palette
+---------------------- Taf a dispatcher ---------------------
+- Mettre en place le mode campagne
 
-Implementer les pentes
-
-Implementer les objs interactifs
-_________________________________
-
----------- Autres -------------
-
-Se doc sur le moteur physique
-
-Virer fill_triangle_unit.c
-
-Pauffiner scroll_files
-_________________________________
-
-
-
+---------------------- Surplus --------------------------
 exit_malloc() a tous les mallocs / surcouches qui appellent malloc
+Gerer les leaks
+Faire une fonction parse_error pour le map_editor
+Fermer les fd
+Recompiler bzip2 et freetype en creeant leurs regles dans le Makefile
+Creer quelques maps avec le map editor pour la correction
 
-	blender:
-		Modelisation campagne | Moguy
-		Monstres | gneheheeee
-		Armes | bibax
-		Grotte avec lac de lave | bibax
-
-	obj_parser:
-		Faire une fonction parse_error
-	Autres:
-		Compresser toutes les ressources en une archive .a pendant la compilation, puis la decompresser au launch
-		Fermer les fd
-
-Optis : 
+--------------------- Optimisations (pas touche) ---------------------
 - clear_screen (multithread / loop_unrolling)
-
-Recompiler bzip2 et freetype en creeant leurs regles
-
-Scenario :
-Vous vous reveillez sur une chaise, l'ecole a ete evacue suite a une attaque
-extraterrestre et vous etes seul, blesse, et enferme dans le labelec. Vous trouvez
-la note d'un gars expliquant qu'il vous a mis la pour vous sauver la vie
-en voyant que vous etiez blesse. A cote de la note, vous trouvez un talkie,
-a travers lequel un homme s'identifie comme l'auteur de la lettre, et vous
-offre son aide en vous guidant dans l'ecole grace aux cameras de surveillance.
-Il vous revele egalement l'emplacement d'un pistolet et d'un couteau dans le lab.
-Vous sortez du lab et vous rendez en E1 sur les conseils de votre interlocuteur,
-afin de trouver la cle de l'ascenswag. Il faudra nettoyer tous les clusters, de
-l'E1 a l'E3 (niveaux) pour finalement trouver la carte d'un tuteur, vous donnant
-acces au bocal (easter egg) pour trouver la cle de l'ascenswag. Une fois dans
-l'ascenswag, l'homme vous indique une sequence de boutons qui vous fait descendre
-a l'etage -420. L'ascenseur s'ouvre sur une grotte avec un lac de lave traverse
-par un petit pont en bois, endommage par les aliens si vous ne les tuez pas.
-Une fois sur l'autre rive, vous passez une porte et l'homme vous annonce au
-talkie que vous avez fait une grave erreur en venant ici. Sadirac apparait
-(boss final).

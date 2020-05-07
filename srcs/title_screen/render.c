@@ -57,7 +57,7 @@ int			render_ts(void *param)
 
 	handle_events(env);
 
-//	loop_sample(env->sound.samples[SA_PNL], frame == 0, false, frame > 0);
+	//loop_sample(env->sound.samples[SA_PNL], frame == 0, false, frame > 0);
 
 	map_sprite(env->mlx.img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
 
