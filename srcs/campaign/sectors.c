@@ -9,6 +9,7 @@ void	init_sectors(t_env *env)
 	cmp_env->sectors[SECTOR_PHYSIC].map = SCENE_PHYSIC_02;
 	cmp_env->sectors[SECTOR_AK47].map = SCENE_AK47;
 	cmp_env->sectors[SECTOR_CUBE].map = SCENE_CUBE;
+	cmp_env->sectors[SECTOR_TEST].map = SCENE_MAP_TEST;
 }
 
 void	check_doors(t_env *env, t_camp_env *cmp_env)
