@@ -13,7 +13,7 @@ static void		copy_matrice(t_ed_map *env, int *len)
 		{
 			nb[3] = -1;
 			while (++nb[3] < env->depth)
-				env->flat[nb[0]++] = env->map[nb[1]][nb[2]][nb[3]];
+				env->flat[nb[0]++] = (char)0;//env->map[nb[1]][nb[2]][nb[3]];
 			if (nb[2] + 1 < env->height)
 				env->flat[nb[0]++] = 127;
 		}
@@ -43,52 +43,63 @@ int			flat_map(t_ed_map *env, int *len)
 
 /************************************************************/
 
-static int		handle_sep_line(t_ed_map *env, int i, int j, int hd[2])
+static int		handle_backline(t_ed_map *env, int *nb, int len)
 {
+	++nb[2];
 	if (env->width == 0)
-		env->width = i - j;
-	else if (i - j != env->width)
-		return (-1);
-
-	if (env->depth == 0)
-		hd[1]++;
-	return (0);
+		env->width = nb[0] - nb[1];
+	else if (env->width != nb[0] - nb[1])
+		return (0);
+	if (env->flat[nb[0] + 1] == 127)
+	{
+		if (env->height == 0)
+			env->height = nb[2];
+		else if (env->height != nb[2])
+			return (0);
+		nb[2] = 0;
+		++nb[3];
+		++nb[0];
+	}
+	return (nb[0] + 1 != len);
 }
 
-static int		handle_sep_matrice(t_ed_map *env, int i, int j, int hd[2])
+static int		handle_endline(t_ed_map *env, int *nb)
 {
-	(void)i;
-	(void)j;
-	(void)env;
+	++nb[2];
+	++nb[3];
+	if (env->width == 0)
+		env->width = nb[0] - nb[1];
+	else if (env->width != nb[0] - nb[1])
+		return (0);
+	if (env->height == 0)
+		env->height = nb[2];
 	if (env->depth == 0)
-		env->depth = hd[1];
-	return (0);
+		env->depth = nb[3];
+	return (env->height == nb[2]);
 }
 
 static int		get_matrice_size(t_ed_map *env, int len)
 {
-	int		i;
-	int		j;
-	int		hd[2];
+	int nb[4];
 
-	i = 0;
-	hd[0] = 0;
-	hd[1] = 0;
-	while (i < len)
+	nb[2] = 0;
+	nb[3] = 0;
+	nb[0] = -1;
+	while (++nb[0] < len)
 	{
-		j = i;
-		while (i < len && env->flat[i] != 127)
-			i++;
-		if (env->flat[i] != 127)
-			return (0);
-		else if (i < len - 1 && env->flat[i + 1] != 127
-				&& handle_sep_line(env, i, j, hd))
+		nb[1] = nb[0];
+		while (nb[0] < len && !((int)env->flat[nb[0]] == 127))
+			++nb[0];
+		if (env->flat[nb[0]] == 127)
+		{
+			if (handle_backline(env, nb, len) == 0)
 				return (0);
-		else if (i < len - 1 && env->flat[i + 1] == 127
-				&& handle_sep_matrice(env, i, j, hd))
+		}
+		else if (nb[0] == len)
+		{
+			if (handle_endline(env, nb) == 0)
 				return (0);
-			return (0);
-		i++;
+		}
 	}
 	return (env->width && env->height && env->depth);
 }
