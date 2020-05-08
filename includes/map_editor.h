@@ -117,7 +117,6 @@ struct				s_cube_pallet
 
 struct				s_ed_map
 {
-	t_sprite	*textures[256];
 	char		***map;
 	char		*flat;
 	char		*name;
@@ -132,7 +131,6 @@ struct				s_edit_env
 	t_cube_pallet	pallet[BTXT_MAX];
 	t_sprite		btxts[BTXT_MAX];
 	t_button		buttons[MAPED_MENU_BUTTON_MAX];
-	t_point			pos[MAPED_MENU_BUTTON_MAX];
 	t_ed_map		new_map;
 	t_map			map;
 	t_scroll		scroll;

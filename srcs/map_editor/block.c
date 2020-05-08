@@ -81,9 +81,12 @@ void				del_door(t_env *env)
 int			del_block(t_env *env)
 {
 	t_mesh	*mesh;
+	int		pos[3];
 
+	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
 	mesh = env->mid.mesh;
 	mesh->type = BTXT_NONE;
+	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
 	return (0);
 }
 
