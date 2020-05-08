@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/06 03:30:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/08 15:57:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int		key_press_maped(int key, void *param)
 	sc = env->edit_env.sub_context;
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
-	if (env->edit_env.sub_context == MAPED_SC_CREATIVE && env->events.keys[KEY_P])
-		export_maped_map(&env->edit_env);
 	return (0);
 }
 

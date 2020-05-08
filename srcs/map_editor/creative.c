@@ -65,6 +65,9 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	if (e->keys[KEY_E]) // Custom only, a tej d'ici
 		del_door(env);
+
+	if (env->events.keys[KEY_P])
+		export_maped_map(&env->edit_env);
 }
 
 int		maped_creative(t_env *env)

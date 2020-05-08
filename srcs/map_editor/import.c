@@ -10,6 +10,8 @@ static int	ft_strclen(char *s, char c)
 	return (i);
 }
 
+
+
 static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 {
 	ft_bzero(path, MAX_MAP_PATH_LEN);
@@ -17,7 +19,7 @@ static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 	ft_strcat(path, name);
 }
 
-int			check_header(char *file, char *name, int *len)
+static int	check_header(char *file, char *name, int *len)
 {
 	int		magic;
 
@@ -38,7 +40,21 @@ int			check_header(char *file, char *name, int *len)
 	return (0);
 }
 
-int		import_maped_map(t_edit_env *env, char *name)
+static char	*get_file_name(char *name)
+{
+	char	*dest;
+	int		len;
+
+	len = 0;
+	while (name[len] && name[len] != '.')
+		len++;
+	if (!(dest = ft_strnew(len)))
+		return (NULL);
+	ft_memcpy(dest, name, len);
+	return (dest);
+}
+
+int			import_maped_map(t_edit_env *env, char *name)
 {
 	char	path[MAX_MAP_PATH_LEN];
 	char	*file;
@@ -46,6 +62,8 @@ int		import_maped_map(t_edit_env *env, char *name)
 	int		offset;
 	int		fd;
 
+	if (!(env->new_map.name = get_file_name(name)))
+		return (-1);
 	gen_path(path, name);
 	if ((fd = open(path, O_RDONLY)) == -1)
 	{
@@ -63,5 +81,6 @@ int		import_maped_map(t_edit_env *env, char *name)
 	env->new_map.flat = file;
 	if (!flat_to_matrice(&env->new_map, offset, len))
 		return (-1);
+	munmap(file, len);
 	return (0);
 }
