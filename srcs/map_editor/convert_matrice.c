@@ -71,20 +71,15 @@ static int		get_matrice_size(t_ed_map *env, int len)
 	x = 0;
 	y = 0;
 	z = 0;
-	(void)env;
 	while (i < len)
 	{
-		printf("0 : i == %d\n", i);
 		while (i < len && env->flat[i] != 126)
 		{
 			i++;
 			x++;
 		}
-		printf("1 : i == %d\n", i);
-		// sep lignes
 		if (env->flat[i] == 126 && i < len - 1 && env->flat[i + 1] != 126)
 		{
-			printf("sep lignes (x = %d | w = %d)\n", x, env->width);
 			if (env->width == 0)
 				env->width = x;
 			else if (env->width != x)
@@ -92,10 +87,8 @@ static int		get_matrice_size(t_ed_map *env, int len)
 			x = 0;
 			z++;
 		}
-		// sep matrices
 		else if (env->flat[i] == 126 && i < len - 1 && env->flat[i + 1] == 126)
 		{
-			printf("sep matrices (z = %d | d = %d)\n", z, env->depth);
 			if (env->depth == 0)
 				env->depth = z;
 			else if (env->depth != z)
@@ -106,10 +99,7 @@ static int		get_matrice_size(t_ed_map *env, int len)
 			i++;
 		}
 		else if (i != len)
-		{
-			printf("sep not found (i == %d | len == %d)\n", i, len);
-			return (0); // 126 not found
-		}
+			return (0);
 		i++;
 	}
 	env->depth++;
@@ -137,12 +127,9 @@ static void		stock_matrice(t_ed_map *env)
 				while (env->flat[i] == 126)
 					++i;
 				env->map[w][h][d] = env->flat[i];
-				printf("%d ", env->flat[i]);
 				++i;
 			}
-			printf("\n");
 		}
-		printf("\n\n");
 	}
 }
 
@@ -158,7 +145,6 @@ int				flat_to_matrice(t_ed_map *env, int offset, int len)
 		env->flat -= offset;
 		return (0);
 	}
-	printf("SIZE : %d %d %d\n", env->width, env->height, env->depth);
 	stock_matrice(env);
 	env->flat -= offset;
 //	print_matrice(env, len);
