@@ -81,7 +81,7 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 	&& mouse_y > pos.y && mouse_y < pos.y + rect_d.y)
 		s->mouse_index = i;
 	else if (mouse_x < s->o.x || mouse_x > s->o.x + s->d.x
-	|| mouse_y < s->o.y || mouse_y > s->o.y + s->d.y)
+	|| mouse_y < s->o.y || mouse_y > s->o.y + s->nb_case * s->case_size)
 		s->mouse_index = -1;
 }
 
