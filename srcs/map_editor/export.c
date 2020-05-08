@@ -46,8 +46,6 @@ static char	*add_matrice(t_edit_env *env, char *header, int *len)
 		free(header);
 		return (NULL);
 	}
-//	if (!(*file = ft_strjoin(header, env->new_map.flat)))
-//		return (-1);
 	if (!(file = ft_strnew(*len + matrice_len)))
 		return (NULL);
 	while (i < *len)
@@ -77,7 +75,6 @@ int			export_maped_map(t_edit_env *env)
 	if (write_header(&header, env->new_map.name))
 		return (-1);
 	len = ft_strlen(header);
-	printf("header size : %d\n", len);
 	gen_path(path, env->new_map.name);
 	if (!(str = add_matrice(env, header, &len)))
 		return (-1);
