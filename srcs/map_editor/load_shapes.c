@@ -3,12 +3,15 @@
 int			create_cube(t_env *env, t_mesh *new, char type)
 {
 	t_mesh		*mesh;
+	int			*pos;
 	t_triangle	t;
 	int			i;
 
 	i = 0;
 	new->type = get_block_type(env, new, type);
 	mesh = dyacc(&env->maps[SCENE_CUBE].meshs, 0);
+	pos = new->m_pos;
+	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = type;
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);
 	while (i < mesh->tris.nb_cells)

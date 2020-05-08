@@ -80,7 +80,7 @@ static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 	new.yaw = 0;
 	new.roll = 0;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
-	if (ft_inbounds(type, 0, 31) && create_slope_north(env, &new, type))
+	if (ft_inbounds(type, 0, 31) && create_cube(env, &new, type))
 		return (-1);
 //	else if (ft_inbounds(type, 32, 63) && create_slope_north(env, &new, type))
 //		return (-1);
