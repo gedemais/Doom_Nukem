@@ -1,5 +1,5 @@
 #include "main.h"
-
+/*
 static void		print_matrice(t_ed_map *env, int len)
 {
 	int		i;
@@ -14,7 +14,7 @@ static void		print_matrice(t_ed_map *env, int len)
 		i++;
 	}
 	printf("------------------------------------------\n");
-}
+}*/
 
 static void		copy_matrice(t_ed_map *env, int *len)
 {
@@ -54,7 +54,7 @@ int			flat_map(t_ed_map *env, int *len)
 	if (!(env->flat = (char *)ft_memalloc((sizeof(char) * (size + 1)))))
 		return (0);
 	copy_matrice(env, len);
-	print_matrice(env, *len);
+	//print_matrice(env, *len);
 	return (1);
 }
 

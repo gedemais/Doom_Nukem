@@ -101,6 +101,7 @@ int			put_block(t_env *env)
 		return (0);
 	new = get_blockindex(&env->edit_env.map, pos, &m_index);
 	new->type = env->edit_env.current_bt + 1;
+	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = new->type;
 	while (i < new->tris.nb_cells)
 	{
 		t = dyacc(&new->tris, i);
