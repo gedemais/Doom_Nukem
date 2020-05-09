@@ -11,6 +11,8 @@
 # define MAP_MAGIC_NUMBER 0x12ff8969
 # define PUT_BLOCK_DELAY 10
 
+# define CG_COLOR 0xffffff
+
 # define NB_CUBES_ICONES 22
 
 # define SCROLL_FILE_FONT FONT_ARIAL
@@ -87,7 +89,10 @@ enum	e_blocs_textures_ids
 enum	e_bloc_type
 {
 	BC_CUBE,
-	BC_SLOPE,
+	BC_SLOPE_NORD,
+	BC_SLOPE_SUD,
+	BC_SLOPE_OUEST,
+	BC_SLOPE_EST,
 	BC_OBJ,
 	BC_MAX
 };
@@ -180,13 +185,17 @@ int					flat_to_matrice(t_ed_map *env, int offset, int len);
 
 // Blocks
 int					create_cube(t_env *env, t_mesh *new, char type);
-int					create_slope_north(t_env *env, t_mesh *new, char type);
+int					create_slope(t_env *env, t_mesh *new, char type);
 int					get_block_type(t_env *env, t_mesh *new, char type);
 void				translate_triangle(t_mesh *new, t_triangle *t);
+
+// Blocks categorys / types
+void				switch_bloc_category(t_env *env, int key);
 
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
 int					render_pallet(t_env *env);
+void				draw_cg_pallet(t_env *env);
 void				render_cube_pallet(t_env *env, t_cube_pallet *pallet, t_point o);
 
 // Scroll

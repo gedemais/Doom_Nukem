@@ -35,6 +35,27 @@ static void	switch_cube_block_type(t_env *env, t_events *e)
 	}
 }
 
+void	switch_bloc_category(t_env *env, int key)
+{
+	char	*bc;
+
+	bc = &env->edit_env.current_bc;
+	if (key == KEY_DOWN)
+	{
+		if (*bc + 1 >= BC_MAX)
+			*bc = BC_CUBE;
+		else
+			*bc += 1;
+	}
+	else if (key == KEY_UP)
+	{
+		if (*bc - 1 < BC_CUBE)
+			*bc = BC_MAX - 1;
+		else
+			*bc -= 1;
+	}
+}
+
 static void	handle_mouse(t_env *env, t_events *e)
 {
 	static int	put_delay = PUT_BLOCK_DELAY;
@@ -79,6 +100,7 @@ int		maped_creative(t_env *env)
 	env->mid.mesh = NULL;
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
+	draw_cg_pallet(env);
 	render_pallet(env);
 	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
