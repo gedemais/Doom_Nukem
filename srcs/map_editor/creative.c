@@ -5,7 +5,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 {
 	t_vec3d		f;
 	t_vec3d		r;
-f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
+	f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, f.w}, env->cam.stats.aspect_ratio); 
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
