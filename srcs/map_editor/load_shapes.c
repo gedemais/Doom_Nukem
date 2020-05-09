@@ -39,15 +39,31 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 	return (0);
 }
 
-int		create_slope_north(t_env *env, t_mesh *new, char type)
+static int	get_slope_obj(char type)
+{
+	if (ft_inbounds((int)type, 32, 63))
+		return (SCENE_PENTE_NORD);
+	else if (ft_inbounds((int)type, 64, 95))
+		return (SCENE_PENTE_SUD);
+	else if (ft_inbounds((int)type, 96, 127))
+		return (SCENE_PENTE_OUEST);
+	else if (ft_inbounds((int)type, 128, 159))
+		return (SCENE_PENTE_EST);
+	return (-1);
+}
+
+int		create_slope(t_env *env, t_mesh *new, char type)
 {
 	t_mesh		*mesh;
 	t_triangle	t;
+	int			obj;
 	int			i;
 
 	i = 0;
 	new->type = get_block_type(env, new, type);
-	mesh = dyacc(&env->maps[SCENE_PENTE_NORD].meshs, 0);
+	if ((obj = get_slope_obj(type)))
+		return (-1);
+	mesh = dyacc(&env->maps[obj].meshs, 0);
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);
 	while (i < mesh->tris.nb_cells)

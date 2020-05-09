@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/08 15:57:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/09 16:26:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		key_press_maped(int key, void *param)
 	sc = env->edit_env.sub_context;
 	if (key == KEY_ESCAPE)
 		exit(EXIT_SUCCESS);
+	if (sc == MAPED_SC_CREATIVE && (key == KEY_UP || key == KEY_DOWN))
+		switch_bloc_category(env, key);
 	return (0);
 }
 
