@@ -11,6 +11,7 @@ void		*dyacc(t_dynarray *arr, int index)
 void		free_dynarray(t_dynarray *arr)
 {
 	free(arr->c);
+	free(arr->tmp);
 	ft_memset(arr, 0, sizeof(t_dynarray));
 }
 
@@ -26,7 +27,6 @@ static int	start_size(int n)
 
 void		clear_dynarray(t_dynarray *arr)
 {
-	//ft_memset(arr->c, 0, arr->byte_size);
 	arr->nb_cells = 0;
 }
 

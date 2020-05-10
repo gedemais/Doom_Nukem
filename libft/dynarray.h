@@ -1,7 +1,7 @@
 #ifndef DYNARRAY_H
 # define DYNARRAY_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <stdbool.h>
 
 typedef struct	s_dynarray
@@ -14,12 +14,16 @@ typedef struct	s_dynarray
 }				t_dynarray;
 
 int				init_dynarray(t_dynarray *arr, int cell_size, int nb_cells);
-void			free_dynarray(t_dynarray *arr);
+void			clear_dynarray(t_dynarray *arr);
 void			*dyacc(t_dynarray *arr, int index);
 
-void			clear_dynarray(t_dynarray *arr);
+int				check_space(t_dynarray *arr);
+void			free_dynarray(t_dynarray *arr);
+
 int				pop_dynarray(t_dynarray *arr, bool front);
 int				push_dynarray(t_dynarray *arr, void *src, bool back);
-
+int				replace_dynarray_cell(t_dynarray *arr, void *src, int index);
+int				insert_dynarray(t_dynarray *arr, void *src, int index);
+int				extract_dynarray(t_dynarray *arr, int index);
 
 #endif
