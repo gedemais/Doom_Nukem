@@ -41,7 +41,6 @@ static t_mesh	*get_blockindex(t_map *map, int *pos, int *m_index)
 			break ;
 		}
 	}
-	*m_index = 0;
 	return (mesh);
 }
 
@@ -93,7 +92,7 @@ int			del_block(t_env *env)
 int			put_block(t_env *env)
 {
 	t_mesh		*new;
-	t_triangle	*t;
+	//t_triangle	*t;
 	int			pos[3];
 	int			m_index;
 	int			i;
@@ -105,12 +104,11 @@ int			put_block(t_env *env)
 	new = get_blockindex(&env->edit_env.map, pos, &m_index);
 	new->type = env->edit_env.current_bt + 1;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = new->type;
-	while (i < new->tris.nb_cells)
-	{
-		t = dyacc(&new->tris, i);
-		t->sp = new->type;
-		i++;
-	}
+
+	free_dynarray(&new->tris);
+	if (env->edit_env.current_bc == BC_CUBE)
+		create_cube(env, new, new->type);
+
 	attribute_mesh(&env->edit_env.map, m_index);
 	return (0);
 }
