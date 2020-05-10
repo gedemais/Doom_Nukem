@@ -14,6 +14,7 @@
 # define CG_COLOR 0xffffff
 
 # define NB_CUBES_ICONES 22
+# define NB_SLOPES_ICONES 21
 
 # define SCROLL_FILE_FONT FONT_ARIAL
 # define MAX_MAP_PATH_LEN 128
@@ -194,9 +195,9 @@ void				switch_bloc_category(t_env *env, int key);
 
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
-int					render_pallet(t_env *env);
+int					render_pallets(t_env *env);
+void				render_pallet(t_env *env, t_cube_pallet *pallet, t_point o, char bc);
 void				draw_cg_pallet(t_env *env);
-void				render_cube_pallet(t_env *env, t_cube_pallet *pallet, t_point o);
 
 // Scroll
 int					init_maped_scroll_file(t_env *env);
@@ -208,6 +209,7 @@ int					put_block(t_env *env);
 int					del_block(t_env *env);
 void				del_door(t_env *env);
 void				attribute_mesh(t_map *scene, int index);
+void				switch_block_type(t_env *env, t_events *e);
 
 // Saves
 int					write_infile(char *f_path, char *str, int len, bool token);

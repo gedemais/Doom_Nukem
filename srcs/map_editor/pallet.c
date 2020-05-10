@@ -28,13 +28,36 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
-static void	draw_pallet_bbox(t_env *env, int nb_icones, t_point *origin)
+static int	count_icones(t_cube_pallet *p, char bc)
+{
+	unsigned int	i;
+	int				ret;
+
+	i = 0;
+	ret = 0;
+	while (i < BTXT_MAX)
+	{
+		if (bc == BC_CUBE && p[i].cube)
+			ret++;
+		else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST) && p[i].slope)
+			ret++;
+		else if (bc == BC_OBJ && p[i].obj)
+			ret++;
+		i++;
+	}
+	return (ret);
+}
+
+static void	draw_pallet_bbox(t_env *env, t_point *origin, char bc)
 {
 	t_point	o;
 	t_point	dims;
 	t_point	s_dims;
 	int		offset;
+	int		nb_icones;
 
+	if (!(nb_icones = count_icones(env->edit_env.pallet, bc)))
+		return ;
 	offset = nb_icones * 34;
 	o = (t_point){env->data.half_wdt - (offset / 2), 600}; // bbox origin
 	*origin = o;
@@ -42,6 +65,7 @@ static void	draw_pallet_bbox(t_env *env, int nb_icones, t_point *origin)
 	s_dims = (t_point){2, 34};
 
 	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // top
+
 	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff); // sides
 	o.x += offset;
 	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff);
@@ -51,15 +75,14 @@ static void	draw_pallet_bbox(t_env *env, int nb_icones, t_point *origin)
 	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // bottom
 }
 
-int			render_pallet(t_env *env)
+int			render_pallets(t_env *env)
 {
 	t_point		o;
+	char		bc;
 
-	if (env->edit_env.current_bc == BC_CUBE)
-	{
-		draw_pallet_bbox(env, NB_CUBES_ICONES, &o);
-		render_cube_pallet(env, env->edit_env.pallet, o);
-	}
+	bc = env->edit_env.current_bc;
+	draw_pallet_bbox(env, &o, bc);
+	render_pallet(env, env->edit_env.pallet, o, bc);
 	return (0);
 }
 

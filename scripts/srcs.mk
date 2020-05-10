@@ -45,6 +45,7 @@ SRCS_NAME =	main.c\
 			map_editor/pallet.c\
 			map_editor/file.c\
 			map_editor/listpath.c\
+			map_editor/switch_bt.c\
 			map_editor/render_pallet.c\
 			map_editor/routines.c\
 			map_editor/input_field.c\

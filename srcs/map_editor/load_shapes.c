@@ -46,10 +46,10 @@ static int	get_slope_obj(char type)
 	else if (ft_inbounds((int)type, 64, 95))
 		return (SCENE_PENTE_SUD);
 	else if (ft_inbounds((int)type, 96, 127))
-		return (SCENE_PENTE_OUEST);
-	else if (ft_inbounds((int)type, 128, 159))
 		return (SCENE_PENTE_EST);
-	return (-1);
+	else if (ft_inbounds((int)type, 128, 159))
+		return (SCENE_PENTE_OUEST);
+	return (0);
 }
 
 int		create_slope(t_env *env, t_mesh *new, char type)
@@ -61,8 +61,9 @@ int		create_slope(t_env *env, t_mesh *new, char type)
 
 	i = 0;
 	new->type = get_block_type(env, new, type);
-	if ((obj = get_slope_obj(type)))
+	if (!(obj = get_slope_obj(type)))
 		return (-1);
+	printf("obj == %d\n", obj);
 	mesh = dyacc(&env->maps[obj].meshs, 0);
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);

@@ -84,6 +84,8 @@ int			del_block(t_env *env)
 
 	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
 	mesh = env->mid.mesh;
+	if (!mesh)
+		return (0);
 	mesh->type = BTXT_NONE;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
 	return (0);
@@ -92,12 +94,11 @@ int			del_block(t_env *env)
 int			put_block(t_env *env)
 {
 	t_mesh		*new;
-	//t_triangle	*t;
 	int			pos[3];
 	int			m_index;
-	int			i;
+	char		bc;
 
-	i = 0;
+	bc = env->edit_env.current_bc;
 	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
 	if (replace_with_face(env, pos, env->mid.face_i))
 		return (0);
@@ -106,9 +107,13 @@ int			put_block(t_env *env)
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = new->type;
 
 	free_dynarray(&new->tris);
-	if (env->edit_env.current_bc == BC_CUBE)
+	if (bc == BC_CUBE)
 		create_cube(env, new, new->type);
-
+	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
+	{
+		PUT
+		create_slope(env, new, new->type);
+	}
 	attribute_mesh(&env->edit_env.map, m_index);
 	return (0);
 }

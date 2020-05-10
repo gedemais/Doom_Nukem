@@ -18,22 +18,6 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 }
 
 //static void	switch_slope_block_type(t_env *env, t_events *e)
-static void	switch_cube_block_type(t_env *env, t_events *e)
-{
-	char	*bt;
-
-	bt = &env->edit_env.current_bt;
-	if (e->buttons[BUTTON_SCROLL_UP])
-	{
-		if (env->edit_env.current_bc == BC_CUBE)
-			*bt = (*bt >= NB_CUBES_ICONES - 1) ? 0 : *bt + 1;
-	}
-	else if (e->buttons[BUTTON_SCROLL_DOWN])
-	{
-		if (env->edit_env.current_bc == BC_CUBE)
-			*bt = (*bt == BTXT_NONE) ? NB_CUBES_ICONES - 1 : *bt - 1;
-	}
-}
 
 void	switch_bloc_category(t_env *env, int key)
 {
@@ -63,17 +47,22 @@ static void	handle_mouse(t_env *env, t_events *e)
 
 	if (!e->buttons[BUTTON_LCLIC])
 		put_delay = 0;
+
 	if (!e->buttons[BUTTON_RCLIC])
 		del_delay = 0;
+
 	if (e->buttons[BUTTON_LCLIC] && env->mid.mesh && put_delay <= 0
 		&& (put_delay = PUT_BLOCK_DELAY))
 		put_block(env);
 	else if (e->buttons[BUTTON_RCLIC] && del_delay <= 0
 		&& (del_delay = PUT_BLOCK_DELAY))
 		del_block(env);
-	switch_cube_block_type(env, e);
+
+	switch_block_type(env, e);
+
 	e->buttons[BUTTON_SCROLL_UP] = false;
 	e->buttons[BUTTON_SCROLL_DOWN] = false;
+
 	put_delay--;
 	del_delay--;
 }
@@ -101,7 +90,7 @@ int		maped_creative(t_env *env)
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
 	draw_cg_pallet(env);
-	render_pallet(env);
+	render_pallets(env);
 	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
