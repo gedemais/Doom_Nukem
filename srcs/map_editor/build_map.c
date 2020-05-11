@@ -12,8 +12,8 @@ void			free_matrice(t_ed_map *env)
 	{
 		j = -1;
 		while (**env->map && ++j < env->height)
-			ft_strdel(&env->map[i][j]);
-		ft_strdel(env->map[i]);
+			ft_strdel((char**)&env->map[i][j]);
+		ft_strdel((char**)&env->map[i]);
 	}
 	free(env->map);
 	env->map = NULL;
@@ -26,18 +26,17 @@ int			init_matrice(t_ed_map *env)
 	int     error;
 
 	error = 0;
-	if (!(env->map = (char ***)ft_memalloc(sizeof(char **) * env->width)))
+	if (!(env->map = (unsigned char ***)ft_memalloc(sizeof(unsigned char **) * env->width)))
 		error = 1;
 	x = -1;
 	while (error == 0 && ++x < env->width)
 	{
-		if (!(env->map[x] = (char **)ft_memalloc(sizeof(char *) * env->height)))
+		if (!(env->map[x] = (unsigned char **)ft_memalloc(sizeof(unsigned char *) * env->height)))
 			error = 1;
 		y = -1;
 		while (error == 0 && ++y < env->height)
 		{
-			if (!(env->map[x][y] = (char *)ft_memalloc(sizeof(char)
-							* env->depth)))
+			if (!(env->map[x][y] = (unsigned char *)ft_memalloc(sizeof(unsigned char) * env->depth)))
 				error = 1;
 		}
 	}

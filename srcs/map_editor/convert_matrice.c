@@ -35,7 +35,7 @@ int			flat_map(t_ed_map *env, int *len)
 		|| env->width + env->height + env->depth == 0)
 		return (0);
 	size = (env->width + 1) * (env->height + 2) * env->depth;
-	if (!(env->flat = (char *)ft_memalloc((sizeof(char) * (size + 1)))))
+	if (!(env->flat = (unsigned char *)ft_memalloc((sizeof(unsigned char) * (size + 1)))))
 		return (0);
 	copy_matrice(env, len);
 	return (1);

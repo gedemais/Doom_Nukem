@@ -1,29 +1,5 @@
 #include "main.h"
 
-static int	replace_with_face(t_env *env, int *pos, char face)
-{
-	int		i;
-
-	i = -1;
-	if (face == FACE_OUEST)
-		pos[0]++;
-	else if (face == FACE_EST)
-		pos[0]--;
-	else if (face == FACE_UP)
-		pos[1]++;
-	else if (face == FACE_BOTTOM)
-		pos[1]--;
-	else if (face == FACE_NORD)
-		pos[2]--;
-	else if (face == FACE_SUD)
-		pos[2]++;
-	if (!ft_inbounds(pos[0], 0, env->edit_env.new_map.width - 1)
-			|| !ft_inbounds(pos[1], 0, env->edit_env.new_map.height - 1)
-			|| !ft_inbounds(pos[2], 0, env->edit_env.new_map.depth - 1))
-		return (1);
-	return (0);
-}
-
 static t_mesh	*get_blockindex(t_map *map, int *pos, int *m_index)
 {
 	t_mesh	*mesh;
@@ -100,13 +76,14 @@ int			put_block(t_env *env)
 
 	bc = env->edit_env.current_bc;
 	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
-	if (replace_with_face(env, pos, env->mid.face_i))
+	if (replace_by_face(env, pos, env->mid.face_i, env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]]))
 		return (0);
 	new = get_blockindex(&env->edit_env.map, pos, &m_index);
 	new->type = env->edit_env.current_bt + 1;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = new->type;
 
 	free_dynarray(&new->tris);
+
 	if (bc == BC_CUBE)
 		create_cube(env, new, new->type);
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))

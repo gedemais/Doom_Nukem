@@ -70,7 +70,7 @@ void	attribute_mesh(t_map *scene, int index)
 	}
 }
 
-static int	create_block(t_env *env, t_map *scene, char type, int *pos)
+static int	create_block(t_env *env, t_map *scene, unsigned char type, int *pos)
 {
 	t_mesh	new;
 	int		i;
@@ -80,16 +80,11 @@ static int	create_block(t_env *env, t_map *scene, char type, int *pos)
 	new.yaw = 0;
 	new.roll = 0;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
-	if (ft_inbounds(type, 0, 31) && create_cube(env, &new, type))
+	if ((ft_inbounds(type, 0, 31) || ft_inbounds(type, 160, 191))
+		&& create_cube(env, &new, type))
 		return (-1);
-//	else if (ft_inbounds(type, 32, 63) && create_slope_north(env, &new, type))
-//		return (-1);
-	/*	else if (ft_inbounds(type, 64, 95))
-		return (create_slope_south(env, &new, type));
-		else if (ft_inbounds(type, 96, 127))
-		return (create_slope_west(env, &new, type));
-		else if (ft_inbounds(type, 128, 159))
-		return (create_slope_est(env, &new, type));*/
+	else if (ft_inbounds(type, 32, 159) && create_slope(env, &new, type))
+		return (-1);
 	if (push_dynarray(&scene->meshs, &new, false))
 		return (-1);
 	attribute_mesh(scene, scene->nmesh);

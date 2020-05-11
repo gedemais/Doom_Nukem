@@ -58,6 +58,16 @@ enum	e_bloc_faces_id
 	FACE_MAX
 };
 
+enum	e_slope_faces_id
+{
+	SFACE_SLOPE,
+	SFACE_LEFT,
+	SFACE_RIGHT,
+	SFACE_FRONT,
+	SFACE_BOTTOM,
+	SFACE_MAX
+};
+
 enum	e_blocs_textures_ids
 {
 	BTXT_NONE,
@@ -123,9 +133,9 @@ struct				s_cube_pallet
 
 struct				s_ed_map
 {
-	char		***map;
-	char		*flat;
-	char		*name;
+	unsigned char	***map;
+	unsigned char	*flat;
+	char			*name;
 	int			width;
 	int			height;
 	int			depth;
@@ -185,10 +195,11 @@ int					flat_map(t_ed_map *env, int *len);
 int					flat_to_matrice(t_ed_map *env, int offset, int len);
 
 // Blocks
-int					create_cube(t_env *env, t_mesh *new, char type);
+int					create_cube(t_env *env, t_mesh *new, unsigned char type);
 int					create_slope(t_env *env, t_mesh *new, unsigned char type);
 int					get_block_type(t_env *env, t_mesh *new, unsigned char type);
 void				translate_triangle(t_mesh *new, t_triangle *t);
+int					replace_by_face(t_env *env, int *pos, char face, unsigned char type);
 
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);

@@ -1,6 +1,36 @@
 #include "main.h"
 
-int			create_cube(t_env *env, t_mesh *new, char type)
+static void	attribute_cube_faces(t_mesh *new, char bc)
+{
+	if (bc == BC_CUBE)
+	{
+		((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
+		((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
+		((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
+		((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
+		((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
+		((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
+		((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_OUEST;
+		((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_OUEST;
+		((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_UP;
+		((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
+		((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
+		((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
+	}
+	else
+	{
+		((t_triangle*)dyacc(&new->tris, 4))->face_i = SFACE_SLOPE;
+		((t_triangle*)dyacc(&new->tris, 7))->face_i = SFACE_SLOPE;
+		((t_triangle*)dyacc(&new->tris, 2))->face_i = SFACE_LEFT;
+		((t_triangle*)dyacc(&new->tris, 1))->face_i = SFACE_RIGHT;
+		((t_triangle*)dyacc(&new->tris, 3))->face_i = SFACE_BOTTOM;
+		((t_triangle*)dyacc(&new->tris, 0))->face_i = SFACE_FRONT;
+		((t_triangle*)dyacc(&new->tris, 5))->face_i = SFACE_FRONT;
+		((t_triangle*)dyacc(&new->tris, 6))->face_i = SFACE_BOTTOM;
+	}
+}
+
+int			create_cube(t_env *env, t_mesh *new, unsigned char type)
 {
 	t_mesh		*mesh;
 	int			*pos;
@@ -24,18 +54,7 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 			return (-1);
 		i++;
 	}
-	((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
-	((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
-	((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
-	((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_OUEST;
-	((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
-	((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
-	((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
+	attribute_cube_faces(new, BC_CUBE);
 	return (0);
 }
 
@@ -77,5 +96,6 @@ int		create_slope(t_env *env, t_mesh *new, unsigned char type)
 			return (-1);
 		i++;
 	}
+	attribute_cube_faces(new, BC_SLOPE_NORD);
 	return (0);
 }

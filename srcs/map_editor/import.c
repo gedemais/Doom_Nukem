@@ -78,7 +78,7 @@ int			import_maped_map(t_edit_env *env, char *name)
 	close(fd);
 	if (check_header(file, name, &offset))
 		return (-1);
-	env->new_map.flat = file;
+	env->new_map.flat = (unsigned char*)file;
 	if (!flat_to_matrice(&env->new_map, offset, len))
 		return (-1);
 	munmap(file, len);
