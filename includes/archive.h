@@ -1,0 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   archive.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/08 01:57:47 by grudler           #+#    #+#             */
+/*   Updated: 2020/05/11 17:45:21 by grudler          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CONCAT_H
+# define CONCAT_H
+
+# define BOUNDARY "=#=#=#=#=#=#=#=#=#=#"
+
+int		free_stuff(void *ptrs[4]);
+int		archive_directory(char *dir_path);
+int		unarchive_directory(char *archive_path);
+
+#endif
