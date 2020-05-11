@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:35:15 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 18:48:16 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/11 19:07:27 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		createFolders(char *path)
 	char *subPath;
 
 	tmp = path;
-	while (tmp - path < ft_strlen(path))
+	while ((size_t)(tmp - path) < ft_strlen(path))
 	{
 		if (*tmp == '/')
 		{

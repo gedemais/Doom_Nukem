@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:54:03 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 18:41:02 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/11 19:03:46 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		readFolder(char *dir_path, int fd_archi)
 	return (errno == 0 ? 0 : -1);
 }
 
-int		archive_directory(char *dir_path):
+int		archive_directory(char *dir_path)
 {
 	int fd_archi;
 
