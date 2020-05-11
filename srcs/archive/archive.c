@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:54:03 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 17:45:50 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/11 18:41:02 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		concatFiles(char *path, int fd_archi)
 	if (!(contain = read_file(fd_file, &len)))
 		return(free_stuff((void*[4]){NULL, NULL, &fd_file, NULL}));
 	close(fd_file);
+	unlink(path);
 	if (len)
 	{
 		write(fd_archi, contain, len);
@@ -56,7 +57,10 @@ int		readFolder(char *dir_path, int fd_archi)
 			if (dirent->d_type == DT_REG && concatFiles(path, fd_archi))
 				return(free_stuff((void*[4]){dir, &fd_archi, NULL, path}));
 			else if (dirent->d_type == DT_DIR)
+			{
 				readFolder(path, fd_archi);
+				rmdir(path);
+			}
 			free(path);
 		}
 	}
@@ -73,5 +77,6 @@ int		archive_directory(char *dir_path):
 	if (readFolder(dir_path, fd_archi))
 		return(-1);
 	close(fd_archi);
+	rmdir(dir_path);
 	return (0);
 }
