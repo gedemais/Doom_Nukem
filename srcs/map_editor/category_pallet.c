@@ -47,9 +47,9 @@ static void	draw_top_n_bottom(t_env *env, t_point o, t_point dims, t_point v)
 
 void		draw_cg_pallet(t_env *env)
 {
-	static char				*strings[BC_MAX] = {"cube", "pente nord",
-										"pente sud", "pente ouest", "pente est",
-										"gameplay"};
+	static char				*strings[BC_MAX] = {"cube", "pente est",
+													"pente ouest", "pente nord",
+													"pente sud", "gameplay"};
 	t_point			dims;
 	t_point			o;
 	t_point			v;
