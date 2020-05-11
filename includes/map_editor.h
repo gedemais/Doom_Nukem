@@ -141,7 +141,7 @@ struct				s_edit_env
 	t_map			map;
 	t_scroll		scroll;
 	char			current_bc;
-	char			current_bt;
+	unsigned char	current_bt;
 	int				error;
 	int				sub_context;
 };
@@ -186,12 +186,9 @@ int					flat_to_matrice(t_ed_map *env, int offset, int len);
 
 // Blocks
 int					create_cube(t_env *env, t_mesh *new, char type);
-int					create_slope(t_env *env, t_mesh *new, char type);
-int					get_block_type(t_env *env, t_mesh *new, char type);
+int					create_slope(t_env *env, t_mesh *new, unsigned char type);
+int					get_block_type(t_env *env, t_mesh *new, unsigned char type);
 void				translate_triangle(t_mesh *new, t_triangle *t);
-
-// Blocks categorys / types
-void				switch_bloc_category(t_env *env, int key);
 
 // Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);

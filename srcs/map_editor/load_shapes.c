@@ -39,7 +39,7 @@ int			create_cube(t_env *env, t_mesh *new, char type)
 	return (0);
 }
 
-static int	get_slope_obj(char type)
+static int	get_slope_obj(unsigned char type)
 {
 	if (ft_inbounds((int)type, 32, 63))
 		return (SCENE_PENTE_NORD);
@@ -52,7 +52,7 @@ static int	get_slope_obj(char type)
 	return (0);
 }
 
-int		create_slope(t_env *env, t_mesh *new, char type)
+int		create_slope(t_env *env, t_mesh *new, unsigned char type)
 {
 	t_mesh		*mesh;
 	t_triangle	t;
@@ -60,10 +60,9 @@ int		create_slope(t_env *env, t_mesh *new, char type)
 	int			i;
 
 	i = 0;
-	new->type = get_block_type(env, new, type);
 	if (!(obj = get_slope_obj(type)))
 		return (-1);
-	printf("obj == %d\n", obj);
+	new->type = get_block_type(env, new, type);
 	mesh = dyacc(&env->maps[obj].meshs, 0);
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);

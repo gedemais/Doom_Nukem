@@ -17,27 +17,32 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 }
 
-//static void	switch_slope_block_type(t_env *env, t_events *e)
-
-void	switch_bloc_category(t_env *env, int key)
+static void		switch_block_category(t_env *env, t_events *e)
 {
-	char	*bc;
+	static bool	on = true;
+	char		*bc;
 
 	bc = &env->edit_env.current_bc;
-	if (key == KEY_DOWN)
+	if (on && e->keys[KEY_DOWN])
 	{
 		if (*bc + 1 >= BC_MAX)
 			*bc = BC_CUBE;
 		else
 			*bc += 1;
+		env->edit_env.current_bt = *bc * 32;
+		on = false;
 	}
-	else if (key == KEY_UP)
+	else if (on && e->keys[KEY_UP])
 	{
 		if (*bc - 1 < BC_CUBE)
 			*bc = BC_MAX - 1;
 		else
 			*bc -= 1;
+		env->edit_env.current_bt = *bc * 32;
+		on = false;
 	}
+	else if (!e->keys[KEY_DOWN] && !e->keys[KEY_UP])
+		on = true;
 }
 
 static void	handle_mouse(t_env *env, t_events *e)
@@ -58,8 +63,6 @@ static void	handle_mouse(t_env *env, t_events *e)
 		&& (del_delay = PUT_BLOCK_DELAY))
 		del_block(env);
 
-	switch_block_type(env, e);
-
 	e->buttons[BUTTON_SCROLL_UP] = false;
 	e->buttons[BUTTON_SCROLL_DOWN] = false;
 
@@ -78,6 +81,9 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	if (env->events.keys[KEY_P])
 		export_maped_map(&env->edit_env);
+
+	switch_block_category(env, e);
+	switch_block_type(env, e);
 }
 
 int		maped_creative(t_env *env)

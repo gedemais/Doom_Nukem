@@ -38,7 +38,7 @@ static bool		full_neighbours(t_ed_map *map, int *pos)
 }
 
 
-int		get_block_type(t_env *env, t_mesh *new, char type)
+int		get_block_type(t_env *env, t_mesh *new, unsigned char type)
 {
 	int		ret;
 

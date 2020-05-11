@@ -110,10 +110,7 @@ int			put_block(t_env *env)
 	if (bc == BC_CUBE)
 		create_cube(env, new, new->type);
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
-	{
-		PUT
 		create_slope(env, new, new->type);
-	}
 	attribute_mesh(&env->edit_env.map, m_index);
 	return (0);
 }

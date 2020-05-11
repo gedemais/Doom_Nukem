@@ -113,7 +113,7 @@ struct	s_mesh
 	int			index;
 	bool		textured;
 	bool		phy;
-	char		type;
+	unsigned char	type;
 };
 
 struct	s_map
