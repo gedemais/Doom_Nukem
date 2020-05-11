@@ -13,5 +13,6 @@ INCS_NAME=	main.h\
 			weapons.h\
 			text.h\
 			title_screen.h\
-			typedefs.h
+			typedefs.h\
+			archive.h
 

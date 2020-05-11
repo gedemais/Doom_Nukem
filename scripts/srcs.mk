@@ -109,4 +109,8 @@ SRCS_NAME =	main.c\
 			weapons/weapons.c\
 			weapons/ammos.c\
 			weapons/init_weapons.c\
-			weapons/reticule.c
+			weapons/reticule.c\
+			\
+			archive/archive.c\
+			archive/unarchive.c\
+			archive/archive_tools.c
