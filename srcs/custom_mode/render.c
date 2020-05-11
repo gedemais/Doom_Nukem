@@ -20,6 +20,7 @@ int			render_custom(void *param)
 	ft_memset(env->mlx.img_data, 0, sizeof(int) * WDT * HGT);
 	if (env->events.keys[KEY_M])
 		switch_context(env, C_TITLE_SCREEN);
+	custom_menu(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

@@ -1,26 +1,6 @@
 #include "main.h"
-/*
+
 int		init_custom_scroll_file(t_env *env)
-{
-	t_scroll	*s;
-
-	s = &env->edit_env.scroll;
-	if (!(s->list = listpath(MAPED_SAVE_PATH, ".map")))
-		return (-1);
-	s->max = ft_tablen(s->list);
-	s->d = (t_point){400, 800};
-	s->o = (t_point){100, 100};
-	s->color = 0xaaaaaa;
-	s->font = SCROLL_FILE_FONT;
-	s->case_size = 50;
-	s->mouse_index = -1;
-	s->nb_case = s->d.y / s->case_size - 1;
-	if (s->case_size > s->max)
-		s->nb_case = s->max;
-	return (0);
-}*/
-
-int		init_maped_scroll_file(t_env *env)
 {
 	t_scroll	*s;
 
@@ -40,6 +20,28 @@ int		init_maped_scroll_file(t_env *env)
 	return (0);
 }
 
+int		init_maped_scroll_file(t_env *env)
+{
+	t_scroll	*s;
+
+	s = &env->edit_env.scroll;
+	if (!(s->list = listpath(MAPED_SAVE_PATH, ".map")))
+		return (-1);
+	s->max = ft_tablen(s->list);
+	s->d = (t_point){400, 800};
+	s->o = (t_point){100, 100};
+	s->color = 0xaaaaaa;
+	s->font = SCROLL_FILE_FONT;
+	s->case_size = 50;
+	s->mouse_index = -1;
+	s->nb_case = s->d.y / s->case_size - 1;
+	if (s->case_size > s->max)
+		s->nb_case = s->max;
+	if (s->nb_case < 1)
+		s->nb_case = 1;
+	return (0);
+}
+
 static void		display_str(t_env *env, t_point police, int i)
 {
 	t_scroll		*s;
@@ -51,7 +53,7 @@ static void		display_str(t_env *env, t_point police, int i)
 	conf = ttf_config();
 	ft_bzero(conf->s, sizeof(unsigned char) * 1024);
 	if (s->max == 0)
-		ft_strlcpy((char *)conf->s, "no file found", 13);
+		ft_strlcpy((char *)conf->s, "No map found!", 13);
 	else
 	{
 		size = s->d.x / (conf->size + 10);
@@ -105,8 +107,6 @@ void		display_file(t_env *env)
 	t_scroll		*s;
 
 	s = &env->edit_env.scroll;
-	if (s->list == NULL)
-		return ;
 	s->current = s->current < 0 ? s->max : s->current;
 	s->current = s->current > s->max ? 0 : s->current;
 	i = -1;

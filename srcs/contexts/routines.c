@@ -27,10 +27,8 @@ void	ts_to_campaign(t_env *env)
 
 void	ts_to_custom(t_env *env)
 {
-	(void)env;
-//	if (init_custom_scroll_file(env))
-//		exit(1);
-//	mlx_mouse_hide();
+	if (init_custom_scroll_file(env))
+		exit(1);
 }
 
 void	ts_to_map_editor(t_env *env)

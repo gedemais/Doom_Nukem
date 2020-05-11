@@ -20,4 +20,7 @@ int					mouse_release_custom(int button, int x, int y, void *param);
 int					mouse_position_custom(int x, int y, void *param);
 int					render_custom(void *param);
 
+int					custom_menu(t_env *env);
+int					init_custom_scroll_file(t_env *env);
+
 #endif
