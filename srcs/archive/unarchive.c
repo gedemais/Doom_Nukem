@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:35:15 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 17:43:54 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/11 18:48:16 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int		unarchive_directory(char *archive_path)
 	if (readArchi(archi, len))
 		return(free_stuff((void*[4]){NULL, &fd_archi, NULL, NULL}));
 	close(fd_archi);
+	unlink(archive_path);
 	return (0);
 }
