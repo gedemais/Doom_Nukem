@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/04 00:19:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 14:38:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4]
 	*(int*)(&env->mlx.img_data[pos[3]]) = color;
 }
 
-static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simples[6])
+static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simples[6], bool textured)
 {
-	steps[0] = (txt->t_step * txt->txt_su);
-	steps[1] = (txt->t_step * txt->txt_eu);
-	steps[2] = (txt->t_step * txt->txt_sv);
-	steps[3] = (txt->t_step * txt->txt_ev);
+	if (textured)
+	{
+		steps[0] = (txt->t_step * txt->txt_su);
+		steps[1] = (txt->t_step * txt->txt_eu);
+		steps[2] = (txt->t_step * txt->txt_sv);
+		steps[3] = (txt->t_step * txt->txt_ev);
+	}
 	steps[4] = (txt->t_step * txt->txt_sw);
 	steps[5] = (txt->t_step * txt->txt_ew);
 	simples[0] = txt->txt_su;
@@ -55,12 +58,15 @@ static void	simplify_interpolation(t_texturizer *txt, float steps[6], float simp
 	simples[5] = 0.0f;
 }
 
-static void	update_expr(float steps[6], float simples[6])
+static void	update_expr(float steps[6], float simples[6], bool textured)
 {
-	simples[0] -= steps[0];
-	simples[1] += steps[1];
-	simples[2] -= steps[2];
-	simples[3] += steps[3];
+	if (textured)
+	{
+		simples[0] -= steps[0];
+		simples[1] += steps[1];
+		simples[2] -= steps[2];
+		simples[3] += steps[3];
+	}
 	simples[4] -= steps[4];
 	simples[5] += steps[5];
 }
@@ -77,7 +83,7 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 	txt->t_step = 1.0f / (txt->bx - txt->ax);
 	px = abs(i - 1) * WDT + j;
 	addr = px * 4;
-	simplify_interpolation(txt, steps, simples);
+	simplify_interpolation(txt, steps, simples, t.textured);
 	while (j < txt->bx)
 	{
 		if (t.textured)
@@ -86,7 +92,7 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 			txt->txt_v = simples[2] + simples[3];
 		}
 		txt->txt_w = simples[4] + simples[5];
-		update_expr(steps, simples);
+		update_expr(steps, simples, t.textured);
 		write_pixel(env, txt, &t, (int[4]){i, j, px, addr});
 		addr += 4;
 		px++;
