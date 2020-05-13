@@ -149,7 +149,6 @@ struct				s_edit_env
 	t_button		buttons[MAPED_MENU_BUTTON_MAX];
 	t_ed_map		new_map;
 	t_map			map;
-	t_scroll		scroll;
 	char			current_bc;
 	unsigned char	current_bt;
 	int				error;

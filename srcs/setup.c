@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 01:41:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 16:25:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int		init_contexts(t_env *env)
 	if (setup_ts(env))
 		return (-1);
 	if (setup_cmp(env))
+		return (-1);
+	if (setup_custom(env))
 		return (-1);
 	if (setup_medit(env))
 		return (-1);

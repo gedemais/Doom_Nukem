@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 17:17:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 18:18:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 
 # include "title_screen.h"
 # include "campaign.h"
-# include "custom.h"
 # include "map_editor.h"
+# include "custom.h"
 
 // TMP
 #define PUT ft_putstr("There\n"); fflush(stdout);
@@ -111,6 +111,7 @@ struct			s_env
 	t_mlx		mlx;
 	t_ts_env	ts_env;
 	t_camp_env	cmp_env;
+	t_custom_env	custom_env;
 	t_edit_env	edit_env;
 	t_events	events;
 	t_sound		sound;
@@ -120,9 +121,10 @@ struct			s_env
 	t_data		data;
 	t_physics	phy_env;
 	t_cam		cam;
+	t_scroll	scroll;
+	t_ttf		ttfs;
 	int			context;
 	int			scene;
-	t_ttf		ttfs;
 };
 
 int				setup(t_env *env);
@@ -178,6 +180,11 @@ int				mouse_press_dev(int button, int x, int y, void *param);
 int				mouse_release_dev(int button, int x, int y, void *param);
 int				mouse_position_dev(int x, int y, void *param);
 int				render_dev(void *param);
+
+/*
+** GUI
+*/
+int				init_scroll_file(t_env *env, char *path, char *extension);
 
 /*
 ** Singletons

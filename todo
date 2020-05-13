@@ -5,6 +5,7 @@ Geoffrey:
 - Finir le map_editor avec Maboye
 - Finir les armes (deplacement, flash lumineux du tir, cadence, son)
 - Mettre en place le mode custom avec Maboye
+- Reparer les chaines d'erreurs (switchs, routines, mallocs, parsing)
 - Adapter le rasterizer sur GPU
 
 Lise:

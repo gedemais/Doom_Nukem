@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/04 22:53:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 16:20:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_sound t_sound;
 
 typedef struct	s_button t_button;
 typedef struct	s_ts_env t_ts_env;
+typedef struct	s_custom_env t_custom_env;
 
 typedef struct	s_box t_box;
 typedef struct	s_collide t_collide;

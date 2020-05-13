@@ -1,31 +1,13 @@
 #include "main.h"
 
-int		init_custom_scroll_file(t_env *env)
+//int		free_scroll_file(t_env *env)
+
+int		init_scroll_file(t_env *env, char *path, char *extension)
 {
 	t_scroll	*s;
 
-	s = &env->edit_env.scroll;
-	if (!(s->list = listpath(MAPED_SAVE_PATH, ".map")))
-		return (-1);
-	s->max = ft_tablen(s->list);
-	s->d = (t_point){400, 800};
-	s->o = (t_point){100, 100};
-	s->color = 0xaaaaaa;
-	s->font = SCROLL_FILE_FONT;
-	s->case_size = 50;
-	s->mouse_index = -1;
-	s->nb_case = s->d.y / s->case_size - 1;
-	if (s->case_size > s->max)
-		s->nb_case = s->max;
-	return (0);
-}
-
-int		init_maped_scroll_file(t_env *env)
-{
-	t_scroll	*s;
-
-	s = &env->edit_env.scroll;
-	if (!(s->list = listpath(MAPED_SAVE_PATH, ".map")))
+	s = &env->scroll;
+	if (!(s->list = listpath(path, extension)))
 		return (-1);
 	s->max = ft_tablen(s->list);
 	s->d = (t_point){400, 800};
@@ -49,7 +31,7 @@ static void		display_str(t_env *env, t_point police, int i)
 	int				size;
 	t_ttf_config	*conf;
 
-	s = &env->edit_env.scroll;
+	s = &env->scroll;
 	conf = ttf_config();
 	ft_bzero(conf->s, sizeof(unsigned char) * 1024);
 	if (s->max == 0)
@@ -76,7 +58,7 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 	int			mouse_y;
 	t_scroll	*s;
 
-	s = &env->edit_env.scroll;
+	s = &env->scroll;
 	mouse_x = env->events.mouse_pos.x;
 	mouse_y = env->events.mouse_pos.y;
 	if (mouse_x > pos.x && mouse_x < pos.x + rect_d.x
@@ -89,12 +71,12 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 
 static void	events_scroll_file(t_env *env)
 {
-	if (env->edit_env.scroll.mouse_index > -1)
+	if (env->scroll.mouse_index > -1)
 	{
 		if (env->events.buttons[BUTTON_SCROLL_UP])
-			++env->edit_env.scroll.current;
+			++env->scroll.current;
 		else if (env->events.buttons[BUTTON_SCROLL_DOWN])
-			--env->edit_env.scroll.current;
+			--env->scroll.current;
 	}
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
@@ -106,7 +88,7 @@ void		display_file(t_env *env)
 	t_point			pos;
 	t_scroll		*s;
 
-	s = &env->edit_env.scroll;
+	s = &env->scroll;
 	s->current = s->current < 0 ? s->max : s->current;
 	s->current = s->current > s->max ? 0 : s->current;
 	i = -1;

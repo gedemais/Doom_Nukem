@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 04:59:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 17:19:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 18:24:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ void	ts_to_campaign(t_env *env)
 
 void	ts_to_custom(t_env *env)
 {
-	if (init_custom_scroll_file(env))
+	if (init_scroll_file(env, MAPED_SAVE_PATH, ".map"))
 		exit(1);
+	env->scroll.o = (t_point){25, 100};
+	env->scroll.d = (t_point){350, 500};
 }
 
 void	ts_to_map_editor(t_env *env)
 {
-	if (init_maped_scroll_file(env))
+	if (init_scroll_file(env, MAPED_SAVE_PATH, ".map"))
 		exit(1);
 }
 

@@ -25,7 +25,10 @@ SRCS_NAME =	main.c\
 			\
 			custom_mode/render.c\
 			custom_mode/events.c\
-			custom_mode/custom_menu.c\
+			custom_mode/menu.c\
+			custom_mode/play.c\
+			custom_mode/setup.c\
+			custom_mode/routines.c\
 			\
 			map_editor/build_map.c\
 			map_editor/block.c\
@@ -40,7 +43,7 @@ SRCS_NAME =	main.c\
 			map_editor/events.c\
 			map_editor/import.c\
 			map_editor/load_shapes.c\
-			map_editor/maped_menu.c\
+			map_editor/menu.c\
 			map_editor/map_to_scene.c\
 			map_editor/new_map.c\
 			map_editor/pallet.c\

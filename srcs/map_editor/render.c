@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 17:15:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/13 17:27:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	init_me_routines(int (*routines[C_MAX][C_MAX])(t_env*))
+static void	init_me_routines(int (*routines[MAPED_SC_MAX][MAPED_SC_MAX])(t_env*))
 {
 	routines[MAPED_SC_MENU][MAPED_SC_NEW_MAP] = me_menu_to_new_map;
 	routines[MAPED_SC_MENU][MAPED_SC_CREATIVE] = me_menu_to_creative;
@@ -28,7 +28,7 @@ int			switch_mecontext(t_env *env, unsigned int i)
 {
 	t_edit_env		*edit_env;
 	static bool		first = true;
-	static int		(*routines[C_MAX][C_MAX])(t_env*) = {};
+	static int		(*routines[MAPED_SC_MAX][MAPED_SC_MAX])(t_env*) = {};
 
 	edit_env = &env->edit_env;
 	if (first)
