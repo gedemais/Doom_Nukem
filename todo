@@ -10,6 +10,7 @@ Geoffrey:
 
 Lise:
 - Compresser toutes les ressources dans un fichier / les decompresser au launch
+- Animation des monstres
 - Saves du mode campagne (quand le mode campagne sera pret)
 
 Maboye:
@@ -31,7 +32,7 @@ exit_malloc() a tous les mallocs / surcouches qui appellent malloc
 Gerer les leaks
 Faire une fonction parse_error pour le map_editor
 Fermer les fd
-Recompiler bzip2 et freetype en creeant leurs regles dans le Makefile
+Recompiler freetype en creeant sa regle dans le Makefile
 Creer quelques maps avec le map editor pour la correction
 
 --------------------- Optimisations (pas touche) ---------------------

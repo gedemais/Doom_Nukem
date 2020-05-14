@@ -10,5 +10,6 @@ int		custom_menu_to_play(t_env *env)
 int		custom_play_to_menu(t_env *env)
 {
 	(void)env;
+	// free new_map
 	return (0);
 }

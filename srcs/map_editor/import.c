@@ -10,8 +10,6 @@ static int	ft_strclen(char *s, char c)
 	return (i);
 }
 
-
-
 static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 {
 	ft_bzero(path, MAX_MAP_PATH_LEN);

@@ -34,5 +34,6 @@ int	me_new_map_to_menu(t_env *env)
 int	me_creative_to_menu(t_env *env)
 {
 	(void)env;
+	// free new_map
 	return (0);
 }
