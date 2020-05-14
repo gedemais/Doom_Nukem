@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:57:47 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 17:45:21 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/14 05:20:38 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CONCAT_H
 
 # define BOUNDARY "=#=#=#=#=#=#=#=#=#=#"
+# define ARCHIVE "./resources.archi"
 
 int		free_stuff(void *ptrs[4]);
 int		archive_directory(char *dir_path);

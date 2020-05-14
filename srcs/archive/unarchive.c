@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 17:35:15 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/11 19:07:27 by grudler          ###   ########.fr       */
+/*   Updated: 2020/05/14 05:22:12 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int		unarchive_directory(char *archive_path)
 	char *archi;
 	int len;
 
-	if ((fd_archi = open(archive_path, O_RDONLY)) < 0)
+	ft_putendl("Unarchive resources...");
+	if ((fd_archi = open(archive_path, O_RDONLY)) != 0)
 		return(-1);
 	if (!(archi = read_file(fd_archi, &len)))
 		return(free_stuff((void*[4]){NULL, &fd_archi, NULL, NULL}));
