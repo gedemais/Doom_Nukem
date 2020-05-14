@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 18:18:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/14 16:50:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # include "campaign.h"
 # include "map_editor.h"
 # include "custom.h"
+
+# include "archive.h"
 
 // TMP
 #define PUT ft_putstr("There\n"); fflush(stdout);
@@ -127,6 +129,7 @@ struct			s_env
 	int			scene;
 };
 
+int				exit_doom(t_env *env);
 int				setup(t_env *env);
 int				free_env(t_env *env);
 

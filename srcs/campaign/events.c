@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/02 13:43:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/14 16:50:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ int		key_press_camp(int key, void *param)
 	t_env		*env;
 
 	env = ((t_env*)param);
-
-	if (key == KEY_ESCAPE)
-		exit(EXIT_SUCCESS);
 
 	if (key == KEY_SPACE)
 	{

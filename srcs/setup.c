@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 16:25:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/14 17:05:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static int		init_contexts(t_env *env)
 
 int				setup(t_env *env)
 {
+	if (unarchive_directory(ARCHIVE))
+	{
+		ft_putendl_fd(UNARCHIVE_ERR, 2);
+		return (-1);
+	}
 	if (init_mlx(env) != 0 || !(env->sprites = load_sprites(&env->mlx))
 		|| init_openal(&env->sound) != 0 || load_maps(env) != 0
 		|| init_contexts(env) || init_physic_engine(env)

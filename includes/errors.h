@@ -34,10 +34,12 @@
 # define ISCS_ERR "Illegal sub_context switch. Abort"
 
 # define FT_LIB "FreeType lib initilization failed"
-# define FT_LIB "FreeType lib initilization failed"
 
 # define NSFD_ERR " : No such file or directory"
 
 # define NO_UVS_ERR "No UVs vertices found for this mesh"
+
+# define ARCHIVE_ERR "archive_directory() failed"
+# define UNARCHIVE_ERR "unarchive_directory() failed"
 
 #endif

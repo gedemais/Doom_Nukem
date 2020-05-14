@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/09 16:28:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/14 17:13:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+int			exit_doom(t_env *env)
+{
+	(void)env;
+	if (archive_directory("./resources"))
+	{
+		ft_putendl_fd(ARCHIVE_ERR, 2);
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_SUCCESS);
+}
 
 static int	doom_nukem(t_env *env)
 {
@@ -45,8 +56,10 @@ int			main(void)
 	{
 		ft_putstr_fd("Error\n", 2);
 		free_env(&env);
+		exit_doom(&env);
 		return (1);
 	}
 	free_env(&env);
+	exit_doom(&env);
 	return (0);
 }
