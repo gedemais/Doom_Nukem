@@ -44,7 +44,7 @@ static void			del_recursif(t_env *env, int x, int y, int z)
 
 void				del_door(t_env *env)
 {
-	if (env->mid.mesh->type == BTXT_OBSIDIENNE)
+	if (env->mid.mesh && env->mid.mesh->type == BTXT_OBSIDIENNE)
 	{
 		del_recursif(env,
 			env->mid.mesh->m_pos[0],
@@ -58,12 +58,37 @@ int			del_block(t_env *env)
 	t_mesh	*mesh;
 	int		pos[3];
 
-	ft_memcpy(pos, &env->mid.mesh->m_pos, sizeof(int) * 3);
-	mesh = env->mid.mesh;
-	if (!mesh)
+	if (!env->mid.mesh)
 		return (0);
+	mesh = env->mid.mesh;
+	ft_memcpy(pos, mesh->m_pos, sizeof(int) * 3);
 	mesh->type = BTXT_NONE;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
+	return (0);
+}
+
+int			replace_block(t_env *env)
+{
+	int		pos[3];
+	t_mesh	*mesh;
+	int		i;
+	char	bt;
+
+	i = -1;
+	if (!env->mid.mesh)
+		return (0);
+	mesh = env->mid.mesh;
+	bt = (env->edit_env.current_bt == 0) ? 1 : env->edit_env.current_bt;
+	ft_memcpy(pos, mesh->m_pos, sizeof(int) * 3);
+	if (env->events.buttons[BUTTON_SCLIC])
+		if (env->events.buttons[BUTTON_SCROLL_UP]
+			|| env->events.buttons[BUTTON_SCROLL_DOWN])
+		{
+			mesh->type = bt;
+			env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = bt;
+			while (++i < mesh->tris.nb_cells)
+				((t_triangle*)dyacc(&mesh->tris, i))->sp = mesh->type;
+		}
 	return (0);
 }
 

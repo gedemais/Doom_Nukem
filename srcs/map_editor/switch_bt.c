@@ -74,12 +74,6 @@ static void		switch_slope_type(unsigned char bc, unsigned char *bt, t_events *e)
 	last_bc = bc;
 }
 
-/*
-static void		switch_obj_type(char *bt, t_events *e)
-{
-	
-}*/
-
 void			switch_block_type(t_env *env, t_events *e)
 {
 	unsigned char	*bt;

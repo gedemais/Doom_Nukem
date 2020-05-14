@@ -83,6 +83,7 @@ static void	handle_keys(t_env *env, t_events *e)
 
 	switch_block_category(env, e);
 	switch_block_type(env, e);
+	replace_block(env);
 }
 
 int		maped_creative(t_env *env)

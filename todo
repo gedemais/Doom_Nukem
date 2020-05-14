@@ -25,10 +25,15 @@ Moguy:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ---------------------- Taf a dispatcher ---------------------
-- Mettre en place le mode campagne
+
+Mobs :
+- Creer une data-structure adaptee aux mobs
+- Trouver des mobs en .obj
+- Les animer a partir des meshs pivots
+- Les pathfind dans l'espace
 
 ---------------------- Surplus --------------------------
-exit_malloc() a tous les mallocs / surcouches qui appellent malloc
+exit_malloc() (surcouche de exit_doom) a tous les mallocs / surcouches qui appellent malloc
 Gerer les leaks
 Faire une fonction parse_error pour le map_editor
 Fermer les fd
