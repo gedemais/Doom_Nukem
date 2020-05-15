@@ -9,11 +9,12 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/aug.obj",
 										"resources/maps/ump45.obj",
 										"resources/maps/mag-7.obj",
+										"resources/maps/galil.obj",
 										"resources/maps/cube.obj",
 										"resources/maps/axis.obj",
 										"resources/maps/pente_nord.obj",
 										"resources/maps/pente_ouest.obj",
-										"resources/maps/pentg_sud.obj",
+										"resources/maps/pente_sud.obj",
 										"resources/maps/pente_est.obj",
 										"resources/maps/map-test.obj"};
 

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/15 15:41:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/16 00:10:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ enum	e_cmp_menu_buttons_id
 
 enum	e_sector_id
 {
+	SECTOR_FAMAS,
 	SECTOR_AK47,
+	SECTOR_SAWED_OFF,
+	SECTOR_GLOCK_18,
+	SECTOR_AUG,
+	SECTOR_UMP45,
 	SECTOR_MAG7,
+	SECTOR_GALIL,
 	SECTOR_CUBE,
 	SECTOR_AXIS,
 	SECTOR_TEST,
