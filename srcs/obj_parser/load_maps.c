@@ -13,7 +13,10 @@ int			load_maps(t_env *env)
 	{
 		loading_bar(i, SCENE_MAX, false);
 		if (parse_map(&env->maps[i], maps_paths(i), states) != 0)
+		{
+			printf("%s\n", maps_paths(i));
 			return (-1);
+		}
 		*current_map() = &env->maps[i];
 		if (load_map_config(env, &env->maps[i], maps_paths(i)))
 			return (-1);
