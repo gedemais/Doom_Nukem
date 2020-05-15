@@ -62,9 +62,6 @@ static void	handle_mouse(t_env *env, t_events *e)
 		&& (del_delay = PUT_BLOCK_DELAY))
 		del_block(env);
 
-	e->buttons[BUTTON_SCROLL_UP] = false;
-	e->buttons[BUTTON_SCROLL_DOWN] = false;
-
 	put_delay--;
 	del_delay--;
 }
@@ -86,8 +83,20 @@ static void	handle_keys(t_env *env, t_events *e)
 	replace_block(env);
 }
 
-int		maped_creative(t_env *env)
+static void	refresh_last_gui(t_events *e, int *gui)
 {
+	if (e->keys[KEY_UP] || e->keys[KEY_DOWN] || e->buttons[BUTTON_LCLIC]
+		|| e->buttons[BUTTON_RCLIC] || e->buttons[BUTTON_SCLIC]
+		|| e->buttons[BUTTON_SCROLL_DOWN] || e->buttons[BUTTON_SCROLL_UP])
+		*gui = 100;
+	e->buttons[BUTTON_SCROLL_UP] = false;
+	e->buttons[BUTTON_SCROLL_DOWN] = false;
+}
+
+int			maped_creative(t_env *env)
+{
+	static int	last_gui_use = 0;
+
 	handle_keys(env, &env->events);
 	handle_mouse(env, &env->events);
 	clear_screen_buffers(env);
@@ -95,8 +104,13 @@ int		maped_creative(t_env *env)
 	env->mid.mesh = NULL;
 	if (rasterizer(env, &env->edit_env.map))
 		exit(EXIT_FAILURE);
-	draw_cg_pallet(env);
-	render_pallets(env);
+	refresh_last_gui(&env->events, &last_gui_use);
+	if (last_gui_use > 0)
+	{
+		draw_cg_pallet(env);
+		render_pallets(env);
+		last_gui_use--;
+	}
 	maped_crosshair(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
