@@ -46,12 +46,13 @@ void	draw_reticule(t_env *env)
 
 	data = &env->data;
 	mlx = &env->mlx;
-	line_size = env->cmp_env.player.current->reticle;
-	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt, 0x00ff00);
-	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt, 0x00ff00);
-	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt - 1, 0x00ff00);
-	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt - 1, 0x00ff00);
+	line_size = env->player.current->reticle;
+	// Askip c'est moche
+//	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt, 0x00ff00);
+//	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt, 0x00ff00);
+//	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt - 1, 0x00ff00);
+//	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt - 1, 0x00ff00);
 
-	draw_vertical(data, mlx, line_size, env->cmp_env.player.current->accuracy);
-	draw_horizontal(data, mlx, line_size, env->cmp_env.player.current->accuracy);
+	draw_vertical(data, mlx, line_size, env->player.current->accuracy);
+	draw_horizontal(data, mlx, line_size, env->player.current->accuracy);
 }

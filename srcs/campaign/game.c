@@ -23,12 +23,25 @@ static void	handle_keys(t_env *env, t_events *e)
 		move(env, e->keys);
 }
 
+static void	handle_mouse(t_env *env, t_events *e)
+{
+	bool	exp;
+
+	exp = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
+	if (exp && env->player.current)
+		switch_current_weapon(env, &env->events);
+
+	e->buttons[BUTTON_SCROLL_UP] = false;
+	e->buttons[BUTTON_SCROLL_DOWN] = false;
+}
+
 static void	cmp_game_handle_events(t_env *env)
 {
 	t_events	*e;
 
 	e = &env->events;
 	handle_keys(env, e);
+	handle_mouse(env, e);
 }
 
 int		cmp_game(void *param)
@@ -49,7 +62,6 @@ int		cmp_game(void *param)
 	if (rasterizer(env, &env->maps[env->scene]))
 		return (-1);
 	handle_weapons(env);
-	cmp_hud(env, &env->cmp_env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	av += 1 / mesure_time(true);

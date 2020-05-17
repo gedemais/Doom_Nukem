@@ -38,10 +38,11 @@ struct	s_weapon
 
 int			init_weapons(t_env *env);
 
+void		switch_current_weapon(t_env *env, t_events *e);
+
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);
 int			print_ammos(t_env *env, t_weapon *w);
-
-void		switch_current_weapon(t_camp_env *cmp_env, int button);
+int			weapons_hud(t_env *env);
 
 #endif

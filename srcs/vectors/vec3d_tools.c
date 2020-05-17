@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:18:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 19:29:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/16 16:17:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int		nonzero_vector(t_vec3d vec)
 
 void	print_vec(t_vec3d vec)
 {
-	printf("vec.x = %f",vec.x);
-	printf(" vec.y = %f",vec.y);
-	printf(" vec.z = %f\n",vec.z);
+	printf("vec.x = %f", vec.x);
+	printf(" vec.y = %f", vec.y);
+	printf(" vec.z = %f\n", vec.z);
 }
 
 t_vec3d zero_vector()

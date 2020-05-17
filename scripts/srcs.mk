@@ -17,7 +17,6 @@ SRCS_NAME =	main.c\
 			campaign/game.c\
 			campaign/routines.c\
 			campaign/sectors.c\
-			campaign/hud.c\
 			\
 			contexts/switch_context.c\
 			contexts/routines.c\
@@ -115,6 +114,7 @@ SRCS_NAME =	main.c\
 			\
 			weapons/weapons.c\
 			weapons/ammos.c\
+			weapons/hud.c\
 			weapons/init_weapons.c\
 			weapons/reticule.c\
 			\

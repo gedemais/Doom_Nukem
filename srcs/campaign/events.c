@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/15 02:18:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/17 16:27:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ int		mouse_press_camp(int button, int x, int y, void *param)
 	
 	(void)x;
 	(void)y;
-	if (env->sub_context == CMP_SC_GAME)
-		if ((button == BUTTON_SCROLL_UP || button == BUTTON_SCROLL_DOWN)
-			&& env->player.current)
-		switch_current_weapon(env, button);
+	(void)button;
 	return (0);
 }
 

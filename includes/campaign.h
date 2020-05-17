@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/16 00:10:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/17 16:23:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,10 @@ struct			s_player
 
 struct			s_camp_env
 {
+	t_env		*env;
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];		
 	t_sector	sectors[SECTOR_MAX];
-	t_weapon	weapons[W_MAX];
-	t_player	player;
-	t_env		*env;
 	int			sector;
 	int			sub_context;
 };
@@ -106,8 +104,4 @@ int					cmp_game(void *param);
 void				cmp_menu_to_game(t_env *env);
 void				cmp_game_to_menu(t_env *env);
 
-/*
-** UI
-*/
-int					cmp_hud(t_env *env, t_camp_env *cmp_env);
 #endif

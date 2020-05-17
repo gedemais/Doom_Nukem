@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/14 16:50:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/17 16:23:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ struct			s_env
 	t_map		maps[SCENE_MAX];
 	t_data		data;
 	t_physics	phy_env;
+	t_player	player;
+	t_weapon	weapons[W_MAX];
 	t_cam		cam;
 	t_scroll	scroll;
 	t_ttf		ttfs;
