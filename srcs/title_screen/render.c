@@ -73,6 +73,6 @@ int			render_ts(void *param)
 	if (anim > 0)
 		wait_frame();
 	anim--;
-//	sleep(1);
+	sleep(1);
 	return (0);
 }
