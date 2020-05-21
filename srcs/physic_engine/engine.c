@@ -86,7 +86,8 @@ static t_vec3d	update_angle(t_env *env, int index)
 
 static void	type_of_plan(t_env *env, t_collide *c)
 {
-//	print_vec(c->a->corp.norm);
+	printf("norm-----floor-----\n");
+	print_vec(c->a->corp.norm);
 	if (fabs(c->a->corp.norm.x) == 1 || fabs(c->a->corp.norm.z) == 1)
 	{
 		env->maps[env->scene].cam_wall = *c;
@@ -154,7 +155,9 @@ static void	update_positions_gravity_cam(t_env *env)
 	t_mesh		*cam;
 	
 	cam = &env->maps[env->scene].cam;
-	if (env->cam.stats.onfloor == 0 && env->cam.stats.onplan == 0)
+	if (env->cam.stats.onfloor == 0 && 
+			env->cam.stats.onplan == 0 &&
+			env->cam.stats.pos.y > 0.5)
 	{
 		phy_gravitax_cam(env, cam, &env->cam.stats);
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);

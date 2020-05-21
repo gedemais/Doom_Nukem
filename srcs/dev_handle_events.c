@@ -133,9 +133,6 @@ static t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 {
 	t_mesh *cam;
 	t_mesh wall;
-//	t_vec3d pos_cam;
-//	t_vec3d v_cam;
-//	t_vec3d pos_wall;
 	t_vec3d norm_wall;
 
 	(void)env;
@@ -224,7 +221,7 @@ static void	handle_keys(t_env *env, t_events *e)
 	printf("on wall %d\n",cam_stats.onwall);
 	printf("on floor %d\n",cam_stats.onfloor);
 	printf("on plan %d\n",cam_stats.onplan);
-	if (key_move(e->keys)  && simple_test_floor(env) && move_i == 1)
+	if (key_move(e->keys)  &&  move_i == 1)
 		move(env, e->keys);
 	else if (move_i == 0)
 		fake_move(env, e->keys);
