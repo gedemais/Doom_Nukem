@@ -1,0 +1,9 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+poignee_poignee_glock-18|{}|[]|true|()|
+chargeur_chargeur_glock-18.005|{}|[]|true|()|poignee_poignee_glock-18
+culasse_culasse_glock-18.018|{}|[]|true|()|poignee_poignee_glock-18

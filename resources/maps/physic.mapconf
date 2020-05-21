@@ -1,0 +1,30 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+Cube|{}|[]|true|()|
+Cube.001|{}|[]|true|()|
+Cube.002|{}|[]|true|()|
+Cube.003|{}|[]|true|()|
+Cube.004|{}|[]|true|()|
+Cube.005|{}|[]|true|()|
+Cube.006|{}|[]|true|()|
+Cube.007|{}|[]|true|()|
+Cube.008|{}|[]|true|()|
+Cube.009|{}|[]|true|()|
+Cube.010|{}|[]|true|()|
+Cube.011|{}|[]|true|()|
+Cube.012|{}|[]|true|()|
+Cube.013|{}|[]|true|()|
+Cube.014|{}|[]|true|()|
+Cube.015|{}|[]|true|()|
+Cube.016|{}|[]|true|()|
+Cube.017|{}|[]|true|()|
+Cube.019|{}|[]|true|()|
+Cube.018|{}|[]|true|()|
+Cube.023|{}|[]|true|()|
+Cube.022|{}|[]|true|()|
+Cube.021|{}|[]|true|()|
+Cube.020|{}|[]|true|()|

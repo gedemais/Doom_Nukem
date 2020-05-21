@@ -12,6 +12,7 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/galil.obj",
 										"resources/maps/negev.obj",
 										"resources/maps/tec-9.obj",
+										"resources/maps/physic.obj",
 										"resources/maps/cube.obj",
 										"resources/maps/axis.obj",
 										"resources/maps/pente_nord.obj",

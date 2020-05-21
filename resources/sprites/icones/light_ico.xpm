@@ -1,0 +1,34 @@
+/* XPM */
+static char *light_ico[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 12 1 ",
+"  c #2BB9B0",
+". c #2BCBC0",
+"X c #2BDED6",
+"o c #49D5CC",
+"O c #54D9D0",
+"+ c #6FE3DC",
+"@ c #9CF2ED",
+"# c #CCECF0",
+"$ c #C4FFFE",
+"% c #D6FFFE",
+"& c #EEFFFF",
+"* c white",
+/* pixels */
+"****************",
+"*     ......   #",
+"* .....oo..... #",
+"* ..XooooooX.. #",
+"*..XoO++++OoX..#",
+"*..oO+@$$@+Oo..#",
+"* .o+@$%%$@+o..#",
+"* oo+$%&&%$+oo.#",
+"*.oo+$%&&%$+oo #",
+"*..o+@$%%$@+o..#",
+"*..oO+@$$@+Oo..#",
+"*..XoO++++OoX. #",
+"* ..XooooooX.. #",
+"* .....oo..... #",
+"*    ..... .   #",
+"################"
+};
