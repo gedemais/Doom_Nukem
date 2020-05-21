@@ -38,6 +38,7 @@ struct	s_collide
 struct	s_physics
 {
 	t_dynarray		collides;
+	t_dynarray		collides_cam;
 	double			time;
 	double			prev_time;
 	unsigned int	tps;

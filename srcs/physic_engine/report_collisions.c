@@ -81,18 +81,45 @@ static bool	check_coll(t_dynarray *meshs, int i, int j, t_collide *c)
 //	fflush(stdout);
 	return (aabb_collision(a->corp.o, b->corp.o, a->corp.dims, b->corp.dims));
 }
-/*
+// il faut le tableau de mesh de la scene et la mesh camera 
+// stop gravity
+static bool	check_coll_cam(t_dynarray *meshs, int i, t_mesh *cam, t_collide *c)
+{
+	t_mesh	*a;
+
+	a = dyacc(meshs, i);
+	c->a = a;
+	c->b = cam;
+//	printf("%s (%f %f %f) <-> %s (%f %f %F)\n", c->a->name, c->a->corp.pos.x, c->a->corp.pos.y, c->a->corp.pos.z, c->b->name, c->b->corp.pos.x, c->b->corp.pos.y, c->b->corp.pos.z);
+//	fflush(stdout);
+	return (aabb_collision(a->corp.o, cam->corp.o, a->corp.dims, cam->corp.dims));
+}
+
+
 int			report_cam_collisions(t_env *env)
 {
 	int			i;
-
+	t_collide	c;
+	t_mesh	*cam;
+	
+	cam = &env->maps[env->scene].cam;
+	if (init_dynarray(&env->phy_env.collides_cam,
+		sizeof(t_collide), env->maps[env->scene].nmesh)) //pas la peine de mettre autant de case
+		return (-1);
 	i = 0;
 	while (i < env->maps[env->scene].nmesh)
 	{
+		if (check_coll_cam(&env->maps[env->scene].meshs, i, cam, &c))
+		{
+			c.i_a = i;
+			if (push_dynarray(&env->phy_env.collides_cam, &c, false))
+					return (-1);
+		}
 		i++;
+		env->maps[env->scene].colls[i] = true;
 	}
 	return (0);
-}*/
+}
 
 int			report_collisions(t_env *env)
 {
@@ -120,7 +147,7 @@ int			report_collisions(t_env *env)
 		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
-	//report_cam_collisions(env);
+	report_cam_collisions(env);
 //	printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	return (0);
 }

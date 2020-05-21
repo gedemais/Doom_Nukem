@@ -4,7 +4,7 @@ include scripts/incs.mk
 NAME=doom-nukem
 
 CC=gcc
-FLAGS= -Wall -Werror -Wextra
+FLAGS=
 
 # Flags variables
 DEBUG ?= 0
