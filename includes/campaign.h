@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/17 16:23:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/21 16:34:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ enum	e_sector_id
 	SECTOR_UMP45,
 	SECTOR_MAG7,
 	SECTOR_GALIL,
+	SECTOR_NEGEV,
+	SECTOR_TEC9,
 	SECTOR_CUBE,
 	SECTOR_AXIS,
 	SECTOR_TEST,

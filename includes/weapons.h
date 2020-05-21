@@ -14,6 +14,10 @@ enum	e_weapons
 	W_GLOCK_18,
 	W_AUG,
 	W_UMP45,
+	W_MAG7,
+	W_GALIL,
+	W_NEGEV,
+	W_TEC9,
 	W_MAX
 };
 
@@ -23,6 +27,8 @@ struct	s_weapon
 	t_vec3d	p_angle;// Angles de l'arme dans le referentiel du joueur
 	t_map	*w_map; // map du .obj de l'arme
 	t_mesh	*mesh; // Mesh central de l'arme
+	t_mesh	*charger; // Mesh chargeur de l'arme
+	t_mesh	*breech; // Mesh culasse de l'arme
 	char	*name;
 	float	accuracy; // 0-1
 	int		reticle;

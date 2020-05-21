@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/20 19:24:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/21 00:56:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int				setup(t_env *env)
 		ft_putendl_fd(UNARCHIVE_ERR, 2);
 		return (-1);
 	}
-//	sleep(100);
 	if (init_mlx(env) != 0 || !(env->sprites = load_sprites(&env->mlx))
 		|| init_openal(&env->sound) != 0 || load_maps(env) != 0
 		|| init_contexts(env) || init_physic_engine(env)

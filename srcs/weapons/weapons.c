@@ -23,9 +23,6 @@ void	switch_current_weapon(t_env *env, t_events *e)
 
 int		handle_weapons(t_env *env)
 {
-	t_camp_env	*cmp_env;
-
-	cmp_env = &env->cmp_env;
 	// Deplacer l'arme avec le joueur
 
 	// Dessiner le reticule
