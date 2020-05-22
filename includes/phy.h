@@ -46,6 +46,7 @@ struct	s_physics
 	t_vec3d			gravitax;
 };
 
+void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);
 int		physic_engine(t_env *env);
 int		init_physic_engine(t_env *env);
 int		init_bounding_box(t_mesh *m);
@@ -56,5 +57,18 @@ void	tp_mesh(t_map *map, t_mesh *m, t_vec3d t);
 void	print_mesh_corp(t_mesh m);
 void	print_collide(t_collide c);
 void	tp_mesh_print(t_mesh *m);
-
+/*			phy_gravity		*/
+void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);
+void	phy_gravitax(t_env *env, t_mesh *m, int i);
+/*			phy_update.c	*/
+t_vec3d	update_angle(t_env *env, int index);
+void	update_speeds_collide(t_env *env);
+void	update_speeds_collide_cam(t_env *env);
+void	update_positions_gravity(t_env *env); 
+void	update_positions_gravity_cam(t_env *env);
+/*			color_collides	*/
+void	color_collides(t_env *env);
+void	color_collides_cam(t_env *env);
+/*			phy_tool.c		*/
+void	type_of_plan(t_env *env, t_collide *c);
 #endif
