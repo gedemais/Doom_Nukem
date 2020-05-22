@@ -20,8 +20,6 @@ static void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats)
 	(void)stats;
 	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
 	m->corp.v = vec_sub(m->corp.v, gravitax);
-//	printf("tps = %u\n",env->phy_env.tps);
-//		printf("tps ? %d\n",env->phy_env.tps);
 		if (env->phy_env.tps < 10)
 			env->phy_env.tps += 2.5;
 		else
@@ -86,9 +84,7 @@ static t_vec3d	update_angle(t_env *env, int index)
 
 static void	type_of_plan(t_env *env, t_collide *c)
 {
-	printf("norm-----floor-----\n");
-	print_vec(c->a->corp.norm);
-	if (fabs(c->a->corp.norm.x) == 1 || fabs(c->a->corp.norm.z) == 1)
+	if ((fabs(c->a->corp.norm.x) == 1 || fabs(c->a->corp.norm.z) == 1) && c->i_a != 0)
 	{
 		env->maps[env->scene].cam_wall = *c;
 		env->cam.stats.onwall = 1;
@@ -99,7 +95,7 @@ static void	type_of_plan(t_env *env, t_collide *c)
 		c->b->corp.v = zero_vector(); //stop gravity
 		env->phy_env.tps = 0;			// need to be variable by mesh 
 		env->cam.stats.onwall = 0;
-		if (c->a->corp.norm.y == 1)
+		if (c->a->corp.norm.y == 1 || c->i_a == 0)
 		{
 			env->cam.stats.onfloor = 1; //2 
 			env->cam.stats.onplan = 0;
@@ -156,8 +152,7 @@ static void	update_positions_gravity_cam(t_env *env)
 	
 	cam = &env->maps[env->scene].cam;
 	if (env->cam.stats.onfloor == 0 && 
-			env->cam.stats.onplan == 0 &&
-			env->cam.stats.pos.y > 0.5)
+			env->cam.stats.onplan == 0)
 	{
 		phy_gravitax_cam(env, cam, &env->cam.stats);
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);

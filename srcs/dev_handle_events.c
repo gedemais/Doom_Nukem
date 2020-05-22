@@ -39,39 +39,22 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 	z = tri->points[2];
 	/* creation vecteurs pentes */
 	u = vec_sub(x, y);
-	printf("u \n");
-	print_vec(u);
+//	print_vec(u);
 	v = vec_sub(x, z);
-	printf("v \n");
-	print_vec(v);
+//	print_vec(v);
 	w = vec_sub(y, z);
-	printf("w \n");
-	print_vec(w);
+//	print_vec(w);
 
 	/* dot product*/
-	printf("dot(u,v) = %f\n", vec_dot(u, v));
-	printf("dot(v,w) = %f\n", vec_dot(v, w));
-	printf("dot(u,w) = %f\n", vec_dot(u, w));
+//	printf("dot(u,v) = %f\n", vec_dot(u, v));
+//	printf("dot(v,w) = %f\n", vec_dot(v, w));
+//	printf("dot(u,w) = %f\n", vec_dot(u, w));
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
 	new_dir->y = step_dir.y;
-	printf("step_dir = \n");
-	print_vec(step_dir);
-//	printf("------------coeff_dir---------\n");
+//	printf("step_dir = \n");
+//	print_vec(step_dir);
 	
-	printf("------------coeff_dir---------\n");
-//	printf("v.y = %f", v.y);
-//	printf("v.y = %f", w.y);
-//	p.x = v.y * w.z - (w.y * v.z);
-//	p.y = v.z * w.x - (w.z * v.x);
-//	p.z = v.x * w.y - (v.y * w.x);
-//	new_dir->y = -(p.x * new_dir->x + p.z * new_dir->z) / p.y;
-//	printf("%f \n",new_dir->y);
-//	if (new_dir->y > 0)
-//		new_dir->y = 0.2;
-//	if (new_dir->y < 0)
-//		new_dir->y = -0.2;
-
 	return (new_dir);
 }
 
@@ -90,7 +73,7 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
 	float diff;
 
 	diff = cam_vec->y - c.a->corp.pos.y;
-	if (cam_vec->y - c.a->corp.pos.y < 0.3)
+	if (diff < 0.3 && diff > 0)
 		cam_vec->y += 0.1;
 
 }
@@ -118,7 +101,7 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
 	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E])
 	{
 		if (keys[KEY_E] && (simple_test_floor(env) == 1))
-			f.y = 0.05;
+			f.y = 0.1;
 		else if (cam_stats.onfloor == 1)
 			f.y = 0;
 		else if (cam_stats.onplan == 1)
@@ -139,7 +122,7 @@ static t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	cam = c->b;
 	wall = *(c->a);
 	norm_wall = wall.corp.norm;
-	if (vec_dot(f, norm_wall) < 0)
+	if (vec_dot(f, norm_wall) < 0 && c->i_a != 0)
 		return (zero_vector());
 	else
 		return (f);
@@ -171,8 +154,8 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		f = vec_add(f, vec_fmult(r, 3.0f));
 	if (keys[KEY_D])
 		f = vec_add(f, vec_fmult(r, -3.0f));
-//	if (env->cam.stats.onwall == 1)
-//		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
+	if (env->cam.stats.onwall == 1)
+		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
 	
 //	printf("norm_f = %f\n", vec_norm(f));
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
@@ -218,9 +201,6 @@ static void	handle_keys(t_env *env, t_events *e)
 	cam_stats = env->cam.stats;
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
-	printf("on wall %d\n",cam_stats.onwall);
-	printf("on floor %d\n",cam_stats.onfloor);
-	printf("on plan %d\n",cam_stats.onplan);
 	if (key_move(e->keys)  &&  move_i == 1)
 		move(env, e->keys);
 	else if (move_i == 0)
