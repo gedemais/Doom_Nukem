@@ -27,6 +27,7 @@ int			load_maps(t_env *env)
 			printf("%s : %d triangles\n", m->name, m->tris.nb_cells);
 		}*/
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
+		env->maps[i].index = i;
 		i++;
 	}
 	loading_bar(i, SCENE_MAX, true);

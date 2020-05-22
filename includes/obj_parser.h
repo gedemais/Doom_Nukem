@@ -135,6 +135,7 @@ struct	s_map
 	bool			*stats_cpy;
 	int				cmtl;
 	int				nmesh;
+	int				index;
 	t_collide		cam_floor;
 	t_collide		cam_wall;
 };

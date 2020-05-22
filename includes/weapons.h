@@ -37,6 +37,8 @@ struct	s_weapon
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock
 	int		index;
+	int		scene_start;
+	int		scene_end;
 	//	Son
 	//	Cadence de tir
 	//	sprite de flamme ?
@@ -44,11 +46,11 @@ struct	s_weapon
 
 int			init_weapons(t_env *env);
 
-void		switch_current_weapon(t_env *env, t_events *e);
-
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);
 int			print_ammos(t_env *env, t_weapon *w);
 int			weapons_hud(t_env *env);
+int			link_weapon_to_cam(t_map *map, t_weapon *w);
+int			unlink_weapon(t_map *map, t_weapon *w);
 
 #endif

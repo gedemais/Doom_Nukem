@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/16 14:46:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/22 14:00:50 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -76,6 +76,7 @@ int		rasterizer(t_env *env, t_map *map)
 	}
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);
+	env->scene = map->index;
 	clear_dynarray(&env->cam.to_clip);
 	return (0);
 }

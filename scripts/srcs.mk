@@ -115,6 +115,7 @@ SRCS_NAME =	main.c\
 			weapons/weapons.c\
 			weapons/ammos.c\
 			weapons/hud.c\
+			weapons/dependencies.c\
 			weapons/init_weapons.c\
 			weapons/reticule.c\
 			\

@@ -25,12 +25,7 @@ static void	handle_keys(t_env *env, t_events *e)
 
 static void	handle_mouse(t_env *env, t_events *e)
 {
-	bool	exp;
-
-	exp = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
-	if (exp && env->player.current)
-		switch_current_weapon(env, &env->events);
-
+	(void)env;
 	e->buttons[BUTTON_SCROLL_UP] = false;
 	e->buttons[BUTTON_SCROLL_DOWN] = false;
 }

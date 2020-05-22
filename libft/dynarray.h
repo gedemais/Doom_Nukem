@@ -25,5 +25,6 @@ int				push_dynarray(t_dynarray *arr, void *src, bool back);
 int				replace_dynarray_cell(t_dynarray *arr, void *src, int index);
 int				insert_dynarray(t_dynarray *arr, void *src, int index);
 int				extract_dynarray(t_dynarray *arr, int index);
+int				dynarray_swap_cells(t_dynarray *add, int index1, int index2);
 
 #endif

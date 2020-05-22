@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	switch_current_weapon(t_env *env, t_events *e)
+static void	switch_current_weapon(t_env *env, t_events *e)
 {
 	int		index;
 
@@ -21,12 +21,22 @@ void	switch_current_weapon(t_env *env, t_events *e)
 	}
 }
 
-int		handle_weapons(t_env *env)
+static void	weapons_events(t_env *env, t_events *e)
+{
+	bool	exp;
+
+	exp = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
+	if (exp && env->player.current)
+		switch_current_weapon(env, &env->events);
+}
+
+int			handle_weapons(t_env *env)
 {
 	// Deplacer l'arme avec le joueur
 
 	// Dessiner le reticule
 
+	weapons_events(env, &env->events);
 	// Si nb_bullets_loaded == 0 && nb_bullets_tot > 0
 		// Recharger
 	// Si le clic gauche est appuye, tirer
