@@ -29,6 +29,7 @@ static int		copy_weapon_to_scene(t_map *map, t_weapon *w)
 		w->breech = dyacc(&map->meshs, map->meshs.nb_cells - 1);
 		ret++;
 	}
+//	printf("%d\n", map->meshs.nb_cells);
 	return (ret);
 }
 /*
