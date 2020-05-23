@@ -39,12 +39,15 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 	z = tri->points[2];
 	/* creation vecteurs pentes */
 	u = vec_sub(x, y);
-//	print_vec(u);
+	print_vec(u);
 	v = vec_sub(x, z);
-//	print_vec(v);
+	print_vec(v);
 	w = vec_sub(y, z);
-//	print_vec(w);
-
+	print_vec(w);
+	tri = dyacc(&m->tris, 1);
+	x = tri->points[0];
+	y = tri->points[1];
+	z = tri->points[2];
 	/* dot product*/
 //	printf("dot(u,v) = %f\n", vec_dot(u, v));
 //	printf("dot(v,w) = %f\n", vec_dot(v, w));
@@ -72,9 +75,10 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8
 {
 	float diff;
 
-	diff = cam_vec->y - c.a->corp.pos.y;
-	if (diff < 0.3 && diff > 0)
-		cam_vec->y += 0.1;
+	diff = cam_vec->y - c.a->corp.dims.y;
+	printf("diff = %f \n", diff);
+//	if (diff < 0.3 && diff > 0)
+//		cam_vec->y += 0.1;
 
 }
 
@@ -98,13 +102,10 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
 
 	cam_stats = env->cam.stats;
 	f = vec_fmult(cam_stats.dir, WALK_SPEED);
-	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E]) //refaire tout ca 
-	{
-		if (keys[KEY_E])
-			f.y = 0.1;
-		else if (cam_stats.onplan == 1)
-			f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
-	}
+	if (keys[KEY_E])
+		f.y = 0.1;
+	else
+		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	return (f);
 
 }
@@ -193,24 +194,23 @@ static void	handle_keys(t_env *env, t_events *e)
 	static int move_i = 1;
 	t_vec3d dir;
 	t_vec3d pos;
+	t_mesh		*cam;
 	t_cam_stats cam_stats;
 
 	cam_stats = env->cam.stats;
+	cam = &env->maps[env->scene].cam;
 	dir = env->cam.stats.dir;
 	pos = env->cam.stats.pos;
+	print_vec(cam->corp.dims);
 	if (key_move(e->keys)  &&  move_i == 1)
 		move(env, e->keys);
 	else if (move_i == 0)
 		fake_move(env, e->keys);
-	else if (e->keys[KEY_N])
 		move_i = (move_i == 0) ? 1 : 0;
-	if (e->keys[KEY_T])
-	{
 		printf("----------dir---------\n");
 		print_vec(dir);
 		printf("----------pos---------\n");
 		print_vec(pos);
-	}
 }
 
 void		dev_handle_events(t_env *env)

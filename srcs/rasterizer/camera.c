@@ -6,7 +6,7 @@ void	map_spawn(t_cam *cam, t_map *map)
 
 	if (address != map)
 	{
-		cam->stats.pos = map->spawn;
+		cam->stats.pos = vec_add(map->spawn, (t_vec3d){0, map->cam.corp.dims.y, 0, 0});
 		map->cam.corp.pos = map->spawn;
 		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
 
