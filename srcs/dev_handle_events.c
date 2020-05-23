@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-t_vec3d project_ortho(t_vec3d u, t_vec3d y) //projection orthogonal sur un vecteur
+t_vec3d project_ortho(t_vec3d u, t_vec3d y) //projection orthogonal sur un vecteur //7
 {
 	t_vec3d y_proj;
 
@@ -21,7 +21,7 @@ t_vec3d project_ortho(t_vec3d u, t_vec3d y) //projection orthogonal sur un vecte
 }
 
 // only define the direction of the slope
-static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
+static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 {
 	t_triangle *tri;
 	t_vec3d v;
@@ -58,17 +58,17 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir)
 	return (new_dir);
 }
 
-static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir)
+static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
 {
 	t_mesh *b;
 	t_vec3d f;	
 
 	b = c->a;
-	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED);
+	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED); 
 	return (f);
 }
 
-void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
+void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8
 {
 	float diff;
 
@@ -77,8 +77,8 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec)
 		cam_vec->y += 0.1;
 
 }
-// idee : save dans une structure la collide de la camera avec le sol du moment 
-static int simple_test_floor(t_env *env)
+
+static int simple_test_floor(t_env *env) //4 (a supprimer)
 {
 	t_cam_stats cam_stats;
 
@@ -91,19 +91,17 @@ static int simple_test_floor(t_env *env)
 		return (0);
 }
 
-static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS])
+static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
 {
 	t_vec3d f;
 	t_cam_stats cam_stats;
 
 	cam_stats = env->cam.stats;
 	f = vec_fmult(cam_stats.dir, WALK_SPEED);
-	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E])
+	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1 || keys[KEY_E]) //refaire tout ca 
 	{
-		if (keys[KEY_E] && (simple_test_floor(env) == 1))
+		if (keys[KEY_E])
 			f.y = 0.1;
-		else if (cam_stats.onfloor == 1)
-			f.y = 0;
 		else if (cam_stats.onplan == 1)
 			f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
 	}
@@ -128,7 +126,7 @@ static t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 		return (f);
 }
 
-static void	move(t_env *env, bool keys[NB_KEYS])
+static void	move(t_env *env, bool keys[NB_KEYS]) //2
 {
 	t_mesh		*cam;
 	t_vec3d		f;
@@ -157,13 +155,12 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	if (env->cam.stats.onwall == 1)
 		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
 	
-//	printf("norm_f = %f\n", vec_norm(f));
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	cam->corp.v = f;
 }
 
-static int key_move(bool keys[NB_KEYS])
+static int key_move(bool keys[NB_KEYS]) //1
 {
 	if ((keys[KEY_W] || keys[KEY_S] || keys[KEY_A] || keys[KEY_D]) || keys[KEY_E]) 
 		return (1);
