@@ -62,15 +62,15 @@ static int		delete_weapon_from_scene(t_map *map, t_weapon *w)
 
 int		link_weapon_to_cam(t_map *map, t_weapon *w)
 {
+	t_vec3d	offset;
 	int		wmesh;
 	int		index;
 
-	t_mesh	*m;
-
-	m = w->w_map->meshs.c;
-
+	printf("%s\n", __FUNCTION__);
 	if ((wmesh = copy_weapon_to_scene(map, w)) <= 0)
 		return (-1);
+	w->scene_start = map->meshs.nb_cells - wmesh;
+	w->scene_end = map->meshs.nb_cells;
 	index = map->meshs.nb_cells;
 	index -= wmesh;
 	map->nmesh += wmesh;
@@ -79,15 +79,25 @@ int		link_weapon_to_cam(t_map *map, t_weapon *w)
 		return (-1);
 	if (push_dynarray(&map->cam.deps, &index, false))
 		return (-1);
-	translate_mesh(map, dyacc(&map->meshs, index), w->p_offset);
+	w->dep_index = map->cam.deps.nb_cells - 1;
+
+	offset = vec_add(w->p_offset, map->cam.corp.pos);
+	translate_mesh(map, dyacc(&map->meshs, index), offset);
 	return (0);
 }
 
-// supprime le mesh de la scene (quand le personnage switch d'arme)
-
 int		unlink_weapon(t_map *map, t_weapon *w)
 {
-	(void)map;
-	(void)w;
+	int		i;
+
+	printf("%s\n", __FUNCTION__);
+	i = w->scene_start;
+	map->nmesh -= (w->scene_end - w->scene_start);
+	while (i < w->scene_end)
+	{
+		extract_dynarray(&map->meshs, w->scene_start);
+		i++;
+	}
+	extract_dynarray(&map->cam.deps, w->dep_index);
 	return (0);
 }

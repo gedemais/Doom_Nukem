@@ -37,6 +37,7 @@ struct	s_weapon
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock
 	int		index;
+	int		dep_index;
 	int		scene_start;
 	int		scene_end;
 	//	Son

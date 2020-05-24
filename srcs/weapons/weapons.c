@@ -2,22 +2,24 @@
 
 static void	switch_current_weapon(t_env *env, t_events *e)
 {
+	t_map	*map;
 	int		index;
 
+	map = &env->edit_env.map;
 	index = env->player.current->index;
 	if (e->buttons[BUTTON_SCROLL_UP])
 	{
 		index = (index == W_MAX - 1) ? 0 : index + 1;
-		// unlink current weapon
+		unlink_weapon(map, env->player.current);
 		env->player.current = dyacc(&env->player.weapons, index);
-		// link current weapon
+		link_weapon_to_cam(map, env->player.current);
 	}
 	else if (e->buttons[BUTTON_SCROLL_DOWN])
 	{
 		index = (index == 0) ? W_MAX - 1 : index - 1;
-		// unlink current weapon
+		unlink_weapon(map, env->player.current);
 		env->player.current = dyacc(&env->player.weapons, index);
-		// link current weapon
+		link_weapon_to_cam(map, env->player.current);
 	}
 }
 
@@ -38,7 +40,7 @@ int			handle_weapons(t_env *env)
 
 	weapons_events(env, &env->events);
 	// Si nb_bullets_loaded == 0 && nb_bullets_tot > 0
-		// Recharger
+	// Recharger
 	// Si le clic gauche est appuye, tirer
 	weapons_hud(env);
 	return (0);
