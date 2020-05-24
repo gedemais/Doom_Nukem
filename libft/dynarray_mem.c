@@ -20,13 +20,10 @@ static int	realloc_content(t_dynarray *arr)
 int			check_space(t_dynarray *arr)
 {
 	arr->nb_cells++;
-	if (arr->nb_cells * arr->cell_size >= arr->byte_size)
+	while (arr->nb_cells * arr->cell_size >= arr->byte_size)
 	{
-		while (arr->nb_cells * arr->cell_size >= arr->byte_size)
-		{
-			if (realloc_content(arr))
-				return (-1);
-		}
+		if (realloc_content(arr))
+			return (-1);
 	}
 	return (0);
 }

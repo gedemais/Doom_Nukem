@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/14 17:27:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/24 16:51:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	clear_screen_buffers(t_env *env)
 	}
 }
 
-void	compute_rotation_matrices(t_env *env, t_mesh m)
+void	compute_rotation_matrices(t_env *env)
 {
-	update_xrotation_matrix(env->cam.rx_m, m.pitch);
-	update_yrotation_matrix(env->cam.ry_m, m.yaw);
-	update_zrotation_matrix(env->cam.rz_m, m.roll);
+	update_xrotation_matrix(env->cam.rx_m, 0);
+	update_yrotation_matrix(env->cam.ry_m, 0);
+	update_zrotation_matrix(env->cam.rz_m, 0);
 	matrix_mult_matrix(env->cam.rz_m, env->cam.rx_m, env->cam.w_m);
 }
 

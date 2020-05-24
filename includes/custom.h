@@ -6,12 +6,14 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 17:38:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/23 21:46:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUSTOM_H
 # define CUSTOM_H
+
+# define CUSTOM_WALK_SPEED 0.05f
 
 enum				e_custom_sc_id
 {

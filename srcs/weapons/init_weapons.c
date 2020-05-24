@@ -123,7 +123,7 @@ static void		assign_weapons_stats(t_env *env)
 static void	assign_weapons_offsets(t_env *env)
 {
 	env->weapons[W_FAMAS].p_offset = (t_vec3d){0, 1.0f, 0, 0};
-	env->weapons[W_AK47].p_offset = (t_vec3d){0, 1.0f, 0, 0};
+	env->weapons[W_AK47].p_offset = (t_vec3d){0, -0.2f, -0.1f, 0};
 /*	env->weapons[W_SAWED_OFF].p_offset = (t_vec3d){};
 	env->weapons[W_GLOCK_18].p_offset = (t_vec3d){};
 	env->weapons[W_AUG].p_offset = (t_vec3d){};

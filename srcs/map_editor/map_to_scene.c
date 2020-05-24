@@ -76,9 +76,6 @@ static int	create_block(t_env *env, t_map *scene, unsigned char type, int *pos)
 	int		i;
 
 	i = 0;
-	new.pitch = 0;
-	new.yaw = 0;
-	new.roll = 0;
 	ft_memcpy(new.m_pos, pos, sizeof(int) * 3);
 	if ((ft_inbounds(type, 0, 31) || ft_inbounds(type, 160, 191))
 		&& create_cube(env, &new, type))

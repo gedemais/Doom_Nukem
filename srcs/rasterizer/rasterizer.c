@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/22 14:00:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/24 17:00:03 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -66,7 +66,7 @@ int		rasterizer(t_env *env, t_map *map)
 			return (-1);
 		if (m->type == BTXT_NONE)
 			continue ;
-		compute_rotation_matrices(env, *m);
+		compute_rotation_matrices(env);
 		while (j < m->tris.nb_cells)
 		{
 			t = (t_triangle*)(dyacc(&m->tris, j));

@@ -174,7 +174,7 @@ void			fill_triangle_texture(t_env *env, t_triangle t);
 ** Tools
 */
 void			draw_triangle(void *mlx, t_triangle t);
-void			compute_rotation_matrices(t_env *env, t_mesh m);
+void			compute_rotation_matrices(t_env *env);
 void			compute_view_matrice(t_env *env);
 void			swap_floats(float *a, float *b);
 void			clear_screen_buffers(t_env *env);

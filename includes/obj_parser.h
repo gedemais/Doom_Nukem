@@ -113,7 +113,6 @@ struct	s_mesh
 	char		*name;
 	float		yaw;
 	float		pitch;
-	float		roll;
 	int			index;
 	bool		textured;
 	bool		phy;
