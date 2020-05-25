@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/21 17:27:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/25 15:43:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ enum	e_sector_id
 	SECTOR_CUBE,
 	SECTOR_AXIS,
 	SECTOR_TEST,
+	SECTOR_SLENDER,
 	SECTOR_MAX
 };
 

@@ -19,7 +19,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/pente_ouest.obj",
 										"resources/maps/pente_sud.obj",
 										"resources/maps/pente_est.obj",
-										"resources/maps/map-test.obj"};
+										"resources/maps/map-test.obj",
+										"resources/maps/slender.obj"};
 
 	return (paths[index]);
 }

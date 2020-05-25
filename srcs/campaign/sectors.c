@@ -8,6 +8,7 @@ void	init_sectors(t_env *env)
 	cmp_env->sectors[SECTOR_AXIS].map = SCENE_AXIS;
 	cmp_env->sectors[SECTOR_CUBE].map = SCENE_CUBE;
 	cmp_env->sectors[SECTOR_TEST].map = SCENE_MAP_TEST;
+	cmp_env->sectors[SECTOR_SLENDER].map = SCENE_SLENDER;
 
 	cmp_env->sectors[SECTOR_FAMAS].map = SCENE_FAMAS;
 	cmp_env->sectors[SECTOR_AK47].map = SCENE_AK47;
