@@ -40,18 +40,13 @@ static int		handle_keys(t_env *env, t_events *e)
 
 int		custom_play(t_env *env)
 {
-	static bool		init = false;
-
-//	printf("yaw : %f | pitch : %f\n", env->cam.stats.yaw, env->cam.stats.pitch);
-//	print_vec(env->player.current->mesh->corp.pos);
-	if (!init)
-		link_weapon_to_cam(&env->edit_env.map, env->player.current);
-	init = true;
-	handle_keys(env, &env->events);
 	clear_screen_buffers(env);
+	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;
+
 	assert(!rasterizer(env, &env->edit_env.map));
+
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
