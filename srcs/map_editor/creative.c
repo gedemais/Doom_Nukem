@@ -85,8 +85,7 @@ static void	handle_keys(t_env *env, t_events *e)
 
 static void	refresh_last_gui(t_events *e, int *gui)
 {
-	if (e->keys[KEY_UP] || e->keys[KEY_DOWN] || e->buttons[BUTTON_LCLIC]
-		|| e->buttons[BUTTON_RCLIC] || e->buttons[BUTTON_SCLIC]
+	if (e->keys[KEY_UP] || e->keys[KEY_DOWN] || e->buttons[BUTTON_SCLIC]
 		|| e->buttons[BUTTON_SCROLL_DOWN] || e->buttons[BUTTON_SCROLL_UP])
 		*gui = 100;
 	e->buttons[BUTTON_SCROLL_UP] = false;
@@ -95,8 +94,9 @@ static void	refresh_last_gui(t_events *e, int *gui)
 
 int			maped_creative(t_env *env)
 {
-	static int	last_gui_use = 0;
+	static int	last_gui_use = -1;
 
+	last_gui_use == -1 ? last_gui_use = 500 : 0;
 	handle_keys(env, &env->events);
 	handle_mouse(env, &env->events);
 	clear_screen_buffers(env);

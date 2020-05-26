@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 22:00:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/26 03:15:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray 
 	return (0);
 }
 
-int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris, t_mesh *m)
+int		triangle_pipeline(t_env *env, t_triangle *t, t_dynarray *tris, t_mesh *m)
 {
 	t_vec3d		normal;
 	t_vec3d		line1;
@@ -112,18 +112,18 @@ int		triangle_pipeline(t_env *env, t_triangle t, t_dynarray *tris, t_mesh *m)
 //	t.points[2] = vec_add(t.points[2], (t_vec3d){0.0f, 0.0f, 5.0f, 0.0f});
 
 	//Rotation
-	t.points[0] = matrix_mult_vec(env->cam.w_m, t.points[0]);
-	t.points[1] = matrix_mult_vec(env->cam.w_m, t.points[1]);
-	t.points[2] = matrix_mult_vec(env->cam.w_m, t.points[2]);
-	line1 = vec_sub(t.points[1], t.points[0]);
-	line2 = vec_sub(t.points[2], t.points[0]);
+	t->points[0] = matrix_mult_vec(env->cam.w_m, t->points[0]);
+	t->points[1] = matrix_mult_vec(env->cam.w_m, t->points[1]);
+	t->points[2] = matrix_mult_vec(env->cam.w_m, t->points[2]);
+	line1 = vec_sub(t->points[1], t->points[0]);
+	line2 = vec_sub(t->points[2], t->points[0]);
 	normal = vec_cross(line1, line2);
 	normal = vec_normalize(normal);
 	m->corp.norm = normal;
 	
-	if (vec_dot(normal, vec_sub(t.points[0], env->cam.stats.pos)) < 0.0f)
+	if (vec_dot(normal, vec_sub(t->points[0], env->cam.stats.pos)) < 0.0f)
 	{
-		if (clip_near_plane(env, t, normal, tris))
+		if (clip_near_plane(env, *t, normal, tris))
 			return (-1);
 	}
 	return (0);

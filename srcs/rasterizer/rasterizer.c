@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/24 17:00:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/26 03:19:00 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -52,7 +52,6 @@ void	monothread_raster(void *e)
 int		rasterizer(t_env *env, t_map *map)
 {
 	t_mesh		*m;
-	t_triangle	*t;
 	int			i;
 	int			j;
 
@@ -61,18 +60,14 @@ int		rasterizer(t_env *env, t_map *map)
 	compute_view_matrice(env);
 	while (++i < map->nmesh)
 	{
-		j = 0;
+		j = -1;
 		if (!(m = dyacc(&map->meshs, i)))
 			return (-1);
 		if (m->type == BTXT_NONE)
 			continue ;
 		compute_rotation_matrices(env);
-		while (j < m->tris.nb_cells)
-		{
-			t = (t_triangle*)(dyacc(&m->tris, j));
-			triangle_pipeline(env, *t, &env->cam.to_clip, m);
-			j++;
-		}
+		while (++j < m->tris.nb_cells)
+			triangle_pipeline(env, dyacc(&m->tris, j), &env->cam.to_clip, m);
 	}
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);

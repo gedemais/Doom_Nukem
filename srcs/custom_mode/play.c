@@ -42,8 +42,8 @@ int		custom_play(t_env *env)
 {
 	static bool		init = false;
 
-	printf("yaw : %f | pitch : %f\n", env->cam.stats.yaw, env->cam.stats.pitch);
-	print_vec(env->player.current->mesh->corp.pos);
+//	printf("yaw : %f | pitch : %f\n", env->cam.stats.yaw, env->cam.stats.pitch);
+//	print_vec(env->player.current->mesh->corp.pos);
 	if (!init)
 		link_weapon_to_cam(&env->edit_env.map, env->player.current);
 	init = true;

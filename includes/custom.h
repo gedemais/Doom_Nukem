@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/23 21:46:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/26 03:57:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,24 @@ enum				e_custom_sc_id
 	CUSTOM_SC_MAX
 };
 
+struct				s_custom_game
+{
+	int		wave; // index de la vague en cours
+	int		player_pv; // PVs du joueur / 100
+	int		mobs_pv; // PV des mobs qui spawnent pdt cette vague
+	int		current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
+	int		current_nmob; // Nombre de mobs presents sur la map
+	char	music; // ID (sound.h) de la musique jouee (-1 si aucune)
+};
+
 struct				s_custom_env
 {
-	t_env		*env;
-	t_scroll	scroll;
-	t_ed_map	map;
-	t_map		scene;
-	int			sub_context;
+	t_env			*env;
+	t_scroll		scroll;
+	t_ed_map		map;
+	t_map			scene;
+	t_custom_game	game;
+	int				sub_context;
 };
 
 int					key_press_custom(int key, void *param);

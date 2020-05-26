@@ -42,3 +42,4 @@ Creer quelques maps avec le map editor pour la correction
 
 --------------------- Optimisations (pas touche) ---------------------
 - clear_screen (multithread / loop_unrolling)
+- multithread les loops autour de triangle_pipeline

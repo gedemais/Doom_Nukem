@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/24 16:51:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/26 02:01:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clear_screen_buffers(t_env *env)
 		env->cam.z_buffer[i + 1] = -INFINITY;
 		env->cam.z_buffer[i + 2] = -INFINITY;
 		env->cam.z_buffer[i + 3] = -INFINITY;
-		i += 4; // Loop unrolling, about 5 fps of gain
+		i += 4;
 	}
 }
 

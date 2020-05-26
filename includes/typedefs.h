@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 16:20:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/26 03:57:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct	s_weapon t_weapon;
 
 typedef struct	s_ed_map t_ed_map;
 typedef struct	s_scroll t_scroll;
+typedef struct	s_custom_game t_custom_game;
 
 typedef struct	s_kerning t_kerning;
 typedef struct	s_text_box t_text_box;
