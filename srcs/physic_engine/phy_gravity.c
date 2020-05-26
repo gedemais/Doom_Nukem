@@ -15,7 +15,6 @@
 void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats)
 {
 	static  t_vec3d		gravitax;
-	static	int			chute_libre = 0;
 
 	(void)stats;
 	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
@@ -24,10 +23,8 @@ void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats)
 		env->phy_env.tps += 2.5;
 	else
 	{
-		chute_libre++;
-		if (chute_libre > 150)
+		if (stats->pos.y < -10)
 		{
-			chute_libre = 0;
 			env->phy_env.tps = 0;
 			stats->pos = zero_vector();
 			m->corp.v = zero_vector();

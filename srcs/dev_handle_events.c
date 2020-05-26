@@ -20,8 +20,54 @@ t_vec3d project_ortho(t_vec3d u, t_vec3d y) //projection orthogonal sur un vecte
 	return (y_proj);
 }
 
+static float	print_points_face(t_triangle *tri, t_cam_stats cam_stat)
+{
+	unsigned int i;
+	float y_min;
+	t_vec3d diff;
+	
+	i = -1;
+	y_min = 0;
+	while (++i < 3)
+	{
+		diff = vec_sub(cam_stat.pos, tri->points[i]);
+		y_min = (i == 0) ? diff.y : fmin(diff.y, y_min);
+	}
+	printf("y_min = %f\n", y_min);
+	return (y_min);
+}
+
+static void	print_vect_face(t_triangle *tri, t_cam_stats cam_stat)
+{
+	t_vec3d u;
+	t_vec3d v;
+	t_vec3d w;
+	
+	print_points_face(tri, cam_stat);
+	u = vec_sub(tri->points[0], tri->points[1]);
+//	print_vec(u);
+	v = vec_sub(tri->points[1], tri->points[2]);
+//	print_vec(v);
+	w = vec_sub(tri->points[2], tri->points[0]);
+//	print_vec(w);
+
+}
+
+static t_vec3d	browse_vect_plan(t_mesh *m, t_cam_stats cam_stat)
+{
+	unsigned int i;
+
+	i = -1;
+	printf("nb_triangle %d \n",m->tris.nb_cells);
+	while (++i < m->tris.nb_cells)
+	{
+		printf("triangle num %d \n",i);
+		print_vect_face(dyacc(&m->tris, i), cam_stat);	
+	}
+}
+
 // only define the direction of the slope
-static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
+static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir, t_cam_stats cam_stats) //6
 {
 	t_triangle *tri;
 	t_vec3d v;
@@ -33,27 +79,25 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 	t_vec3d	*new_dir;
 	t_vec3d step_dir;
 	
+	browse_vect_plan(m, cam_stats);
 	tri = dyacc(&m->tris, 0);
 	x = tri->points[0];
 	y = tri->points[1];
 	z = tri->points[2];
 	/* creation vecteurs pentes */
 	u = vec_sub(x, y);
-	print_vec(u);
+//	print_vec(u);
 	v = vec_sub(x, z);
-	print_vec(v);
+//	print_vec(v);
 	w = vec_sub(y, z);
-	print_vec(w);
-	tri = dyacc(&m->tris, 1);
-	x = tri->points[0];
-	y = tri->points[1];
-	z = tri->points[2];
+//	print_vec(w);
 	/* dot product*/
 //	printf("dot(u,v) = %f\n", vec_dot(u, v));
 //	printf("dot(v,w) = %f\n", vec_dot(v, w));
 //	printf("dot(u,w) = %f\n", vec_dot(u, w));
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
+	printf("dot = %f\n",vec_dot(step_dir , w));	
 	new_dir->y = step_dir.y;
 //	printf("step_dir = \n");
 //	print_vec(step_dir);
@@ -61,38 +105,25 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 	return (new_dir);
 }
 
-static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
+static t_vec3d		fps_move_print(t_collide *c, t_vec3d dir, t_cam_stats cam_stats) //5
 {
 	t_mesh *b;
 	t_vec3d f;	
 
 	b = c->a;
-	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED); 
+	f = vec_fmult(*coefdir_plan(b, &dir, cam_stats), WALK_SPEED); 
 	return (f);
 }
 
-void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8
+void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8 // fonction hyper importante a refaire 
 {
 	float diff;
 
-	diff = cam_vec->y - c.a->corp.dims.y;
+	diff = cam_vec->y - c.a->corp.pos.y;
 	printf("diff = %f \n", diff);
-//	if (diff < 0.3 && diff > 0)
-//		cam_vec->y += 0.1;
+	if (diff < 0.3 && diff > 0)
+		cam_vec->y += 0.1;
 
-}
-
-static int simple_test_floor(t_env *env) //4 (a supprimer)
-{
-	t_cam_stats cam_stats;
-
-	cam_stats = env->cam.stats;
-//	printf("cam_stats_onfloor = %d\n", cam_stats.onfloor);
-//	printf("cam_stats_onplan = %d\n", cam_stats.onplan);
-	if (cam_stats.onfloor == 1 || cam_stats.onplan == 1)
-		return (1);
-	else
-		return (0);
 }
 
 static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
@@ -105,7 +136,7 @@ static t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
 	if (keys[KEY_E])
 		f.y = 0.1;
 	else
-		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir, cam_stats);
 	return (f);
 
 }
@@ -155,7 +186,6 @@ static void	move(t_env *env, bool keys[NB_KEYS]) //2
 		f = vec_add(f, vec_fmult(r, -3.0f));
 	if (env->cam.stats.onwall == 1)
 		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
-	
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	cam->corp.v = f;

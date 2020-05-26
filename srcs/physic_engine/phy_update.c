@@ -108,6 +108,7 @@ void	update_speeds_collide_cam(t_env *env)
 	{
 		env->cam.stats.onfloor = 0;
 		env->cam.stats.onplan = 0;
+		env->events.keys[KEY_E] = false;
 	}	
 }
 
