@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/27 09:47:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/27 12:13:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include "typedefs.h"
 # include "vectors.h"
 # include "errors.h"
+# include "enemys.h"
 # include "keys.h"
 # include "sound.h"
 # include "phy.h"
@@ -127,6 +128,7 @@ struct			s_env
 	t_cam		cam;
 	t_scroll	scroll;
 	t_ttf		ttfs;
+	t_dynarray	mobs;
 	int			context;
 	int			scene;
 };

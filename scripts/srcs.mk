@@ -29,6 +29,9 @@ SRCS_NAME =	main.c\
 			custom_mode/setup.c\
 			custom_mode/routines.c\
 			\
+			enemys/enemys.c\
+			enemys/create_mob.c\
+			\
 			map_editor/build_map.c\
 			map_editor/block.c\
 			map_editor/category_pallet.c\

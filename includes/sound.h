@@ -15,6 +15,7 @@ enum	e_sample_id
 
 typedef struct	s_sample
 {
+	//char		*name;
 	ALuint		buffer;
 	ALshort		*sample;
 	SNDFILE		*file;

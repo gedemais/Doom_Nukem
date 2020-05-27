@@ -2,6 +2,7 @@ INCS_NAME=	main.h\
 			campaign.h\
 			custom.h\
 			errors.h\
+			enemys.h\
 			keys.h\
 			main.h\
 			map_editor.h\
