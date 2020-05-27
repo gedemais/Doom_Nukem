@@ -73,53 +73,6 @@ static void		assign_meshs(t_env *env)
 //	printf("%s\n", env->weapons[W_TEC9].mesh->name);
 }
 
-static void		assign_weapons_stats(t_env *env)
-{
-	env->weapons[W_FAMAS].damages = 30;
-	env->weapons[W_AK47].damages = 50;
-	env->weapons[W_SAWED_OFF].damages = 90;
-	env->weapons[W_GLOCK_18].damages = 30;
-	env->weapons[W_AUG].damages = 40;
-	env->weapons[W_UMP45].damages = 30;
-	env->weapons[W_MAG7].damages = 80;
-	env->weapons[W_GALIL].damages = 25;
-	env->weapons[W_NEGEV].damages = 60;
-	env->weapons[W_TEC9].damages = 45;
-
-	env->weapons[W_FAMAS].accuracy = 0.8f;
-	env->weapons[W_AK47].accuracy = 0.6f;
-	env->weapons[W_SAWED_OFF].accuracy = 0.3f;
-	env->weapons[W_GLOCK_18].accuracy = 0.5f;
-	env->weapons[W_AUG].accuracy = 0.8f;
-	env->weapons[W_UMP45].accuracy = 0.5;
-	env->weapons[W_MAG7].accuracy = 0.4;
-	env->weapons[W_GALIL].accuracy = 0.6;
-	env->weapons[W_NEGEV].accuracy = 0.4;
-	env->weapons[W_TEC9].accuracy = 0.8;
-
-	env->weapons[W_FAMAS].magazine = 25;
-	env->weapons[W_AK47].magazine = 30;
-	env->weapons[W_SAWED_OFF].magazine = 6;
-	env->weapons[W_GLOCK_18].magazine = 18;
-	env->weapons[W_AUG].magazine = 30;
-	env->weapons[W_UMP45].magazine = 32;
-	env->weapons[W_MAG7].magazine = 6;
-	env->weapons[W_GALIL].magazine = 35;
-	env->weapons[W_NEGEV].magazine = 100;
-	env->weapons[W_TEC9].magazine = 18;
-
-	env->weapons[W_FAMAS].reticle = 20;
-	env->weapons[W_AK47].reticle = 24;
-	env->weapons[W_SAWED_OFF].reticle = 32;
-	env->weapons[W_GLOCK_18].reticle = 16;
-	env->weapons[W_AUG].reticle = 20;
-	env->weapons[W_UMP45].reticle = 22;
-	env->weapons[W_MAG7].reticle = 30;
-	env->weapons[W_GALIL].reticle = 22;
-	env->weapons[W_NEGEV].reticle = 30;
-	env->weapons[W_TEC9].reticle = 20;
-}
-
 static void	assign_weapons_offsets(t_env *env)
 {
 	env->weapons[W_FAMAS].p_offset = (t_vec3d){0, -0.5f, 0.7f, 0};

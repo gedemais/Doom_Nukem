@@ -21,6 +21,14 @@ enum	e_weapons
 	W_MAX
 };
 
+enum	e_shoot_mode
+{
+	SMODE_SBS,
+	SMODE_SINGLE,
+	SMODE_FULL_AUTO,
+	SMODE_MAX
+};
+
 struct	s_weapon
 {
 	t_vec3d	p_offset; // Offset de la position de l'arme au joueur
@@ -36,10 +44,9 @@ struct	s_weapon
 	int		magazine; // Capacite du chargeur
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock
+	int		cadency;
+	char	shoot_mode;
 	int		index;
-	int		dep_index;
-	int		scene_start;
-	int		scene_end;
 	//	Son
 	//	Cadence de tir
 	//	sprite de flamme ?
@@ -51,7 +58,6 @@ int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);
 int			print_ammos(t_env *env, t_weapon *w);
 int			weapons_hud(t_env *env);
-int			link_weapon_to_cam(t_map *map, t_weapon *w);
-int			unlink_weapon(t_map *map, t_weapon *w);
+void		assign_weapons_stats(t_env *env);
 
 #endif

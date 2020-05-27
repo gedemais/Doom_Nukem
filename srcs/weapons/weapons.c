@@ -21,15 +21,25 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 
 static void	weapons_events(t_env *env, t_events *e)
 {
-	bool	exp;
+	bool	scroll;
 
-	exp = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
-	if (exp && env->player.current)
+	scroll = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
+	if (scroll && env->player.current)
+	{
 		switch_current_weapon(env, &env->events);
+		return ;
+	}
+/*	if (e->buttons[BUTTON_LCLIC])
+		shoot_current_weapon(env);
+	else if (e->keys[KEY_R])
+		reload_current_weapon();*/
 }
 
 int			handle_weapons(t_env *env)
 {
+	int		memset = 0;
+
+	memset++;
 	raster_weapon(env, env->player.current->w_map);
 	weapons_events(env, &env->events);
 	weapons_hud(env);
