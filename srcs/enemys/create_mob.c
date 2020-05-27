@@ -27,22 +27,32 @@ int		enemy_map_mapper(char type)
 
 static int		copy_mob_to_scene(t_map *map, t_enemy *enemy)
 {
-	t_mesh	*m;
-	int		i;
+	t_mesh		*m;
+	t_triangle	*t;
+	int			i;
+	int			j;
 
 	i = 0;
 	enemy->map_start = map->meshs.nb_cells;
 	enemy->map_end = enemy->map_start + enemy->map->meshs.nb_cells;
-	printf("start : %d | end : %d\n", enemy->map_start, enemy->map_end);
 	while (i < enemy->map->meshs.nb_cells)
 	{
+		j = 0;
 		m = dyacc(&enemy->map->meshs, i);
 		m->type = BTXT_LIGHT;
+		while (j < m->tris.nb_cells)
+		{
+			t = dyacc(&m->tris, j);
+			t->voxel = true;
+			t->sp = BTXT_LIGHT;
+			j++;
+		}
 		if (push_dynarray(&map->meshs, m, false))
 			return (-1);
 		map->nmesh++;
 		i++;
 	}
+	translate_mesh(map, enemy->mesh, enemy->pos);
 	return (0);
 }
 
