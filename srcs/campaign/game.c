@@ -54,7 +54,7 @@ int		cmp_game(void *param)
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	if (rasterizer(env, &env->maps[env->scene]))
+	if (rasterizer(env, &env->maps[env->scene], false))
 		return (-1);
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

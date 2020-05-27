@@ -30,7 +30,7 @@ static void	weapons_events(t_env *env, t_events *e)
 
 int			handle_weapons(t_env *env)
 {
-	assert(!rasterizer(env, env->player.current->w_map));
+	raster_weapon(env, env->player.current->w_map);
 	weapons_events(env, &env->events);
 	weapons_hud(env);
 	return (0);

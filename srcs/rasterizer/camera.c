@@ -1,20 +1,28 @@
 #include "main.h"
 
-void	map_spawn(t_cam *cam, t_map *map)
+void	map_spawn(t_env *env, t_cam *cam, t_map *map, bool respawn)
 {
 	static t_map	*address = NULL;
 
-	if (address != map)
+	(void)env;
+	if (address != map && !map->init)
 	{
+		map->init = true;
 		cam->stats.pos = map->spawn;
 		map->cam.corp.pos = map->spawn;
 		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
-
 		cam->stats.yaw = map->cam_dir.u;
 		cam->stats.pitch = map->cam_dir.v;
-
-		address = map;
 	}
+	else if (address != map)
+	{
+		cam->stats.pos = respawn ? map->spawn : map->cam.corp.pos;
+		map->cam.corp.pos = respawn ? map->spawn : map->cam.corp.pos;
+		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
+		cam->stats.yaw = respawn ? map->cam.yaw : cam->stats.yaw;
+		cam->stats.pitch = respawn ? map->cam.pitch : cam->stats.pitch;
+	}
+	address = map;
 }
 
 int		allocate_clipping_arrays(t_dynarray arrays[4])

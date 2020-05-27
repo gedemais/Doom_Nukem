@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/17 16:23:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/27 09:47:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ struct			s_env
 	int			context;
 	int			scene;
 };
+
+void			print_camera_stats(t_cam *cam, char *title);
 
 int				exit_doom(t_env *env);
 int				setup(t_env *env);

@@ -138,6 +138,7 @@ struct	s_map
 	int				index;
 	t_collide		cam_floor;
 	t_collide		cam_wall;
+	bool			init;
 };
 
 struct	s_parser

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/26 22:44:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/27 11:15:19 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -49,14 +49,25 @@ void	monothread_raster(void *e)
 	rasthreader(&thread);
 }
 
-int		rasterizer(t_env *env, t_map *map)
+int		raster_weapon(t_env *env, t_map *map)
+{
+	t_cam	cam;
+
+	ft_memcpy(&cam, &env->cam, sizeof(t_cam));
+	if (rasterizer(env, map, true))
+		return (-1);
+	ft_memcpy(&env->cam, &cam, sizeof(t_cam));
+	return (0);
+}
+
+int		rasterizer(t_env *env, t_map *map, bool respawn)
 {
 	t_mesh		*m;
 	int			i;
 	int			j;
 
 	i = -1;
-	map_spawn(&env->cam, map);
+	map_spawn(env, &env->cam, map, respawn);
 	compute_view_matrice(env);
 	while (++i < map->nmesh)
 	{

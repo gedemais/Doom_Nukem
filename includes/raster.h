@@ -131,8 +131,9 @@ int				triangle_pipeline(t_env *env, t_triangle *t, t_dynarray *tris, t_mesh *m)
 int				raster_triangles(t_env *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
-int				rasterizer(t_env *env, t_map *map);
-void			map_spawn(t_cam *cam, t_map *map);
+int				rasterizer(t_env *env, t_map *map, bool respawn);
+int				raster_weapon(t_env *env, t_map *map);
+void			map_spawn(t_env *env, t_cam *cam, t_map *map, bool respawn);
 void			camera_aim(t_env *env);
 
 /*

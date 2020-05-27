@@ -55,7 +55,9 @@ void			camera_aim(t_env *env)
 	mouse_y = env->events.mouse_pos.y;
 	if (!left_quarters(env, mouse_x, mouse_y))
 		right_quarters(env, mouse_x, mouse_y);
+
 	mlx_mouse_move(env->mlx.mlx_win, data->half_wdt, data->half_hgt);
+
 	env->events.mouse_pos.x = data->half_wdt;
 	env->events.mouse_pos.y = data->half_hgt;
 }
