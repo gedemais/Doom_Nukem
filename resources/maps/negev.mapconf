@@ -2,8 +2,8 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
-orientation|{0.0, 0.0}
+spawn|{-0.3, 0.8, -1.2}
+orientation|{6.0, -4.0}
 poignee_negev.024|{}|[]|true|()|
 chargeur_negev.102|{}|[]|true|()|poignee_negev.024
 culasse_negev.113|{}|[]|true|()|poignee_negev.024

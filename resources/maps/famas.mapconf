@@ -2,8 +2,8 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.3, -1.0}
-orientation|{0.0, 0.0}
+spawn|{-0.2, 0.45, -1.0}
+orientation|{0.0, -2.0}
 poignee_famas.058|{}|[]|true|()|
 chargeur_famas.049_famas.108|{}|[]|true|()|poignee_famas.058
 Culasse_famas.051_famas.110|{}|[]|true|()|poignee_famas.058
