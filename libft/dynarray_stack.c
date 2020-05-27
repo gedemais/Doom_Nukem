@@ -52,7 +52,7 @@ int		dynarray_swap_cells(t_dynarray *add, int index1, int index2)
 	void    *d2;
 
 	if (index1 < 0 || index2 < 0 || !add
-			|| index1 > add->nb_cells || index2 > add->nb_cells)
+		|| index1 > add->nb_cells || index2 > add->nb_cells)
 		return (-1);
 	d1 = dyacc(add, index1);
 	d2 = dyacc(add, index2);

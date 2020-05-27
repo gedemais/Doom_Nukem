@@ -36,6 +36,8 @@ struct				s_custom_game
 
 struct				s_custom_env
 {
+	t_node          *start;
+    t_node          *end;
 	t_env			*env;
 	t_scroll		scroll;
 	t_ed_map		map;

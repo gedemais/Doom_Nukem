@@ -111,26 +111,27 @@ struct			s_data
 
 struct			s_env
 {
-	t_mlx		mlx;
-	t_ts_env	ts_env;
-	t_camp_env	cmp_env;
+	t_mlx			mlx;
+	t_ts_env		ts_env;
+	t_camp_env		cmp_env;
 	t_custom_env	custom_env;
-	t_edit_env	edit_env;
-	t_events	events;
-	t_sound		sound;
-	t_sprite	*sprites;
-	t_triangle	mid;
-	t_map		maps[SCENE_MAX];
-	t_data		data;
-	t_physics	phy_env;
-	t_player	player;
-	t_weapon	weapons[W_MAX];
-	t_cam		cam;
-	t_scroll	scroll;
-	t_ttf		ttfs;
-	t_dynarray	mobs;
-	int			context;
-	int			scene;
+	t_edit_env		edit_env;
+	t_events		events;
+	t_sound			sound;
+	t_sprite		*sprites;
+	t_triangle		mid;
+	t_map			maps[SCENE_MAX];
+	t_data			data;
+	t_physics		phy_env;
+	t_player		player;
+	t_weapon		weapons[W_MAX];
+	t_cam			cam;
+	t_scroll		scroll;
+	t_ttf			ttfs;
+	t_dynarray		mobs;
+	t_pf			astar;
+	int				context;
+	int				scene;
 };
 
 void			print_camera_stats(t_cam *cam, char *title);

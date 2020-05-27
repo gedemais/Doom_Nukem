@@ -29,6 +29,9 @@ SRCS_NAME =	main.c\
 			custom_mode/setup.c\
 			custom_mode/routines.c\
 			\
+			enemys/astar.c\
+			enemys/astar_tools.c\
+			enemys/nodes.c\
 			enemys/enemys.c\
 			enemys/create_mob.c\
 			\

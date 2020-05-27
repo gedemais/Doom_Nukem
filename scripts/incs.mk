@@ -1,4 +1,5 @@
 INCS_NAME=	main.h\
+			astar.h\
 			campaign.h\
 			custom.h\
 			errors.h\

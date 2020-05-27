@@ -11,6 +11,7 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 	static float	speeds[ENEMY_MAX] = {
 		[ENEMY_CUBE] = 1.0f
 	};
+
 	enemy->pv = pvs[(int)type];
 	enemy->damages = damages[(int)type];
 	enemy->speed = speeds[(int)type];
