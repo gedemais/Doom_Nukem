@@ -46,20 +46,20 @@ static int      astar_exit(t_pf *env, t_node *current)
         || env->d_astar.nb_cells < 1);
 }
 
-static void     astar_solve(t_pf *env, t_node *current)
+static void     astar_solve(t_pf *env, t_node **c)
 {
     int     i;
 
     astar_sort_dynarray(&env->d_astar);
     astar_delvisited_nodes(&env->d_astar);
-    current = env->d_astar.c;
-    current->bvisited = 1;
-    env->nodes[current->x][current->y][current->z].bvisited = 1;
-    if (astar_exit(env, current))
+    *(c) = env->d_astar.c;
+    *(c)->bvisited = 1;
+    env->nodes[(*c)->x][(*c)->y][(*c)->z].bvisited = 1;
+    if (astar_exit(env, *c))
         return ;
     i = -1;
     while (++i < NEIGHBOURG)
-        astar_neighbour(env, &current, i);
+        astar_neighbour(env, c, i);
 }
 
 void            astar(t_pf *env)
@@ -72,5 +72,5 @@ void            astar(t_pf *env)
     current->localgoal = 0;
     current->globalgoal = astar_distance(*env->start, *env->end);
     while (1)
-        astar_solve(env, current);
+        astar_solve(env, &current);
 }

@@ -50,7 +50,8 @@ static int      nodes_init(t_pf *env)
         while (++j < env->edit_env)
             if (!(env->nodes[i][j] = malloc(sizeof(t_node) * env->depth)))
                 return (free_node(env));
-    }   
+    }
+    return (0);
 }
 
 int             astar_get_nodes(t_pf *env)
