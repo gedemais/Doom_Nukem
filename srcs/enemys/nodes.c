@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void     get_neighbours(t_pf *env, int x, int y, int z)
+static void     nodes_neighbours(t_pf *env, int x, int y, int z)
 {
     ft_memset((void *)nodes[x][y][z].ngbhr, 0, sizeof(t_node *));
     if (x > 0)
@@ -17,7 +17,7 @@ static void     get_neighbours(t_pf *env, int x, int y, int z)
         env->nodes[x][y][z].ngbhr[5] = &nodes[x][y][z + 1];
 }
 
-static int      free_nodes(t_pf *env)
+static int      nodes_free(t_pf *env)
 {
     int i;
     int j;
@@ -34,7 +34,7 @@ static int      free_nodes(t_pf *env)
     return (-1);
 }
 
-static int      init_nodes(t_pf *env)
+static int      nodes_init(t_pf *env)
 {
     int     i;
     int     j;
@@ -53,13 +53,13 @@ static int      init_nodes(t_pf *env)
     }   
 }
 
-int             get_nodes(t_pf *env)
+int             astar_get_nodes(t_pf *env)
 {
     int     x;
     int     y;
     int     z;
 
-    if (init_nodes(&env->astar))
+    if (nodes_init(&env->astar))
         return (-1);
     x = -1;
     while (++x < env->width)
@@ -73,7 +73,7 @@ int             get_nodes(t_pf *env)
                 env->astar.nodes[x][y][z].x = x;
                 env->astar.nodes[x][y][z].y = y;
                 env->astar.nodes[x][y][z].z = z;
-                get_neighbours(&env->astar, x, y, z);
+                nodes_neighbours(&env->astar, x, y, z);
             }
         }
     }

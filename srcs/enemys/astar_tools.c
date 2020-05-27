@@ -1,27 +1,6 @@
 #include "main.h"
 
-void            sort_dynarray(t_dynarray *arr)
-{
-	int	    i;
-	int	    j;
-    t_node  *d1;
-    t_node  *d2;
-
-	i = -1;
-	while (++i < arr->nb_cells - 1)
-	{
-		j = -1;
-		while (++j < arr->nb_cells - 1)
-		{
-            d1 = dyacc(arr, j);
-            d2 = dyacc(arr, j + 1);
-			if (d1->globalgoal > d2->globalgoal)
-                dynnaray_swap_cells(arr, j, j + 1);
-		}
-	}
-}
-
-void            delvisited_nodes(t_dynarray *arr)
+void            astar_delvisited_nodes(t_dynarray *arr)
 {
     int     i;
     t_node  *d;
@@ -35,7 +14,7 @@ void            delvisited_nodes(t_dynarray *arr)
     }
 }
 
-float			rsqrt(float number)
+static float	astar_rsqrt(float number)
 {
 	float	i;
 	float	threehalfs;
@@ -49,13 +28,13 @@ float			rsqrt(float number)
 	return (conv.f);
 }
 
-float           distance(t_node a, t_node b)
+float           astar_distance(t_node a, t_node b)
 {
-    return (1 / rsqrt((a.x - b.x) * (a.x - b.x)
+    return (1 / astar_rsqrt((a.x - b.x) * (a.x - b.x)
         + (a.y - b.y) * (a.y - b.y)));
 }
 
-void            resetdata(t_pf *env)
+void            astar_reset(t_pf *env)
 {
     int x;
     int y;
@@ -78,4 +57,25 @@ void            resetdata(t_pf *env)
         }
     }
     clear_dynarray(&env->d_astar);
+}
+
+void            astar_sort_dynarray(t_dynarray *arr)
+{
+	int	    i;
+	int	    j;
+    t_node  *d1;
+    t_node  *d2;
+
+	i = -1;
+	while (++i < arr->nb_cells - 1)
+	{
+		j = -1;
+		while (++j < arr->nb_cells - 1)
+		{
+            d1 = dyacc(arr, j);
+            d2 = dyacc(arr, j + 1);
+			if (d1->globalgoal > d2->globalgoal)
+                dynnaray_swap_cells(arr, j, j + 1);
+		}
+	}
 }

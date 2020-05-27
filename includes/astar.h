@@ -33,4 +33,13 @@ typedef struct  s_pathfinding
     t_node      ***nodes;
 }               t_pf;
 
+void            astar(t_pf *env);
+
+int             astar_get_nodes(t_pf *env);
+
+float           astar_distance(t_node a, t_node b);
+void            astar_delvisited_nodes(t_dynarray *arr);
+void            astar_reset(t_pf *env);
+void            astar_sort_dynarray(t_dynarray *arr);
+
 #endif
