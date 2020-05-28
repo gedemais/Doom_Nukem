@@ -3,13 +3,11 @@
 void            astar_delvisited_nodes(t_dynarray *arr)
 {
     int     i;
-    t_node  *d;
 
     i = -1;
     while (++i < arr->nb_cells)
     {
-        d = dyacc(arr, i);
-        if (d->bvisited)
+        if (((t_node *)dyacc(arr, i))->bvisited)
             extract_dynarray(arr, i);
     }
 }
@@ -93,30 +91,7 @@ void            quick_sort(t_dynarray *array, int low, int high)
     quick_sort(array, pivot + 1, high);
 }
 
-
-void            bubble_sort(t_dynarray *arr)
-{
-    int     i;
-    int     j;
-    t_node  *d1;
-    t_node  *d2;
-
-    i = -1;
-    while (++i < arr->nb_cells - 1)
-    {
-        j = -1;
-        while (++j < arr->nb_cells - 1)
-        {
-            d1 = dyacc(arr, j);
-            d2 = dyacc(arr, j + 1);
-            if (d1->globalgoal > d2->globalgoal)
-                dynarray_swap_cells(arr, j, j + 1);
-        }
-    }
-}
-
 void            astar_sort_dynarray(t_dynarray *arr)
 {
-    //bubble_sort(arr);
     quick_sort(arr, 0, arr->nb_cells - 1);
 }
