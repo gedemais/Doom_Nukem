@@ -52,14 +52,15 @@ static void		enemys_movement(t_env *env)
 static void		enemys_to_scene(t_env *env, t_map *map)
 {
 	int		i;
+	t_mesh	*m;
 	t_enemy	*mob;
 
 	i = -1;
 	while (++i < env->mobs.nb_cells)
 	{
 		mob = dyacc(&env->mobs, i);
-		t_mesh *d = dyacc(&map->meshs, mob->map_start);
-		translate_mesh(map, d, vec_sub(mob->pos, d->corp.pos));
+		m = dyacc(&map->meshs, mob->map_start);
+		translate_mesh(map, m, vec_sub(mob->pos, m->corp.pos));
 	}
 }
 
