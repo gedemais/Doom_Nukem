@@ -10,7 +10,7 @@ enum				e_enemys
 struct				s_enemy
 {
 	t_vec3d		pos;
-	t_map		*map; // map contenant le mob
+	t_map		*map;
 	t_mesh		*mesh;
 	int			pv;
 	int			damages;

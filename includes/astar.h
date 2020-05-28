@@ -13,6 +13,7 @@ typedef struct  s_node
 {
     int             bobstacle;
     int             bvisited;
+    int             i;
     int             x;
     int             y;
     int             z;
@@ -27,7 +28,7 @@ typedef struct  s_pathfinding
     int         width;
     int         height;
     int         depth;
-    t_dynarray  *d_astar;
+    t_dynarray  d_astar;
     t_node      *start;
     t_node      *end;
     t_node      ***nodes;
@@ -35,7 +36,7 @@ typedef struct  s_pathfinding
 
 void            astar(t_pf *env);
 
-int             astar_get_nodes(t_pf *env);
+int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
 float           astar_distance(t_node a, t_node b);
 void            astar_delvisited_nodes(t_dynarray *arr);

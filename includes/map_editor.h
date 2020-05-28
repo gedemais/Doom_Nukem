@@ -136,9 +136,9 @@ struct				s_ed_map
 	unsigned char	***map;
 	unsigned char	*flat;
 	char			*name;
-	int			width;
-	int			height;
-	int			depth;
+	int				width;
+	int				height;
+	int				depth;
 };
 
 struct				s_edit_env

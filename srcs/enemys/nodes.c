@@ -2,19 +2,25 @@
 
 static void     nodes_neighbours(t_pf *env, int x, int y, int z)
 {
-    ft_memset((void *)nodes[x][y][z].ngbhr, 0, sizeof(t_node *));
+    int     i;
+    t_node  ***nodes;
+
+    nodes = env->nodes;
+    i = -1;
+    while (++i < NEIGHBOURG)
+        nodes[x][y][z].ngbhr[i] = NULL;
     if (x > 0)
-        env->nodes[x][y][z].ngbhr[0] = &nodes[x - 1][y][z];
+        nodes[x][y][z].ngbhr[0] = &nodes[x - 1][y][z];
     if (x < env->width - 1)
-        env->nodes[x][y][z].ngbhr[1] = &nodes[x + 1][y][z];
+        nodes[x][y][z].ngbhr[1] = &nodes[x + 1][y][z];
     if (y > 0)
-        env->nodes[x][y][z].ngbhr[2] = &nodes[x][y - 1][z];
+        nodes[x][y][z].ngbhr[2] = &nodes[x][y - 1][z];
     if (y < env->height - 1)
-        env->nodes[x][y][z].ngbhr[3] = &nodes[x][y + 1][z];
+        nodes[x][y][z].ngbhr[3] = &nodes[x][y + 1][z];
     if (z > 0)
-        env->nodes[x][y][z].ngbhr[4] = &nodes[x][y][z - 1];
+        nodes[x][y][z].ngbhr[4] = &nodes[x][y][z - 1];
     if (z < env->depth - 1)
-        env->nodes[x][y][z].ngbhr[5] = &nodes[x][y][z + 1];
+        nodes[x][y][z].ngbhr[5] = &nodes[x][y][z + 1];
 }
 
 static int      nodes_free(t_pf *env)
@@ -39,43 +45,46 @@ static int      nodes_init(t_pf *env)
     int     i;
     int     j;
 
-    if (!(env->nodes = malloc(sizeof(t_node **) * (env->width))))
-        return (free_node(env));
+    if (!(env->nodes = malloc(sizeof(t_node **) * (env->width))))   
+        return (nodes_free(env));
     i = -1;
     while (++i < env->width)
     {
         if (!(env->nodes[i] = malloc(sizeof(t_node *) * env->height)))
-            return (free_node(env));
+            return (nodes_free(env));
         j = -1;
-        while (++j < env->edit_env)
+        while (++j < env->height)
             if (!(env->nodes[i][j] = malloc(sizeof(t_node) * env->depth)))
-                return (free_node(env));
+                return (nodes_free(env));
     }
     return (0);
 }
 
-int             astar_get_nodes(t_pf *env)
+int             astar_get_custom_nodes(t_ed_map map, t_pf *env)
 {
     int     x;
     int     y;
     int     z;
 
-    if (nodes_init(&env->astar))
+    if (nodes_init(env))
         return (-1);
     x = -1;
-    while (++x < env->width)
+    while (++x < map.width)
     {
         y = -1;
-        while (++y < env->height)
+        while (++y < map.height)
         {
             z = -1;
-            while (++z < env->depth)
+            while (++z < map.depth)
             {
-                env->astar.nodes[x][y][z].x = x;
-                env->astar.nodes[x][y][z].y = y;
-                env->astar.nodes[x][y][z].z = z;
-                nodes_neighbours(&env->astar, x, y, z);
+                env->nodes[x][y][z].x = x;
+                env->nodes[x][y][z].y = y;
+                env->nodes[x][y][z].z = z;
+                if (map.map[x][y][z])
+                    env->nodes[x][y][z].bobstacle = 1;
+                nodes_neighbours(env, x, y, z);
             }
         }
     }
+    return (0);
 }

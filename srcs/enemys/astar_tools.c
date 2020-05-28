@@ -75,7 +75,7 @@ void            astar_sort_dynarray(t_dynarray *arr)
             d1 = dyacc(arr, j);
             d2 = dyacc(arr, j + 1);
 			if (d1->globalgoal > d2->globalgoal)
-                dynnaray_swap_cells(arr, j, j + 1);
+                dynarray_swap_cells(arr, j, j + 1);
 		}
 	}
 }

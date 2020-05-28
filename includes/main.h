@@ -17,9 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
 # include <time.h>
 # include <math.h>
 # include <limits.h>
@@ -44,6 +44,7 @@
 # include "raster.h"
 # include "text.h"
 # include "weapons.h"
+# include "astar.h"
 
 # include "title_screen.h"
 # include "campaign.h"
