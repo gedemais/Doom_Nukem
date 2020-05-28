@@ -59,13 +59,14 @@ void            astar_reset(t_pf *env)
 
 int             place_pivot(t_dynarray *array, int low, int high)
 {
-    int     pivot = low;
+    int     pivot;
     int     switch_i;
     int     i;
 
+    pivot = low;
     i = low + 1;
     switch_i = low + 1;
-    while (i <= high)
+    while (i < high - 1)
     {
         if (((t_node *)dyacc(array, i))->globalgoal
             < ((t_node *)dyacc(array, pivot))->globalgoal)
