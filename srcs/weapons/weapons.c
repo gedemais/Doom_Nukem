@@ -21,27 +21,30 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 
 static void	weapons_events(t_env *env, t_events *e)
 {
-	bool	scroll;
+	t_weapon	*w;
+	bool		r;
+	bool		scroll;
 
+	w = env->player.current;
 	scroll = (e->buttons[BUTTON_SCROLL_UP] || e->buttons[BUTTON_SCROLL_DOWN]);
-	if (scroll && env->player.current)
+	if (scroll && w)
 	{
 		switch_current_weapon(env, &env->events);
 		return ;
 	}
-/*	if (e->buttons[BUTTON_LCLIC])
+	r = e->keys[KEY_R];
+	if (((r && w->loaded < w->magazine) || w->loaded == 0) && w->ammos > 0)
+		reload_current_weapon(env);
+	else if (e->buttons[BUTTON_LCLIC] && w->loaded > 0)
 		shoot_current_weapon(env);
-	else if (e->keys[KEY_R])
-		reload_current_weapon();*/
+	w->ready = !e->buttons[BUTTON_LCLIC];
 }
 
 int			handle_weapons(t_env *env)
 {
-	int		memset = 0;
-
-	memset++;
 	raster_weapon(env, env->player.current->w_map);
 	weapons_events(env, &env->events);
+	//animations();
 	weapons_hud(env);
 	return (0);
 }

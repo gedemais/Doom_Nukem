@@ -45,14 +45,19 @@ struct	s_weapon
 	int		loaded; // Nombre de balles dans le chargeur
 	int		ammos; // Nombre de balles en stock
 	int		cadency;
-	char	shoot_mode;
 	int		index;
+	bool	ready;
+	bool	animated;
+	char	shoot_mode;
 	//	Son
 	//	Cadence de tir
 	//	sprite de flamme ?
 };
 
 int			init_weapons(t_env *env);
+
+int			shoot_current_weapon(t_env *env);
+int			reload_current_weapon(t_env *env);
 
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);

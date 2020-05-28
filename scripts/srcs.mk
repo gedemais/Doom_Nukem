@@ -120,6 +120,7 @@ SRCS_NAME =	main.c\
 			weapons/hud.c\
 			weapons/init_weapons.c\
 			weapons/reticule.c\
+			weapons/shoot.c\
 			weapons/stats.c\
 			\
 			archive/archive.c\
