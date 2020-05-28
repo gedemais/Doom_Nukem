@@ -57,7 +57,7 @@ void            astar_reset(t_pf *env)
     clear_dynarray(&env->d_astar);
 }
 
-int             place_pivot(t_dynarray *array, int low, int high)
+int             place_pivot(t_dynarray *arr, int low, int high)
 {
     int     pivot;
     int     switch_i;
@@ -68,11 +68,11 @@ int             place_pivot(t_dynarray *array, int low, int high)
     switch_i = low + 1;
     while (i < high - 1)
     {
-        if (((t_node *)dyacc(array, i))->globalgoal
-            < ((t_node *)dyacc(array, pivot))->globalgoal)
+        if (((t_node *)dyacc(arr, i))->globalgoal
+            < ((t_node *)dyacc(arr, pivot))->globalgoal)
         {
-            dynarray_swap_cells(array, i, switch_i);
-            dynarray_swap_cells(array, pivot, switch_i);
+            dynarray_swap_cells(arr, i, switch_i);
+            dynarray_swap_cells(arr, pivot, switch_i);
             ++pivot;
             ++switch_i;
         }
@@ -81,15 +81,15 @@ int             place_pivot(t_dynarray *array, int low, int high)
     return (pivot);
 }
 
-void            quick_sort(t_dynarray *array, int low, int high)
+void            quick_sort(t_dynarray *arr, int low, int high)
 {
     int     pivot;
 
     if (low >= high)
         return;
-    pivot = place_pivot(array, low, high); 
-    quick_sort(array, low, pivot - 1);
-    quick_sort(array, pivot + 1, high);
+    pivot = place_pivot(arr, low, high); 
+    quick_sort(arr, low, pivot - 1);
+    quick_sort(arr, pivot + 1, high);
 }
 
 void            astar_sort_dynarray(t_dynarray *arr)
