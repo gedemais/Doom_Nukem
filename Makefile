@@ -9,7 +9,7 @@ FLAGS= -Wall -Werror -Wextra
 # Flags variables
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
-    FLAGS += -g3 -fsanitize=address -fno-common
+    FLAGS += -g3 -fsanitize=address
 endif
 
 OPTI ?= 0
@@ -62,7 +62,6 @@ install: scripts/install.sh
 
 $(NAME): $(LIB) $(MLX) $(OBJS)
 	$(CC) $(FLAGS) -I $(INCS_PATH) -I $(MLX_PATH) -I $(LIB_PATH) $(IBZ2) -o $(NAME) $(OBJS) $(MLX) $(LIB) $(LOPENAL) $(LSNDFILE) $(LFREETYPE) $(LPNG) $(LBZ2) -lpthread -framework OpenGL -framework AppKit
-
 
 $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	@tput civis

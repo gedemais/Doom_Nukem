@@ -102,7 +102,9 @@ char	*samples_paths(unsigned int index)
 {
 	static char		*paths[SA_MAX] = {"resources/samples/ambiances/title_screen_intro.wav",
 					"resources/samples/ambiances/title_screen_loop.wav",
-					"resources/samples/loop.wav"};
+					"resources/samples/loop.wav",
+					"resources/samples/weapons/ak47-fire.wav",
+					"resources/samples/weapons/ak47-reload.wav"};
 
 	return (paths[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/28 10:40:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/05/28 11:13:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ static int	doom_nukem(t_env *env)
 	}
 
 	env->player.current = dyacc(&env->player.weapons, W_FAMAS);
-	env->player.current->ammos = 120;
-	env->player.current->magazine = 30;
-	env->player.current->loaded = 30;
 
 	env->context = C_TITLE_SCREEN;
 	env->scene = 0;

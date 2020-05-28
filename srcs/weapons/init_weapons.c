@@ -73,26 +73,29 @@ static void		assign_meshs(t_env *env)
 //	printf("%s\n", env->weapons[W_TEC9].mesh->name);
 }
 
-static void	assign_weapons_offsets(t_env *env)
+static void	assign_weapons_samples(t_env *env)
 {
-	env->weapons[W_FAMAS].p_offset = (t_vec3d){0, -0.5f, 0.7f, 0};
-	env->weapons[W_AK47].p_offset = (t_vec3d){0, -0.2f, -0.1f, 0};
-	env->weapons[W_SAWED_OFF].p_offset = (t_vec3d){-0.05f, -0.25f, 0.9f, 0};
-	env->weapons[W_GLOCK_18].p_offset = (t_vec3d){0, -0.25f, 1.5f, 0};
-	env->weapons[W_AUG].p_offset = (t_vec3d){0, -0.33f, 1, 0};
-	env->weapons[W_UMP45].p_offset = (t_vec3d){0.75f, -0.6f, 1.2f, 0};
-	env->weapons[W_MAG7].p_offset = (t_vec3d){-0.5f, -0.5f, 1.5f, 0};
-	env->weapons[W_GALIL].p_offset = (t_vec3d){0, -0.5f, 1, 0};
-	env->weapons[W_NEGEV].p_offset = (t_vec3d){0, -0.5f, 1.5f, 0};
-	env->weapons[W_TEC9].p_offset = (t_vec3d){0, -0.5f, 2, 0};
+	env->weapons[W_FAMAS].shoot = NULL;
+	env->weapons[W_AK47].shoot = &env->sound.samples[SA_AK47_FIRE];
+	env->weapons[W_SAWED_OFF].shoot = NULL;
+	env->weapons[W_GLOCK_18].shoot = NULL;
+	env->weapons[W_AUG].shoot = NULL;
+	env->weapons[W_UMP45].shoot = NULL;
+	env->weapons[W_MAG7].shoot = NULL;
+	env->weapons[W_GALIL].shoot = NULL;
+	env->weapons[W_NEGEV].shoot = NULL;
+	env->weapons[W_TEC9].shoot = NULL;
 
-	/*
-	env->weapons[W_FAMAS].p_angle = (t_vec3d){};
-	env->weapons[W_AK47].p_angle = (t_vec3d){};
-	env->weapons[W_SAWED_OFF].p_angle = (t_vec3d){};
-	env->weapons[W_GLOCK_18].p_angle = (t_vec3d){};
-	env->weapons[W_AUG].p_angle = (t_vec3d){};
-	env->weapons[W_UMP45].p_angle = (t_vec3d){};*/
+	env->weapons[W_FAMAS].reload = NULL;
+	env->weapons[W_AK47].reload = &env->sound.samples[SA_AK47_RELOAD];
+	env->weapons[W_SAWED_OFF].reload = NULL;
+	env->weapons[W_GLOCK_18].reload = NULL;
+	env->weapons[W_AUG].reload = NULL;
+	env->weapons[W_UMP45].reload = NULL;
+	env->weapons[W_MAG7].reload = NULL;
+	env->weapons[W_GALIL].reload = NULL;
+	env->weapons[W_NEGEV].reload = NULL;
+	env->weapons[W_TEC9].reload = NULL;
 }
 
 int		init_weapons(t_env *env)
@@ -101,7 +104,7 @@ int		init_weapons(t_env *env)
 		return (-1);
 	assign_meshs(env);
 	assign_weapons_stats(env);
-	assign_weapons_offsets(env);
+	assign_weapons_samples(env);
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0))
 		return (-1);
 	return (0);

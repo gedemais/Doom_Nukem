@@ -10,6 +10,8 @@ enum	e_sample_id
 	SA_TITLE_SCREEN_S,
 	SA_TITLE_SCREEN_L,
 	SA_PNL,
+	SA_AK47_FIRE,
+	SA_AK47_RELOAD,
 	SA_MAX
 };
 
@@ -35,7 +37,7 @@ typedef struct	s_sound
 }				t_sound;
 
 char	*samples_paths(unsigned int index);
-int		play_ambience(t_sample sample, bool play, bool stop, bool keep);
-void	loop_sample(t_sample sample, bool launch, bool stop, bool keep);
+int		play_ambience(t_sample *sample, bool play, bool stop, bool keep);
+void	loop_sample(t_sample *sample, bool launch, bool stop, bool keep);
 
 #endif

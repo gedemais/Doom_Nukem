@@ -8,16 +8,16 @@ int		shoot_current_weapon(t_env *env)
 	bool		full_auto;
 
 	w = env->player.current;
-	sbs = (w->animated && w->shoot_mode == SMODE_SBS);
+	sbs = (w->ready && w->shoot_mode == SMODE_SBS);
 	single = (w->ready && w->shoot_mode == SMODE_SINGLE);
-	full_auto = (w->shoot_mode == SMODE_FULL_AUTO);
+	full_auto = (w->ready && w->shoot_mode == SMODE_FULL_AUTO);
 	if (sbs || single || full_auto)
 	{
 		w->ready = false;
-		w->animated = false;
 		w->loaded--;
+		if (w->shoot)
+			play_ambience(w->shoot, true, false, false);
 	}
-	// Jouer le son
 	// Animation
 	return (0);
 }
@@ -25,13 +25,28 @@ int		shoot_current_weapon(t_env *env)
 int		reload_current_weapon(t_env *env)
 {
 	t_weapon	*w;
-	int		inmag;
-	int		tmp;
+	int			need;
 
 	w = env->player.current;
-	inmag = (w->ammos >= w->magazine) ? w->magazine : w->ammos;
-	tmp = w->loaded;
-	w->loaded = inmag;
-	w->ammos -= inmag - tmp;
+	if (w->loaded == 0 && w->ammos >= w->magazine) // Chargeur vide
+	{
+		w->loaded += w->magazine;
+		w->ammos -= w->magazine;
+	}
+	else if ((need = w->magazine - w->loaded) <= w->ammos) // R
+	{
+		w->loaded += need;
+		w->ammos -= need;
+	}
+	else // Last
+	{
+		w->loaded += w->ammos;
+		w->ammos = 0;
+	}
+	if (w->reload)
+	{
+		play_ambience(w->reload, false, true, false);
+		play_ambience(w->reload, true, false, false);
+	}
 	return (0);
 }

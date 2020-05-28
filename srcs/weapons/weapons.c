@@ -37,7 +37,9 @@ static void	weapons_events(t_env *env, t_events *e)
 		reload_current_weapon(env);
 	else if (e->buttons[BUTTON_LCLIC] && w->loaded > 0)
 		shoot_current_weapon(env);
-	w->ready = !e->buttons[BUTTON_LCLIC];
+//	w->ready = !e->buttons[BUTTON_LCLIC];
+//	handle_ready();
+	w->ready = true;
 }
 
 int			handle_weapons(t_env *env)
