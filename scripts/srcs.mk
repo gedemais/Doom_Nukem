@@ -29,11 +29,11 @@ SRCS_NAME =	main.c\
 			custom_mode/setup.c\
 			custom_mode/routines.c\
 			\
-			enemys/astar.c\
-			enemys/astar_tools.c\
-			enemys/nodes.c\
-			enemys/enemys.c\
-			enemys/create_mob.c\
+			enemies/astar.c\
+			enemies/astar_tools.c\
+			enemies/nodes.c\
+			enemies/enemies.c\
+			enemies/create_mob.c\
 			\
 			map_editor/build_map.c\
 			map_editor/block.c\

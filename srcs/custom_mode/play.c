@@ -41,7 +41,7 @@ static int		handle_keys(t_env *env, t_events *e)
 int			custom_play(t_env *env)
 {
 	clear_screen_buffers(env);
-	handle_enemys(env);
+	handle_enemies(env);
 	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;

@@ -34,6 +34,8 @@ typedef struct  s_pathfinding
     t_node      ***nodes;
 }               t_pf;
 
+float           vec_dst(t_vec3d a, t_vec3d b);
+
 void            astar(t_pf *env);
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);

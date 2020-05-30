@@ -40,6 +40,7 @@ static int		copy_mob_to_scene(t_map *map, t_enemy *enemy)
 	{
 		j = 0;
 		m = dyacc(&enemy->map->meshs, i);
+		m->corp.pos = enemy->pos;
 		m->type = BTXT_LIGHT;
 		while (j < m->tris.nb_cells)
 		{

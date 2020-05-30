@@ -56,6 +56,7 @@ void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
 	i = 0;
 	while (map && i < m->deps.nb_cells)
 	{
+		PUT
 		d = dyacc(&map->meshs, *(int*)dyacc(&m->deps, i));
 		translate_mesh(map, d, t);
 		i++;

@@ -35,7 +35,7 @@
 # include "typedefs.h"
 # include "vectors.h"
 # include "errors.h"
-# include "enemys.h"
+# include "enemies.h"
 # include "keys.h"
 # include "sound.h"
 # include "phy.h"

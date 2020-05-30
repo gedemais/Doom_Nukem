@@ -1,7 +1,9 @@
-#ifndef ENEMYS_H
-# define ENEMYS_H
+#ifndef ENEMIES_H
+# define ENEMIES_H
 
-enum				e_enemys
+# include "astar.h"
+
+enum				e_enemies
 {
 	ENEMY_CUBE,
 	ENEMY_MAX
@@ -9,17 +11,18 @@ enum				e_enemys
 
 struct				s_enemy
 {
-	t_vec3d		pos;
-	t_map		*map;
-	t_mesh		*mesh;
 	int			pv;
 	int			damages;
-	float		speed;
 	int			map_start;
 	int			map_end;
+	float		speed;
+	t_vec3d		pos;
+	t_node		*goal;
+	t_map		*map;
+	t_mesh		*mesh;
 };
 
-int			handle_enemys(t_env *env);
+int			handle_enemies(t_env *env);
 int			create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 
 #endif
