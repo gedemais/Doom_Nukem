@@ -40,13 +40,28 @@ static int		handle_keys(t_env *env, t_events *e)
 
 int			custom_play(t_env *env)
 {
+	clock_t	time;
+
+	time = clock();
 	clear_screen_buffers(env);
+	time = clock() - time;
+	printf("clear screen buffers : %f\n-----------------\n", (double)time / CLOCKS_PER_SEC);
+
 	handle_enemys(env);
 	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;
+	time = clock();
 	assert(!rasterizer(env, &env->edit_env.map, false));
+	time = clock() - time;
+	printf("scene rasterization : %f\n", (double)time / CLOCKS_PER_SEC);
+
+	time = clock();
 	handle_weapons(env);
+	time = clock() - time;
+	printf("handle_weapons : %f\n", (double)time / CLOCKS_PER_SEC);
+
+	printf("--------------------------------------------------------\n");
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
