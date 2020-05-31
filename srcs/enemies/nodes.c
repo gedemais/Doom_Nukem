@@ -1,11 +1,10 @@
 #include "main.h"
 
-static void     nodes_neighbourgs_diagonals(t_pf *env, int x, int y, int z)
+static void     nodes_diagonals_xy(t_pf *env, int x, int y, int z)
 {
     t_node  ***nodes;
 
     nodes = env->nodes;
-    // x && y
     if (x > 0 && y > 0) 
         nodes[x][y][z].nghbr[6] = &nodes[x - 1][y - 1][z];
     if (x < env->width - 1 && y < env->height - 1)
@@ -14,8 +13,13 @@ static void     nodes_neighbourgs_diagonals(t_pf *env, int x, int y, int z)
         nodes[x][y][z].nghbr[8] = &nodes[x + 1][y - 1][z];
     if (x > 0 && y < env->height - 1)
         nodes[x][y][z].nghbr[9] = &nodes[x - 1][y + 1][z];
+}
 
-    // x && z
+static void     nodes_diagonals_xz(t_pf *env, int x, int y, int z)
+{
+    t_node  ***nodes;
+
+    nodes = env->nodes;
     if (x > 0 && z > 0)
         nodes[x][y][z].nghbr[10] = &nodes[x - 1][y][z - 1];
     if (x < env->width - 1 && z < env->depth - 1)
@@ -23,9 +27,14 @@ static void     nodes_neighbourgs_diagonals(t_pf *env, int x, int y, int z)
     if (x < env->width - 1 && z > 0)
         nodes[x][y][z].nghbr[12] = &nodes[x + 1][y][z - 1];
     if (x > 0 && z < env->depth - 1)
-        nodes[x][y][z].nghbr[13] = &nodes[x - 1][y][z + 1];
+        nodes[x][y][z].nghbr[13] = &nodes[x - 1][y][z + 1]; 
+}
 
-    // y && z
+static void     nodes_diagonals_yz(t_pf *env, int x, int y, int z)
+{
+    t_node  ***nodes;
+
+    nodes = env->nodes;
     if (y > 0 && z > 0)
         nodes[x][y][z].nghbr[14] = &nodes[x][y - 1][z - 1];
     if (y < env->height - 1 && z < env->depth - 1)
@@ -58,7 +67,11 @@ static void     nodes_neighbours(t_pf *env, int x, int y, int z)
     if (z < env->depth - 1)
         nodes[x][y][z].nghbr[5] = &nodes[x][y][z + 1];
     if (NEIGHBOURG > 6)
-        nodes_neighbourgs_diagonals(env, x, y, z);
+    {
+        nodes_diagonals_xy(env, x, y, z);
+        nodes_diagonals_xz(env, x, y, z);
+        nodes_diagonals_yz(env, x, y, z);
+    }
 }
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env)

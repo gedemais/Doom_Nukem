@@ -30,6 +30,7 @@ SRCS_NAME =	main.c\
 			custom_mode/routines.c\
 			\
 			enemies/astar.c\
+			enemies/astar_quick_sort.c\
 			enemies/astar_tools.c\
 			enemies/create_mob.c\
 			enemies/enemies.c\
