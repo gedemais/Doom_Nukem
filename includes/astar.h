@@ -1,7 +1,7 @@
 #ifndef ASTAR_H
 # define ASTAR_H
 
-# define NEIGHBOURG 6
+# define NEIGHBOURG 18
 
 typedef union	u_rsqrt
 {

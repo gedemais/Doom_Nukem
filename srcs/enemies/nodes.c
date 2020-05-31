@@ -1,5 +1,41 @@
 #include "main.h"
 
+static void     nodes_more_neighbourgs(t_pf *env, int x, int y, int z)
+{
+    t_node  ***nodes;
+
+    nodes = env->nodes;
+    // x && y
+    if (x > 0 && y > 0)
+        nodes[x][y][z].nghbr[6] = &nodes[x - 1][y - 1][z];
+    if (x < env->width - 1 && y < env->height - 1)
+        nodes[x][y][z].nghbr[7] = &nodes[x + 1][y + 1][z];
+    if (x < env->width - 1 && y > 0)
+        nodes[x][y][z].nghbr[8] = &nodes[x + 1][y - 1][z];
+    if (x > 0 && y < env->height - 1)
+        nodes[x][y][z].nghbr[9] = &nodes[x - 1][y + 1][z];
+
+    // x && z
+    if (x > 0 && z > 0)
+        nodes[x][y][z].nghbr[10] = &nodes[x - 1][y][z - 1];
+    if (x < env->width - 1 && z < env->depth - 1)
+        nodes[x][y][z].nghbr[11] = &nodes[x + 1][y][z + 1];
+    if (x < env->width - 1 && z > 0)
+        nodes[x][y][z].nghbr[12] = &nodes[x + 1][y][z - 1];
+    if (x > 0 && z < env->depth - 1)
+        nodes[x][y][z].nghbr[13] = &nodes[x - 1][y][z + 1];
+
+    // y && z
+    if (y > 0 && z > 0)
+        nodes[x][y][z].nghbr[14] = &nodes[x][y - 1][z - 1];
+    if (y < env->height - 1 && z < env->depth - 1)
+        nodes[x][y][z].nghbr[15] = &nodes[x][y + 1][z + 1];
+    if (y < env->height - 1 && z > 0)
+        nodes[x][y][z].nghbr[16] = &nodes[x][y + 1][z - 1];
+    if (y > 0 && z < env->depth - 1)
+        nodes[x][y][z].nghbr[17] = &nodes[x][y - 1][z + 1];
+}
+
 static void     nodes_neighbours(t_pf *env, int x, int y, int z)
 {
     int     i;
@@ -21,6 +57,8 @@ static void     nodes_neighbours(t_pf *env, int x, int y, int z)
         nodes[x][y][z].nghbr[4] = &nodes[x][y][z - 1];
     if (z < env->depth - 1)
         nodes[x][y][z].nghbr[5] = &nodes[x][y][z + 1];
+    if (NEIGHBOURG > 6)
+        nodes_more_neighbourgs(env, x, y, z);
 }
 
 static int      nodes_free(t_pf *env)
