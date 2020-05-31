@@ -26,13 +26,7 @@ static float	astar_rsqrt(float number)
 	return (conv.f);
 }
 
-float           astar_distance(t_node a, t_node b)
-{
-    return (1 / astar_rsqrt((a.x - b.x) * (a.x - b.x)
-        + (a.y - b.y) * (a.y - b.y)));
-}
-
-float           vec_dst(t_vec3d a, t_vec3d b)
+float           astar_distance(t_vec3d a, t_vec3d b)
 {
     return (1 / astar_rsqrt((a.x - b.x) * (a.x - b.x)
         + (a.y - b.y) * (a.y - b.y)
