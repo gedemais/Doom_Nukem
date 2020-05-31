@@ -16,6 +16,7 @@ struct				s_enemy
 	int			map_start;
 	int			map_end;
 	float		speed;
+	t_vec3d		pas;
 	t_vec3d		pos;
 	t_node		*goal;
 	t_map		*map;

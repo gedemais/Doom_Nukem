@@ -5,9 +5,8 @@ static t_node	*enemies_get_closest_node(t_pf *a, t_vec3d pos)
 	float	dst;
 	float	tmp;
 	int		nb[3];
-	t_node	*ret;
+	t_node	*node;
 
-	pos = vec_fdiv(pos, 2);
 	dst = INFINITY;
 	nb[0] = -1;
 	while (++nb[0] < a->width)
@@ -22,12 +21,23 @@ static t_node	*enemies_get_closest_node(t_pf *a, t_vec3d pos)
 				if (tmp < dst)
 				{
 					dst = tmp;
-					ret = &a->nodes[nb[0]][nb[1]][nb[2]];
+					node = &a->nodes[nb[0]][nb[1]][nb[2]];
 				}
 			}
 		}
 	}
-	return (ret);
+	return (node);
+}
+
+static void		enemies_get_pas(t_enemy *mob)
+{
+	float	speed = 0.1f;
+	t_vec3d	goal;
+
+	goal = vec_add(mob->goal->pos, mob->goal->pos);
+	mob->pas.x = (goal.x - mob->pos.x) * speed;
+	mob->pas.y = (goal.y - mob->pos.y) * speed;
+	mob->pas.z = (goal.z - mob->pos.z) * speed;	
 }
 
 static void		enemies_get_goal(t_pf *a, t_enemy *mob)
@@ -37,12 +47,12 @@ static void		enemies_get_goal(t_pf *a, t_enemy *mob)
 	current = a->end;
 	if (current == NULL)
 		return ;
-	a->start = enemies_get_closest_node(a, mob->pos);
 	while (current && current != a->start)
 	{
 		if (current->parent == a->start)
 		{
 			mob->goal = current;
+			enemies_get_pas(mob);
 			return ;
 		}
 		current = current->parent;
@@ -51,52 +61,48 @@ static void		enemies_get_goal(t_pf *a, t_enemy *mob)
 
 static void		enemies_smooth_movement(t_enemy *mob)
 {
-	float	speed = 0.2f;
-	t_vec3d	pos;
+	t_vec3d	goal;
 
-	pos = vec_fmult(mob->goal->pos, 2);
-	mob->pos.x += (pos.x - mob->pos.x) * speed;
-	mob->pos.y += (pos.y - mob->pos.y) * speed;
-	mob->pos.z += (pos.z - mob->pos.z) * speed;
+	goal = vec_add(mob->goal->pos, mob->goal->pos);
+	if (mob->pos.x == goal.x
+		&& mob->pos.y == goal.y
+		&& mob->pos.z == goal.z)
+		return ;
+	mob->pos.x += mob->pas.x;
+	mob->pos.y += mob->pas.y;
+	mob->pos.z += mob->pas.z;
 }
 
 static void		enemies_do_movement(t_pf *a, t_enemy *mob)
 {
-	t_vec3d	v;
+	t_vec3d	start;
 
-	v = vec_fmult(a->start->pos, 2);
-	if (mob->pos.x == v.x
-		&& mob->pos.y == v.y
-		&& mob->pos.z == v.z)
-	{
+	start = vec_add(a->start->pos, a->start->pos);
+	if (mob->pos.x == start.x
+		&& mob->pos.y == start.y
+		&& mob->pos.z == start.z)
 		enemies_get_goal(a, mob);
-	}
-	v = vec_fmult(mob->goal->pos, 2);
-	if (astar_distance(v, mob->pos) < 0.1f)
-	{
-		mob->pos = v;
-		enemies_get_goal(a, mob);
-	}
 	enemies_smooth_movement(mob);
+	start = vec_add(mob->goal->pos, mob->goal->pos);
+	if (astar_distance(start, mob->pos) < 0.1f)
+		mob->pos = start;
 }
 
 static void		enemies_get_end(t_pf *a)
 {
-	int	i;
-	int	ex;
-	int	ey;
-	int	ez;
+	int		i;
+	t_vec3d	end;
 
-	ex = a->width - 1;
-	ey = a->height - 1;
-	ez = a->depth - 1;
-	a->end = &a->nodes[ex][ey][ez];
+	end.x = a->width - 1;
+	end.y = a->height - 1;
+	end.z = a->depth - 1;
+	a->end = enemies_get_closest_node(a, end);
 	while (astar_distance(a->start->pos, a->end->pos) > 5)
 	{
-		ex = a->end->pos.x / 2 + a->start->pos.x / 2;
-		ey = a->end->pos.y / 2 + a->start->pos.y / 2;
-		ez = a->end->pos.z / 2 + a->start->pos.z / 2;
-		a->end = &a->nodes[ex][ey][ez];
+		end.x = a->end->pos.x / 2 + a->start->pos.x / 2;
+		end.y = a->end->pos.y / 2 + a->start->pos.y / 2;
+		end.z = a->end->pos.z / 2 + a->start->pos.z / 2;
+		a->end = enemies_get_closest_node(a, end);
 		if (a->end->bobstacle == 1)
 		{
 			i = -1;
@@ -107,12 +113,16 @@ static void		enemies_get_end(t_pf *a)
 	}
 }
 
-static int		check_mob_pos(t_pf *a, t_enemy *mob)
+static int		enemies_astar_detection(t_pf *a, t_enemy *mob)
 {
-	return (a->end == NULL
-		|| (mob->pos.x == a->end->pos.x * 2
-		&& mob->pos.y == a->end->pos.y * 2
-		&& mob->pos.z == a->end->pos.z * 2));
+	t_vec3d	v;
+
+	if (a->end == NULL)
+		return (-1);
+	v = vec_add(a->end->pos, a->end->pos);
+	return (mob->pos.x == v.x
+		&& mob->pos.y == v.y
+		&& mob->pos.z == v.z);
 }
 
 static void		enemies_movement(t_env *env)
@@ -126,8 +136,8 @@ static void		enemies_movement(t_env *env)
 	while (++i < env->mobs.nb_cells)
 	{
 		mob = dyacc(&env->mobs, i);
-		a->start = enemies_get_closest_node(a, mob->pos);
-		if (check_mob_pos(a, mob))
+		a->start = enemies_get_closest_node(a, vec_fdiv(mob->pos, 2));
+		if (enemies_astar_detection(a, mob))
 		{
 			enemies_get_end(a);
 			astar(a);
@@ -147,8 +157,7 @@ static void		enemies_to_scene(t_env *env, t_map *map)
 	{
 		mob = dyacc(&env->mobs, i);
 		m = dyacc(&map->meshs, mob->map_start);
-		translate_mesh(map, m,
-			vec_sub(mob->pos, m->corp.pos));
+		translate_mesh(map, m, vec_sub(mob->pos, m->corp.pos));
 	}
 }
 
