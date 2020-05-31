@@ -31,9 +31,12 @@ SRCS_NAME =	main.c\
 			\
 			enemies/astar.c\
 			enemies/astar_tools.c\
-			enemies/nodes.c\
-			enemies/enemies.c\
 			enemies/create_mob.c\
+			enemies/enemies.c\
+			enemies/enemies_do_movement.c\
+			enemies/enemies_movements.c\
+			enemies/nodes.c\
+			enemies/nodes_tools.c\
 			\
 			map_editor/build_map.c\
 			map_editor/block.c\

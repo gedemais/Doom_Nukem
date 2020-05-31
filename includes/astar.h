@@ -35,6 +35,9 @@ void            astar(t_pf *env);
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
+int             nodes_init(t_pf *env);
+t_node          *nodes_get_closest(t_pf *a, t_vec3d pos);
+
 float           astar_distance(t_vec3d a, t_vec3d b);
 void            astar_delvisited_nodes(t_dynarray *arr);
 void            astar_reset(t_pf *env);

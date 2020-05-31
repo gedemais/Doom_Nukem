@@ -1,12 +1,12 @@
 #include "main.h"
 
-static void     nodes_more_neighbourgs(t_pf *env, int x, int y, int z)
+static void     nodes_neighbourgs_diagonals(t_pf *env, int x, int y, int z)
 {
     t_node  ***nodes;
 
     nodes = env->nodes;
     // x && y
-    if (x > 0 && y > 0)
+    if (x > 0 && y > 0) 
         nodes[x][y][z].nghbr[6] = &nodes[x - 1][y - 1][z];
     if (x < env->width - 1 && y < env->height - 1)
         nodes[x][y][z].nghbr[7] = &nodes[x + 1][y + 1][z];
@@ -58,44 +58,7 @@ static void     nodes_neighbours(t_pf *env, int x, int y, int z)
     if (z < env->depth - 1)
         nodes[x][y][z].nghbr[5] = &nodes[x][y][z + 1];
     if (NEIGHBOURG > 6)
-        nodes_more_neighbourgs(env, x, y, z);
-}
-
-static int      nodes_free(t_pf *env)
-{
-    int i;
-    int j;
-
-    i = -1;
-    while (env->nodes && ++i < env->width)
-    {
-        j = -1;
-        while (env->nodes[i] && ++j < env->height)
-            free(env->nodes[i][j]);
-        free(env->nodes[i]);
-    }
-    free(env->nodes);
-    return (-1);
-}
-
-static int      nodes_init(t_pf *env)
-{
-    int     i;
-    int     j;
-
-    if (!(env->nodes = malloc(sizeof(t_node **) * (env->width))))   
-        return (nodes_free(env));
-    i = -1;
-    while (++i < env->width)
-    {
-        if (!(env->nodes[i] = malloc(sizeof(t_node *) * env->height)))
-            return (nodes_free(env));
-        j = -1;
-        while (++j < env->height)
-            if (!(env->nodes[i][j] = malloc(sizeof(t_node) * env->depth)))
-                return (nodes_free(env));
-    }
-    return (0);
+        nodes_neighbourgs_diagonals(env, x, y, z);
 }
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env)

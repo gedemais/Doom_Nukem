@@ -28,8 +28,7 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
     plowergoal = (*c)->localgoal + astar_distance((*c)->pos, nghbr->pos);
     if (plowergoal < nghbr->localgoal)
     {
-        nghbr->parent
-            = &env->nodes[(int)(*c)->pos.x][(int)(*c)->pos.y][(int)(*c)->pos.z];
+        nghbr->parent = nodes_get_closest(env, (*c)->pos);
         nghbr->localgoal = plowergoal;
         nghbr->globalgoal = nghbr->localgoal
             + astar_distance(nghbr->pos, env->end->pos);
@@ -50,12 +49,14 @@ static int      astar_exit(t_pf *env, t_node *current)
 static int      astar_solve(t_pf *env, t_node *c)
 {
     int     i;
+    t_node  *node;
 
     astar_sort_dynarray(&env->d_astar);
     astar_delvisited_nodes(&env->d_astar);
     c = env->d_astar.c;
     c->bvisited = 1;
-    env->nodes[(int)c->pos.x][(int)c->pos.y][(int)c->pos.z].bvisited = 1;
+    node = nodes_get_closest(env, c->pos);
+    node->bvisited = 1;
     if (astar_exit(env, c))
         return (1);
     i = -1;
