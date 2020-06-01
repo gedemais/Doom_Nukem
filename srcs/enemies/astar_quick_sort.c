@@ -84,5 +84,8 @@ void            bubble_sort(t_dynarray *arr)
 
 void            astar_sort_dynarray(t_dynarray *arr, bool astar)
 {
-    quick_sort(arr, 0, arr->nb_cells - 1, astar);
+    if (astar)
+        quick_sort(arr, 0, arr->nb_cells - 1, astar);
+    else
+        bubble_sort(arr);
 }
