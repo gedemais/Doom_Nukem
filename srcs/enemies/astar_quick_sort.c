@@ -1,91 +1,67 @@
 #include "main.h"
 
-static int      astar_place_pivot(t_dynarray *arr, int low, int high)
-{
-    int     pivot;
-    int     switch_i;
-    int     i;
-
-    pivot = low;
-    i = low + 1;
-    switch_i = low + 1;
-    while (i < high - 1)
-    {
-        if (((t_node *)dyacc(arr, i))->globalgoal
-            < ((t_node *)dyacc(arr, pivot))->globalgoal)
-        {
-            dynarray_swap_cells(arr, i, switch_i);
-            dynarray_swap_cells(arr, pivot, switch_i);
-            ++pivot;
-            ++switch_i;
-        }
-        ++i;
-    }
-    return (pivot);
-}
-
-static int      nodes_place_pivot(t_dynarray *arr, int low, int high)
-{
-    int     pivot;
-    int     switch_i;
-    int     i;
-
-    pivot = low;
-    i = low + 1;
-    switch_i = low + 1;
-    while (i < high - 1)
-    {
-        if (((t_node *)dyacc(arr, i))->i
-            < ((t_node *)dyacc(arr, pivot))->i)
-        {
-            dynarray_swap_cells(arr, i, switch_i);
-            dynarray_swap_cells(arr, pivot, switch_i);
-            ++pivot;
-            ++switch_i;
-        }
-        ++i;
-    }
-    return (pivot);
-}
-
-static void		quick_sort(t_dynarray *arr, int low, int high, bool astar)
-{
-    int     pivot;
-
-    if (low >= high)
-        return;
-    if (astar)
-        pivot = astar_place_pivot(arr, low, high);
-    else
-        pivot = nodes_place_pivot(arr, low, high);
-    quick_sort(arr, low, pivot - 1, astar);
-    quick_sort(arr, pivot + 1, high, astar);
-}
-
-void            bubble_sort(t_dynarray *arr)
+static int      astar_partition(t_dynarray *arr, int low, int high)
 {
     int     i;
     int     j;
+    float   pivot;
+    t_node  *d;
 
-    i = -1;
-    while (++i < arr->nb_cells - 1)
+    pivot = ((t_node *)dyacc(arr, high))->globalgoal;
+    i = low - 1;
+    j = low - 1;
+    while (++j <= high)
     {
-        j = -1;
-        while (++j < arr->nb_cells - 1)
+        d = dyacc(arr , j);
+        if (d->globalgoal < pivot)
         {
-            if (((t_node *)dyacc(arr, j))->i
-                > ((t_node *)dyacc(arr, j + 1))->i)
-            {
-                dynarray_swap_cells(arr, j, j + 1);
-            }
+            i++;
+            dynarray_swap_cells(arr, i, j);
         }
+    }
+    dynarray_swap_cells(arr, i + 1, high);
+    return (i + 1);
+}
+
+static int      nodes_partition(t_dynarray *arr, int low, int high)
+{
+    int     i;
+    int     j;
+    int     pivot;
+    t_node  *d;
+
+    pivot = ((t_node *)dyacc(arr, high))->i;
+    i = low - 1;
+    j = low - 1;
+    while (++j <= high)
+    {
+        d = dyacc(arr , j);
+        if (d->i < pivot)
+        {
+            i++;
+            dynarray_swap_cells(arr, i, j);
+        }
+    }
+    dynarray_swap_cells(arr, i + 1, high);
+    return (i + 1);
+}
+
+void            quicksort(t_dynarray *arr, int low, int high, bool astar)
+{
+    int     pi;
+
+    if (low < high)
+    {
+        if (astar)
+            pi = astar_partition(arr, low, high);
+        else
+            pi = nodes_partition(arr, low, high);
+        quicksort(arr, low, pi - 1, astar);
+        quicksort(arr, pi + 1, high, astar);
     }
 }
 
 void            astar_sort_dynarray(t_dynarray *arr, bool astar)
 {
-    if (astar)
-        quick_sort(arr, 0, arr->nb_cells - 1, astar);
-    else
-        bubble_sort(arr);
+    quicksort(arr, 0, arr->nb_cells - 1, astar);
 }
