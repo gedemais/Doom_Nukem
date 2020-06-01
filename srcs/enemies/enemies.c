@@ -11,8 +11,7 @@ static void		enemies_to_scene(t_env *env, t_map *map)
 	{
 		mob = dyacc(&env->mobs, i);
 		m = dyacc(&map->meshs, mob->map_start);
-		if (mob && m)
-			translate_mesh(map, m, vec_sub(mob->pos, m->corp.pos));
+		translate_mesh(map, m, vec_sub(mob->pos, m->corp.pos));
 	}
 }
 

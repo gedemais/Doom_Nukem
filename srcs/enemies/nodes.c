@@ -17,14 +17,13 @@ static void     nodes_init_nghbrs(t_ed_map map, t_pf *env)
 int             nodes_init_dynarray(t_ed_map map, t_pf *env, int *pos)
 {
     int     i;
+    t_vec3d dim;
     t_node  node;
 
+    dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
     ft_memset(&node, 0, sizeof(t_node));
-    node.pos.x = pos[0];
-    node.pos.y = pos[1];
-    node.pos.z = pos[2];
-    node.i = nodes_3d_1d((t_vec3d){ map.width, map.height, map.depth, 0 },
-        node.pos);
+    node.pos = (t_vec3d) { pos[0], pos[1], pos[2], 0 };
+    node.i = nodes_3d_1d(dim, node.pos);
     if (map.map[pos[0]][pos[1]][pos[2]])
         node.bobstacle = 1;
     i = -1;
