@@ -16,8 +16,6 @@ static void		enemies_get_goal(t_pf *a, t_enemy *mob)
 	t_node	*current;
 
 	current = a->end;
-	if (current == NULL)
-		return ;
 	while (current && current != a->start)
 	{
 		if (current->parent == a->start)

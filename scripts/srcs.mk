@@ -37,6 +37,7 @@ SRCS_NAME =	main.c\
 			enemies/enemies_do_movement.c\
 			enemies/enemies_movements.c\
 			enemies/nodes.c\
+			enemies/nodes_neighbourgs.c\
 			enemies/nodes_tools.c\
 			\
 			map_editor/build_map.c\

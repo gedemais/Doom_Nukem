@@ -1,104 +1,61 @@
 #include "main.h"
 
-static void     nodes_diagonals_xy(t_pf *env, int x, int y, int z)
-{
-    t_node  ***nodes;
-
-    nodes = env->nodes;
-    if (x > 0 && y > 0) 
-        nodes[x][y][z].nghbr[6] = &nodes[x - 1][y - 1][z];
-    if (x < env->width - 1 && y < env->height - 1)
-        nodes[x][y][z].nghbr[7] = &nodes[x + 1][y + 1][z];
-    if (x < env->width - 1 && y > 0)
-        nodes[x][y][z].nghbr[8] = &nodes[x + 1][y - 1][z];
-    if (x > 0 && y < env->height - 1)
-        nodes[x][y][z].nghbr[9] = &nodes[x - 1][y + 1][z];
-}
-
-static void     nodes_diagonals_xz(t_pf *env, int x, int y, int z)
-{
-    t_node  ***nodes;
-
-    nodes = env->nodes;
-    if (x > 0 && z > 0)
-        nodes[x][y][z].nghbr[10] = &nodes[x - 1][y][z - 1];
-    if (x < env->width - 1 && z < env->depth - 1)
-        nodes[x][y][z].nghbr[11] = &nodes[x + 1][y][z + 1];
-    if (x < env->width - 1 && z > 0)
-        nodes[x][y][z].nghbr[12] = &nodes[x + 1][y][z - 1];
-    if (x > 0 && z < env->depth - 1)
-        nodes[x][y][z].nghbr[13] = &nodes[x - 1][y][z + 1]; 
-}
-
-static void     nodes_diagonals_yz(t_pf *env, int x, int y, int z)
-{
-    t_node  ***nodes;
-
-    nodes = env->nodes;
-    if (y > 0 && z > 0)
-        nodes[x][y][z].nghbr[14] = &nodes[x][y - 1][z - 1];
-    if (y < env->height - 1 && z < env->depth - 1)
-        nodes[x][y][z].nghbr[15] = &nodes[x][y + 1][z + 1];
-    if (y < env->height - 1 && z > 0)
-        nodes[x][y][z].nghbr[16] = &nodes[x][y + 1][z - 1];
-    if (y > 0 && z < env->depth - 1)
-        nodes[x][y][z].nghbr[17] = &nodes[x][y - 1][z + 1];
-}
-
-static void     nodes_neighbours(t_pf *env, int x, int y, int z)
+static void     nodes_init_nghbrs(t_ed_map map, t_pf *env)
 {
     int     i;
-    t_node  ***nodes;
+    t_node  *node;
 
-    nodes = env->nodes;
+    astar_sort_dynarray(&env->d_nodes, 0);
+    i = -1;
+    while (++i < env->d_nodes.nb_cells)
+    {
+        node = dyacc(&env->d_nodes, i);
+        nodes_neighbourgs(map, node);
+    }
+}
+
+int             nodes_init_dynarray(t_ed_map map, t_pf *env, int *pos)
+{
+    int     i;
+    t_node  node;
+
+    ft_memset(&node, 0, sizeof(t_node));
+    node.pos.x = pos[0];
+    node.pos.y = pos[1];
+    node.pos.z = pos[2];
+    node.i = nodes_3d_1d((t_vec3d){ map.width, map.height, map.depth, 0 },
+        node.pos);
+    if (map.map[pos[0]][pos[1]][pos[2]])
+        node.bobstacle = 1;
     i = -1;
     while (++i < NEIGHBOURG)
-        nodes[x][y][z].nghbr[i] = NULL;
-    if (x > 0)
-        nodes[x][y][z].nghbr[0] = &nodes[x - 1][y][z];
-    if (x < env->width - 1)
-        nodes[x][y][z].nghbr[1] = &nodes[x + 1][y][z];
-    if (y > 0)
-        nodes[x][y][z].nghbr[2] = &nodes[x][y - 1][z];
-    if (y < env->height - 1)
-        nodes[x][y][z].nghbr[3] = &nodes[x][y + 1][z];
-    if (z > 0)
-        nodes[x][y][z].nghbr[4] = &nodes[x][y][z - 1];
-    if (z < env->depth - 1)
-        nodes[x][y][z].nghbr[5] = &nodes[x][y][z + 1];
-    if (NEIGHBOURG > 6)
-    {
-        nodes_diagonals_xy(env, x, y, z);
-        nodes_diagonals_xz(env, x, y, z);
-        nodes_diagonals_yz(env, x, y, z);
-    }
+        node.nghbr[i] = -1;
+    if (push_dynarray(&env->d_nodes, &node, 0))
+        return (-1);
+    return (0);
 }
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env)
 {
-    int     x;
-    int     y;
-    int     z;
+    int     pos[3];
 
-    if (nodes_init(env))
+    if (init_dynarray(&env->d_nodes, sizeof(t_node),
+        map.width * map.height * map.depth))
         return (-1);
-    x = -1;
-    while (++x < map.width)
+    pos[0] = -1;
+    while (++pos[0] < map.width)
     {
-        y = -1;
-        while (++y < map.height)
+        pos[1] = -1;
+        while (++pos[1] < map.height)
         {
-            z = -1;
-            while (++z < map.depth)
+            pos[2] = -1;
+            while (++pos[2] < map.depth)
             {
-                env->nodes[x][y][z].pos.x = x;
-                env->nodes[x][y][z].pos.y = y;
-                env->nodes[x][y][z].pos.z = z;
-                if (map.map[x][y][z])
-                    env->nodes[x][y][z].bobstacle = 1;
-                nodes_neighbours(env, x, y, z);
+                if (nodes_init_dynarray(map, env, pos))
+                    return (-1);
             }
         }
     }
+    nodes_init_nghbrs(map, env);
     return (0);
 }

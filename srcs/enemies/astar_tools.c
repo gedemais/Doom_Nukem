@@ -35,25 +35,17 @@ float           astar_distance(t_vec3d a, t_vec3d b)
 
 void            astar_reset(t_pf *env)
 {
-    int x;
-    int y;
-    int z;
+    int     i;
+    t_node  *node;
 
-    x = -1;
-    while (++x < env->width)
+    i = -1;
+    while (++i < env->d_nodes.nb_cells)
     {
-        y = -1;
-        while (++y < env->height)
-        {
-            z = -1;
-            while (++z < env->depth)
-            {
-                env->nodes[x][y][z].bvisited = 0;
-                env->nodes[x][y][z].globalgoal = INFINITY;
-                env->nodes[x][y][z].localgoal = INFINITY;
-                env->nodes[x][y][z].parent = NULL;
-            }
-        }
+        node = dyacc(&env->d_nodes, i);
+        node->bvisited = 0;
+        node->globalgoal = INFINITY;
+        node->localgoal = INFINITY;
+        node->parent = NULL;
     }
     clear_dynarray(&env->d_astar);
 }

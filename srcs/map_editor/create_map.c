@@ -27,9 +27,9 @@ static int		get_dimensions(t_env *env)
 	s[2] = env->ttfs.fields[FIELD_NM_MAP_DEPTH].str.c;
 	if (check_digits(s[0]) || check_digits(s[1]) || check_digits(s[2]))
 		return (CM_ERR_INVALID_DIM);
-	e->new_map.width = ft_atoi(s[0]);
+	e->new_map.width = ft_atoi(s[2]);
 	e->new_map.height = ft_atoi(s[1]);
-	e->new_map.depth = ft_atoi(s[2]);
+	e->new_map.depth = ft_atoi(s[0]);
 	if (!ft_inbounds(e->new_map.width, 1, INT_MAX)
 		|| !ft_inbounds(e->new_map.height, 1, INT_MAX)
 		|| !ft_inbounds(e->new_map.depth, 1, INT_MAX))
