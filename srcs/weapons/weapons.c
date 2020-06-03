@@ -19,6 +19,16 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 	}
 }
 
+static void	handle_ready(t_env *env, t_weapon *w)
+{
+	if (w->shoot_mode == SMODE_FULL_AUTO)
+		w->ready = true; // Cap with time
+	else if (w->shoot_mode == SMODE_SINGLE)
+		w->ready = !env->events.buttons[BUTTON_LCLIC];
+	else if (w->shoot_mode == SMODE_SBS)
+		w->ready = !env->events.buttons[BUTTON_LCLIC]; // Cap with animation time
+}
+
 static void	weapons_events(t_env *env, t_events *e)
 {
 	t_weapon	*w;
@@ -37,9 +47,8 @@ static void	weapons_events(t_env *env, t_events *e)
 		reload_current_weapon(env);
 	else if (e->buttons[BUTTON_LCLIC] && w->loaded > 0)
 		shoot_current_weapon(env);
-//	w->ready = !e->buttons[BUTTON_LCLIC];
-//	handle_ready();
-	w->ready = true;
+	handle_ready(env, w);
+	//recoil(env, w);
 }
 
 int			handle_weapons(t_env *env)

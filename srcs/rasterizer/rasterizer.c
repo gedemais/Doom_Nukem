@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/30 15:00:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/02 22:08:32 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -62,14 +62,11 @@ int		raster_weapon(t_env *env, t_map *map)
 
 int		rasterizer(t_env *env, t_map *map, bool respawn)
 {
-	clock_t		time;
 	t_mesh		*m;
 	int			i;
 	int			j;
 
 	i = -1;
-	printf("Rasterizer :\n");
-	time = clock();
 	map_spawn(env, &env->cam, map, respawn);
 	compute_view_matrice(env);
 	while (++i < map->nmesh)
@@ -83,8 +80,6 @@ int		rasterizer(t_env *env, t_map *map, bool respawn)
 		while (++j < m->tris.nb_cells)
 			triangle_pipeline(env, dyacc(&m->tris, j), &env->cam.to_clip, m);
 	}
-	time = clock() - time;
-	printf("triangle pipeline : %f\n", (double)time / CLOCKS_PER_SEC);
 	if (raster_triangles(env, &env->cam.to_clip))
 		return (-1);
 	env->scene = map->index;

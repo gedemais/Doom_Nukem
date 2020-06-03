@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/28 16:33:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/02 23:05:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ struct			s_events
 
 struct			s_data
 {
+	clock_t		time;
+	double		spent;
 	float		half_wdt;
 	float		half_hgt;
 	int			data_size;
