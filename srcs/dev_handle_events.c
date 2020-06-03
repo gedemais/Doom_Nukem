@@ -99,6 +99,7 @@ static t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir, t_cam_stats cam_stats) //6
 	step_dir = project_ortho(w, *dir);
 	printf("dot = %f\n",vec_dot(step_dir , w));	
 	new_dir->y = step_dir.y;
+	// print norm triangle 
 //	printf("step_dir = \n");
 //	print_vec(step_dir);
 	
@@ -173,10 +174,7 @@ static void	move(t_env *env, bool keys[NB_KEYS]) //2
 	{
 		f = vec_add(f, vec_fmult(f, 3.0f));
 		if (keys[KEY_E] && !keys[KEY_W])
-		{
-			f.x = 0;
-			f.z = 0;
-		}
+			f = (t_vec3d){0 , f.y, 0, f.w};
 	}
 	if (keys[KEY_S])
 		f = vec_add(f, vec_fmult(f, -3.0f));
