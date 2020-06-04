@@ -33,14 +33,12 @@ static void	attribute_cube_faces(t_mesh *new, char bc)
 int			create_cube(t_env *env, t_mesh *new, unsigned char type)
 {
 	t_mesh		*mesh;
-	int			*pos;
 	t_triangle	t;
 	int			i;
 
 	i = 0;
 	new->type = get_block_type(env, new, type);
 	mesh = dyacc(&env->maps[SCENE_CUBE].meshs, 0);
-	pos = new->m_pos;
 	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
 		return (-1);
 	while (i < mesh->tris.nb_cells)
