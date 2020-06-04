@@ -1,6 +1,8 @@
 #ifndef ASTAR_H
 # define ASTAR_H
 
+# include "main.h"
+
 # define NEIGHBOURG 18
 
 typedef union	u_rsqrt
@@ -9,28 +11,28 @@ typedef union	u_rsqrt
 	uint32_t	i;
 }				t_rsqrt;
 
-typedef struct  s_node
+struct  s_node
 {
-    int             i;
-    int             bobstacle;
-    int             bvisited;
-    float           globalgoal;
-    float           localgoal;
-    t_vec3d         pos;
-    int             nghbr[NEIGHBOURG];
-    struct s_node   *parent;
-}               t_node;
+	int			i;
+	int			bobstacle;
+	int			bvisited;
+	float		globalgoal;
+	float		localgoal;
+	t_vec3d		pos;
+	int			nghbr[NEIGHBOURG];
+	t_node		*parent;
+};
 
-typedef struct  s_pathfinding
+struct			s_pathfinding
 {
-    int         width;
-    int         height;
-    int         depth;
-    t_node      *start;
-    t_node      *end;
-    t_dynarray  d_astar;
-    t_dynarray  d_nodes;
-}               t_pf;
+	int			width;
+	int			height;
+	int			depth;
+	t_node		*start;
+	t_node		*end;
+	t_dynarray	d_astar;
+	t_dynarray	d_nodes;
+};
 
 void            astar(t_pf *env);
 
@@ -48,6 +50,6 @@ void            astar_reset(t_pf *env);
 int             astar_compare(void *a, void *b);
 int             nodes_compare(void *a, void *b);
 void            astar_sort_dynarray(t_dynarray *arr,
-                    int (*compare)(void *a, void *b));
+		int (*compare)(void *a, void *b));
 
 #endif

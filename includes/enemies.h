@@ -1,7 +1,9 @@
 #ifndef ENEMIES_H
 # define ENEMIES_H
 
-# include "astar.h"
+# include "main.h"
+
+# define MAX_ENEMIES 5
 
 enum				e_enemies
 {
@@ -20,7 +22,6 @@ struct				s_enemy
 	t_vec3d		pos;
 	t_node		*goal;
 	t_map		*map;
-	t_mesh		*mesh;
 };
 
 int				handle_enemies(t_env *env);

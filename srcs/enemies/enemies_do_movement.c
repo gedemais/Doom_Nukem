@@ -16,8 +16,12 @@ static void		enemies_get_goal(t_pf *a, t_enemy *mob)
 	t_node	*current;
 
 	current = a->end;
+	printf("start position : ");
+	print_vec(a->start->pos);
 	while (current && current != a->start)
 	{
+		printf("current position : ");
+		print_vec(current->pos);
 		if (current->parent == a->start)
 		{
 			mob->goal = current;

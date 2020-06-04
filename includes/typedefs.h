@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/27 11:37:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/04 18:43:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ typedef struct	s_custom_game t_custom_game;
 typedef struct	s_kerning t_kerning;
 typedef struct	s_text_box t_text_box;
 typedef struct	s_cube_pallet t_cube_pallet;
+
+typedef struct	s_node t_node;
+typedef struct  s_pathfinding t_pf;
 
 #endif
