@@ -27,14 +27,14 @@ static int      partition(t_dynarray *arr, int low, int high,
     int     j;
     void    *pivot;
 
-    pivot = ((t_node *)dyacc(arr, high));
+    pivot = dyacc(arr, high);
     i = low - 1;
     j = low - 1;
     while (++j <= high)
     {
         if (compare(dyacc(arr , j), pivot))
         {
-            i++;
+            ++i;
             dynarray_swap_cells(arr, i, j);
         }
     }
