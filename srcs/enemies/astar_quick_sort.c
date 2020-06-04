@@ -1,19 +1,38 @@
 #include "main.h"
 
-static int      astar_partition(t_dynarray *arr, int low, int high)
+int             astar_compare(void *a, void *b)
+{
+    t_node  *n1;
+    t_node  *n2;
+
+    n1 = (t_node *)a;
+    n2 = (t_node *)b;
+    return (n1->globalgoal < n2->globalgoal);
+}
+
+int             nodes_compare(void *a, void *b)
+{
+    t_node  *n1;
+    t_node  *n2;
+
+    n1 = (t_node *)a;
+    n2 = (t_node *)b;
+    return (n1->i < n2->i);
+}
+
+static int      partition(t_dynarray *arr, int low, int high,
+                    int (*compare)(void *a, void *b))
 {
     int     i;
     int     j;
-    float   pivot;
-    t_node  *d;
+    void    *pivot;
 
-    pivot = ((t_node *)dyacc(arr, high))->globalgoal;
+    pivot = ((t_node *)dyacc(arr, high));
     i = low - 1;
     j = low - 1;
     while (++j <= high)
     {
-        d = dyacc(arr , j);
-        if (d->globalgoal < pivot)
+        if (compare(dyacc(arr , j), pivot))
         {
             i++;
             dynarray_swap_cells(arr, i, j);
@@ -23,45 +42,21 @@ static int      astar_partition(t_dynarray *arr, int low, int high)
     return (i + 1);
 }
 
-static int      nodes_partition(t_dynarray *arr, int low, int high)
+void            quicksort(t_dynarray *arr, int low, int high,
+                    int (*compare)(void *a, void *b))
 {
-    int     i;
-    int     j;
     int     pivot;
-    t_node  *d;
-
-    pivot = ((t_node *)dyacc(arr, high))->i;
-    i = low - 1;
-    j = low - 1;
-    while (++j <= high)
-    {
-        d = dyacc(arr , j);
-        if (d->i < pivot)
-        {
-            i++;
-            dynarray_swap_cells(arr, i, j);
-        }
-    }
-    dynarray_swap_cells(arr, i + 1, high);
-    return (i + 1);
-}
-
-void            quicksort(t_dynarray *arr, int low, int high, bool astar)
-{
-    int     pi;
 
     if (low < high)
     {
-        if (astar)
-            pi = astar_partition(arr, low, high);
-        else
-            pi = nodes_partition(arr, low, high);
-        quicksort(arr, low, pi - 1, astar);
-        quicksort(arr, pi + 1, high, astar);
+        pivot = partition(arr, low, high, compare);
+        quicksort(arr, low, pivot - 1, compare);
+        quicksort(arr, pivot + 1, high, compare);
     }
 }
 
-void            astar_sort_dynarray(t_dynarray *arr, bool astar)
+void            astar_sort_dynarray(t_dynarray *arr,
+                    int (*compare)(void *a, void *b))
 {
-    quicksort(arr, 0, arr->nb_cells - 1, astar);
+    quicksort(arr, 0, arr->nb_cells - 1, compare);
 }

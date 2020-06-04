@@ -16,7 +16,7 @@ static void		enemies_to_scene(t_env *env, t_map *map)
 }
 
 static int		test_mob(t_env *env)
-{
+{/*
 	int 	nb_mobs = 4;
 	t_vec3d	pos[nb_mobs];
 
@@ -26,10 +26,11 @@ static int		test_mob(t_env *env)
 	pos[3] = (t_vec3d){(env->astar.width - 1) * 2, 2, (env->astar.depth - 1) * 2, 0};
 	
 	static int i = -1;
-	
-	while (++i < nb_mobs)
+	*/
+	t_vec3d pos = (t_vec3d){ 0, 2, 0, 0 };
+	if (env->mobs.nb_cells == 0)
 	{
-		if (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos[i]))
+		if (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos))
 			return (-1);
 	}
 	return (0);
@@ -39,7 +40,7 @@ int				handle_enemies(t_env *env)
 {
 	if (test_mob(env))
 		return (-1);
-	//enemies_movements(env);
+	enemies_movements(env);
 	enemies_to_scene(env, &env->edit_env.map);
 	return (0);
 }

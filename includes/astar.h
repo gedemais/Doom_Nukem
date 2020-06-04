@@ -44,6 +44,10 @@ t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos);
 float           astar_distance(t_vec3d a, t_vec3d b);
 void            astar_delvisited_nodes(t_dynarray *arr);
 void            astar_reset(t_pf *env);
-void            astar_sort_dynarray(t_dynarray *arr, bool astar);
+
+int             astar_compare(void *a, void *b);
+int             nodes_compare(void *a, void *b);
+void            astar_sort_dynarray(t_dynarray *arr,
+                    int (*compare)(void *a, void *b));
 
 #endif

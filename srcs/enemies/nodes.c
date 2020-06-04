@@ -5,7 +5,7 @@ static void     nodes_init_nghbrs(t_ed_map map, t_pf *env)
     int     i;
     t_node  *node;
 
-    astar_sort_dynarray(&env->d_nodes, 0);
+    astar_sort_dynarray(&env->d_nodes, nodes_compare);
     i = -1;
     while (++i < env->d_nodes.nb_cells)
     {
@@ -20,8 +20,8 @@ int             nodes_init_dynarray(t_ed_map map, t_pf *env, int *pos)
     t_vec3d dim;
     t_node  node;
 
-    dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
     ft_memset(&node, 0, sizeof(t_node));
+    dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
     node.pos = (t_vec3d) { pos[0], pos[1], pos[2], 0 };
     node.i = nodes_3d_1d(dim, node.pos);
     if (map.map[pos[0]][pos[1]][pos[2]])

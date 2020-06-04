@@ -51,7 +51,7 @@ static int      astar_solve(t_pf *env, t_node *c)
     int     i;
     t_node  *node;
 
-    astar_sort_dynarray(&env->d_astar, 1);
+    astar_sort_dynarray(&env->d_astar, astar_compare);
     astar_delvisited_nodes(&env->d_astar);
     c = env->d_astar.c;
     c->bvisited = 1;
