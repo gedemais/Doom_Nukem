@@ -9,7 +9,7 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 		[ENEMY_CUBE] = 10
 	};
 	static float	speeds[ENEMY_MAX] = {
-		[ENEMY_CUBE] = 1.0f
+		[ENEMY_CUBE] = 0.05f
 	};
 
 	enemy->pv = pvs[(int)type];
@@ -74,6 +74,8 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
 
+	ft_memset((void *)&enemy, 0, sizeof(t_enemy));
+	assign_enemys_stats(&enemy, type);
 	enemy.pos = pos;
 	enemy.map = &env->maps[enemy_map_mapper(type)];
 	if (copy_mob_to_scene(map, &enemy)

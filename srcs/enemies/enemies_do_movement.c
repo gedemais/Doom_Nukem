@@ -2,27 +2,23 @@
 
 static void		enemies_get_pas(t_enemy *mob)
 {
-	float	speed = 0.1f;
 	t_vec3d	goal;
 
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
-	mob->pas.x = (goal.x - mob->pos.x) * speed;
-	mob->pas.y = (goal.y - mob->pos.y) * speed;
-	mob->pas.z = (goal.z - mob->pos.z) * speed;	
+	mob->pas.x = (goal.x - mob->pos.x) * mob->speed;
+	mob->pas.y = (goal.y - mob->pos.y) * mob->speed;
+	mob->pas.z = (goal.z - mob->pos.z) * mob->speed;	
 }
 
 static void		enemies_get_goal(t_pf *a, t_enemy *mob)
 {
 	t_node	*current;
 
-	current = a->end;
-	printf("start position : ");
-	print_vec(a->start->pos);
+	current = mob->end;
 	while (current && current != a->start)
 	{
-		printf("current position : ");
-		print_vec(current->pos);
-		if (current->parent == a->start)
+		if (current->parent == a->start
+			|| current->parent == NULL)
 		{
 			mob->goal = current;
 			enemies_get_pas(mob);

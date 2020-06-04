@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 5
+# define MAX_ENEMIES 3
 
 enum				e_enemies
 {
@@ -21,6 +21,7 @@ struct				s_enemy
 	t_vec3d		pas;
 	t_vec3d		pos;
 	t_node		*goal;
+	t_node		*end;
 	t_map		*map;
 };
 
