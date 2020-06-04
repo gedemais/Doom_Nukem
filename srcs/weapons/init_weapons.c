@@ -75,27 +75,27 @@ static void		assign_meshs(t_env *env)
 
 static void	assign_weapons_samples(t_env *env)
 {
-	env->weapons[W_FAMAS].shoot = NULL;
+	env->weapons[W_FAMAS].shoot = &env->sound.samples[SA_FAMAS_FIRE];
 	env->weapons[W_AK47].shoot = &env->sound.samples[SA_AK47_FIRE];
-	env->weapons[W_SAWED_OFF].shoot = NULL;
-	env->weapons[W_GLOCK_18].shoot = NULL;
-	env->weapons[W_AUG].shoot = NULL;
-	env->weapons[W_UMP45].shoot = NULL;
-	env->weapons[W_MAG7].shoot = NULL;
-	env->weapons[W_GALIL].shoot = NULL;
-	env->weapons[W_NEGEV].shoot = NULL;
-	env->weapons[W_TEC9].shoot = NULL;
+	env->weapons[W_SAWED_OFF].shoot = &env->sound.samples[SA_SAWED_OFF_FIRE];
+	env->weapons[W_GLOCK_18].shoot = &env->sound.samples[SA_GLOCK_FIRE];
+	env->weapons[W_AUG].shoot = &env->sound.samples[SA_AUG_FIRE];
+	env->weapons[W_UMP45].shoot = &env->sound.samples[SA_UMP45_FIRE];
+	env->weapons[W_MAG7].shoot = &env->sound.samples[SA_MAG7_FIRE];
+	env->weapons[W_GALIL].shoot = &env->sound.samples[SA_GALIL_FIRE];
+	env->weapons[W_NEGEV].shoot = &env->sound.samples[SA_NEGEV_FIRE];
+	env->weapons[W_TEC9].shoot = &env->sound.samples[SA_TEC9_FIRE];
 
-	env->weapons[W_FAMAS].reload = NULL;
+	env->weapons[W_FAMAS].reload = &env->sound.samples[SA_FAMAS_RELOAD];
 	env->weapons[W_AK47].reload = &env->sound.samples[SA_AK47_RELOAD];
-	env->weapons[W_SAWED_OFF].reload = NULL;
-	env->weapons[W_GLOCK_18].reload = NULL;
-	env->weapons[W_AUG].reload = NULL;
-	env->weapons[W_UMP45].reload = NULL;
-	env->weapons[W_MAG7].reload = NULL;
-	env->weapons[W_GALIL].reload = NULL;
-	env->weapons[W_NEGEV].reload = NULL;
-	env->weapons[W_TEC9].reload = NULL;
+	env->weapons[W_SAWED_OFF].reload = &env->sound.samples[SA_SAWED_OFF_FILL];
+	env->weapons[W_GLOCK_18].reload = &env->sound.samples[SA_GLOCK_RELOAD];
+	env->weapons[W_AUG].reload = &env->sound.samples[SA_AUG_RELOAD];
+	env->weapons[W_UMP45].reload = &env->sound.samples[SA_UMP45_RELOAD];
+	env->weapons[W_MAG7].reload = &env->sound.samples[SA_MAG7_RELOAD];
+	env->weapons[W_GALIL].reload = &env->sound.samples[SA_GALIL_RELOAD];
+	env->weapons[W_NEGEV].reload = &env->sound.samples[SA_NEGEV_RELOAD];
+	env->weapons[W_TEC9].reload = &env->sound.samples[SA_TEC9_RELOAD];
 }
 
 int		init_weapons(t_env *env)

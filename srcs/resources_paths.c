@@ -103,8 +103,27 @@ char	*samples_paths(unsigned int index)
 	static char		*paths[SA_MAX] = {"resources/samples/ambiances/title_screen_intro.wav",
 					"resources/samples/ambiances/title_screen_loop.wav",
 					"resources/samples/loop.wav",
-					"resources/samples/weapons/ak47-fire.wav",
-					"resources/samples/weapons/ak47-reload.wav"};
+					"resources/samples/weapons/ak47-reload.wav",
+					"resources/samples/weapons/ak47-shot.wav",
+					"resources/samples/weapons/aug-reload.wav",
+					"resources/samples/weapons/aug-shot.wav",
+					"resources/samples/weapons/famas-reload.wav",
+					"resources/samples/weapons/famas-shot.wav",
+					"resources/samples/weapons/galil-reload.wav",
+					"resources/samples/weapons/galil-shot.wav",
+					"resources/samples/weapons/glock-reload.wav",
+					"resources/samples/weapons/glock-shot.wav",
+					"resources/samples/weapons/mag7-reload.wav",
+					"resources/samples/weapons/mag7-shot.wav",
+					"resources/samples/weapons/negev-reload.wav",
+					"resources/samples/weapons/negev-shot.wav",
+					"resources/samples/weapons/sawed-off-fill.wav",
+					"resources/samples/weapons/sawed-off-pump.wav",
+					"resources/samples/weapons/sawed-off-shot.wav",
+					"resources/samples/weapons/tec9-reload.wav",
+					"resources/samples/weapons/tec9-shot.wav",
+					"resources/samples/weapons/ump45-reload.wav",
+					"resources/samples/weapons/ump45-shot.wav"};
 
 	return (paths[index]);
 }

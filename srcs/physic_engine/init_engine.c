@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/03 17:07:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/04 15:27:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static	void init_physic_engine2(t_env *env)
 	//other type of plan 
 }
 
-int		init_physic_engine(t_env *env)
+int			init_physic_engine(t_env *env)
 {
 	t_mesh		*m;
 	int			i;

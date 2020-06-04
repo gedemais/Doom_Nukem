@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/03 18:55:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/04 19:46:04 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		render(void *param)
 	env = (t_env*)param;
 	env->data.spent = (double)(clock() - env->data.time) / CLOCKS_PER_SEC;
 
-	printf("fps : %f\n", 1 / env->data.spent);
+//	printf("fps : %f\n", 1 / env->data.spent);
 
 	env->data.time = clock();
 
