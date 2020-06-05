@@ -87,6 +87,7 @@ SRCS_NAME =	main.c\
 			physic_engine/phy_gravity.c\
 			physic_engine/phy_tool.c\
 			physic_engine/phy_update.c\
+			physic_engine/phy_move.c\
 			physic_engine/color_collides.c\
 			\
 			rasterizer/clipping.c\

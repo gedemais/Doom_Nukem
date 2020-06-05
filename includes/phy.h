@@ -73,4 +73,10 @@ void	color_collides(t_env *env);
 void	color_collides_cam(t_env *env);
 /*			phy_tool.c		*/
 void	type_of_plan(t_env *env, t_collide *c);
+t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]);
+t_vec3d	fps_move_print(t_collide *c, t_vec3d dir);
+t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir);
+t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f);
+/*			phy_tool2.c		*/
+void	phy_move(t_env *env, bool keys[NB_KEYS]);
 #endif

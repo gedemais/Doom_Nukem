@@ -12,6 +12,14 @@
 
 #include "main.h"
 
+t_vec3d project_ortho(t_vec3d u, t_vec3d y)
+{
+	t_vec3d y_proj;
+
+	y_proj = vec_fmult(u, (vec_dot(y, u) / vec_dot(u, u)));
+	return (y_proj);
+}
+
 void		vec3d_swap(t_vec3d *a, t_vec3d *b)
 {
 	t_vec3d		t;

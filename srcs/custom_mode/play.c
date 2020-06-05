@@ -1,5 +1,5 @@
 #include "main.h"
-
+/*
 static void	move(t_env *env, bool keys[NB_KEYS])
 {
 	t_map		*map;
@@ -30,11 +30,11 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		translate_mesh(map, &map->cam, vec_fmult(r, -3.0f));
 	}
 }
-
+*/
 static int		handle_keys(t_env *env, t_events *e)
 {
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
-		move(env, e->keys);
+		phy_move(env, e->keys);
 	return (0);
 }
 
