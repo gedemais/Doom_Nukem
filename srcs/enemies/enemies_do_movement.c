@@ -10,49 +10,41 @@ static void		enemies_get_pas(t_enemy *mob)
 	mob->pas.z = (goal.z - mob->pos.z) * mob->speed;	
 }
 
-static void		enemies_get_goal(t_pf *a, t_enemy *mob)
+static void		enemies_get_goal(t_enemy *mob)
 {
-	t_node	*current;
-
-	current = mob->end;
-	while (current && current != a->start)
+	while (mob->end && mob->end != mob->goal)
 	{
-		if (current->parent == a->start
-			|| current->parent == NULL)
+		if (mob->end->parent == NULL)
+			return ;
+		if (mob->end->parent == mob->goal)
 		{
-			mob->goal = current;
+			mob->goal = mob->end;
 			enemies_get_pas(mob);
 			return ;
 		}
-		current = current->parent;
+		mob->end = mob->end->parent;
 	}
 }
 
 static void		enemies_smooth_movement(t_enemy *mob)
 {
-	t_vec3d	goal;
-
-	goal = vec_add(mob->goal->pos, mob->goal->pos);
-	if (mob->pos.x == goal.x
-		&& mob->pos.y == goal.y
-		&& mob->pos.z == goal.z)
+	if (mob->i == mob->goal->i)
 		return ;
-	mob->pos.x += mob->pas.x;
-	mob->pos.y += mob->pas.y;
-	mob->pos.z += mob->pas.z;
+	mob->pos = vec_add(mob->pos, mob->pas);
 }
 
 void			enemies_do_movement(t_pf *a, t_enemy *mob)
 {
-	t_vec3d	start;
+	t_vec3d	goal;
+	(void)a;
 
-	start = vec_add(a->start->pos, a->start->pos);
-	if (mob->pos.x == start.x
-		&& mob->pos.y == start.y
-		&& mob->pos.z == start.z)
-		enemies_get_goal(a, mob);
+	if (mob->i == mob->goal->i)
+		enemies_get_goal(mob);
 	enemies_smooth_movement(mob);
-	start = vec_add(mob->goal->pos, mob->goal->pos);
-	if (astar_distance(start, mob->pos) < 0.1f)
-		mob->pos = start;
+	goal = vec_add(mob->goal->pos, mob->goal->pos);
+	if (astar_distance(goal, mob->pos) < 0.1f)
+	{
+		mob->i = mob->goal->i;
+		mob->pos = goal;
+	}
 }

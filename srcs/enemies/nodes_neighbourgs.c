@@ -64,7 +64,7 @@ static void		nodes_neighbourgs_diagonals(t_node *node, t_vec3d dim)
 	nodes_diagonals_yz(node, dim);
 }
 
-void            nodes_neighbourgs(t_ed_map map, t_node *node)
+void            nodes_neighbourgs(t_pf *env, t_node *node)
 {
     int     x;
     int     y;
@@ -74,7 +74,7 @@ void            nodes_neighbourgs(t_ed_map map, t_node *node)
     x = node->pos.x;
     y = node->pos.y;
     z = node->pos.z;
-    dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
+    dim = env->dim;
     if (x > 0)
         node->nghbr[0] = nodes_3d_1d(dim, (t_vec3d){ x - 1, y, z, 0 });
     if (x < dim.x - 1)

@@ -2,22 +2,12 @@
 
 int             astar_compare(void *a, void *b)
 {
-    t_node  *n1;
-    t_node  *n2;
-
-    n1 = (t_node *)a;
-    n2 = (t_node *)b;
-    return (n1->globalgoal < n2->globalgoal);
+    return (((t_node *)a)->globalgoal < ((t_node *)b)->globalgoal);
 }
 
 int             nodes_compare(void *a, void *b)
 {
-    t_node  *n1;
-    t_node  *n2;
-
-    n1 = (t_node *)a;
-    n2 = (t_node *)b;
-    return (n1->i < n2->i);
+    return (((t_node *)a)->i < ((t_node *)b)->i);
 }
 
 static int      partition(t_dynarray *arr, int low, int high,
@@ -33,10 +23,7 @@ static int      partition(t_dynarray *arr, int low, int high,
     while (++j <= high)
     {
         if (compare(dyacc(arr , j), pivot))
-        {
-            ++i;
-            dynarray_swap_cells(arr, i, j);
-        }
+            dynarray_swap_cells(arr, ++i, j);
     }
     dynarray_swap_cells(arr, i + 1, high);
     return (i + 1);

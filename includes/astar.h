@@ -25,9 +25,7 @@ struct  s_node
 
 struct			s_pathfinding
 {
-	int			width;
-	int			height;
-	int			depth;
+	t_vec3d		dim;
 	t_node		*start;
 	t_node		*end;
 	t_dynarray	d_astar;
@@ -38,7 +36,7 @@ void            astar(t_pf *env);
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
-void            nodes_neighbourgs(t_ed_map map, t_node *node);
+void            nodes_neighbourgs(t_pf *env, t_node *node);
 
 int             nodes_3d_1d(t_vec3d dim, t_vec3d pos);
 t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos);
@@ -50,6 +48,6 @@ void            astar_reset(t_pf *env);
 int             astar_compare(void *a, void *b);
 int             nodes_compare(void *a, void *b);
 void            astar_sort_dynarray(t_dynarray *arr,
-		int (*compare)(void *a, void *b));
+					int (*compare)(void *a, void *b));
 
 #endif

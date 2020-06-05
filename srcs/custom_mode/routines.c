@@ -9,9 +9,6 @@ static int		astar_init(t_env *env)
 	map = env->edit_env.new_map;
 	if (init_dynarray(&astar->d_astar, sizeof(t_node), 1))
 		return (-1);
-	astar->width = map.width;
-	astar->height = map.height;
-	astar->depth = map.depth;
 	if (astar_get_custom_nodes(map, astar))
 		return (-1);
 	return (0);

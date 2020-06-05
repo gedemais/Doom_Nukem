@@ -1,29 +1,28 @@
 #include "main.h"
 
-static void     nodes_init_nghbrs(t_ed_map map, t_pf *env)
+static void     nodes_init_nghbrs(t_pf *env)
 {
     int     i;
     t_node  *node;
 
     astar_sort_dynarray(&env->d_nodes, nodes_compare);
+    env->dim.w = env->d_nodes.nb_cells;
     i = -1;
     while (++i < env->d_nodes.nb_cells)
     {
         node = dyacc(&env->d_nodes, i);
-        nodes_neighbourgs(map, node);
+        nodes_neighbourgs(env, node);
     }
 }
 
 int             nodes_init_dynarray(t_ed_map map, t_pf *env, int *pos)
 {
     int     i;
-    t_vec3d dim;
     t_node  node;
 
     ft_memset(&node, 0, sizeof(t_node));
-    dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
     node.pos = (t_vec3d) { pos[0], pos[1], pos[2], 0 };
-    node.i = nodes_3d_1d(dim, node.pos);
+    node.i = nodes_3d_1d(env->dim, node.pos);
     if (map.map[pos[0]][pos[1]][pos[2]])
         node.bobstacle = 1;
     i = -1;
@@ -41,6 +40,7 @@ int             astar_get_custom_nodes(t_ed_map map, t_pf *env)
     if (init_dynarray(&env->d_nodes, sizeof(t_node),
         map.width * map.height * map.depth))
         return (-1);
+    env->dim = (t_vec3d){ map.width, map.height, map.depth, 0 };
     pos[0] = -1;
     while (++pos[0] < map.width)
     {
@@ -55,6 +55,6 @@ int             astar_get_custom_nodes(t_ed_map map, t_pf *env)
             }
         }
     }
-    nodes_init_nghbrs(map, env);
+    nodes_init_nghbrs(env);
     return (0);
 }

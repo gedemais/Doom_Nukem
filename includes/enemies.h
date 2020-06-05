@@ -13,6 +13,7 @@ enum				e_enemies
 
 struct				s_enemy
 {
+	int 		i;
 	int			pv;
 	int			damages;
 	int			map_start;

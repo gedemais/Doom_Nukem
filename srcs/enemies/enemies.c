@@ -19,16 +19,15 @@ static int		spawn_mob(t_env *env)
 {
 	t_vec3d		pos;
 
-	pos.x = rand() % (env->astar.width - 1);
-	pos.y = rand() % (env->astar.height - 1);
-	pos.z = rand() % (env->astar.depth - 1);
-	pos.w = 0;
+	pos.x = rand() % (int)(env->astar.dim.x - 1);
+	pos.y = rand() % (int)(env->astar.dim.y - 1);
+	pos.z = rand() % (int)(env->astar.dim.z - 1);
 
 	pos.x = ((int)pos.x % 2) ? pos.x + 1 : pos.x;
 	pos.y = ((int)pos.y % 2) ? pos.y + 1 : pos.y;
 	pos.z = ((int)pos.z % 2) ? pos.z + 1 : pos.z;
 
-	//t_vec3d pos = (t_vec3d){ 0, 2, 0, 0 };
+//	pos = (t_vec3d){ 0, 2, 0, 0 };
 	if (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos))
 		return (-1);
 	return (0);
@@ -36,7 +35,7 @@ static int		spawn_mob(t_env *env)
 
 int				handle_enemies(t_env *env)
 {
-	int 	nb_mobs = 10;
+	int 	nb_mobs = 5;
 
 	while (env->mobs.nb_cells < nb_mobs)
 	{	

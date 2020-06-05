@@ -3,26 +3,20 @@
 static void     astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
 {
     int     i;
-    t_node  *d;
 
     i = -1;
     while (++i < arr->nb_cells)
     {
-        d = dyacc(arr, i);
-        if (d->pos.x == ngbhr->pos.x
-            && d->pos.y == ngbhr->pos.y
-            && d->pos.z == ngbhr->pos.z)
+        if (((t_node *)dyacc(arr, i))->i == ngbhr->i)
             return ;
     }
     push_dynarray(arr, ngbhr, 0);
-    ngbhr->bvisited = 1;
 }
 
 static void     astar_neighbour(t_pf *env, t_node **c, int i)
 {
     float   plowergoal;
     t_node  *nghbr;
-    t_node  *parent;
 
     nghbr = dyacc(&env->d_nodes, (*c)->nghbr[i]);
     if (nghbr == NULL)
@@ -30,9 +24,7 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
     plowergoal = (*c)->localgoal + astar_distance((*c)->pos, nghbr->pos);
     if (plowergoal < nghbr->localgoal)
     {
-        parent = dyacc(&env->d_nodes, (*c)->i);
-        if (parent->bvisited == 0)
-            nghbr->parent = parent;
+        nghbr->parent = dyacc(&env->d_nodes, (*c)->i);
         nghbr->localgoal = plowergoal;
         nghbr->globalgoal = nghbr->localgoal
             + astar_distance(nghbr->pos, env->end->pos);
@@ -44,9 +36,7 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
 
 static int      astar_exit(t_pf *env, t_node *current)
 {
-    return ((current->pos.x == env->end->pos.x
-        && current->pos.y == env->end->pos.y
-        && current->pos.z == env->end->pos.z)
+    return (current->i == env->end->i
         || env->d_astar.nb_cells < 1);
 }
 
@@ -74,6 +64,8 @@ void            astar(t_pf *env)
     astar_reset(env);
     push_dynarray(&env->d_astar, env->start, 0);
     current = env->d_astar.c;
+    if (current == NULL)
+        return ;
     current->localgoal = 0;
     current->globalgoal = astar_distance(env->start->pos, env->end->pos);
     while (astar_solve(env, current) == 0)
