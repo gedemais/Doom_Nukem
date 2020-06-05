@@ -14,19 +14,50 @@ static void		enemies_check_neighbourgs(t_pf *a, t_enemy *mob)
 	}
 }
 
-static void		enemies_get_end(t_pf *a, t_enemy *mob)
+static int		enemies_vec_outrange(t_vec3d dim, t_vec3d pos)
+{
+	return (pos.x < 0 || pos.x > dim.x - 1
+		|| pos.y < 0 || pos.y > dim.y - 1
+		|| pos.z < 0 || pos.z > dim.z - 1);
+}
+
+static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 {
 	t_vec3d	end;
 
-	mob->end = dyacc(&a->d_nodes, a->d_nodes.nb_cells - 1);
-	while (astar_distance(a->start->pos, mob->end->pos) > 5)
+	while (astar_distance(mob->goal->pos, mob->end->pos) > 4)
 	{
-		end.x = (int)(mob->end->pos.x / 2 + a->start->pos.x / 2);
-		end.y = (int)(mob->end->pos.y / 2 + a->start->pos.y / 2);
-		end.z = (int)(mob->end->pos.z / 2 + a->start->pos.z / 2);
+		end.x = (int)(mob->end->pos.x / 2 + mob->goal->pos.x / 2);
+		end.y = (int)(mob->end->pos.y / 2 + mob->goal->pos.y / 2);
+		end.z = (int)(mob->end->pos.z / 2 + mob->goal->pos.z / 2);
+		if (enemies_vec_outrange(a->dim, end))
+			return (-1);
 		mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, end));
-		if (mob->end->bobstacle == 1)
-			enemies_check_neighbourgs(a, mob);
+		if (mob->end == NULL)
+			return (-1);
+	}
+	if (mob->end->bobstacle == 1)
+		enemies_check_neighbourgs(a, mob);
+	return (0);
+}
+
+static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
+{
+	mob->end = NULL;
+	if (mob->goal == NULL)
+		return ;
+	cam.x = (int)cam.x / 2;
+	cam.y = (int)cam.y / 2;
+	cam.z = (int)cam.z / 2;
+	if (enemies_vec_outrange(a->dim, cam))
+		return ;
+	mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, cam));
+	if (mob->end == NULL)
+		return ;
+	if (enemies_get_closer_end(a, mob)
+		|| mob->end->bobstacle == 1)
+	{
+		mob->end = NULL;
 	}
 	a->end = mob->end;
 }
@@ -46,9 +77,12 @@ void			enemies_movements(t_env *env)
 		if (mob->end == NULL || mob->i == mob->end->i)
 		{
 			mob->goal = a->start;
-			enemies_get_end(a, mob);
-			astar(a);
+			enemies_get_end(a, mob, env->cam.stats.pos);
+			if (mob->end == NULL || mob->goal == NULL)
+				continue ;
+			astar(a);	
 		}
+		mob->goal->bobstacle = 0;
 		enemies_do_movement(mob);
 	}
 }

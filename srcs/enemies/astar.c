@@ -61,6 +61,8 @@ void            astar(t_pf *env)
 {
     t_node  *current;
 
+    if (env->start == NULL || env->end == NULL)
+        return ;
     astar_reset(env);
     push_dynarray(&env->d_astar, env->start, 0);
     current = env->d_astar.c;
