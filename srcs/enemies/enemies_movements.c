@@ -21,10 +21,10 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob)
 	mob->end = dyacc(&a->d_nodes, a->d_nodes.nb_cells - 1);
 	while (astar_distance(a->start->pos, mob->end->pos) > 5)
 	{
-		end.x = mob->end->pos.x / 2 + a->start->pos.x / 2;
-		end.y = mob->end->pos.y / 2 + a->start->pos.y / 2;
-		end.z = mob->end->pos.z / 2 + a->start->pos.z / 2;
-		mob->end = nodes_get_closest(&a->d_nodes, end);
+		end.x = (int)(mob->end->pos.x / 2 + a->start->pos.x / 2);
+		end.y = (int)(mob->end->pos.y / 2 + a->start->pos.y / 2);
+		end.z = (int)(mob->end->pos.z / 2 + a->start->pos.z / 2);
+		mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, end));
 		if (mob->end->bobstacle == 1)
 			enemies_check_neighbourgs(a, mob);
 	}
@@ -49,6 +49,6 @@ void			enemies_movements(t_env *env)
 			enemies_get_end(a, mob);
 			astar(a);
 		}
-		enemies_do_movement(a, mob);
+		enemies_do_movement(mob);
 	}
 }

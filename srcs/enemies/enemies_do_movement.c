@@ -33,18 +33,14 @@ static void		enemies_smooth_movement(t_enemy *mob)
 	mob->pos = vec_add(mob->pos, mob->pas);
 }
 
-void			enemies_do_movement(t_pf *a, t_enemy *mob)
+void			enemies_do_movement(t_enemy *mob)
 {
 	t_vec3d	goal;
-	(void)a;
 
 	if (mob->i == mob->goal->i)
 		enemies_get_goal(mob);
 	enemies_smooth_movement(mob);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (astar_distance(goal, mob->pos) < 0.1f)
-	{
 		mob->i = mob->goal->i;
-		mob->pos = goal;
-	}
 }

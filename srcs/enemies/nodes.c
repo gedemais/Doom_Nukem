@@ -6,7 +6,6 @@ static void     nodes_init_nghbrs(t_pf *env)
     t_node  *node;
 
     astar_sort_dynarray(&env->d_nodes, nodes_compare);
-    env->dim.w = env->d_nodes.nb_cells;
     i = -1;
     while (++i < env->d_nodes.nb_cells)
     {

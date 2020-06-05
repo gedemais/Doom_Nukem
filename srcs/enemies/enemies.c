@@ -26,8 +26,7 @@ static int		spawn_mob(t_env *env)
 	pos.x = ((int)pos.x % 2) ? pos.x + 1 : pos.x;
 	pos.y = ((int)pos.y % 2) ? pos.y + 1 : pos.y;
 	pos.z = ((int)pos.z % 2) ? pos.z + 1 : pos.z;
-
-//	pos = (t_vec3d){ 0, 2, 0, 0 };
+	
 	if (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos))
 		return (-1);
 	return (0);
