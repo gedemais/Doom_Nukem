@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/27 11:15:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:17:24 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -14,15 +14,13 @@
 void	*rasthreader(void *param)
 {
 	t_rasthread	*thr;
-	t_triangle	*t;
 	t_env		*env;
 
 	thr = (t_rasthread*)param;
 	env = thr->env;
 	while (thr->index < thr->end)
 	{
-		t = (t_triangle*)dyacc(&env->cam.to_raster, thr->index);
-		fill_triangle_texture((t_env*)thr->env, *t);
+		fill_triangle_texture((t_env*)thr->env, dyacc(&env->cam.to_raster, thr->index));
 //		draw_triangle(&env->mlx, *t);
 		thr->index++;
 	}

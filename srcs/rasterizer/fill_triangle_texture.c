@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/04 18:52:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:35:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4]
 		if (pos[0] == env->data.half_hgt)
 			if (pos[1] == env->data.half_wdt)
 				env->mid = *t;
-	if (t->sp >= 0 && t->textured)
+	if (t->textured && t->sp >= 0)
 	{
 		cu = txt->txt_u / txt->txt_w;
 		cv = txt->txt_v / txt->txt_w;
@@ -71,7 +71,7 @@ static void	update_expr(float steps[6], float simples[6], bool textured)
 	simples[5] += steps[5];
 }
 
-static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int i)
+static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle *t, int i)
 {
 	int		j;
 	int		px;
@@ -83,33 +83,34 @@ static void	draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle t, int 
 	txt->t_step = 1.0f / (txt->bx - txt->ax);
 	px = abs(i - 1) * WDT + j;
 	addr = px * 4;
-	simplify_interpolation(txt, steps, simples, t.textured);
+	simplify_interpolation(txt, steps, simples, t->textured);
 	while (j < txt->bx)
 	{
-		if (t.textured)
+		if (t->textured)
 		{
 			txt->txt_u = simples[0] + simples[1];
 			txt->txt_v = simples[2] + simples[3];
 		}
 		txt->txt_w = simples[4] + simples[5];
-		update_expr(steps, simples, t.textured);
-		write_pixel(env, txt, &t, (int[4]){i, j, px, addr});
+		update_expr(steps, simples, t->textured);
+		write_pixel(env, txt, t, (int[4]){i, j, px, addr});
 		addr += 4;
 		px++;
 		j++;
 	}
 }
 
-static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
+static void	flattop(t_env *env, t_texturizer *txt, t_triangle *t)
 {
 	int		i;
 	int		end;
 
-	i = ceil(t.points[0].y);
-	end = ceil(t.points[1].y);
+	i = ceil(t->points[0].y);
+	end = ceil(t->points[1].y);
+	(void)env;
 	while (i < end)
 	{
-		set_line_bounds_top(txt, t, i - t.points[0].y);
+		set_line_bounds_top(txt, t, i - t->points[0].y);
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
@@ -118,16 +119,17 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle t)
 	}
 }
 
-static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
+static void	flatbot(t_env *env, t_texturizer *txt, t_triangle *t)
 {
 	int		i;
 	int		end;
 
-	i = ceil(t.points[1].y);
-	end = ceil(t.points[2].y);
+	i = ceil(t->points[1].y);
+	end = ceil(t->points[2].y);
+	(void)env;
 	while (i < end)
 	{
-		set_line_bounds_bot(txt, t, (float[2]){i - t.points[0].y, i - t.points[1].y});
+		set_line_bounds_bot(txt, t, (float[2]){i - t->points[0].y, i - t->points[1].y});
 		txt->txt_u = txt->txt_su;
 		txt->txt_v = txt->txt_sv;
 		txt->txt_w = txt->txt_sw;
@@ -136,16 +138,16 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle t)
 	}
 }
 
-void		fill_triangle_texture(t_env *env, t_triangle t)
+void		fill_triangle_texture(t_env *env, t_triangle *t)
 {
 	t_texturizer	txt;
 
 	txt = (t_texturizer){};
-	starting_swap(&t);
-	if (t.voxel)
-		txt.texture = &env->edit_env.btxts[t.sp];
+	starting_swap(t);
+	if (t->voxel)
+		txt.texture = &env->edit_env.btxts[t->sp];
 	else
-		txt.texture = env->maps[env->scene].txts.c + (t.sp * sizeof(t_sprite));
+		txt.texture = env->maps[env->scene].txts.c + (t->sp * sizeof(t_sprite));
 
 	compute_gradients(&txt, t, false);
 	if (txt.dy1)

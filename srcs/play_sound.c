@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	loop_sample(t_sample sample, bool launch, bool stop, bool keep)
+void	loop_sample(t_sample *sample, bool launch, bool stop, bool keep)
 {
 	static bool		play = false;
 
@@ -18,7 +18,7 @@ void	loop_sample(t_sample sample, bool launch, bool stop, bool keep)
 	}
 }
 
-int		play_ambience(t_sample sample, bool play, bool stop, bool keep)
+int		play_ambience(t_sample *sample, bool play, bool stop, bool keep)
 {
 	static ALuint	source = UINT_MAX;
 	ALint			status;
@@ -38,7 +38,7 @@ int		play_ambience(t_sample sample, bool play, bool stop, bool keep)
 	}
 	else if (play)
 	{
-		alSourcei(source, AL_BUFFER, (ALint)sample.buffer);
+		alSourcei(source, AL_BUFFER, (ALint)sample->buffer);
 		alSourcePlay(source);
 	}
 	return (0);

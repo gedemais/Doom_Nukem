@@ -2,7 +2,7 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
-orientation|{0.0, 0.0}
+spawn|{-0.4, 0.3, -0.8}
+orientation|{-3.0, -2.0}
 corps_poignee_sawed-off.000|{}|[]|true|()|
 culasse_sawed-off.000_culasse_sawed-off.001|{}|[]|true|()|corps_poignee_sawed-off.000

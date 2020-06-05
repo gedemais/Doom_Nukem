@@ -73,73 +73,29 @@ static void		assign_meshs(t_env *env)
 //	printf("%s\n", env->weapons[W_TEC9].mesh->name);
 }
 
-static void		assign_weapons_stats(t_env *env)
+static void	assign_weapons_samples(t_env *env)
 {
-	env->weapons[W_FAMAS].damages = 30;
-	env->weapons[W_AK47].damages = 50;
-	env->weapons[W_SAWED_OFF].damages = 90;
-	env->weapons[W_GLOCK_18].damages = 30;
-	env->weapons[W_AUG].damages = 40;
-	env->weapons[W_UMP45].damages = 30;
-	env->weapons[W_MAG7].damages = 80;
-	env->weapons[W_GALIL].damages = 25;
-	env->weapons[W_NEGEV].damages = 60;
-	env->weapons[W_TEC9].damages = 45;
+	env->weapons[W_FAMAS].shoot = &env->sound.samples[SA_FAMAS_FIRE];
+	env->weapons[W_AK47].shoot = &env->sound.samples[SA_AK47_FIRE];
+	env->weapons[W_SAWED_OFF].shoot = &env->sound.samples[SA_SAWED_OFF_FIRE];
+	env->weapons[W_GLOCK_18].shoot = &env->sound.samples[SA_GLOCK_FIRE];
+	env->weapons[W_AUG].shoot = &env->sound.samples[SA_AUG_FIRE];
+	env->weapons[W_UMP45].shoot = &env->sound.samples[SA_UMP45_FIRE];
+	env->weapons[W_MAG7].shoot = &env->sound.samples[SA_MAG7_FIRE];
+	env->weapons[W_GALIL].shoot = &env->sound.samples[SA_GALIL_FIRE];
+	env->weapons[W_NEGEV].shoot = &env->sound.samples[SA_NEGEV_FIRE];
+	env->weapons[W_TEC9].shoot = &env->sound.samples[SA_TEC9_FIRE];
 
-	env->weapons[W_FAMAS].accuracy = 0.8f;
-	env->weapons[W_AK47].accuracy = 0.6f;
-	env->weapons[W_SAWED_OFF].accuracy = 0.3f;
-	env->weapons[W_GLOCK_18].accuracy = 0.5f;
-	env->weapons[W_AUG].accuracy = 0.8f;
-	env->weapons[W_UMP45].accuracy = 0.5;
-	env->weapons[W_MAG7].accuracy = 0.4;
-	env->weapons[W_GALIL].accuracy = 0.6;
-	env->weapons[W_NEGEV].accuracy = 0.4;
-	env->weapons[W_TEC9].accuracy = 0.8;
-
-	env->weapons[W_FAMAS].magazine = 25;
-	env->weapons[W_AK47].magazine = 30;
-	env->weapons[W_SAWED_OFF].magazine = 6;
-	env->weapons[W_GLOCK_18].magazine = 18;
-	env->weapons[W_AUG].magazine = 30;
-	env->weapons[W_UMP45].magazine = 32;
-	env->weapons[W_MAG7].magazine = 6;
-	env->weapons[W_GALIL].magazine = 35;
-	env->weapons[W_NEGEV].magazine = 100;
-	env->weapons[W_TEC9].magazine = 18;
-
-	env->weapons[W_FAMAS].reticle = 20;
-	env->weapons[W_AK47].reticle = 24;
-	env->weapons[W_SAWED_OFF].reticle = 32;
-	env->weapons[W_GLOCK_18].reticle = 16;
-	env->weapons[W_AUG].reticle = 20;
-	env->weapons[W_UMP45].reticle = 22;
-	env->weapons[W_MAG7].reticle = 30;
-	env->weapons[W_GALIL].reticle = 22;
-	env->weapons[W_NEGEV].reticle = 30;
-	env->weapons[W_TEC9].reticle = 20;
-}
-
-static void	assign_weapons_offsets(t_env *env)
-{
-	env->weapons[W_FAMAS].p_offset = (t_vec3d){0, -0.5f, 0.7f, 0};
-	env->weapons[W_AK47].p_offset = (t_vec3d){0, -0.2f, -0.1f, 0};
-	env->weapons[W_SAWED_OFF].p_offset = (t_vec3d){-0.05f, -0.25f, 0.9f, 0};
-	env->weapons[W_GLOCK_18].p_offset = (t_vec3d){0, -0.25f, 1.5f, 0};
-	env->weapons[W_AUG].p_offset = (t_vec3d){0, -0.33f, 1, 0};
-	env->weapons[W_UMP45].p_offset = (t_vec3d){0.75f, -0.6f, 1.2f, 0};
-	env->weapons[W_MAG7].p_offset = (t_vec3d){-0.5f, -0.5f, 1.5f, 0};
-	env->weapons[W_GALIL].p_offset = (t_vec3d){0, -0.5f, 1, 0};
-	env->weapons[W_NEGEV].p_offset = (t_vec3d){0, -0.5f, 1.5f, 0};
-	env->weapons[W_TEC9].p_offset = (t_vec3d){0, -0.5f, 2, 0};
-
-	/*
-	env->weapons[W_FAMAS].p_angle = (t_vec3d){};
-	env->weapons[W_AK47].p_angle = (t_vec3d){};
-	env->weapons[W_SAWED_OFF].p_angle = (t_vec3d){};
-	env->weapons[W_GLOCK_18].p_angle = (t_vec3d){};
-	env->weapons[W_AUG].p_angle = (t_vec3d){};
-	env->weapons[W_UMP45].p_angle = (t_vec3d){};*/
+	env->weapons[W_FAMAS].reload = &env->sound.samples[SA_FAMAS_RELOAD];
+	env->weapons[W_AK47].reload = &env->sound.samples[SA_AK47_RELOAD];
+	env->weapons[W_SAWED_OFF].reload = &env->sound.samples[SA_SAWED_OFF_FILL];
+	env->weapons[W_GLOCK_18].reload = &env->sound.samples[SA_GLOCK_RELOAD];
+	env->weapons[W_AUG].reload = &env->sound.samples[SA_AUG_RELOAD];
+	env->weapons[W_UMP45].reload = &env->sound.samples[SA_UMP45_RELOAD];
+	env->weapons[W_MAG7].reload = &env->sound.samples[SA_MAG7_RELOAD];
+	env->weapons[W_GALIL].reload = &env->sound.samples[SA_GALIL_RELOAD];
+	env->weapons[W_NEGEV].reload = &env->sound.samples[SA_NEGEV_RELOAD];
+	env->weapons[W_TEC9].reload = &env->sound.samples[SA_TEC9_RELOAD];
 }
 
 int		init_weapons(t_env *env)
@@ -148,7 +104,7 @@ int		init_weapons(t_env *env)
 		return (-1);
 	assign_meshs(env);
 	assign_weapons_stats(env);
-	assign_weapons_offsets(env);
+	assign_weapons_samples(env);
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0))
 		return (-1);
 	return (0);

@@ -2,8 +2,8 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
-orientation|{0.0, 0.0}
+spawn|{0.0, 0.7, -1.0}
+orientation|{0.0, -2.0}
 poignee_galil_ar.026|{}|[]|true|()|
 chargeur_galil_ar.136|{}|[]|true|()|poignee_galil_ar.026
 culasse_galil_ar.142|{}|[]|true|()|poignee_galil_ar.026
