@@ -166,10 +166,10 @@ void			inverse_matrix(float m[4][4], float ret[4][4]);
 */
 void			starting_swap(t_triangle *t);
 void			compute_steps(t_texturizer *txt, bool t);
-void			compute_gradients(t_texturizer *txt, t_triangle t, bool fbot);
-void			set_line_bounds_top(t_texturizer *txt, t_triangle t, float cur);
-void			set_line_bounds_bot(t_texturizer *t, t_triangle e, float c[2]);
-void			fill_triangle_texture(t_env *env, t_triangle t);
+void			compute_gradients(t_texturizer *txt, t_triangle *t, bool flatbot);
+void			set_line_bounds_top(t_texturizer *txt, t_triangle *t, float current);
+void			set_line_bounds_bot(t_texturizer *txt, t_triangle *t, float currents[2]);
+void			fill_triangle_texture(t_env *env, t_triangle *t);
 
 /*
 ** Tools
