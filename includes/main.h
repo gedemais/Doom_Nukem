@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/02 23:05:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 14:26:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+# include <sys/time.h>
 # include <time.h>
 # include <math.h>
 # include <limits.h>
@@ -104,8 +105,8 @@ struct			s_events
 
 struct			s_data
 {
-	clock_t		time;
-	double		spent;
+	struct timeval		time;
+	float		spent;
 	float		half_wdt;
 	float		half_hgt;
 	int			data_size;

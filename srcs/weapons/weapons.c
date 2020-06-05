@@ -21,8 +21,13 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 
 static void	handle_ready(t_env *env, t_weapon *w)
 {
+	static float	full_auto = 0;
+
 	if (w->shoot_mode == SMODE_FULL_AUTO)
-		w->ready = true; // Cap with time
+	{
+		w->ready = (60 / full_auto) < w->cadency; // Cap with time
+		full_auto = w->ready ? 0 : full_auto + env->data.spent;
+	}
 	else if (w->shoot_mode == SMODE_SINGLE)
 		w->ready = !env->events.buttons[BUTTON_LCLIC];
 	else if (w->shoot_mode == SMODE_SBS)
