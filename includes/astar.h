@@ -14,8 +14,8 @@ typedef union	u_rsqrt
 struct  s_node
 {
 	int			i;
-	int			bobstacle;
-	int			bvisited;
+	bool		bobstacle;
+	bool		bvisited;
 	float		globalgoal;
 	float		localgoal;
 	t_vec3d		pos;
