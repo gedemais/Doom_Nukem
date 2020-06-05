@@ -32,6 +32,7 @@ struct			s_pathfinding
 	t_dynarray	d_nodes;
 };
 
+int				astar_init(t_env *env);
 void            astar(t_pf *env);
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);

@@ -1,0 +1,4 @@
+cp srcs/dev_handle_events.c srcs/physic_engine/handle_events.c
+cp ../izi/srcs/physic_engine/handle_events.c srcs/dev_handle_events.c
+cp -r ../izi/srcs/physic_engine/engine.c srcs/physic_engine/engine.c
+cp ../izi/srcs/physic_engine/report_collisions.c ./srcs/physic_engine/report_collisions.c

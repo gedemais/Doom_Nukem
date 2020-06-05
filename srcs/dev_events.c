@@ -75,7 +75,7 @@ int		render_dev(void *param)
 	physic_engine(env);
 	if (rasterizer(env, &env->maps[env->scene], false))
 		exit(EXIT_FAILURE);
-	handle_weapons(env);
+	//handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	av += 1 / mesure_time(true);

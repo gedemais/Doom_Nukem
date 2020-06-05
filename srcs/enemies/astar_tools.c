@@ -1,5 +1,19 @@
 #include "main.h"
 
+int		astar_init(t_env *env)
+{
+	t_pf		*astar;
+	t_ed_map	map;
+
+	astar = &env->astar;
+	map = env->edit_env.new_map;
+	if (init_dynarray(&astar->d_astar, sizeof(t_node), 1))
+		return (-1);
+	if (astar_get_custom_nodes(map, astar))
+		return (-1);
+	return (0);
+}
+
 void            astar_delvisited_nodes(t_dynarray *arr)
 {
     int     i;

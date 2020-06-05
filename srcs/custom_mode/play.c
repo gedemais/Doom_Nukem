@@ -45,6 +45,7 @@ int			custom_play(t_env *env)
 	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;
+	physic_engine(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

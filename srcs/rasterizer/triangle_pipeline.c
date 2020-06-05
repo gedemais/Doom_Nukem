@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/26 03:15:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:43:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int		triangle_pipeline(t_env *env, t_triangle *t, t_dynarray *tris, t_mesh *m)
 	normal = vec_cross(line1, line2);
 	normal = vec_normalize(normal);
 	m->corp.norm = normal;
-	
 	if (vec_dot(normal, vec_sub(t->points[0], env->cam.stats.pos)) < 0.0f)
 	{
 		if (clip_near_plane(env, *t, normal, tris))

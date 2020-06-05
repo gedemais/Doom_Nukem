@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/15 03:10:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/04 15:27:41 by gedemais         ###   ########.fr       */
+/*   Created: 2020/05/22 14:43:44 by bebosson          #+#    #+#             */
+/*   Updated: 2020/06/05 16:07:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,48 +33,37 @@ static int		set_mesh_position(t_mesh *m)
 	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
    	return (0);
 }
-static int		init_mesh_physics(t_mesh *m)
-{
 
-	if (set_mesh_position(m) || init_bounding_box(m))
-		return (-1);
+int			init_map_physics(t_map *map)
+{
+	t_mesh	*m;
+	int		i;
+
+	i = 0;
+	while (i < map->nmesh)
+	{
+		if (!(m = dyacc(&map->meshs, i))
+			|| set_mesh_position(m)
+			|| init_bounding_box(m))
+			return (-1);
+		i++;
+	}
 	return (0);
-}
-
-
-static	void init_physic_engine2(t_env *env)
-{
-	env->phy_env.tps = 0;
-	env->phy_env.gravity = 0.0000981;
-	// faire apres quand on a teste le plan en dessous du joueur ?
-	env->cam.stats.onfloor = 0;
-	env->cam.stats.onplan = 0;
-	env->cam.stats.onwall = 0;
-	//other type of plan 
 }
 
 int			init_physic_engine(t_env *env)
 {
-	t_mesh		*m;
 	int			i;
-	int			j;
-	int			nb_m;
-	
+
 	i = 0;
-	nb_m = -1;
-	//ft_putendl("Init physic engine...");
+	ft_putendl("Init physic_engine :");
 	while (i < SCENE_MAX)
 	{
-		j = 0;
-		while (j < env->maps[i].nmesh)
-		{
-			if (!(m = dyacc(&env->maps[i].meshs, j)) || init_mesh_physics(m))
-				return (-1);
-			j++;
-		}
+		if (init_map_physics(&env->maps[i]))
+			return (-1);
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
-	init_physic_engine2(env);
+	env->phy_env.gravity = 0.0000981;
 	return (0);
 }
