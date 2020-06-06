@@ -43,6 +43,7 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 
 static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 {
+	a->end = NULL;
 	mob->end = NULL;
 	if (mob->goal == NULL)
 		return ;
