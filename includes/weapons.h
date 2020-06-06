@@ -62,6 +62,7 @@ struct	s_weapon
 	int			cadency;
 	int			index;
 	float		reloading;
+	float		shooting;
 	bool		ready;
 	char		shoot_mode;
 	//	Cadence de tir
@@ -71,6 +72,7 @@ struct	s_weapon
 int			init_weapons(t_env *env);
 
 int			shoot_current_weapon(t_env *env);
+void		shoot_animation(t_env *env, t_weapon *w);
 int			reload_current_weapon(t_env *env);
 void		reload_animation(t_env *env, t_weapon *w);
 

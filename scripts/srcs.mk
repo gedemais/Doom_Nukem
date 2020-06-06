@@ -134,6 +134,7 @@ SRCS_NAME =	main.c\
 			weapons/reload_animation.c\
 			weapons/reticule.c\
 			weapons/shoot.c\
+			weapons/shoot_animation.c\
 			weapons/stats.c\
 			\
 			archive/archive.c\

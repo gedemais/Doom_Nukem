@@ -29,6 +29,8 @@ static void	handle_ready(t_env *env, t_weapon *w)
 		w->ready = false;
 		return ;
 	}
+	if (w->shooting > 0)
+		shoot_animation(env, w);
 	if (w->shoot_mode == SMODE_FULL_AUTO)
 	{
 		w->ready = (60 / since) < w->cadency; // Cap with time
