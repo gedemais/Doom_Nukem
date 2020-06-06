@@ -27,9 +27,7 @@ int             nodes_init_dynarray(t_ed_map map, t_pf *env, int *pos)
     i = -1;
     while (++i < NEIGHBOURG)
         node.nghbr[i] = -1;
-    if (push_dynarray(&env->d_nodes, &node, 0))
-        return (-1);
-    return (0);
+    return (push_dynarray(&env->d_nodes, &node, 0));
 }
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env)

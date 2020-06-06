@@ -49,6 +49,7 @@ void			enemies_do_movement(t_enemy *mob)
 {
 	t_vec3d	goal;
 
+	mob->goal->bobstacle = 0;
 	if (mob->i == mob->goal->i)
 		enemies_get_goal(mob);
 	if (mob->end == NULL || mob->goal == NULL)

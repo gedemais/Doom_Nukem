@@ -84,7 +84,6 @@ void			enemies_movements(t_env *env)
 				continue ;
 			}
 		}
-		mob->goal->bobstacle = 0;
 		enemies_do_movement(mob);
 	}
 }
