@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 15:37:01 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/06 13:38:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int				shade_color(int color, float scale);
 int				pixloc(int x, int y, bool free);
 void			draw_pixel(char *img, int x, int y, int color);
 void			draw_line(t_mlx *mlx, t_point f, t_point s, int color);
-int				sample_pixel(char *img, t_point size, t_vec2d point);
+int				sample_pixel(int *img, t_point size, t_vec2d point);
 
 /*
 ** Contexts

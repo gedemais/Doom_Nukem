@@ -40,26 +40,20 @@ static char	*add_matrice(t_edit_env *env, char *header, int *len)
 	int		matrice_len;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (!flat_map(&env->new_map, &matrice_len))
 	{
 		free(header);
 		return (NULL);
 	}
-	if (!(file = ft_strnew(*len + matrice_len)))
+	if (!(file = ft_strnew(*len + matrice_len + sizeof(t_vec3d))))
 		return (NULL);
-	while (i < *len)
-	{
+	while (++i < *len)
 		file[i] = header[i];
-		i++;
-	}
 	free(header);
-	i = 0;
-	while (i < matrice_len)
-	{
+	i = -1;
+	while (++i < matrice_len)
 		file[i + *len] = env->new_map.flat[i];
-		i++;
-	}
 	file[i + *len] = 0;
 	*len += matrice_len;
 	return (file);
@@ -78,6 +72,8 @@ int			export_maped_map(t_edit_env *env)
 	gen_path(path, env->new_map.name);
 	if (!(str = add_matrice(env, header, &len)))
 		return (-1);
+	ft_memcpy(&str[len], &env->env->cam.stats.pos, sizeof(t_vec3d));
+	len += sizeof(t_vec3d);
 	if (!write_infile(path, str, len, true))
 		return (-1);
 	free(str);

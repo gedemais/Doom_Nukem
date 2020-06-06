@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/06 10:53:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/06 13:38:59 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int
 	{
 		cu = txt->txt_u / txt->txt_w;
 		cv = txt->txt_v / txt->txt_w;
-		color = sample_pixel(txt->texture->img_data,
+		color = sample_pixel((int*)txt->texture->img_data,
 			(t_point){txt->texture->hgt, txt->texture->wdt},
 			(t_vec2d){cu, cv, 1.0f});
 		color = shade_color(color, t->illum);
