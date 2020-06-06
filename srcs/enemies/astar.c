@@ -24,18 +24,23 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
     plowergoal = (*c)->localgoal + astar_distance((*c)->pos, nghbr->pos);
     if (plowergoal < nghbr->localgoal)
     {
-        nghbr->parent = dyacc(&env->d_nodes, (*c)->i);
         nghbr->localgoal = plowergoal;
         nghbr->globalgoal = nghbr->localgoal
             + astar_distance(nghbr->pos, env->end->pos);
+        nghbr->parent = dyacc(&env->d_nodes, (*c)->i);
     }
     if (nghbr->bvisited == 0 && nghbr->bobstacle == 0)
         astar_stock_neighbour(&env->d_astar, nghbr);
     *c = env->d_astar.c;
 }
 
-static int      astar_exit(t_pf *env, t_node *current)
+static bool     astar_exit(t_pf *env, t_node *current)
 {
+    if (astar_distance(env->start->pos, current->pos) > 3)
+    {
+        env->end = NULL;
+        return (true);
+    }
     return (current->i == env->end->i
         || env->d_astar.nb_cells < 1);
 }

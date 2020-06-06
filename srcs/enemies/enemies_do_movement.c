@@ -10,15 +10,23 @@ static void		enemies_get_pas(t_enemy *mob)
 	mob->pas.z = (goal.z - mob->pos.z) * mob->speed;	
 }
 
+static bool		enemies_infinite_loop(t_enemy *mob)
+{
+	return (mob->end->parent->parent
+		&& mob->end->parent->parent->i == mob->end->i);
+}
+
 static void		enemies_get_goal(t_enemy *mob)
 {
-	while (mob->end && mob->end != mob->goal)
+	while (mob->end && mob->end->i != mob->goal->i)
 	{
 		if (mob->end->parent == NULL)
 			return ;
-		if (mob->end->parent == mob->goal)
+		if (mob->end->parent->i == mob->goal->i
+			|| enemies_infinite_loop(mob))
 		{
-			mob->goal = mob->end;
+			mob->goal = enemies_infinite_loop(mob)
+				? mob->end->parent->parent : mob->end;
 			enemies_get_pas(mob);
 			return ;
 		}

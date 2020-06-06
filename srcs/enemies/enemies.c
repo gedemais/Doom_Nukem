@@ -29,7 +29,7 @@ static int		spawn_mob(t_env *env)
 
 int				handle_enemies(t_env *env)
 {
-	int 	nb_mobs = 30;
+	int 	nb_mobs = 0;
 
 	while (env->mobs.nb_cells < nb_mobs)
 	{	
