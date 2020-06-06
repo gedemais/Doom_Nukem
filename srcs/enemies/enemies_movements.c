@@ -38,7 +38,7 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 	}
 	if (mob->end->bobstacle == 1)
 		enemies_check_neighbourgs(a, mob);
-	return (0);
+	return (mob->end->bobstacle);
 }
 
 static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
@@ -57,8 +57,6 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	if (mob->end == NULL)
 		return ;
 	if (enemies_get_closer_end(a, mob))
-		mob->end = NULL;
-	if (mob->end && mob->end->bobstacle == 1)
 		mob->end = NULL;
 	a->end = mob->end;
 }
