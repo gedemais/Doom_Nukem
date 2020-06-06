@@ -132,11 +132,16 @@ void	update_positions_gravity(t_env *env)
 	}
 }
 
-void	update_positions_gravity_cam(t_env *env)
+void	update_positions_gravity_cam(t_env *env, t_mesh *cam)
 {
-	t_mesh		*cam;
-	
-	cam = &env->maps[env->scene].cam;
+	printf("floor %d \n", env->cam.stats.onfloor);
+	printf("plan %d \n", env->cam.stats.onplan);
+	printf("--------------------------------------------\n");
+	printf("cam->corp.v\n");
+	print_vec(cam->corp.v);
+	printf("--------------------------------------------\n");
+	printf("env->cam.stats.pos\n");
+	print_vec(env->cam.stats.pos);
 	if (env->cam.stats.onfloor == 0 && 
 			env->cam.stats.onplan == 0)
 	{

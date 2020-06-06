@@ -63,13 +63,19 @@ static int	init_cameras_meshs(t_env *env)
 	while (i < SCENE_MAX)
 	{
 		cam = &env->maps[i].cam;
-		cam->yaw = env->maps[i].cam_dir.u;
-		cam->pitch = env->maps[i].cam_dir.v;
-		cam->corp.pos = env->maps[i].spawn;
-		cam->corp.o = vec_sub(cam->corp.pos, vec_fdiv(cam->corp.dims, 2.0f));
-		cam->corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};
+		init_cameras_mesh(&env->maps[i], cam);
 		i++;
 	}
+	return (0);
+}
+
+int	init_cameras_mesh(t_map *map, t_mesh *cam)
+{
+	cam->yaw = map->cam_dir.u;
+	cam->pitch = map->cam_dir.v;
+	cam->corp.pos = map->spawn;
+	cam->corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};
+	cam->corp.o = vec_sub(cam->corp.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	return (0);
 }
 

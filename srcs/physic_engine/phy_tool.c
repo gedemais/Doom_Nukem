@@ -23,15 +23,7 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8 // fonction hyper 
 
 }
 
-t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
-{
-	t_mesh *b;
-	t_vec3d f;	
 
-	b = c->a;
-	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED); 
-	return (f);
-}
 
 t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 {
@@ -59,6 +51,16 @@ t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 	printf("dot = %f\n",vec_dot(step_dir , w));	
 	new_dir->y = step_dir.y;
 	return (new_dir);
+}
+
+t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
+{
+	t_mesh *b;
+	t_vec3d f;	
+
+	b = c->a;
+	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED); 
+	return (f);
 }
 
 t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
@@ -102,6 +104,7 @@ void	type_of_plan(t_env *env, t_collide *c)
 	else
 	{
 		test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
+		printf("STOP_PLAN");
 		c->b->corp.v = zero_vector(); //stop gravity
 		env->phy_env.tps = 0;			// need to be variable by mesh 
 		env->cam.stats.onwall = 0;

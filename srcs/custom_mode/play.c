@@ -1,5 +1,5 @@
 #include "main.h"
-/*
+
 static void	move(t_env *env, bool keys[NB_KEYS])
 {
 	t_map		*map;
@@ -30,11 +30,24 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		translate_mesh(map, &map->cam, vec_fmult(r, -3.0f));
 	}
 }
-*/
+
+static void ft_type_move(t_env *env, bool keys[NB_KEYS])
+{
+	if (env->phy_env.type_move == true)
+		move(env, keys);
+	else
+		phy_move(env, keys);
+	
+}
+
 static int		handle_keys(t_env *env, t_events *e)
 {
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
-		phy_move(env, e->keys);
+	if (e->keys[KEY_T])
+		env->phy_env.type_move = false;
+	if (e->keys[KEY_Y])
+		env->phy_env.type_move = true;
+
+	ft_type_move(env, e->keys);
 	return (0);
 }
 
@@ -45,7 +58,10 @@ int			custom_play(t_env *env)
 	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;
-	physic_engine(env);
+	
+	
+//	if (env->phy_env.type_move == false)
+		physic_engine(env, &env->edit_env.map);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);

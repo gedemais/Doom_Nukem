@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:44:26 by bebosson          #+#    #+#             */
-/*   Updated: 2020/05/22 14:45:48 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/05/22 14:44:48 by bebosson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,8 @@ void print_mesh_corp(t_mesh m)
 
 void	print_collide(t_collide c)
 {
-	printf("%s <-> %s\n", c.a->name, c.b->name);
-	printf("------\n%s\n------\n", c.a->name);
 	printf("%d\n", c.i_a);
 	print_mesh_corp(*c.a);
-	printf("------\n%s\n------\n\n", c.b->name);
-	printf("%d\n", c.i_b);
-	print_mesh_corp(*c.b);
 
 }
 
@@ -96,27 +91,27 @@ static bool	check_coll_cam(t_dynarray *meshs, int i, t_mesh *cam, t_collide *c)
 }
 
 
-int			report_cam_collisions(t_env *env)
+int			report_cam_collisions(t_env *env, t_map *maps)
 {
 	int			i;
 	t_collide	c;
 	t_mesh	*cam;
 	
-	cam = &env->maps[env->scene].cam;
+	cam = &maps->cam;
 	if (init_dynarray(&env->phy_env.collides_cam,
-		sizeof(t_collide), env->maps[env->scene].nmesh)) //pas la peine de mettre autant de case
+		sizeof(t_collide), maps->nmesh)) //pas la peine de mettre autant de case
 		return (-1);
 	i = 0;
-	while (i < env->maps[env->scene].nmesh)
+	while (i < maps->nmesh)
 	{
-		if (check_coll_cam(&env->maps[env->scene].meshs, i, cam, &c))
+		if (check_coll_cam(&maps->meshs, i, cam, &c))
 		{
 			c.i_a = i;
 			if (push_dynarray(&env->phy_env.collides_cam, &c, false))
 					return (-1);
 		}
+		maps->colls[i] = true;
 		i++;
-		env->maps[env->scene].colls[i] = true;
 	}
 	return (0);
 }
@@ -147,7 +142,6 @@ int			report_collisions(t_env *env)
 		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
-	report_cam_collisions(env);
 //	printf("%d collisions\n", env->phy_env.collides.nb_cells);
 	return (0);
 }
