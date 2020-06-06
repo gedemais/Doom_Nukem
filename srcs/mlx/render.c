@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 14:46:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 18:24:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		render(void *param)
 
 	fps += 1 / data->spent;
 	it++;
-	if (it > 10)
+	if (it > 30)
 	{
 		printf("fps : %f\n", fps / it);
 		it = 0;

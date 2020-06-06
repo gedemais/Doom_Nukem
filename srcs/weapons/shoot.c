@@ -1,6 +1,12 @@
 #include "main.h"
 
-int		shoot_current_weapon(t_env *env)
+static void	stop_n_play(t_sample *s)
+{
+	play_ambience(s, false, true, false);
+	play_ambience(s, true, false, false);
+}
+
+int			shoot_current_weapon(t_env *env)
 {
 	t_weapon	*w;
 	bool		sbs;
@@ -8,21 +14,20 @@ int		shoot_current_weapon(t_env *env)
 	bool		full_auto;
 
 	w = env->player.current;
-	sbs = (w->ready && w->shoot_mode == SMODE_SBS);
-	single = (w->ready && w->shoot_mode == SMODE_SINGLE);
-	full_auto = (w->ready && w->shoot_mode == SMODE_FULL_AUTO);
+	sbs = w->shoot_mode == SMODE_SBS;
+	single = w->shoot_mode == SMODE_SINGLE;
+	full_auto = w->shoot_mode == SMODE_FULL_AUTO;
 	if (sbs || single || full_auto)
 	{
 		w->ready = false;
 		w->loaded--;
 		if (w->shoot)
-			play_ambience(w->shoot, true, false, false);
+			stop_n_play(w->shoot);
 	}
-	// Animation
 	return (0);
 }
 
-int		reload_current_weapon(t_env *env)
+int			reload_current_weapon(t_env *env)
 {
 	t_weapon	*w;
 	int			need;
@@ -44,9 +49,8 @@ int		reload_current_weapon(t_env *env)
 		w->ammos = 0;
 	}
 	if (w->reload)
-	{
-		play_ambience(w->reload, false, true, false);
-		play_ambience(w->reload, true, false, false);
-	}
+		stop_n_play(w->reload);
+	w->reloading = RELOAD_TIME;
+	w->start = w->w_map->spawn;
 	return (0);
 }

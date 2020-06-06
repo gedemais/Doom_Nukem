@@ -6,6 +6,9 @@
 # define AMMO_FONT_SIZE 24
 # define W_NAME_FONT_SIZE 16
 
+# define RELOAD_TIME 2.5f // seconds
+# define RELOAD_SPEED 0.05f;
+
 enum	e_weapons
 {
 	W_FAMAS,
@@ -29,14 +32,26 @@ enum	e_shoot_mode
 	SMODE_MAX
 };
 
+struct	s_animation
+{
+	t_vec3d		start;
+	t_dynarray	keyframes;
+	t_vec3d		end;
+	int			m_id;
+	float		progress;
+};
+
 struct	s_weapon
 {
-	t_vec3d		p_offset; // Offset de la position de l'arme au joueur
-	t_vec3d		p_angle;// Angles de l'arme dans le referentiel du joueur
+	t_animation	shot;
+	t_animation	rl;
+	t_vec3d		start;
 	t_map		*w_map; // map du .obj de l'arme
 	t_mesh		*mesh; // Mesh central de l'arme
 	t_mesh		*charger; // Mesh chargeur de l'arme
 	t_mesh		*breech; // Mesh culasse de l'arme
+	t_sample	*shoot;
+	t_sample	*reload;
 	char		*name;
 	float		accuracy; // 0-1
 	int			reticle;
@@ -46,11 +61,9 @@ struct	s_weapon
 	int			ammos; // Nombre de balles en stock
 	int			cadency;
 	int			index;
+	float		reloading;
 	bool		ready;
-	bool		animated;
 	char		shoot_mode;
-	t_sample	*shoot;
-	t_sample	*reload;
 	//	Cadence de tir
 	//	sprite de flamme ?
 };
@@ -59,6 +72,7 @@ int			init_weapons(t_env *env);
 
 int			shoot_current_weapon(t_env *env);
 int			reload_current_weapon(t_env *env);
+void		reload_animation(t_env *env, t_weapon *w);
 
 int			handle_weapons(t_env *env);
 void		draw_reticule(t_env *env);

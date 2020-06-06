@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:00:05 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 15:48:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/05 20:24:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ static void	handle_keys(t_env *env, t_events *e)
 	t_vec3d dir;
 	t_vec3d pos;
 	t_mesh		*cam;
-	t_cam_stats cam_stats;
+	t_cam_stats	cam_stats;
 
 	cam_stats = env->cam.stats;
 	cam = &env->maps[env->scene].cam;
@@ -236,11 +236,11 @@ static void	handle_keys(t_env *env, t_events *e)
 		move(env, e->keys);
 	else if (move_i == 0)
 		fake_move(env, e->keys);
-		move_i = (move_i == 0) ? 1 : 0;
-		printf("----------dir---------\n");
-		print_vec(dir);
-		printf("----------pos---------\n");
-		print_vec(pos);
+	move_i = (move_i == 0) ? 1 : 0;
+	printf("----------dir---------\n");
+	print_vec(dir);
+	printf("----------pos---------\n");
+	print_vec(pos);
 }
 
 void		dev_handle_events(t_env *env)

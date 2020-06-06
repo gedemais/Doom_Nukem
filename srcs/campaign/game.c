@@ -43,8 +43,6 @@ int		cmp_game(void *param)
 {
 	t_env		*env;
 	t_camp_env	*cmp_env;
-	static float	av = 0.0f;
-	static int		it = 0;
 
 	mesure_time(false);
 	env = (t_env*)param;
@@ -54,22 +52,12 @@ int		cmp_game(void *param)
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	if (rasterizer(env, &env->maps[env->scene], false))
-		return (-1);
+	assert(rasterizer(env, &env->maps[env->scene], false));
 //	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	translate_mesh(env->player.current->w_map,
 		env->player.current->w_map->meshs.c,
 		(t_vec3d){0.005f, 0, 0, 0});
-
-	av += 1 / mesure_time(true);
-	if (av > 5000)
-	{
-		printf("%f\n", av / it);
-		av = 0.0f;
-		it = 0;
-	}
-	it++;
 	return (0);
 }

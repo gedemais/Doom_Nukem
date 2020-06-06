@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:18 by bebosson          #+#    #+#             */
-/*   Updated: 2020/05/22 14:45:48 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/06/05 17:32:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		physic_engine(t_env *env)
 	color_collides_cam(env);
 	update_speeds_collide(env); //report type of collision cam_floor // et update angle 
 	update_speeds_collide_cam(env);
-	update_positions_gravity(env); // gravity 
+	update_positions_gravity(env); // gravity
 	update_positions_gravity_cam(env);
 //	if (e->keys[KEY_P])
 //		pause_position(env);

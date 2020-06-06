@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 15:35:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/06 10:53:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4])
+static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4])
 {
 	float		cu;
 	float		cv;

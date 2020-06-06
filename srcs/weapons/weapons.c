@@ -21,12 +21,18 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 
 static void	handle_ready(t_env *env, t_weapon *w)
 {
-	static float	full_auto = 0;
+	static float	since = 0;
 
+	if (w->reloading > 0)
+	{
+		reload_animation(env, w);
+		w->ready = false;
+		return ;
+	}
 	if (w->shoot_mode == SMODE_FULL_AUTO)
 	{
-		w->ready = (60 / full_auto) < w->cadency; // Cap with time
-		full_auto = w->ready ? 0 : full_auto + env->data.spent;
+		w->ready = (60 / since) < w->cadency; // Cap with time
+		since = w->ready ? env->data.spent : since + env->data.spent;
 	}
 	else if (w->shoot_mode == SMODE_SINGLE)
 		w->ready = !env->events.buttons[BUTTON_LCLIC];
@@ -50,17 +56,15 @@ static void	weapons_events(t_env *env, t_events *e)
 	r = e->keys[KEY_R];
 	if (((r && w->loaded < w->magazine) || w->loaded == 0) && w->ammos > 0)
 		reload_current_weapon(env);
-	else if (e->buttons[BUTTON_LCLIC] && w->loaded > 0)
+	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
 		shoot_current_weapon(env);
 	handle_ready(env, w);
-	//recoil(env, w);
 }
 
 int			handle_weapons(t_env *env)
 {
 	raster_weapon(env, env->player.current->w_map);
 	weapons_events(env, &env->events);
-	//animations();
 	weapons_hud(env);
 	return (0);
 }
