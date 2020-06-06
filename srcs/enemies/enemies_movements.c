@@ -56,11 +56,10 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, cam));
 	if (mob->end == NULL)
 		return ;
-	if (enemies_get_closer_end(a, mob)
-		|| mob->end->bobstacle == 1)
-	{
+	if (enemies_get_closer_end(a, mob))
 		mob->end = NULL;
-	}
+	if (mob->end && mob->end->bobstacle == 1)
+		mob->end = NULL;
 	a->end = mob->end;
 }
 
@@ -81,7 +80,7 @@ void			enemies_movements(t_env *env)
 			mob->goal = a->start;
 			enemies_get_end(a, mob, env->cam.stats.pos);
 			astar(a);
-			if (a->end == NULL || mob->goal == NULL)
+			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{
 				mob->end = NULL;
 				continue ;

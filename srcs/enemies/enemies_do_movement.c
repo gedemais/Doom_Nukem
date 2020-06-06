@@ -22,12 +22,16 @@ static void		enemies_get_goal(t_enemy *mob)
 	{
 		if (mob->end->parent == NULL)
 			return ;
-		if (mob->end->parent->i == mob->goal->i
-			|| enemies_infinite_loop(mob))
+		if (mob->end->parent->i == mob->goal->i)
 		{
-			mob->goal = enemies_infinite_loop(mob)
-				? mob->end->parent->parent : mob->end;
+			mob->goal = mob->end;
 			enemies_get_pas(mob);
+			return ;
+		}
+		if (enemies_infinite_loop(mob))
+		{
+			mob->end = NULL;
+			mob->goal = NULL;
 			return ;
 		}
 		mob->end = mob->end->parent;
@@ -47,6 +51,8 @@ void			enemies_do_movement(t_enemy *mob)
 
 	if (mob->i == mob->goal->i)
 		enemies_get_goal(mob);
+	if (mob->end == NULL || mob->goal == NULL)
+		return ;
 	enemies_smooth_movement(mob);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (astar_distance(goal, mob->pos) < 0.1f)
