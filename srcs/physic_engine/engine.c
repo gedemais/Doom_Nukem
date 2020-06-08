@@ -30,7 +30,6 @@ int		physic_engine(t_env *env, t_map *maps)
 //	update_positions_gravity(env); // gravity 
 	update_positions_cam(env , maps, cam);
 //	print_collide(maps->cam_floor);
-	printf("----------------------\n");
 	stop_position_cam(env, maps, cam);
 	// if collide 
 	// update_plan_cam(env)

@@ -27,6 +27,7 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 
 	i = 0;
 	cam = &env->edit_env.map.cam;
+//	print_info_phy(env, &maps->cam);
 	 if (env->cam.stats.onfloor == 1)
 		f = set_y_dir(env, maps); // a virer dans engine ! 
 	else
@@ -38,8 +39,4 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 		cam->corp.v = f;
 	}
-//	if (env->cam.stats.onwall == 1)
-//		f =	test_dist_wall(env, &env->maps[env->scene].cam_wall, f);
-//	printf("ici zero\n");
-//	print_vec(env->cam.stats.pos);
 }

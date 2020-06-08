@@ -29,7 +29,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
 		translate_mesh(map, &map->cam, vec_fmult(r, -3.0f));
 	}
-	print_info_phy(env, &map->cam);
+//	print_info_phy(env, &map->cam);
 }
 
 static void ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
@@ -59,7 +59,7 @@ int			custom_play(t_env *env)
 	handle_keys(env, &env->events, &env->edit_env.map);
 	camera_aim(env);
 	env->mid.mesh = NULL;
-	printf("type_move %s \n", env->phy_env.type_move ? "true" : "false");	
+//	printf("type_move %s \n", env->phy_env.type_move ? "true" : "false");	
 	physic_engine(env, &env->edit_env.map);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_weapons(env);

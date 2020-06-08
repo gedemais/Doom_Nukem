@@ -108,15 +108,13 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 	int					i;
 	
 	i = 0;
-	// clairement a changer en fonction de map prio
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
 		type_of_plan(env, c, map);
-		printf("diff = %f\n",cam->corp.pos.y - c->a->corp.pos.y);
 		i++;
 	}
-	if (i == 0 && env->phy_env.type_move == true) //activer la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
+	if (i == 0 && env->phy_env.type_move == true) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
 	{
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);
@@ -149,7 +147,6 @@ void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	(void)maps;
 	if (env->cam.stats.pos.y < -10 || env->cam.stats.onfloor == 1)
 	{
-		printf("STOP_V\n");
 		env->phy_env.tps = 0;
 		cam->corp.v = zero_vector();
 		if (env->cam.stats.pos.y < -10)
