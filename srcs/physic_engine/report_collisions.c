@@ -30,6 +30,7 @@ void print_mesh_corp(t_mesh m)
 	print_vec(m.corp.norm);
 	printf("dims |");
 	print_vec(m.corp.dims);
+	printf("type %d|", m.type);
 }
 
 void	print_collide(t_collide c)
@@ -83,6 +84,8 @@ static bool	check_coll_cam(t_dynarray *meshs, int i, t_mesh *cam, t_collide *c)
 	t_mesh	*a;
 
 	a = dyacc(meshs, i);
+	if (a->type == 0)
+		return (false);
 	c->a = a;
 	c->b = cam;
 //	printf("%s (%f %f %f) <-> %s (%f %f %F)\n", c->a->name, c->a->corp.pos.x, c->a->corp.pos.y, c->a->corp.pos.z, c->b->name, c->b->corp.pos.x, c->b->corp.pos.y, c->b->corp.pos.z);
@@ -95,6 +98,7 @@ int			report_cam_collisions(t_env *env, t_map *maps)
 {
 	int			i;
 	t_collide	c;
+//	t_mesh	*m;
 	t_mesh	*cam;
 	
 	cam = &maps->cam;
@@ -110,7 +114,6 @@ int			report_cam_collisions(t_env *env, t_map *maps)
 			if (push_dynarray(&env->phy_env.collides_cam, &c, false))
 					return (-1);
 		}
-		maps->colls[i] = true;
 		i++;
 	}
 	return (0);

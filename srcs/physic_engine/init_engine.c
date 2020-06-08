@@ -31,7 +31,7 @@ static int		set_mesh_position(t_mesh *m)
 	}
 	m->corp.pos = vec_fdiv(average, (float)i);
 	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
-   	return (0);
+	return (0);
 }
 
 int			init_map_physics(t_map *map)
@@ -64,6 +64,7 @@ int			init_physic_engine(t_env *env)
 		ft_putchar(i == SCENE_MAX - 1 ? '\0' : '\r');
 		i++;
 	}
+	ft_memset((void*)&env->phy_env, 0, sizeof(t_physics));
 	env->phy_env.gravity = 0.0000981;
 	return (0);
 }

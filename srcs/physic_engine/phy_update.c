@@ -40,6 +40,19 @@ static void pause_position(t_env *env)
 }
 */
 
+void	print_info_phy(t_env *env, t_mesh *cam)
+{
+	printf("floor %d \n", env->cam.stats.onfloor);
+	printf("plan %d \n", env->cam.stats.onplan);
+	printf("--------------------------------------------\n");
+	printf("cam->corp.v\n");
+	print_vec(cam->corp.v);
+	printf("--------------------------------------------\n");
+	printf("env->cam.stats.pos\n");
+	print_vec(env->cam.stats.pos);
+
+}
+
 t_vec3d		update_angle(t_env *env, int index)
 {
 	t_collide	*c;
@@ -89,25 +102,24 @@ void	update_speeds_collide(t_env *env)
 	}
 }
 
-void	update_speeds_collide_cam(t_env *env)
+void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 {
 	t_collide			*c;
 	int					i;
-	int					n_mesh;
 	
-	n_mesh = env->maps[env->scene].nmesh;
 	i = 0;
+	// clairement a changer en fonction de map prio
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
-		env->maps[env->scene].cam_floor = *c;
-		type_of_plan(env, c);
+		type_of_plan(env, c, map);
+		printf("diff = %f\n",cam->corp.pos.y - c->a->corp.pos.y);
 		i++;
 	}
-	if (i == 0)
+	if (i == 0 && env->phy_env.type_move == true) //activer la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
 	{
-		env->cam.stats.onfloor = 0;
-		env->cam.stats.onplan = 0;
+		env->cam.stats.onfloor = 0;	
+		phy_gravitax_cam(env, cam, &env->cam.stats);
 		env->events.keys[KEY_E] = false;
 	}	
 }
@@ -132,21 +144,30 @@ void	update_positions_gravity(t_env *env)
 	}
 }
 
-void	update_positions_gravity_cam(t_env *env, t_mesh *cam)
+void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 {
-	printf("floor %d \n", env->cam.stats.onfloor);
-	printf("plan %d \n", env->cam.stats.onplan);
-	printf("--------------------------------------------\n");
-	printf("cam->corp.v\n");
-	print_vec(cam->corp.v);
-	printf("--------------------------------------------\n");
-	printf("env->cam.stats.pos\n");
-	print_vec(env->cam.stats.pos);
-	if (env->cam.stats.onfloor == 0 && 
-			env->cam.stats.onplan == 0)
+	(void)maps;
+	if (env->cam.stats.pos.y < -10 || env->cam.stats.onfloor == 1)
 	{
-		phy_gravitax_cam(env, cam, &env->cam.stats);
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
-		cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+		printf("STOP_V\n");
+		env->phy_env.tps = 0;
+		cam->corp.v = zero_vector();
+		if (env->cam.stats.pos.y < -10)
+			translate_mesh(maps, cam, vec_sub(zero_vector(), cam->corp.o));
 	}
+}
+
+
+void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
+{
+//	print_info_phy(env, cam);
+	// add f and r to v here ?
+//	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v); 
+	translate_mesh(map, cam, cam->corp.v); 
+	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
+	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+
+//	if () // si aucune collide sol ?
+//	{
+//	}
 }

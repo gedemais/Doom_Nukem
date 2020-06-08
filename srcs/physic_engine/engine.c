@@ -24,13 +24,19 @@ int		physic_engine(t_env *env, t_map *maps)
 //	report_collisions(env);
 	report_cam_collisions(env, maps);
 //	color_collides(env);
-	color_collides_cam(env);
+//	color_collides_cam(env);
 //	update_speeds_collide(env); //report type of collision cam_floor // et update angle 
-	update_speeds_collide_cam(env);
+	update_speeds_collide_cam(env, cam, maps);
 //	update_positions_gravity(env); // gravity 
-	update_positions_gravity_cam(env, cam);
-
+	update_positions_cam(env , maps, cam);
+//	print_collide(maps->cam_floor);
+	printf("----------------------\n");
+	stop_position_cam(env, maps, cam);
+	// if collide 
 	// update_plan_cam(env)
+	// equivalent de f = set_y_r
+	// ---------A SECURISER AVEC COLLIDE ET BOOL DE PHY----
+	//
 //	if (e->keys[KEY_P])
 //		pause_position(env);
 //	stop_speed(env);

@@ -25,7 +25,7 @@ static int key_move(bool keys[NB_KEYS]) //1
 static void	handle_keys(t_env *env, t_events *e)
 {
 	if (key_move(e->keys))
-		phy_move(env, e->keys);
+		phy_move(env, e->keys, &env->maps[env->scene]);
 }
 
 void		dev_handle_events(t_env *env)

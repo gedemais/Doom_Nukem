@@ -20,10 +20,7 @@ void	test_distance_camplan(t_collide c, t_vec3d *cam_vec) //8 // fonction hyper 
 	printf("diff = %f \n", diff);
 	if (diff < 0.3 && diff > 0)
 		cam_vec->y += 0.1;
-
 }
-
-
 
 t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 {
@@ -55,25 +52,20 @@ t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
 
 t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
 {
-	t_mesh *b;
+	t_mesh *a;
 	t_vec3d f;	
-
-	b = c->a;
-	f = vec_fmult(*coefdir_plan(b, &dir), WALK_SPEED); 
+	
+	(void)dir;
+	a = c->a;
+	f = vec_fmult(*coefdir_plan(a, &dir), WALK_SPEED); 
 	return (f);
 }
 
-t_vec3d	set_y_dir(t_env *env,  bool keys[NB_KEYS]) //3
+t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 {
 	t_vec3d f;
-	t_cam_stats cam_stats;
 
-	cam_stats = env->cam.stats;
-	f = vec_fmult(cam_stats.dir, WALK_SPEED);
-	if (keys[KEY_E])
-		f.y = 0.1;
-	else
-		f = fps_move_print(&env->maps[env->scene].cam_floor, env->cam.stats.dir);
+	f = fps_move_print(&map->cam_floor, env->cam.stats.dir);
 	return (f);
 
 }
@@ -94,29 +86,9 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 		return (f);
 }
 
-void	type_of_plan(t_env *env, t_collide *c)
+void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if ((fabs(c->a->corp.norm.x) == 1 || fabs(c->a->corp.norm.z) == 1) && c->i_a != 0)
-	{
-		env->maps[env->scene].cam_wall = *c;
-		env->cam.stats.onwall = 1;
-	}
-	else
-	{
-		test_distance_camplan(env->maps[env->scene].cam_floor, &env->cam.stats.pos);
-		printf("STOP_PLAN");
-		c->b->corp.v = zero_vector(); //stop gravity
-		env->phy_env.tps = 0;			// need to be variable by mesh 
-		env->cam.stats.onwall = 0;
-		if (c->a->corp.norm.y == 1 || c->i_a == 0)
-		{
-			env->cam.stats.onfloor = 1; //2 
-			env->cam.stats.onplan = 0;
-		}	// save the main collide
-		else
-		{
-			env->cam.stats.onplan = 1; //3
-			env->cam.stats.onfloor = 0; // save the main collide
-		}
-	}
+	map->cam_floor = *c;
+	env->cam.stats.onfloor = 1;
+	print_collide(map->cam_floor);
 }
