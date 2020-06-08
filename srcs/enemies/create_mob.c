@@ -2,7 +2,7 @@
 
 void	assign_enemys_stats(t_enemy *enemy, char type)
 {
-	static int		pvs[ENEMY_MAX] = {
+	static int		hps[ENEMY_MAX] = {
 		[ENEMY_CUBE] = 100
 	};
 	static int		damages[ENEMY_MAX] = {
@@ -12,7 +12,7 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 		[ENEMY_CUBE] = 0.1f
 	};
 
-	enemy->pv = pvs[(int)type];
+	enemy->hp = hps[(int)type];
 	enemy->damages = damages[(int)type];
 	enemy->speed = speeds[(int)type];
 }
@@ -45,7 +45,7 @@ static int		copy_triangles(t_mesh *m, t_mesh *new)
 	return (0);
 }
 
-static int		copy_mob_to_scene(t_map *map, t_enemy *enemy)
+static int		copy_mob_to_scene(t_map *map, t_map *mob, t_enemy *enemy)
 {
 	t_mesh		new;
 	t_mesh		*m;
@@ -53,11 +53,11 @@ static int		copy_mob_to_scene(t_map *map, t_enemy *enemy)
 
 	i = 0;
 	enemy->map_start = map->meshs.nb_cells;
-	enemy->map_end = enemy->map_start + enemy->map->meshs.nb_cells;
-	while (i < enemy->map->meshs.nb_cells)
+	enemy->map_end = enemy->map_start + mob->meshs.nb_cells;
+	while (i < mob->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
-		m = dyacc(&enemy->map->meshs, i);
+		m = dyacc(&mob->meshs, i);
 		new.type = BTXT_LIGHT;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(m, &new)
@@ -78,8 +78,8 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	assign_enemys_stats(&enemy, type);
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
-	enemy.map = &env->maps[enemy_map_mapper(type)];
-	if (copy_mob_to_scene(map, &enemy)
+	enemy.map = map;
+	if (copy_mob_to_scene(map, &env->maps[enemy_map_mapper(type)], &enemy)
 		|| push_dynarray(&env->mobs, &enemy, false))
 		return (-1);
 	return (0);
