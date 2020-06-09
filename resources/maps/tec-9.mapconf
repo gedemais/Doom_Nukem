@@ -2,8 +2,9 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{-0.3, 0.6, -2.0}
-orientation|{0.0, -2.0}
+spawn|{0.0, 0.3, -0.5}
+orientation|{0.0, 0.0}
+armmesh_Mesh|{}|[]|true|()|
 poignee_handle_tec-9.010|{}|[]|true|()|
-chargeur_chargeur_tec-9.030|{}|[]|true|()|poignee_handle_tec-9.010
-culasse_poignee_culasse_tec-9.031|{}|[]|true|()|poignee_handle_tec-9.010
+chargeur_chargeur_tec-9.030|{}|[]|true|()|
+culasse_poignee_culasse_tec-9.031|{}|[]|true|()|

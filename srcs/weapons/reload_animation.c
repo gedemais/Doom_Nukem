@@ -1,8 +1,8 @@
 #include "main.h"
 
-static void	up_n_down(t_weapon *w, t_animation reload, bool reset)
+static void	up_n_down(t_weapon *w, float progress, bool reset)
 {
-	if (reload.progress < 0.5f)
+	if (progress < 0.5f)
 	{
 		w->w_map->spawn.y -= RELOAD_SPEED;
 		w->w_map->spawn.z -= RELOAD_SPEED;
@@ -18,9 +18,11 @@ static void	up_n_down(t_weapon *w, t_animation reload, bool reset)
 
 void	reload_animation(t_env *env, t_weapon *w)
 {
+	float	progress;
+
 	w->reloading -= env->data.spent;
 	if (!ft_inbounds(env->scene, W_FAMAS, W_MAX - 1)) // Protection
 		return ;
-	w->rl.progress = w->reloading / RELOAD_TIME;
-	up_n_down(w, w->rl, w->rl.progress < 0.01f);
+	progress = w->reloading / RELOAD_TIME;
+	up_n_down(w, progress, progress < 0.01f);
 }

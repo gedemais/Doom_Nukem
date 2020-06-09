@@ -1,7 +1,27 @@
-# Blender MTL File: 'None'
-# Material Count: 4
+# Blender MTL File: 'origin.blend'
+# Material Count: 6
 
-newmtl Metal
+newmtl Default_OBJ
+Ns 21.585490
+Ka 1.000000 1.000000 1.000000
+Kd 0.030574 0.053585 0.007732
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.006
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.838799 0.502887 0.456411
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Metal.008
 Ns 225.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.131000 0.130857 0.131000
@@ -11,7 +31,7 @@ Ni 1.450000
 d 1.000000
 illum 2
 
-newmtl clear_metal
+newmtl clear_metal.007
 Ns 225.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.310812 0.310812 0.310812
@@ -21,7 +41,7 @@ Ni 1.450000
 d 1.000000
 illum 2
 
-newmtl dark_metal
+newmtl dark_metal.001
 Ns 323.999994
 Ka 1.000000 1.000000 1.000000
 Kd 0.052218 0.052218 0.052218

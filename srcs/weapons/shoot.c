@@ -24,7 +24,7 @@ int			shoot_current_weapon(t_env *env)
 		if (w->shoot)
 			stop_n_play(w->shoot);
 	}
-	w->shooting = 60 / w->cadency;
+	w->shooting = 60.0f / w->cadency;
 	return (0);
 }
 

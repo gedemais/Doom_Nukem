@@ -32,23 +32,11 @@ enum	e_shoot_mode
 	SMODE_MAX
 };
 
-struct	s_animation
-{
-	t_vec3d		start;
-	t_dynarray	keyframes;
-	t_vec3d		end;
-	int			m_id;
-	float		progress;
-};
-
 struct	s_weapon
 {
-	t_animation	shot;
-	t_animation	rl;
 	t_vec3d		start;
 	t_map		*w_map; // map du .obj de l'arme
 	t_mesh		*mesh; // Mesh central de l'arme
-	t_mesh		*charger; // Mesh chargeur de l'arme
 	t_mesh		*breech; // Mesh culasse de l'arme
 	t_sample	*shoot;
 	t_sample	*reload;
