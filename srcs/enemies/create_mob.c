@@ -26,7 +26,26 @@ int		enemy_map_mapper(char type)
 	return (map[(int)type]);
 }
 
-static int		copy_triangles(t_mesh *m, t_mesh *new)
+static bool		handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
+{
+	t_sprite	*sp;
+	int			i;
+
+	i = 0;
+	while (i < map->txts.nb_cells)
+	{
+		sp = dyacc(&map->txts, i);
+		if (!ft_memcmp(sp, sprite, sizeof(t_sprite)))
+		{
+			new->sp = i;
+			return (true);
+		}
+		i++;
+	}
+	return (false);
+}
+
+static int		copy_triangles(t_map *map, t_map *mob_map, t_mesh *m, t_mesh *new)
 {
 	t_triangle	t;
 	int			i;
@@ -36,8 +55,15 @@ static int		copy_triangles(t_mesh *m, t_mesh *new)
 	{
 		ft_memcpy(&t, dyacc(&m->tris, i), sizeof(t_triangle));
 		t.textured = true;
-		t.voxel = true;
-		t.sp = new->type;
+		t.voxel = false;
+	PUT
+		if (!handle_texture(map, dyacc(&mob_map->txts, t.sp), &t))
+		{
+			if (push_dynarray(&map->txts, dyacc(&mob_map->txts, t.sp), false))
+				return (-1);
+			t.sp = map->txts.nb_cells;
+		}
+	PUT1
 		if (push_dynarray(&new->tris, &t, false))
 			return (-1);
 		i++;
@@ -60,7 +86,7 @@ static int		copy_mob_to_scene(t_map *map, t_enemy *enemy)
 		m = dyacc(&enemy->map->meshs, i);
 		new.type = BTXT_LIGHT;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
-			|| copy_triangles(m, &new)
+			|| copy_triangles(map, enemy->map, m, &new)
 			|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
