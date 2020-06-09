@@ -35,6 +35,7 @@ SRCS_NAME =	main.c\
 			enemies/create_mob.c\
 			enemies/enemies.c\
 			enemies/enemies_do_movement.c\
+			enemies/enemies_goals.c\
 			enemies/enemies_movements.c\
 			enemies/nodes.c\
 			enemies/nodes_neighbourgs.c\
