@@ -29,7 +29,7 @@ bool	ft_good_diago(t_vec3d u, t_vec3d *dir)
 		return (true);
 	return (false);
 }
-
+/*
 static bool	look_for_diago(t_triangle *tri, t_vec3d *dir)
 {
 	t_vec3d u;
@@ -62,7 +62,7 @@ static bool	look_for_diago(t_triangle *tri, t_vec3d *dir)
 	return (false);
 
 }
-
+*/
 static t_vec3d	look_for_slope_vect(t_triangle *tri, t_vec3d *dir)
 {
 	t_vec3d u;
@@ -107,14 +107,17 @@ t_vec3d	ft_look_for_slope(t_mesh *m, t_vec3d *dir)
 
 	tris_num = -1;
 	(void)slope;
+	(void)tris_diago;
+	(void)tris_num;
 	if (m->tris.nb_cells > 8)
 		return ((t_vec3d){2,0,2,0}); // return proj_ortho(2,0,2) ? 
-	while (++tris_num < m->tris.nb_cells)
-	{
-		if (look_for_diago(dyacc(&m->tris, tris_num), dir) == true)
-			tris_diago = tris_num;
-	}
-	slope = look_for_slope_vect(dyacc(&m->tris, tris_diago), dir);
+//	while (++tris_num < m->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
+//	{
+//		if (look_for_diago(dyacc(&m->tris, tris_num), dir) == true)
+//			tris_diago = tris_num;
+//	}
+//	printf("tris_diago = %d\n", tris_diago);
+	slope = look_for_slope_vect(dyacc(&m->tris, 4), dir);
 	return (slope);
 }
 

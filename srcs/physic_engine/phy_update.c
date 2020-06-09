@@ -119,6 +119,10 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);
 		env->events.keys[KEY_E] = false;
+		env->events.keys[KEY_W] = false;
+		env->events.keys[KEY_S] = false;
+		env->events.keys[KEY_A] = false;
+		env->events.keys[KEY_D] = false;
 	}	
 }
 
