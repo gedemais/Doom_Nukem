@@ -40,6 +40,7 @@ static void		enemies_rotate_mob(t_enemy *mob, float angle)
 
 static void		enemies_look_dir(t_enemy *mob)
 {
+	return ;
 	t_vec3d	goal;
 
 	mob->head = (t_vec3d){ 1, 1, 0, 0};
