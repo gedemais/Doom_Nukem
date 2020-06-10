@@ -6,15 +6,9 @@ static void		back_n_forth(t_weapon *w, float progress, bool reset)
 
 	new_pos = (t_vec3d){};
 	if (progress < 0.5f)
-	{
-		w->w_map->spawn.y -= 0.1f;
-		w->w_map->spawn.z -= 0.1f;
-	}
+		w->w_map->spawn.z += w->recoil;
 	else
-	{
-		w->w_map->spawn.y += 0.1f;
-		w->w_map->spawn.z += 0.1f;
-	}
+		w->w_map->spawn.z -= w->recoil;
 	if (reset || w->w_map->spawn.y < w->start.y)
 		w->w_map->spawn = w->start;
 }

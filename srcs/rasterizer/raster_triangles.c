@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/06 10:49:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/10 18:22:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	relaunch_thread(t_rasthread threads[NB_THREADS], int i)
 	threads[t].done = false;
 	if (pthread_create(&threads[i].thread, NULL, rasthreader, &threads[i]))
 		return (-1);
-	return (threads[i].start - threads[i].end);
+	return (threads[i].end - threads[i].start);
 }
 
 static void	manage_threads(t_rasthread threads[NB_THREADS])
@@ -49,7 +49,7 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 	int				relaunched = 0;
 
 	amount = INT_MAX;
-	waste = NB_THREADS + 1;
+	waste = NB_THREADS * NB_THREADS;
 	while (amount > waste)
 	{
 		i = 0;
@@ -64,7 +64,6 @@ static void	manage_threads(t_rasthread threads[NB_THREADS])
 			i++;
 		}
 	}
-//	printf("%d threads relauncheds on this frame\n", relaunched);
 }
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)

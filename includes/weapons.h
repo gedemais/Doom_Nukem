@@ -51,6 +51,7 @@ struct	s_weapon
 	int			index;
 	float		reloading;
 	float		shooting;
+	float		recoil;
 	bool		ready;
 	char		shoot_mode;
 	//	Cadence de tir
