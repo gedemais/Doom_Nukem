@@ -48,7 +48,7 @@ int		render(void *param)
 	it++;
 	if (it > 10)
 	{
-		//printf("fps : %f\n", fps / it);
+		printf("fps : %f\n", fps / it);
 		it = 0;
 		fps = 0;
 	}

@@ -30,7 +30,7 @@ static int		spawn_mob(t_env *env)
 		i = rand() % (env->astar.d_nodes.nb_cells - 1);
 	pos = ((t_node *)dyacc(&env->astar.d_nodes, i))->pos;
 
-	pos = (t_vec3d){ 0, 4, 0, 0 };
+	pos = (t_vec3d){ 0, 2, 0, 0 };
 
 	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
 }

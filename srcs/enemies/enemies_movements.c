@@ -81,6 +81,7 @@ void			enemies_movements(t_env *env)
 			astar(a);
 			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{
+				enemies_last_rotation(mob, env->cam.stats.pos);
 				mob->end = NULL;
 				continue ;
 			}

@@ -95,17 +95,44 @@ static int		copy_mob_to_scene(t_map *map, t_map *mob, t_enemy *enemy)
 	return (0);
 }
 
+static int 		enemy_offset(t_enemy *mob)
+{
+	int			i;
+	int			j;
+	t_mesh 		*mesh;
+	t_triangle	*tri;
+
+	i = mob->map_start - 1;
+	while (++i < mob->map_end)
+	{
+		mesh = dyacc(&mob->map->meshs, i);
+		j = -1;
+		while (++j < mesh->tris.nb_cells)
+		{
+			tri = dyacc(&mesh->tris, j);
+			tri->points[0] = vec_add(tri->points[0], mob->offset);
+			tri->points[1] = vec_add(tri->points[1], mob->offset);
+			tri->points[2] = vec_add(tri->points[2], mob->offset);
+		}
+	}
+	return (0);
+}
+
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
 
 	ft_memset((void *)&enemy, 0, sizeof(t_enemy));
 	assign_enemys_stats(&enemy, type);
+
 	enemy.head = (t_vec3d){ 0, 0, 1, 0 };
+	enemy.offset = (t_vec3d){ 0, 1, 0, 0 };
+
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
 	if (copy_mob_to_scene(map, &env->maps[enemy_map_mapper(type)], &enemy)
+		|| enemy_offset(&enemy)
 		|| push_dynarray(&env->mobs, &enemy, false))
 		return (-1);
 	return (0);
