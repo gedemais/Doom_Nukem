@@ -87,6 +87,7 @@ void print_vect_face(t_triangle *tri, t_vec3d *dir)
 	t_vec3d v;
 	t_vec3d w;
 
+	printf("---------------\n");
 	u = vec_sub(tri->points[0], tri->points[1]);
 	printf("dot = %f\n",vec_dot(*dir , u));
 	print_vec(u);
@@ -109,48 +110,69 @@ t_vec3d	ft_look_for_slope(t_mesh *m, t_vec3d *dir)
 	(void)slope;
 	(void)tris_diago;
 	(void)tris_num;
-	if (m->tris.nb_cells > 8)
-		return ((t_vec3d){2,0,2,0}); // return proj_ortho(2,0,2) ? 
+//	if (m->tris.nb_cells > 8)
+//		return ((t_vec3d){2,0,2,0}); // look_for_wall ? 
+
 //	while (++tris_num < m->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
 //	{
-//		if (look_for_diago(dyacc(&m->tris, tris_num), dir) == true)
-//			tris_diago = tris_num;
+//		print_vect_face(dyacc(&m->tris, tris_num), dir);
 //	}
 //	printf("tris_diago = %d\n", tris_diago);
 	slope = look_for_slope_vect(dyacc(&m->tris, 4), dir);
 	return (slope);
 }
 
-t_vec3d *coefdir_plan(t_mesh *m, t_vec3d *dir) //6
+t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
 {
 	t_vec3d w;
 	t_vec3d	*new_dir;
 	t_vec3d step_dir;
-	
-	w = ft_look_for_slope(m, dir);
+
+	(void)cam;
+	w = (t_vec3d){2,0,2,0};
+  	if (m->tris.nb_cells == 8 && env->cam.stats.onwall == 1) 	
+		w = look_for_slope_vect(dyacc(&m->tris, 4), dir);
+	// test diff pos btw point et cam.pos pour voir si c pas un mur
+	//else look_for_wall => zero_vector
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
 	new_dir->y = step_dir.y;
 	return (new_dir);
 }
 
-t_vec3d		fps_move_print(t_collide *c, t_vec3d dir) //5
+t_vec3d		phy_move_collide(t_env *env, t_collide *c, t_vec3d dir) //5
 {
 	t_mesh *a;
+	t_mesh *cam;
 	t_vec3d f;	
 	
 	(void)dir;
 	a = c->a;
+	cam = c->b;
 //	print_collide(*c);
-	f = vec_fmult(*coefdir_plan(a, &dir), MAPED_WALK_SPEED); 
+	f = vec_fmult(*coefdir_plan(env, a, cam, &dir), MAPED_WALK_SPEED); 
 	return (f);
 }
 
+/*
+ *
+ *printf("diff = %f\n", cam->corp.pos.y - m->corp.pos.y);
+	if ((cam->corp.pos.y - map->cam_wall.a.corp.pos.y) < 1)
+	{
+		printf("dot = %f\n", vec_dot(*dir, m->corp.pos));
+		print_mesh_corp(*m);
+	}
+*/
 t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 {
 	t_vec3d f;
 
-	f = fps_move_print(&map->cam_floor, env->cam.stats.dir);
+	f = (t_vec3d){2, 0, 2, 0};
+//	printf("onfloor %d onwall %d\n", env->cam.stats.onfloor, env->cam.stats.onwall);
+	if (env->cam.stats.onwall == 0)
+		f = phy_move_collide(env, &map->cam_floor, env->cam.stats.dir);
+	else if (env->cam.stats.onwall == 1)
+		f = phy_move_collide(env, &map->cam_wall, env->cam.stats.dir);
 	return (f);
 
 }
@@ -158,14 +180,12 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 {
 	t_mesh *cam;
-	t_mesh wall;
-	t_vec3d norm_wall;
+	t_mesh *wall;
 
 	(void)env;
 	cam = c->b;
-	wall = *(c->a);
-	norm_wall = wall.corp.norm;
-	if (vec_dot(f, norm_wall) < 0 && c->i_a != 0)
+	wall = c->a;
+	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 && wall->tris.nb_cells > 8)
 		return (zero_vector());
 	else
 		return (f);
@@ -173,6 +193,17 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	map->cam_floor = *c;
-	env->cam.stats.onfloor = 1;
+//	print_collide(*c);
+	if (c->b->corp.pos.y - c->a->corp.pos.y > 2 &&
+		   	env->cam.stats.onfloor == 0)
+	{
+		map->cam_floor = *c;
+		env->cam.stats.onfloor = 1;
+	}
+	if (c->b->corp.pos.y - c->a->corp.pos.y < 1 &&
+		env->cam.stats.onwall == 0)
+	{
+		map->cam_wall = *c;
+		env->cam.stats.onwall = 1;
+	}
 }

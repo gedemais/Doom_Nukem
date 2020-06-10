@@ -45,6 +45,8 @@ void	print_info_phy(t_env *env, t_mesh *cam)
 	printf("floor %d \n", env->cam.stats.onfloor);
 	printf("plan %d \n", env->cam.stats.onplan);
 	printf("--------------------------------------------\n");
+	printf("cam->corp.pos\n");
+	print_vec(cam->corp.pos);
 	printf("cam->corp.v\n");
 	print_vec(cam->corp.v);
 	printf("--------------------------------------------\n");
@@ -112,6 +114,7 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
 		type_of_plan(env, c, map);
+//		print_collide(*c);
 		i++;
 	}
 	if (i == 0 && env->phy_env.type_move == true) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 

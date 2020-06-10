@@ -14,22 +14,22 @@
 
 void print_mesh_corp(t_mesh m)
 {
-	printf("acc |");
-	print_vec(m.corp.acc);
-	printf("vo |");
-	print_vec(m.corp.vo);
-	printf("v |");
-	print_vec(m.corp.v);
-	printf("v_cpy |");
-	print_vec(m.corp.v_cpy);
+//	printf("acc |");
+//	print_vec(m.corp.acc);
+//	printf("vo |");
+//	print_vec(m.corp.vo);
+//	printf("v |");
+//	print_vec(m.corp.v);
+//	printf("v_cpy |");
+//	print_vec(m.corp.v_cpy);
 	printf("pos |");
 	print_vec(m.corp.pos);
 	printf("o |");
 	print_vec(m.corp.o);
-	printf("norm |");
-	print_vec(m.corp.norm);
-	printf("dims |");
-	print_vec(m.corp.dims);
+//	printf("norm |");
+//	print_vec(m.corp.norm);
+//	printf("dims |");
+//	print_vec(m.corp.dims);
 	printf("type %d|", m.type);
 }
 

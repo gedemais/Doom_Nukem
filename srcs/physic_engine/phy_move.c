@@ -28,9 +28,10 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 	int			i;
 
 	i = 0;
+
 	cam = &env->edit_env.map.cam;
 //	print_info_phy(env, &maps->cam);
-	 if (env->cam.stats.onfloor == 1)
+	 if (env->cam.stats.onfloor == 1 || env->cam.stats.onwall == 1)
 		f = set_y_dir(env, maps); // a virer dans engine ! 
 	else
 		f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
@@ -38,7 +39,12 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 	if ((keys[KEY_W] || keys[KEY_S] || keys[KEY_A] || keys[KEY_D]|| keys[KEY_E]))
 	{
 		f = phy_handle_key(env, f, r, keys);
+		if (env->cam.stats.onwall == 1)
+			f = test_dist_wall(env, &maps->cam_wall, f);
+
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 		cam->corp.v = f;
 	}
+	if (keys[KEY_O])
+		translate_mesh(maps, cam, vec_sub(vec_add(zero_vector(), cam->corp.dims), cam->corp.o));
 }
