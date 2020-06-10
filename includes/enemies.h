@@ -11,12 +11,6 @@ enum				e_enemies
 	ENEMY_MAX
 };
 
-typedef struct		s_fpoint
-{
-	float	x;
-	float	y;
-}					t_fpoint;
-
 struct				s_enemy
 {
 	int 		i;
@@ -25,6 +19,7 @@ struct				s_enemy
 	int			map_start;
 	int			map_end;
 	float		speed;
+	float		yaw;
 	t_vec3d		head;
 	t_vec3d		pitch;
 	t_vec3d		pos;
