@@ -81,12 +81,12 @@ static void	recoil(t_env *env)
 	env->weapons[W_AK47].recoil = 0.05f;
 	env->weapons[W_SAWED_OFF].recoil = 0.2f; // eulol
 	env->weapons[W_GLOCK_18].recoil = 0.05;
-	env->weapons[W_AUG].recoil = 0;
-	env->weapons[W_UMP45].recoil = 0;
-	env->weapons[W_MAG7].recoil = 0;
-	env->weapons[W_GALIL].recoil = 0;
-	env->weapons[W_NEGEV].recoil = 0;
-	env->weapons[W_TEC9].recoil = 0;
+	env->weapons[W_AUG].recoil = 0.1f;
+	env->weapons[W_UMP45].recoil = 0.1f;
+	env->weapons[W_MAG7].recoil = 0.2f;
+	env->weapons[W_GALIL].recoil = 0.1f;
+	env->weapons[W_NEGEV].recoil = 0.1f;
+	env->weapons[W_TEC9].recoil = 0.05f;
 }
 
 void		assign_weapons_stats(t_env *env)
