@@ -36,7 +36,7 @@ int				handle_enemies(t_env *env)
 		if (spawn_mob(env))
 			return (-1);
 	}
-	enemies_movements(env);
+//	enemies_movements(env);
 	enemies_to_scene(env, &env->edit_env.map);
 	return (0);
 }
