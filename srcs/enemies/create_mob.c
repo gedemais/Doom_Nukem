@@ -131,6 +131,7 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
+
 	if (copy_mob_to_scene(map, &env->maps[enemy_map_mapper(type)], &enemy)
 		|| enemy_offset(&enemy)
 		|| push_dynarray(&env->mobs, &enemy, false))

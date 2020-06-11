@@ -18,6 +18,7 @@ struct				s_enemy
 	int			damages;
 	int			map_start;
 	int			map_end;
+	float		sum_angle;
 	float		speed;
 	float		xaw;
 	float		yaw;
@@ -35,12 +36,18 @@ int				handle_enemies(t_env *env);
 
 int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 
-void			enemies_movements(t_env *env);
+void			enemies_movements(t_env *env, t_pf *a);
 void			enemies_do_movement(t_enemy *mob);
-void			enemies_goals(t_enemy *mob);
+
+void			enemies_death(t_dynarray *mobs);
 
 void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
-void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin);
+void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
+		void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
+
+void			enemies_rotate_x(t_vec3d *v, t_vec3d m, float fcos, float fsin);
+void			enemies_rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin);
+
 float           enemies_xz_angle(t_vec3d a, t_vec3d b);
 
 #endif

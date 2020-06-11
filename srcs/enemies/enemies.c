@@ -30,21 +30,24 @@ static int		spawn_mob(t_env *env)
 		i = rand() % (env->astar.d_nodes.nb_cells - 1);
 	pos = ((t_node *)dyacc(&env->astar.d_nodes, i))->pos;
 
-	pos = (t_vec3d){ 0, 2, 0, 0 };
+	//pos = (t_vec3d){ 0, 2, 0, 0 };
 
 	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
 }
 
 int				handle_enemies(t_env *env)
 {
-	int 	nb_mobs = 1;
+	int 		nb_mobs = 10;
+	static int	i = -1;
 
-	while (env->mobs.nb_cells < nb_mobs)
+	while (++i < nb_mobs)
 	{	
 		if (spawn_mob(env))
 			return (-1);
 	}
-	enemies_movements(env);
-	enemies_to_scene(&env->mobs);
+	enemies_movements(env, &env->astar);
+	enemies_death(&env->mobs);
+	if (env->mobs.nb_cells)
+		enemies_to_scene(&env->mobs);
 	return (0);
 }

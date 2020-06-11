@@ -62,17 +62,17 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	a->end = mob->end;
 }
 
-void			enemies_movements(t_env *env)
+void			enemies_movements(t_env *env, t_pf *a)
 {
 	int		i;
 	t_enemy	*mob;
-	t_pf	*a;
 
-	a = &env->astar;
 	i = -1;
 	while (++i < env->mobs.nb_cells)
 	{
 		mob = dyacc(&env->mobs, i);
+		if (mob->hp < 1)
+			continue ;
 		a->start = dyacc(&a->d_nodes, mob->i);
 		if (mob->end == NULL || mob->i == mob->end->i)
 		{

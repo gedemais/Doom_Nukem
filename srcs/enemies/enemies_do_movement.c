@@ -6,6 +6,19 @@ static bool		enemies_infinite_loop(t_enemy *mob)
 		&& mob->end->parent->parent->i == mob->end->i);
 }
 
+void			enemies_goals(t_enemy *mob)
+{
+	t_vec3d	goal;
+
+	goal = vec_add(mob->goal->pos, mob->goal->pos);
+	mob->pitch.x = (goal.x - mob->pos.x) * mob->speed;
+	mob->pitch.y = (goal.y - mob->pos.y) * mob->speed;
+	mob->pitch.z = (goal.z - mob->pos.z) * mob->speed;
+	goal = vec_add(mob->end->pos, mob->end->pos);
+	goal = vec_sub(goal, mob->pos);
+	mob->yaw = enemies_xz_angle(mob->head, goal) * mob->speed;
+}
+
 static void		enemies_get_goal(t_enemy *mob)
 {
 	while (mob->end && mob->end->i != mob->goal->i)
@@ -37,7 +50,7 @@ static void		enemies_smooth_movement(t_enemy *mob)
 	mob->pos = vec_add(mob->pos, mob->pitch);
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
-	enemies_rotate_mob(mob, fcos, fsin);
+	enemies_rotate_mob(mob, fcos, fsin, enemies_rotate_y);
 }
 
 void			enemies_do_movement(t_enemy *mob)

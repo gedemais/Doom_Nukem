@@ -34,8 +34,8 @@ SRCS_NAME =	main.c\
 			enemies/astar_tools.c\
 			enemies/create_mob.c\
 			enemies/enemies.c\
+			enemies/enemies_death.c\
 			enemies/enemies_do_movement.c\
-			enemies/enemies_goals.c\
 			enemies/enemies_movements.c\
 			enemies/enemies_rotations.c\
 			enemies/nodes.c\
