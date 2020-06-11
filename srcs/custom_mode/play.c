@@ -37,7 +37,7 @@ static int		handle_keys(t_env *env, t_events *e)
 		move(env, e->keys);
 	return (0);
 }
-
+/*
 static void	print_mobs(t_env *env)
 {
 	t_enemy	*mob;
@@ -51,11 +51,11 @@ static void	print_mobs(t_env *env)
 		i++;
 	}
 	printf("--------------------\n");
-}
+}*/
 
 int			custom_play(t_env *env)
 {
-	print_mobs(env);
+//	print_mobs(env);
 	clear_screen_buffers(env);
 	handle_keys(env, &env->events);
 	camera_aim(env);
