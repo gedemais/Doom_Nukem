@@ -54,7 +54,7 @@ static void		cadency_n_shoot_mode(t_env *env)
 {
 	env->weapons[W_FAMAS].cadency = 1000;
 	env->weapons[W_AK47].cadency = 600;
-	env->weapons[W_SAWED_OFF].cadency = 200; // eulol
+	env->weapons[W_SAWED_OFF].cadency = 200;
 	env->weapons[W_GLOCK_18].cadency = 300;
 	env->weapons[W_AUG].cadency = 650;
 	env->weapons[W_UMP45].cadency = 600;
@@ -79,11 +79,11 @@ static void	recoil(t_env *env)
 {
 	env->weapons[W_FAMAS].recoil = 0.1f;
 	env->weapons[W_AK47].recoil = 0.05f;
-	env->weapons[W_SAWED_OFF].recoil = 0.2f; // eulol
+	env->weapons[W_SAWED_OFF].recoil = 0.3f;
 	env->weapons[W_GLOCK_18].recoil = 0.05;
 	env->weapons[W_AUG].recoil = 0.1f;
 	env->weapons[W_UMP45].recoil = 0.1f;
-	env->weapons[W_MAG7].recoil = 0.2f;
+	env->weapons[W_MAG7].recoil = 0.3f;
 	env->weapons[W_GALIL].recoil = 0.1f;
 	env->weapons[W_NEGEV].recoil = 0.1f;
 	env->weapons[W_TEC9].recoil = 0.05f;

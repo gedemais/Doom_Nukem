@@ -72,13 +72,13 @@ $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 
 $(MLX): $(MLX_PATH)
 	@echo "Making MinilibX..."
-	@make -C $(MLX_PATH) -j
+	@make -C $(MLX_PATH) -j4
 	@echo "MinilibX successfully compiled !"
 	@echo "Making Doom_Nukem..."
 
 $(LIB): $(LIB_PATH)
 	@echo "Making Libft..."
-	@make -C $(LIB_PATH)
+	@make -C $(LIB_PATH) -j4
 
 clean:
 	@rm -rf $(OBJS)

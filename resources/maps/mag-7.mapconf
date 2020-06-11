@@ -2,7 +2,7 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{-0.1, 0.3, -0.7}
+spawn|{-0.1, 0.5, -0.7}
 orientation|{0.0, 0.0}
 armmesh_Mesh|{}|[]|true|()|
 poignee_mag-7.023|{}|[]|true|()|
