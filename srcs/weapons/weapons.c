@@ -23,6 +23,12 @@ static void	handle_ready(t_env *env, t_weapon *w)
 {
 	static float	since = 0;
 
+	if (w->shooting > 0)
+	{
+		shoot_animation(env, w);
+		if (w->shoot_mode == SMODE_SBS)
+			w->ready = false;
+	}
 	if (w->reloading > 0)
 	{
 		reload_animation(env, w);
@@ -58,8 +64,6 @@ static void	weapons_events(t_env *env, t_events *e)
 		reload_current_weapon(env);
 	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
 		shoot_current_weapon(env);
-	if (w->shooting > 0)
-		shoot_animation(env, w);
 	handle_ready(env, w);
 }
 

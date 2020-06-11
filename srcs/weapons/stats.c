@@ -54,14 +54,14 @@ static void		cadency_n_shoot_mode(t_env *env)
 {
 	env->weapons[W_FAMAS].cadency = 1000;
 	env->weapons[W_AK47].cadency = 600;
-	env->weapons[W_SAWED_OFF].cadency = 0; // eulol
-	env->weapons[W_GLOCK_18].cadency = 0;
+	env->weapons[W_SAWED_OFF].cadency = 200; // eulol
+	env->weapons[W_GLOCK_18].cadency = 300;
 	env->weapons[W_AUG].cadency = 650;
 	env->weapons[W_UMP45].cadency = 600;
-	env->weapons[W_MAG7].cadency = 0;
+	env->weapons[W_MAG7].cadency = 250;
 	env->weapons[W_GALIL].cadency = 650;
 	env->weapons[W_NEGEV].cadency = 850;
-	env->weapons[W_TEC9].cadency = 0;
+	env->weapons[W_TEC9].cadency = 300;
 
 	env->weapons[W_FAMAS].shoot_mode = SMODE_FULL_AUTO;
 	env->weapons[W_AK47].shoot_mode = SMODE_FULL_AUTO;
