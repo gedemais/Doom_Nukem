@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 3
+# define MAX_ENEMIES 5
 
 enum				e_enemies
 {
@@ -20,9 +20,7 @@ struct				s_enemy
 	int			map_end;
 	float		sum_angle;
 	float		speed;
-	float		xaw;
 	float		yaw;
-	float		zaw;
 	t_vec3d		head;
 	t_vec3d		offset;
 	t_vec3d		pitch;

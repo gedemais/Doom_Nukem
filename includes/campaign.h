@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/10 12:55:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 19:48:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ struct			s_sector
 struct			s_player
 {
 	t_dynarray	weapons;
+	t_point		shoot;
 	t_weapon	*current;
 	t_mesh		*body;
 	int			hp;
+	bool		hitmarker;
 };
 
 struct			s_camp_env

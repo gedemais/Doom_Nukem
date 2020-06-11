@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 18:24:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 18:59:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			sample_pixel(int *img, t_point size, t_vec2d point)
 
 	if (point.u < 0.0f || point.u >= 1.0f || point.v < 0.0f || point.v >= 1.0f)
 		return (0);
-	pos = abs((int)(point.v * size.y)) * size.x;
+	pos = (int)(point.v * size.y) * size.x;
 	pos += (int)(point.u * size.x);
 	return (img[pos]);
 }
@@ -84,8 +84,6 @@ int			shade_color(int color, float scale)
 	unsigned char	*rgb;
 
 	rgb = (unsigned char*)&color;
-	scale += 1.0f;
-	scale /= 2.0f;
 	rgb[0] *= scale;
 	rgb[1] *= scale;
 	rgb[2] *= scale;

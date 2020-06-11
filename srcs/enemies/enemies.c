@@ -1,5 +1,27 @@
 #include "main.h"
 
+static void		enemies_damages(t_env *env)
+{
+	t_enemy	*mob;
+	int		index;
+	int		i;
+
+	i = 0;
+	index = env->mid.mesh->index;
+	while (i < env->mobs.nb_cells)
+	{
+		mob = dyacc(&env->mobs, i);
+		if (index >= mob->map_start && index < mob->map_end)
+		{
+			mob->hp -= env->player.current->damages;
+			env->player.hitmarker = true;
+			return ;
+		}
+		i++;
+	}
+	env->player.hitmarker = false;
+}
+
 static void		enemies_to_scene(t_dynarray *mobs)
 {
 	int		i;
@@ -37,17 +59,15 @@ static int		spawn_mob(t_env *env)
 
 int				handle_enemies(t_env *env)
 {
-	int 		nb_mobs = 5;
-	static int	i = -1;
-
-	while (++i < nb_mobs)
-	{	
-		if (spawn_mob(env))
-			return (-1);
-	}
-	enemies_movements(env, &env->astar);
-	enemies_death(&env->mobs);
+	if (env->mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
+		return (-1);
 	if (env->mobs.nb_cells)
+	{
+		if (env->mid.mesh && env->player.current->shot)
+			enemies_damages(env);
+		enemies_movements(env, &env->astar);
+		enemies_death(&env->mobs);
 		enemies_to_scene(&env->mobs);
+	}
 	return (0);
 }

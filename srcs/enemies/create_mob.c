@@ -83,11 +83,13 @@ static int		copy_mob_to_scene(t_map *map, t_map *mob, t_enemy *enemy)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
 		m = dyacc(&mob->meshs, i);
-		new.type = BTXT_LIGHT;
+		new.type = 1;
+		new.index = map->nmesh;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(map, mob, m, &new)
 			|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
+		assign_meshs(dyacc(&map->meshs, map->nmesh));
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
 		map->nmesh++;
 		i++;

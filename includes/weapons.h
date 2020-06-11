@@ -53,6 +53,7 @@ struct	s_weapon
 	float		shooting;
 	float		recoil;
 	bool		ready;
+	bool		shot;
 	char		shoot_mode;
 	//	Cadence de tir
 	//	sprite de flamme ?
@@ -70,5 +71,6 @@ void		draw_reticule(t_env *env);
 int			print_ammos(t_env *env, t_weapon *w);
 int			weapons_hud(t_env *env);
 void		assign_weapons_stats(t_env *env);
+void		assign_meshs(t_mesh *m);
 
 #endif

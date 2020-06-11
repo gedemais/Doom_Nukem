@@ -95,8 +95,7 @@ struct	s_triangle
 	t_vec2d		txt[3];
 	t_vec3d		normal;
 	t_mesh		*mesh;
-	float		illum;
-	float		alpha;
+	float		scale;
 	int			color;
 	int			sp;
 	char		face_i;

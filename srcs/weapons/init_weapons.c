@@ -19,7 +19,7 @@ int		dup_names(t_env *env)
 }
 
 // Assigne tous les premiers meshs des objs d'armes aux t_weapon
-static void		assign_meshs(t_env *env)
+static void		assign_wmeshs(t_env *env)
 {
 	env->weapons[W_FAMAS].mesh = (t_mesh*)env->maps[SCENE_FAMAS].meshs.c;
 	env->weapons[W_FAMAS].breech = dyacc(&env->maps[SCENE_FAMAS].meshs, 2);
@@ -92,7 +92,7 @@ int		init_weapons(t_env *env)
 {
 	if (dup_names(env))
 		return (-1);
-	assign_meshs(env);
+	assign_wmeshs(env);
 	assign_weapons_stats(env);
 	assign_weapons_samples(env);
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0))

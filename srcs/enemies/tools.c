@@ -38,3 +38,18 @@ t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos)
     }
     return (node);
 }
+
+void		assign_meshs(t_mesh *m)
+{
+	t_triangle	*t;
+	int			i;
+
+	i = 0;
+	while (i < m->tris.nb_cells)
+	{
+		t = dyacc(&m->tris, i);
+		t->mesh = m;
+		i++;
+	}
+}
+

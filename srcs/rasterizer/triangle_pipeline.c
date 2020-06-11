@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:13:54 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 15:43:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 18:59:31 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ static int	project_triangle(t_env *env, t_triangle *t, t_triangle clipped, t_dyn
 static int	clip_near_plane(t_env *env, t_triangle t, t_vec3d normal, t_dynarray *tris)
 {
 	t_triangle	clipped[2];
+	float		illum;
 	int			nclip;
 	int			i;
 
 	i = 0;
-	t.illum = vec_dot(normal, env->cam.light);
-	t.color = shade_color(t.color, t.illum);
+	illum = vec_dot(normal, env->cam.light);
+	t.scale = (illum + 1.0f) / 2.0f;
+	t.color = shade_color(t.color, t.scale);
 	t.normal = normal;
 	// View matrix
 	t.points[0] = multiply_matrix(env->cam.v_m, t.points[0]);

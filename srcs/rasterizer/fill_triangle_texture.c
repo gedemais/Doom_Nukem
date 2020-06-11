@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 18:24:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 20:32:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int
 
 	if (txt->txt_w < env->cam.z_buffer[pos[2]])
 		return ;
-	if (t->voxel)
-		if (pos[0] == env->data.half_hgt)
-			if (pos[1] == env->data.half_wdt)
-				env->mid = *t;
+	if (pos[0] == env->data.half_hgt)
+		if (pos[1] == env->data.half_wdt)
+			env->mid = *t;
 	if (t->textured && t->sp >= 0)
 	{
 		cu = txt->txt_u / txt->txt_w;
@@ -31,7 +30,7 @@ static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int
 		color = sample_pixel((int*)txt->texture->img_data,
 			(t_point){txt->texture->hgt, txt->texture->wdt},
 			(t_vec2d){cu, cv, 1.0f});
-		color = shade_color(color, t->illum);
+		color = shade_color(color, t->scale);
 	}
 	else
 		color = t->color;
@@ -138,19 +137,23 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle *t)
 	}
 }
 
+static void	load_triangle_data(t_env *env, t_triangle *t, t_texturizer *txt)
+{
+	if (t->voxel)
+		txt->texture = &env->edit_env.btxts[t->sp];
+	else if (t->textured && env->context != C_CUSTOM)
+		txt->texture = dyacc(&env->maps[env->scene].txts, t->sp);
+	else if (t->textured && env->context == C_CUSTOM)
+		txt->texture = dyacc(&env->edit_env.map.txts, t->sp);
+}
+
 void		fill_triangle_texture(t_env *env, t_triangle *t)
 {
 	t_texturizer	txt;
 
 	txt = (t_texturizer){};
 	starting_swap(t);
-	if (t->voxel)
-		txt.texture = &env->edit_env.btxts[t->sp];
-	else if (t->textured && env->context != C_CUSTOM)
-		txt.texture = dyacc(&env->maps[env->scene].txts, t->sp);
-	else if (t->textured && env->context == C_CUSTOM)
-		txt.texture = dyacc(&env->edit_env.map.txts, t->sp);
-
+	load_triangle_data(env, t, &txt);
 	compute_gradients(&txt, t, false);
 	if (txt.dy1)
 		flattop(env, &txt, t);
