@@ -37,7 +37,7 @@ static int		spawn_mob(t_env *env)
 
 int				handle_enemies(t_env *env)
 {
-	int 		nb_mobs = 10;
+	int 		nb_mobs = 5;
 	static int	i = -1;
 
 	while (++i < nb_mobs)
