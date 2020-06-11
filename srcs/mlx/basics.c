@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/06 14:01:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 18:24:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ int			sample_pixel(int *img, t_point size, t_vec2d point)
 		return (0);
 	pos = abs((int)(point.v * size.y)) * size.x;
 	pos += (int)(point.u * size.x);
-	if (pos < 0 || pos >= 4096)
-	{
-		printf("pos = %d | u = %f | v = %f\n", pos, point.u, point.v);
-		fflush(stdout);
-	}
-	assert(pos >= 0 && pos < 4096);
 	return (img[pos]);
 }
 

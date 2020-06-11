@@ -65,6 +65,7 @@ enum	e_scene_id
 	SCENE_PENTE_EST,
 	SCENE_MAP_TEST,
 	SCENE_SLENDER,
+	SCENE_UGLY,
 	SCENE_MAX
 };
 

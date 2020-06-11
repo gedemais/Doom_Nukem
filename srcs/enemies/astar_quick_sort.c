@@ -29,7 +29,7 @@ static int      partition(t_dynarray *arr, int low, int high,
     return (i + 1);
 }
 
-void            quicksort(t_dynarray *arr, int low, int high,
+static void     quicksort(t_dynarray *arr, int low, int high,
                     int (*compare)(void *a, void *b))
 {
     int     pivot;

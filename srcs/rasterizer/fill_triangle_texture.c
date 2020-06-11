@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/06 13:38:59 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/11 18:24:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,10 @@ void		fill_triangle_texture(t_env *env, t_triangle *t)
 	starting_swap(t);
 	if (t->voxel)
 		txt.texture = &env->edit_env.btxts[t->sp];
-	else
-		txt.texture = env->maps[env->scene].txts.c + (t->sp * sizeof(t_sprite));
+	else if (t->textured && env->context != C_CUSTOM)
+		txt.texture = dyacc(&env->maps[env->scene].txts, t->sp);
+	else if (t->textured && env->context == C_CUSTOM)
+		txt.texture = dyacc(&env->edit_env.map.txts, t->sp);
 
 	compute_gradients(&txt, t, false);
 	if (txt.dy1)
