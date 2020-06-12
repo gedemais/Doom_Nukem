@@ -61,8 +61,14 @@ int				handle_enemies(t_env *env)
 {
 	env->player.hover = false;
 	env->player.hitmarker--;
-	if (env->mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
-		return (-1);
+	if (env->custom_env.spawner <= 0.0f)
+	{
+		if (env->mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
+			return (-1);
+		env->custom_env.spawner = RESPAWN_DELAY;
+	}
+	else
+		env->custom_env.spawner -= env->data.spent;
 	if (env->mobs.nb_cells)
 	{
 		if (env->mid.mesh)

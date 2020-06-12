@@ -4,6 +4,7 @@
 # include "main.h"
 
 # define MAX_ENEMIES 5
+# define RESPAWN_DELAY 5.0f;
 
 enum				e_enemies
 {
