@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/10 15:00:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/12 11:29:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	doom_nukem(t_env *env)
 	srand(time(NULL));
 	if (setup(env))
 		return (-1);
-
 	// Ajouter toutes les armes dans l'inventaire du joueur
 	for (int i = 0; i < W_MAX; i++)
 	{

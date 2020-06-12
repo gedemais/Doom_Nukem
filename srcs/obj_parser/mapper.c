@@ -38,9 +38,10 @@ char	**get_file_lines(int fd)
 		return (NULL);
 	if (!(ret = ft_strsplit(file, "\n")))
 	{
-		free(file);
+		munmap(file, len);
 		return (NULL);
 	}
+	munmap(file, len);
 	return (ret);
 }
 
