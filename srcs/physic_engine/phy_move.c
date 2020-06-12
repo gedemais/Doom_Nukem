@@ -7,7 +7,7 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 	{
 		f = vec_add(f, vec_fmult(f, 3.0f));
 		if (keys[KEY_E])
-			f.y += 0.5;
+			f.y += 0.4;
 		if (keys[KEY_E] && !keys[KEY_W])
 			f = (t_vec3d){0, f.y, 0, f.w};
 		keys[KEY_S] = 0;
@@ -41,7 +41,7 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 	{
 		f = phy_handle_key(env, f, r, keys);
 		if (env->cam.stats.onwall == 1)
-			f = test_dist_wall(env, &maps->cam_wall, f);
+			f = test_dist_wall(env, maps->cam_wall, f);
 
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 		cam->corp.v = f;

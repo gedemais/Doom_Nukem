@@ -130,7 +130,7 @@ t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
 
 	(void)cam;
 	w = (t_vec3d){2,0,2,0};
-  	if (m->tris.nb_cells == 8 && env->cam.stats.onwall == 1) 	
+  	if (m->tris.nb_cells == 8 && env->cam.stats.onfloor == 1) 	
 		w = look_for_slope_vect(dyacc(&m->tris, 4), dir);
 	// test diff pos btw point et cam.pos pour voir si c pas un mur
 	//else look_for_wall => zero_vector
@@ -149,6 +149,7 @@ t_vec3d		phy_move_collide(t_env *env, t_collide *c, t_vec3d dir) //5
 	(void)dir;
 	a = c->a;
 	cam = c->b;
+	print_collide(*c);
 //	print_collide(*c);
 	f = vec_fmult(*coefdir_plan(env, a, cam, &dir), MAPED_WALK_SPEED); 
 	return (f);
@@ -168,11 +169,19 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 	t_vec3d f;
 
 	f = (t_vec3d){2, 0, 2, 0};
-//	printf("onfloor %d onwall %d\n", env->cam.stats.onfloor, env->cam.stats.onwall);
+
+	printf("onfloor %d onwall %d\n", env->cam.stats.onfloor, env->cam.stats.onwall);
 	if (env->cam.stats.onwall == 0)
-		f = phy_move_collide(env, &map->cam_floor, env->cam.stats.dir);
+	{
+		print_collide(*map->cam_floor);
+		printf("cam_floor\n");
+		f = phy_move_collide(env, map->cam_floor, env->cam.stats.dir);
+	}
 	else if (env->cam.stats.onwall == 1)
-		f = phy_move_collide(env, &map->cam_wall, env->cam.stats.dir);
+	{
+		printf("cam_wall\n");
+		f = phy_move_collide(env, map->cam_wall, env->cam.stats.dir);
+	}
 	return (f);
 
 }
@@ -185,7 +194,8 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	(void)env;
 	cam = c->b;
 	wall = c->a;
-	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 && wall->tris.nb_cells > 8)
+	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
+			&& wall->tris.nb_cells > 8)
 		return (zero_vector());
 	else
 		return (f);
@@ -194,16 +204,17 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
 //	print_collide(*c);
-	if (c->b->corp.pos.y - c->a->corp.pos.y > 2 &&
-		   	env->cam.stats.onfloor == 0)
+//	printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
+	if (c->b->corp.pos.y - c->a->corp.pos.y > 2)
 	{
-		map->cam_floor = *c;
+		map->cam_floor = c;
 		env->cam.stats.onfloor = 1;
+		env->phy_env.diff_camfloor = vec_sub(env->cam.stats.pos, c->a->corp.pos);
 	}
 	if (c->b->corp.pos.y - c->a->corp.pos.y < 1 &&
 		env->cam.stats.onwall == 0)
 	{
-		map->cam_wall = *c;
-		env->cam.stats.onwall = 1;
+		map->cam_wall = c;
+		env->cam.stats.onwall = 1; // bool
 	}
 }

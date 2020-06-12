@@ -18,11 +18,12 @@ void	actual_wall_collide(t_env *env, t_map *maps, t_mesh *cam)
 
 	if (env->cam.stats.onwall == 1)
 	{
-		diff = vec_sub(cam->corp.pos, maps->cam_wall.a->corp.pos);
+		diff = vec_sub(cam->corp.pos, maps->cam_wall->a->corp.pos);
 		if (vec_norm(diff) > 3)
 		{
 			env->cam.stats.onwall = 0;
-			ft_memset(&maps->cam_wall, 0, sizeof(t_collide));
+			maps->cam_wall = NULL;
+	//		ft_memset(&maps->cam_wall, 0, sizeof(t_collide));
 		}
 	}
 
@@ -38,8 +39,7 @@ int		physic_engine(t_env *env, t_map *maps)
 	cam = &maps->cam;
 	e = &env->events;
 	ft_memset((void*)maps->colls, 0, sizeof(bool) *  maps->nmesh);
-
-//	print_info_phy(env, &maps->cam);
+	print_info_phy(env, &maps->cam);
 //	dev_handle_events(env);
 //	report_collisions(env);
 	report_cam_collisions(env, maps);
