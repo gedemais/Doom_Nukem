@@ -9,7 +9,7 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 		[ENEMY_CUBE] = 10
 	};
 	static float	speeds[ENEMY_MAX] = {
-		[ENEMY_CUBE] = 0.1f
+		[ENEMY_CUBE] = 0.05f
 	};
 
 	enemy->hp = hps[(int)type];

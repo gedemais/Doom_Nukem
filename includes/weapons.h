@@ -8,6 +8,7 @@
 
 # define RELOAD_TIME 2.5f // seconds
 # define RELOAD_SPEED 0.05f;
+# define HITMARKER_T 5
 
 enum	e_weapons
 {

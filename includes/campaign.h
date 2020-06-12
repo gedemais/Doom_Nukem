@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 19:48:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/12 18:46:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ struct			s_player
 	t_weapon	*current;
 	t_mesh		*body;
 	int			hp;
-	bool		hitmarker;
+	int			hitmarker;
+	bool		hover;
 };
 
 struct			s_camp_env

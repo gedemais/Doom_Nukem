@@ -17,7 +17,7 @@ static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 	ft_strcat(path, name);
 }
 
-static int	check_header(char *file, char *name, int *len)
+static int	check_header(char *file, char *name, int file_size, int *len)
 {
 	int		magic;
 
@@ -26,12 +26,12 @@ static int	check_header(char *file, char *name, int *len)
 	magic = *(int*)file;
 	if (magic != MAP_MAGIC_NUMBER)
 	{
-		free(file);
+		munmap(file, file_size);
 		return (-1);
 	}
 	if (ft_strncmp(&file[sizeof(int)], name, ft_strclen(name, '.')))
 	{
-		free(file);
+		munmap(file, file_size);
 		return (-1);
 	}
 	*len = 4 + ft_strclen(name, '.');
@@ -74,7 +74,7 @@ int			import_maped_map(t_edit_env *env, char *name)
 		return (-1);
 	}
 	close(fd);
-	if (check_header(file, name, &offset))
+	if (check_header(file, name, len, &offset))
 		return (-1);
 	env->new_map.flat = (unsigned char*)file;
 	env->map.spawn = *(t_vec3d*)&file[len - sizeof(t_vec3d)];

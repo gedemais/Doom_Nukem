@@ -1,8 +1,2 @@
-Hitboxs :
-Appliquer une variation aleatoire proportionelle au centre de l'ecran
-Checker a la frame suivante si le pixel en question fait partie d'un triangle de mob
-
-Objets interactifs :
-Jukebox
-
-Porte
+Save la position de spawn dans le map_editor
+empecher l'user de peter le sol

@@ -1,24 +1,16 @@
 #include "main.h"
 
-static void		replace_meshs(t_dynarray *mobs, int index, int delta)
+static void		replace_meshs(t_enemy *mob, int delta)
 {
-	t_enemy	*mob;
 	t_mesh	*m;
 	int		i;
-	int		j;
 
-	i = index;
-	while (i < mobs->nb_cells)
+	i = mob->map_start;
+	while (i < mob->map_end)
 	{
-		mob = dyacc(mobs, i);
-		j = mob->map_start;
-		while (j < mob->map_end - 1)
-		{
-			m = dyacc(&mob->map->meshs, j);
-			m->index -= delta;
-			assign_meshs(m);
-			j++;
-		}
+		m = dyacc(&mob->map->meshs, i);
+		m->index -= delta;
+		assign_meshs(m);
 		i++;
 	}
 }
@@ -42,7 +34,7 @@ static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 		m = dyacc(mobs, index);
 		m->map_start -= tmp;
 		m->map_end -= tmp;
-		replace_meshs(mobs, index, tmp);
+		replace_meshs(m, tmp);
 		index++;
 	}
 }

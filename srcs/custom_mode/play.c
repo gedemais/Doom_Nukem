@@ -37,33 +37,17 @@ static int		handle_keys(t_env *env, t_events *e)
 		move(env, e->keys);
 	return (0);
 }
-/*
-static void	print_mobs(t_env *env)
-{
-	t_enemy	*mob;
-	int		i;
-
-	i = 0;
-	while (i < env->mobs.nb_cells)
-	{
-		mob = dyacc(&env->mobs, i);
-		printf("Mob %d :| %d <-> %d\n", i, mob->map_start, mob->map_end);
-		i++;
-	}
-	printf("--------------------\n");
-}*/
 
 int			custom_play(t_env *env)
 {
-//	print_mobs(env);
 	clear_screen_buffers(env);
 	handle_keys(env, &env->events);
 	camera_aim(env);
 	env->mid.mesh = NULL;
 //	physic_engine(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
-	handle_weapons(env);
 	handle_enemies(env);
+	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;

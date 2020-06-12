@@ -52,6 +52,7 @@ enum	e_sprite_id
 	SP_ME_MENU_TITLE,
 	SP_ME_NM_TITLE,
 	SP_CUSTOM_BACKGROUND,
+	SP_HITMARKER,
 	SP_MAX
 };
 

@@ -2,9 +2,9 @@
 
 static void		enemies_damages(t_env *env)
 {
-	t_enemy	*mob;
-	int		index;
-	int		i;
+	t_enemy		*mob;
+	int			index;
+	int			i;
 
 	i = 0;
 	index = env->mid.mesh->index;
@@ -13,13 +13,16 @@ static void		enemies_damages(t_env *env)
 		mob = dyacc(&env->mobs, i);
 		if (index >= mob->map_start && index < mob->map_end)
 		{
-			mob->hp -= env->player.current->damages;
-			env->player.hitmarker = true;
+			env->player.hover = true;
+			if (env->player.current->shot)
+			{
+				mob->hp -= env->player.current->damages;
+				env->player.hitmarker = HITMARKER_T;
+			}
 			return ;
 		}
 		i++;
 	}
-	env->player.hitmarker = false;
 }
 
 static void		enemies_to_scene(t_dynarray *mobs)
@@ -51,19 +54,18 @@ static int		spawn_mob(t_env *env)
 	while (((t_node *)dyacc(&env->astar.d_nodes, i))->bobstacle == 1)
 		i = rand() % (env->astar.d_nodes.nb_cells - 1);
 	pos = ((t_node *)dyacc(&env->astar.d_nodes, i))->pos;
-
-	//pos = (t_vec3d){ 0, 2, 0, 0 };
-
 	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
 }
 
 int				handle_enemies(t_env *env)
 {
+	env->player.hover = false;
+	env->player.hitmarker--;
 	if (env->mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
 		return (-1);
 	if (env->mobs.nb_cells)
 	{
-		if (env->mid.mesh && env->player.current->shot)
+		if (env->mid.mesh)
 			enemies_damages(env);
 		enemies_movements(env, &env->astar);
 		enemies_death(&env->mobs);
