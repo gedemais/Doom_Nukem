@@ -48,6 +48,7 @@ struct	s_physics
 	t_vec3d			f;
 	t_vec3d			r;
 	t_vec3d			diff_camfloor;
+	unsigned int	squat;
 };
 
 void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);

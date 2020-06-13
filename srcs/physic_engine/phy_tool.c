@@ -173,12 +173,12 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 	printf("onfloor %d onwall %d\n", env->cam.stats.onfloor, env->cam.stats.onwall);
 	if (env->cam.stats.onwall == 0)
 	{
-		print_collide(*map->cam_floor);
 		printf("cam_floor\n");
 		f = phy_move_collide(env, map->cam_floor, env->cam.stats.dir);
 	}
 	else if (env->cam.stats.onwall == 1)
 	{
+		print_collide(*map->cam_wall);
 		printf("cam_wall\n");
 		f = phy_move_collide(env, map->cam_wall, env->cam.stats.dir);
 	}
@@ -205,9 +205,10 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
 //	print_collide(*c);
 //	printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
-	if (c->b->corp.pos.y - c->a->corp.pos.y > 2)
+	if (c->b->corp.pos.y - c->a->corp.pos.y > 0)
 	{
-		map->cam_floor = c;
+		if (map->cam_floor == NULL || map->cam_floor->a->corp.pos.y != c->a->corp.pos.y)
+			map->cam_floor = c;
 		env->cam.stats.onfloor = 1;
 		env->phy_env.diff_camfloor = vec_sub(env->cam.stats.pos, c->a->corp.pos);
 	}

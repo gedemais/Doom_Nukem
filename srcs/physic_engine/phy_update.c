@@ -121,11 +121,6 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 	{
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);
-		env->events.keys[KEY_E] = false;
-		env->events.keys[KEY_W] = false;
-		env->events.keys[KEY_S] = false;
-		env->events.keys[KEY_A] = false;
-		env->events.keys[KEY_D] = false;
 	}	
 }
 
@@ -174,7 +169,8 @@ void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	printf("diff_y = %f\n", env->phy_env.diff_camfloor.y);
-	if (env->phy_env.diff_camfloor.y < 4)
+	if (env->phy_env.diff_camfloor.y < 4 && env->cam.stats.onwall == 0
+			&& env->cam.stats.onfloor == 1)
 	{
 		diff_y = (t_vec3d){0, 4 - env->phy_env.diff_camfloor.y, 0, 0};
 		translate_mesh(map, cam, diff_y);
