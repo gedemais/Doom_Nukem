@@ -54,6 +54,9 @@ static int		spawn_mob(t_env *env)
 	while (((t_node *)dyacc(&env->astar.d_nodes, i))->bobstacle == 1)
 		i = rand() % (env->astar.d_nodes.nb_cells - 1);
 	pos = ((t_node *)dyacc(&env->astar.d_nodes, i))->pos;
+	pos.x = (int)pos.x % 2 ? pos.x + 1 : pos.x;
+	pos.y = (int)pos.y % 2 ? pos.y + 1 : pos.y;
+	pos.z = (int)pos.z % 2 ? pos.z + 1 : pos.z;
 	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
 }
 
