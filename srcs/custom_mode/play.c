@@ -57,6 +57,9 @@ int			custom_play(t_env *env)
 	clear_screen_buffers(env);
 	handle_enemies(env);
 	handle_keys(env, &env->events, &env->edit_env.map);
+	printf("yaw = %f\n",env->cam.stats.yaw);
+	printf("pitch = %f\n",env->cam.stats.pitch);
+	if (env->cam.stats.pitch > -90 && env->cam.stats.pitch < 90)
 	camera_aim(env);
 	env->mid.mesh = NULL;
 //	printf("type_move %s \n", env->phy_env.type_move ? "true" : "false");	

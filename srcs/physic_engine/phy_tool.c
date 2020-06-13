@@ -169,19 +169,10 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 	t_vec3d f;
 
 	f = (t_vec3d){2, 0, 2, 0};
-
-	printf("onfloor %d onwall %d\n", env->cam.stats.onfloor, env->cam.stats.onwall);
 	if (env->cam.stats.onwall == 0)
-	{
-		printf("cam_floor\n");
 		f = phy_move_collide(env, map->cam_floor, env->cam.stats.dir);
-	}
 	else if (env->cam.stats.onwall == 1)
-	{
-		print_collide(*map->cam_wall);
-		printf("cam_wall\n");
 		f = phy_move_collide(env, map->cam_wall, env->cam.stats.dir);
-	}
 	return (f);
 
 }

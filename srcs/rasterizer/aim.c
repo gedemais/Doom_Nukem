@@ -10,13 +10,15 @@ static int		left_quarters(t_env *env, int x, int y)
 	if (x <= hwdt && y < hhgt) // L Up
 	{
 		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio; // A caper
-		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
+		if (env->cam.stats.pitch + fabs((hhgt - y) * SENSI) <= 90)
+			env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
 		return (1);
 	}
 	else if (x < hwdt && y >= hhgt) // L Down
 	{
 		env->cam.stats.yaw -= fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
+		if (env->cam.stats.pitch - fabs((hhgt - y) * SENSI) >= -90)
+			env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
 		return (1);
 	}
 	return (0);
@@ -29,16 +31,19 @@ static int		right_quarters(t_env *env, int x, int y)
 
 	hwdt = env->data.half_wdt;
 	hhgt = env->data.half_hgt;
+
 	if (x >= hwdt && y < hhgt) // R Up
 	{
 		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
+		if (env->cam.stats.pitch + fabs((hhgt - y) * SENSI) <= 90)
+			env->cam.stats.pitch += fabs((hhgt - y) * SENSI);
 		return (1);
 	}
 	else if (x > hwdt && y >= hhgt) // R Down
 	{
 		env->cam.stats.yaw += fabs((hwdt - x) * SENSI) * env->cam.stats.aspect_ratio;
-		env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
+		if (env->cam.stats.pitch - fabs((hhgt - y) * SENSI) >= -90)
+			env->cam.stats.pitch -= fabs((hhgt - y) * SENSI);
 		return (1);
 	}
 	return (0);

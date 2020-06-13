@@ -52,14 +52,6 @@ int		physic_engine(t_env *env, t_map *maps)
 //	print_collide(maps->cam_floor);
 	stop_position_cam(env, maps, cam);
 	actual_wall_collide(env, maps, cam);
-	// if collide 
-	// update_plan_cam(env)
-	// equivalent de f = set_y_r
-	// ---------A SECURISER AVEC COLLIDE ET BOOL DE PHY----
-	//
-//	if (e->keys[KEY_P])
-//		pause_position(env);
-//	stop_speed(env);
 	clear_dynarray(&env->phy_env.collides);
 	return (0);
 }

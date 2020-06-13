@@ -23,7 +23,7 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 	}
 	if (keys[KEY_D])
 	{
-		if (!keys[KEY_W] && !keys[KEY_S] && keys[KEY_E])
+		if (!keys[KEY_W] && !keys[KEY_S] && !keys[KEY_E])
 			f = zero_vector();
 		f = vec_add(f, vec_fmult(r, -3.0f));
 	}
