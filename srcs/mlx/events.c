@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:24:28 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 18:29:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 17:03:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		key_press(int key, void *param)
 
 	env = ((t_env*)param);
 	if (key == KEY_ESCAPE)
-		exit_doom(env);
+		exit_doom(env, NULL, 0, EXIT_SUCCESS);
 	env->events.keys[key] = true;
 	return (key_press_fts[env->context](key, param));
 }

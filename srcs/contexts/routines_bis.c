@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:53:57 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 16:31:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 17:25:13 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,4 @@ void	custom_to_ts(t_env *env)
 void	map_editor_to_ts(t_env *env)
 {
 	(void)env;
-	// Disable les saisies de texte du menu new_map
-	env->ttfs.fields[0].rendered = false;
-	env->ttfs.fields[1].rendered = false;
-	env->ttfs.fields[2].rendered = false;
-	env->ttfs.fields[3].rendered = false;
 }

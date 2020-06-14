@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/06 18:01:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 17:59:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ static int	load_map_data(t_map *map)
 			if (push_dynarray(&m->tris, &new, false))
 				return (-1);
 		}
+		free_dynarray(&m->faces);
 		//printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
 	}
 	return (0);
@@ -186,9 +187,10 @@ int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 	}
 	if (load_map_data(map)
 		|| !(map->stats = (bool*)malloc(sizeof(bool) * map->nmesh))
-		|| !(map->stats_cpy = (bool*)malloc(sizeof(bool) * map->nmesh))
-		|| !(map->colls = (bool*)malloc(sizeof(bool) * map->nmesh)))
+		|| !(map->stats_cpy = (bool*)malloc(sizeof(bool) * map->nmesh)))
 		return (-1);
+	free_dynarray(&map->pool);
+	free_dynarray(&map->txt_pool);
 	ft_free_ctab(parser.lines);
 	munmap(parser.file, ft_strlen(parser.file));
 	return (0);

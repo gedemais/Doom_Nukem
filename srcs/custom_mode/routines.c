@@ -12,6 +12,8 @@ int				custom_menu_to_play(t_env *env)
 int				custom_play_to_menu(t_env *env)
 {
 	free_dynarray(&env->mobs);
+	free_dynarray(&env->astar.d_nodes);
+	free_dynarray(&env->astar.d_astar);
 	// free new_map
 	return (0);
 }

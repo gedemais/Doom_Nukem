@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/05 18:24:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 16:56:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int		render(void *param)
 	}
 
 	if (env->events.keys[KEY_ESCAPE])
-		exit(EXIT_SUCCESS);
+		exit_doom(env, NULL, 0, EXIT_SUCCESS);
 	return (render_fts[((t_env*)param)->context](param));
 }

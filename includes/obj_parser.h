@@ -106,7 +106,6 @@ struct	s_triangle
 struct	s_mesh
 {
 	t_dynarray	tris;
-	t_dynarray	txts;
 	t_dynarray	deps;
 	t_dynarray	faces;
 	t_corp		corp;
@@ -130,7 +129,6 @@ struct	s_map
 	t_mesh			cam;
 	t_vec3d			spawn;
 	t_vec2d			cam_dir;
-	bool			*colls;
 	bool			*stats;
 	bool			*stats_cpy;
 	int				cmtl;

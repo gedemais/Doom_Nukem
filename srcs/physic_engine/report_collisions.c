@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:44:26 by bebosson          #+#    #+#             */
-/*   Updated: 2020/05/22 14:45:48 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/06/14 18:01:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int			report_cam_collisions(t_env *env)
 					return (-1);
 		}
 		i++;
-		env->maps[env->scene].colls[i] = true;
 	}
 	return (0);
 }
@@ -144,7 +143,6 @@ int			report_collisions(t_env *env)
 				if (push_dynarray(&env->phy_env.collides, &c, false))
 					return (-1);
 			}
-		env->maps[env->scene].colls[i] = true;
 		i++;
 	}
 	report_cam_collisions(env);

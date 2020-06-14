@@ -141,7 +141,7 @@ static int			field_content(t_env *env, t_text_box *box)
 	return (0);
 }
 
-int					input_fields(t_env *env, bool refresh)
+int					input_fields(t_env *env, bool refresh, bool free)
 {
 	static t_dynarray	boxs;
 	t_text_box			*current;
@@ -151,6 +151,11 @@ int					input_fields(t_env *env, bool refresh)
 	i = 0;
 	if ((refresh || first) && get_boxs(&env->ttfs, &boxs))
 		return (-1);
+	if (free && !first)
+	{
+		free_dynarray(&boxs);
+		return (0);
+	}
 	while (i < boxs.nb_cells)
 	{
 		render_field(env, dyacc(&boxs, i));

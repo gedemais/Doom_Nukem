@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 19:01:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 16:57:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ struct			s_env
 
 void			print_camera_stats(t_cam *cam, char *title);
 
-int				exit_doom(t_env *env);
+int				exit_doom(t_env *env, char *msg, int fd, int code);
 int				setup(t_env *env);
 int				free_env(t_env *env);
 

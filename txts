@@ -1,0 +1,163 @@
+srcs/rasterizer/triangle_pipeline.c:124:	m->corp.norm = normal;
+srcs/rasterizer/rasterizer.c:78:		if (m->type == BTXT_NONE)
+srcs/rasterizer/rasterizer.c:81:		while (++j < m->tris.nb_cells)
+srcs/rasterizer/rasterizer.c:82:			triangle_pipeline(env, dyacc(&m->tris, j), &env->cam.to_clip, m);
+srcs/rasterizer/matrices.c:5:	cam->p_m[0][0] = cam->stats.aspect_ratio * cam->stats.fovr;
+srcs/rasterizer/matrices.c:6:	cam->p_m[1][1] = cam->stats.fovr;
+srcs/rasterizer/matrices.c:7:	cam->p_m[2][2] = cam->stats.ffar / cam->stats.fdelta;
+srcs/rasterizer/matrices.c:8:	cam->p_m[3][2] = (-cam->stats.ffar * cam->stats.fnear) / cam->stats.fdelta;
+srcs/rasterizer/matrices.c:9:	cam->p_m[2][3] = 1.0f;
+srcs/rasterizer/matrices.c:10:	cam->p_m[3][3] = 0.0f;
+srcs/rasterizer/matrices.c:20:		ft_memset(&cam->p_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:21:		ft_memset(&cam->rx_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:22:		ft_memset(&cam->ry_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:23:		ft_memset(&cam->rz_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:24:		ft_memset(&cam->crx_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:25:		ft_memset(&cam->cry_m[i][0], 0, sizeof(float) * 4);
+srcs/rasterizer/matrices.c:31:		cam->p_m[i][i] = 1.0f;
+srcs/rasterizer/matrices.c:32:		cam->rx_m[i][i] = 1.0f;
+srcs/rasterizer/matrices.c:33:		cam->ry_m[i][i] = 1.0f;
+srcs/rasterizer/matrices.c:34:		cam->rz_m[i][i] = 1.0f;
+srcs/rasterizer/matrices.c:35:		cam->crx_m[i][i] = 1.0f;
+srcs/rasterizer/matrices.c:36:		cam->cry_m[i][i] = 1.0f;
+srcs/rasterizer/camera.c:11:		cam->stats.pos = map->spawn;
+srcs/rasterizer/camera.c:12:		cam->stats.pos = vec_add(map->spawn, (t_vec3d){0, map->cam.corp.dims.y, 0, 0});
+srcs/rasterizer/camera.c:15:		cam->stats.yaw = map->cam_dir.u;
+srcs/rasterizer/camera.c:16:		cam->stats.pitch = map->cam_dir.v;
+srcs/rasterizer/camera.c:20:		cam->stats.pos = respawn ? map->spawn : map->cam.corp.pos;
+srcs/rasterizer/camera.c:23:		cam->stats.yaw = respawn ? map->cam.yaw : cam->stats.yaw;
+srcs/rasterizer/camera.c:24:		cam->stats.pitch = respawn ? map->cam.pitch : cam->stats.pitch;
+srcs/rasterizer/camera.c:52:		printf("scene %d : mesh 0 : %d triangles\n", i, m->tris.nb_cells);
+srcs/rasterizer/camera.c:66:		cam->yaw = env->maps[i].cam_dir.u;
+srcs/rasterizer/camera.c:67:		cam->pitch = env->maps[i].cam_dir.v;
+srcs/rasterizer/camera.c:68:		cam->corp.pos = env->maps[i].spawn;
+srcs/rasterizer/camera.c:69:		cam->corp.o = vec_sub(cam->corp.pos, vec_fdiv(cam->corp.dims, 2.0f));
+srcs/rasterizer/camera.c:70:		cam->corp.dims = (t_vec3d){2, 3.0f, 2, 1.0f};
+srcs/rasterizer/camera.c:78:	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
+srcs/rasterizer/camera.c:79:	cam->stats.fnear = 0.01f;
+srcs/rasterizer/camera.c:80:	cam->stats.ffar = 1000.0f;
+srcs/rasterizer/camera.c:81:	cam->stats.fovd = 70.0f;
+srcs/rasterizer/camera.c:82:	cam->stats.fovr = (float)(1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f));
+srcs/rasterizer/camera.c:83:	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
+srcs/rasterizer/camera.c:84:	cam->stats.pos = (t_vec3d){0, 0, 0, 0};
+srcs/rasterizer/camera.c:85:	cam->stats.dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
+srcs/rasterizer/camera.c:86:	cam->stats.pitch = 0;
+srcs/rasterizer/camera.c:87:	cam->stats.yaw = 0;
+srcs/rasterizer/camera.c:88:	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
+srcs/rasterizer/camera.c:89:	cam->light = vec_normalize(cam->light);
+srcs/rasterizer/camera.c:91:	if (init_cameras_meshs(env) || allocate_clipping_arrays(cam->clip_arrs)
+srcs/rasterizer/camera.c:92:		|| init_dynarray(&cam->to_clip, sizeof(t_triangle), MIN_TO_RASTER)
+srcs/rasterizer/camera.c:93:		|| init_dynarray(&cam->to_raster, sizeof(t_triangle), MIN_TO_RASTER)
+srcs/rasterizer/camera.c:94:		|| !(cam->z_buffer = (float*)malloc(sizeof(float) * (HGT * WDT))))
+srcs/map_editor/block.c:33:	if (m->type == BTXT_OBSIDIENNE)
+srcs/map_editor/block.c:35:		m->type = BTXT_NONE;
+srcs/obj_parser/mapper_fts.c:13:	while (i < m->tris.nb_cells)
+srcs/obj_parser/mapper_fts.c:15:		t = dyacc(&m->tris, i);
+srcs/obj_parser/mapper_fts.c:22:		while (i < m->tris.nb_cells)
+srcs/obj_parser/mapper_fts.c:24:			t = dyacc(&m->tris, i);
+srcs/obj_parser/mapper_fts.c:45:	while (i < m->tris.nb_cells)
+srcs/obj_parser/mapper_fts.c:47:		t = dyacc(&m->tris, i);
+srcs/obj_parser/mapper_fts.c:89:	m->corp.v = speed;
+srcs/obj_parser/mapper_fts.c:102:		map->stats[m->index] = false;
+srcs/obj_parser/mapper_fts.c:104:		map->stats[m->index] = true;
+srcs/obj_parser/mapper_fts.c:110:	map->stats_cpy[m->index]= map->stats[m->index];
+srcs/obj_parser/mapper_fts.c:137:	if (push_dynarray(&master->deps, &m->index, false))
+srcs/obj_parser/parse_map.c:114:			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells)))
+srcs/obj_parser/parse_map.c:116:		m->type = 1;
+srcs/obj_parser/parse_map.c:117:		while (++j < m->faces.nb_cells)
+srcs/obj_parser/parse_map.c:119:			if (!(f = dyacc(&m->faces, j)) || (f->x - 1 >= map->pool.nb_cells
+srcs/obj_parser/parse_map.c:126:			if (push_dynarray(&m->tris, &new, false))
+srcs/obj_parser/parse_map.c:129:		free_dynarray(&m->faces);
+srcs/obj_parser/parse_map.c:130:		//printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
+srcs/obj_parser/mtl_lines_fts.c:38:	ft_memset(&cm->color, 0, sizeof(int));
+srcs/obj_parser/mtl_lines_fts.c:46:		cm->color[i - 1] = (t * 255);
+srcs/obj_parser/mtl_lines_fts.c:49:	swap_bytes(&cm->color[0], &cm->color[2]);
+srcs/obj_parser/mtl_lines_fts.c:59:	if ((cm->alpha = ft_atof(toks[1])) < 0.0 || cm->alpha > 1.0f)
+srcs/obj_parser/mtl_lines_fts.c:70:	cm->textured = true;
+srcs/obj_parser/dependencies.c:9:	while (i < m->deps.nb_cells)
+srcs/obj_parser/dependencies.c:11:		dep = *(int*)dyacc(&m->deps, i);
+srcs/obj_parser/dependencies.c:30:			ft_putendl_fd(m->name, 2);
+srcs/obj_parser/load_maps.c:27:			printf("%s : %d triangles\n", m->name, m->tris.nb_cells);
+srcs/obj_parser/lines_fts.c:13:		|| !(m->name = ft_strdup(toks[1]))
+srcs/obj_parser/lines_fts.c:14:		|| init_dynarray(&m->txts, sizeof(t_vec2d), 0)
+srcs/obj_parser/lines_fts.c:15:		|| init_dynarray(&m->faces, sizeof(t_face), 0))
+srcs/obj_parser/lines_fts.c:17:	m->index = map->nmesh;
+srcs/obj_parser/lines_fts.c:46:	m->textured = true;
+srcs/obj_parser/lines_fts.c:74:		|| push_dynarray(&m->faces, &face, false))
+srcs/obj_parser/lines_fts.c:118:		if ((m = dyacc(&map->mtls, i)) && !ft_strcmp(toks[1], m->name))
+srcs/obj_parser/mapper.c:86:		if (!ft_strcmp(m->name, line[0]))
+srcs/physic_engine/color_collides.c:34:		for (int j = 0; j < m->a->tris.nb_cells; j++)
+srcs/physic_engine/color_collides.c:36:			t = dyacc(&m->a->tris, j);
+srcs/physic_engine/color_collides.c:39:		for (int j = 0; j < m->b->tris.nb_cells; j++)
+srcs/physic_engine/color_collides.c:41:			t = dyacc(&m->b->tris, j);
+srcs/physic_engine/color_collides.c:66:		for (int j = 0; j < m->a->tris.nb_cells; j++)
+srcs/physic_engine/color_collides.c:68:			t = dyacc(&m->a->tris, j);
+srcs/physic_engine/color_collides.c:71:		for (int j = 0; j < m->b->tris.nb_cells; j++)
+srcs/physic_engine/color_collides.c:73:			t = dyacc(&m->b->tris, j);
+srcs/physic_engine/init_engine.c:23:	while (i < m->tris.nb_cells)
+srcs/physic_engine/init_engine.c:25:		if (!(t = dyacc(&m->tris, i)))
+srcs/physic_engine/init_engine.c:32:	m->corp.pos = vec_fdiv(average, (float)i);
+srcs/physic_engine/init_engine.c:33:	m->corp.pos = vec_fdiv(m->corp.pos, 3.0f);
+srcs/physic_engine/phy_update.c:26:			if (nonzero_vector(m->corp.v))
+srcs/physic_engine/phy_update.c:27:				vec3d_swap(&m->corp.v, &m->corp.v_cpy); // cancel v and save in vec_cpy
+srcs/physic_engine/phy_update.c:30:				vec3d_swap(&m->corp.v_cpy, &m->corp.v); // swap in v and cancel the vec_cpy
+srcs/physic_engine/phy_update.c:31:				m->corp.v_cpy = zero_vector();
+srcs/physic_engine/phy_update.c:129:			translate_mesh(&env->maps[env->scene], m, m->corp.v);
+srcs/physic_engine/phy_update.c:144:		env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
+srcs/physic_engine/phy_update.c:145:		cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+srcs/physic_engine/report_collisions.c:95:	return (aabb_collision(a->corp.o, cam->corp.o, a->corp.dims, cam->corp.dims));
+srcs/physic_engine/init_bounding_boxs.c:44:	while (i < m->tris.nb_cells)
+srcs/physic_engine/init_bounding_boxs.c:47:		if (!(t = dyacc(&m->tris, i)))
+srcs/physic_engine/init_bounding_boxs.c:51:			cmp_xyz(m->corp.pos, t->points[j], &min, &max);
+srcs/physic_engine/init_bounding_boxs.c:56:	m->corp.dims = vec_sub(max, min);
+srcs/physic_engine/init_bounding_boxs.c:64:	m->corp.o = vec_sub(m->corp.pos, vec_fdiv(m->corp.dims, 2.0f));
+srcs/physic_engine/bounce.c:26:		v = m->corp.v;
+srcs/physic_engine/bounce.c:43:		printf("name = %s\n", m->name);
+srcs/physic_engine/bounce.c:44:		printf("------v%f %f %f-------\n",m->corp.v.x, m->corp.v.y, m->corp.v.z);
+srcs/physic_engine/bounce.c:45:		printf("------vo %f %f %f-------\n",m->corp.vo.x, m->corp.vo.y, m->corp.vo.z);
+srcs/physic_engine/bounce.c:46:		printf("------pos %f %f %f-------\n",m->corp.pos.x, m->corp.pos.y, m->corp.pos.z);
+srcs/physic_engine/bounce.c:77:	//	printf("m.x = %f m.y = %f m.z = %f\n",m->corp.pos.x, m->corp.pos.y, m->corp.pos.z);
+srcs/physic_engine/bounce.c:93:	pos = &m->corp.pos;
+srcs/physic_engine/bounce.c:109:	if (m->corp.pos.y > 0)
+srcs/physic_engine/bounce.c:124:	if (c->dot > 0 && m->corp.norm.y == 1.0f)
+srcs/physic_engine/move_mesh.c:22:	while (i < m->tris.nb_cells)
+srcs/physic_engine/move_mesh.c:24:		tri = dyacc(&m->tris, i);
+srcs/physic_engine/move_mesh.c:31:	while (map && i < m->deps.nb_cells)
+srcs/physic_engine/move_mesh.c:33:		d = dyacc(&map->meshs, *(int*)dyacc(&m->deps, i));
+srcs/physic_engine/move_mesh.c:37:	m->corp.pos = vec_add(m->corp.pos, t);
+srcs/physic_engine/move_mesh.c:38:	m->corp.o = vec_add(m->corp.o, t);
+srcs/physic_engine/move_mesh.c:47:	while (i < m->tris.nb_cells)
+srcs/physic_engine/move_mesh.c:49:		tri = dyacc(&m->tris, i);
+srcs/physic_engine/move_mesh.c:55:	if (i == m->tris.nb_cells)
+srcs/physic_engine/move_mesh.c:67:	diff = vec_sub(m->corp.pos, p);
+srcs/physic_engine/move_mesh.c:68:	while (i < m->tris.nb_cells)
+srcs/physic_engine/move_mesh.c:70:		tri = dyacc(&m->tris, i);
+srcs/physic_engine/move_mesh.c:76:	m->corp.pos = p;
+srcs/physic_engine/move_mesh.c:77:	m->corp.o = vec_add(m->corp.o, diff);
+srcs/physic_engine/phy_gravity.c:21:	m->corp.v = vec_sub(m->corp.v, gravitax);
+srcs/physic_engine/phy_gravity.c:30:			m->corp.v = zero_vector();
+srcs/physic_engine/phy_gravity.c:43:		m->corp.v = vec_sub(m->corp.v, gravitax);
+srcs/dev_handle_events.c:62:	printf("nb_triangle %d \n",m->tris.nb_cells);
+srcs/dev_handle_events.c:63:	while (++i < m->tris.nb_cells)
+srcs/dev_handle_events.c:66:		print_vect_face(dyacc(&m->tris, i), cam_stat);	
+srcs/dev_handle_events.c:85:	tri = dyacc(&m->tris, 0);
+srcs/dev_handle_events.c:190:	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+srcs/dev_handle_events.c:191:	cam->corp.v = f;
+srcs/dev_handle_events.c:234:	print_vec(cam->corp.dims);
+srcs/free.c:42:	if (cam->clip_arrs[0].byte_size)
+srcs/free.c:46:			free_dynarray(&cam->clip_arrs[i]);
+srcs/free.c:48:	if (cam->to_clip.byte_size)
+srcs/free.c:49:		free_dynarray(&cam->to_clip);
+srcs/free.c:50:	if (cam->to_raster.byte_size)
+srcs/free.c:51:		free_dynarray(&cam->to_raster);
+srcs/free.c:52:	if (cam->z_buffer)
+srcs/free.c:53:		free(cam->z_buffer);
+srcs/title_screen/render.c:76:	anim--;
+srcs/enemies/create_mob.c:54:	while (i < m->tris.nb_cells)
+srcs/enemies/create_mob.c:56:		ft_memcpy(&t, dyacc(&m->tris, i), sizeof(t_triangle));
+srcs/enemies/tools.c:48:	while (i < m->tris.nb_cells)
+srcs/enemies/tools.c:50:		t = dyacc(&m->tris, i);
+srcs/enemies/enemies_death.c:12:		m->index -= delta;
+srcs/enemies/enemies_death.c:35:		m->map_start -= tmp;
+srcs/enemies/enemies_death.c:36:		m->map_end -= tmp;
+srcs/enemies/enemies.c:43:			translate_mesh(mob->map, m, vec_sub(mob->pos, m->corp.pos));

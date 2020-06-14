@@ -69,7 +69,7 @@ int			maped_new_map(t_env *env)
 	background(env);
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_NM_TITLE],
 		(t_point){420, 60});
-	input_fields(env, false);
+	input_fields(env, false, false);
 	handle_events(env);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_CREATE]);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_MAPED]);

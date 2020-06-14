@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:18 by bebosson          #+#    #+#             */
-/*   Updated: 2020/06/05 17:32:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 18:00:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		physic_engine(t_env *env)
 	t_events	*e;
 
 	e = &env->events;
-	ft_memset(env->maps[env->scene].colls, 0, env->maps[env->scene].nmesh);
 //	dev_handle_events(env);
 	report_collisions(env);
 	color_collides(env);

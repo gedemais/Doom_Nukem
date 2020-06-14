@@ -59,7 +59,7 @@ char			*fonts_paths(unsigned int index);
 int				load_fonts(t_env *env);
 void			my_string_put(t_env *env, char *img, t_point o, int font);
 void			textual_hint(t_env *env, char button, char *action);
-int				input_fields(t_env *env, bool refresh);
+int				input_fields(t_env *env, bool refresh, bool free);
 t_ttf_config	*ttf_config();
 
 #endif
