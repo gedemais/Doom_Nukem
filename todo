@@ -1,6 +1,10 @@
 Save la position de spawn dans le map_editor
 empecher l'user de peter le sol
 
+jukebox
+portes
+boite mystere
+
 Decider de la duree de vie des pointeurs alloues :
 - local
 - frame

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 22:10:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:21:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ struct			s_env
 	int				context;
 	int				scene;
 };
+
+void	free_mesh(t_mesh *m);
 
 void	print_mem_usage(void);
 

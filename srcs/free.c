@@ -6,11 +6,21 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 20:55:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:20:24 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void		free_mesh(t_mesh *m)
+{
+	if (m->name)
+		free(m->name);
+	if (m->tris.byte_size)
+		free_dynarray(&m->tris);
+	if (m->deps.byte_size)
+		free_dynarray(&m->deps);
+}
 
 static void	free_map_childrens(t_map *map)
 {
@@ -22,12 +32,7 @@ static void	free_map_childrens(t_map *map)
 	while (i < map->meshs.nb_cells)
 	{
 		m = dyacc(&map->meshs, i);
-		if (m->name)
-			free(m->name);
-		if (m->tris.byte_size)
-			free_dynarray(&m->tris);
-		if (m->deps.byte_size)
-			free_dynarray(&m->deps);
+		free_mesh(m);
 		i++;
 	}
 	i = 0;

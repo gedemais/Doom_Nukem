@@ -20,10 +20,13 @@ static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 	int		i;
 	int		tmp;
 	t_enemy	*m;
+	t_mesh	*mesh;
 
 	i = mob->map_start - 1;
 	while (++i < mob->map_end)
 	{
+		mesh = dyacc(&mob->map->meshs, mob->map_start);
+		free_mesh(mesh);
 		extract_dynarray(&mob->map->meshs, mob->map_start);
 		--mob->map->nmesh;
 	}
@@ -71,9 +74,6 @@ void			enemies_death(t_dynarray *mobs)
 		mob = dyacc(mobs, i);
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
-			{
 				enemies_delete_mob(mobs, mob, i);
-				//extract_dynarray(mobs, i);
-			}
 	}
 }
