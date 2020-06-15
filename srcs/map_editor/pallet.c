@@ -11,7 +11,6 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	p[BTXT_ICE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_GOLD - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_IRON - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_LIBRARY - 1] = (t_cube_pallet){.cube = 1, .slope = 0, .obj = 0};
 	p[BTXT_LIGHT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_OBSIDIENNE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_SAND - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
@@ -25,6 +24,10 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	p[BTXT_WOOD_D - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_WOOD_D_CUT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
 	p[BTXT_JUKEBOX - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
+	p[BTXT_MYSTERY_BOX - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
+	p[BTXT_DOOR - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
+	p[BTXT_LAVA - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
+	p[BTXT_SPAWNER - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
@@ -88,15 +91,6 @@ int			render_pallets(t_env *env)
 
 int			init_cubes_pallet(t_env *env, t_edit_env *edit_env)
 {
-	static char		*paths[BTXT_MAX] = {"brick_ico.xpm", "dark_brick_ico.xpm",
-					"clean_stone_ico.xpm", "dirt_ico.xpm", "dirt_grass_ico.xpm",
-					"dirt_snow_ico.xpm", "glace_ico.xpm", "gold_ico.xpm",
-					"iron_ico.xpm", "library_ico.xpm", "light_ico.xpm",
-					"obsidienne_ico.xpm", "sand_ico.xpm", "stone_ico.xpm",
-					"wood_a_ico.xpm", "wood_a_cut_ico.xpm",
-					"wood_b_ico.xpm", "wood_b_cut_ico.xpm",
-					"wood_c_ico.xpm", "wood_c_cut_ico.xpm",
-					"wood_d_ico.xpm", "wood_d_cut_ico.xpm", "jukebox_ico.xpm"};
 	char			path[256];
 	unsigned int	i;
 
@@ -104,10 +98,10 @@ int			init_cubes_pallet(t_env *env, t_edit_env *edit_env)
 	set_renderable(edit_env->pallet);
 	while (i < BTXT_MAX - 1)
 	{
-		ft_bzero(path, 256);
 		ft_strcpy(path, MAPED_ICONE_PATH);
-		ft_strcat(path, paths[i]);
-		if (load_texture(&env->mlx, path, &edit_env->pallet[i].sprite, false))
+		ft_strcat(path, icones_paths(i));
+		if (load_texture(&env->mlx, path,
+				&edit_env->pallet[i].sprite, false))
 			return (-1);
 		i++;
 	}

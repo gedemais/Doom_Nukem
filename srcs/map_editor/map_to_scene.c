@@ -45,14 +45,12 @@ int		get_block_type(t_env *env, t_mesh *new, unsigned char type)
 	if (ft_inbounds(type, 0, 160))
 		ret = (int)type % 32;
 	else
-		ret = 0;
+		ret = type - 160 + BTXT_JUKEBOX - 1;
 	if (env->context == C_CUSTOM)
 		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
 			ret = BTXT_NONE;
 	return (ret);
 }
-
-
 
 void	attribute_mesh(t_map *scene, int index)
 {

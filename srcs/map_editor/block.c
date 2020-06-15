@@ -109,7 +109,7 @@ int			put_block(t_env *env)
 
 	free_dynarray(&new->tris);
 
-	if (bc == BC_CUBE)
+	if(bc == BC_CUBE || bc == BC_OBJ)
 		create_cube(env, new, new->type);
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
 		create_slope(env, new, new->type);

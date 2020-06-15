@@ -102,8 +102,7 @@ int			maped_creative(t_env *env)
 	clear_screen_buffers(env);
 	camera_aim(env);
 	env->mid.mesh = NULL;
-	if (rasterizer(env, &env->edit_env.map, false))
-		exit(EXIT_FAILURE);
+	assert(!rasterizer(env, &env->edit_env.map, false));
 	refresh_last_gui(&env->events, &last_gui_use);
 	if (last_gui_use > 0)
 	{

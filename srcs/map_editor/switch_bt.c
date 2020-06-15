@@ -11,7 +11,7 @@ static int		*bt_arrays(int index)
 	{
 		while (++i < NB_CUBES_ICONES)
 			arrays[0][i] = i;
-		while (++i < 128 + NB_SLOPES_ICONES)
+		while (++i < 128 + NB_CUBES_ICONES)
 			arrays[1][i] = i;
 	}
 	first = false;
@@ -43,35 +43,43 @@ static void		switch_slope_type(unsigned char bc, unsigned char *bt, t_events *e)
 	if (bc == BC_SLOPE_NORD)
 	{
 		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 32 + NB_SLOPES_ICONES - 1) ? 32 : bt_slope + 1;
+			bt_slope = (bt_slope >= 32 + NB_CUBES_ICONES - 1) ? 32 : bt_slope + 1;
 		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 32) ? 32 + NB_SLOPES_ICONES - 1 : bt_slope - 1;
+			bt_slope = (bt_slope < 32) ? 32 + NB_CUBES_ICONES - 1 : bt_slope - 1;
 	}
 	else if (bc == BC_SLOPE_SUD)
 	{
 		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 64 + NB_SLOPES_ICONES - 1) ? 64 : bt_slope + 1;
+			bt_slope = (bt_slope >= 64 + NB_CUBES_ICONES - 1) ? 64 : bt_slope + 1;
 		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 64) ? 64 + NB_SLOPES_ICONES - 1 : bt_slope - 1;
+			bt_slope = (bt_slope < 64) ? 64 + NB_CUBES_ICONES - 1 : bt_slope - 1;
 	}
 	else if (bc == BC_SLOPE_OUEST)
 	{
 		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 96 + NB_SLOPES_ICONES - 1) ? 96 : bt_slope + 1;
+			bt_slope = (bt_slope >= 96 + NB_CUBES_ICONES - 1) ? 96 : bt_slope + 1;
 		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 96) ? 96 + NB_SLOPES_ICONES - 1 : bt_slope - 1;
+			bt_slope = (bt_slope < 96) ? 96 + NB_CUBES_ICONES - 1 : bt_slope - 1;
 	}
 	else if (bc == BC_SLOPE_EST)
 	{
 		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 128 + NB_SLOPES_ICONES - 1) ? 128 : bt_slope + 1;
+			bt_slope = (bt_slope >= 128 + NB_CUBES_ICONES - 1) ? 128 : bt_slope + 1;
 		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 128) ? 128 + NB_SLOPES_ICONES - 1 : bt_slope - 1;
+			bt_slope = (bt_slope < 128) ? 128 + NB_CUBES_ICONES - 1 : bt_slope - 1;
 	}
 	else
 		return ;
 	*bt = (unsigned char)ptr[bt_slope];
 	last_bc = bc;
+}
+
+static void		switch_obj_type(unsigned char *bt, t_events *e)
+{
+	if (e->buttons[BUTTON_SCROLL_UP])
+		*bt = (*bt >= 164) ? 160 : *bt + 1;
+	else if (e->buttons[BUTTON_SCROLL_DOWN])
+		*bt = (*bt <= 160) ? 164 : *bt - 1;
 }
 
 void			switch_block_type(t_env *env, t_events *e)
@@ -85,4 +93,6 @@ void			switch_block_type(t_env *env, t_events *e)
 		switch_cube_type(bt, e);
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
 		switch_slope_type(bc, bt, e);
+	else if (bc == BC_OBJ)
+		switch_obj_type(bt, e);
 }

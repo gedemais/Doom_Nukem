@@ -25,8 +25,10 @@ void		render_pallet(t_env *env, t_cube_pallet *p, t_point o, char bc)
 	index = env->edit_env.current_bt % 32;
 	while (i < BTXT_MAX - 1)
 	{
+		(void)bc;
 		if ((bc == BC_CUBE && p[i].cube)
-			|| (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST) && p[i].slope))
+			|| (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST) && p[i].slope)
+			|| (bc == BC_OBJ && p[i].obj))
 		{
 			blit_sprite(env->mlx.img_data, p[i].sprite, pos, 2.0f);
 			pos.x += 34;

@@ -80,7 +80,6 @@ enum	e_blocs_textures_ids
 	BTXT_ICE,
 	BTXT_GOLD,
 	BTXT_IRON,
-	BTXT_LIBRARY,
 	BTXT_LIGHT,
 	BTXT_OBSIDIENNE,
 	BTXT_SAND,
@@ -94,6 +93,10 @@ enum	e_blocs_textures_ids
 	BTXT_WOOD_D,
 	BTXT_WOOD_D_CUT,
 	BTXT_JUKEBOX,
+	BTXT_MYSTERY_BOX,
+	BTXT_DOOR,
+	BTXT_LAVA,
+	BTXT_SPAWNER,
 	BTXT_MAX
 };
 
@@ -158,6 +161,7 @@ struct				s_edit_env
 
 int					setup_medit(t_env *env);
 char				*blocs_txt_paths(unsigned int index);
+char				*icones_paths(unsigned int index);
 
 int					key_press_maped(int key, void *param);
 int					key_release_maped(int key, void *param);

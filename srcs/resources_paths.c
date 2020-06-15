@@ -82,7 +82,6 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/glace.xpm",
 		"resources/textures/blocs/gold.xpm",
 		"resources/textures/blocs/iron.xpm",
-		"resources/textures/blocs/library.xpm",
 		"resources/textures/blocs/light.xpm",
 		"resources/textures/blocs/obsidienne.xpm",
 		"resources/textures/blocs/sand.xpm",
@@ -95,7 +94,11 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/wood_c_cut.xpm",
 		"resources/textures/blocs/wood_d.xpm",
 		"resources/textures/blocs/wood_d_cut.xpm",
-		"resources/textures/blocs/jukebox.xpm"};
+		"resources/textures/blocs/jukebox.xpm",
+		"resources/textures/blocs/mystery_box.xpm",
+		"resources/textures/blocs/door.xpm",
+		"resources/textures/blocs/lava.xpm",
+		"resources/textures/blocs/spawner.xpm"};
 
 	return (paths[index]);
 }
@@ -127,6 +130,35 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/weapons/ump45-reload.wav",
 					"resources/samples/weapons/ump45-shot.wav"};
 
+	return (paths[index]);
+}
+
+char	*icones_paths(unsigned int index)
+{
+	static char		*paths[BTXT_MAX] = {"brick_ico.xpm", "dark_brick_ico.xpm",
+										"clean_stone_ico.xpm", "dirt_ico.xpm",
+										"dirt_grass_ico.xpm",
+										"dirt_snow_ico.xpm",
+										"glace_ico.xpm",
+										"gold_ico.xpm",
+										"iron_ico.xpm",
+										"light_ico.xpm",
+										"obsidienne_ico.xpm",
+										"sand_ico.xpm",
+										"stone_ico.xpm",
+										"wood_a_ico.xpm",
+										"wood_a_cut_ico.xpm",
+										"wood_b_ico.xpm",
+										"wood_b_cut_ico.xpm",
+										"wood_c_ico.xpm",
+										"wood_c_cut_ico.xpm",
+										"wood_d_ico.xpm",
+										"wood_d_cut_ico.xpm",
+										"jukebox_ico.xpm",
+										"mystery_box_ico.xpm",
+										"door_ico.xpm",
+										"lava_ico.xpm",
+										"spawner_ico.xpm"};
 	return (paths[index]);
 }
 
