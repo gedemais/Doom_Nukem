@@ -45,11 +45,7 @@ int			custom_play(t_env *env)
 	camera_aim(env);
 	env->mid.mesh = NULL;
 //	physic_engine(env);
-	printf("before rasterizer : ");
-	print_mem_usage();
 	assert(!rasterizer(env, &env->edit_env.map, false));
-	printf("after rasterizer : ");
-	print_mem_usage();
 	handle_enemies(env);
 	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
