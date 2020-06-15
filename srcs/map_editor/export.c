@@ -72,8 +72,6 @@ int			export_maped_map(t_edit_env *env)
 	gen_path(path, env->new_map.name);
 	if (!(str = add_matrice(env, header, &len)))
 		return (-1);
-	ft_memcpy(&str[len], &env->env->cam.stats.pos, sizeof(t_vec3d));
-	len += sizeof(t_vec3d);
 	if (!write_infile(path, str, len, true))
 		return (-1);
 	free(str);

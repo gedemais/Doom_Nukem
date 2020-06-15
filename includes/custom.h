@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/12 20:52:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/15 18:53:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUSTOM_H
 
 # define CUSTOM_WALK_SPEED 0.05f
-
 # define MAX_CUSTOM_MOBS 1
+# define MAX_EVENT_DIST 2.0f
 
 enum				e_custom_sc_id
 {
@@ -24,12 +24,31 @@ enum				e_custom_sc_id
 	CUSTOM_SC_MAX
 };
 
+enum				e_block_events
+{
+	BE_JUKEBOX,
+	BE_CHEST,
+	BE_DOOR,
+	BE_LAVA,
+	BE_MAX
+};
+
+struct				s_event_block
+{
+	int		x;
+	int		y;
+	int		z;
+	char	event_id;
+};
+
 struct				s_custom_game
 {
+	t_dynarray	events_blocks;
 	int			wave; // index de la vague en cours
 	int			player_pv; // PVs du joueur / 100
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
+	int			moula;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 

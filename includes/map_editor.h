@@ -13,8 +13,8 @@
 
 # define CG_COLOR 0xffffff
 
-# define NB_CUBES_ICONES 22
-# define NB_SLOPES_ICONES 21
+# define NB_CUBES_ICONES 21
+# define NB_INTERACTIVES 6
 
 # define SCROLL_FILE_FONT FONT_ARIAL
 # define MAX_MAP_PATH_LEN 128
@@ -97,6 +97,7 @@ enum	e_blocs_textures_ids
 	BTXT_DOOR,
 	BTXT_LAVA,
 	BTXT_SPAWNER,
+	BTXT_MOB_SPAWNER,
 	BTXT_MAX
 };
 

@@ -77,9 +77,9 @@ static void		switch_slope_type(unsigned char bc, unsigned char *bt, t_events *e)
 static void		switch_obj_type(unsigned char *bt, t_events *e)
 {
 	if (e->buttons[BUTTON_SCROLL_UP])
-		*bt = (*bt >= 164) ? 160 : *bt + 1;
+		*bt = (*bt >= 160 + NB_INTERACTIVES - 1) ? 160 : *bt + 1;
 	else if (e->buttons[BUTTON_SCROLL_DOWN])
-		*bt = (*bt <= 160) ? 164 : *bt - 1;
+		*bt = (*bt <= 160) ? 160 + NB_INTERACTIVES - 1 : *bt - 1;
 }
 
 void			switch_block_type(t_env *env, t_events *e)

@@ -28,6 +28,7 @@ static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 	p[BTXT_DOOR - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_LAVA - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_SPAWNER - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
+	p[BTXT_MOB_SPAWNER - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 

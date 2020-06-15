@@ -1,5 +1,5 @@
-Fix le GUI du maped
-Save la position de spawn dans le map_editor
+Parser les blocs events en mode custom
+Renseigner le type de bloc en maped avec bc == BC_OBJ avec un texte a l'ecran
 empecher l'user de peter le sol
 
 jukebox

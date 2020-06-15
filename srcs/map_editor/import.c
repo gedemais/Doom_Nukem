@@ -77,8 +77,6 @@ int			import_maped_map(t_edit_env *env, char *name)
 	if (check_header(file, name, len, &offset))
 		return (-1);
 	env->new_map.flat = (unsigned char*)file;
-	env->map.spawn = *(t_vec3d*)&file[len - sizeof(t_vec3d)];
-	len -= sizeof(t_vec3d);
 	if (!flat_to_matrice(&env->new_map, offset, len))
 		return (-1);
 	munmap(file, len);

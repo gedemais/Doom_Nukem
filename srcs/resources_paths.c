@@ -98,7 +98,8 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/mystery_box.xpm",
 		"resources/textures/blocs/door.xpm",
 		"resources/textures/blocs/lava.xpm",
-		"resources/textures/blocs/spawner.xpm"};
+		"resources/textures/blocs/spawner.xpm",
+		"resources/textures/blocs/mob_spawner.xpm"};
 
 	return (paths[index]);
 }
@@ -158,7 +159,8 @@ char	*icones_paths(unsigned int index)
 										"mystery_box_ico.xpm",
 										"door_ico.xpm",
 										"lava_ico.xpm",
-										"spawner_ico.xpm"};
+										"spawner_ico.xpm",
+										"mob_spawner_ico.xpm"};
 	return (paths[index]);
 }
 
