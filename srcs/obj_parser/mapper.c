@@ -53,9 +53,10 @@ static int	load_mesh_config(t_env *env, t_mesh *m, char *line)
 		return (-1);
 	if (check_line(env, m, stats))
 	{
-		free(stats);
+		ft_free_ctab(stats);
 		return (-1);
 	}
+	ft_free_ctab(stats);
 	return (0);
 }
 
@@ -71,12 +72,18 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 	if (!ft_strcmp(line[0], "spawn"))
 	{
 		if (get_spawn_position(map, line))
+		{
+			ft_free_ctab(line);
 			return (NULL);
+		}
 	}
 	else if (!ft_strcmp(line[0], "orientation"))
 	{
 		if (get_cam_direction(map, line))
+		{
+			ft_free_ctab(line);
 			return (NULL);
+		}
 	}
 	else
 		*prop = false;
@@ -84,7 +91,10 @@ t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
 	{
 		m = dyacc(&map->meshs, i);
 		if (!ft_strcmp(m->name, line[0]))
+		{
+			ft_free_ctab(line);
 			return (m);
+		}
 		i++;
 	}
 	ft_free_ctab(line);

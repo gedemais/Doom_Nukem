@@ -63,9 +63,19 @@ int		mtl_alpha(char **toks, t_dynarray *mtls)
 
 int		mtl_map_texture(char **toks, t_dynarray *mtls)
 {
-	t_mtl			*cm;
+	int		i;
+	int		j;
+	t_mtl	*cm;
 
-	if (!(cm = dyacc(mtls, mtls->nb_cells - 1)) || ft_tablen(toks) != 2)
+	i = -1;
+	while (toks[++i])
+	{
+		j = -1;
+		while (toks[i][++j])
+			if (!ft_isprint(toks[i][j]))
+				return (-1);
+	}
+	if (!(cm = dyacc(mtls, mtls->nb_cells - 1)))
 		return (-1);
 	cm->textured = true;
 	return (0);

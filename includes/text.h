@@ -13,6 +13,7 @@ enum	e_font_id
 	FONT_AMMOS,
 	FONT_TXT_HINT,
 	FONT_COOLVETICA,
+	FONT_PAD,
 	FONT_MAX
 };
 

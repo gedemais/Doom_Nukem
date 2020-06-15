@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 16:56:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 21:14:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		render(void *param)
 	if (it > 30)
 	{
 		printf("fps : %f\n", fps / it);
+		//system("leaks doom-nukem");
 		it = 0;
 		fps = 0;
 	}

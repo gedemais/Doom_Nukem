@@ -6,11 +6,19 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 18:59:48 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 22:07:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	print_mem_usage(void)
+{
+	struct rusage	usage;
+
+	getrusage(RUSAGE_SELF, &usage);
+	printf("%ld bytes allocated\n", usage.ru_ixrss);
+}
 
 static int	**init_pixloc(void)
 {

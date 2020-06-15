@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 21:32:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 21:02:19 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -71,10 +71,7 @@ int		rasterizer(t_env *env, t_map *map, bool respawn)
 	{
 		j = -1;
 		if (!(m = dyacc(&map->meshs, i)))
-		{
-			PUT
 			return (-1);
-		}
 		if (m->type == BTXT_NONE)
 			continue ;
 		compute_rotation_matrices(env);
@@ -82,10 +79,7 @@ int		rasterizer(t_env *env, t_map *map, bool respawn)
 			triangle_pipeline(env, dyacc(&m->tris, j), &env->cam.to_clip, m);
 	}
 	if (raster_triangles(env, &env->cam.to_clip))
-	{
-		PUT1
 		return (-1);
-	}
 	env->scene = map->index;
 	clear_dynarray(&env->cam.to_clip);
 	return (0);

@@ -157,7 +157,7 @@ int		load_fonts(t_env *env)
 	if (FT_Init_FreeType(&env->ttfs.fontlib)
 		&& write(2, FT_LIB, ft_strlen(FT_LIB)))
 		return (-1);
-	while (i < FONT_MAX)
+	while (i < FONT_MAX - 1)
 	{
 		if ((err = FT_New_Face(ttf->fontlib,
 			fonts_paths(i), 0, &ttf->faces[i])))

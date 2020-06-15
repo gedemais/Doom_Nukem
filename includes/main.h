@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 16:57:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 22:10:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+
+#include <sys/resource.h>
+
 # include <sys/time.h>
 # include <time.h>
 # include <math.h>
@@ -137,6 +140,8 @@ struct			s_env
 	int				context;
 	int				scene;
 };
+
+void	print_mem_usage(void);
 
 void			print_camera_stats(t_cam *cam, char *title);
 

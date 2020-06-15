@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 17:59:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/14 19:46:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MA
 		return (-1);
 	}
 	if (p->state == PS_COMMENT)
+	{
+		ft_free_ctab(p->toks);
 		return (0);
+	}
 	if (!(*init_parser()) && lines_fts[(int)p->state](map, p->toks))
 		return (-1);
 	ft_free_ctab(p->toks);
