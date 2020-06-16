@@ -25,7 +25,6 @@ static void	render_obj_name(t_env *env)
 	conf->size = 14;
 	index = env->edit_env.current_bt - 160;
 	o = (t_point){500, 580};
-	printf("index = %d\n", index);
 	ft_strcpy((char*)conf->s, names[index]);
 	my_string_put(env, env->mlx.img_data, o, FONT_COOLVETICA);
 }

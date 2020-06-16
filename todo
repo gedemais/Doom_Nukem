@@ -1,5 +1,5 @@
+Fix le segfault du bonus wheel avec bc == BC_OBJ
 Parser les blocs events en mode custom
-Renseigner le type de bloc en maped avec bc == BC_OBJ avec un texte a l'ecran
 empecher l'user de peter le sol
 
 jukebox

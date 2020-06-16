@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/15 18:53:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/16 20:32:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define CUSTOM_WALK_SPEED 0.05f
 # define MAX_CUSTOM_MOBS 1
-# define MAX_EVENT_DIST 2.0f
+# define EVENT_DIST 20.0f
 
 enum				e_custom_sc_id
 {
@@ -24,13 +24,28 @@ enum				e_custom_sc_id
 	CUSTOM_SC_MAX
 };
 
+enum				e_music_tracks
+{
+	MT_FIRST,
+	MT_SECOND,
+	MT_MAX
+};
+
 enum				e_block_events
 {
+	BE_NONE,
 	BE_JUKEBOX,
 	BE_CHEST,
 	BE_DOOR,
 	BE_LAVA,
+	BE_MOB_SPAWNER,
 	BE_MAX
+};
+
+union				u_bep
+{
+	char	c;
+	float	f;
 };
 
 struct				s_event_block
@@ -38,12 +53,14 @@ struct				s_event_block
 	int		x;
 	int		y;
 	int		z;
-	char	event_id;
+	int		price;
+	t_bep	param;
+	bool	hover;
+	char	id;
 };
 
 struct				s_custom_game
 {
-	t_dynarray	events_blocks;
 	int			wave; // index de la vague en cours
 	int			player_pv; // PVs du joueur / 100
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
@@ -54,17 +71,28 @@ struct				s_custom_game
 
 struct				s_custom_env
 {
+	t_custom_game	game;
+	t_ed_map		map;
+	t_map			scene;
+	t_scroll		scroll;
+	t_dynarray		events;
 	t_node          *start;
     t_node          *end;
 	t_env			*env;
-	t_scroll		scroll;
-	t_ed_map		map;
-	t_map			scene;
 	float			spawner;
-	t_custom_game	game;
 	int				sub_context;
 };
 
+t_vec3d				get_block_center(t_event_block *block);
+int					handle_block_events(t_env *env);
+int					parse_events_blocks(t_env *env);
+
+int					handle_jukeboxs(t_env *env, t_event_block *block);
+/*void				handle_mystery_boxs(t_env *env, t_event_block *block);
+void				handle_doors(t_env *env, t_event_block *block);
+void				handle_lavas(t_env *env, t_event_block *block);
+void				handle_mob_spawners(t_env *env);
+*/
 int					key_press_custom(int key, void *param);
 int					key_release_custom(int key, void *param);
 int					mouse_press_custom(int button, int x, int y, void *param);

@@ -126,7 +126,7 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 	}
 }
 
-void		textual_hint(t_env *env, char button, char *action)
+void		textual_hint(t_env *env, char button, char *action, int index)
 {
 	t_ttf_config	*conf;
 	t_point			o;
@@ -134,14 +134,14 @@ void		textual_hint(t_env *env, char button, char *action)
 
 	conf = ttf_config();
 	conf->size = 20;
-	ft_strcpy((char*)conf->s, "Press [");
+	ft_strcpy((char*)conf->s, "Press ");
 	ft_strncat((char*)conf->s, &button, 1);
-	ft_strcat((char*)conf->s, "] to ");
+	ft_strcat((char*)conf->s, " to ");
 	ft_strcat((char*)conf->s, action);
 
 	x_offset = (ft_strlen((char*)conf->s)) / 2 * conf->size;
 	o.x = env->data.half_wdt - x_offset;
-	o.y = HGT / 3;
+	o.y = HGT / 3 + (index * conf->size * 2);
 
 	my_string_put(env, env->mlx.img_data, o, FONT_TXT_HINT);
 }
