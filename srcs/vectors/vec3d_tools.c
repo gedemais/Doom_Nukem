@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:18:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/16 16:17:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/17 17:20:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ float	vec_sdist(t_vec3d o, t_vec3d v)
 	ret += o.y * v.y;
 	ret += o.z * v.z;
 	return (ret);
+}
+
+float	vec3d_dist(t_vec3d o, t_vec3d v)
+{
+	float	ret;
+	float	tmp;
+
+	ret = 0.0f;
+	tmp = (v.x - o.x);
+	ret +=  tmp * tmp;
+	tmp = (v.y - o.y);
+	ret +=  tmp * tmp;
+	tmp = (v.z - o.z);
+	ret +=  tmp * tmp;
+	return (astar_rsqrt(ret));
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/16 20:32:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/17 19:19:46 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define CUSTOM_WALK_SPEED 0.05f
 # define MAX_CUSTOM_MOBS 1
-# define EVENT_DIST 20.0f
+# define EVENT_DIST 0.25f
 
 enum				e_custom_sc_id
 {
@@ -38,6 +38,7 @@ enum				e_block_events
 	BE_CHEST,
 	BE_DOOR,
 	BE_LAVA,
+	BE_SPAWNER,
 	BE_MOB_SPAWNER,
 	BE_MAX
 };
@@ -55,12 +56,12 @@ struct				s_event_block
 	int		z;
 	int		price;
 	t_bep	param;
-	bool	hover;
 	char	id;
 };
 
 struct				s_custom_game
 {
+	int			nb_spawners;
 	int			wave; // index de la vague en cours
 	int			player_pv; // PVs du joueur / 100
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
@@ -88,9 +89,9 @@ int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
 int					handle_jukeboxs(t_env *env, t_event_block *block);
-/*void				handle_mystery_boxs(t_env *env, t_event_block *block);
-void				handle_doors(t_env *env, t_event_block *block);
-void				handle_lavas(t_env *env, t_event_block *block);
+int					handle_mystery_boxs(t_env *env, t_event_block *block);
+int					handle_doors(t_env *env, t_event_block *block);
+/*void				handle_lavas(t_env *env, t_event_block *block);
 void				handle_mob_spawners(t_env *env);
 */
 int					key_press_custom(int key, void *param);

@@ -35,6 +35,8 @@ struct			s_pathfinding
 int				astar_init(t_env *env);
 void            astar(t_pf *env);
 
+float			astar_rsqrt(float number);
+
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
 void            nodes_neighbourgs(t_pf *env, t_node *node);

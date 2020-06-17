@@ -1,10 +1,12 @@
 Fix le segfault du bonus wheel avec bc == BC_OBJ
+Deplacer le dynarray de mobs dans le custom_env
 Parser les blocs events en mode custom
 empecher l'user de peter le sol
 
 jukebox
 portes
 boite mystere
+
 
 Decider de la duree de vie des pointeurs alloues :
 - local

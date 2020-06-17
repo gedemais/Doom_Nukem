@@ -8,14 +8,12 @@ int		handle_jukeboxs(t_env *env, t_event_block *block)
 	e = &env->events;
 	if (block->id != BE_JUKEBOX)
 		return (0);
-	printf("%f\n", vec_sdist(env->cam.stats.pos, get_block_center(block)));
-	if (vec_sdist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
 	{
 		track = &block->param.c;
-		block->hover = true;
 		textual_hint(env, 'F', "turn on / off", 0);
-		textual_hint(env, '{', "play previous track", 1);
-		textual_hint(env, '}', "play next track", 2);
+		textual_hint(env, '{', "play previous track ( cost x)", 1);
+		textual_hint(env, '}', "play next track ( cost x)", 2);
 		if (e->keys[KEY_F])
 			*track = *track >= 0 ? -1 : 0; // on / off
 		else if (e->keys[KEY_LEFT])
@@ -28,15 +26,27 @@ int		handle_jukeboxs(t_env *env, t_event_block *block)
 	}
 	return (0);
 }
-/*
+
 int		handle_mystery_boxs(t_env *env, t_event_block *block)
 {
 	if (block->id != BE_CHEST)
 		return (0);
-	if (vec_sdist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
 	{
-		block->hover = true;
-		
+		textual_hint(env, 'F', "get a random weapon ( cost x)", 0);
+		return (1);
 	}
 	return (0);
-}*/
+}
+
+int		handle_doors(t_env *env, t_event_block *block)
+{
+	if (block->id != BE_DOOR)
+		return (0);
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	{
+		textual_hint(env, 'F', "open the door ( cost x)", 0);
+		return (1);
+	}
+	return (0);
+}

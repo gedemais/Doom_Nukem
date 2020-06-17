@@ -22,6 +22,7 @@ struct				s_enemy
 	float		sum_angle;
 	float		speed;
 	float		yaw;
+	bool		dead;
 	t_vec3d		head;
 	t_vec3d		offset;
 	t_vec3d		pitch;

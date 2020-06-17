@@ -14,9 +14,11 @@ static void		enemies_damages(t_env *env)
 		if (index >= mob->map_start && index < mob->map_end)
 		{
 			env->player.hover = true;
-			if (env->player.current->shot)
+			if (env->player.current->shot && !mob->dead)
 			{
 				mob->hp -= env->player.current->damages;
+				env->custom_env.game.moula += (mob->hp > 0) ? 10 : 60;
+				mob->dead = (mob->hp <= 0);
 				env->player.hitmarker = HITMARKER_T;
 			}
 			return ;
@@ -45,18 +47,43 @@ static void		enemies_to_scene(t_dynarray *mobs)
 	}
 }
 
+static void		find_random_spawner(t_dynarray *events, int sp[3], int index)
+{
+	t_event_block	*block;
+	int				i;
+	int				j;
+
+	i = 0;
+	j = 0;
+	while (i < events->nb_cells)
+	{
+		block = dyacc(events, i);
+		if (block->id == BE_MOB_SPAWNER)
+			j++;
+		if (j == index)
+		{
+			sp[0] = block->x;
+			sp[1] = block->y;
+			sp[2] = block->z;
+			return ;
+		}
+		i++;
+	}
+}
+
 static int		spawn_mob(t_env *env)
 {
-	int			i;
-	t_vec3d		pos;
+	t_custom_game	*game;
+	int				index;
+	int				p[3];
+	t_vec3d			pos;
 
-	i = rand() % (env->astar.d_nodes.nb_cells - 1);
-	while (((t_node *)dyacc(&env->astar.d_nodes, i))->bobstacle == 1)
-		i = rand() % (env->astar.d_nodes.nb_cells - 1);
-	pos = ((t_node *)dyacc(&env->astar.d_nodes, i))->pos;
-	pos.x = (int)pos.x % 2 ? pos.x + 1 : pos.x;
-	pos.y = (int)pos.y % 2 ? pos.y + 1 : pos.y;
-	pos.z = (int)pos.z % 2 ? pos.z + 1 : pos.z;
+	game = &env->custom_env.game;
+	index = rand() % game->nb_spawners + 1;
+	find_random_spawner(&env->custom_env.events, p, index);
+	pos.x = p[0] * 2;
+	pos.y = p[1] * 2;
+	pos.z = p[2] * 2;
 	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
 }
 
