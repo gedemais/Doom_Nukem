@@ -17,7 +17,8 @@ static void		enemies_damages(t_env *env)
 			if (env->player.current->shot && !mob->dead)
 			{
 				mob->hp -= env->player.current->damages;
-				env->custom_env.game.moula += (mob->hp > 0) ? 10 : 60;
+				env->custom_env.game.moula += (mob->hp > 0)
+					? HIT_REWARD : KILL_REWARD;
 				mob->dead = (mob->hp <= 0);
 				env->player.hitmarker = HITMARKER_T;
 			}

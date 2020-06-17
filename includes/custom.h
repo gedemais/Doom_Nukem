@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/17 19:19:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/17 20:10:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define CUSTOM_WALK_SPEED 0.05f
 # define MAX_CUSTOM_MOBS 1
 # define EVENT_DIST 0.25f
+
+# define HIT_REWARD 10
+# define KILL_REWARD 60
 
 enum				e_custom_sc_id
 {
