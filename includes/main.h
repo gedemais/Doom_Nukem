@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/17 21:34:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 17:35:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ struct			s_env
 	t_cam			cam;
 	t_scroll		scroll;
 	t_ttf			ttfs;
-	t_dynarray		mobs;
 	t_pf			astar;
 	int				context;
 	int				scene;

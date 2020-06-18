@@ -8,9 +8,9 @@ static void		enemies_damages(t_env *env)
 
 	i = 0;
 	index = env->mid.mesh->index;
-	while (i < env->mobs.nb_cells)
+	while (i < env->custom_env.mobs.nb_cells)
 	{
-		mob = dyacc(&env->mobs, i);
+		mob = dyacc(&env->custom_env.mobs, i);
 		if (index >= mob->map_start && index < mob->map_end)
 		{
 			env->player.hover = true;
@@ -96,19 +96,19 @@ int				handle_enemies(t_env *env)
 	env->player.hitmarker--;
 	if (env->custom_env.spawner <= 0.0f)
 	{
-		if (env->mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
+		if (env->custom_env.mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
 			return (-1);
 		env->custom_env.spawner = RESPAWN_DELAY;
 	}
 	else
 		env->custom_env.spawner -= env->data.spent;
-	if (env->mobs.nb_cells)
+	if (env->custom_env.mobs.nb_cells)
 	{
 		if (env->mid.mesh)
 			enemies_damages(env);
 		enemies_movements(env, &env->astar);
-		enemies_death(&env->mobs);
-		enemies_to_scene(&env->mobs);
+		enemies_death(&env->custom_env.mobs);
+		enemies_to_scene(&env->custom_env.mobs);
 	}
 	return (0);
 }

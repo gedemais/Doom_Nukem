@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/15 15:20:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 17:36:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ static void	free_cmp(t_env *env)
 static void	free_custom(t_env *env)
 {
 	free_player(&env->player);
-	if (env->mobs.byte_size)
-		free_dynarray(&env->mobs);
+	if (env->custom_env.mobs.byte_size)
+		free_dynarray(&env->custom_env.mobs);
 	if (env->astar.d_nodes.byte_size)
 		free_dynarray(&env->astar.d_nodes);
 	if (env->astar.d_astar.byte_size)

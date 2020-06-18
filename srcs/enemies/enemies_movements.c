@@ -68,9 +68,9 @@ void			enemies_movements(t_env *env, t_pf *a)
 	t_enemy	*mob;
 
 	i = -1;
-	while (++i < env->mobs.nb_cells)
+	while (++i < env->custom_env.mobs.nb_cells)
 	{
-		mob = dyacc(&env->mobs, i);
+		mob = dyacc(&env->custom_env.mobs, i);
 		if (mob->hp < 1)
 			continue ;
 		a->start = dyacc(&a->d_nodes, mob->i);

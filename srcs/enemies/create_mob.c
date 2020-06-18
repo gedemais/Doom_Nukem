@@ -136,7 +136,7 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 
 	if (copy_mob_to_scene(map, &env->maps[enemy_map_mapper(type)], &enemy)
 		|| enemy_offset(&enemy)
-		|| push_dynarray(&env->mobs, &enemy, false))
+		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
 	return (0);
 }

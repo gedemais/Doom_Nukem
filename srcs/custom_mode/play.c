@@ -38,21 +38,6 @@ static int		handle_keys(t_env *env, t_events *e)
 	return (0);
 }
 
-static void	handle_player(t_env *env)
-{
-	static int	heal = HEAL_SPEED;
-	int			i;
-
-	i = 0;
-	heal--;
-	if (heal <= 0)
-	{
-		if (env->player.hp < START_HP)
-			env->player.hp++;
-		heal = HEAL_SPEED;
-	}
-}
-
 int			custom_play(t_env *env)
 {
 	handle_player(env);

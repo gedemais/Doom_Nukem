@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/18 16:36:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 17:35:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ struct				s_custom_game
 struct				s_custom_env
 {
 	t_custom_game	game;
+	t_dynarray		mobs;
 	t_ed_map		map;
 	t_map			scene;
 	t_scroll		scroll;
@@ -95,6 +96,8 @@ struct				s_custom_env
 t_vec3d				get_block_center(t_event_block *block);
 int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
+
+void				handle_player(t_env *env);
 
 int					handle_jukeboxs(t_env *env, t_event_block *block);
 int					handle_mystery_boxs(t_env *env, t_event_block *block);
