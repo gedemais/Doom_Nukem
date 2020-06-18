@@ -19,6 +19,7 @@ struct				s_enemy
 	int			damages;
 	int			map_start;
 	int			map_end;
+	int			peace;
 	float		sum_angle;
 	float		speed;
 	float		yaw;

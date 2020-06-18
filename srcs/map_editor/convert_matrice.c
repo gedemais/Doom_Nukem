@@ -97,6 +97,7 @@ static int		get_matrice_size(t_ed_map *env, int len)
 				return (0);
 		}
 	}
+	ft_swap(&env->width, &env->depth);
 	return (env->width && env->height && env->depth);
 }
 
