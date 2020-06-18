@@ -51,4 +51,7 @@ void			enemies_rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin);
 
 float           enemies_xz_angle(t_vec3d a, t_vec3d b);
 
+void			enemies_damages(t_env *env);
+void			enemies_sound(t_env *env);
+
 #endif
