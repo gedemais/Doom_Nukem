@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 21:02:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 16:10:15 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -21,10 +21,9 @@ void	*rasthreader(void *param)
 	while (thr->index < thr->end)
 	{
 		fill_triangle_texture((t_env*)thr->env, dyacc(&env->cam.to_raster, thr->index));
-//		draw_triangle(&env->mlx, *t);
+		//draw_triangle(&env->mlx, *(t_triangle*)dyacc(&env->cam.to_raster, thr->index));
 		thr->index++;
 	}
-	thr->done = true;
 	if (thr->mono)
 		return (NULL);
 	else
@@ -42,7 +41,6 @@ void	monothread_raster(void *e)
 	thread.start = 0;
 	thread.index = 0;
 	thread.end = env->cam.to_raster.nb_cells;
-	thread.done = false;
 	thread.mono = true;
 	rasthreader(&thread);
 }

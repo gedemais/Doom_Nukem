@@ -50,3 +50,22 @@ int		handle_doors(t_env *env, t_event_block *block)
 	}
 	return (0);
 }
+
+int		handle_lavas(t_env *env, t_event_block *block)
+{
+	static int		delay = LAVA_DELAY;
+
+	if (block->id != BE_LAVA)
+		return (0);
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	{
+		delay--;
+		if (delay == 0)
+		{
+			env->player.hp--;
+			delay = LAVA_DELAY;
+		}
+		return (1);
+	}
+	return (0);
+}

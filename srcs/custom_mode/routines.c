@@ -5,6 +5,7 @@ int				custom_menu_to_play(t_env *env)
 	if (init_dynarray(&env->mobs, sizeof(t_enemy), MAX_CUSTOM_MOBS)
 		|| astar_init(env) || init_map_physics(&env->edit_env.map))
 		return (-1);
+	env->player.hp = START_HP;
 	mlx_mouse_hide();
 	return (0);
 }

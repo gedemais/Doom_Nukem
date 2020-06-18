@@ -6,65 +6,11 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 21:10:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 16:08:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-static int	relaunch_thread(t_rasthread threads[NB_THREADS], int i)
-{
-	int				t;
-	int				j;
-	unsigned int	work;
-	unsigned int	max_work;
-
-	j = -1;
-	t = -1;
-	max_work = 0;
-	while (++j < NB_THREADS)
-		if (i != j && (work = threads[j].end - threads[j].index) > max_work)
-		{
-			max_work = work;
-			t = j;
-		}
-	if (t == -1)
-		return (0);
-	threads[i].start = threads[t].index + (max_work / 2); // Placing new's start
-	threads[i].index = threads[i].start; // Placing new's start
-	threads[i].end = threads[t].end; // Placing new's end
-	threads[t].end = threads[i].start; // Copying on weak's end
-	threads[i].done = false;
-	threads[t].done = false;
-	if (pthread_create(&threads[i].thread, NULL, rasthreader, &threads[i]))
-		return (-1);
-	return (threads[i].end - threads[i].start);
-}
-
-static void	manage_threads(t_rasthread threads[NB_THREADS])
-{
-	unsigned int	i;
-	int				waste;
-	int				amount;
-	int				relaunched = 0;
-
-	amount = INT_MAX;
-	waste = NB_THREADS * NB_THREADS;
-	while (amount > waste)
-	{
-		i = 0;
-		while (i < NB_THREADS)
-		{
-			if (threads[i].done)
-			{
-				amount = relaunch_thread(threads, (int)i);
-				relaunched++;
-				break ;
-			}
-			i++;
-		}
-	}
-}
 
 static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
 {
@@ -73,7 +19,6 @@ static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
 	thread->start = thread->id * part;
 	thread->index = thread->start;
 	thread->end = thread->start + part + (thread->id == NB_THREADS - 1 ? rest : 0);
-	thread->done = false;
 	thread->mono = false;
 	if (pthread_create(&thread->thread, NULL, rasthreader, thread))
 		return (-1);
@@ -117,7 +62,6 @@ int			raster_triangles(t_env *env, t_dynarray *arr)
 	else
 	{
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, false);
-		manage_threads(threads);
 		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
 	}
 	clear_dynarray(&env->cam.to_raster);

@@ -84,7 +84,6 @@ struct	s_rasthread
 	pthread_t	thread;
 	int			start;
 	int			end;
-	bool		done;
 	bool		mono;
 	int			index;
 	int			id;

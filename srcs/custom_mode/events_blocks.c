@@ -63,7 +63,7 @@ int		handle_block_events(t_env *env)
 {
 	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*) = {
 						NULL, handle_jukeboxs, handle_mystery_boxs, handle_doors,
-						NULL, NULL};
+						handle_lavas, NULL};
 	t_event_block	*block;
 	int				ret;
 	int				i;

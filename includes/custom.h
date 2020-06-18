@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/17 20:10:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/18 16:36:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@
 # define MAX_CUSTOM_MOBS 1
 # define EVENT_DIST 0.25f
 
+# define START_HP 100
+# define HEAL_SPEED 10
+
 # define HIT_REWARD 10
 # define KILL_REWARD 60
+
+# define LAVA_DELAY 2
 
 enum				e_custom_sc_id
 {
@@ -94,9 +99,8 @@ int					parse_events_blocks(t_env *env);
 int					handle_jukeboxs(t_env *env, t_event_block *block);
 int					handle_mystery_boxs(t_env *env, t_event_block *block);
 int					handle_doors(t_env *env, t_event_block *block);
-/*void				handle_lavas(t_env *env, t_event_block *block);
-void				handle_mob_spawners(t_env *env);
-*/
+int					handle_lavas(t_env *env, t_event_block *block);
+
 int					key_press_custom(int key, void *param);
 int					key_release_custom(int key, void *param);
 int					mouse_press_custom(int button, int x, int y, void *param);
