@@ -10,11 +10,11 @@ static void	print_moulaga(t_env *env)
 	if (!(moulaga = ft_itoa(env->custom_env.game.moula)))
 		return ;
 	ft_strcpy((char*)conf->s, moulaga);
-	free(moulaga);
 	conf->size = 16;
 	o = (t_point){1000 - conf->size / 2, 200};
 	draw_rectangle(env->mlx.img_data, o,
 		(t_point){conf->size * ft_strlen(moulaga), conf->size}, 0x770000);
+	free(moulaga);
 	o.x += conf->size / 2;
 	o.y += conf->size;
 	my_string_put(env, env->mlx.img_data, o, FONT_COOLVETICA);

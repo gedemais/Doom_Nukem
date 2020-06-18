@@ -80,6 +80,8 @@ static int		spawn_mob(t_env *env)
 	t_vec3d			pos;
 
 	game = &env->custom_env.game;
+	if (game->nb_spawners == 0)
+		return (0);
 	index = rand() % game->nb_spawners + 1;
 	find_random_spawner(&env->custom_env.events, p, index);
 	pos.x = p[0] * 2;
