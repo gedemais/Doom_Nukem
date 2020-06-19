@@ -1,5 +1,10 @@
 #include "main.h"
-/*
+
+static void	wound(t_env *env, t_enemy *mob)
+{
+	env->player.hp -= mob->damages;
+}
+
 static void	check_wounds(t_env *env)
 {
 	t_enemy	*mob;
@@ -9,17 +14,18 @@ static void	check_wounds(t_env *env)
 	while (i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
-		if (vec3d_dist(env->cam->stats.pos, mob->pos) > EVENT_DIST)
+		if (vec3d_dist(env->cam.stats.pos, mob->pos) > EVENT_DIST)
 		{
 			mob->peace--;
 			if (mob->peace <= 0)
 			{
 				mob->peace = MOB_PEACE_TIME;
+				wound(env, mob);
 			}
 		}
 		i++;
 	}
-}*/
+}
 
 void	handle_player(t_env *env)
 {
@@ -34,6 +40,5 @@ void	handle_player(t_env *env)
 			env->player.hp++;
 		heal = HEAL_SPEED;
 	}
-//	check_wounds(env);
+	check_wounds(env);
 }
-

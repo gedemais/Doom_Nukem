@@ -40,6 +40,7 @@ static int		handle_keys(t_env *env, t_events *e)
 
 int			custom_play(t_env *env)
 {
+	printf("%d hp\n", env->player.hp);
 	handle_player(env);
 	clear_screen_buffers(env);
 	handle_keys(env, &env->events);

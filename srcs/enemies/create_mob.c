@@ -34,11 +34,14 @@ static bool		handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
 	if (!map->txts.byte_size)
 		return (false);
 	while (++i < map->txts.nb_cells)
+	{
+		printf("%d : %p <-> %p\n", i, dyacc(&map->txts, i), sprite);
 		if (!ft_memcmp(sprite, dyacc(&map->txts, i), sizeof(t_sprite)))
 		{
 			new->sp = i;
 			return (true);
 		}
+	}
 	return (false);
 }
 

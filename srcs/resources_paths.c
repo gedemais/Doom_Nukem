@@ -21,7 +21,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/pente_est.obj",
 										"resources/maps/map-test.obj",
 										"resources/maps/slender.obj",
-										"resources/maps/ugly.obj"};
+										"resources/maps/ugly.obj",
+										"resources/maps/mad.obj"};
 
 	return (paths[index]);
 }

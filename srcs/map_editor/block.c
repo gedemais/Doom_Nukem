@@ -62,6 +62,8 @@ int			del_block(t_env *env)
 		return (0);
 	mesh = env->mid.mesh;
 	ft_memcpy(pos, mesh->m_pos, sizeof(int) * 3);
+	if (pos[1] <= 0)
+		return (0);
 	mesh->type = BTXT_NONE;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
 	return (0);
@@ -109,7 +111,7 @@ int			put_block(t_env *env)
 
 	free_dynarray(&new->tris);
 
-	if(bc == BC_CUBE || bc == BC_OBJ)
+	if (bc == BC_CUBE || bc == BC_OBJ)
 		create_cube(env, new, new->type);
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
 		create_slope(env, new, new->type);
