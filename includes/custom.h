@@ -24,6 +24,7 @@
 
 # define HIT_REWARD 10
 # define KILL_REWARD 60
+# define KILL_DELAY 120
 
 # define LAVA_DELAY 2
 

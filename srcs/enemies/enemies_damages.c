@@ -1,4 +1,4 @@
-#include "main.h"
+	#include "main.h"
 
 static void		enemies_sound_damages(t_env *env)
 {
@@ -26,7 +26,7 @@ static void		enemies_do_damages(t_env *env, t_enemy *mob)
 		++env->custom_env.game.kill_count;
 		enemies_sound_death(env);
 		if (env->custom_env.game.kill_delay == 0)
-			env->custom_env.game.kill_delay = 120;
+			env->custom_env.game.kill_delay = KILL_DELAY;
 	}
 	else
 		enemies_sound_damages(env);
