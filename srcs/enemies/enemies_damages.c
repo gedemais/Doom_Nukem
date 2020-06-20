@@ -7,7 +7,14 @@ static void		enemies_sound_damages(t_env *env)
 
 static void		enemies_sound_death(t_env *env)
 {
-	(void)env;
+	ALuint		source;
+	t_sample	*sound;
+
+	source = UINT_MAX;
+	sound = &env->sound.samples[SA_DEATHMONSTER];
+	alGenSources(1, &source);
+	alSourcei(source, AL_BUFFER, (ALint)sound->buffer);
+	alSourcePlay(source);
 }
 
 static void		enemies_do_damages(t_env *env, t_enemy *mob)

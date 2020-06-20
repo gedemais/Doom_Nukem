@@ -134,7 +134,14 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/voices/triplekill.wav",
 					"resources/samples/voices/rampage.wav",
 					"resources/samples/voices/godlike.wav",
-					"resources/samples/voices/wickedsick.wav"};
+					"resources/samples/voices/wickedsick.wav",
+					"resources/samples/monsters/death_monster.wav",
+					"resources/samples/world/door.wav",
+					"resources/samples/world/gong.wav",
+					"resources/samples/world/invocation.wav",
+					"resources/samples/world/ring.wav",
+					"resources/samples/world/portail.wav",
+					"resources/samples/world/teleportation.wav",};
 
 	return (paths[index]);
 }
