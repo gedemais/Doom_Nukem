@@ -71,6 +71,7 @@ SRCS_NAME =	main.c\
 			map_editor/replace_by_face.c\
 			map_editor/routines.c\
 			map_editor/input_field.c\
+			map_editor/neighbourgs.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/dependencies.c\

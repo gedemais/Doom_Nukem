@@ -159,6 +159,7 @@ struct				s_edit_env
 	unsigned char	current_bt;
 };
 
+void				check_neighbourgs(t_env *env, t_mesh *news);
 
 int					setup_medit(t_env *env);
 char				*blocs_txt_paths(unsigned int index);
