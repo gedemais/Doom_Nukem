@@ -129,7 +129,12 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/weapons/tec9-reload.wav",
 					"resources/samples/weapons/tec9-shot.wav",
 					"resources/samples/weapons/ump45-reload.wav",
-					"resources/samples/weapons/ump45-shot.wav"};
+					"resources/samples/weapons/ump45-shot.wav",
+					"resources/samples/voices/doublekill.wav",
+					"resources/samples/voices/triplekill.wav",
+					"resources/samples/voices/rampage.wav",
+					"resources/samples/voices/godlike.wav",
+					"resources/samples/voices/wickedsick.wav"};
 
 	return (paths[index]);
 }

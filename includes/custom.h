@@ -78,6 +78,7 @@ struct				s_custom_game
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
 	int 		kill_count;
+	int 		kill_delay;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 

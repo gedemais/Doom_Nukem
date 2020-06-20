@@ -40,6 +40,7 @@ SRCS_NAME =	main.c\
 			enemies/enemies_damages.c\
 			enemies/enemies_death.c\
 			enemies/enemies_do_movement.c\
+			enemies/enemies_kills_annoucements.c\
 			enemies/enemies_movements.c\
 			enemies/enemies_rotations.c\
 			enemies/nodes.c\

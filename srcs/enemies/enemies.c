@@ -81,7 +81,7 @@ int				handle_enemies(t_env *env)
 		enemies_movements(env, &env->astar);
 		enemies_death(&env->custom_env.mobs);
 		enemies_to_scene(&env->custom_env.mobs);
-		enemies_sound(env);
+		enemies_kills_annoucements(env);
 	}
 	return (0);
 }
