@@ -4,18 +4,19 @@ static void		enemies_to_scene(t_dynarray *mobs)
 {
 	int		i;
 	int		j;
-	t_mesh	*m;
+	t_mesh	*mesh;
 	t_enemy	*mob;
 
 	i = -1;
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
+		enemies_animations(mob);
 		j = mob->map_start - 1;
 		while (++j < mob->map_end)
 		{
-			m = dyacc(&mob->map->meshs, j);
-			translate_mesh(mob->map, m, vec_sub(mob->pos, m->corp.pos));
+			mesh = dyacc(&mob->map->meshs, j);
+			translate_mesh(mob->map, mesh, vec_sub(mob->pos, mesh->corp.pos));
 		}
 	}
 }
