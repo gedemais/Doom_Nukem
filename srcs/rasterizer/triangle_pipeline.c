@@ -108,7 +108,7 @@ int		triangle_pipeline(t_env *env, t_triangle *t, t_dynarray *tris, t_mesh *m)
 	t_vec3d		line1;
 	t_vec3d		line2;
 
-	if (t->sp == BTXT_NONE)
+	if (t->voxel && t->sp == BTXT_NONE)
 		return (0);
 	t->points[0] = matrix_mult_vec(env->cam.w_m, t->points[0]);
 	t->points[1] = matrix_mult_vec(env->cam.w_m, t->points[1]);

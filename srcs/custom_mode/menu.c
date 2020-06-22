@@ -14,9 +14,9 @@ static int	select_map(t_env *env)
 			exit(1);
 			return (-1);
 		}
+		switch_custom_context(env, CUSTOM_SC_PLAY);
 		if (map_to_scene(env) || parse_events_blocks(env))
 			return (-1);
-		switch_custom_context(env, CUSTOM_SC_PLAY);
 	}
 	ft_strdel(&s->s_path);
 	return (0);
