@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/18 17:46:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/22 21:57:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ int					parse_events_blocks(t_env *env);
 
 void				handle_player(t_env *env);
 
-int					handle_jukeboxs(t_env *env, t_event_block *block);
-int					handle_mystery_boxs(t_env *env, t_event_block *block);
-int					handle_doors(t_env *env, t_event_block *block);
-int					handle_lavas(t_env *env, t_event_block *block);
+int					handle_jukeboxs(t_env *env, t_event_block *block, int index);
+int					handle_mystery_boxs(t_env *env, t_event_block *block, int index);
+int					handle_doors(t_env *env, t_event_block *block, int index);
+int					handle_lavas(t_env *env, t_event_block *block, int index);
 
 int					key_press_custom(int key, void *param);
 int					key_release_custom(int key, void *param);

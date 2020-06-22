@@ -43,3 +43,9 @@ int		play_ambience(t_sample *sample, bool play, bool stop, bool keep)
 	}
 	return (0);
 }
+/*
+int		sound_system(t_env *env)
+{
+
+	return (0);
+}*/

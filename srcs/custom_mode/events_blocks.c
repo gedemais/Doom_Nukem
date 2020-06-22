@@ -72,7 +72,7 @@ int		parse_events_blocks(t_env *env)
 
 int		handle_block_events(t_env *env)
 {
-	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*) = {
+	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*, int) = {
 						NULL, handle_jukeboxs, handle_mystery_boxs, handle_doors,
 						handle_lavas, NULL};
 	t_event_block	*block;
@@ -86,7 +86,7 @@ int		handle_block_events(t_env *env)
 		block = dyacc(&env->custom_env.events, i);
 		while (j < BE_MAX && block_fts[j])
 		{
-			if ((ret = block_fts[j](env, block)))
+			if ((ret = block_fts[j](env, block, i)))
 				break ;
 			else if (ret == -1)
 				return (-1);

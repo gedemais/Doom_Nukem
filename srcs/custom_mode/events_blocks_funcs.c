@@ -1,10 +1,11 @@
 #include "main.h"
 
-int		handle_jukeboxs(t_env *env, t_event_block *block)
+int		handle_jukeboxs(t_env *env, t_event_block *block, int index)
 {
 	t_events	*e;
 	char		*track;
 
+	(void)index;
 	e = &env->events;
 	if (block->id != BE_JUKEBOX)
 		return (0);
@@ -27,8 +28,9 @@ int		handle_jukeboxs(t_env *env, t_event_block *block)
 	return (0);
 }
 
-int		handle_mystery_boxs(t_env *env, t_event_block *block)
+int		handle_mystery_boxs(t_env *env, t_event_block *block, int index)
 {
+	(void)index;
 	if (block->id != BE_CHEST)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
@@ -39,7 +41,7 @@ int		handle_mystery_boxs(t_env *env, t_event_block *block)
 	return (0);
 }
 
-int		handle_doors(t_env *env, t_event_block *block)
+int		handle_doors(t_env *env, t_event_block *block, int index)
 {
 	if (block->id != BE_DOOR)
 		return (0);
@@ -49,6 +51,7 @@ int		handle_doors(t_env *env, t_event_block *block)
 		if (env->events.keys[KEY_F])
 		{
 			del_door(env);
+			extract_dynarray(&env->custom_env.events, index);
 			play_ambience(&env->sound.samples[SA_DOOR], true, false, false);
 		}
 		return (1);
@@ -56,10 +59,11 @@ int		handle_doors(t_env *env, t_event_block *block)
 	return (0);
 }
 
-int		handle_lavas(t_env *env, t_event_block *block)
+int		handle_lavas(t_env *env, t_event_block *block, int index)
 {
 	static int		delay = LAVA_DELAY;
 
+	(void)index;
 	if (block->id != BE_LAVA)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
