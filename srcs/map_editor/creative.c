@@ -68,19 +68,38 @@ static void	handle_mouse(t_env *env, t_events *e)
 
 static void	handle_keys(t_env *env, t_events *e)
 {
-
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
 
 	if (e->keys[KEY_E]) // Custom only, a tej d'ici
 		del_door(env);
 
-	if (env->events.keys[KEY_P])
-		export_maped_map(&env->edit_env);
-
 	switch_block_category(env, e);
 	switch_block_type(env, e);
 	replace_block(env);
+}
+
+static void	check_export(t_env *env)
+{
+	static char		*msgs[MAPERR_MAX] = {"Map saved",
+											"Player should have one spawner"};
+	t_ttf_config	*conf;
+	static int		err_time = 0;
+	static int		ret = 0;
+
+	if (env->events.keys[KEY_P])
+	{
+		ret = export_maped_map(&env->edit_env);
+		err_time = EXPORT_ERR_TIME;
+	}
+	if (err_time > 0)
+	{
+		conf = ttf_config();
+		conf->size = 20;
+		ft_strcpy((char*)conf->s, msgs[ret]);
+		my_string_put(env, env->mlx.img_data, (t_point){200, 200}, FONT_COOLVETICA);
+		err_time--;
+	}
 }
 
 static void	refresh_last_gui(t_events *e, int *gui)
@@ -111,6 +130,7 @@ int			maped_creative(t_env *env)
 		last_gui_use--;
 	}
 	maped_crosshair(env);
+	check_export(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

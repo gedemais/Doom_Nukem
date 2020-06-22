@@ -22,6 +22,7 @@ static t_mesh	*get_blockindex(t_map *map, int *pos, int *m_index)
 
 static void			del_recursif(t_env *env, int x, int y, int z)
 {
+	t_node	*node;
 	t_mesh	*m;
 	int    i;
 
@@ -30,8 +31,10 @@ static void			del_recursif(t_env *env, int x, int y, int z)
 		|| z < 0 || z > env->edit_env.new_map.depth - 1)
 		return ;
 	m = get_blockindex(&env->edit_env.map, (int[3]){x, y, z}, &i);
-	if (m->type == BTXT_OBSIDIENNE)
+	if (m->type == BTXT_DOOR)
 	{
+		node = dyacc(&env->astar.d_nodes, nodes_3d_1d(env->astar.dim, (t_vec3d){x, y, z, 0}));
+		node->bobstacle = 0;
 		m->type = BTXT_NONE;
 		del_recursif(env, x - 1, y, z);
 		del_recursif(env, x + 1, y, z);
@@ -44,7 +47,7 @@ static void			del_recursif(t_env *env, int x, int y, int z)
 
 void				del_door(t_env *env)
 {
-	if (env->mid.mesh && env->mid.mesh->type == BTXT_OBSIDIENNE)
+	if (env->mid.mesh && env->mid.mesh->type == BTXT_DOOR)
 	{
 		del_recursif(env,
 			env->mid.mesh->m_pos[0],

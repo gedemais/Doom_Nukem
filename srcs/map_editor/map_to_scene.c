@@ -20,7 +20,7 @@ static int      test_neighbours(t_ed_map *map, int x, int y , int z)
 		|| y < 0 || y > map->height - 1
 		|| z < 0 || z > map->depth - 1)
 		return (1);
-	return (map->map[x][y][z] > BTXT_NONE);
+	return (map->map[x][y][z] != 163 && map->map[x][y][z] > BTXT_NONE);
 }
 
 static bool		full_neighbours(t_ed_map *map, int *pos)

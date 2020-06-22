@@ -10,6 +10,24 @@ t_vec3d		get_block_center(t_event_block *block)
 	return (ret);
 }
 
+static int	parse_block_type(t_env *env, t_custom_env *c, t_event_block block, int p[3])
+{
+	if (block.id == BE_MOB_SPAWNER)
+		env->custom_env.game.nb_spawners++;
+	if (block.id == BE_SPAWNER)
+	{
+		env->edit_env.map.spawn = vec_fmult((t_vec3d){p[0], p[1], p[2], 0}, 2);
+		env->edit_env.map.spawn.y += PLAYER_SIZE;
+	}
+	if (c->events.byte_size == 0
+			&& init_dynarray(&c->events, sizeof(t_event_block), 0))
+		return (-1);
+	if (c->events.byte_size > 0
+		&& push_dynarray(&c->events, &block, false))
+		return (-1);
+	return (0);
+}
+
 static int	parse_event_block(t_env *env, t_ed_map *map, int p[3])
 {
 	t_custom_env	*c;
@@ -24,14 +42,7 @@ static int	parse_event_block(t_env *env, t_ed_map *map, int p[3])
 		block.y = p[1];
 		block.z = p[2];
 		block.id = id - 160;
-		if (block.id == BE_MOB_SPAWNER)
-			env->custom_env.game.nb_spawners++;	
-		if (c->events.byte_size == 0
-				&& init_dynarray(&c->events, sizeof(t_event_block), 0))
-			return (-1);
-		if (c->events.byte_size > 0
-			&& push_dynarray(&c->events, &block, false))
-			return (-1);
+		return (parse_block_type(env, c, block, p));
 	}
 	return (0);
 }

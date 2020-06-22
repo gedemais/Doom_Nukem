@@ -1,10 +1,7 @@
+Ciel
 Fix le segfault du bonus wheel avec bc == BC_OBJ
-empecher l'user de peter le sol
-
-jukebox
-portes
-boite mystere
-
+Checker le nombre de blocs SPAWNER
+Loots : Nuke, munitions, god mode, Thunes
 
 Decider de la duree de vie des pointeurs alloues :
 - local

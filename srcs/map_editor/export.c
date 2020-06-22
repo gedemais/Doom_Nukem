@@ -59,6 +59,34 @@ static char	*add_matrice(t_edit_env *env, char *header, int *len)
 	return (file);
 }
 
+static int	count_blocks(t_edit_env *env, unsigned char block)
+{
+	int		ret;
+	int		x;
+	int		y;
+	int		z;
+
+	x = 0;
+	ret = 0;
+	while (x < env->new_map.width)
+	{
+		y = 0;
+		while (y < env->new_map.height)
+		{
+			z = 0;
+			while (z < env->new_map.depth)
+			{
+				if (env->new_map.map[x][y][z] == block)
+					ret++;
+				z++;
+			}
+			y++;
+		}
+		x++;
+	}
+	return (ret);
+}
+
 int			export_maped_map(t_edit_env *env)
 {
 	char	path[MAX_MAP_PATH_LEN];
@@ -66,6 +94,8 @@ int			export_maped_map(t_edit_env *env)
 	char	*str;
 	int		len;
 
+	if (count_blocks(env, 165) != 1)
+		return (MAPERR_PLAYER_SPAWNER);
 	if (write_header(&header, env->new_map.name))
 		return (-1);
 	len = ft_strlen(header);

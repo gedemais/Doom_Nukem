@@ -12,6 +12,13 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
+enum	e_maped_errors
+{
+	MAPERR_NONE,
+	MAPERR_PLAYER_SPAWNER,
+	MAPERR_MAX
+};
+
 # define MLX_INIT_FAIL "mlx_init() failed\n"
 # define MLX_NW_FAIL "mlx_new_window() failed\n"
 # define MLX_NI_FAIL "mlx_new_image() failed\n"

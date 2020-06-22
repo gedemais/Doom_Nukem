@@ -52,7 +52,7 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	cam.z = (int)cam.z / 2;
 	if (enemies_vec_outrange(a->dim, cam))
 		return ;
-	if (astar_distance(a->start->pos, cam) < 3)
+	if (astar_distance(a->start->pos, cam) < DIST_TO_PLAYER)
 		return ;
 	mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, cam));
 	if (mob->end == NULL)

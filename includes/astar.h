@@ -5,6 +5,8 @@
 
 # define NEIGHBOURG 18
 
+# define DIST_TO_PLAYER 1.5f
+
 typedef union	u_rsqrt
 {
 	float		f;

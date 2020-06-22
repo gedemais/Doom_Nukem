@@ -21,6 +21,8 @@
 # define MAPED_SAVE_PATH "./resources/custom_maps/"
 # define MAPED_ICONE_PATH "./resources/sprites/icones/"
 
+# define EXPORT_ERR_TIME 100
+
 enum	e_maped_sc_id
 {
 	MAPED_SC_MENU,
