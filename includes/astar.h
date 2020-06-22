@@ -39,7 +39,7 @@ float			astar_rsqrt(float number);
 
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
-void            nodes_neighbourgs(t_pf *env, t_node *node);
+void            nodes_neighbours(t_pf *env, t_node *node);
 
 int             nodes_3d_1d(t_vec3d dim, t_vec3d pos);
 t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos);

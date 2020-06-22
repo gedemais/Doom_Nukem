@@ -82,7 +82,7 @@ static int	create_block(t_env *env, t_map *scene, unsigned char type, int *pos)
 	else if (ft_inbounds(type, 32, 159) && create_slope(env, &new, type))
 		return (-1);
 	if (env->context == C_CUSTOM)
-		check_neighbourgs(env, &new);
+		culling(env, &new);
 	if (push_dynarray(&scene->meshs, &new, false))
 		return (-1);
 	attribute_mesh(scene, scene->nmesh);

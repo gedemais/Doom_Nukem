@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void		enemies_check_neighbourgs(t_pf *a, t_enemy *mob)
+static void		enemies_check_neighbours(t_pf *a, t_enemy *mob)
 {
 	int 	i;
 	t_node	*node;
@@ -37,7 +37,7 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 			return (-1);
 	}
 	if (mob->end->bobstacle == 1)
-		enemies_check_neighbourgs(a, mob);
+		enemies_check_neighbours(a, mob);
 	return (mob->end->bobstacle);
 }
 

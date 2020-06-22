@@ -15,12 +15,18 @@ static char		check_face(t_ed_map *map, char type, int *pos)
 	return (check_type(map->map[pos[0]][pos[1]][pos[2]]) ? 0 : type);
 }
 
-void			last_neighbourgs(t_env *env, t_mesh *new, t_triangle *tri)
+void			culling_faces(t_env *env, t_mesh *new, t_triangle *tri)
 {
 	int		*pos;
 
 	pos = new->m_pos;
-	if (tri->face_i == FACE_EST)
+	if (tri->face_i == FACE_NORD)
+		tri->sp = check_face(&env->edit_env.new_map, new->type,
+			(int[3]){ pos[0], pos[1], pos[2] - 1});
+	else if (tri->face_i == FACE_SUD)
+		tri->sp = check_face(&env->edit_env.new_map, new->type,
+			(int[3]){ pos[0], pos[1], pos[2] + 1});
+	else if (tri->face_i == FACE_EST)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
 			(int[3]){ pos[0] - 1, pos[1], pos[2] });
 	else if (tri->face_i == FACE_OUEST)
@@ -34,27 +40,18 @@ void			last_neighbourgs(t_env *env, t_mesh *new, t_triangle *tri)
 			(int[3]){ pos[0], pos[1] - 1, pos[2] });
 }
 
-void			check_neighbourgs(t_env *env, t_mesh *new)
+void			culling(t_env *env, t_mesh *new)
 {
-	return ;
 	int			i;
-	int			*pos;
 	t_triangle	*tri;
 
 	if ((!ft_inbounds(new->type, 1, 31) && !ft_inbounds(new->type, 160, 191))
 		|| new->type == BTXT_NONE)
 		return ;
-	pos = new->m_pos;
 	i = -1;
 	while (++i < new->tris.nb_cells)
 	{
 		tri = dyacc(&new->tris, i);
-		if (tri->face_i == FACE_NORD)
-			tri->sp = check_face(&env->edit_env.new_map, new->type,
-				(int[3]){ pos[0], pos[1], pos[2] - 1});
-		else if (tri->face_i == FACE_SUD)
-			tri->sp = check_face(&env->edit_env.new_map, new->type,
-				(int[3]){ pos[0], pos[1], pos[2] + 1});
-		last_neighbourgs(env, new, tri);
+		culling_faces(env, new, tri);
 	}
 }
