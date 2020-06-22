@@ -92,6 +92,7 @@ void			greedy_meshing(t_env *env, t_map *map)
 	t_dynarray	nodes;
 	t_ed_map	*matrix = &env->edit_env.new_map;
 
+	return ;
 	init_dynarray(&nodes, sizeof(t_node), env->astar.d_nodes.nb_cells);
 	nodes.nb_cells = env->astar.d_nodes.nb_cells;
 	ft_memcpy(nodes.c, env->astar.d_nodes.c, nodes.byte_size);
