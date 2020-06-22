@@ -11,13 +11,22 @@ static t_node	*get_end(t_ed_map *m, t_dynarray *n, t_vec3d dim, t_vec3d pos)
 	return (dyacc(n, nodes_3d_1d(dim, pos)));
 }
 
+static void		fusion(t_mesh *start, t_mesh *end)
+{
+	(void)start;
+	(void)end;
+}
+
 static void		new_bloc(t_map *map, t_node *start, t_node *end)
 {
-	int 	i = -1;
-	t_mesh	*mstart = NULL;
-	t_mesh	*mend = NULL;
+	int 	i;
+	t_mesh	*mstart;
+	t_mesh	*mend;
 	t_mesh	*mesh;
 
+	mstart = NULL;
+	mend = NULL;
+	i = -1;
 	while (++i < map->nmesh)
 	{
 		mesh = dyacc(&map->meshs, i);
@@ -30,22 +39,25 @@ static void		new_bloc(t_map *map, t_node *start, t_node *end)
 			&& mesh->m_pos[2] == (int)end->pos.z)
 			mend = mesh;
 	}
+/*
 	printf("start: ");
 	print_vec(start->pos);
 	printf("%d %d %d\n", mstart->m_pos[0], mstart->m_pos[1], mstart->m_pos[2]);
 	printf("end: ");
 	print_vec(end->pos);
 	printf("%d %d %d\n", mend->m_pos[0], mend->m_pos[1], mend->m_pos[2]);
-
+*/
 	if (mstart && mend)
 	{
+		fusion(mstart, mend);
+/*
 		t_triangle	*tri;
 		for (int j = 0; j < mstart->tris.nb_cells; j++)
 		{
 			tri = dyacc(&mstart->tris, j);
 			if (tri->sp > BTXT_NONE)
 			{
-				printf("start");
+				printf("start\n");
 				for (int k = 0; k < 3; k++)
 				{
 					print_vec(tri->points[k]);
@@ -58,7 +70,7 @@ static void		new_bloc(t_map *map, t_node *start, t_node *end)
 			tri = dyacc(&mend->tris, j);
 			if (tri->sp > BTXT_NONE)
 			{
-				printf("end ");
+				printf("end\n");
 				for (int k = 0; k < 3; k++)
 				{
 					print_vec(tri->points[k]);
@@ -66,18 +78,17 @@ static void		new_bloc(t_map *map, t_node *start, t_node *end)
 				printf("\n");
 			}
 		}
+*/
 	}
-	exit(0);
 }
 
-static void		fusion()
+static void		delete_blocs()
 {
-
+	
 }
 
 void			greedy_meshing(t_env *env, t_map *map)
 {
-	return ;
 	t_dynarray	nodes;
 	t_ed_map	*matrix = &env->edit_env.new_map;
 
@@ -106,15 +117,10 @@ void			greedy_meshing(t_env *env, t_map *map)
 				node = dyacc(&nodes, nodes_3d_1d(dim , pos)); 
 				if (node && ft_inbounds(matrix->map[x][y][z], 1, 31))
 				{
-					printf("%d %d %d\n", x, y, z);
 					end = get_end(matrix, &nodes, dim, pos);
 					if (node->i != end->i)
-					{
-						printf("ni: %d ei: %d\n",
-							node->i, end->i);
 						new_bloc(map, node, end);
-						fusion();
-					}
+					delete_blocs();
 				}
 			}
 		}
