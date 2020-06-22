@@ -116,5 +116,9 @@ int			map_to_scene(t_env *env)
 		}
 	}
 	scene->spawn = (t_vec3d){0, 0, 0, 0};
+
+	if (env->context == C_CUSTOM)
+		greedy_meshing(env, scene);
+
 	return (0);
 }

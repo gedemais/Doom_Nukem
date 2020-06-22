@@ -73,6 +73,7 @@ SRCS_NAME =	main.c\
 			map_editor/routines.c\
 			map_editor/input_field.c\
 			map_editor/culling.c\
+			map_editor/greedy_meshing.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/dependencies.c\

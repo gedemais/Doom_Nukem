@@ -15,7 +15,7 @@ static char		check_face(t_ed_map *map, char type, int *pos)
 	return (check_type(map->map[pos[0]][pos[1]][pos[2]]) ? 0 : type);
 }
 
-void			culling_faces(t_env *env, t_mesh *new, t_triangle *tri)
+void			cull_faces(t_env *env, t_mesh *new, t_triangle *tri)
 {
 	int		*pos;
 
@@ -45,6 +45,8 @@ void			culling(t_env *env, t_mesh *new)
 	int			i;
 	t_triangle	*tri;
 
+	//add slopes culling
+
 	if ((!ft_inbounds(new->type, 1, 31) && !ft_inbounds(new->type, 160, 191))
 		|| new->type == BTXT_NONE)
 		return ;
@@ -52,6 +54,6 @@ void			culling(t_env *env, t_mesh *new)
 	while (++i < new->tris.nb_cells)
 	{
 		tri = dyacc(&new->tris, i);
-		culling_faces(env, new, tri);
+		cull_faces(env, new, tri);
 	}
 }
