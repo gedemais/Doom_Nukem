@@ -31,12 +31,12 @@ int		play_ambience(t_sample *sample, bool play, bool stop, bool keep)
 		if (status == AL_PLAYING)
 			alSourceStop(source);
 	}
-	else if (keep)
+	if (keep)
 	{
 		alGetSourcei(source, AL_SOURCE_STATE, &status);
 		return (status == AL_PLAYING ? 1 : 0);
 	}
-	else if (play)
+	if (play)
 	{
 		alSourcei(source, AL_BUFFER, (ALint)sample->buffer);
 		alSourcePlay(source);

@@ -57,14 +57,14 @@ static void     nodes_diagonals_yz(t_node *node, t_vec3d dim)
         node->nghbr[17] = nodes_3d_1d(dim, (t_vec3d){ x, y - 1, z + 1, 0 });
 }
 
-static void		nodes_neighbourgs_diagonals(t_node *node, t_vec3d dim)
+static void		nodes_neighbours_diagonals(t_node *node, t_vec3d dim)
 {
 	nodes_diagonals_xy(node, dim);
 	nodes_diagonals_xz(node, dim);
 	nodes_diagonals_yz(node, dim);
 }
 
-void            nodes_neighbourgs(t_pf *env, t_node *node)
+void            nodes_neighbours(t_pf *env, t_node *node)
 {
     int     x;
     int     y;
@@ -88,5 +88,5 @@ void            nodes_neighbourgs(t_pf *env, t_node *node)
     if (z < dim.z - 1)
         node->nghbr[5] = nodes_3d_1d(dim, (t_vec3d){ x, y, z + 1, 0 });
     if (NEIGHBOURG == 18)
-    	nodes_neighbourgs_diagonals(node, dim);
+    	nodes_neighbours_diagonals(node, dim);
 }

@@ -133,7 +133,6 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.head = (t_vec3d){ 0, 0, 1, 0 };
 	enemy.offset = (t_vec3d){ 0, 1, 0, 0 };
 	enemy.peace = MOB_PEACE_TIME;
-
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;

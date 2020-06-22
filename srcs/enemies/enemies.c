@@ -1,49 +1,22 @@
 #include "main.h"
 
-static void		enemies_damages(t_env *env)
-{
-	t_enemy		*mob;
-	int			index;
-	int			i;
-
-	i = 0;
-	index = env->mid.mesh->index;
-	while (i < env->custom_env.mobs.nb_cells)
-	{
-		mob = dyacc(&env->custom_env.mobs, i);
-		if (index >= mob->map_start && index < mob->map_end)
-		{
-			env->player.hover = true;
-			if (env->player.current->shot && !mob->dead)
-			{
-				mob->hp -= env->player.current->damages;
-				env->custom_env.game.moula += (mob->hp > 0)
-					? HIT_REWARD : KILL_REWARD;
-				mob->dead = (mob->hp <= 0);
-				env->player.hitmarker = HITMARKER_T;
-			}
-			return ;
-		}
-		i++;
-	}
-}
-
 static void		enemies_to_scene(t_dynarray *mobs)
 {
 	int		i;
 	int		j;
-	t_mesh	*m;
+	t_mesh	*mesh;
 	t_enemy	*mob;
 
 	i = -1;
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
+		enemies_animations(mob);
 		j = mob->map_start - 1;
 		while (++j < mob->map_end)
 		{
-			m = dyacc(&mob->map->meshs, j);
-			translate_mesh(mob->map, m, vec_sub(mob->pos, m->corp.pos));
+			mesh = dyacc(&mob->map->meshs, j);
+			translate_mesh(mob->map, mesh, vec_sub(mob->pos, mesh->corp.pos));
 		}
 	}
 }
@@ -109,6 +82,7 @@ int				handle_enemies(t_env *env)
 		enemies_movements(env, &env->astar);
 		enemies_death(&env->custom_env.mobs);
 		enemies_to_scene(&env->custom_env.mobs);
+		enemies_kills_annoucements(env);
 	}
 	return (0);
 }

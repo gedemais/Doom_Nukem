@@ -10,7 +10,7 @@ static void     nodes_init_nghbrs(t_pf *env)
     while (++i < env->d_nodes.nb_cells)
     {
         node = dyacc(&env->d_nodes, i);
-        nodes_neighbourgs(env, node);
+        nodes_neighbours(env, node);
     }
 }
 

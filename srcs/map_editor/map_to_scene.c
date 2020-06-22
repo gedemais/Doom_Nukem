@@ -81,6 +81,8 @@ static int	create_block(t_env *env, t_map *scene, unsigned char type, int *pos)
 		return (-1);
 	else if (ft_inbounds(type, 32, 159) && create_slope(env, &new, type))
 		return (-1);
+	if (env->context == C_CUSTOM)
+		culling(env, &new);
 	if (push_dynarray(&scene->meshs, &new, false))
 		return (-1);
 	attribute_mesh(scene, scene->nmesh);
@@ -114,5 +116,9 @@ int			map_to_scene(t_env *env)
 		}
 	}
 	scene->spawn = (t_vec3d){0, 0, 0, 0};
+
+	if (env->context == C_CUSTOM)
+		greedy_meshing(env, scene);
+
 	return (0);
 }

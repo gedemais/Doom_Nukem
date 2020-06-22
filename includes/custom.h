@@ -24,6 +24,7 @@
 
 # define HIT_REWARD 10
 # define KILL_REWARD 60
+# define KILL_DELAY 120
 
 # define LAVA_DELAY 2
 
@@ -77,6 +78,8 @@ struct				s_custom_game
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
+	int 		kill_count;
+	int 		kill_delay;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 

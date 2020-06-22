@@ -159,6 +159,8 @@ struct				s_edit_env
 	unsigned char	current_bt;
 };
 
+void				culling(t_env *env, t_mesh *news);
+void				greedy_meshing(t_env *env, t_map *map);
 
 int					setup_medit(t_env *env);
 char				*blocs_txt_paths(unsigned int index);
