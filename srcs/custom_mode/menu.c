@@ -17,6 +17,8 @@ static int	select_map(t_env *env)
 		if (map_to_scene(env) || parse_events_blocks(env))
 			return (-1);
 		switch_custom_context(env, CUSTOM_SC_PLAY);
+		//if (env->context == C_CUSTOM)
+		//	greedy_meshing(env, scene);
 	}
 	ft_strdel(&s->s_path);
 	return (0);

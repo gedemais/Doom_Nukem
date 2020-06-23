@@ -161,7 +161,9 @@ struct				s_edit_env
 	unsigned char	current_bt;
 };
 
-void				culling(t_env *env, t_mesh *news);
+void				culling(t_env *env, t_mesh *news, unsigned char type);
+char				check_face(t_ed_map *map, char type, int *pos);
+void				cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type);
 void				greedy_meshing(t_env *env, t_map *map);
 
 int					setup_medit(t_env *env);

@@ -2,11 +2,13 @@
 
 static bool		check_type(int type)
 {
+	// handle slopes faces
+
 	return (ft_inbounds(type, 1, 31)
 		|| (ft_inbounds(type, 160, 191) && type != 163));
 }
 
-static char		check_face(t_ed_map *map, char type, int *pos)
+char			check_face(t_ed_map *map, char type, int *pos)
 {
 	if (pos[0] < 0 || pos[0] > map->width - 1
 		|| pos[1] < 0 || pos[1] > map->height - 1
@@ -15,7 +17,7 @@ static char		check_face(t_ed_map *map, char type, int *pos)
 	return (check_type(map->map[pos[0]][pos[1]][pos[2]]) ? 0 : type);
 }
 
-void			cull_faces(t_env *env, t_mesh *new, t_triangle *tri)
+static void		cull_blocs(t_env *env, t_mesh *new, t_triangle *tri)
 {
 	int		*pos;
 
@@ -40,20 +42,20 @@ void			cull_faces(t_env *env, t_mesh *new, t_triangle *tri)
 			(int[3]){ pos[0], pos[1] - 1, pos[2] });
 }
 
-void			culling(t_env *env, t_mesh *new)
+void			culling(t_env *env, t_mesh *new, unsigned char type)
 {
 	int			i;
 	t_triangle	*tri;
 
-	//add slopes culling
-
-	if ((!ft_inbounds(new->type, 1, 31) && !ft_inbounds(new->type, 160, 191))
-		|| new->type == BTXT_NONE)
+	if (type == BTXT_NONE)
 		return ;
 	i = -1;
 	while (++i < new->tris.nb_cells)
 	{
 		tri = dyacc(&new->tris, i);
-		cull_faces(env, new, tri);
+		if ((ft_inbounds(type, 1, 31) || ft_inbounds(type, 160, 191)))
+			cull_blocs(env, new, tri);
+		else
+			cull_slopes(env, new, tri, type);
 	}
 }
