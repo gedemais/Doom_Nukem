@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/22 21:57:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/23 18:48:59 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define HIT_REWARD 10
 # define KILL_REWARD 60
 # define KILL_DELAY 120
+
+# define NB_STARS 500
 
 # define LAVA_DELAY 2
 
@@ -97,6 +99,10 @@ struct				s_custom_env
 	float			spawner;
 	int				sub_context;
 };
+
+int					init_sky(t_env *env);
+int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
+int					copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
 
 t_vec3d				get_block_center(t_event_block *block);
 int					handle_block_events(t_env *env);

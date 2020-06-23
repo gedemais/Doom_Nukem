@@ -42,7 +42,7 @@ static bool		handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
 	return (false);
 }
 
-static int		copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
+int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 {
 	t_sprite	*sprite;
 	t_triangle	t;
@@ -54,9 +54,8 @@ static int		copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 	while (i < m->tris.nb_cells)
 	{
 		ft_memcpy(&t, dyacc(&m->tris, i), sizeof(t_triangle));
-		t.textured = true;
 		t.voxel = false;
-		if (!handle_texture(map, dyacc(&mob->txts, t.sp), &t))
+		if (t.textured && !handle_texture(map, dyacc(&mob->txts, t.sp), &t))
 		{
 			sprite = dyacc(&mob->txts, t.sp);
 			if (push_dynarray(&map->txts, sprite, false))

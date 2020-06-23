@@ -23,14 +23,16 @@ SRCS_NAME =	main.c\
 			contexts/routines_bis.c\
 			\
 			custom_mode/render.c\
+			custom_mode/copy_to_scene.c\
 			custom_mode/events.c\
 			custom_mode/events_blocks.c\
 			custom_mode/events_blocks_funcs.c\
 			custom_mode/menu.c\
 			custom_mode/play.c\
 			custom_mode/player.c\
-			custom_mode/setup.c\
 			custom_mode/routines.c\
+			custom_mode/setup.c\
+			custom_mode/sky.c\
 			\
 			enemies/astar.c\
 			enemies/astar_quick_sort.c\

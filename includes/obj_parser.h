@@ -68,6 +68,7 @@ enum	e_scene_id
 	SCENE_UGLY,
 	SCENE_MAD,
 	SCENE_MOON,
+	SCENE_STAR,
 	SCENE_MAX
 };
 

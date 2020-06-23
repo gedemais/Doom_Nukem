@@ -23,7 +23,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/slender.obj",
 										"resources/maps/ugly.obj",
 										"resources/maps/mad.obj",
-										"resources/maps/moon.obj"};
+										"resources/maps/moon.obj",
+										"resources/maps/star.obj"};
 
 	return (paths[index]);
 }

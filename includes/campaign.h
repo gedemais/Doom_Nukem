@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/22 21:24:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/23 17:03:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ enum	e_sector_id
 	SECTOR_UGLY,
 	SECTOR_MAD,
 	SECTOR_MOON,
+	SECTOR_STAR,
 	SECTOR_MAX
 };
 
