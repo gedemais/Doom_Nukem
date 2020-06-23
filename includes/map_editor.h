@@ -162,7 +162,7 @@ struct				s_edit_env
 };
 
 void				culling(t_env *env, t_mesh *news, unsigned char type);
-char				check_face(t_ed_map *map, char type, int *pos);
+int 				check_face(t_ed_map *map, int type, int *pos, int face);
 void				cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type);
 void				greedy_meshing(t_env *env, t_map *map);
 

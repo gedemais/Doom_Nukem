@@ -7,16 +7,16 @@ static void		east_slope(t_env *env, t_mesh *new, t_triangle *tri)
 	pos = new->m_pos;
 	if (tri->face_i == SFACE_LEFT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] + 1});
+			(int[3]){ pos[0], pos[1], pos[2] + 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_RIGHT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] - 1});
+			(int[3]){ pos[0], pos[1], pos[2] - 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_FRONT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] - 1, pos[1], pos[2] });
+			(int[3]){ pos[0] - 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_BOTTOM)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1] - 1, pos[2] });
+			(int[3]){ pos[0], pos[1] - 1, pos[2] }, tri->face_i);
 }
 
 static void		west_slope(t_env *env, t_mesh *new, t_triangle *tri)
@@ -26,16 +26,16 @@ static void		west_slope(t_env *env, t_mesh *new, t_triangle *tri)
 	pos = new->m_pos;
 	if (tri->face_i == SFACE_LEFT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] - 1});
+			(int[3]){ pos[0], pos[1], pos[2] - 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_RIGHT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] + 1});
+			(int[3]){ pos[0], pos[1], pos[2] + 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_FRONT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] + 1, pos[1], pos[2] });
+			(int[3]){ pos[0] + 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_BOTTOM)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1] - 1, pos[2] });
+			(int[3]){ pos[0], pos[1] - 1, pos[2] }, tri->face_i);
 }
 
 static void		north_slope(t_env *env, t_mesh *new, t_triangle *tri)
@@ -45,16 +45,16 @@ static void		north_slope(t_env *env, t_mesh *new, t_triangle *tri)
 	pos = new->m_pos;
 	if (tri->face_i == SFACE_LEFT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] + 1, pos[1], pos[2]});
+			(int[3]){ pos[0] + 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_RIGHT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] - 1, pos[1], pos[2]});
+			(int[3]){ pos[0] - 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_FRONT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] + 1 });
+			(int[3]){ pos[0], pos[1], pos[2] + 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_BOTTOM)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1] - 1, pos[2] });
+			(int[3]){ pos[0], pos[1] - 1, pos[2] }, tri->face_i);
 }
 
 static void		south_slope(t_env *env, t_mesh *new, t_triangle *tri)
@@ -64,16 +64,16 @@ static void		south_slope(t_env *env, t_mesh *new, t_triangle *tri)
 	pos = new->m_pos;
 	if (tri->face_i == SFACE_LEFT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] - 1, pos[1], pos[2]});
+			(int[3]){ pos[0] - 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_RIGHT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0] + 1, pos[1], pos[2]});
+			(int[3]){ pos[0] + 1, pos[1], pos[2] }, tri->face_i);
 	else if (tri->face_i == SFACE_FRONT)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1], pos[2] - 1 });
+			(int[3]){ pos[0], pos[1], pos[2] - 1 }, tri->face_i);
 	else if (tri->face_i == SFACE_BOTTOM)
 		tri->sp = check_face(&env->edit_env.new_map, new->type,
-			(int[3]){ pos[0], pos[1] - 1, pos[2] });
+			(int[3]){ pos[0], pos[1] - 1, pos[2] }, tri->face_i);
 }
 
 void			cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type)
