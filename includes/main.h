@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/23 18:47:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/23 20:01:24 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@
 
 # define SENSI 0.1f
 # define WALK_SPEED 0.3f
+# define WSPEED 3.0f
 # define PLAYER_SIZE 3.0f
 
 enum		e_context_id

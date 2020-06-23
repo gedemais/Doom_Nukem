@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/23 18:48:59 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/23 19:57:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define KILL_DELAY 120
 
 # define NB_STARS 500
+
+# define STARS_SPREAD 25
 
 # define LAVA_DELAY 2
 
