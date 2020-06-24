@@ -4,14 +4,17 @@ static void		tweek_stars_height(t_env *env, t_vec3d star, float *y)
 {
 	t_vec3d		middle;
 	t_ed_map	*map;
+	float		x;
+	float		z;
 
 	map = &env->edit_env.new_map;
 	middle = (t_vec3d){map->width, map->height, map->depth, 0};
 
-	// tu peux pas faire un vec3d dist pcq ca prend en compte
-	// le y et du coup ca augmente la dist pour R
-	// spour ça que je t'ai dis de faire la dist entre 2 t_point
-	*y -= vec3d_dist(middle, star);
+	x = star.x - middle.x;
+	z = star.z - middle.z;
+	x *= x;
+	z *= z;
+	*y -= 1 / astar_rsqrt(x + z) / 2;
 }
 
 static int		spawn_stars(t_env *env, t_vec3d o, t_vec3d box)
@@ -27,10 +30,17 @@ static int		spawn_stars(t_env *env, t_vec3d o, t_vec3d box)
 
 static int		spawn_moon(t_env *env, t_vec3d o, t_vec3d box)
 {
-	(void)env;
-	(void)o;
-	(void)box;
-	return (0);
+	t_vec3d	pos[4];
+	float	s;
+	int		p;
+
+	s = 1.75f;
+	p = rand() % 4;
+	pos[0] = (t_vec3d){o.x / s, -box.y, o.z / s, 0};
+	pos[1] = (t_vec3d){(o.x + box.x) / s, -box.y, o.z / s, 0};
+	pos[2] = (t_vec3d){o.x / s, -box.y, (o.z + box.z) / s, 0};
+	pos[3] = (t_vec3d){(o.x + box.x) / s, -box.y, (o.z + box.z) / s, 0};
+	return (copy_to_scene(&env->edit_env.map, &env->maps[SCENE_MOON], pos[0]));
 }
 
 int				init_sky(t_env *env)
@@ -44,12 +54,10 @@ int				init_sky(t_env *env)
 	map = &env->edit_env.new_map;
 	scale = map->width > map->depth ? map->width : map->depth;
 	scale = scale < STARS_SPREAD ? STARS_SPREAD : scale;
-	o = (t_vec3d){ scale * STARS_SPREAD,
-		-map->height * 20,
-		scale * STARS_SPREAD, 0 };
-	box = (t_vec3d){ scale * 2 + o.x * 2,
-		-map->height * 22,
-		scale * 2 + o.z * 2, 0 };
+	o = (t_vec3d){scale * STARS_SPREAD, -map->height * 20,
+		scale * STARS_SPREAD, 0};
+	box = (t_vec3d){ scale * 2 + o.x * 2, -map->height * 22,
+		scale * 2 + o.z * 2, 0};
 	if (spawn_moon(env, o, box))
 		return (-1);
 	i = -1;
