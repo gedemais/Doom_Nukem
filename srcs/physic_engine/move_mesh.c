@@ -12,6 +12,26 @@
 
 #include "main.h"
 
+void	rotate_mesh(t_mesh *mesh, t_vec3d mesh_center, float angle,
+			void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin))
+{
+	int			i;
+	float		fcos;
+	float		fsin;
+	t_triangle	*tri;
+
+	fcos = cos(angle);
+	fsin = sin(angle);
+	i = -1;
+	while (++i < mesh->tris.nb_cells)
+	{
+		tri = dyacc(&mesh->tris, i);
+		rotation(&tri->points[0], mesh_center, fcos, fsin);
+		rotation(&tri->points[1], mesh_center, fcos, fsin);
+		rotation(&tri->points[2], mesh_center, fcos, fsin);
+	}
+}
+
 void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
 {
 	t_triangle	*tri;

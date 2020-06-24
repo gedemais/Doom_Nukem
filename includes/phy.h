@@ -54,7 +54,8 @@ int		report_collisions(t_env *env);
 int		init_map_physics(t_map *map);
 
 void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t);
-void	rotate_mesh(t_map *map, t_mesh *m, t_vec3d t);
+void	rotate_mesh(t_mesh *mesh, t_vec3d mesh_center, float angle,
+			void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
 void	tp_mesh(t_map *map, t_mesh *m, t_vec3d t);
 void	print_mesh_corp(t_mesh m);
 void	print_collide(t_collide c);

@@ -97,7 +97,6 @@ struct				s_custom_env
 	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;
-	t_vec3d			moon_pos;
 	t_mesh			*moon;
 	t_node          *start;
     t_node          *end;
