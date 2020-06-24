@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/24 18:12:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/24 21:51:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ enum				e_block_events
 
 union				u_bep
 {
-	char	c;
-	float	f;
+	char		c;
+	int			door;
 };
 
 struct				s_event_block
@@ -71,6 +71,7 @@ struct				s_event_block
 	int		x;
 	int		y;
 	int		z;
+	int		index;
 	int		price;
 	t_bep	param;
 	char	id;
@@ -93,9 +94,9 @@ struct				s_custom_env
 {
 	t_custom_game	game;
 	t_dynarray		mobs;
-	t_ed_map		map;
 	t_map			scene;
 	t_scroll		scroll;
+	t_dynarray		doors;
 	t_dynarray		events;
 	t_mesh			*moon;
 	t_node          *start;
@@ -104,6 +105,8 @@ struct				s_custom_env
 	float			spawner;
 	int				sub_context;
 };
+
+int					init_custom_door(t_custom_env *c, t_event_block *block);
 
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
 t_mesh				*copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);

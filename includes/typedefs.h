@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/16 19:47:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:32:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct	s_cube_pallet t_cube_pallet;
 typedef struct	s_node t_node;
 typedef struct  s_pathfinding t_pf;
 typedef struct	s_event_block t_event_block;
-
-typedef union	u_bep t_bep;
+typedef union	u_bep	t_bep;
 
 #endif

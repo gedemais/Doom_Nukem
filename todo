@@ -1,6 +1,7 @@
-Ciel
+Fix les doors
+Empecher les spawners qui te trouvent pas de faire spawn des mobs
+
 Fix le segfault du bonus wheel avec bc == BC_OBJ
-Checker le nombre de blocs SPAWNER
 Loots : Nuke, munitions, god mode, Thunes
 
 Decider de la duree de vie des pointeurs alloues :

@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:56 by bebosson          #+#    #+#             */
-/*   Updated: 2020/06/05 15:45:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:45:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	rotate_mesh(t_mesh *mesh, t_vec3d mesh_center, float angle,
 		rotation(&tri->points[1], mesh_center, fcos, fsin);
 		rotation(&tri->points[2], mesh_center, fcos, fsin);
 	}
+	rotation(&mesh->corp.pos, mesh_center, fcos, fsin);
 }
 
 void	translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
