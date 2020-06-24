@@ -36,6 +36,7 @@ void			handle_moon(t_env *env)
 	printf("moon_pos ");
 	print_vec(env->custom_env.moon_pos);
 
+	translate_mesh(&env->edit_env.map, env->custom_env.moon, (t_vec3d){1.0f, 0, 0, 0});
 	//enemies_rotate_y
 	//moon_rotate(moon, env->custom_env.moon_pos, 5, ro)
 }

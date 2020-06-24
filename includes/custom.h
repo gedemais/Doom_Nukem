@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/23 19:57:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/24 18:12:46 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,17 @@ struct				s_custom_env
 	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;
+	t_vec3d			moon_pos;
+	t_mesh			*moon;
 	t_node          *start;
     t_node          *end;
 	t_env			*env;
 	float			spawner;
 	int				sub_context;
-	t_vec3d			moon_pos;
-	t_mesh			*moon;
 };
 
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
-int					copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
+t_mesh				*copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
 
 t_vec3d				get_block_center(t_event_block *block);
 int					handle_block_events(t_env *env);

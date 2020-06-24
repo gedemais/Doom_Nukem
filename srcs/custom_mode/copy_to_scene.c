@@ -1,12 +1,14 @@
 #include "main.h"
 
-int		copy_to_scene(t_map *dest, t_map *src, t_vec3d pos)
+t_mesh	*copy_to_scene(t_map *dest, t_map *src, t_vec3d pos)
 {
 	t_mesh		new;
 	t_mesh		*m;
+	t_mesh		*ret;
 	int			i;
 
 	i = 0;
+	ret = dest->meshs.c + (dest->meshs.cell_size * dest->meshs.nb_cells);
 	while (i < src->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
@@ -16,11 +18,11 @@ int		copy_to_scene(t_map *dest, t_map *src, t_vec3d pos)
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(dest, src, m, &new)
 			|| push_dynarray(&dest->meshs, &new, false))
-			return (-1);
+			return (NULL);
 		assign_meshs(dyacc(&dest->meshs, dest->nmesh));
 		translate_mesh(dest, dyacc(&dest->meshs, dest->nmesh), pos);
 		dest->nmesh++;
 		i++;
 	}
-	return (0);
+	return (ret);
 }

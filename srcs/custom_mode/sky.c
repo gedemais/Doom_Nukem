@@ -22,13 +22,14 @@ static int		spawn_stars(t_env *env, t_vec3d o, t_vec3d box)
 	spawn.y = (rand() % (int)box.y) - o.y;
 	spawn.z = (rand() % (int)box.z) - o.z;
 	tweek_stars_height(env, spawn, &spawn.y);
-	return (copy_to_scene(&env->edit_env.map, &env->maps[SCENE_STAR], spawn));
+	return (!copy_to_scene(&env->edit_env.map, &env->maps[SCENE_STAR], spawn));
 }
 
 static int		spawn_moon(t_env *env, t_vec3d o)
 {
-	int 	p;
 	t_vec3d	pos[4];
+	t_mesh	*m;
+	int		p;
 
 	if (o.x > STARS_SPREAD * STARS_SPREAD)
 		o.x = STARS_SPREAD * STARS_SPREAD;
@@ -42,7 +43,9 @@ static int		spawn_moon(t_env *env, t_vec3d o)
 	pos[3] = (t_vec3d){o.x / MOON_SCALE, -o.y, o.z / MOON_SCALE, 0};
 	p = rand() % 4;
 	env->custom_env.moon_pos = pos[p];
-	return (copy_to_scene(&env->edit_env.map, &env->maps[SCENE_MOON], pos[p]));
+	m = copy_to_scene(&env->edit_env.map, &env->maps[SCENE_MOON], pos[p]);
+	env->custom_env.moon = m;
+	return (m ? 0 : -1);
 }
 
 int				init_sky(t_env *env)
