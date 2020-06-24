@@ -42,7 +42,6 @@ static int		spawn_moon(t_env *env, t_vec3d o)
 	pos[2] = (t_vec3d){o.x / MOON_SCALE, -o.y, -o.z / MOON_SCALE, 0};
 	pos[3] = (t_vec3d){o.x / MOON_SCALE, -o.y, o.z / MOON_SCALE, 0};
 	p = rand() % 4;
-	env->custom_env.moon_pos = pos[p];
 	m = copy_to_scene(&env->edit_env.map, &env->maps[SCENE_MOON], pos[p]);
 	env->custom_env.moon = m;
 	return (m ? 0 : -1);
