@@ -102,9 +102,10 @@ struct				s_custom_env
 	t_env			*env;
 	float			spawner;
 	int				sub_context;
+	t_vec3d			moon_pos;
+	t_mesh			*moon;
 };
 
-int					init_sky(t_env *env);
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
 int					copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
 
@@ -113,6 +114,9 @@ int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
 void				handle_player(t_env *env);
+
+int					init_sky(t_env *env);
+void				handle_moon(t_env *env);
 
 int					handle_jukeboxs(t_env *env, t_event_block *block, int index);
 int					handle_mystery_boxs(t_env *env, t_event_block *block, int index);

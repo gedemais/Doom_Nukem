@@ -28,6 +28,7 @@ SRCS_NAME =	main.c\
 			custom_mode/events_blocks.c\
 			custom_mode/events_blocks_funcs.c\
 			custom_mode/menu.c\
+			custom_mode/moon.c\
 			custom_mode/play.c\
 			custom_mode/player.c\
 			custom_mode/routines.c\
