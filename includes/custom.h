@@ -26,9 +26,11 @@
 # define KILL_REWARD 60
 # define KILL_DELAY 120
 
-# define NB_STARS 500
-
+# define NB_STARS 100
 # define STARS_SPREAD 25
+# define STARS_MAX_HEIGHT 10
+# define STARS_MIN_HEIGHT 7
+# define MOON_SCALE 1.8f
 
 # define LAVA_DELAY 2
 
