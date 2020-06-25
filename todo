@@ -1,5 +1,12 @@
 Fix les doors
+
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
+{
+	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche
+	INFINITY si joueur trop loin
+}
+
+Gérer le changement de contexte reverse (custom to menu etc..)
 
 Fix le segfault du bonus wheel avec bc == BC_OBJ
 Loots : Nuke, munitions, god mode, Thunes
@@ -12,3 +19,14 @@ Decider de la duree de vie des pointeurs alloues :
 - programme
 
 FT_Done_Face
+
+gérer le export ds le make install
+ => l'user définit en brut dans le make install le path du .zshrc
+ 
+NORME
+
+LEAKS
+
+gérer toutes les sorties de fonctions return(-1);
+
+vérifier les .h et .c si fonctions non utilisées => delete
