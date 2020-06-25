@@ -25,7 +25,7 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 {
 	t_vec3d	end;
 
-	while (astar_distance(mob->goal->pos, mob->end->pos) > 3)
+	while (vec3d_dist(mob->goal->pos, mob->end->pos) > 3)
 	{
 		end.x = (int)(mob->end->pos.x / 2 + mob->goal->pos.x / 2);
 		end.y = (int)(mob->end->pos.y / 2 + mob->goal->pos.y / 2);
@@ -52,7 +52,7 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	cam.z = (int)cam.z / 2;
 	if (enemies_vec_outrange(a->dim, cam))
 		return ;
-	if (astar_distance(a->start->pos, cam) < DIST_TO_PLAYER)
+	if (vec3d_dist(a->start->pos, cam) < DIST_TO_PLAYER)
 		return ;
 	mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, cam));
 	if (mob->end == NULL)

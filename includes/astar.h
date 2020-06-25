@@ -5,13 +5,7 @@
 
 # define NEIGHBOURG 18
 
-# define DIST_TO_PLAYER 1.5f
-
-typedef union	u_rsqrt
-{
-	float		f;
-	uint32_t	i;
-}				t_rsqrt;
+# define ASTAR_MAX_DIST 5
 
 struct  s_node
 {
@@ -37,8 +31,6 @@ struct			s_pathfinding
 int				astar_init(t_env *env);
 void            astar(t_pf *env);
 
-float			astar_rsqrt(float number);
-
 int             astar_get_custom_nodes(t_ed_map map, t_pf *env);
 
 void            nodes_neighbours(t_pf *env, t_node *node);
@@ -46,7 +38,6 @@ void            nodes_neighbours(t_pf *env, t_node *node);
 int             nodes_3d_1d(t_vec3d dim, t_vec3d pos);
 t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos);
 
-float           astar_distance(t_vec3d a, t_vec3d b);
 void            astar_delvisited_nodes(t_dynarray *arr);
 void            astar_reset(t_pf *env);
 

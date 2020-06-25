@@ -14,7 +14,7 @@ static void	check_wounds(t_env *env)
 	while (i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
-		if (vec3d_dist(env->cam.stats.pos, mob->pos) > EVENT_DIST)
+		if (vec3d_dist(env->cam.stats.pos, mob->pos) < EVENT_DIST)
 		{
 			mob->peace--;
 			if (mob->peace <= 0)

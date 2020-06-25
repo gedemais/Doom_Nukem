@@ -15,7 +15,7 @@
 
 # define CUSTOM_WALK_SPEED 0.05f
 # define MAX_CUSTOM_MOBS 1
-# define EVENT_DIST 0.25f
+# define EVENT_DIST 4
 
 # define MOB_PEACE_TIME 30
 

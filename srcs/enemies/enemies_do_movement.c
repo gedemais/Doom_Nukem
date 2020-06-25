@@ -64,7 +64,7 @@ void			enemies_do_movement(t_enemy *mob)
 		return ;
 	enemies_smooth_movement(mob);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
-	if (astar_distance(goal, mob->pos) < 0.1f)
+	if (vec3d_dist(goal, mob->pos) < 0.1f)
 		mob->i = mob->goal->i;
 	mob->goal->bobstacle = 1;
 }

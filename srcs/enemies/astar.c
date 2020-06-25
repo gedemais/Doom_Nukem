@@ -21,12 +21,12 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
     nghbr = dyacc(&env->d_nodes, (*c)->nghbr[i]);
     if (nghbr == NULL)
         return ;
-    plowergoal = (*c)->localgoal + astar_distance((*c)->pos, nghbr->pos);
+    plowergoal = (*c)->localgoal + vec3d_dist((*c)->pos, nghbr->pos);
     if (plowergoal < nghbr->localgoal)
     {
         nghbr->localgoal = plowergoal;
         nghbr->globalgoal = nghbr->localgoal
-            + astar_distance(nghbr->pos, env->end->pos);
+            + vec3d_dist(nghbr->pos, env->end->pos);
         nghbr->parent = dyacc(&env->d_nodes, (*c)->i);
     }
     if (nghbr->bvisited == 0 && nghbr->bobstacle == 0)
@@ -36,7 +36,7 @@ static void     astar_neighbour(t_pf *env, t_node **c, int i)
 
 static bool     astar_exit(t_pf *env, t_node *current)
 {
-    if (astar_distance(env->start->pos, current->pos) > 3)
+    if (vec3d_dist(env->start->pos, current->pos) > ASTAR_MAX_DIST)
     {
         env->end = NULL;
         return (true);
@@ -74,7 +74,7 @@ void            astar(t_pf *env)
     if (current == NULL)
         return ;
     current->localgoal = 0;
-    current->globalgoal = astar_distance(env->start->pos, env->end->pos);
+    current->globalgoal = vec3d_dist(env->start->pos, env->end->pos);
     while (astar_solve(env, current) == 0)
         ;
 }

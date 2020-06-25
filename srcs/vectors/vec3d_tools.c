@@ -12,6 +12,20 @@
 
 #include "main.h"
 
+float		rsqrt(float number)
+{
+	float	i;
+	float	threehalfs;
+	t_rsqrt	conv;
+
+	i = number * 0.5f;
+	threehalfs = 1.5f;
+	conv = (t_rsqrt){ number };
+	conv.i = 0x5f3759df - (conv.i >> 1);
+	conv.f *= (threehalfs - (i * conv.f * conv.f));
+	return (conv.f);
+}
+
 void		vec3d_swap(t_vec3d *a, t_vec3d *b)
 {
 	t_vec3d		t;
@@ -53,14 +67,14 @@ t_vec3d zero_vector()
 
 float	vec_norm(t_vec3d vec)
 {
-	return (sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (1/ rsqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
 t_vec3d	vec_normalize(t_vec3d vec)
 {
 	float	l;
 
-	l = sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	l = 1 / rsqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 	return ((t_vec3d){vec.x /= l, vec.y /= l, vec.z /= l, 0.0f});
 }
 
@@ -88,15 +102,7 @@ float	vec_sdist(t_vec3d o, t_vec3d v)
 
 float	vec3d_dist(t_vec3d o, t_vec3d v)
 {
-	float	ret;
-	float	tmp;
-
-	ret = 0.0f;
-	tmp = (v.x - o.x);
-	ret +=  tmp * tmp;
-	tmp = (v.y - o.y);
-	ret +=  tmp * tmp;
-	tmp = (v.z - o.z);
-	ret +=  tmp * tmp;
-	return (astar_rsqrt(ret));
+    return (1 / rsqrt((o.x - v.x) * (o.x - v.x)
+        + (o.y - v.y) * (o.y - v.y)
+        + (o.z - v.z) * (o.z - v.z)));
 }

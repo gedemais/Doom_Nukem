@@ -9,7 +9,7 @@ int		handle_jukeboxs(t_env *env, t_event_block *block, int index)
 	e = &env->events;
 	if (block->id != BE_JUKEBOX)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
 		track = &block->param.c;
 		textual_hint(env, 'F', "turn on / off", 0);
@@ -33,7 +33,7 @@ int		handle_mystery_boxs(t_env *env, t_event_block *block, int index)
 	(void)index;
 	if (block->id != BE_CHEST)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
 		textual_hint(env, 'F', "get a random weapon ( cost x)", 0);
 		return (1);
@@ -62,7 +62,7 @@ int		handle_doors(t_env *env, t_event_block *block, int index)
 	(void)index;
 	if (block->id != BE_DOOR)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
 		textual_hint(env, 'F', "open the door ( cost x)", 0);
 		if (env->events.keys[KEY_F])
@@ -83,7 +83,7 @@ int		handle_lavas(t_env *env, t_event_block *block, int index)
 	(void)index;
 	if (block->id != BE_LAVA)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) > EVENT_DIST)
+	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
 		delay--;
 		if (delay == 0)

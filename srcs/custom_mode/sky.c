@@ -11,7 +11,7 @@ static void		tweek_stars_height(t_env *env, t_vec3d star, float *y)
 	middle = (t_vec3d){ map->width, map->height, map->depth, 0 };
 	x = star.x - middle.x;
 	z = star.z - middle.z;
-	*y -= 1 / astar_rsqrt(x * x + z * z) / 2;
+	*y -= 1 / rsqrt(x * x + z * z) / 2;
 }
 
 static int		spawn_stars(t_env *env, t_vec3d o, t_vec3d box)

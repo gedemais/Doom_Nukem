@@ -8,6 +8,9 @@
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
 
+
+# define DIST_TO_PLAYER 1.8f
+
 enum				e_enemies
 {
 	ENEMY_CUBE,

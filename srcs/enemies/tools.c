@@ -29,7 +29,7 @@ t_node          *nodes_get_closest(t_dynarray *arr, t_vec3d pos)
     while (++i < arr->nb_cells)
     {
         d = dyacc(arr, i);
-        tmp = astar_distance(pos, d->pos);
+        tmp = vec3d_dist(pos, d->pos);
         if (tmp < dst)
         {
             dst = tmp;
