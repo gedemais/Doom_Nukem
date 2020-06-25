@@ -45,14 +45,6 @@ t_vec3d		vec_cross(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
-int		nonzero_vector(t_vec3d vec)
-{
-	if (vec.x != 0 || vec.y != 0 || vec.z != 0)
-		return (1);
-	else
-		return (0);
-}
-
 void	print_vec(t_vec3d vec)
 {
 	printf("vec.x = %f", vec.x);
@@ -74,8 +66,8 @@ t_vec3d	vec_normalize(t_vec3d vec)
 {
 	float	l;
 
-	l = 1 / rsqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	return ((t_vec3d){vec.x /= l, vec.y /= l, vec.z /= l, 0.0f});
+	l = vec_norm(vec);
+	return ((t_vec3d){vec.x /= l, vec.y /= l, vec.z /= l, 0});
 }
 
 float	vec_dot(t_vec3d a, t_vec3d b)
