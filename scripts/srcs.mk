@@ -141,4 +141,8 @@ SRCS_NAME =	main.c\
 			\
 			archive/archive.c\
 			archive/unarchive.c\
-			archive/archive_tools.c
+			archive/archive_tools.c\
+			\
+			hud/hud.c\
+			hud/health.c\
+			hud/compass.c

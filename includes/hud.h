@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2d_tools.c                                      :+:      :+:    :+:   */
+/*   hud.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/15 01:21:03 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/25 07:39:49 by grudler          ###   ########.fr       */
+/*   Created: 2020/06/14 16:13:21 by grudler           #+#    #+#             */
+/*   Updated: 2020/06/25 18:54:50 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#ifndef HUD_H
+# define HUD_H
 
-void		vec2d_swap(t_vec2d *a, t_vec2d *b)
-{
-	t_vec2d		t;
+# include "main.h"
+# define HP_MAX 100
+# define DARK_GREY 0x293133
+# define LIGHT_GREY 0x9C9C9C
+# define NORMAL_RED 0xFF0000
+# define RED_HEALTH 0xA50016
+# define GREEN_HEALTH 0x009242
+# define ORA_HEALTH 0xF88F23
 
-	t = *a;
-	*a = *b;
-	*b = t;
-}
+int		draw_hud(t_env *env);
+int		draw_health(t_env *env);
+void	draw_compass(t_env *env);
 
-float		vec2d_det_xz(t_vec3d a, t_vec3d b)
-{
-	return(a.x * b.z - a.z * b.x);
-}
 
-float		vec2d_dot_xz(t_vec3d a, t_vec3d b)
-{
-	return(a.x * b.x + a.z * b.z);
-}
+
+#endif
