@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:12:34 by grudler           #+#    #+#             */
-/*   Updated: 2020/06/25 18:59:19 by grudler          ###   ########.fr       */
+/*   Updated: 2020/06/25 20:45:42 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int		draw_health(t_env *env)
 
 	conf = ttf_config();
 	ft_strcpy((char *)conf->s, "HP");
-	if (env->player.hp <= 0.33 * HP_MAX)
+	env->player.hp = 100;
+	if (env->player.hp <= HP_MAX * 1/3)
 		color = RED_HEALTH;
-	else if (env->player.hp > 0.67 * HP_MAX)
+	else if (env->player.hp > HP_MAX * 2/3)
 		color = GREEN_HEALTH;
 	else
 		color = ORA_HEALTH;

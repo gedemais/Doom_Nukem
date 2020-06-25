@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 02:39:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/25 07:39:46 by grudler          ###   ########.fr       */
+/*   Updated: 2020/06/25 20:58:42 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,5 @@ void			print_vec(t_vec3d vec);
 float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
 
 void			vec2d_swap(t_vec2d *a, t_vec2d *b);
-float			vec2d_det_xz(t_vec3d a, t_vec3d b);
-float			vec2d_dot_xz(t_vec3d a, t_vec3d b);
-
 
 #endif
