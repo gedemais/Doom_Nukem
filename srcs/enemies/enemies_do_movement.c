@@ -50,7 +50,7 @@ static void		enemies_smooth_movement(t_enemy *mob)
 	mob->pos = vec_add(mob->pos, mob->pitch);
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
-	enemies_rotate_mob(mob, fcos, fsin, enemies_rotate_y);
+	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
 }
 
 void			enemies_do_movement(t_enemy *mob)

@@ -51,7 +51,7 @@ static bool		enemies_death_animation(t_enemy *mob, float angle)
 	fsin = sin(angle);
 	if (mob->sum_angle < 1.5f)
 	{
-		enemies_rotate_mob(mob, fcos, fsin, enemies_rotate_x);
+		enemies_rotate_mob(mob, fcos, fsin, rotate_x);
 		mob->sum_angle += angle;
 		return (false);
 	}

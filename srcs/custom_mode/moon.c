@@ -10,5 +10,5 @@ void			handle_moon(t_env *env)
 						env->edit_env.new_map.depth, 0 };
 	moon = env->custom_env.moon;
 	env->cam.light = vec_fdiv(vec_normalize(moon->corp.pos), 2.0f);
-	rotate_mesh(moon, map_center, 0.001f, enemies_rotate_y);
+	rotate_mesh(moon, map_center, 0.001f, rotate_y);
 }

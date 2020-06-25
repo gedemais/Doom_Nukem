@@ -26,7 +26,7 @@ void            astar_delvisited_nodes(t_dynarray *arr)
     }
 }
 
-float		astar_rsqrt(float number)
+float           astar_rsqrt(float number)
 {
 	float	i;
 	float	threehalfs;

@@ -55,9 +55,6 @@ void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
 void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
 		void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
 
-void			enemies_rotate_x(t_vec3d *v, t_vec3d m, float fcos, float fsin);
-void			enemies_rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin);
-
 float           enemies_xz_angle(t_vec3d a, t_vec3d b);
 
 #endif
