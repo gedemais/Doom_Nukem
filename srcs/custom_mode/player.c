@@ -34,6 +34,8 @@ void	handle_player(t_env *env)
 
 	i = 0;
 	heal--;
+	if (env->player.hp < 1)
+		switch_custom_context(env, CUSTOM_SC_GAME_OVER);
 	if (heal <= 0)
 	{
 		if (env->player.hp < START_HP)

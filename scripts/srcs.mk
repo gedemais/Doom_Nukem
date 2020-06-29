@@ -27,6 +27,7 @@ SRCS_NAME =	main.c\
 			custom_mode/events.c\
 			custom_mode/events_blocks.c\
 			custom_mode/events_blocks_funcs.c\
+			custom_mode/game_over.c\
 			custom_mode/menu.c\
 			custom_mode/moon.c\
 			custom_mode/play.c\
@@ -151,4 +152,8 @@ SRCS_NAME =	main.c\
 			\
 			archive/archive.c\
 			archive/unarchive.c\
-			archive/archive_tools.c
+			archive/archive_tools.c\
+			\
+			hud/hud.c\
+			hud/health.c\
+			hud/compass.c

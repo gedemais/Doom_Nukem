@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/15 18:16:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:42:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void		load_values(t_env *env, t_data *data)
 	gettimeofday(&data->time, NULL);
 	data->half_wdt = (float)WDT / 2;
 	data->half_hgt = (float)HGT / 2;
+	data->third_wdt = (float)WDT / 3;
 	data->data_size = WDT * HGT * sizeof(int);
 }
 

@@ -51,6 +51,7 @@ int			custom_play(t_env *env)
 	handle_weapons(env);
 	handle_block_events(env);
 	handle_moon(env);
+	draw_hud(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2d_tools.c                                      :+:      :+:    :+:   */
+/*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/15 01:21:03 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/25 20:58:28 by grudler          ###   ########.fr       */
+/*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
+/*   Updated: 2020/06/29 16:58:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void		vec2d_swap(t_vec2d *a, t_vec2d *b)
+int		draw_hud(t_env *env)
 {
-	t_vec2d		t;
+	draw_health(env);
+	draw_compass(env);
+	return(0);
 
-	t = *a;
-	*a = *b;
-	*b = t;
 }

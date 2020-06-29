@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/23 20:01:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:43:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@
 # include "custom.h"
 
 # include "archive.h"
+
+# include "hud.h"
 
 // TMP
 #define PUT ft_putstr("There\n"); fflush(stdout);
@@ -114,6 +116,7 @@ struct			s_data
 	struct timeval		time;
 	float		spent;
 	float		half_wdt;
+	float		third_wdt;
 	float		half_hgt;
 	int			data_size;
 };

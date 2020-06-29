@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:37:10 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/24 20:02:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/29 17:22:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			switch_custom_context(t_env *env, unsigned int i)
 
 int			render_custom(void *param)
 {
-	static int	(*sub_contexts[CUSTOM_SC_MAX])(t_env *env) = {custom_menu, custom_play};
+	static int	(*sub_contexts[CUSTOM_SC_MAX])(t_env *env) = {custom_menu, custom_play, custom_game_over};
 	t_env		*env;
 
 	env = ((t_env*)param);

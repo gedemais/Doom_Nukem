@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 09:45:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/29 17:24:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum				e_custom_sc_id
 {
 	CUSTOM_SC_MENU,
 	CUSTOM_SC_PLAY,
+	CUSTOM_SC_GAME_OVER,
 	CUSTOM_SC_MAX
 };
 
@@ -105,6 +106,7 @@ struct				s_custom_env
 	int				sub_context;
 };
 
+int					custom_game_over(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
