@@ -38,33 +38,8 @@ static int		handle_keys(t_env *env, t_events *e)
 	return (0);
 }
 
-static void	print_doors(t_env *env)
-{
-	t_dynarray	*door;
-	int			*pos;
-	int			i;
-	int			j;
-
-	i = 0;
-	while (i < env->custom_env.doors.nb_cells)
-	{
-		j = 0;
-		door = dyacc(&env->custom_env.doors, i);
-		printf("------- door n%d : %d blocks ------------\n", i, door->nb_cells);
-		while (j < door->nb_cells)
-		{
-			pos = dyacc(door, j);
-			printf("block n%d : %d %d %d | door n%d\n", j, pos[0], pos[1], pos[2], pos[3]);
-			j++;
-		}
-		printf("-----------------------------------\n");
-		i++;
-	}
-}
-
 int			custom_play(t_env *env)
 {
-	print_doors(env);
 	handle_player(env);
 	clear_screen_buffers(env);
 	handle_keys(env, &env->events);

@@ -41,22 +41,6 @@ int		handle_mystery_boxs(t_env *env, t_event_block *block, int index)
 	return (0);
 }
 
-static void	extract_door_blocks(t_env *env, t_dynarray *events, t_event_block *block)
-{
-	t_dynarray	*door;
-	int			*pos;
-	int			i;
-
-	i = 0;
-	door = dyacc(&env->custom_env.doors, block->param.door);
-	while (i < door->nb_cells)
-	{
-		pos = dyacc(door, i);
-		extract_dynarray(events, pos[3]);
-		i++;
-	}
-}
-
 int		handle_doors(t_env *env, t_event_block *block, int index)
 {
 	(void)index;
@@ -68,7 +52,7 @@ int		handle_doors(t_env *env, t_event_block *block, int index)
 		if (env->events.keys[KEY_F])
 		{
 		//	del_door(env);
-			extract_door_blocks(env, &env->custom_env.events, block);
+	//		extract_door_blocks(env, &env->custom_env.events, block);
 			play_ambience(&env->sound.samples[SA_DOOR], true, false, false);
 		}
 		return (1);

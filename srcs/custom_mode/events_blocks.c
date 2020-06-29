@@ -19,8 +19,8 @@ static int	parse_block_type(t_env *env, t_custom_env *c, t_event_block block, in
 		env->edit_env.map.spawn = vec_fmult((t_vec3d){p[0], p[1], p[2], 0}, 2);
 		env->edit_env.map.spawn.y += PLAYER_SIZE;
 	}
-	if (block.id == BE_DOOR)
-		init_custom_door(c, &block);
+//	if (block.id == BE_DOOR)
+//		init_custom_door(c, &block);
 	if (c->events.byte_size == 0
 			&& init_dynarray(&c->events, sizeof(t_event_block), 0))
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/24 21:51:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/29 09:45:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ struct				s_custom_env
 	t_dynarray		mobs;
 	t_map			scene;
 	t_scroll		scroll;
-	t_dynarray		doors;
 	t_dynarray		events;
 	t_mesh			*moon;
 	t_node          *start;
