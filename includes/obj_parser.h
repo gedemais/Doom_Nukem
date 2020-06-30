@@ -70,6 +70,7 @@ enum	e_scene_id
 	SCENE_MOON,
 	SCENE_STAR,
 	SCENE_MAGE,
+	SCENE_LOOT,
 	SCENE_MAX
 };
 

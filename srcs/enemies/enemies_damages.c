@@ -17,24 +17,27 @@ static void		enemies_sound_death(t_env *env)
 	alSourcePlay(source);
 }
 
-static void		enemies_do_damages(t_env *env, t_enemy *mob)
+static int	enemies_do_damages(t_env *env, t_enemy *mob)
 {
 	mob->hp -= env->player.current->damages;
 	if (mob->hp < 1)
 	{
-		mob->dead = 1;
+		mob->dead = true;
 		++env->custom_env.game.kill_count;
 		enemies_sound_death(env);
 		if (env->custom_env.game.kill_delay == 0)
 			env->custom_env.game.kill_delay = KILL_DELAY;
+//		if (spawn_loot(env, mob->pos))
+//			return (-1);
 	}
 	else
 		enemies_sound_damages(env);
 	env->custom_env.game.moula += mob->dead ? KILL_REWARD : HIT_REWARD;
 	env->player.hitmarker = HITMARKER_T;
+	return (0);
 }
 
-void			enemies_damages(t_env *env)
+int			enemies_damages(t_env *env)
 {
 	int			i;
 	int			index;
@@ -49,8 +52,9 @@ void			enemies_damages(t_env *env)
 		{
 			env->player.hover = true;
 			if (env->player.current->shot && !mob->dead)
-				enemies_do_damages(env, mob);
-			return ;
+				return (enemies_do_damages(env, mob));
+			return (0);
 		}
 	}
+	return (0);
 }

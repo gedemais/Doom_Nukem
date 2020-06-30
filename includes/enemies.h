@@ -18,6 +18,23 @@ enum				e_enemies
 	ENEMY_MAX
 };
 
+enum				e_loots_id
+{
+	LOOT_NUKE,
+	LOOT_MONEY,
+	LOOT_SHIELD,
+	LOOT_AMMOS,
+	LOOT_MAX
+};
+
+struct				s_loot
+{
+	int				x;
+	int				y;
+	int				z;
+	char			id;
+};
+
 struct				s_enemy
 {
 	int 		i;
@@ -52,7 +69,7 @@ void			enemies_movements(t_env *env, t_pf *a);
 void			enemies_do_movement(t_enemy *mob);
 
 void			enemies_death(t_dynarray *mobs);
-void			enemies_damages(t_env *env);
+int				enemies_damages(t_env *env);
 void			enemies_kills_annoucements(t_env *env);
 
 void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
