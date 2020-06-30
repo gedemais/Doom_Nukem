@@ -29,23 +29,35 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, WSPEED));
 		translate_mesh(map, &map->cam, vec_fmult(r, -WSPEED));
 	}
+//	print_info_phy(env, &map->cam);
+}
+
+static void ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
+{
+	if (env->phy_env.type_move == false)
+		move(env, keys);
+	else
+		phy_move(env, keys, maps);
 }
 
 static int		handle_keys(t_env *env, t_events *e)
 {
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
-		move(env, e->keys);
+	if (e->keys[KEY_T])
+		env->phy_env.type_move = false;
+	if (e->keys[KEY_Y])
+		env->phy_env.type_move = true;
+
+	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }
 
 int			custom_play(t_env *env)
 {
-	handle_player(env);
-	clear_screen_buffers(env);
 	handle_keys(env, &env->events);
+	handle_player(env);
 	camera_aim(env);
-	env->mid.mesh = NULL;
-//	physic_engine(env);
+	physic_engine(env, &env->edit_env.map);
+	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_enemies(env);
 	handle_weapons(env);

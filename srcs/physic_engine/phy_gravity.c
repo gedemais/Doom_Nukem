@@ -14,22 +14,15 @@
 
 void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats)
 {
-	static  t_vec3d		gravitax;
-
 	(void)stats;
-	gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
-	m->corp.v = vec_sub(m->corp.v, gravitax);
+	env->phy_env.gravitax = (t_vec3d){0, env->phy_env.tps * env->phy_env.gravity * 50 , 0 ,0};
+	m->corp.v = vec_sub(m->corp.v, env->phy_env.gravitax);
+//	printf("-------gravitax----------\n");
+//	print_vec(env->phy_env.gravitax);
+//	printf("tps = %d\n", env->phy_env.tps);
+	//mettre dans une fonction stop
 	if (env->phy_env.tps < 10)
-		env->phy_env.tps += 2.5;
-	else
-	{
-		if (stats->pos.y < -10)
-		{
-			env->phy_env.tps = 0;
-			stats->pos = zero_vector();
-			m->corp.v = zero_vector();
-		}
-	}
+		env->phy_env.tps += 2.5;	
 }
 
 

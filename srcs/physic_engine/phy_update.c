@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:44:16 by bebosson          #+#    #+#             */
-/*   Updated: 2020/05/22 14:45:48 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:15:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ static void pause_position(t_env *env)
 	}	
 }
 */
+
+void	print_info_phy(t_env *env, t_mesh *cam)
+{
+	printf("floor %d \n", env->cam.stats.onfloor);
+	printf("plan %d \n", env->cam.stats.onplan);
+	printf("--------------------------------------------\n");
+	printf("cam->corp.pos\n");
+	print_vec(cam->corp.pos);
+	printf("cam->corp.v\n");
+	print_vec(cam->corp.v);
+	printf("--------------------------------------------\n");
+	printf("env->cam.stats.pos\n");
+	print_vec(env->cam.stats.pos);
+
+}
 
 t_vec3d		update_angle(t_env *env, int index)
 {
@@ -89,26 +104,23 @@ void	update_speeds_collide(t_env *env)
 	}
 }
 
-void	update_speeds_collide_cam(t_env *env)
+void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 {
 	t_collide			*c;
 	int					i;
-	int					n_mesh;
 	
-	n_mesh = env->maps[env->scene].nmesh;
 	i = 0;
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
-		env->maps[env->scene].cam_floor = *c;
-		type_of_plan(env, c);
+		type_of_plan(env, c, map);
+//		print_collide(*c);
 		i++;
 	}
-	if (i == 0)
+	if (i == 0 && env->phy_env.type_move == true) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
 	{
-		env->cam.stats.onfloor = 0;
-		env->cam.stats.onplan = 0;
-		env->events.keys[KEY_E] = false;
+		env->cam.stats.onfloor = 0;	
+		phy_gravitax_cam(env, cam, &env->cam.stats);
 	}	
 }
 
@@ -132,16 +144,52 @@ void	update_positions_gravity(t_env *env)
 	}
 }
 
-void	update_positions_gravity_cam(t_env *env)
+void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 {
-	t_mesh		*cam;
-	
-	cam = &env->maps[env->scene].cam;
-	if (env->cam.stats.onfloor == 0 && 
-			env->cam.stats.onplan == 0)
+	static t_vec3d	v = (t_vec3d){-INFINITY, 0, 0, 0};
+	t_vec3d			diff_y;
+//	print_info_phy(env, cam);
+	// add f and r to v here ?
+//	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v);
+//	cam->corp.v 
+	diff_y = zero_vector();
+	printf("corp speed : ");
+	print_vec(cam->corp.v);
+	printf("speed : ");
+	print_vec(v);
+	if (key_move(env->events.keys))
 	{
-		phy_gravitax_cam(env, cam, &env->cam.stats);
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
-		cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+		v = cam->corp.v;
+		translate_mesh(map, cam, cam->corp.v);
 	}
+	else if (vec_norm(v) > 0)
+	{
+		if (fabs(v.x) > INERTIE)
+			v.x = (v.x > 0) ? v.x - INERTIE : v.x + INERTIE;
+		else
+			v = zero_vector();
+		if (fabs(v.y) > INERTIE)
+			v.y = (v.y > 0) ? v.y - INERTIE : v.y + INERTIE;
+		else
+			v = zero_vector();
+		if (fabs(v.z) > INERTIE)
+			v.z = (v.z > 0) ? v.z - INERTIE : v.z + INERTIE;
+		else
+			v = zero_vector();
+		translate_mesh(map, cam, v);
+	}
+	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
+	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
+	printf("diff_y = %f\n", env->phy_env.diff_camfloor.y);
+	if (env->phy_env.diff_camfloor.y < 4 && env->cam.stats.onwall == 0
+			&& env->cam.stats.onfloor == 1)
+	{
+		diff_y = (t_vec3d){0, 4 - env->phy_env.diff_camfloor.y, 0, 0};
+		translate_mesh(map, cam, diff_y);
+		env->cam.stats.pos = vec_add(env->cam.stats.pos, diff_y);
+	}
+
+//	if () // si aucune collide sol ?
+//	{
+//	}
 }

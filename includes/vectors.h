@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 02:39:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 16:42:59 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/30 16:35:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
 t_vec3d			vec_mult(t_vec3d a, t_vec3d b);
 t_vec3d			vec_fdiv(t_vec3d a, float n);
 t_vec3d			vec_fmult(t_vec3d a, float n);
+t_vec3d			vec_fsub(t_vec3d a, float n);
+t_vec3d			vec_relu(t_vec3d v);
 
 t_vec3d			zero_vector();
 void			print_vec(t_vec3d vec);
@@ -59,5 +61,5 @@ t_vec3d			vec_intersect_plane(t_vec3d plane_p, t_vec3d plane_n,
 float			distance_to_plane(t_vec3d plane_n, t_vec3d plane_p, t_vec3d p);
 
 void			vec2d_swap(t_vec2d *a, t_vec2d *b);
-
+t_vec3d			project_ortho(t_vec3d u, t_vec3d y);
 #endif

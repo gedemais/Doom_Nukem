@@ -126,7 +126,7 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 	}
 }
 
-void		textual_hint(t_env *env, char button, char *action, int index)
+void		textual_hint(t_env *env, char *button, char *action, int index)
 {
 	t_ttf_config	*conf;
 	t_point			o;
@@ -135,7 +135,7 @@ void		textual_hint(t_env *env, char button, char *action, int index)
 	conf = ttf_config();
 	conf->size = 20;
 	ft_strcpy((char*)conf->s, "Press ");
-	ft_strncat((char*)conf->s, &button, 1);
+	ft_strncat((char*)conf->s, button, 1);
 	ft_strcat((char*)conf->s, " to ");
 	ft_strcat((char*)conf->s, action);
 

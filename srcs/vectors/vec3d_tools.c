@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:18:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/17 17:20:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/30 14:46:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ float		rsqrt(float number)
 	conv.i = 0x5f3759df - (conv.i >> 1);
 	conv.f *= (threehalfs - (i * conv.f * conv.f));
 	return (conv.f);
+}
+
+t_vec3d project_ortho(t_vec3d u, t_vec3d y)
+{
+	t_vec3d y_proj;
+
+	y_proj = vec_fmult(u, (vec_dot(y, u) / vec_dot(u, u)));
+	return (y_proj);
 }
 
 void		vec3d_swap(t_vec3d *a, t_vec3d *b)

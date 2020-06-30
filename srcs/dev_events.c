@@ -72,7 +72,7 @@ int		render_dev(void *param)
 	//printf("%f %f %f | %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z, env->cam.stats.yaw, env->cam.stats.pitch);
 	clear_screen_buffers(env);
 	camera_aim(env);
-	physic_engine(env);
+	physic_engine(env, &env->maps[env->scene]);
 	if (rasterizer(env, &env->maps[env->scene], false))
 		exit(EXIT_FAILURE);
 	//handle_weapons(env);

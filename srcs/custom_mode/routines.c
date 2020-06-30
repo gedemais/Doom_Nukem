@@ -2,9 +2,12 @@
 
 int				custom_menu_to_play(t_env *env)
 {
+	t_map	*map;
+
+	map = &env->edit_env.map;
 	if (init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_CUSTOM_MOBS)
 		|| astar_init(env) || init_map_physics(&env->edit_env.map)
-		|| init_sky(env))
+		|| (init_cameras_mesh(map, &map->cam)) || init_sky(env))
 		return (-1);
 	env->player.hp = START_HP;
 	mlx_mouse_hide();

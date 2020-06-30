@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/12 20:36:51 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/06/30 15:14:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	clear_screen_buffers(t_env *env)
 		env->cam.z_buffer[i + 3] = -INFINITY;
 		i += 4;
 	}
+	env->mid.mesh = NULL;
 }
 
 void	compute_rotation_matrices(t_env *env)

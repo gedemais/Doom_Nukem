@@ -139,8 +139,8 @@ struct	s_map
 	int				cmtl;
 	int				nmesh;
 	int				index;
-	t_collide		cam_floor;
-	t_collide		cam_wall;
+	t_collide		*cam_floor;
+	t_collide		*cam_wall;
 	bool			init;
 };
 
