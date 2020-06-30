@@ -13,7 +13,8 @@
 
 enum				e_enemies
 {
-	ENEMY_CUBE,
+	ENEMY_CORONA,
+	//ENEMY_MAGE,
 	ENEMY_MAX
 };
 

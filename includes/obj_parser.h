@@ -69,6 +69,7 @@ enum	e_scene_id
 	SCENE_MAD,
 	SCENE_MOON,
 	SCENE_STAR,
+	SCENE_MAGE,
 	SCENE_MAX
 };
 

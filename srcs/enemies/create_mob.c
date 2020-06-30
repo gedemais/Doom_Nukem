@@ -3,13 +3,13 @@
 void	assign_enemys_stats(t_enemy *enemy, char type)
 {
 	static int		hps[ENEMY_MAX] = {
-		[ENEMY_CUBE] = 100
+		[ENEMY_CORONA] = 100
 	};
 	static int		damages[ENEMY_MAX] = {
-		[ENEMY_CUBE] = 10
+		[ENEMY_CORONA] = 10
 	};
 	static float	speeds[ENEMY_MAX] = {
-		[ENEMY_CUBE] = 0.05f
+		[ENEMY_CORONA] = 0.05f
 	};
 
 	enemy->hp = hps[(int)type];
@@ -20,7 +20,8 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 int		enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
-		[ENEMY_CUBE] = SCENE_UGLY
+		[ENEMY_CORONA] = SCENE_MAGE
+		//[ENEMY_MAGE] = SCENE_MAGE
 	};
 
 	return (map[(int)type]);

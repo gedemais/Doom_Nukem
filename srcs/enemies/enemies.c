@@ -60,7 +60,7 @@ static int		spawn_mob(t_env *env)
 	pos.x = p[0] * 2;
 	pos.y = p[1] * 2;
 	pos.z = p[2] * 2;
-	return (create_mob(env, &env->edit_env.map, ENEMY_CUBE, pos));
+	return (create_mob(env, &env->edit_env.map, ENEMY_CORONA, pos));
 }
 
 int				handle_enemies(t_env *env)
