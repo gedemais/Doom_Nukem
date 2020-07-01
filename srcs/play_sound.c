@@ -50,10 +50,10 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	t_sound	sound;
 	ALuint 	*sources;
 
-	sources = NULL;
 	if (init_dynarray(sounds, sizeof(t_sound), SA_MAX))
 		return (-1);
-	sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX);
+	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX)))
+		return (-1);
 	alGenSources(SA_MAX - 1, sources);
 	i = -1;
 	while (++i < SA_MAX)
@@ -114,7 +114,7 @@ int				sound_system(t_env *env, int source, bool stop, bool overall)
 
 	if (sounds.byte_size == 0 && init_sound_system(env, &sounds))
 		return (-1);
-	if (source < 0 || source > sounds.nb_cells)
+	if (source < 0 || source > sounds.nb_cells - 1)
 		return (0);
 	if (overall == true && stop_sounds(&sounds))
 		return (-1);
