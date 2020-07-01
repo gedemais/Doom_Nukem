@@ -165,6 +165,8 @@ void				culling(t_env *env, t_mesh *news, unsigned char type);
 int 				check_face(t_ed_map *map, int type, int *pos, int face);
 void				cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type);
 
+t_mesh				*get_blockindex(t_map *map, int *pos, int *m_index);
+
 int					setup_medit(t_env *env);
 char				*blocs_txt_paths(unsigned int index);
 char				*icones_paths(unsigned int index);
@@ -225,7 +227,7 @@ void				maped_crosshair(t_env *env);
 int					put_block(t_env *env);
 int					del_block(t_env *env);
 int					replace_block(t_env *env);
-void				del_door(t_env *env);
+void				del_door(t_env *env, t_event_block *block);
 void				attribute_mesh(t_map *scene, int index);
 void				switch_block_type(t_env *env, t_events *e);
 

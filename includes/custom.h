@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 11:03:13 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:08:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ struct				s_event_block
 	char	id;
 };
 
+struct				s_custom_door
+{
+	t_dynarray		blocks;
+	int				index;
+};
+
 struct				s_custom_game
 {
 	int			nb_spawners;
@@ -98,6 +104,7 @@ struct				s_custom_env
 	t_custom_game	game;
 	t_dynarray		mobs;
 	t_dynarray		loots;
+	t_dynarray		doors;
 	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;

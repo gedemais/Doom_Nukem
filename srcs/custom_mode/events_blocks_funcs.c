@@ -41,7 +41,7 @@ int		handle_mystery_boxs(t_env *env, t_event_block *block, int index)
 	return (0);
 }
 
-int		handle_doors(t_env *env, t_event_block *block, int index)
+int			handle_doors(t_env *env, t_event_block *block, int index)
 {
 	(void)index;
 	if (block->id != BE_DOOR)
@@ -51,7 +51,7 @@ int		handle_doors(t_env *env, t_event_block *block, int index)
 		textual_hint(env, "F", "open the door ( cost x)", 0);
 		if (env->events.keys[KEY_F])
 		{
-		//	del_door(env);
+			del_door(env, block);
 	//		extract_door_blocks(env, &env->custom_env.events, block);
 			play_ambience(&env->sound.samples[SA_DOOR], true, false, false);
 		}

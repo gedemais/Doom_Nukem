@@ -71,9 +71,6 @@ static void	handle_keys(t_env *env, t_events *e)
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
 
-	if (e->keys[KEY_E]) // Custom only, a tej d'ici
-		del_door(env);
-
 	switch_block_category(env, e);
 	switch_block_type(env, e);
 	replace_block(env);

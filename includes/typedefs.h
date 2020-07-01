@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 11:05:01 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:08:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_physics t_physics;
 
 typedef	struct	s_camp_env t_camp_env;
 typedef struct	s_door t_door;
+typedef struct	s_custom_door t_custom_door;
 
 typedef	struct	s_edit_env t_edit_env;
 

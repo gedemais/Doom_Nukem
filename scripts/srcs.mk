@@ -24,6 +24,7 @@ SRCS_NAME =	main.c\
 			\
 			custom_mode/render.c\
 			custom_mode/copy_to_scene.c\
+			custom_mode/doors.c\
 			custom_mode/events.c\
 			custom_mode/events_blocks.c\
 			custom_mode/events_blocks_funcs.c\
