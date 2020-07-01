@@ -56,7 +56,7 @@ int			custom_play(t_env *env)
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);
-	physic_engine(env, &env->edit_env.map);
+	//physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_enemies(env);
@@ -64,6 +64,7 @@ int			custom_play(t_env *env)
 	handle_block_events(env);
 	handle_moon(env);
 	draw_hud(env);
+	sound_system(env, -1, false, false);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
