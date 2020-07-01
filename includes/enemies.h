@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 6
+# define MAX_ENEMIES 1
 # define RESPAWN_DELAY 3.0f
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
@@ -29,9 +29,8 @@ enum				e_loots_id
 
 struct				s_loot
 {
-	int				x;
-	int				y;
-	int				z;
+	t_mesh			*m;
+	t_vec3d			pos;
 	char			id;
 };
 
@@ -68,9 +67,11 @@ void			enemies_animations(t_enemy *mob);
 void			enemies_movements(t_env *env, t_pf *a);
 void			enemies_do_movement(t_enemy *mob);
 
-void			enemies_death(t_dynarray *mobs);
+void			enemies_death(t_env *env, t_dynarray *mobs);
 int				enemies_damages(t_env *env);
 void			enemies_kills_annoucements(t_env *env);
+
+int				spawn_loot(t_env *env, t_vec3d pos);
 
 void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
 void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,

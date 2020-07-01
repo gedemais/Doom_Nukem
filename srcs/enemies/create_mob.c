@@ -20,7 +20,7 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 int		enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
-		[ENEMY_CORONA] = SCENE_MAGE
+		[ENEMY_CORONA] = SCENE_UGLY
 		//[ENEMY_MAGE] = SCENE_MAGE
 	};
 
@@ -70,26 +70,44 @@ int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 	return (0);
 }
 
-static int		copy_mob_to_scene(t_map *map, t_map *mob, t_enemy *enemy)
+static void		find_start_end(t_env *env, t_map *mob, t_enemy *enemy)
+{
+	t_enemy	*last_mob;
+	int		index;
+
+	if (env->custom_env.mobs.nb_cells == 0)
+	{
+		enemy->map_start = env->edit_env.map.meshs.nb_cells - env->custom_env.loots.nb_cells;
+		enemy->map_end = enemy->map_start + mob->nmesh;
+	}
+	else
+	{
+		index = env->custom_env.mobs.nb_cells - 1;
+		last_mob = dyacc(&env->custom_env.mobs, index);
+		enemy->map_start = last_mob->map_end;
+		enemy->map_end = enemy->map_start + mob->nmesh;
+	}
+}
+
+static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
 {
 	t_mesh		new;
 	t_mesh		*m;
 	int			i;
 
 	i = 0;
-	enemy->map_start = map->meshs.nb_cells;
-	enemy->map_end = enemy->map_start + mob->meshs.nb_cells;
+	find_start_end(env, mob, enemy);
 	while (i < mob->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
 		m = dyacc(&mob->meshs, i);
 		new.type = 1;
-		new.index = map->nmesh;
+		new.index = map->nmesh - env->custom_env.loots.nb_cells;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(map, mob, m, &new)
-			|| push_dynarray(&map->meshs, &new, false))
+			|| insert_dynarray(&map->meshs, &new, map->nmesh - env->custom_env.loots.nb_cells))
 			return (-1);
-		assign_meshs(dyacc(&map->meshs, map->nmesh));
+		assign_meshs(dyacc(&map->meshs, map->nmesh - env->custom_env.loots.nb_cells));
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
 		map->nmesh++;
 		i++;
@@ -134,8 +152,9 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
 
-	if (copy_mob_to_scene(map, &env->maps[enemy_map_mapper(type)], &enemy)
-		|| enemy_offset(&enemy)
+	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
+		return (-1);
+		if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
 	return (0);

@@ -51,15 +51,40 @@ static int		handle_keys(t_env *env, t_events *e)
 	return (0);
 }
 
+static void	print_mobs(t_env *env)
+{
+	t_loot	*loot;
+	t_enemy	*mob;
+	int		i;
+
+	i = 0;
+	while (i < env->custom_env.mobs.nb_cells)
+	{
+		mob = dyacc(&env->custom_env.mobs, i);
+		printf("mob %d : %d <-> %d\n", i, mob->map_start, mob->map_end);
+		i++;
+	}
+	i = 0;
+	while (i < env->custom_env.loots.nb_cells)
+	{
+		loot = dyacc(&env->custom_env.loots, i);
+		printf("loot %d : %d\n", i, loot->m->index);
+		i++;
+	}
+	printf("--------------\n");
+}
+
 int			custom_play(t_env *env)
 {
+	print_mobs(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);
-	physic_engine(env, &env->edit_env.map);
+//	physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_enemies(env);
+	printf("--------------------------------------\n");
 	handle_weapons(env);
 	handle_block_events(env);
 	handle_moon(env);

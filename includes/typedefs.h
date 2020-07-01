@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/24 20:32:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:05:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_ttf_config t_ttf_config;
 
 typedef struct	s_weapon t_weapon;
 typedef struct	s_enemy t_enemy;
+typedef struct	s_loot t_loot;
 
 typedef struct	s_ed_map t_ed_map;
 typedef struct	s_scroll t_scroll;

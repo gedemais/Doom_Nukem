@@ -6,6 +6,8 @@ Empecher les spawners qui te trouvent pas de faire spawn des mobs
 	INFINITY si joueur trop loin
 }
 
+Bruit de prise de degats du joueur
+
 Gérer le changement de contexte reverse (custom to menu etc..)
 
 Fix le segfault du bonus wheel avec bc == BC_OBJ

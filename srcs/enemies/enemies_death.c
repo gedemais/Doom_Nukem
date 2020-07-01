@@ -15,13 +15,15 @@ static void		replace_meshs(t_enemy *mob, int delta)
 	}
 }
 
-static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
+static void		enemies_delete_mob(t_env *env, t_dynarray *mobs, t_enemy *mob, int index)
 {
 	int		i;
 	int		tmp;
 	t_enemy	*m;
 	t_mesh	*mesh;
+	//t_loot	*loot;
 
+	(void)env;
 	i = mob->map_start - 1;
 	while (++i < mob->map_end)
 	{
@@ -63,7 +65,7 @@ static bool		enemies_death_animation(t_enemy *mob, float angle)
 	return (true);
 }
 
-void			enemies_death(t_dynarray *mobs)
+void			enemies_death(t_env *env, t_dynarray *mobs)
 {
 	int		i;
 	t_enemy	*mob;
@@ -74,6 +76,6 @@ void			enemies_death(t_dynarray *mobs)
 		mob = dyacc(mobs, i);
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
-				enemies_delete_mob(mobs, mob, i);
+				enemies_delete_mob(env, mobs, mob, i);
 	}
 }

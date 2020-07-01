@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 17:24:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 11:03:13 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define MOON_SCALE 1.8f
 
 # define LAVA_DELAY 2
+
+# define LOOT_FREQ 1
 
 enum				e_custom_sc_id
 {
@@ -95,6 +97,7 @@ struct				s_custom_env
 {
 	t_custom_game	game;
 	t_dynarray		mobs;
+	t_dynarray		loots;
 	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;
