@@ -16,8 +16,6 @@ void	ts_to_dev(t_env *env)
 {
 	(void)env;
 	mlx_mouse_hide();
-//	play_ambience(env->sound.samples[SA_TITLE_SCREEN_S], false, true, false);
-//	loop_sample(env->sound.samples[SA_TITLE_SCREEN_L], false, true, false);
 }
 
 void	ts_to_campaign(t_env *env)

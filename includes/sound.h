@@ -70,7 +70,5 @@ typedef struct	s_sound
 int				sound_system(t_env *env, int source, bool stop, bool overall);
 
 char			*samples_paths(unsigned int index);
-int				play_ambience(t_sample *sample, bool play, bool stop, bool keep);
-void			loop_sample(t_sample *sample, bool launch, bool stop, bool keep);
 
 #endif

@@ -1,49 +1,5 @@
 #include "main.h"
 
-void			loop_sample(t_sample *sample, bool launch, bool stop, bool keep)
-{
-	static bool		play = false;
-
-	if (keep && play_ambience(sample, false, false, true) == 0)
-		play_ambience(sample, true, false, false);
-	else if (launch && !stop)
-	{
-		play = true;
-		play_ambience(sample, true, false, false);
-	}
-	else if (stop)
-	{
-		play_ambience(sample, false, true, false);
-		play = false;
-	}
-}
-
-int				play_ambience(t_sample *sample, bool play, bool stop, bool keep)
-{
-	static ALuint	source = UINT_MAX;
-	ALint			status;
-
-	if (source == UINT_MAX)
-		alGenSources(1, &source);
-	if (stop)
-	{
-		alGetSourcei(source, AL_SOURCE_STATE, &status);
-		if (status == AL_PLAYING)
-			alSourceStop(source);
-	}
-	if (keep)
-	{
-		alGetSourcei(source, AL_SOURCE_STATE, &status);
-		return (status == AL_PLAYING ? 1 : 0);
-	}
-	if (play)
-	{
-		alSourcei(source, AL_BUFFER, (ALint)sample->buffer);
-		alSourcePlay(source);
-	}
-	return (0);
-}
-
 static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 {
 	int 	i;
@@ -81,13 +37,13 @@ static int 		stop_sound(t_dynarray *sounds, int source)
 	return (0);
 }
 
-static int 		stop_sounds(t_dynarray *sounds)
+static int 		stop_sounds(t_dynarray *sounds, int source)
 {
 	int 	i;
 
 	i = -1;
 	while (++i < sounds->nb_cells)
-		if (stop_sound(sounds, i))
+		if (i != source && stop_sound(sounds, i))
 			return (-1);
 	return (0);
 }
@@ -116,7 +72,7 @@ int				sound_system(t_env *env, int source, bool stop, bool overall)
 		return (-1);
 	if (source < 0 || source > sounds.nb_cells - 1)
 		return (0);
-	if (overall == true && stop_sounds(&sounds))
+	if (overall == true && stop_sounds(&sounds, source))
 		return (-1);
 	if (overall == false && stop == true && stop_sound(&sounds, source))
 		return (-1);

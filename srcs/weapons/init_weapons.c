@@ -65,27 +65,27 @@ static void		assign_wmeshs(t_env *env)
 
 static void	assign_weapons_samples(t_env *env)
 {
-	env->weapons[W_FAMAS].shoot = &env->sound.samples[SA_FAMAS_FIRE];
-	env->weapons[W_AK47].shoot = &env->sound.samples[SA_AK47_FIRE];
-	env->weapons[W_SAWED_OFF].shoot = &env->sound.samples[SA_SAWED_OFF_FIRE];
-	env->weapons[W_GLOCK_18].shoot = &env->sound.samples[SA_GLOCK_FIRE];
-	env->weapons[W_AUG].shoot = &env->sound.samples[SA_AUG_FIRE];
-	env->weapons[W_UMP45].shoot = &env->sound.samples[SA_UMP45_FIRE];
-	env->weapons[W_MAG7].shoot = &env->sound.samples[SA_MAG7_FIRE];
-	env->weapons[W_GALIL].shoot = &env->sound.samples[SA_GALIL_FIRE];
-	env->weapons[W_NEGEV].shoot = &env->sound.samples[SA_NEGEV_FIRE];
-	env->weapons[W_TEC9].shoot = &env->sound.samples[SA_TEC9_FIRE];
+	env->weapons[W_FAMAS].shoot = SA_FAMAS_FIRE;
+	env->weapons[W_AK47].shoot = SA_AK47_FIRE;
+	env->weapons[W_SAWED_OFF].shoot = SA_SAWED_OFF_FIRE;
+	env->weapons[W_GLOCK_18].shoot = SA_GLOCK_FIRE;
+	env->weapons[W_AUG].shoot = SA_AUG_FIRE;
+	env->weapons[W_UMP45].shoot = SA_UMP45_FIRE;
+	env->weapons[W_MAG7].shoot = SA_MAG7_FIRE;
+	env->weapons[W_GALIL].shoot = SA_GALIL_FIRE;
+	env->weapons[W_NEGEV].shoot = SA_NEGEV_FIRE;
+	env->weapons[W_TEC9].shoot = SA_TEC9_FIRE;
 
-	env->weapons[W_FAMAS].reload = &env->sound.samples[SA_FAMAS_RELOAD];
-	env->weapons[W_AK47].reload = &env->sound.samples[SA_AK47_RELOAD];
-	env->weapons[W_SAWED_OFF].reload = &env->sound.samples[SA_SAWED_OFF_FILL];
-	env->weapons[W_GLOCK_18].reload = &env->sound.samples[SA_GLOCK_RELOAD];
-	env->weapons[W_AUG].reload = &env->sound.samples[SA_AUG_RELOAD];
-	env->weapons[W_UMP45].reload = &env->sound.samples[SA_UMP45_RELOAD];
-	env->weapons[W_MAG7].reload = &env->sound.samples[SA_MAG7_RELOAD];
-	env->weapons[W_GALIL].reload = &env->sound.samples[SA_GALIL_RELOAD];
-	env->weapons[W_NEGEV].reload = &env->sound.samples[SA_NEGEV_RELOAD];
-	env->weapons[W_TEC9].reload = &env->sound.samples[SA_TEC9_RELOAD];
+	env->weapons[W_FAMAS].reload = SA_FAMAS_RELOAD;
+	env->weapons[W_AK47].reload = SA_AK47_RELOAD;
+	env->weapons[W_SAWED_OFF].reload = SA_SAWED_OFF_FILL;
+	env->weapons[W_GLOCK_18].reload = SA_GLOCK_RELOAD;
+	env->weapons[W_AUG].reload = SA_AUG_RELOAD;
+	env->weapons[W_UMP45].reload = SA_UMP45_RELOAD;
+	env->weapons[W_MAG7].reload = SA_MAG7_RELOAD;
+	env->weapons[W_GALIL].reload = SA_GALIL_RELOAD;
+	env->weapons[W_NEGEV].reload = SA_NEGEV_RELOAD;
+	env->weapons[W_TEC9].reload = SA_TEC9_RELOAD;
 }
 
 int		init_weapons(t_env *env)
