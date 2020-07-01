@@ -57,22 +57,21 @@ static int	add_random_weapon(t_env *env)
 
 int		handle_mystery_boxs(t_env *env, t_event_block *block)
 {
-	static float	delay = 1.0f;
+	static bool	button = true;
 
 	if (block->id != BE_CHEST)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
 		textual_hint(env, "F", "get a random weapon ( cost 1000)", 0);
-		if (env->events.keys[KEY_F] && env->custom_env.game.moula >= 1000 && delay < 0)
+		if (env->events.keys[KEY_F] && env->custom_env.game.moula >= 1000 && button)
 		{
-			delay = 1.0f;
+			button = false;
 			env->custom_env.game.moula -= 1000;
 			add_random_weapon(env);
 			// sound
 		}
-		else
-			delay -= env->data.spent;
+		button = !env->events.keys[KEY_F];
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 19:13:02 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 21:15:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ struct			s_player
 	int			current_w;
 	int			hp;
 	int			hitmarker;
+	float		god;
 	bool		hover;
 };
 

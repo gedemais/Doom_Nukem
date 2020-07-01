@@ -27,6 +27,18 @@ static void	check_wounds(t_env *env)
 	}
 }
 
+static void	godmode(t_env *env)
+{
+	int		fade;
+
+	fade = 10;
+	if (env->player.hp < 142 && env->player.god > (GOD_TIME / fade))
+		env->player.hp++;
+	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
+		env->player.hp--;
+	env->player.god -= env->data.spent;
+}
+
 void	handle_player(t_env *env)
 {
 	static int	heal = HEAL_SPEED;
@@ -34,6 +46,11 @@ void	handle_player(t_env *env)
 
 	i = 0;
 	heal--;
+	if (env->player.god > 0.0f)
+	{
+		godmode(env);
+		return ;
+	}
 	if (env->player.hp < 1)
 		switch_custom_context(env, CUSTOM_SC_GAME_OVER);
 	if (heal <= 0)

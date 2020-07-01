@@ -53,6 +53,14 @@ static int		handle_keys(t_env *env, t_events *e)
 
 int			custom_play(t_env *env)
 {
+	if (env->events.keys[KEY_N])
+		loot_nuke(env);
+	else if (env->events.keys[KEY_T])
+		loot_money(env);
+	else if (env->events.keys[KEY_C])
+		loot_shield(env);
+	else if (env->events.keys[KEY_B])
+		loot_ammos(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);

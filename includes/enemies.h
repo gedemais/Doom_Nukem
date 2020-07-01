@@ -72,6 +72,10 @@ int				enemies_damages(t_env *env);
 void			enemies_kills_annoucements(t_env *env);
 
 int				spawn_loot(t_env *env, t_vec3d pos);
+int				loot_nuke(t_env *env);
+int				loot_money(t_env *env);
+int				loot_shield(t_env *env);
+int				loot_ammos(t_env *env);
 
 void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
 void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,

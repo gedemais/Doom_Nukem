@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 19:24:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 21:18:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUSTOM_H
 
 # define CUSTOM_WALK_SPEED 0.05f
-# define MAX_CUSTOM_MOBS 34
+# define MAX_CUSTOM_MOBS 3
 # define EVENT_DIST 4
 
-# define MOB_PEACE_TIME 20
+# define MOB_PEACE_TIME 30
 
 # define START_HP 100
 # define HEAL_SPEED 10
@@ -27,6 +27,10 @@
 # define KILL_DELAY 120
 
 # define START_MOULA 5000
+
+# define MIN_CASH 100
+# define MAX_CASH 1000
+# define GOD_TIME 20
 
 # define NB_STARS 100
 # define STARS_SPREAD 25
