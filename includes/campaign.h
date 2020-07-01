@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/30 14:18:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 19:13:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ struct			s_player
 	t_point		shoot;
 	t_weapon	*current;
 	t_mesh		*body;
+	int			current_w;
 	int			hp;
 	int			hitmarker;
 	bool		hover;

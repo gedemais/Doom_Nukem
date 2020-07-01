@@ -48,6 +48,7 @@ struct	s_weapon
 	int			magazine; // Capacite du chargeur
 	int			loaded; // Nombre de balles dans le chargeur
 	int			ammos; // Nombre de balles en stock
+	int			max_ammos;
 	int			cadency;
 	int			index;
 	float		reloading;

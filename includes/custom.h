@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 18:08:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 19:24:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUSTOM_H
 
 # define CUSTOM_WALK_SPEED 0.05f
-# define MAX_CUSTOM_MOBS 1
+# define MAX_CUSTOM_MOBS 34
 # define EVENT_DIST 4
 
-# define MOB_PEACE_TIME 30
+# define MOB_PEACE_TIME 20
 
 # define START_HP 100
 # define HEAL_SPEED 10
@@ -25,6 +25,8 @@
 # define HIT_REWARD 10
 # define KILL_REWARD 60
 # define KILL_DELAY 120
+
+# define START_MOULA 5000
 
 # define NB_STARS 100
 # define STARS_SPREAD 25
@@ -131,10 +133,10 @@ void				handle_player(t_env *env);
 int					init_sky(t_env *env);
 void				handle_moon(t_env *env);
 
-int					handle_jukeboxs(t_env *env, t_event_block *block, int index);
-int					handle_mystery_boxs(t_env *env, t_event_block *block, int index);
-int					handle_doors(t_env *env, t_event_block *block, int index);
-int					handle_lavas(t_env *env, t_event_block *block, int index);
+int					handle_jukeboxs(t_env *env, t_event_block *block);
+int					handle_mystery_boxs(t_env *env, t_event_block *block);
+int					handle_doors(t_env *env, t_event_block *block);
+int					handle_lavas(t_env *env, t_event_block *block);
 
 int					key_press_custom(int key, void *param);
 int					key_release_custom(int key, void *param);

@@ -3,18 +3,22 @@
 static void	switch_current_weapon(t_env *env, t_events *e)
 {
 	t_map	*map;
+	int		nweapon;
 	int		index;
 
 	map = &env->edit_env.map;
-	index = env->player.current->index;
+	index = env->player.current_w;
+	nweapon = env->player.weapons.nb_cells;
 	if (e->buttons[BUTTON_SCROLL_UP])
 	{
-		index = (index == W_MAX - 1) ? 0 : index + 1;
+		index = (index >= nweapon - 1) ? 0 : index + 1;
+		env->player.current_w = index;
 		env->player.current = dyacc(&env->player.weapons, index);
 	}
 	else if (e->buttons[BUTTON_SCROLL_DOWN])
 	{
-		index = (index == 0) ? W_MAX - 1 : index - 1;
+		index = (index <= 0) ? nweapon - 1 : index - 1;
+		env->player.current_w = index;
 		env->player.current = dyacc(&env->player.weapons, index);
 	}
 }

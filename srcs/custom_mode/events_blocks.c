@@ -19,8 +19,6 @@ static int	parse_block_type(t_env *env, t_custom_env *c, t_event_block block, in
 		env->edit_env.map.spawn = vec_fmult((t_vec3d){p[0], p[1], p[2], 0}, 2);
 		env->edit_env.map.spawn.y += PLAYER_SIZE;
 	}
-//	if (block.id == BE_DOOR)
-//		init_custom_door(c, &block);
 	if (c->events.byte_size == 0
 			&& init_dynarray(&c->events, sizeof(t_event_block), 0))
 		return (-1);
@@ -75,7 +73,7 @@ int		parse_events_blocks(t_env *env)
 
 int		handle_block_events(t_env *env)
 {
-	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*, int) = {
+	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*) = {
 						NULL, handle_jukeboxs, handle_mystery_boxs, handle_doors,
 						handle_lavas, NULL};
 	t_event_block	*block;
@@ -89,7 +87,7 @@ int		handle_block_events(t_env *env)
 		block = dyacc(&env->custom_env.events, i);
 		while (j < BE_MAX && block_fts[j])
 		{
-			if ((ret = block_fts[j](env, block, i)))
+			if ((ret = block_fts[j](env, block)))
 				break ;
 			else if (ret == -1)
 				return (-1);

@@ -75,7 +75,7 @@ static void		cadency_n_shoot_mode(t_env *env)
 	env->weapons[W_TEC9].shoot_mode = SMODE_SINGLE;
 }
 
-static void	recoil(t_env *env)
+static void	recoil_n_max_ammos(t_env *env)
 {
 	env->weapons[W_FAMAS].recoil = 0.1f;
 	env->weapons[W_AK47].recoil = 0.05f;
@@ -87,6 +87,17 @@ static void	recoil(t_env *env)
 	env->weapons[W_GALIL].recoil = 0.1f;
 	env->weapons[W_NEGEV].recoil = 0.1f;
 	env->weapons[W_TEC9].recoil = 0.05f;
+
+	env->weapons[W_FAMAS].max_ammos = 200;
+	env->weapons[W_AK47].max_ammos = 250;
+	env->weapons[W_SAWED_OFF].max_ammos = 60;
+	env->weapons[W_GLOCK_18].max_ammos = 80;
+	env->weapons[W_AUG].max_ammos = 220;
+	env->weapons[W_UMP45].max_ammos = 180;
+	env->weapons[W_MAG7].max_ammos = 76;
+	env->weapons[W_GALIL].max_ammos = 270;
+	env->weapons[W_NEGEV].max_ammos = 400;
+	env->weapons[W_TEC9].max_ammos = 144;
 }
 
 void		assign_weapons_stats(t_env *env)
@@ -94,5 +105,5 @@ void		assign_weapons_stats(t_env *env)
 	damages_n_accuracy(env);
 	magazine_n_reticle(env);
 	cadency_n_shoot_mode(env);
-	recoil(env);
+	recoil_n_max_ammos(env);
 }

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/15 16:46:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:39:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ static int	doom_nukem(t_env *env)
 	if (setup(env))
 		return (-1);
 	// Ajouter toutes les armes dans l'inventaire du joueur
-	for (int i = 0; i < W_MAX; i++)
+/*	for (int i = 0; i < W_MAX; i++)
 	{
 		env->weapons[i].ammos = 100;
 		push_dynarray(&env->player.weapons, &env->weapons[i], false);
-	}
-
-	env->player.current = dyacc(&env->player.weapons, W_FAMAS);
+	}*/
 
 	env->context = C_TITLE_SCREEN;
 	env->scene = 0;
