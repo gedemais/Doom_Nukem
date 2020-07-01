@@ -94,10 +94,14 @@ static int 		stop_sounds(t_dynarray *sounds)
 
 static int 		play_sound(t_dynarray *sounds, int source)
 {
+	ALint 	status;
 	t_sound	*sound;
 
 	sound = dyacc(sounds, source);
 	if (sound == NULL)
+		return (0);
+	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
+	if (status == AL_PLAYING)
 		return (0);
 	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(sound->ambient);
