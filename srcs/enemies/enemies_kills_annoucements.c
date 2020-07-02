@@ -23,6 +23,6 @@ void			enemies_kills_annoucements(t_env *env)
 		if (tmp == source)
 			return ;
 		tmp = source;
-		sound_system(env, source, (t_sparam){ 0, 0, 0, 0 });
+		sound_system(env, source, sp_play(0.5f));
 	}
 }

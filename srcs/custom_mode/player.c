@@ -37,7 +37,7 @@ static void	godmode(t_env *env)
 		env->player.hp++;
 	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
 	{
-		sound_system(env, SA_LGODEND, (t_sparam){ 0, 0, end, 0 });
+		sound_system(env, SA_LGODEND, end ? sp_fork(0.5f) : sp_play(0.5f));
 		end = true;
 		env->player.hp--;
 	}
