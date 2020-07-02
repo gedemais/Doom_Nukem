@@ -112,7 +112,6 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 		map->nmesh++;
 		i++;
 	}
-	sleep(1);
 	return (0);
 }
 

@@ -86,6 +86,7 @@ int			handle_doors(t_env *env, t_event_block *block)
 		{
 			env->custom_env.game.moula -= 500;
 			del_door(env, block);
+			sound_system(env, SA_DOOR, sp_fork(0.5f));
 		}
 		return (1);
 	}

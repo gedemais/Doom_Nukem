@@ -6,7 +6,6 @@ static t_event_block	*find_event_block(t_env *env, int pos[3])
 	int		i;
 
 	i = 0;
-	printf("%d events\n", env->custom_env.events.nb_cells);
 	while (i < env->custom_env.events.nb_cells)
 	{
 		block = dyacc(&env->custom_env.events, i);
@@ -71,7 +70,7 @@ void				del_door(t_env *env, t_event_block *block)
 	if (block->id == BE_DOOR)
 	{
 		del_recursif(env, (int[3]){block->x, block->y, block->z});
-		sound_system(env, SA_DOOR, (t_sparam){ 0, 0, 1, 0 });
+		sound_system(env, SA_DOOR, sp_fork(0.5f));
 	}
 }
 

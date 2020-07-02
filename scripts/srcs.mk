@@ -3,12 +3,15 @@ SRCS_NAME =	main.c\
 			dev_handle_events.c\
 			free.c\
 			openal.c\
-			play_sound.c\
 			resources_paths.c\
 			setup.c\
 			singletons.c\
 			text.c\
 			scroll_file.c\
+			\
+			sound_system/sound_system.c\
+			sound_system/sound_system_functions.c\
+			sound_system/sound_system_tools.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
