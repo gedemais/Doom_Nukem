@@ -55,16 +55,18 @@ int			render_ts(void *param)
 
 	mesure_time(false);
 	env = ((t_env*)param);
-	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
 	handle_events(env);
 	map_sprite(env->mlx.img_data,
 		env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
 	if (anim > 0 && (++frame))
 		animation(env);
 	else
+	{
+		if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+			sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
 		map_sprite(env->mlx.img_data,
 			env->sprites[SP_TS_LOGO], (t_point){180, 50});
+	}
 	render_buttons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr,
 		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
