@@ -39,6 +39,8 @@ int			cmp_menu(void *param)
 	t_env *env;
 
 	env = (t_env*)param;
+	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
 	handle_events_cmp_menu(env);
 	if (env->events.keys[KEY_M])
 		switch_context(env, C_TITLE_SCREEN);

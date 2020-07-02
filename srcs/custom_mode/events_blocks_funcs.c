@@ -1,31 +1,51 @@
 #include "main.h"
 
-int		handle_jukeboxs(t_env *env, t_event_block *block)
+static int 		jukeboxs_play_sound(t_env *env)
 {
 	t_events	*e;
-	char		*track;
+	static int	ambient = 0;
+	static int	delay = 0;
 
 	e = &env->events;
+	if (e->keys[KEY_F] && env->custom_env.game.moula >= 1000 && delay == 0)
+	{
+		delay = 20;
+		if (ambient < 0 || ambient > SA_PNL)
+			ambient = 0;
+		sound_system(env, ambient, sp_overall(0.5f, 0, SA_PNL, false));
+		env->custom_env.game.moula -= 1000;
+	}
+	else if ((e->keys[KEY_LEFT] || e->keys[KEY_RIGHT]) && delay == 0)
+	{
+		delay = 5;
+		ambient = e->keys[KEY_LEFT] ? ambient - 1 : ambient + 1;
+		ambient = ambient < 0 ? SA_PNL : ambient;
+		ambient = ambient > SA_PNL ? 0 : ambient;
+	}
+	delay = delay > 0 ? delay - 1 : delay;
+	return (ambient);
+}
+
+int				handle_jukeboxs(t_env *env, t_event_block *block)
+{
 	if (block->id != BE_JUKEBOX)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
-		track = &block->param.c;
-		textual_hint(env, "F", "turn on / off", 0);
-		textual_hint(env, "{", "play previous track ( cost x)", 1);
-		textual_hint(env, "}", "play next track ( cost x)", 2);
-		if (e->keys[KEY_F])
-			*track = *track >= 0 ? -1 : 0; // on / off
-		else if (e->keys[KEY_LEFT])
-			*track = *track == 0 ? MT_MAX - 1 : *track - 1; // previous
-		else if (e->keys[KEY_RIGHT])
-			*track = *track == MT_MAX ? 0 : *track + 1; // next
+		textual_hint(env, "F", "PLAY ( cost 1000)", 0);
+		textual_hint(env, "{", "PREVIOUS", 1);
+		textual_hint(env, "}", "NEXT", 2);
+
+		char	*current = ft_itoa(jukeboxs_play_sound(env));
+		textual_hint(env, current, "current track", 3),
+		ft_strdel(&current);
+
 		return (1);
 	}
 	return (0);
 }
 
-static int	add_random_weapon(t_env *env)
+static int		add_random_weapon(t_env *env)
 {
 	t_weapon	*w;
 	int			index;
@@ -53,7 +73,7 @@ static int	add_random_weapon(t_env *env)
 	return (0);
 }
 
-int		handle_mystery_boxs(t_env *env, t_event_block *block)
+int				handle_mystery_boxs(t_env *env, t_event_block *block)
 {
 	static bool	button = true;
 
@@ -75,7 +95,7 @@ int		handle_mystery_boxs(t_env *env, t_event_block *block)
 	return (0);
 }
 
-int			handle_doors(t_env *env, t_event_block *block)
+int				handle_doors(t_env *env, t_event_block *block)
 {
 	if (block->id != BE_DOOR)
 		return (0);
@@ -93,7 +113,7 @@ int			handle_doors(t_env *env, t_event_block *block)
 	return (0);
 }
 
-int		handle_lavas(t_env *env, t_event_block *block)
+int				handle_lavas(t_env *env, t_event_block *block)
 {
 	static int		delay = LAVA_DELAY;
 

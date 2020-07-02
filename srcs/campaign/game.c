@@ -46,6 +46,8 @@ int		cmp_game(void *param)
 
 	mesure_time(false);
 	env = (t_env*)param;
+	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
 	cmp_env = &env->cmp_env;
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
 	//physic_engine(env);
@@ -53,7 +55,7 @@ int		cmp_game(void *param)
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->maps[env->scene], false));
-//	handle_weapons(env);
+	//handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
 	translate_mesh(env->player.current->w_map,

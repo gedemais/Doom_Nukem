@@ -72,6 +72,9 @@ typedef struct	s_sound_param
 	size_t		pause;
 	bool		sound;
 	float		volume;
+	int 		start;
+	int 		end;
+	bool		no_sound;
 }				t_sparam;
 
 typedef struct	s_sound
@@ -86,15 +89,18 @@ typedef struct	s_sound
 int				sound_system(t_env *env, int source, t_sparam param);
 
 t_sparam		sp_fork(float volume);
+t_sparam		sp_no_sound(int start, int end);
+t_sparam		sp_overall(float volume, int start, int end, bool stop);
 t_sparam		sp_play(float volume);
 t_sparam		sp_stop();
 t_sparam		sp_volume(float volume);
 
 int 			fork_sound(t_dynarray *sounds, int source, t_sparam param);
+int 			no_sound(t_dynarray *sounds, t_sparam param);
 int 			play_sound(t_dynarray *sounds, int source, t_sparam param);
 int 			sound_volume(t_dynarray *sounds, int source, t_sparam param);
 int 			stop_sound(t_dynarray *sounds, int source);
-int 			stop_sounds(t_dynarray *sounds, int source);
+int 			stop_sounds(t_dynarray *sounds, int source, t_sparam param);
 
 char			*samples_paths(unsigned int index);
 

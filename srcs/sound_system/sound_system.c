@@ -38,10 +38,14 @@ int				sound_system(t_env *env, int source, t_sparam param)
 		free_dynarray(&sounds);
 		return (1);
 	}
+	if (param.no_sound)
+		return (no_sound(&sounds, param));
 	if (param.sound)
 		return (sound_volume(&sounds, source, param));
-	if (param.overall && stop_sounds(&sounds, source))
+	if (param.overall && stop_sounds(&sounds, source, param))
 		return (-1);
+	if (param.overall && param.stop)
+		return (stop_sound(&sounds, source));
 	if (!param.overall && param.stop && stop_sound(&sounds, source))
 		return (-1);
 	if (!param.stop && !param.fork && play_sound(&sounds, source, param))

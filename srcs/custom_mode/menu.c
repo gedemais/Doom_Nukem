@@ -48,6 +48,8 @@ static int				handle_events(t_env *env)
 
 int			custom_menu(t_env *env)
 {
+	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
 	handle_events(env);
 	map_sprite(env->mlx.img_data, env->sprites[SP_CUSTOM_BACKGROUND], (t_point){0, 0});
 	render_button(env, env->edit_env.buttons[MAPED_MENU_BUTTON_MAIN_MENU]);
