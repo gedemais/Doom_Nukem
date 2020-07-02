@@ -12,6 +12,7 @@ int		loot_nuke(t_env *env)
 		mob->hp = 0;
 		i++;
 	}
+	env->custom_env.game.moula -= env->custom_env.mobs.nb_cells * KILL_REWARD;
 	sound_system(env, SA_LNUKE, sp_fork(0.5f));
 	return (0);
 }
