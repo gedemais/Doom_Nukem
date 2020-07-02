@@ -12,14 +12,14 @@ void			enemies_kills_annoucements(t_env *env)
 		env->custom_env.game.kill_count = 0;
 		return ;
 	}
+	if (env->custom_env.game.kill_delay == KILL_DELAY - 1)
+		tmp = 0;
 	source = env->custom_env.game.kill_count;
 	source = source < 2 ? 0 : source;
 	source = source > 5 ? 6 : source;
 	if (source)
 	{
 		source += SA_DOUBLEKILL - 2;
-		if (env->custom_env.game.kill_delay == KILL_DELAY - 1)
-			tmp = 0;
 		if (tmp == source)
 			return ;
 		tmp = source;
