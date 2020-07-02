@@ -59,6 +59,14 @@ typedef struct	s_sample
 	float		length;
 }				t_sample;
 
+typedef struct	s_sound_param
+{
+	bool		stop;
+	bool		overall;
+	bool		fork;
+	size_t		pause;
+}				t_sparam;
+
 typedef struct	s_sound
 {
 	ALCdevice	*device;
@@ -67,7 +75,7 @@ typedef struct	s_sound
 	ALuint		ambient;
 }				t_sound;
 
-int				sound_system(t_env *env, int source, bool stop, bool overall);
+int				sound_system(t_env *env, int source, t_sparam param);
 
 char			*samples_paths(unsigned int index);
 

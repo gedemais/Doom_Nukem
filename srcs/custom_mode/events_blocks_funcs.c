@@ -51,7 +51,7 @@ int		handle_doors(t_env *env, t_event_block *block, int index)
 		{
 		//	del_door(env);
 	//		extract_door_blocks(env, &env->custom_env.events, block);
-			sound_system(env, SA_DOOR, false, false);
+			sound_system(env, SA_DOOR, (t_sparam){ 0, 0, 1, 0 });
 		}
 		return (1);
 	}

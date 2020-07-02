@@ -2,8 +2,8 @@
 
 static void	stop_n_play(t_env *env, int source)
 {
-	sound_system(env, source, true, false);
-	sound_system(env, source, false, false);
+	sound_system(env, source, (t_sparam){ 1, 0, 0, 0 });
+	sound_system(env, source, (t_sparam){ 0, 0, 0, 0 });
 }
 
 static void	pichenette(t_env *env)
