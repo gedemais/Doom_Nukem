@@ -32,7 +32,7 @@ int				handle_jukeboxs(t_env *env, t_event_block *block)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
-		textual_hint(env, "F", "PLAY ( cost 1000)", 0);
+		textual_hint(env, "F", "PLAY ( 1000)", 0);
 		textual_hint(env, "{", "PREVIOUS", 1);
 		textual_hint(env, "}", "NEXT", 2);
 
@@ -81,13 +81,13 @@ int				handle_mystery_boxs(t_env *env, t_event_block *block)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
-		textual_hint(env, "F", "get a random weapon ( cost 1000)", 0);
+		textual_hint(env, "F", "GET RANDOM WEAPON ( 1000)", 0);
 		if (env->events.keys[KEY_F] && env->custom_env.game.moula >= 1000 && button)
 		{
 			button = false;
 			env->custom_env.game.moula -= 1000;
 			add_random_weapon(env);
-			// sound
+			sound_system(env, SA_INVOCATION, sp_fork(0.5f));
 		}
 		button = !env->events.keys[KEY_F];
 		return (1);
@@ -124,6 +124,7 @@ int				handle_lavas(t_env *env, t_event_block *block)
 		delay--;
 		if (delay == 0)
 		{
+			sound_system(env, SA_GONG, sp_fork(0.5f));
 			env->player.hp--;
 			delay = LAVA_DELAY;
 		}
