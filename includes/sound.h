@@ -84,7 +84,6 @@ typedef struct	s_sound
 	t_sample	*samples;
 	ALuint		ambient;
 	float		volume;
-	float		voffset;
 }				t_sound;
 
 int				sound_system(t_env *env, int source, t_sparam param);

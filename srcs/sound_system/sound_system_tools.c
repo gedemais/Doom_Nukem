@@ -46,7 +46,7 @@ int 			play_sound(t_dynarray *sounds, int source, t_sparam param)
 	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
 	if (status == AL_PLAYING)
 		return (0);
-	sound->volume = param.volume + sound->voffset;
+	sound->volume = param.volume;
 	sound->volume = sound->volume > 1 ? 1 : sound->volume;
 	sound->volume = sound->volume < 0 ? 0 : sound->volume;
 	alSourcef(sound->ambient, AL_GAIN, sound->volume);
