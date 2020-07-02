@@ -66,15 +66,14 @@ typedef struct	s_sample
 
 typedef struct	s_sound_param
 {
-	bool		stop;
-	bool		overall;
 	bool		fork;
-	size_t		pause;
+	bool		no_sound;
+	bool		overall;
 	bool		sound;
-	float		volume;
+	bool		stop;
 	int 		start;
 	int 		end;
-	bool		no_sound;
+	float		volume;
 }				t_sparam;
 
 typedef struct	s_sound
