@@ -69,7 +69,9 @@ typedef struct	s_sound_param
 	bool		stop;
 	bool		overall;
 	bool		fork;
+	bool		sound;
 	size_t		pause;
+	float		volume;
 }				t_sparam;
 
 typedef struct	s_sound

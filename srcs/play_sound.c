@@ -82,6 +82,17 @@ static int 		fork_sound(t_dynarray *sounds, int source)
 	return (0);
 }
 
+static int 		sound_volume(t_dynarray *sounds, int source, t_sparam param)
+{
+	t_sound	sound;
+
+	sound = dyacc(sounds, source);
+	if (sound == NULL)
+		return (0);
+	alSourcef(sound->ambient, AL_GAIN, param.volume);
+	return (0);
+}
+
 int				sound_system(t_env *env, int source, t_sparam param)
 {
 	static t_dynarray	sounds;
@@ -89,7 +100,10 @@ int				sound_system(t_env *env, int source, t_sparam param)
 	if (sounds.byte_size == 0 && init_sound_system(env, &sounds))
 		return (-1);
 	if (source < 0 || source > sounds.nb_cells - 1)
-		return (0);
+	{
+		free_dynarray(&sounds);
+		return (1);
+	}
 	if (param.overall && stop_sounds(&sounds, source))
 		return (-1);
 	if (!param.overall && param.stop && stop_sound(&sounds, source))
