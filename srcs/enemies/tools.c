@@ -1,6 +1,6 @@
 #include "main.h"
 
-float           enemies_xz_angle(t_vec3d a, t_vec3d b)
+float           xz_angle(t_vec3d a, t_vec3d b)
 {
     float   cross;
     float   dot;

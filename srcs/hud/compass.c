@@ -25,7 +25,7 @@ static void		draw_ennemies_indicator(t_env *env, t_dynarray *mobs)
 	{
 		mob = dyacc(mobs, i);
 		sub = vec_sub(mob->pos, env->cam.stats.pos);
-		angle = enemies_xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
+		angle = xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
 		offsetx = WDT * (angle + 180) / 360;
 		if (offsetx > env->data.third_wdt && offsetx + EN_WDT < env->data.third_wdt * 2)
 			draw_rectangle(env->mlx.img_data, (t_point){offsetx, OFF_EN},
@@ -61,7 +61,7 @@ static void	draw_coordinates(t_env *env)
 	int			offsetx_left;
 
 	nord = (t_vec3d){1,0,0,0};
-	angle = enemies_xz_angle(env->cam.stats.dir, nord) * 180 / M_PI;
+	angle = xz_angle(env->cam.stats.dir, nord) * 180 / M_PI;
 	index = 0;
 	while (index <= 360)
 	{

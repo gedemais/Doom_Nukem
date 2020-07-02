@@ -33,7 +33,7 @@ void			enemies_last_rotation(t_enemy *mob, t_vec3d cam)
 	t_vec3d	goal;
 
 	goal = vec_sub(cam, mob->pos);
-	mob->yaw = enemies_xz_angle(mob->head, goal) * 0.5f;
+	mob->yaw = xz_angle(mob->head, goal) * 0.5f;
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);

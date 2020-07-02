@@ -106,7 +106,6 @@ static void	flattop(t_env *env, t_texturizer *txt, t_triangle *t)
 
 	i = ceil(t->points[0].y);
 	end = ceil(t->points[1].y);
-	(void)env;
 	while (i < end)
 	{
 		set_line_bounds_top(txt, t, i - t->points[0].y);
@@ -125,7 +124,6 @@ static void	flatbot(t_env *env, t_texturizer *txt, t_triangle *t)
 
 	i = ceil(t->points[1].y);
 	end = ceil(t->points[2].y);
-	(void)env;
 	while (i < end)
 	{
 		set_line_bounds_bot(txt, t, (float[2]){i - t->points[0].y, i - t->points[1].y});

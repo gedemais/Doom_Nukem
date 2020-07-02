@@ -16,7 +16,7 @@ void			enemies_goals(t_enemy *mob)
 	mob->pitch.z = (goal.z - mob->pos.z) * mob->speed;
 	goal = vec_add(mob->end->pos, mob->end->pos);
 	goal = vec_sub(goal, mob->pos);
-	mob->yaw = enemies_xz_angle(mob->head, goal) * mob->speed;
+	mob->yaw = xz_angle(mob->head, goal) * mob->speed;
 }
 
 static void		enemies_get_goal(t_enemy *mob)
