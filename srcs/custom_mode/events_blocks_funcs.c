@@ -20,8 +20,6 @@ int		handle_jukeboxs(t_env *env, t_event_block *block)
 			*track = *track == 0 ? MT_MAX - 1 : *track - 1; // previous
 		else if (e->keys[KEY_RIGHT])
 			*track = *track == MT_MAX ? 0 : *track + 1; // next
-		//*track >= 0 ? play_ambience(NULL, false, true, false) : 0; Stop the current track if one
-		//*track >= 0 ? play_ambience(env->) : 0; Play the new track
 		return (1);
 	}
 	return (0);
@@ -88,7 +86,7 @@ int			handle_doors(t_env *env, t_event_block *block)
 		{
 			env->custom_env.game.moula -= 500;
 			del_door(env, block);
-			play_ambience(&env->sound.samples[SA_DOOR], true, false, false);
+			sound_system(env, SA_DOOR, (t_sparam){ 0, 0, 1, 0 });
 		}
 		return (1);
 	}

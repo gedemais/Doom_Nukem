@@ -39,10 +39,10 @@ struct	s_weapon
 	t_map		*w_map; // map du .obj de l'arme
 	t_mesh		*mesh; // Mesh central de l'arme
 	t_mesh		*breech; // Mesh culasse de l'arme
-	t_sample	*shoot;
-	t_sample	*reload;
 	char		*name;
 	float		accuracy; // 0-1
+	int 		shoot;
+	int 		reload;
 	int			reticle;
 	int			damages; // 0-100
 	int			magazine; // Capacite du chargeur

@@ -43,6 +43,11 @@ enum	e_sample_id
 	SA_RING,
 	SA_PORTAIL,
 	SA_TELEPORTATION,
+	SA_LNUKE,
+	SA_LAMMOS,
+	SA_LCASH,
+	SA_LGODSTART,
+	SA_LGODEND,
 	SA_MAX
 };
 
@@ -59,6 +64,14 @@ typedef struct	s_sample
 	float		length;
 }				t_sample;
 
+typedef struct	s_sound_param
+{
+	bool		stop;
+	bool		overall;
+	bool		fork;
+	size_t		pause;
+}				t_sparam;
+
 typedef struct	s_sound
 {
 	ALCdevice	*device;
@@ -67,8 +80,8 @@ typedef struct	s_sound
 	ALuint		ambient;
 }				t_sound;
 
-char	*samples_paths(unsigned int index);
-int		play_ambience(t_sample *sample, bool play, bool stop, bool keep);
-void	loop_sample(t_sample *sample, bool launch, bool stop, bool keep);
+int				sound_system(t_env *env, int source, t_sparam param);
+
+char			*samples_paths(unsigned int index);
 
 #endif

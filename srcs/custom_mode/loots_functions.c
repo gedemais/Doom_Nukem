@@ -12,7 +12,7 @@ int		loot_nuke(t_env *env)
 		mob->hp = 0;
 		i++;
 	}
-	// nuke sound
+	sound_system(env, SA_LNUKE, (t_sparam){ 0, 0, 1, 0 });
 	return (0);
 }
 
@@ -26,13 +26,14 @@ int		loot_money(t_env *env)
 	env->custom_env.game.moula += bonus;
 	while (env->custom_env.game.moula % 10)
 		env->custom_env.game.moula++;
-	// cash sound
+	sound_system(env, SA_LCASH, (t_sparam){ 0, 0, 1, 0 });
 	return (0);
 }
 
 int		loot_shield(t_env *env)
 {
 	env->player.god = GOD_TIME;
+	sound_system(env, SA_LGODSTART, (t_sparam){ 0, 0, 1, 0 });
 	return (0);
 }
 
@@ -48,5 +49,6 @@ int		loot_ammos(t_env *env)
 		w->ammos = w->max_ammos;
 		i++;
 	}
+	sound_system(env, SA_LAMMOS, (t_sparam){ 0, 0, 1, 0 });
 	return (0);
 }

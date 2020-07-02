@@ -29,14 +29,21 @@ static void	check_wounds(t_env *env)
 
 static void	godmode(t_env *env)
 {
-	int		fade;
+	static bool	end = false;
+	int			fade;
 
 	fade = 10;
 	if (env->player.hp < 142 && env->player.god > (GOD_TIME / fade))
 		env->player.hp++;
 	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
+	{
+		sound_system(env, SA_LGODEND, (t_sparam){ 0, 0, end, 0 });
+		end = true;
 		env->player.hp--;
+	}
 	env->player.god -= env->data.spent;
+	if (env->player.god <= 0.0f)
+		end = false;
 }
 
 void	handle_player(t_env *env)

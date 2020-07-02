@@ -146,7 +146,12 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/world/invocation.wav",
 					"resources/samples/world/ring.wav",
 					"resources/samples/world/portail.wav",
-					"resources/samples/world/teleportation.wav",};
+					"resources/samples/world/teleportation.wav",
+					"resources/samples/loots/nuke.wav",
+					"resources/samples/loots/ammos.wav",
+					"resources/samples/loots/cash.wav",
+					"resources/samples/loots/god_end.wav",
+					"resources/samples/loots/god_start.wav"};
 
 	return (paths[index]);
 }

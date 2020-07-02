@@ -1,21 +1,4 @@
-	#include "main.h"
-
-static void		enemies_sound_damages(t_env *env)
-{
-	(void)env;
-}
-
-static void		enemies_sound_death(t_env *env)
-{
-	ALuint		source;
-	t_sample	*sound;
-
-	source = UINT_MAX;
-	sound = &env->sound.samples[SA_DEATHMONSTER];
-	alGenSources(1, &source);
-	alSourcei(source, AL_BUFFER, (ALint)sound->buffer);
-	alSourcePlay(source);
-}
+#include "main.h"
 
 static int	enemies_do_damages(t_env *env, t_enemy *mob)
 {
@@ -24,14 +7,10 @@ static int	enemies_do_damages(t_env *env, t_enemy *mob)
 	{
 		mob->dead = true;
 		++env->custom_env.game.kill_count;
-		enemies_sound_death(env);
+		sound_system(env, SA_DEATHMONSTER, (t_sparam){ 0, 0, 1, 0 });
 		if (env->custom_env.game.kill_delay == 0)
 			env->custom_env.game.kill_delay = KILL_DELAY;
-//		if (spawn_loot(env, mob->pos))
-//			return (-1);
 	}
-	else
-		enemies_sound_damages(env);
 	env->custom_env.game.moula += mob->dead ? KILL_REWARD : HIT_REWARD;
 	env->player.hitmarker = HITMARKER_T;
 	return (0);
