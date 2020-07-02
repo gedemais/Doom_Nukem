@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 21:18:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/02 13:02:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUSTOM_H
 
 # define CUSTOM_WALK_SPEED 0.05f
-# define MAX_CUSTOM_MOBS 3
-# define EVENT_DIST 4
+# define MAX_CUSTOM_MOBS 0
+# define EVENT_DIST 6
 
 # define MOB_PEACE_TIME 30
 
