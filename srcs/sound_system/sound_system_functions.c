@@ -73,7 +73,7 @@ t_sparam		sp_volume(float volume)
 	t_sparam	param;
 
 	volume = volume > 1 ? 1 : volume;
-	volume = volume < 0 ? 0 : volume;
+	volume = volume < -1 ? -1 : volume;
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.fork = true;
 	param.sound = true;
