@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 4
+# define MAX_ENEMIES 5
 # define RESPAWN_DELAY 3.0f
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
@@ -67,7 +67,7 @@ void			enemies_animations(t_enemy *mob);
 void			enemies_movements(t_env *env, t_pf *a);
 void			enemies_do_movement(t_enemy *mob);
 
-void			enemies_death(t_env *env, t_dynarray *mobs);
+int				enemies_death(t_env *env, t_dynarray *mobs);
 int				enemies_damages(t_env *env);
 void			enemies_kills_annoucements(t_env *env);
 

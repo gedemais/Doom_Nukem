@@ -112,6 +112,7 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 		map->nmesh++;
 		i++;
 	}
+	sleep(1);
 	return (0);
 }
 
@@ -138,6 +139,23 @@ static int 		enemy_offset(t_enemy *mob)
 	return (0);
 }
 
+static void	replace_loots_index(t_env *env, int delta)
+{
+	t_loot	*loot;
+	int		i;
+
+	i = 0;
+	while (i < env->custom_env.loots.nb_cells)
+	{
+		loot = dyacc(&env->custom_env.loots, i);
+		loot->m->index += delta;
+		loot->m = dyacc(&env->edit_env.map.meshs, loot->m->index);
+		loot->m->index += delta;
+		assign_meshs(loot->m);
+		i++;
+	}
+}
+
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
@@ -157,5 +175,6 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 		if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
+	replace_loots_index(env, enemy.map_end - enemy.map_start);
 	return (0);
 }

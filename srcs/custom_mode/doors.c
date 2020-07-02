@@ -70,10 +70,8 @@ void				del_door(t_env *env, t_event_block *block)
 {
 	if (block->id == BE_DOOR)
 	{
-		del_recursif(env, (int[3]){
-			env->mid.mesh->m_pos[0],
-			env->mid.mesh->m_pos[1],
-			env->mid.mesh->m_pos[2]});
+		del_recursif(env, (int[3]){block->x, block->y, block->z});
+		sound_system(env, SA_DOOR, (t_sparam){ 0, 0, 1, 0 });
 	}
 }
 
