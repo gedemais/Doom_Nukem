@@ -20,8 +20,8 @@ void	assign_enemys_stats(t_enemy *enemy, char type)
 int		enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
-		[ENEMY_CORONA] = SCENE_UGLY
-		//[ENEMY_MAGE] = SCENE_MAGE
+		//[ENEMY_CORONA] = SCENE_UGLY
+		[ENEMY_CORONA] = SCENE_MAGE
 	};
 
 	return (map[(int)type]);
@@ -77,7 +77,7 @@ static void		find_start_end(t_env *env, t_map *mob, t_enemy *enemy)
 
 	if (env->custom_env.mobs.nb_cells == 0)
 	{
-		enemy->map_start = env->edit_env.map.meshs.nb_cells - env->custom_env.loots.nb_cells;
+		enemy->map_start = env->edit_env.map.nmesh - env->custom_env.loots.nb_cells;
 		enemy->map_end = enemy->map_start + mob->nmesh;
 	}
 	else
@@ -102,7 +102,7 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 		ft_memset(&new, 0, sizeof(t_mesh));
 		m = dyacc(&mob->meshs, i);
 		new.type = 1;
-		new.index = map->nmesh - env->custom_env.loots.nb_cells;
+		new.index = enemy->map_start + i;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(map, mob, m, &new)
 			|| insert_dynarray(&map->meshs, &new, map->nmesh - env->custom_env.loots.nb_cells))
@@ -141,16 +141,17 @@ static int 		enemy_offset(t_enemy *mob)
 static void	replace_loots_index(t_env *env, int delta)
 {
 	t_loot	*loot;
+	int		index;
 	int		i;
 
 	i = 0;
 	while (i < env->custom_env.loots.nb_cells)
 	{
 		loot = dyacc(&env->custom_env.loots, i);
-		loot->m->index += delta;
-		loot->m = dyacc(&env->edit_env.map.meshs, loot->m->index);
-		loot->m->index += delta;
+		index = loot->m->index + delta;
+		loot->m = dyacc(&env->edit_env.map.meshs, index);
 		assign_meshs(loot->m);
+		loot->m->index += delta;
 		i++;
 	}
 }
@@ -168,12 +169,18 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
-
+	
+	printf("before copy\n");
+	print_mobs(env);
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
-		if (enemy_offset(&enemy)
+	if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
+	printf("after copy\n");
+	print_mobs(env);
 	replace_loots_index(env, enemy.map_end - enemy.map_start);
+	printf("after replace\n");
+	print_mobs(env);
 	return (0);
 }

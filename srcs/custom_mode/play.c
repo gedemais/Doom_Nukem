@@ -50,8 +50,8 @@ static int		handle_keys(t_env *env, t_events *e)
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }
-/*
-static void	print_mobs(t_env *env)
+
+void	print_mobs(t_env *env)
 {
 	t_enemy	*mob;
 	t_loot	*loot;
@@ -80,23 +80,17 @@ static void	print_mobs(t_env *env)
 		i++;
 	}
 	printf("--------------------------------------------\n");
-}*/
+}
 
 int			custom_play(t_env *env)
 {
-//	printf("--------- START ----------\n");
-//	print_mobs(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);
 	//physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
-//	printf("--------- before enemies ----------\n");
-//	print_mobs(env);
 	handle_enemies(env);
-//	printf("--------- after enemies ----------\n");
-//	print_mobs(env);
 	handle_weapons(env);
 	handle_block_events(env);
 	handle_moon(env);

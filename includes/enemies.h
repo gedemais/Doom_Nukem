@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 5
+# define MAX_ENEMIES 1
 # define RESPAWN_DELAY 3.0f
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
@@ -57,6 +57,8 @@ struct				s_enemy
 	t_node		*end;
 	t_map		*map;
 };
+
+void			print_mobs(t_env *env); // a tej
 
 int				handle_enemies(t_env *env);
 
