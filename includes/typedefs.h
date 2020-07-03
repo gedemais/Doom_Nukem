@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/01 18:08:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:55:08 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_loot t_loot;
 typedef struct	s_ed_map t_ed_map;
 typedef struct	s_scroll t_scroll;
 typedef struct	s_custom_game t_custom_game;
+typedef struct	s_go_env t_go_env;
 
 typedef struct	s_kerning t_kerning;
 typedef struct	s_text_box t_text_box;

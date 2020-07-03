@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/07 15:51:16 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/07 15:54:52 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ enum				e_block_events
 	BE_MAX
 };
 
+enum	e_go_button_id
+{
+	GO_BUTTON_YES,
+	GO_BUTTON_NO,
+	GO_BUTTON_MAX
+};
+
 union				u_bep
 {
 	char		c;
@@ -105,12 +112,22 @@ struct				s_custom_game
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 
+struct	s_go_env
+{
+	void			*env;
+	t_button		buttons[GO_BUTTON_MAX];
+};
+
 struct				s_custom_env
 {
 	t_custom_game	game;
 	t_dynarray		mobs;
+<<<<<<< HEAD
 	t_dynarray		loots;
 	t_dynarray		doors;
+=======
+	t_go_env		go_env;
+>>>>>>> add game over
 	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;
@@ -121,6 +138,8 @@ struct				s_custom_env
 	float			spawner;
 	int				sub_context;
 };
+
+
 
 int					custom_game_over(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
