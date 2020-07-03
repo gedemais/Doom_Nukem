@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/18 17:36:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/03 13:31:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static void	free_maped(t_env *env)
 
 int			free_env(t_env *env)
 {
-	static void	(*free_context[C_MAX])(t_env*) = {NULL, NULL, free_cmp,
+	static void	(*free_context[C_MAX])(t_env*) = {NULL, free_cmp,
 													free_custom, free_maped};
 	int		i;
 

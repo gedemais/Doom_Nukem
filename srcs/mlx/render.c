@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 16:42:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/03 13:34:27 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	mesure_time(bool end)
 
 int		render(void *param)
 {
-	static int				(*render_fts[C_MAX])(void*) = {render_dev, render_ts, render_camp, render_custom, render_maped};
+	static int				(*render_fts[C_MAX])(void*) = {render_ts, render_camp, render_custom, render_maped};
 	static struct timeval	t;
 	t_env					*env;
 	t_data					*data;

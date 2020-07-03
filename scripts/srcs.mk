@@ -1,6 +1,4 @@
 SRCS_NAME =	main.c\
-			dev_events.c\
-			dev_handle_events.c\
 			free.c\
 			openal.c\
 			resources_paths.c\

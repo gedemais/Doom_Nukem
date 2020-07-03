@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 16:43:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/03 13:35:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@
 
 enum		e_context_id
 {
-	C_DEV,
 	C_TITLE_SCREEN,
 	C_CAMPAIGN,
 	C_CUSTOM,

@@ -12,10 +12,9 @@ static int				handle_events(t_env *env)
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
 				if (i == TS_BUTTON_QUIT)
-					switch_context(env, C_DEV);
-					//exit_doom(env);
+					exit_doom(env, NULL, 1, 0);
 				else
-					switch_context(env, i + 2);
+					switch_context(env, i + 1);
 				clic = false;
 				return (1);
 			}
