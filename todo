@@ -10,6 +10,8 @@ Add CONTEXTE galerie
 Bruit de prise de degats du joueur
 
 Fix la physique
+=> baisser s'accroupir + voir msg épinglé discord
+
 Fix le segfault du bonus wheel avec bc == BC_OBJ
 Fix les loots
 
