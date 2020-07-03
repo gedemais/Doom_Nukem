@@ -10,7 +10,7 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 		if (keys[KEY_E])
 			f.y += 0.3f;
 		if (keys[KEY_E] && !keys[KEY_W])
-			f = (t_vec3d){0, 1.0f, 0, f.w};
+			f = (t_vec3d){0, f.y, 0, f.w};
 		keys[KEY_S] = 0;
 	}
 	if (keys[KEY_S])

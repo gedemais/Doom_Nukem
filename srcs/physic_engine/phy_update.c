@@ -143,20 +143,17 @@ void	update_positions_gravity(t_env *env)
 		i++;
 	}
 }
-
-void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
+/*
+void	ft_inertie(t_env *env, t_map map, t_vec3d v)
 {
 	static t_vec3d	v = (t_vec3d){-INFINITY, 0, 0, 0};
-	t_vec3d			diff_y;
-//	print_info_phy(env, cam);
-	// add f and r to v here ?
-//	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v);
-//	cam->corp.v 
-	diff_y = zero_vector();
+
 	printf("corp speed : ");
 	print_vec(cam->corp.v);
 	printf("speed : ");
 	print_vec(v);
+
+
 	if (key_move(env->events.keys))
 	{
 		v = cam->corp.v;
@@ -176,20 +173,30 @@ void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 			v.z = (v.z > 0) ? v.z - INERTIE : v.z + INERTIE;
 		else
 			v = zero_vector();
-		translate_mesh(map, cam, v);
 	}
+}
+*/
+
+
+void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
+{
+	t_vec3d			diff_y;
+//	print_info_phy(env, cam);
+	// add f and r to v here ?
+//	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v);
+//	cam->corp.v 
+	
+	diff_y = zero_vector();
+		
+	translate_mesh(map, cam, cam->corp.v);	
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
 	printf("diff_y = %f\n", env->phy_env.diff_camfloor.y);
-	if (env->phy_env.diff_camfloor.y < 4 && env->cam.stats.onwall == 0
+	if (env->phy_env.diff_camfloor.y < DIFCAMFLOOR && env->cam.stats.onwall == 0
 			&& env->cam.stats.onfloor == 1)
 	{
-		diff_y = (t_vec3d){0, 4 - env->phy_env.diff_camfloor.y, 0, 0};
+		diff_y = (t_vec3d){0, DIFCAMFLOOR - env->phy_env.diff_camfloor.y, 0, 0};
 		translate_mesh(map, cam, diff_y);
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, diff_y);
 	}
-
-//	if () // si aucune collide sol ?
-//	{
-//	}
 }

@@ -57,6 +57,8 @@ IBZ2 = -I/usr/local/opt/bzip2/include/
 
 all: $(NAME)
 
+thread: 
+	make -C . -j4
 install: scripts/install.sh
 	@bash scripts/install.sh
 

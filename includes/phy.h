@@ -13,6 +13,7 @@
 # define PHY_H
 
 # define INERTIE 0.01f
+# define DIFCAMFLOOR 3
 
 struct	s_corp
 {
