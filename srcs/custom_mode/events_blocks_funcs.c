@@ -12,7 +12,7 @@ static int 		jukeboxs_play_sound(t_env *env)
 		delay = 20;
 		if (ambient < 0 || ambient > SA_PNL)
 			ambient = 0;
-		sound_system(env, ambient, sp_overall(0.5f, 0, SA_PNL, false));
+		sound_system(env, ambient, sp_overall(0, SA_PNL, sp_play(0.5f)));
 		env->custom_env.game.moula -= 1000;
 	}
 	else if ((e->keys[KEY_LEFT] || e->keys[KEY_RIGHT]) && delay == 0)

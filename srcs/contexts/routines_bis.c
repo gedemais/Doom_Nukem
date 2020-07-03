@@ -15,12 +15,12 @@
 void	custom_to_ts(t_env *env)
 {
 	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0.5f, 0, SA_MAX, true));
+		sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_show();
 }
 
 void	map_editor_to_ts(t_env *env)
 {
 	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0.5f, 0, SA_MAX, true));
+		sp_overall(0, SA_MAX, sp_stop()));
 }

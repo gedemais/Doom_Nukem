@@ -5,7 +5,7 @@ int				custom_menu_to_play(t_env *env)
 	t_map	*map;
 
 	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0.5f, 0, SA_MAX, true));
+		sp_overall(0, SA_MAX, sp_stop()));
 	map = &env->edit_env.map;
 	if (init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_CUSTOM_MOBS)
 		|| astar_init(env) || init_map_physics(&env->edit_env.map)
@@ -28,7 +28,7 @@ int				custom_menu_to_play(t_env *env)
 int				custom_play_to_menu(t_env *env)
 {
 	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0.5f, 0, SA_MAX, true));
+		sp_overall(0, SA_MAX, sp_stop()));
 	free_dynarray(&env->custom_env.mobs);
 	free_dynarray(&env->astar.d_nodes);
 	free_dynarray(&env->astar.d_astar);
