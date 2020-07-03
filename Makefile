@@ -57,6 +57,9 @@ IBZ2 = -I/usr/local/opt/bzip2/include/
 
 all: $(NAME)
 
+thread:
+	@make -C . -j4
+
 install: scripts/install.sh
 	@bash scripts/install.sh
 
@@ -68,7 +71,7 @@ $(SRCS_PATH)%.o: $(SRCS_PATH)%.c $(INCS)
 	@printf " Compiling $<"
 	@printf "                                       \\r"
 	@tput cnorm
-	@$(CC) $(FLAGS) -I$(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) $(IFREETYPE) $(IPNG) $(IBZ2) -o $@ -c $<
+	@$(CC) $(FLAGS) -I $(INCS_PATH) -I$(MLX_PATH) -I$(LIB_PATH) $(IOPENAL) $(ISNDFILE) $(IFREETYPE) $(IPNG) $(IBZ2) -o $@ -c $<
 
 $(MLX): $(MLX_PATH)
 	@echo "Making MinilibX..."
