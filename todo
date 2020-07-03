@@ -1,34 +1,33 @@
-Fix les doors
-
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
 {
 	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche
 	INFINITY si joueur trop loin
 }
 
+Add waves en custom mode + système de règles
+Add CONTEXTE galerie
+
 Bruit de prise de degats du joueur
 
-Gérer le changement de contexte reverse (custom to menu etc..)
-
+Fix la physique
 Fix le segfault du bonus wheel avec bc == BC_OBJ
-Loots : Nuke, munitions, god mode, Thunes
+Fix les loots
 
-Decider de la duree de vie des pointeurs alloues :
-- local
-- frame
-- subcontext
-- contexte
-- programme
-
-FT_Done_Face
+Gérer le changement de contexte reverse (custom to menu etc..)
+=> Decider de la duree de vie des pointeurs alloues :
+	- local
+	- frame
+	- subcontext
+	- contexte
+	- programme
 
 gérer le export ds le make install
- => l'user définit en brut dans le make install le path du .zshrc
+=> l'user définit en brut dans le make install le path du .zshrc
  
 NORME
 
 LEAKS
 
-gérer toutes les sorties de fonctions return(-1);
+remonter les chaines d'erreurs return (-1);
 
-vérifier les .h et .c si fonctions non utilisées => delete
+vérifier les .h et .c si fonctions / variables non utilisées => delete
