@@ -43,7 +43,7 @@ static void pause_position(t_env *env)
 void	print_info_phy(t_env *env, t_mesh *cam)
 {
 	printf("floor %d \n", env->cam.stats.onfloor);
-	printf("plan %d \n", env->cam.stats.onplan);
+	printf("wall %d \n", env->cam.stats.onwall);
 	printf("--------------------------------------------\n");
 	printf("cam->corp.pos\n");
 	print_vec(cam->corp.pos);

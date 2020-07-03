@@ -185,6 +185,9 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	(void)env;
 	cam = c->b;
 	wall = c->a;
+	printf("pos_wall\n");
+
+	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
 	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
 			&& wall->tris.nb_cells > 8)
 		return (zero_vector());
