@@ -52,23 +52,30 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	int			ret;
 	int			i;
 
-	i = loot->index + 1;
+	i = loot->index - 1;
 	ret = loots_fts[(int)loot->id](env);
+	printf("loot id : %d\n", loot->id);
+	PUT
 	extract_dynarray(&env->edit_env.map.meshs, loot->m->index);
+	PUT
 	extract_dynarray(&env->custom_env.loots, loot->index);
+	PUT
+	env->edit_env.map.nmesh--;
 	while (i < env->custom_env.loots.nb_cells)
 	{
-		l = dyacc(&env->custom_env.loots, i);
+		if (!(l = dyacc(&env->custom_env.loots, i)))
+			break ;
 		l->m->index--;
 		i++;
 	}
-	printf("%d\n", loot->id);
+	PUT
 //	printf("---------- lauch_loot------------\n");
 //	print_mobs(env);
 	replace_mobs_index(env, -1);
 //	printf("---------- lauch_loot 2------------\n");
 //	print_mobs(env);
 //	exit(0);
+	PUT
 	return (ret);
 }
 
@@ -114,9 +121,11 @@ void	handle_loots(t_env *env)
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);
 			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.1f));
 			if (dist < 0.1f)
+			{
 				launch_loot(env, loot);
+				return ;
+			}
 		}
-		rotate_mesh(loot->m, loot->m->corp.pos, 0.02f, rotate_x);
 		rotate_mesh(loot->m, loot->m->corp.pos, 0.02f, rotate_y);
 		i++;
 	}
