@@ -95,8 +95,7 @@ t_sparam		sp_no_sound(int start, int end);
 t_sparam		sp_overall(int start, int end, t_sparam p);
 t_sparam		sp_play(float volume);
 t_sparam		sp_stop();
-t_sparam		sp_change_volume(float voffset);
-t_sparam		sp_set_volume(float volume);
+t_sparam		sp_volume(float voffset);
 
 int 			fork_sound(t_dynarray *sounds, int source, t_sparam param);
 int 			play_sound(t_dynarray *sounds, int source, t_sparam param);

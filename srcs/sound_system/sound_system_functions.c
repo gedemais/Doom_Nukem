@@ -65,7 +65,7 @@ t_sparam		sp_stop()
 	return (param);
 }
 
-t_sparam		sp_change_volume(float voffset)
+t_sparam		sp_volume(float voffset)
 {
 	t_sparam	param;
 
@@ -74,17 +74,5 @@ t_sparam		sp_change_volume(float voffset)
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.sound = true;
 	param.volume = voffset;
-	return (param);
-}
-
-t_sparam		sp_set_volume(float volume)
-{
-	t_sparam	param;
-
-	volume = volume > 1 ? 1 : volume;
-	volume = volume < 0 ? 0 : volume;
-	ft_memset(&param, 0, sizeof(t_sparam));
-	param.sound = true;
-	param.volume = volume;
 	return (param);
 }

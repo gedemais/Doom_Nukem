@@ -6,14 +6,14 @@ int				background_sound(t_env *env, int source)
 	{
 		env->volume += 0.01f;
 		if (sound_system(env, source,
-			sp_overall(0, SA_MAX - 1, sp_change_volume(0.01f))))
+			sp_overall(0, SA_MAX - 1, sp_volume(0.01f))))
 			return (-1);
 	}
 	else if (env->events.keys[KEY_G])
 	{
 		env->volume -= 0.01f;
 		if (sound_system(env, source,
-			sp_overall(0, SA_MAX - 1, sp_change_volume(-0.01f))))
+			sp_overall(0, SA_MAX - 1, sp_volume(-0.01f))))
 			return (-1);
 	}
 	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
