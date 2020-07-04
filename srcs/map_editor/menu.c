@@ -68,8 +68,8 @@ static int	select_map(t_env *env)
 
 int			maped_menu(t_env *env)
 {
-	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
+	if (background_sound(env, SA_TITLE_SCREEN_L))
+		return (-1);
 	handle_events(env);
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_BACKGROUND], (t_point){0, 0});
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_MENU_TITLE], (t_point){420, 60});

@@ -84,8 +84,8 @@ static void	print_mobs(t_env *env)
 
 int			custom_play(t_env *env)
 {
-	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
+	if (background_sound(env, SA_TITLE_SCREEN_L))
+		return (-1);
 //	printf("--------- START ----------\n");
 //	print_mobs(env);
 	handle_keys(env, &env->events);

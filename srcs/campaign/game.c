@@ -46,8 +46,8 @@ int		cmp_game(void *param)
 
 	mesure_time(false);
 	env = (t_env*)param;
-	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-		sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
+	if (background_sound(env, SA_TITLE_SCREEN_L))
+		return (-1);
 	cmp_env = &env->cmp_env;
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
 	//physic_engine(env);

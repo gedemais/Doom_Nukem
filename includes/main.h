@@ -142,6 +142,7 @@ struct			s_env
 	t_pf			astar;
 	int				context;
 	int				scene;
+	float			volume;
 };
 
 void	free_mesh(t_mesh *m);

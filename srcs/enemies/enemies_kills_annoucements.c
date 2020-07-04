@@ -24,6 +24,6 @@ void			enemies_kills_annoucements(t_env *env)
 			return ;
 		tmp = source;
 		sound_system(env, source,
-			sp_overall(SA_DOUBLEKILL, SA_WICKEDSICK, sp_play(0.5f)));
+			sp_overall(SA_DOUBLEKILL, SA_WICKEDSICK, sp_play(env->volume)));
 	}
 }

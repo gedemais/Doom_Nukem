@@ -67,7 +67,7 @@ int			render_ts(void *param)
 	if (anim-- > 0)
 		wait_frame();
 	else
-		if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-			sound_system(env, SA_TITLE_SCREEN_L, sp_play(0.5f));
+		if (background_sound(env, SA_TITLE_SCREEN_L))
+			return (-1);
 	return (0);
 }
