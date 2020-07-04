@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/04 16:29:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/04 18:00:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define EVENT_DIST 5
 
 # define MOB_PEACE_TIME 30
+# define INTER_WAVE 10
+
+# define SPAWN_SPEED_SUB 0.1f
 
 # define START_HP 100
 # define HEAL_SPEED 10
@@ -28,6 +31,8 @@
 # define START_MOULA 5000
 # define MOB_START_HP 50
 # define MOB_LSTART 6
+# define MOB_PV_COEFF 1.3f
+# define MOB_NB_ADD 4
 
 # define MIN_CASH 100
 # define MAX_CASH 1000
@@ -95,10 +100,12 @@ struct				s_custom_door
 
 struct				s_custom_game
 {
+	float		spawn_speed;
 	int			nb_spawners;
 	int			wave; // index de la vague en cours
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
 	int			lmob;
+	int			amob;
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
 	int 		kill_count;
@@ -123,6 +130,7 @@ struct				s_custom_env
 	int				sub_context;
 };
 
+void				handle_waves(t_env *env);
 int					custom_game_over(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 

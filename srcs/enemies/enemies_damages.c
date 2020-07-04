@@ -5,6 +5,7 @@ static int	enemies_do_damages(t_env *env, t_enemy *mob)
 	mob->hp -= env->player.current->damages;
 	if (mob->hp < 1)
 	{
+		env->custom_env.game.amob--;
 		mob->dead = true;
 		++env->custom_env.game.kill_count;
 		sound_system(env, SA_DEATHMONSTER, sp_fork(0.5f));

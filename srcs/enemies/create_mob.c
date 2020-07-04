@@ -1,18 +1,14 @@
 #include "main.h"
 
-void	assign_enemys_stats(t_enemy *enemy, char type)
+void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 {
-	static int		hps[ENEMY_MAX] = {
-		[ENEMY_CORONA] = 100
-	};
 	static int		damages[ENEMY_MAX] = {
-		[ENEMY_CORONA] = 10
+		[ENEMY_CORONA] = EDAMAGES_CORONA
 	};
 	static float	speeds[ENEMY_MAX] = {
 		[ENEMY_CORONA] = 0.05f
 	};
-
-	enemy->hp = hps[(int)type];
+	enemy->hp = game->mobs_pv;
 	enemy->damages = damages[(int)type];
 	enemy->speed = speeds[(int)type];
 }
@@ -161,7 +157,7 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	t_enemy	enemy;
 
 	ft_memset((void *)&enemy, 0, sizeof(t_enemy));
-	assign_enemys_stats(&enemy, type);
+	assign_enemys_stats(&env->custom_env.game, &enemy, type);
 
 	enemy.head = (t_vec3d){ 0, 0, 1, 0 };
 	enemy.offset = (t_vec3d){ 0, 1, 0, 0 };
@@ -170,17 +166,17 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
 	
-	printf("before copy\n");
-	print_mobs(env);
+//	printf("before copy\n");
+//	print_mobs(env);
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
 	if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
-	printf("after copy\n");
-	print_mobs(env);
+//	printf("after copy\n");
+//	print_mobs(env);
 	replace_loots_index(env, enemy.map_end - enemy.map_start);
-	printf("after replace\n");
-	print_mobs(env);
+//	printf("after replace\n");
+//	print_mobs(env);
 	return (0);
 }

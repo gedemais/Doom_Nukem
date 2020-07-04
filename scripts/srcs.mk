@@ -41,6 +41,7 @@ SRCS_NAME =	main.c\
 			custom_mode/routines.c\
 			custom_mode/setup.c\
 			custom_mode/sky.c\
+			custom_mode/waves.c\
 			\
 			enemies/astar.c\
 			enemies/astar_quick_sort.c\

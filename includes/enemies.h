@@ -17,6 +17,12 @@ enum				e_enemies
 	ENEMY_MAX
 };
 
+enum				e_damages
+{
+	EDAMAGES_CORONA = 10,
+	EDAMAGES_MAGE = 35
+};
+
 enum				e_loots_id
 {
 	LOOT_NUKE,
