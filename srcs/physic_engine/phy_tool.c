@@ -81,24 +81,7 @@ static t_vec3d	look_for_slope_vect(t_triangle *tri, t_vec3d *dir)
 	return (zero_vector());
 }
 
-void print_vect_face(t_triangle *tri, t_vec3d *dir)
-{
-	t_vec3d u;
-	t_vec3d v;
-	t_vec3d w;
 
-	printf("---------------\n");
-	u = vec_sub(tri->points[0], tri->points[1]);
-	printf("dot = %f\n",vec_dot(*dir , u));
-	print_vec(u);
-//		return (u);
-	v = vec_sub(tri->points[1], tri->points[2]);
-	printf("dot = %f\n",vec_dot(*dir , v));	
-	print_vec(v);
-	w = vec_sub(tri->points[2], tri->points[0]);
-	printf("dot = %f\n",vec_dot(*dir , w));	
-	print_vec(w);
-}
 
 t_vec3d	ft_look_for_slope(t_mesh *m, t_vec3d *dir)
 {
@@ -149,8 +132,6 @@ t_vec3d		phy_move_collide(t_env *env, t_collide *c, t_vec3d dir) //5
 	(void)dir;
 	a = c->a;
 	cam = c->b;
-	print_collide(*c);
-//	print_collide(*c);
 	f = vec_fmult(*coefdir_plan(env, a, cam, &dir), MAPED_WALK_SPEED); 
 	return (f);
 }
@@ -174,6 +155,90 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 	else if (env->cam.stats.onwall == 1)
 		f = phy_move_collide(env, map->cam_wall, env->cam.stats.dir);
 	return (f);
+}
+
+void print_vect_face(t_triangle *tri, t_vec3d *dir)
+{
+	t_vec3d u;
+	t_vec3d v;
+	t_vec3d w;
+	(void)dir;
+	(void)tri;	
+//	printf("loookforcloth\n");
+	printf("----------------\n");
+	print_vec(tri->points[0]);
+	print_vec(tri->points[1]);
+	print_vec(tri->points[2]);
+	printf("----------------\n");
+	//dir only in vec_dot < 0 way? 
+	u = vec_sub(tri->points[0], tri->points[1]);
+	v = vec_sub(tri->points[1], tri->points[2]);
+	w = vec_sub(tri->points[2], tri->points[0]);
+	printf("dotu = %f\n",vec_dot(*dir , u));	
+	printf("dotv = %f\n",vec_dot(*dir , v));	
+	printf("dotw = %f\n",vec_dot(*dir , w));	
+//	printf("w = ");
+	print_vec(u);
+	print_vec(v);
+	print_vec(w);
+	print_vec(*dir);
+
+	printf("----------------\n");
+//	printf("-----------projete_w------\n");
+//	print_vec(project_ortho(*dir, w));
+}
+
+t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tris_num)
+{
+	t_vec3d test_diff;
+	int		i;
+	t_vec3d pos;
+
+	i = -1;
+	test_diff = diff;
+	pos = c->b->corp.pos;
+	while (++i < 3)
+	{
+//		printf("point_%d\n",i);
+//		print_vec(tri->points[i]);
+//		printf("calcul test_diff\n");
+//		print_vec(vec_sub(pos, tri->points[i]));
+		if (vec_norm(vec_sub(pos, tri->points[i])) < vec_norm(test_diff))
+		{
+			printf("DAMN");
+			c->diffwall = vec_sub(pos, tri->points[i]);
+			test_diff = vec_sub(pos, tri->points[i]);
+			c->cloth_face = tris_num;
+		}
+	}
+//	print_vec(vec_sub(pos, tri->points[0]));
+//	print_vec(vec_sub(pos, tri->points[1]));
+//	print_vec(vec_sub(pos, tri->points[2]));
+//	printf("------CALCUL--------\n");
+//	test_diff = vec_sub(pos, tri->points[0]);
+//
+//	printf("test_diff\n");
+//	print_vec(test_diff);
+	return (test_diff);
+}
+
+void	parse_mesh_side(t_collide *c, t_mesh *wall, t_vec3d *dir)
+{
+	int	tris_num;
+	t_vec3d diff_face;
+
+	tris_num = -1;
+	diff_face = (t_vec3d){2, 2, 2, 0};
+	
+	while (++tris_num < wall->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
+	{
+//		printf("face = %d\n", tris_num);
+		diff_face = look_for_cloth_side(c, dyacc(&wall->tris, tris_num), diff_face, tris_num);
+	}
+
+	print_vect_face(dyacc(&wall->tris, c->cloth_face), dir);
+//	printf("test_diff_final\n");
+//	print_vec(diff_face);
 
 }
 /*						A REFAIRE			*/
@@ -185,12 +250,20 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	(void)env;
 	cam = c->b;
 	wall = c->a;
-	printf("pos_wall\n");
-
-	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
+	printf("pos_joueur\n");
+	print_vec(cam->corp.pos);
+//	printf("pos_wall\n");
+//	print_vec(wall->corp.pos);
+//	printf("diff %f\n", wall->corp.pos.y - cam->corp.pos.y);
+//	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
 	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
 			&& wall->tris.nb_cells > 8)
-		return (zero_vector());
+	{
+		parse_mesh_side(c, wall, &f);
+		printf("diffwall = ");
+		print_vec(c->diffwall);
+		return (f);
+	}
 	else
 		return (f);
 }
@@ -214,7 +287,6 @@ static bool	is_mesh_mob(t_env *env, t_mesh *m)
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
 //	print_collide(*c);
-//	printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
 	if (c->b->corp.pos.y - c->a->corp.pos.y > 0)
 	{
 		if (map->cam_floor == NULL || map->cam_floor->a->corp.pos.y != c->a->corp.pos.y)
@@ -222,10 +294,20 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 		env->phy_env.diff_camfloor = vec_sub(env->cam.stats.pos, c->a->corp.pos);
 	}
-	if (c->b->corp.pos.y - c->a->corp.pos.y < 1 &&
+	if (c->b->corp.pos.y - c->a->corp.pos.y < 2 &&
 		env->cam.stats.onwall == 0)
 	{
+//		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
+//		printf("pos_wall");
+//		printf("dot = %f\n", vec_dot(c->b->corp.pos, c->a->corp.pos));
+		printf("COLLISION_WALL\n");
+		print_vec(c->a->corp.pos);
 		map->cam_wall = c;
 		env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
+	}
+	else if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(map->cam_wall->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
+	{
+		map->cam_wall = NULL;
+		env->cam.stats.onwall = 0;
 	}
 }

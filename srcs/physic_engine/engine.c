@@ -18,13 +18,13 @@ void	actual_wall_collide(t_env *env, t_map *maps, t_mesh *cam)
 
 	if (env->cam.stats.onwall == 1)
 	{
-		diff = vec_sub(cam->corp.pos, maps->cam_wall->a->corp.pos);
-		if (vec_norm(diff) > 3)
-		{
-			env->cam.stats.onwall = 0;
-			maps->cam_wall = NULL;
+		diff = vec_sub(maps->cam_wall->a->corp.pos, cam->corp.pos);
+//		if (vec_norm(diff) > 3)
+//		{
+//			env->cam.stats.onwall = 0;
+//			maps->cam_wall = NULL;
 	//		ft_memset(&maps->cam_wall, 0, sizeof(t_collide));
-		}
+//		}
 	}
 
 }

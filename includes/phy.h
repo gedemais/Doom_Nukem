@@ -33,6 +33,8 @@ struct	s_collide
 	t_mesh	*b;
 	unsigned int i_a;
 	unsigned int i_b;
+	unsigned int cloth_face;
+	t_vec3d		diffwall;
 	float dot;
 };
 

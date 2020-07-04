@@ -191,7 +191,6 @@ void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 	translate_mesh(map, cam, cam->corp.v);	
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
-	printf("diff_y = %f\n", env->phy_env.diff_camfloor.y);
 	if (env->phy_env.diff_camfloor.y < DIFCAMFLOOR && env->cam.stats.onwall == 0
 			&& env->cam.stats.onfloor == 1)
 	{

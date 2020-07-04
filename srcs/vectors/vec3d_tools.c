@@ -29,9 +29,17 @@ float		rsqrt(float number)
 t_vec3d project_ortho(t_vec3d u, t_vec3d y)
 {
 	t_vec3d y_proj;
-
-	y_proj = vec_fmult(u, (vec_dot(y, u) / vec_dot(u, u)));
-	return (y_proj);
+	
+	if (vec_dot(u,u) == 0)
+	{
+		(void)y_proj;
+		return (zero_vector());
+	}
+	else
+	{
+		y_proj = vec_fmult(u, (vec_dot(y, u) / vec_dot(u, u)));
+		return (y_proj);
+	}
 }
 
 void		vec3d_swap(t_vec3d *a, t_vec3d *b)
@@ -58,6 +66,11 @@ void	print_vec(t_vec3d vec)
 	printf("vec.x = %f", vec.x);
 	printf(" vec.y = %f", vec.y);
 	printf(" vec.z = %f\n", vec.z);
+}
+
+t_vec3d abs_vector(t_vec3d vec)
+{
+	return ((t_vec3d){fabs(vec.x), fabs(vec.y), fabs(vec.z), 0});
 }
 
 t_vec3d zero_vector()
