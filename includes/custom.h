@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/02 14:51:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/04 15:40:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ struct				s_custom_env
 	int				sub_context;
 };
 
+int					draw_wave(t_env *env);
 int					custom_game_over(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 

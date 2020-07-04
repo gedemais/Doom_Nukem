@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hud.c                                              :+:      :+:    :+:   */
+/*   waves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/04 15:38:53 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/04 15:39:21 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/04 15:43:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		draw_hud(t_env *env)
+int		draw_wave(t_env *env)
 {
-	draw_health(env);
-	draw_compass(env);
-	draw_wave();
-	return(0);
-
+	char	*
+	return (0);
 }
