@@ -83,27 +83,6 @@ static t_vec3d	look_for_slope_vect(t_triangle *tri, t_vec3d *dir)
 
 
 
-t_vec3d	ft_look_for_slope(t_mesh *m, t_vec3d *dir)
-{
-	int	tris_num;
-	t_vec3d slope;
-	int	tris_diago;
-
-	tris_num = -1;
-	(void)slope;
-	(void)tris_diago;
-	(void)tris_num;
-//	if (m->tris.nb_cells > 8)
-//		return ((t_vec3d){2,0,2,0}); // look_for_wall ? 
-
-//	while (++tris_num < m->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
-//	{
-//		print_vect_face(dyacc(&m->tris, tris_num), dir);
-//	}
-//	printf("tris_diago = %d\n", tris_diago);
-	slope = look_for_slope_vect(dyacc(&m->tris, 4), dir);
-	return (slope);
-}
 
 t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
 {
@@ -184,19 +163,25 @@ void print_vect_face(t_triangle *tri, t_vec3d *dir)
 	print_vec(*dir);
 
 	printf("----------------\n");
-//	printf("-----------projete_w------\n");
-//	print_vec(project_ortho(*dir, w));
+			printf("-----------projete_u------\n");
+	print_vec(project_ortho(*dir, u));
+printf("-----------projete_v------\n");
+	print_vec(project_ortho(*dir, v));
+printf("-----------projete_w------\n");
+	print_vec(project_ortho(*dir, w));
 }
 
 t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tris_num)
 {
 	t_vec3d test_diff;
-	int		i;
 	t_vec3d pos;
+	int		i;
 
 	i = -1;
 	test_diff = diff;
 	pos = c->b->corp.pos;
+
+	print_vec(tri->normal);
 	while (++i < 3)
 	{
 //		printf("point_%d\n",i);
@@ -205,11 +190,12 @@ t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tr
 //		print_vec(vec_sub(pos, tri->points[i]));
 		if (vec_norm(vec_sub(pos, tri->points[i])) < vec_norm(test_diff))
 		{
-			printf("DAMN");
+			printf("face saved\n");
 			c->diffwall = vec_sub(pos, tri->points[i]);
 			test_diff = vec_sub(pos, tri->points[i]);
 			c->cloth_face = tris_num;
 		}
+
 	}
 //	print_vec(vec_sub(pos, tri->points[0]));
 //	print_vec(vec_sub(pos, tri->points[1]));
@@ -232,11 +218,12 @@ void	parse_mesh_side(t_collide *c, t_mesh *wall, t_vec3d *dir)
 	
 	while (++tris_num < wall->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
 	{
-//		printf("face = %d\n", tris_num);
+		printf("face = %d\n", tris_num);
+//		print_vect_face(dyacc(&wall->tris, tris_num), dir);
 		diff_face = look_for_cloth_side(c, dyacc(&wall->tris, tris_num), diff_face, tris_num);
 	}
-
-	print_vect_face(dyacc(&wall->tris, c->cloth_face), dir);
+		*dir = vec_fmult(*dir, vec_norm(diff_face));
+		print_vect_face(dyacc(&wall->tris, c->cloth_face), dir);
 //	printf("test_diff_final\n");
 //	print_vec(diff_face);
 
@@ -255,13 +242,13 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 //	printf("pos_wall\n");
 //	print_vec(wall->corp.pos);
 //	printf("diff %f\n", wall->corp.pos.y - cam->corp.pos.y);
-//	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
+	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
 	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
 			&& wall->tris.nb_cells > 8)
 	{
 		parse_mesh_side(c, wall, &f);
-		printf("diffwall = ");
-		print_vec(c->diffwall);
+		printf("------f-------\n");
+		f = vec_fmult(f, 0.1f);
 		return (f);
 	}
 	else
