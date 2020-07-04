@@ -3,11 +3,10 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 1
+# define MAX_ENEMIES 12
 # define RESPAWN_DELAY 3.0f
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
-
 
 # define DIST_TO_PLAYER 1.8f
 

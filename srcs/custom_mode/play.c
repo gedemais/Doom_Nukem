@@ -84,6 +84,7 @@ void	print_mobs(t_env *env)
 
 int			custom_play(t_env *env)
 {
+	handle_waves(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);
