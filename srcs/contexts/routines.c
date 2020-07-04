@@ -32,8 +32,8 @@ void	ts_to_custom(t_env *env)
 		sp_overall(0, SA_MAX, sp_stop()));
 	if (init_scroll_file(env, MAPED_SAVE_PATH, ".map"))
 		exit(1);
-	env->scroll.o = (t_point){25, 100};
-	env->scroll.d = (t_point){350, 500};
+	env->scroll.o = (t_point){WDT / 12, HGT / 4 };
+	env->scroll.d = (t_point){WDT / 3, HGT - HGT / 4};
 }
 
 void	ts_to_map_editor(t_env *env)

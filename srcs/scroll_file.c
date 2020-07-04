@@ -10,10 +10,10 @@ int		init_scroll_file(t_env *env, char *path, char *extension)
 	if (!(s->list = listpath(path, extension)))
 		return (-1);
 	s->max = ft_tablen(s->list);
-	s->d = (t_point){400, 800};
-	s->o = (t_point){100, 100};
-	s->color = 0xaaaaaa;
-	s->font = SCROLL_FILE_FONT;
+	s->d = (t_point){WDT / 3, HGT - HGT / 4};
+	s->o = (t_point){WDT / 10, HGT / 4 };
+	s->color = 0xB22222;
+	s->font = FONT_COOLVETICA;
 	s->case_size = 50;
 	s->mouse_index = -1;
 	s->nb_case = s->d.y / s->case_size - 1;
