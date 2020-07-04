@@ -27,28 +27,28 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	return (0);
 }
 
-static int 		sound_overall(t_env *env, t_dynarray *sounds, int s, t_sparam p)
+static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
 	int 	i;
 	ALint 	status;
 	t_sound	*sound;
 
 	i = p.start - 1;
-	while (++i <= p.end && i < sounds->nb_cells)
+	while (++i <= p.end && i < s->nb_cells)
 	{
-		sound = dyacc(sounds, i);
+		sound = dyacc(s, i);
 		alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
 		if (status == AL_PLAYING && p.no_sound)
 			return (1);
-		if (p.sound && sound_volume(sounds, sound->ambient, p, env->volume))
+		if (p.sound && sound_volume(env, s, sound->ambient, p))
 			return (-1);
 		if (!p.no_sound && !p.sound
-			&& stop_sound(sounds, sound->ambient))
+			&& stop_sound(s, sound->ambient))
 			return (-1);
 	}
-	if (p.fork && fork_sound(sounds, s, p))
+	if (p.fork && fork_sound(env, s, source, p))
 		return (-1);
-	if (p.play && play_sound(sounds, s, p))
+	if (p.play && play_sound(env, s, source, p))
 		return (-1);
 	return (0);
 }
@@ -67,10 +67,10 @@ int				sound_system(t_env *env, int source, t_sparam param)
 	if (param.overall || param.no_sound)
 		return (sound_overall(env, &sounds, source, param));
 	if (param.sound)
-		return (sound_volume(&sounds, source, param, env->volume));
-	if (param.fork && fork_sound(&sounds, source, param))
+		return (sound_volume(env, &sounds, source, param));
+	if (param.fork && fork_sound(env, &sounds, source, param))
 		return (-1);
-	if (param.play && play_sound(&sounds, source, param))
+	if (param.play && play_sound(env, &sounds, source, param))
 		return (-1);
 	if (param.stop && stop_sound(&sounds, source))
 		return (-1);

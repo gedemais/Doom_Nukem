@@ -3,7 +3,7 @@
 static void	stop_n_play(t_env *env, int source)
 {
 	sound_system(env, source, sp_stop());
-	sound_system(env, source, sp_play(env->volume));
+	sound_system(env, source, sp_play(env->volume, false, zero_vector()));
 }
 
 static void	pichenette(t_env *env)

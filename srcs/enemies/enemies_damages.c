@@ -7,7 +7,8 @@ static int	enemies_do_damages(t_env *env, t_enemy *mob)
 	{
 		mob->dead = true;
 		++env->custom_env.game.kill_count;
-		sound_system(env, SA_DEATHMONSTER, sp_fork(env->volume));
+		sound_system(env, SA_DEATHMONSTER,
+			sp_fork(env->volume, true, mob->pos));
 		if (env->custom_env.game.kill_delay == 0)
 			env->custom_env.game.kill_delay = KILL_DELAY;
 	}

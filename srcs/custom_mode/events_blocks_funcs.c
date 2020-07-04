@@ -12,7 +12,8 @@ static int 		jukeboxs_play_sound(t_env *env)
 		delay = 20;
 		if (ambient < 0 || ambient > SA_PNL)
 			ambient = 0;
-		sound_system(env, ambient, sp_overall(0, SA_PNL, sp_play(env->volume)));
+		sound_system(env, ambient, sp_overall(0, SA_PNL,
+			sp_play(env->volume, false, zero_vector())));
 		env->custom_env.game.moula -= 1000;
 	}
 	else if ((e->keys[KEY_LEFT] || e->keys[KEY_RIGHT]) && delay == 0)
@@ -87,7 +88,8 @@ int				handle_mystery_boxs(t_env *env, t_event_block *block)
 			button = false;
 			env->custom_env.game.moula -= 1000;
 			add_random_weapon(env);
-			sound_system(env, SA_INVOCATION, sp_fork(env->volume));
+			sound_system(env, SA_INVOCATION,
+				sp_fork(env->volume, false, zero_vector()));
 		}
 		button = !env->events.keys[KEY_F];
 		return (1);
@@ -106,7 +108,8 @@ int				handle_doors(t_env *env, t_event_block *block)
 		{
 			env->custom_env.game.moula -= 500;
 			del_door(env, block);
-			sound_system(env, SA_DOOR, sp_fork(env->volume));
+			sound_system(env, SA_DOOR,
+				sp_fork(env->volume, false, zero_vector()));
 		}
 		return (1);
 	}
@@ -124,7 +127,8 @@ int				handle_lavas(t_env *env, t_event_block *block)
 		delay--;
 		if (delay == 0)
 		{
-			sound_system(env, SA_GONG, sp_fork(env->volume));
+			sound_system(env, SA_GONG,
+				sp_fork(env->volume, false, zero_vector()));
 			env->player.hp--;
 			delay = LAVA_DELAY;
 		}

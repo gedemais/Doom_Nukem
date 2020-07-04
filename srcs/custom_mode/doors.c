@@ -70,7 +70,8 @@ void				del_door(t_env *env, t_event_block *block)
 	if (block->id == BE_DOOR)
 	{
 		del_recursif(env, (int[3]){block->x, block->y, block->z});
-		sound_system(env, SA_DOOR, sp_fork(env->volume));
+		sound_system(env, SA_DOOR,
+			sp_fork(env->volume, false, zero_vector()));
 	}
 }
 
