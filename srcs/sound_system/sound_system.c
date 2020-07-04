@@ -39,17 +39,14 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 	{
 		sound = dyacc(s, i);
 		alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
-		if (status == AL_PLAYING && p.no_sound)
-			return (1);
-		if (p.sound && sound_volume(env, s, sound->ambient, p))
-			return (-1);
-		if (!p.no_sound && !p.sound
-			&& stop_sound(s, sound->ambient))
+		if ((status == AL_PLAYING && p.no_sound)
+			|| (p.sound && sound_volume(env, s, sound->ambient, p))
+			|| (!p.no_sound && !p.sound
+				&& stop_sound(s, sound->ambient)))
 			return (-1);
 	}
-	if (p.fork && fork_sound(env, s, source, p))
-		return (-1);
-	if (p.play && play_sound(env, s, source, p))
+	if ((p.fork && fork_sound(env, s, source, p))
+		|| (p.play && play_sound(env, s, source, p)))
 		return (-1);
 	return (0);
 }
