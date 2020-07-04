@@ -180,22 +180,12 @@ void	ft_inertie(t_env *env, t_map map, t_vec3d v)
 
 void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 {
-	t_vec3d			diff_y;
 //	print_info_phy(env, cam);
 	// add f and r to v here ?
 //	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v);
 //	cam->corp.v 
-	
-	diff_y = zero_vector();
-		
 	translate_mesh(map, cam, cam->corp.v);	
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
-	if (env->phy_env.diff_camfloor.y < DIFCAMFLOOR && env->cam.stats.onwall == 0
-			&& env->cam.stats.onfloor == 1)
-	{
-		diff_y = (t_vec3d){0, DIFCAMFLOOR - env->phy_env.diff_camfloor.y, 0, 0};
-		translate_mesh(map, cam, diff_y);
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, diff_y);
-	}
+	
 }

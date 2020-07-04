@@ -91,7 +91,8 @@ int			custom_play(t_env *env)
 	handle_keys(env, &env->events);
 	handle_player(env);
 	camera_aim(env);
-	physic_engine(env, &env->edit_env.map);
+	if (env->phy_env.type_move == true)
+		physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 //	printf("--------- before enemies ----------\n");

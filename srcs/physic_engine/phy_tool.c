@@ -215,15 +215,13 @@ void	parse_mesh_side(t_collide *c, t_mesh *wall, t_vec3d *dir)
 
 	tris_num = -1;
 	diff_face = (t_vec3d){2, 2, 2, 0};
-	
+	(void)dir;	
 	while (++tris_num < wall->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
 	{
 //		printf("face = %d\n", tris_num);
 //		print_vect_face(dyacc(&wall->tris, tris_num), dir);
 		diff_face = look_for_cloth_side(c, dyacc(&wall->tris, tris_num), diff_face, tris_num);
 	}
-		*dir = vec_fmult(*dir, vec_norm(diff_face));
-		print_vect_face(dyacc(&wall->tris, c->cloth_face), dir);
 //	printf("test_diff_final\n");
 //	print_vec(diff_face);
 
@@ -233,22 +231,33 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 {
 	t_mesh *cam;
 	t_mesh *wall;
-
+	t_vec3d vec;
+	t_vec3d vec2;
 	(void)env;
 	cam = c->b;
 	wall = c->a;
 //	printf("pos_joueur\n");
 //	print_vec(cam->corp.pos);
+	vec = vec_sub(wall->corp.pos, cam->corp.pos);
+	vec2 = (t_vec3d){vec.x, 0, vec.z, 0};
+	print_vec(vec2);
 //	printf("pos_wall\n");
 //	print_vec(wall->corp.pos);
 //	printf("diff %f\n", wall->corp.pos.y - cam->corp.pos.y);
-//	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
-	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
-			&& wall->tris.nb_cells > 8)
+	printf("dot_product %f\n", vec_dot(f, vec2));
+	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) > 0 
+			&& vec_dot(f, vec2) < 0.5
+			&& vec_norm(vec2) < 1.2)
 	{
-		parse_mesh_side(c, wall, &f);
+//		parse_mesh_side(c, wall, &f);
+//		printf("diffwall = ");
+		print_vec(vec2);
+		f = vec_fmult(vec2, -0.0075);
+//		f = vec_add(vec_fmult(f, 0.5) , vec_fmult(vec, -0.075));
+//		printf("vec_norm_diff_wall = %f\n", vec_norm(vec_sub(wall->corp.pos, cam->corp.pos)));
+//		if (vec_norm(vec) < 2)
+//			f = vec_fmult(f, -1);	
 //		printf("------f-------\n");
-		f = vec_fmult(f, 0.1f);
 		return (f);
 	}
 	else
@@ -273,23 +282,30 @@ static bool	is_mesh_mob(t_env *env, t_mesh *m)
 
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-//	print_collide(*c);
 	if (c->b->corp.pos.y - c->a->corp.pos.y > 0)
 	{
-		if (map->cam_floor == NULL || map->cam_floor->a->corp.pos.y != c->a->corp.pos.y)
+		if (map->cam_floor == NULL || map->cam_floor->a->corp.pos.y > c->a->corp.pos.y)
 			map->cam_floor = c;
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
-		env->phy_env.diff_camfloor = vec_sub(env->cam.stats.pos, c->a->corp.pos);
 	}
-	if (c->b->corp.pos.y - c->a->corp.pos.y < 2 &&
-		env->cam.stats.onwall == 0)
+	if (c->b->corp.pos.y - c->a->corp.pos.y < 2
+			&& c->b->corp.pos.y - c->a->corp.pos.y > -2)
 	{
+		printf("COLLISION_WALL dist before\n");
+		print_vec(vec_sub(c->b->corp.pos, map->cam_floor->a->corp.pos));
+		printf("COLLISION_WALL dist before\n");
+		print_vec(vec_sub(c->b->corp.pos, c->a->corp.pos));
+		if (map->cam_wall == NULL || map->cam_floor->a->corp.pos.y > c->a->corp.pos.y)
+		{
+			printf("WALL SAVED\n");
+			map->cam_wall = c;
+		}
 //		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
 //		printf("pos_wall");
 //		printf("dot = %f\n", vec_dot(c->b->corp.pos, c->a->corp.pos));
+//		map->cam_wall = c;
 //		printf("COLLISION_WALL\n");
 //		print_vec(c->a->corp.pos);
-		map->cam_wall = c;
 		env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
 	}
 	else if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(map->cam_wall->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
