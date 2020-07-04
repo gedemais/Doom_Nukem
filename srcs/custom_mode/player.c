@@ -38,8 +38,8 @@ static void	godmode(t_env *env)
 	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
 	{
 		sound_system(env, SA_LGODEND, end
-			? sp_fork(env->volume, false, zero_vector())
-			: sp_play(env->volume, false, zero_vector()));
+			? sp_fork(env->volume, env->cam.stats.pos)
+			: sp_play(env->volume, env->cam.stats.pos));
 		end = true;
 		env->player.hp--;
 	}

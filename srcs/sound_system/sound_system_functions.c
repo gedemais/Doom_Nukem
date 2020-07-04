@@ -1,6 +1,6 @@
 #include "main.h"
 
-t_sparam		sp_fork(float volume, bool surround, t_vec3d pos)
+t_sparam		sp_fork(float volume, t_vec3d pos)
 {
 	t_sparam	param;
 
@@ -9,7 +9,6 @@ t_sparam		sp_fork(float volume, bool surround, t_vec3d pos)
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.fork = true;
 	param.volume = volume;
-	param.surround = surround;
 	param.pos = pos;
 	return (param);
 }
@@ -46,7 +45,7 @@ t_sparam		sp_overall(int start, int end, t_sparam p)
 	return (param);
 }
 
-t_sparam		sp_play(float volume, bool surround, t_vec3d pos)
+t_sparam		sp_play(float volume, t_vec3d pos)
 {
 	t_sparam	param;
 
@@ -55,7 +54,6 @@ t_sparam		sp_play(float volume, bool surround, t_vec3d pos)
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.play = true;
 	param.volume = volume;
-	param.surround = surround;
 	param.pos = pos;
 	return (param);
 }
@@ -69,7 +67,7 @@ t_sparam		sp_stop()
 	return (param);
 }
 
-t_sparam		sp_volume(float voffset, bool surround, t_vec3d pos)
+t_sparam		sp_volume(float voffset, t_vec3d pos)
 {
 	t_sparam	param;
 
@@ -78,7 +76,6 @@ t_sparam		sp_volume(float voffset, bool surround, t_vec3d pos)
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.sound = true;
 	param.volume = voffset;
-	param.surround = surround;
 	param.pos = pos;
 	return (param);
 }

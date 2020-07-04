@@ -6,21 +6,18 @@ int				background_sound(t_env *env, int source)
 	{
 		env->volume += 0.01f;
 		if (sound_system(env, source,
-			sp_overall(0, SA_MAX - 1,
-				sp_volume(0.01f, false, zero_vector()))))
+			sp_overall(0, SA_MAX - 1, sp_volume(0.01f, env->cam.stats.pos))))
 			return (-1);
 	}
 	else if (env->events.keys[KEY_G])
 	{
 		env->volume -= 0.01f;
 		if (sound_system(env, source,
-			sp_overall(0, SA_MAX - 1,
-				sp_volume(0.01f, false, zero_vector()))))
+			sp_overall(0, SA_MAX - 1, sp_volume(0.01f, env->cam.stats.pos))))
 			return (-1);
 	}
 	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
-		if (sound_system(env, source,
-				sp_play(env->volume, false, zero_vector())))
+		if (sound_system(env, source, sp_play(env->volume, env->cam.stats.pos)))
 			return (-1);
 	return (0);
 }
@@ -34,13 +31,11 @@ int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	if (sound == NULL)
 		return (0);
 	alGenSources(1, &tmp);
-	if (p.surround)
-	{
-		alListener3f(AL_POSITION, env->cam.stats.pos.x,
-			env->cam.stats.pos.y, env->cam.stats.pos.z);
-		alSource3f(tmp, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
-	}
-	alSourcef(tmp, AL_GAIN, p.volume);
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alSource3f(tmp, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
+	alSourcef(tmp, AL_GAIN,
+		p.volume + vec3d_dist(env->cam.stats.pos, p.pos) / 10);
 	alSourcei(tmp, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(tmp);
 	return (0);
@@ -60,13 +55,11 @@ int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	sound->volume = p.volume;
 	sound->volume = sound->volume > 1 ? 1 : sound->volume;
 	sound->volume = sound->volume < 0 ? 0 : sound->volume;
-	if (p.surround)
-	{
-		alListener3f(AL_POSITION, env->cam.stats.pos.x,
-			env->cam.stats.pos.y, env->cam.stats.pos.z);
-		alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
-	}
-	alSourcef(sound->ambient, AL_GAIN, sound->volume);
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
+	alSourcef(sound->ambient, AL_GAIN,
+		p.volume + vec3d_dist(env->cam.stats.pos, p.pos) / 10);
 	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(sound->ambient);
 	return (0);
@@ -87,12 +80,6 @@ int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
 		sound->volume = sound->volume < 0 ? 0 : sound->volume;
 		sound->volume = sound->volume > env->volume
 		? env->volume : sound->volume;
-		if (p.surround)
-		{
-			alListener3f(AL_POSITION, env->cam.stats.pos.x,
-				env->cam.stats.pos.y, env->cam.stats.pos.z);
-			alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
-		}
 		alSourcef(sound->ambient, AL_GAIN, sound->volume);
 	}
 	return (0);
