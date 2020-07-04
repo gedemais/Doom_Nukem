@@ -34,8 +34,10 @@ int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	alListener3f(AL_POSITION, env->cam.stats.pos.x,
 		env->cam.stats.pos.y, env->cam.stats.pos.z);
 	alSource3f(tmp, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
-	alSourcef(tmp, AL_GAIN,
-		p.volume + vec3d_dist(env->cam.stats.pos, p.pos) / 10);
+	alSourcef(tmp, AL_GAIN, p.volume);
+	//alSourcef(tmp, AL_REFERENCE_DISTANCE, 5);
+	//alSourcef(tmp, AL_MAX_DISTANCE, 10);
+	//alSourcef(tmp, AL_ROLLOFF_FACTOR, 4);
 	alSourcei(tmp, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(tmp);
 	return (0);
@@ -58,8 +60,7 @@ int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	alListener3f(AL_POSITION, env->cam.stats.pos.x,
 		env->cam.stats.pos.y, env->cam.stats.pos.z);
 	alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
-	alSourcef(sound->ambient, AL_GAIN,
-		p.volume + vec3d_dist(env->cam.stats.pos, p.pos) / 10);
+	alSourcef(sound->ambient, AL_GAIN, p.volume);
 	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(sound->ambient);
 	return (0);

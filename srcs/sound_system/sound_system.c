@@ -11,6 +11,7 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX)))
 		return (-1);
 	alGenSources(SA_MAX - 1, sources);
+	//alDistanceModel(AL_INVERSE_DISTANCE_CLAMPED);
 	i = -1;
 	while (++i < SA_MAX)
 	{
