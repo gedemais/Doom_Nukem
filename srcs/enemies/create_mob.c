@@ -66,25 +66,6 @@ int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 	return (0);
 }
 
-static void		find_start_end(t_env *env, t_map *mob, t_enemy *enemy)
-{
-	t_enemy	*last_mob;
-	int		index;
-
-	if (env->custom_env.mobs.nb_cells == 0)
-	{
-		enemy->map_start = env->edit_env.map.nmesh - env->custom_env.loots.nb_cells;
-		enemy->map_end = enemy->map_start + mob->nmesh;
-	}
-	else
-	{
-		index = env->custom_env.mobs.nb_cells - 1;
-		last_mob = dyacc(&env->custom_env.mobs, index);
-		enemy->map_start = last_mob->map_end;
-		enemy->map_end = enemy->map_start + mob->nmesh;
-	}
-}
-
 static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
 {
 	t_mesh		new;
@@ -92,7 +73,8 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 	int			i;
 
 	i = 0;
-	find_start_end(env, mob, enemy);
+	enemy->map_start = env->edit_env.map.nmesh;
+	enemy->map_end = enemy->map_start + mob->nmesh;
 	while (i < mob->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
@@ -101,9 +83,9 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 		new.index = enemy->map_start + i;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(map, mob, m, &new)
-			|| insert_dynarray(&map->meshs, &new, map->nmesh - env->custom_env.loots.nb_cells))
+			|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
-		assign_meshs(dyacc(&map->meshs, map->nmesh - env->custom_env.loots.nb_cells));
+		assign_meshs(dyacc(&map->meshs, map->nmesh));
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
 		map->nmesh++;
 		i++;
@@ -134,24 +116,6 @@ static int 		enemy_offset(t_enemy *mob)
 	return (0);
 }
 
-static void	replace_loots_index(t_env *env, int delta)
-{
-	t_loot	*loot;
-	int		index;
-	int		i;
-
-	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		index = loot->m->index + delta;
-		loot->m = dyacc(&env->edit_env.map.meshs, index);
-		assign_meshs(loot->m);
-		loot->m->index += delta;
-		i++;
-	}
-}
-
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
@@ -166,17 +130,10 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
 	
-//	printf("before copy\n");
-//	print_mobs(env);
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
 	if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
-//	printf("after copy\n");
-//	print_mobs(env);
-	replace_loots_index(env, enemy.map_end - enemy.map_start);
-//	printf("after replace\n");
-//	print_mobs(env);
 	return (0);
 }

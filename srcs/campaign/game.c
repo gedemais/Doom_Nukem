@@ -56,8 +56,5 @@ int		cmp_game(void *param)
 //	handle_weapons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 
-	translate_mesh(env->player.current->w_map,
-		env->player.current->w_map->meshs.c,
-		(t_vec3d){0.005f, 0, 0, 0});
 	return (0);
 }

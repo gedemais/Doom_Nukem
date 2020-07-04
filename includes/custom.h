@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/04 18:00:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/04 19:41:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
 void				handle_player(t_env *env);
+void				handle_loots(t_env *env);
 
 int					init_sky(t_env *env);
 void				handle_moon(t_env *env);

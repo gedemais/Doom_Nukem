@@ -55,7 +55,7 @@ static int	add_random_weapon(t_env *env)
 
 int		handle_mystery_boxs(t_env *env, t_event_block *block)
 {
-	static bool	button = true;
+	static bool	button = false;
 
 	if (block->id != BE_CHEST)
 		return (0);

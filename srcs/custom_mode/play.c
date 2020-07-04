@@ -59,6 +59,14 @@ void	print_mobs(t_env *env)
 	int		i;
 
 	i = 0;
+	while (i < env->custom_env.loots.nb_cells)
+	{
+		loot = dyacc(&env->custom_env.loots, i);
+		printf("loot n%d : %d\n", i, loot->m->index);
+		i++;
+	}
+	printf("------------------------\n");
+	i = 0;
 	while (i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
@@ -71,19 +79,13 @@ void	print_mobs(t_env *env)
 		printf(")\n");
 		i++;
 	}
-	printf("------------------------\n");
-	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		printf("loot n%d : %d\n", i, loot->m->index);
-		i++;
-	}
 	printf("--------------------------------------------\n");
 }
 
 int			custom_play(t_env *env)
 {
+	printf("---------- custom_play ------------\n");
+	print_mobs(env);
 	handle_waves(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
@@ -92,6 +94,7 @@ int			custom_play(t_env *env)
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_enemies(env);
+	handle_loots(env);
 	handle_weapons(env);
 	handle_block_events(env);
 	handle_moon(env);
