@@ -69,11 +69,9 @@ int				sound_system(t_env *env, int source, t_sparam param)
 		return (sound_overall(env, &sounds, source, param));
 	if (param.sound)
 		return (sound_volume(env, &sounds, source, param));
-	if (param.fork && fork_sound(env, &sounds, source, param))
-		return (-1);
-	if (param.play && play_sound(env, &sounds, source, param))
-		return (-1);
-	if (param.stop && stop_sound(&sounds, source))
+	if ((param.fork && fork_sound(env, &sounds, source, param))
+		|| (param.play && play_sound(env, &sounds, source, param))
+		|| (param.stop && stop_sound(&sounds, source)))
 		return (-1);
 	return (0);
 }
