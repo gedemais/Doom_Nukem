@@ -48,12 +48,12 @@ enum	e_sample_id
 	SA_LCASH,
 	SA_LGODSTART,
 	SA_LGODEND,
+	SA_PLAYER_DAMAGE,
 	SA_MAX
 };
 
 typedef struct	s_sample
 {
-	//char		*name;
 	ALuint		buffer;
 	ALshort		*sample;
 	SNDFILE		*file;

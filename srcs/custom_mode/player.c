@@ -3,6 +3,7 @@
 static void	wound(t_env *env, t_enemy *mob)
 {
 	env->player.hp -= mob->damages;
+	sound_system(env, SA_PLAYER_DAMAGE, sp_play(0.5f)); // ?
 }
 
 static void	check_wounds(t_env *env)
