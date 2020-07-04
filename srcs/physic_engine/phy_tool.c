@@ -144,31 +144,31 @@ void print_vect_face(t_triangle *tri, t_vec3d *dir)
 	(void)dir;
 	(void)tri;	
 //	printf("loookforcloth\n");
-	printf("----------------\n");
-	print_vec(tri->points[0]);
-	print_vec(tri->points[1]);
-	print_vec(tri->points[2]);
-	printf("----------------\n");
+//	printf("----------------\n");
+//	print_vec(tri->points[0]);
+//	print_vec(tri->points[1]);
+//	print_vec(tri->points[2]);
+//	printf("----------------\n");
 	//dir only in vec_dot < 0 way? 
 	u = vec_sub(tri->points[0], tri->points[1]);
 	v = vec_sub(tri->points[1], tri->points[2]);
 	w = vec_sub(tri->points[2], tri->points[0]);
-	printf("dotu = %f\n",vec_dot(*dir , u));	
-	printf("dotv = %f\n",vec_dot(*dir , v));	
-	printf("dotw = %f\n",vec_dot(*dir , w));	
+//	printf("dotu = %f\n",vec_dot(*dir , u));	
+///	printf("dotv = %f\n",vec_dot(*dir , v));	
+//	printf("dotw = %f\n",vec_dot(*dir , w));	
 //	printf("w = ");
-	print_vec(u);
-	print_vec(v);
-	print_vec(w);
-	print_vec(*dir);
+//	print_vec(u);
+//	print_vec(v);
+//	print_vec(w);
+//	print_vec(*dir);
 
-	printf("----------------\n");
-			printf("-----------projete_u------\n");
-	print_vec(project_ortho(*dir, u));
-printf("-----------projete_v------\n");
-	print_vec(project_ortho(*dir, v));
-printf("-----------projete_w------\n");
-	print_vec(project_ortho(*dir, w));
+//	printf("----------------\n");
+//			printf("-----------projete_u------\n");
+//	print_vec(project_ortho(*dir, u));
+// printf("-----------projete_v------\n");
+//	print_vec(project_ortho(*dir, v));
+ ///printf("-----------projete_w------\n");
+//	print_vec(project_ortho(*dir, w));
 }
 
 t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tris_num)
@@ -190,7 +190,7 @@ t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tr
 //		print_vec(vec_sub(pos, tri->points[i]));
 		if (vec_norm(vec_sub(pos, tri->points[i])) < vec_norm(test_diff))
 		{
-			printf("face saved\n");
+//			printf("face saved\n");
 			c->diffwall = vec_sub(pos, tri->points[i]);
 			test_diff = vec_sub(pos, tri->points[i]);
 			c->cloth_face = tris_num;
@@ -218,7 +218,7 @@ void	parse_mesh_side(t_collide *c, t_mesh *wall, t_vec3d *dir)
 	
 	while (++tris_num < wall->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
 	{
-		printf("face = %d\n", tris_num);
+//		printf("face = %d\n", tris_num);
 //		print_vect_face(dyacc(&wall->tris, tris_num), dir);
 		diff_face = look_for_cloth_side(c, dyacc(&wall->tris, tris_num), diff_face, tris_num);
 	}
@@ -237,17 +237,17 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	(void)env;
 	cam = c->b;
 	wall = c->a;
-	printf("pos_joueur\n");
-	print_vec(cam->corp.pos);
+//	printf("pos_joueur\n");
+//	print_vec(cam->corp.pos);
 //	printf("pos_wall\n");
 //	print_vec(wall->corp.pos);
 //	printf("diff %f\n", wall->corp.pos.y - cam->corp.pos.y);
-	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
+//	printf("dot_product %f\n", vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)));
 	if (vec_dot(f, vec_sub(wall->corp.pos, cam->corp.pos)) > 0 
 			&& wall->tris.nb_cells > 8)
 	{
 		parse_mesh_side(c, wall, &f);
-		printf("------f-------\n");
+//		printf("------f-------\n");
 		f = vec_fmult(f, 0.1f);
 		return (f);
 	}
@@ -287,8 +287,8 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 //		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
 //		printf("pos_wall");
 //		printf("dot = %f\n", vec_dot(c->b->corp.pos, c->a->corp.pos));
-		printf("COLLISION_WALL\n");
-		print_vec(c->a->corp.pos);
+//		printf("COLLISION_WALL\n");
+//		print_vec(c->a->corp.pos);
 		map->cam_wall = c;
 		env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
 	}
