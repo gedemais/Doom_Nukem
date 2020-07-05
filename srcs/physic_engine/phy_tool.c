@@ -280,31 +280,48 @@ static bool	is_mesh_mob(t_env *env, t_mesh *m)
 	return (false);
 }
 
+static	void	scan_actuall_collide(t_env *env, t_map *map)
+{
+	(void)map;
+	if (env->cam.stats.onwall == 1) 
+	{
+		printf("WALL_COLLIDE_SAVED\n");
+		printf("Vec_dist\n");
+		print_vec(map->cam_wall->cam_mesh_first);
+		printf("norm = %f\n", map->cam_wall->norm_dist_first);
+	}
+	if (env->cam.stats.onfloor == 1) 
+	{
+		printf("FLOOR_COLLIDE_SAVED\n");
+		printf("Vec_dist_first\n");
+		print_vec(map->cam_floor->cam_mesh_first);
+		printf("norm_first = %f\n", map->cam_floor->norm_dist_first);
+		map->cam_floor->cam_mesh_actual = vec_sub(env->cam.stats.pos, map->cam_floor->a->corp.pos);
+		printf("Vec_dist_actual\n");
+		print_vec(map->cam_floor->cam_mesh_actual);
+		map->cam_floor->norm_dist_actual = vec_norm(map->cam_floor->cam_mesh_actual);
+		printf("norm_actual = %f\n", map->cam_floor->norm_dist_actual);
+		if (map->cam_floor->norm_dist_actual > map->cam_floor->norm_dist_first)
+			env->cam.stats.onfloor = 0;
+	}
+}
+
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if (c->b->corp.pos.y - c->a->corp.pos.y > 0)
+	if (env->cam.stats.onwall == 1 || env->cam.stats.onfloor == 1)
+		scan_actuall_collide(env, map);
+	if (c->cam_mesh_first.y > 0) //
 	{
 		map->cam_floor = c;
+		printf("FLOOR SAVED\n");
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 	}
-	else if (env->cam.stats.onfloor == 1 && vec_norm(vec_sub(c->b->corp.pos, map->cam_floor->a->corp.pos)) > 3)
+	if (c->cam_mesh_first.y < 2
+			&& c->cam_mesh_first.y > -1)
 	{
-		map->cam_wall = NULL;
-		env->cam.stats.onfloor = 1;
-	}
-	if (c->b->corp.pos.y - c->a->corp.pos.y < 2
-			&& c->b->corp.pos.y - c->a->corp.pos.y > -1)
-	{
-		printf("COLLISION_WALL dist before\n");
-		print_vec(vec_sub(c->b->corp.pos, map->cam_floor->a->corp.pos));
-		printf("COLLISION_WALL dist before\n");
-		print_vec(vec_sub(c->b->corp.pos, c->a->corp.pos));
-		if (map->cam_wall == NULL || map->cam_floor->a->corp.pos.y > c->a->corp.pos.y)
-		{
 			printf("WALL SAVED\n");
-			env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
+			env->cam.stats.onwall = !is_mesh_mob(env, c->a);
 			map->cam_wall = c;
-		}
 //		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
 //		printf("pos_wall");
 //		printf("dot = %f\n", vec_dot(c->b->corp.pos, c->a->corp.pos));
@@ -312,16 +329,19 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 //		printf("COLLISION_WALL\n");
 //		print_vec(c->a->corp.pos);
 	}
-	else if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(c->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
+	if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(c->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
 	{
+		printf("WALL_ERASED\n");
 		map->cam_wall = NULL;
 		env->cam.stats.onwall = 0;
 	}
-//	if (c->b->corp.pos.y - c->a->corp.pos.y < -3)
-//	{
-///		map->cam_roof = c;
-//		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
-//	}
+	if (c->cam_mesh_first.y < -2)
+	{
+		map->cam_roof = c;
+		printf("cam_mesh ROOF");
+		print_vec(c->cam_mesh_first);
+		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
+	}
 	/*
 	else if (env->cam.stats.onroof == 1 )
 	{

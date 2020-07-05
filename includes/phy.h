@@ -35,6 +35,10 @@ struct	s_collide
 	unsigned int i_b;
 	unsigned int cloth_face;
 	t_vec3d		diffwall;
+	t_vec3d		cam_mesh_first;
+	float		norm_dist_first;
+	t_vec3d		cam_mesh_actual;
+	float		norm_dist_actual;
 	float dot;
 };
 

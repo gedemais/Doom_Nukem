@@ -92,7 +92,12 @@ static bool	check_coll_cam(t_dynarray *meshs, int i, t_mesh *cam, t_collide *c)
 //	fflush(stdout);
 	return (aabb_collision(a->corp.o, cam->corp.o, a->corp.dims, cam->corp.dims));
 }
-
+static	void	scan_collide(t_collide *c, int i)
+{
+	c->cam_mesh_first = vec_sub(c->b->corp.pos, c->a->corp.pos);
+	c->norm_dist_first = vec_norm(c->cam_mesh_first);
+	c->i_a = i;
+}
 
 int			report_cam_collisions(t_env *env, t_map *maps)
 {
@@ -110,7 +115,7 @@ int			report_cam_collisions(t_env *env, t_map *maps)
 	{
 		if (check_coll_cam(&maps->meshs, i, cam, &c))
 		{
-			c.i_a = i;
+			scan_collide(&c, i);
 			if (push_dynarray(&env->phy_env.collides_cam, &c, false))
 					return (-1);
 		}

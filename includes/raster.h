@@ -94,7 +94,7 @@ struct	s_cam_stats
 	t_vec3d		pos;
 	t_vec3d		dir;
 	int			onfloor;
-//	int			onroof;
+	int			onroof;
 	int			onwall;
 	float		yaw;
 	float		pitch;

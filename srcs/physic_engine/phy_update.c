@@ -113,27 +113,35 @@ void	update_speeds_collide(t_env *env)
 		i++;
 	}
 }
+/*
+static	void	actual_collide(t_map *map)
+{
+	
 
+}
+*/
 void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 {
 	t_collide			*c;
 	int					i;
+	int					j;
 	
 	i = 0;
+	j = 0;
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
-		printf("distance_coll");
-		print_vec(vec_sub(c->b->corp.pos, c->a->corp.pos));
 		type_of_plan(env, c, map);
 //		print_collide(*c);
 		i++;
 	}
-	if (i == 0 || env->cam.stats.onfloor == 0) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
+	printf("nb_collision = %d", i);
+	if ((env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0) || i == 0)
 	{
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);
-	}	
+	}
+	//env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0	
 }
 
 void	update_positions_gravity(t_env *env)
