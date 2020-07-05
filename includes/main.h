@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 16:43:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/05 14:32:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@
 #define PUT7 ft_putstr("There7\n"); fflush(stdout);
 #define PUT8 ft_putstr("There8\n"); fflush(stdout);
 #define PUT9 ft_putstr("There9\n"); fflush(stdout);
+
+# define BREAKPOINT printf("%s at line %d in %s\n", __FUNCTION__, __LINE__, __FILE__); fflush(stdout);
 
 
 # define NB_THREADS 8

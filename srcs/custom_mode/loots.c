@@ -53,9 +53,11 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	int			ret;
 	int			i;
 
-	i = loot->index - 1;
+	i = loot->index;
 	ret = loots_fts[(int)loot->id](env);
-	printf("loot id : %d\n", loot->id);
+	printf("---------- lauch_loot 0 ------------\n");
+	print_mobs(env);
+	sleep(2);
 	extract_dynarray(&env->edit_env.map.meshs, loot->m->index);
 	extract_dynarray(&env->custom_env.loots, loot->index);
 	env->edit_env.map.nmesh--;
@@ -66,11 +68,13 @@ static int	launch_loot(t_env *env, t_loot *loot)
 		l->m->index--;
 		i++;
 	}
-//	printf("---------- lauch_loot------------\n");
-//	print_mobs(env);
+	printf("---------- lauch_loot 2 ------------\n");
+	print_mobs(env);
+	sleep(2);
 	replace_mobs_index(env, -1);
-//	printf("---------- lauch_loot 2------------\n");
-//	print_mobs(env);
+	printf("---------- lauch_loot 3------------\n");
+	print_mobs(env);
+	sleep(2);
 //	exit(0);
 	return (ret);
 }
@@ -90,7 +94,7 @@ int		spawn_loot(t_env *env, t_vec3d pos)
 	loot.index = env->custom_env.loots.nb_cells;
 	loot.id = rand() % LOOT_MAX;
 	loot.pos = pos;
-	pos.y += 2.0f;
+	pos.y += 4.0f;
 	if (!(loot.m = insert_loot(&env->edit_env.map, map, pos, (int[2]){first->map_start, loot.id})))
 		return (-1);
 	replace_mobs_index(env, 1);
@@ -115,7 +119,7 @@ void	handle_loots(t_env *env)
 		if ((dist = vec3d_dist(env->cam.stats.pos, loot->m->corp.pos)) < EVENT_DIST)
 		{
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);
-			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.1f));
+			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.33f / dist));
 			if (dist < 0.1f)
 			{
 				launch_loot(env, loot);
