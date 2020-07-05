@@ -1,81 +1,105 @@
 #include "main.h"
 
-t_sparam		sp_fork(float volume, t_vec3d pos)
+int				background_sound(t_env *env, int source)
 {
-	t_sparam	param;
-
-	volume = volume > 1 ? 1 : volume;
-	volume = volume < 0 ? 0 : volume;
-	ft_memset(&param, 0, sizeof(t_sparam));
-	param.fork = true;
-	param.volume = volume;
-	param.pos = pos;
-	return (param);
+	if (env->events.keys[KEY_T])
+	{
+		env->volume += 0.01f;
+		env->volume = env->volume > 1 ? 1 : env->volume;
+		if (sound_system(env, 0, sp_overall(0, SA_MAX - 1,
+				sp_volume(0.01f, env->cam.stats.pos))))
+			return (-1);
+	}
+	else if (env->events.keys[KEY_G])
+	{
+		env->volume -= 0.01f;
+		env->volume = env->volume < 0 ? 0 : env->volume;
+		if (sound_system(env, 0, sp_overall(0, SA_MAX - 1,
+				sp_volume(0.01f, env->cam.stats.pos))))
+			return (-1);
+	}
+	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+		if (sound_system(env, source, sp_play(env->volume, env->cam.stats.pos)))
+			return (-1);
+	return (0);
 }
 
-t_sparam		sp_no_sound(int start, int end)
+int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
-	t_sparam	param;
+	ALuint 	tmp;
+	t_sound	*sound;
 
-	ft_memset(&param, 0, sizeof(t_sparam));
-	start = start < 0 ? 0 : start;
-	start = start > SA_MAX - 1 ? SA_MAX - 1 : start;
-	end = end < 0 ? 0 : end;
-	end = end > SA_MAX - 1 ? SA_MAX - 1 : end;
-	end = end < start ? start : end;
-	param.start = start;
-	param.end = end;
-	param.no_sound = true;
-	return (param);	
+	sound = dyacc(s, source);
+	if (sound == NULL)
+		return (0);
+	sound->volume = p.volume;
+	alGenSources(1, &tmp);
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alSource3f(tmp, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
+	alSourcef(tmp, AL_REFERENCE_DISTANCE, 10);
+	alSourcef(tmp, AL_MAX_DISTANCE, 50);
+	alSourcef(tmp, AL_ROLLOFF_FACTOR, 1);
+	alSourcef(tmp, AL_GAIN, p.volume);
+	alSourcei(tmp, AL_BUFFER, (ALint)sound->samples->buffer);
+	alSourcePlay(tmp);
+	return (0);
 }
 
-t_sparam		sp_overall(int start, int end, t_sparam p)
+int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
-	t_sparam	param;
+	ALint 	status;
+	t_sound	*sound;
 
-	param = p;
-	start = start < 0 ? 0 : start;
-	start = start > SA_MAX - 1 ? SA_MAX - 1 : start;
-	end = end < 0 ? 0 : end;
-	end = end > SA_MAX - 1 ? SA_MAX - 1 : end;
-	end = end < start ? start : end;
-	param.start = start;
-	param.end = end;
-	param.overall = true;
-	return (param);
+	sound = dyacc(s, source);
+	if (sound == NULL)
+		return (0);
+	sound->volume = p.volume;
+	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
+	if (status == AL_PLAYING)
+		return (0);
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
+	alSourcef(sound->ambient, AL_REFERENCE_DISTANCE, 10);
+	alSourcef(sound->ambient, AL_MAX_DISTANCE, 50);
+	alSourcef(sound->ambient, AL_ROLLOFF_FACTOR, 1);
+	alSourcef(sound->ambient, AL_GAIN, p.volume);
+	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
+	alSourcePlay(sound->ambient);
+	return (0);
 }
 
-t_sparam		sp_play(float volume, t_vec3d pos)
+int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
-	t_sparam	param;
+	ALint 	status;
+	t_sound	*sound;
 
-	volume = volume > 1 ? 1 : volume;
-	volume = volume < 0 ? 0 : volume;
-	ft_memset(&param, 0, sizeof(t_sparam));
-	param.play = true;
-	param.volume = volume;
-	param.pos = pos;
-	return (param);
+	sound = dyacc(s, source);
+	if (sound == NULL)
+		return (0);
+	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
+	if (status == AL_PLAYING)
+	{
+		sound->volume += p.volume;
+		sound->volume = sound->volume < 0 ? 0 : sound->volume;
+		sound->volume = sound->volume > env->volume
+			? env->volume : sound->volume;
+		alSourcef(sound->ambient, AL_GAIN, sound->volume);
+	}
+	return (0);
 }
 
-t_sparam		sp_stop()
+int 			stop_sound(t_dynarray *sounds, int source)
 {
-	t_sparam	param;
+	ALint 	status;
+	t_sound	*sound;
 
-	ft_memset(&param, 0, sizeof(t_sparam));
-	param.stop = true;
-	return (param);
-}
-
-t_sparam		sp_volume(float voffset, t_vec3d pos)
-{
-	t_sparam	param;
-
-	voffset = voffset > 1 ? 1 : voffset;
-	voffset = voffset < -1 ? -1 : voffset;
-	ft_memset(&param, 0, sizeof(t_sparam));
-	param.sound = true;
-	param.volume = voffset;
-	param.pos = pos;
-	return (param);
+	sound = dyacc(sounds, source);
+	if (sound == NULL)
+		return (0);
+	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
+	if (status == AL_PLAYING)
+		alSourceStop(sound->ambient);	
+	return (0);
 }
