@@ -1,36 +1,35 @@
 #include "main.h"
 
-static int 		free_sources(ALuint *sources)
-{
-	free(sources);
-	return (0);
-}
-
 static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 {
 	int 	i;
 	t_sound	sound;
 	ALuint 	*sources;
 
+	env->volume = VOLUME;
 	if (init_dynarray(sounds, sizeof(t_sound), SA_MAX))
 		return (-1);
 	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX)))
 		return (-1);
 	alGenSources(SA_MAX - 1, sources);
-	alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
+	alDistanceModel(AL_LINEAR_DISTANCE);
 	i = -1;
 	while (++i < SA_MAX)
 	{
     	ft_memset(&sound, 0, sizeof(t_sound));
     	sound.samples = &env->sound.samples[i];
 		sound.ambient = sources[i];
+		alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
+		alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
+		alSourcef(sound.ambient, AL_MAX_DISTANCE, 50);
     	if (push_dynarray(sounds, &sound, 0))
     	{
-    		free_sources(sources);
+    		free(sources);
     		return (-1);
     	}
 	}
-	return (free_sources(sources));
+	free(sources);
+	return (0);
 }
 
 static int 		quit_sound_system(t_dynarray *sounds)
@@ -42,6 +41,8 @@ static int 		quit_sound_system(t_dynarray *sounds)
 	while (++i < sounds->nb_cells)
 	{
 		sound = dyacc(sounds, i);
+		stop_sound(sounds, i);
+		alDeleteSources(1, &sound->ambient);
 	}
 	free_dynarray(sounds);
 	return (0);
@@ -57,9 +58,12 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 	while (++i <= p.end && i < s->nb_cells)
 	{
 		sound = dyacc(s, i);
-		alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
-		if (p.no_sound && status == AL_PLAYING)
-			return (1);
+		if (p.no_sound)
+		{
+			alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
+			if (status == AL_PLAYING)
+				return (1);
+		}
 		if ((p.sound && sound_volume(env, s, sound->ambient, p))
 			|| ((p.play || p.fork || p.stop) && stop_sound(s, sound->ambient)))
 			return (-1);

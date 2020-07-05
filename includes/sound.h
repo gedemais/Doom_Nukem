@@ -5,6 +5,9 @@
 # include <AL/alc.h>
 # include <sndfile.h>
 
+# define VOLUME	0.2f
+# define PITCH	1.0f
+
 enum	e_sample_id
 {
 	SA_TITLE_SCREEN_S,
@@ -75,6 +78,7 @@ typedef struct	s_sound_param
 	int 		start;
 	int 		end;
 	float		volume;
+	float		pitch;
 	t_vec3d		pos;
 }				t_sparam;
 
@@ -85,18 +89,19 @@ typedef struct	s_sound
 	t_sample	*samples;
 	ALuint		ambient;
 	float		volume;
+	float		pitch;
 }				t_sound;
 
 int				sound_system(t_env *env, int source, t_sparam param);
 
 int				background_sound(t_env *env, int source);
 
-t_sparam		sp_fork(float volume, t_vec3d pos);
+t_sparam		sp_fork(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_no_sound(int start, int end);
 t_sparam		sp_overall(int start, int end, t_sparam p);
-t_sparam		sp_play(float volume, t_vec3d pos);
+t_sparam		sp_play(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_stop();
-t_sparam		sp_volume(float voffset, t_vec3d pos);
+t_sparam		sp_volume(float volume, float pitch);
 
 int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p);
 int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p);

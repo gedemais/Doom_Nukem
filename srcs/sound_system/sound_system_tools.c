@@ -1,14 +1,17 @@
 #include "main.h"
 
-t_sparam		sp_fork(float volume, t_vec3d pos)
+t_sparam		sp_fork(float volume, float pitch, t_vec3d pos)
 {
 	t_sparam	param;
 
 	volume = volume > 1 ? 1 : volume;
 	volume = volume < 0 ? 0 : volume;
+	pitch = pitch > 2 ? 2 : pitch;
+	pitch = pitch < 0 ? 0 : pitch;
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.fork = true;
 	param.volume = volume;
+	param.pitch = pitch;
 	param.pos = pos;
 	return (param);
 }
@@ -57,15 +60,18 @@ t_sparam		sp_overall(int start, int end, t_sparam p)
 	return (param);
 }
 
-t_sparam		sp_play(float volume, t_vec3d pos)
+t_sparam		sp_play(float volume, float pitch, t_vec3d pos)
 {
 	t_sparam	param;
 
 	volume = volume > 1 ? 1 : volume;
 	volume = volume < 0 ? 0 : volume;
+	pitch = pitch > 2 ? 2 : pitch;
+	pitch = pitch < 0 ? 0 : pitch;
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.play = true;
 	param.volume = volume;
+	param.pitch = pitch;
 	param.pos = pos;
 	return (param);
 }
@@ -79,15 +85,17 @@ t_sparam		sp_stop()
 	return (param);
 }
 
-t_sparam		sp_volume(float voffset, t_vec3d pos)
+t_sparam		sp_volume(float volume, float pitch)
 {
 	t_sparam	param;
 
-	voffset = voffset > 1 ? 1 : voffset;
-	voffset = voffset < -1 ? -1 : voffset;
+	volume = volume > 1 ? 1 : volume;
+	volume = volume < -1 ? -1 : volume;
+	pitch = pitch > 2 ? 2 : pitch;
+	pitch = pitch < -2 ? -2 : pitch;
 	ft_memset(&param, 0, sizeof(t_sparam));
 	param.sound = true;
-	param.volume = voffset;
-	param.pos = pos;
+	param.volume = volume;
+	param.pitch = pitch;
 	return (param);
 }

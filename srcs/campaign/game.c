@@ -46,7 +46,7 @@ int		cmp_game(void *param)
 
 	mesure_time(false);
 	env = (t_env*)param;
-	if (background_sound(env, SA_TITLE_SCREEN_L))
+	if (background_sound(env, SA_MAX))
 		return (-1);
 	cmp_env = &env->cmp_env;
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
