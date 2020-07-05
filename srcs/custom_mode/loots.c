@@ -24,23 +24,24 @@ static void	replace_mobs_index(t_env *env, int delta)
 	}
 }
 
-static t_mesh	*insert_loot(t_map *dest, t_map *src, t_vec3d pos, int index)
+static t_mesh	*insert_loot(t_map *dest, t_map *src, t_vec3d pos, int index[2])
 {
 	t_mesh		new;
 	t_mesh		*m;
 	t_mesh		*ret;
 
 	ft_memset(&new, 0, sizeof(t_mesh));
-	m = dyacc(&src->meshs, 0);
+	printf("cube n%d\n", index[1]);
+	m = dyacc(&src->meshs, index[1]);
 	new.type = 1;
-	new.index = index;
+	new.index = index[0];
 	if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 		|| copy_triangles(dest, src, m, &new)
-		|| insert_dynarray(&dest->meshs, &new, index))
+		|| insert_dynarray(&dest->meshs, &new, index[0]))
 		return (NULL);
-	ret = dyacc(&dest->meshs, index);
-	assign_meshs(dyacc(&dest->meshs, index));
-	translate_mesh(dest, dyacc(&dest->meshs, index), pos);
+	ret = dyacc(&dest->meshs, index[0]);
+	assign_meshs(dyacc(&dest->meshs, index[0]));
+	translate_mesh(dest, dyacc(&dest->meshs, index[0]), pos);
 	dest->nmesh++;
 	return (ret);
 }
@@ -55,11 +56,8 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	i = loot->index - 1;
 	ret = loots_fts[(int)loot->id](env);
 	printf("loot id : %d\n", loot->id);
-	PUT
 	extract_dynarray(&env->edit_env.map.meshs, loot->m->index);
-	PUT
 	extract_dynarray(&env->custom_env.loots, loot->index);
-	PUT
 	env->edit_env.map.nmesh--;
 	while (i < env->custom_env.loots.nb_cells)
 	{
@@ -68,14 +66,12 @@ static int	launch_loot(t_env *env, t_loot *loot)
 		l->m->index--;
 		i++;
 	}
-	PUT
 //	printf("---------- lauch_loot------------\n");
 //	print_mobs(env);
 	replace_mobs_index(env, -1);
 //	printf("---------- lauch_loot 2------------\n");
 //	print_mobs(env);
 //	exit(0);
-	PUT
 	return (ret);
 }
 
@@ -95,7 +91,7 @@ int		spawn_loot(t_env *env, t_vec3d pos)
 	loot.id = rand() % LOOT_MAX;
 	loot.pos = pos;
 	pos.y += 2.0f;
-	if (!(loot.m = insert_loot(&env->edit_env.map, map, pos, first->map_start)))
+	if (!(loot.m = insert_loot(&env->edit_env.map, map, pos, (int[2]){first->map_start, loot.id})))
 		return (-1);
 	replace_mobs_index(env, 1);
 	if (loots->byte_size == 0 && init_dynarray(loots, sizeof(t_loot), 0))

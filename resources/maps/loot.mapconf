@@ -4,4 +4,7 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-Cube|{}|[]|true|(resources/textures/loots/nuke.xpm)|
+nuke_Cube.001|{}|[]|true|(resources/textures/loots/nuke.xpm)|
+shield_Cube.002|{}|[]|true|(resources/textures/loots/dollar.xpm)|
+money_Cube.003|{}|[]|true|(resources/textures/loots/shield.xpm)|
+ammos_Cube.004|{}|[]|true|(resources/textures/loots/ammos.xpm)|
