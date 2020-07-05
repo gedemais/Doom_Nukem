@@ -1,9 +1,21 @@
 #include "main.h"
 
+static int 		init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
+{
+	t_sound	sound;
+
+    ft_memset(&sound, 0, sizeof(t_sound));
+    sound.samples = &env->sound.samples[i];
+	sound.ambient = sources[i];
+	alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
+	alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
+	alSourcef(sound.ambient, AL_MAX_DISTANCE, 50);
+    return (push_dynarray(s, &sound, 0));
+}
+
 static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 {
 	int 	i;
-	t_sound	sound;
 	ALuint 	*sources;
 
 	env->volume = VOLUME;
@@ -15,19 +27,11 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	alDistanceModel(AL_LINEAR_DISTANCE);
 	i = -1;
 	while (++i < SA_MAX)
-	{
-    	ft_memset(&sound, 0, sizeof(t_sound));
-    	sound.samples = &env->sound.samples[i];
-		sound.ambient = sources[i];
-		alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
-		alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
-		alSourcef(sound.ambient, AL_MAX_DISTANCE, 50);
-    	if (push_dynarray(sounds, &sound, 0))
-    	{
-    		free(sources);
-    		return (-1);
-    	}
-	}
+		if (init_sound(env, sounds, sources, i))
+		{
+			free(sources);
+			return (-1);
+		}
 	free(sources);
 	return (0);
 }
@@ -63,6 +67,7 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 			alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
 			if (status == AL_PLAYING)
 				return (1);
+			continue ;
 		}
 		if ((p.sound && sound_volume(env, s, sound->ambient, p))
 			|| ((p.play || p.fork || p.stop) && stop_sound(s, sound->ambient)))
@@ -84,9 +89,8 @@ int				sound_system(t_env *env, int source, t_sparam param)
 		return (quit_sound_system(&sounds));
 	if (param.overall || param.no_sound)
 		return (sound_overall(env, &sounds, source, param));
-	if (param.sound)
-		return (sound_volume(env, &sounds, source, param));
-	if ((param.fork && fork_sound(env, &sounds, source, param))
+	if ((param.sound && sound_volume(env, &sounds, source, param))
+		|| (param.fork && fork_sound(env, &sounds, source, param))
 		|| (param.play && play_sound(env, &sounds, source, param))
 		|| (param.stop && stop_sound(&sounds, source)))
 		return (-1);
