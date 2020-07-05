@@ -50,37 +50,6 @@ static int		handle_keys(t_env *env, t_events *e)
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }
-/*
-static void	print_mobs(t_env *env)
-{
-	t_enemy	*mob;
-	t_loot	*loot;
-	t_mesh	*m;
-	int		i;
-
-	i = 0;
-	while (i < env->custom_env.mobs.nb_cells)
-	{
-		mob = dyacc(&env->custom_env.mobs, i);
-		printf("mob n%d : %d <-> %d | (", i, mob->map_start, mob->map_end);
-		for (int j = mob->map_start; j < mob->map_end; j++)
-		{
-			m = dyacc(&env->edit_env.map.meshs, j);
-			printf("%d ", m->index);
-		}
-		printf(")\n");
-		i++;
-	}
-	printf("------------------------\n");
-	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		printf("loot n%d : %d\n", i, loot->m->index);
-		i++;
-	}
-	printf("--------------------------------------------\n");
-}*/
 
 int			custom_play(t_env *env)
 {

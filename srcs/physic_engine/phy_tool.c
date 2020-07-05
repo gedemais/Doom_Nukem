@@ -93,12 +93,18 @@ t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
 	(void)cam;
 	w = (t_vec3d){2,0,2,0};
   	if (m->tris.nb_cells == 8 && env->cam.stats.onfloor == 1) 	
+	{
 		w = look_for_slope_vect(dyacc(&m->tris, 4), dir);
+		print_vec(w);
+	}
 	// test diff pos btw point et cam.pos pour voir si c pas un mur
 	//else look_for_wall => zero_vector
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
 	new_dir->y = step_dir.y;
+	if (new_dir->y < 0.8 && m->tris.nb_cells == 8)
+		new_dir->y = 0.8;
+	print_vec(*new_dir);
 	return (new_dir);
 }
 
@@ -234,6 +240,14 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 			&& vec_dot(f, vec2) < 0.5
 			&& vec_norm(vec2) < 2.5)
 		f = vec_fmult(vec2, -0.0075);
+	else if (wall->tris.nb_cells == 8)
+	{
+		printf("f_dist_wall");
+		if (f.y > 0 && f.y < 0.8)
+			f.y = 0.8;
+		print_vec(f);
+	}
+		
 	return (f);
 }
 
