@@ -7,7 +7,7 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 	if (keys[KEY_W] || keys[KEY_E])
 	{
 		f = vec_add(f, vec_fmult(f, 3.0f));
-		if (keys[KEY_E])
+		if (keys[KEY_E] && env->cam.stats.onroof == 0)
 			f.y += 0.3f;
 		if (keys[KEY_E] && !keys[KEY_W])
 			f = (t_vec3d){0, f.y, 0, f.w};

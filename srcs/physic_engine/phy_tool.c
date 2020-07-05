@@ -304,6 +304,20 @@ static	void	scan_actuall_collide(t_env *env, t_map *map)
 		if (map->cam_floor->norm_dist_actual > map->cam_floor->norm_dist_first)
 			env->cam.stats.onfloor = 0;
 	}
+	if (env->cam.stats.onroof == 1) 
+	{
+		printf("ROOF_COLLIDE_SAVED\n");
+		printf("Vec_dist_first\n");
+		print_vec(map->cam_roof->cam_mesh_first);
+		printf("norm_first = %f\n", map->cam_roof->norm_dist_first);
+		map->cam_roof->cam_mesh_actual = vec_sub(env->cam.stats.pos, map->cam_roof->a->corp.pos);
+		printf("Vec_dist_actual\n");
+		print_vec(map->cam_roof->cam_mesh_actual);
+		map->cam_roof->norm_dist_actual = vec_norm(map->cam_roof->cam_mesh_actual);
+		printf("norm_actual = %f\n", map->cam_roof->norm_dist_actual);
+		if (map->cam_roof->norm_dist_actual > map->cam_roof->norm_dist_first)
+			env->cam.stats.onroof = 0;
+	}
 }
 
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
