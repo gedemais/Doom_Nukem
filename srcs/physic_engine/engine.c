@@ -38,7 +38,7 @@ int		physic_engine(t_env *env, t_map *maps)
 
 	cam = &maps->cam;
 	e = &env->events;
-//	print_info_phy(env, &maps->cam);
+	print_info_phy(env, &maps->cam, maps);
 //	dev_handle_events(env);
 //	report_collisions(env);
 	report_cam_collisions(env, maps);

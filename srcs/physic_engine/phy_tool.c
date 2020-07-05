@@ -247,7 +247,7 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	printf("dot_product %f\n", vec_dot(f, vec2));
 	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) > 0 
 			&& vec_dot(f, vec2) < 0.5
-			&& vec_norm(vec2) < 1.2)
+			&& vec_norm(vec2) < 2.5)
 	{
 //		parse_mesh_side(c, wall, &f);
 //		printf("diffwall = ");
@@ -284,12 +284,16 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
 	if (c->b->corp.pos.y - c->a->corp.pos.y > 0)
 	{
-		if (map->cam_floor == NULL || map->cam_floor->a->corp.pos.y > c->a->corp.pos.y)
-			map->cam_floor = c;
+		map->cam_floor = c;
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 	}
+	else if (env->cam.stats.onfloor == 1 && vec_norm(vec_sub(c->b->corp.pos, map->cam_floor->a->corp.pos)) > 3)
+	{
+		map->cam_wall = NULL;
+		env->cam.stats.onfloor = 1;
+	}
 	if (c->b->corp.pos.y - c->a->corp.pos.y < 2
-			&& c->b->corp.pos.y - c->a->corp.pos.y > -2)
+			&& c->b->corp.pos.y - c->a->corp.pos.y > -1)
 	{
 		printf("COLLISION_WALL dist before\n");
 		print_vec(vec_sub(c->b->corp.pos, map->cam_floor->a->corp.pos));
@@ -298,6 +302,7 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 		if (map->cam_wall == NULL || map->cam_floor->a->corp.pos.y > c->a->corp.pos.y)
 		{
 			printf("WALL SAVED\n");
+			env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
 			map->cam_wall = c;
 		}
 //		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
@@ -306,11 +311,22 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 //		map->cam_wall = c;
 //		printf("COLLISION_WALL\n");
 //		print_vec(c->a->corp.pos);
-		env->cam.stats.onwall = !is_mesh_mob(env, c->a); // bool
 	}
-	else if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(map->cam_wall->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
+	else if (env->cam.stats.onwall == 1 && vec_norm(vec_sub(c->b->corp.pos, map->cam_wall->a->corp.pos)) > 3)
 	{
 		map->cam_wall = NULL;
 		env->cam.stats.onwall = 0;
 	}
+//	if (c->b->corp.pos.y - c->a->corp.pos.y < -3)
+//	{
+///		map->cam_roof = c;
+//		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
+//	}
+	/*
+	else if (env->cam.stats.onroof == 1 )
+	{
+		map->cam_wall = NULL;
+		env->cam.stats.onroof = 0;
+	}
+	*/
 }

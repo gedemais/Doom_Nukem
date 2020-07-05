@@ -95,7 +95,7 @@ t_vec3d	set_y_dir(t_env *env, t_map *map);
 t_vec3d	phy_move_collide(t_env *env, t_collide *c, t_vec3d dir);
 t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir);
 t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f);
-void	print_info_phy(t_env *env, t_mesh *cam);
+void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps);
 /*			phy_tool2.c		*/
 void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam);
 bool	key_move(bool keys[NB_KEYS]);

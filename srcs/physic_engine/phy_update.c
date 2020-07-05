@@ -40,18 +40,28 @@ static void pause_position(t_env *env)
 }
 */
 
-void	print_info_phy(t_env *env, t_mesh *cam)
+void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 {
+	printf("-----------------PRINT_INFO---------------------\n");
 	printf("floor %d \n", env->cam.stats.onfloor);
 	printf("wall %d \n", env->cam.stats.onwall);
-	printf("--------------------------------------------\n");
+	printf("------------------------------------------------\n");
 	printf("cam->corp.pos\n");
 	print_vec(cam->corp.pos);
 	printf("cam->corp.v\n");
 	print_vec(cam->corp.v);
-	printf("--------------------------------------------\n");
+	printf("-----------------------------------------------\n");
 	printf("env->cam.stats.pos\n");
 	print_vec(env->cam.stats.pos);
+	printf("-------------------COLIDE WALL-------------------------\n");
+	if (env->cam.stats.onwall == 1)
+		print_collide(*maps->cam_wall);
+	printf("-------------------COLIDE FLOOR-------------------------\n");
+	if (env->cam.stats.onfloor == 1)
+		print_collide(*maps->cam_floor);
+	printf("-------------------COLIDE ROOF-------------------------\n");
+//	if (env->cam.stats.onroof == 1)
+//		print_collide(*maps->cam_roof);
 
 }
 
@@ -113,11 +123,13 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
+		printf("distance_coll");
+		print_vec(vec_sub(c->b->corp.pos, c->a->corp.pos));
 		type_of_plan(env, c, map);
 //		print_collide(*c);
 		i++;
 	}
-	if (i == 0 && env->phy_env.type_move == true) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
+	if (i == 0 || env->cam.stats.onfloor == 0) //active la gravite || map->m // mettre a zero les deux collides cam_floor et cam_wall ? 
 	{
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);

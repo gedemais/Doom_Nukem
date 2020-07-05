@@ -141,6 +141,7 @@ struct	s_map
 	int				index;
 	t_collide		*cam_floor;
 	t_collide		*cam_wall;
+	t_collide		*cam_roof;
 	bool			init;
 };
 
