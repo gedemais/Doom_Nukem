@@ -111,19 +111,10 @@ t_vec3d		phy_move_collide(t_env *env, t_collide *c, t_vec3d dir) //5
 	(void)dir;
 	a = c->a;
 	cam = c->b;
-	f = vec_fmult(*coefdir_plan(env, a, cam, &dir), MAPED_WALK_SPEED); 
+	f = vec_fmult(*coefdir_plan(env, a, cam, &dir), MAPED_WALK_SPEED * env->cam.stats.speed); 
 	return (f);
 }
 
-/*
- *
- *printf("diff = %f\n", cam->corp.pos.y - m->corp.pos.y);
-	if ((cam->corp.pos.y - map->cam_wall.a.corp.pos.y) < 1)
-	{
-		printf("dot = %f\n", vec_dot(*dir, m->corp.pos));
-		print_mesh_corp(*m);
-	}
-*/
 t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 {
 	t_vec3d f;
@@ -236,32 +227,14 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	(void)env;
 	cam = c->b;
 	wall = c->a;
-//	printf("pos_joueur\n");
-//	print_vec(cam->corp.pos);
+	
 	vec = vec_sub(wall->corp.pos, cam->corp.pos);
 	vec2 = (t_vec3d){vec.x, 0, vec.z, 0};
-	print_vec(vec2);
-//	printf("pos_wall\n");
-//	print_vec(wall->corp.pos);
-//	printf("diff %f\n", wall->corp.pos.y - cam->corp.pos.y);
-	printf("dot_product %f\n", vec_dot(f, vec2));
 	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) > 0 
 			&& vec_dot(f, vec2) < 0.5
 			&& vec_norm(vec2) < 2.5)
-	{
-//		parse_mesh_side(c, wall, &f);
-//		printf("diffwall = ");
-		print_vec(vec2);
 		f = vec_fmult(vec2, -0.0075);
-//		f = vec_add(vec_fmult(f, 0.5) , vec_fmult(vec, -0.075));
-//		printf("vec_norm_diff_wall = %f\n", vec_norm(vec_sub(wall->corp.pos, cam->corp.pos)));
-//		if (vec_norm(vec) < 2)
-//			f = vec_fmult(f, -1);	
-//		printf("------f-------\n");
-		return (f);
-	}
-	else
-		return (f);
+	return (f);
 }
 
 static bool	is_mesh_mob(t_env *env, t_mesh *m)
@@ -314,30 +287,17 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 	if (c->cam_mesh_first.y > 0) //
 	{
 		map->cam_floor = c;
-		printf("FLOOR SAVED\n");
-		print_vec(c->cam_mesh_actual);
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 	}
 	if (c->cam_mesh_first.y < 2
 			&& c->cam_mesh_first.y > -1)
 	{
-			printf("WALL SAVED\n");
-			print_vec(c->cam_mesh_actual);
 			env->cam.stats.onwall = !is_mesh_mob(env, c->a);
 			map->cam_wall = c;
-//		printf("diff_y = %f\n", c->b->corp.pos.y - c->a->corp.pos.y);
-//		printf("pos_wall");
-//		printf("dot = %f\n", vec_dot(c->b->corp.pos, c->a->corp.pos));
-//		map->cam_wall = c;
-//		printf("COLLISION_WALL\n");
-//		print_vec(c->a->corp.pos);
 	}
-	
 	if (c->cam_mesh_first.y < -2)
 	{
 		map->cam_roof = c;
-		printf("cam_mesh ROOF");
-		print_vec(c->cam_mesh_actual);
 		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
 	}
 	/*

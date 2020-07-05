@@ -135,7 +135,6 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 //		print_collide(*c);
 		i++;
 	}
-	printf("nb_collision = %d", i);
 	if ((env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0) || i == 0)
 	{
 		env->cam.stats.onfloor = 0;	
