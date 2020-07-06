@@ -45,6 +45,7 @@ void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 	printf("-----------------PRINT_INFO---------------------\n");
 	printf("floor %d \n", env->cam.stats.onfloor);
 	printf("wall %d \n", env->cam.stats.onwall);
+	printf("roof %d \n", env->cam.stats.onroof);
 	printf("------------------------------------------------\n");
 	printf("cam->corp.pos\n");
 	print_vec(cam->corp.pos);
@@ -60,8 +61,8 @@ void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 	if (env->cam.stats.onfloor == 1)
 		print_collide(*maps->cam_floor);
 	printf("-------------------COLIDE ROOF-------------------------\n");
-//	if (env->cam.stats.onroof == 1)
-//		print_collide(*maps->cam_roof);
+	if (env->cam.stats.onroof == 1)
+		print_collide(*maps->cam_roof);
 
 }
 

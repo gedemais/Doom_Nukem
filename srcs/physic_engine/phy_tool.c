@@ -95,16 +95,16 @@ t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
   	if (m->tris.nb_cells == 8 && env->cam.stats.onfloor == 1) 	
 	{
 		w = look_for_slope_vect(dyacc(&m->tris, 4), dir);
-		print_vec(w);
+//		print_vec(w);
 	}
 	// test diff pos btw point et cam.pos pour voir si c pas un mur
 	//else look_for_wall => zero_vector
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
 	new_dir->y = step_dir.y;
-	if (new_dir->y < 0.8 && m->tris.nb_cells == 8)
-		new_dir->y = 0.8;
-	print_vec(*new_dir);
+//	if (new_dir->y < 0.8 && m->tris.nb_cells == 8)
+//		new_dir->y = 0.8;
+//	print_vec(*new_dir);
 	return (new_dir);
 }
 
@@ -132,97 +132,6 @@ t_vec3d	set_y_dir(t_env *env, t_map *map) //3
 		f = phy_move_collide(env, map->cam_wall, env->cam.stats.dir);
 	return (f);
 }
-
-void print_vect_face(t_triangle *tri, t_vec3d *dir)
-{
-	t_vec3d u;
-	t_vec3d v;
-	t_vec3d w;
-	(void)dir;
-	(void)tri;	
-//	printf("loookforcloth\n");
-//	printf("----------------\n");
-//	print_vec(tri->points[0]);
-//	print_vec(tri->points[1]);
-//	print_vec(tri->points[2]);
-//	printf("----------------\n");
-	//dir only in vec_dot < 0 way? 
-	u = vec_sub(tri->points[0], tri->points[1]);
-	v = vec_sub(tri->points[1], tri->points[2]);
-	w = vec_sub(tri->points[2], tri->points[0]);
-//	printf("dotu = %f\n",vec_dot(*dir , u));	
-///	printf("dotv = %f\n",vec_dot(*dir , v));	
-//	printf("dotw = %f\n",vec_dot(*dir , w));	
-//	printf("w = ");
-//	print_vec(u);
-//	print_vec(v);
-//	print_vec(w);
-//	print_vec(*dir);
-
-//	printf("----------------\n");
-//			printf("-----------projete_u------\n");
-//	print_vec(project_ortho(*dir, u));
-// printf("-----------projete_v------\n");
-//	print_vec(project_ortho(*dir, v));
- ///printf("-----------projete_w------\n");
-//	print_vec(project_ortho(*dir, w));
-}
-
-t_vec3d		look_for_cloth_side(t_collide *c, t_triangle *tri, t_vec3d diff, int tris_num)
-{
-	t_vec3d test_diff;
-	t_vec3d pos;
-	int		i;
-
-	i = -1;
-	test_diff = diff;
-	pos = c->b->corp.pos;
-
-	print_vec(tri->normal);
-	while (++i < 3)
-	{
-//		printf("point_%d\n",i);
-//		print_vec(tri->points[i]);
-//		printf("calcul test_diff\n");
-//		print_vec(vec_sub(pos, tri->points[i]));
-		if (vec_norm(vec_sub(pos, tri->points[i])) < vec_norm(test_diff))
-		{
-//			printf("face saved\n");
-			c->diffwall = vec_sub(pos, tri->points[i]);
-			test_diff = vec_sub(pos, tri->points[i]);
-			c->cloth_face = tris_num;
-		}
-
-	}
-//	print_vec(vec_sub(pos, tri->points[0]));
-//	print_vec(vec_sub(pos, tri->points[1]));
-//	print_vec(vec_sub(pos, tri->points[2]));
-//	printf("------CALCUL--------\n");
-//	test_diff = vec_sub(pos, tri->points[0]);
-//
-//	printf("test_diff\n");
-//	print_vec(test_diff);
-	return (test_diff);
-}
-
-void	parse_mesh_side(t_collide *c, t_mesh *wall, t_vec3d *dir)
-{
-	int	tris_num;
-	t_vec3d diff_face;
-
-	tris_num = -1;
-	diff_face = (t_vec3d){2, 2, 2, 0};
-	(void)dir;	
-	while (++tris_num < wall->tris.nb_cells) // si la diago est tjrs a lindex 4 pas besoin de look for diago 
-	{
-//		printf("face = %d\n", tris_num);
-//		print_vect_face(dyacc(&wall->tris, tris_num), dir);
-		diff_face = look_for_cloth_side(c, dyacc(&wall->tris, tris_num), diff_face, tris_num);
-	}
-//	printf("test_diff_final\n");
-//	print_vec(diff_face);
-
-}
 /*						A REFAIRE			*/
 t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 {
@@ -230,24 +139,33 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	t_mesh *wall;
 	t_vec3d vec;
 	t_vec3d vec2;
+	float norm_speed;
 	(void)env;
 	cam = c->b;
 	wall = c->a;
 	
+	norm_speed = fabs(f.y);
+	
+	printf("nbr_cells = %d\n" ,wall->tris.nb_cells);
+	printf("f_avant");
+	print_vec(f);
 	vec = vec_sub(wall->corp.pos, cam->corp.pos);
 	vec2 = (t_vec3d){vec.x, 0, vec.z, 0};
-	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) > 0 
-			&& vec_dot(f, vec2) < 0.5
-			&& vec_norm(vec2) < 2.5)
-		f = vec_fmult(vec2, -0.0075);
-	else if (wall->tris.nb_cells == 8)
+	printf("vec_dotf = %f\n", vec_dot(f, vec2));
+	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) < 0.5
+			&& vec_norm(vec2) < 2)
+		f = vec_fmult(vec2, -0.1);
+	//  translate_mesh(maps, cam, vec_sub(cam, cam->corp.o));
+	if (wall->tris.nb_cells == 8)
 	{
-		printf("f_dist_wall");
-		if (f.y > 0 && f.y < 0.8)
-			f.y = 0.8;
-		print_vec(f);
+		f = *coefdir_plan(env, c->a, c->b, &f);
+		printf("vec_y = %f", vec.y);
 	}
-		
+	
+//		printf("f =  %f\n",f.y);
+//	}
+	printf("f_apres");
+	print_vec(f);	
 	return (f);
 }
 
