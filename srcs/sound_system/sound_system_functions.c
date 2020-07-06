@@ -6,7 +6,7 @@ int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	t_sound	*sound;
 
 	sound = dyacc(s, source);
-	if (sound == NULL)
+	if (sound == NULL || p.fork == false)
 		return (0);
 	alGenSources(1, &tmp);
 	alListener3f(AL_POSITION, -env->cam.stats.pos.x,
@@ -28,7 +28,7 @@ int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	t_sound	*sound;
 
 	sound = dyacc(s, source);
-	if (sound == NULL)
+	if (sound == NULL || p.play == false)
 		return (0);
 	sound->volume = p.volume;
 	sound->pitch = p.pitch;
@@ -51,7 +51,7 @@ int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
 	t_sound	*sound;
 
 	sound = dyacc(s, source);
-	if (sound == NULL)
+	if (sound == NULL || p.sound == false)
 		return (0);
 	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
 	if (status == AL_PLAYING)

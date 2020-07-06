@@ -73,12 +73,13 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 				return (1);
 			continue ;
 		}
-		if ((p.sound && sound_volume(env, s, sound->ambient, p))
-			|| ((p.play || p.fork || p.stop) && stop_sound(s, sound->ambient)))
+		if ((sound_volume(env, s, sound->ambient, p))
+			|| ((p.play || p.fork || p.stop)
+				&& stop_sound(s, sound->ambient)))
 			return (-1);
 	}
-	if ((p.fork && fork_sound(env, s, source, p))
-		|| (p.play && play_sound(env, s, source, p)))
+	if ((fork_sound(env, s, source, p))
+		|| (play_sound(env, s, source, p)))
 		return (-1);
 	return (0);
 }
@@ -93,9 +94,9 @@ int				sound_system(t_env *env, int source, t_sparam param)
 		return (quit_sound_system(&sounds));
 	if (param.overall || param.no_sound)
 		return (sound_overall(env, &sounds, source, param));
-	if ((param.sound && sound_volume(env, &sounds, source, param))
-		|| (param.fork && fork_sound(env, &sounds, source, param))
-		|| (param.play && play_sound(env, &sounds, source, param))
+	if ((sound_volume(env, &sounds, source, param))
+		|| (fork_sound(env, &sounds, source, param))
+		|| (play_sound(env, &sounds, source, param))
 		|| (param.stop && stop_sound(&sounds, source)))
 		return (-1);
 	return (0);
