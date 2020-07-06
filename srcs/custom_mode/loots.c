@@ -50,31 +50,59 @@ static int	launch_loot(t_env *env, t_loot *loot)
 {
 	static int	(*loots_fts[LOOT_MAX])(t_env*) = {loot_nuke, loot_money, loot_shield, loot_ammos};
 	t_loot		*l;
+	int			tmp;
 	int			ret;
 	int			i;
 
 	i = loot->index;
 	ret = loots_fts[(int)loot->id](env);
+
 	printf("---------- lauch_loot 0 ------------\n");
 	print_mobs(env);
-	sleep(2);
-	extract_dynarray(&env->edit_env.map.meshs, loot->m->index);
+	sleep(1);
+
+	printf("%d loots\n", env->custom_env.loots.nb_cells);
+
+	tmp = loot->m->index;
+	printf("extract loot %d\n", loot->index);
 	extract_dynarray(&env->custom_env.loots, loot->index);
+
+	printf("---------- lauch_loot 1 ------------\n");
+	print_mobs(env);
+	sleep(1);
+
+	printf("extract mesh %d\n", tmp);
+	extract_dynarray(&env->edit_env.map.meshs, tmp);
+
+	printf("---------- lauch_loot 2 ------------\n");
+	print_mobs(env);
+	sleep(1);
+
+	printf("%d loots\n", env->custom_env.loots.nb_cells);
 	env->edit_env.map.nmesh--;
+	printf("i = %d\n", i);
 	while (i < env->custom_env.loots.nb_cells)
 	{
+		PUT
 		if (!(l = dyacc(&env->custom_env.loots, i)))
+		{
+			PUT1
 			break ;
+		}
+		printf("before : %d\n", l->m->index);
 		l->m->index--;
+		printf("after : %d\n", l->m->index);
 		i++;
 	}
 	printf("---------- lauch_loot 2 ------------\n");
 	print_mobs(env);
-	sleep(2);
+	sleep(1);
+
 	replace_mobs_index(env, -1);
 	printf("---------- lauch_loot 3------------\n");
 	print_mobs(env);
-	sleep(2);
+	sleep(1);
+
 //	exit(0);
 	return (ret);
 }
