@@ -49,11 +49,11 @@ static int 		quit_sound_system(t_dynarray *sounds)
 	while (++i < sounds->nb_cells)
 	{
 		sound = dyacc(sounds, i);
-		stop_sound(sounds, i);
+		stop_sound(sounds, sound->ambient);
 		alDeleteSources(1, &sound->ambient);
 	}
 	free_dynarray(sounds);
-	return (0);
+	return (-1);
 }
 
 static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
@@ -76,11 +76,11 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 		if ((sound_volume(env, s, sound->ambient, p))
 			|| ((p.play || p.fork || p.stop)
 				&& stop_sound(s, sound->ambient)))
-			return (-1);
+			return (quit_sound_system(s));
 	}
 	if ((fork_sound(env, s, source, p))
 		|| (play_sound(env, s, source, p)))
-		return (-1);
+		return (quit_sound_system(s));
 	return (0);
 }
 
@@ -89,15 +89,15 @@ int				sound_system(t_env *env, int source, t_sparam param)
 	static t_dynarray	sounds;
 
 	if (sounds.byte_size == 0 && init_sound_system(env, &sounds))
-		return (-1);
-	if (source < 0 || source > sounds.nb_cells - 1)
 		return (quit_sound_system(&sounds));
+	if (source < 0 || source > sounds.nb_cells - 1)
+		return (!quit_sound_system(&sounds));
 	if (param.overall || param.no_sound)
 		return (sound_overall(env, &sounds, source, param));
 	if ((sound_volume(env, &sounds, source, param))
 		|| (fork_sound(env, &sounds, source, param))
 		|| (play_sound(env, &sounds, source, param))
 		|| (param.stop && stop_sound(&sounds, source)))
-		return (-1);
+		return (quit_sound_system(&sounds));
 	return (0);
 }
