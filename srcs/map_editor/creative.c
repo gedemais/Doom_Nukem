@@ -112,7 +112,7 @@ int			maped_creative(t_env *env)
 {
 	static int	last_gui_use = -1;
 
-	if (background_sound(env, SA_MAX))
+	if (sound_manager(env, SA_MAX))
 		return (-1);
 	last_gui_use == -1 ? last_gui_use = 500 : 0;
 	handle_keys(env, &env->events);

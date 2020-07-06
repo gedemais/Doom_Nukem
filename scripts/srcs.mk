@@ -9,6 +9,8 @@ SRCS_NAME =	main.c\
 			\
 			sound_system/sound_system.c\
 			sound_system/sound_system_functions.c\
+			sound_system/sound_system_manager.c\
+			sound_system/sound_system_params.c\
 			sound_system/sound_system_tools.c\
 			\
 			campaign/render.c\

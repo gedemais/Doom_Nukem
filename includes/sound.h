@@ -94,7 +94,7 @@ typedef struct	s_sound
 
 int				sound_system(t_env *env, int source, t_sparam param);
 
-int				background_sound(t_env *env, int source);
+int				sound_manager(t_env *env, int source);
 
 t_sparam		sp_fork(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_no_sound(int start, int end);

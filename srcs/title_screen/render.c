@@ -67,7 +67,7 @@ int			render_ts(void *param)
 	if (anim-- > 0)
 		wait_frame();
 	else
-		if (background_sound(env, SA_TITLE_SCREEN_L))
+		if (sound_manager(env, SA_TITLE_SCREEN_L))
 			return (-1);
 	return (0);
 }

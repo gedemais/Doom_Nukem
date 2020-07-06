@@ -39,7 +39,7 @@ int			cmp_menu(void *param)
 	t_env *env;
 
 	env = (t_env*)param;
-	if (background_sound(env, SA_TITLE_SCREEN_L))
+	if (sound_manager(env, SA_TITLE_SCREEN_L))
 		return (-1);
 	handle_events_cmp_menu(env);
 	if (env->events.keys[KEY_M])
