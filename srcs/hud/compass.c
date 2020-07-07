@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:22:11 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/07 15:47:07 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/07 16:03:21 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		draw_events_indicator(t_env *env)
 			if (event->id == BE_CHEST)
 			{
 				sub = vec_sub(get_block_center(event), env->cam.stats.pos);
-				angle = enemies_xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
+				angle = xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
 				offsetx = WDT * (angle + 180) / 360;
 				dist = vec3d_dist(get_block_center(event), env->cam.stats.pos);
 				if (offsetx > env->data.third_wdt && offsetx + EN_WDT < env->data.third_wdt * 2)
