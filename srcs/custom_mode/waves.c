@@ -42,6 +42,7 @@ void		handle_waves(t_env *env)
 	t_custom_game	*game;
 
 	game = &env->custom_env.game;
+	printf("lmob : %d | amob : %d\n", game->current_lmob, game->amob);
 	if (game->wave == 0)
 	{
 		start_game(env);

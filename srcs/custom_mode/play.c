@@ -84,8 +84,8 @@ void	print_mobs(t_env *env)
 
 int			custom_play(t_env *env)
 {
-	printf("---------- custom_play ------------\n");
-	print_mobs(env);
+//	printf("---------- custom_play ------------\n");
+//	print_mobs(env);
 	handle_waves(env);
 	handle_keys(env, &env->events);
 	handle_player(env);
@@ -93,8 +93,8 @@ int			custom_play(t_env *env)
 	//physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
-	handle_enemies(env);
 	handle_loots(env);
+	handle_enemies(env);
 	handle_weapons(env);
 	handle_block_events(env);
 	handle_moon(env);

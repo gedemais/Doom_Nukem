@@ -1,19 +1,30 @@
 #include "main.h"
 
+static int	check_hps(t_env *env, t_enemy *mob)
+{
+	if (mob->hp < 1 && !mob->dead)
+	{
+		mob->dead = true;
+		env->custom_env.game.amob--;
+		return (1);
+	}
+	return (0);
+}
+
 static int	enemies_do_damages(t_env *env, t_enemy *mob)
 {
+	env->player.hitmarker = HITMARKER_T;
 	mob->hp -= env->player.current->damages;
 	if (mob->hp < 1)
 	{
-		env->custom_env.game.amob--;
 		mob->dead = true;
+		env->custom_env.game.amob--;
 		++env->custom_env.game.kill_count;
 		sound_system(env, SA_DEATHMONSTER, sp_fork(0.5f));
 		if (env->custom_env.game.kill_delay == 0)
 			env->custom_env.game.kill_delay = KILL_DELAY;
 	}
 	env->custom_env.game.moula += mob->dead ? KILL_REWARD : HIT_REWARD;
-	env->player.hitmarker = HITMARKER_T;
 	return (0);
 }
 
@@ -28,6 +39,8 @@ int			enemies_damages(t_env *env)
 	while (++i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
+		if (check_hps(env, mob))
+			continue ;
 		if (index >= mob->map_start && index < mob->map_end)
 		{
 			env->player.hover = true;

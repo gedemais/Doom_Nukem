@@ -57,58 +57,59 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	i = loot->index;
 	ret = loots_fts[(int)loot->id](env);
 
-	printf("---------- lauch_loot 0 ------------\n");
-	print_mobs(env);
+	//printf("---------- lauch_loot 0 ------------\n");
+	//print_mobs(env);
 	//sleep(1);
 
-	printf("%d loots\n", env->custom_env.loots.nb_cells);
+	//printf("%d loots\n", env->custom_env.loots.nb_cells);
 
 	tmp = loot->m->index;
 	while (loot->index >= env->custom_env.loots.nb_cells)
 		loot->index--;
 	if (loot->index == -1)
 		return (-1);
-	printf("extract loot %d\n", loot->index);
+	//printf("extract loot %d\n", loot->index);
 	extract_dynarray(&env->custom_env.loots, loot->index);
 
-	printf("---------- lauch_loot 1 ------------\n");
-	print_mobs(env);
+	//printf("---------- lauch_loot 1 ------------\n");
+	//print_mobs(env);
 	//sleep(1);
 
-	printf("%d loots\n", env->custom_env.loots.nb_cells);
+	//printf("%d loots\n", env->custom_env.loots.nb_cells);
 	env->edit_env.map.nmesh--;
-	printf("i = %d\n", i);
+	//printf("i = %d | %d loots\n", i, env->custom_env.loots.nb_cells);
 	while (i < env->custom_env.loots.nb_cells)
 	{
-		PUT
+//		PUT
 		if (!(l = dyacc(&env->custom_env.loots, i)))
 		{
-			PUT1
+//			PUT1
 			break ;
 		}
-		printf("before : %d\n", l->m->index);
+		//printf("before : %d\n", l->m->index);
+		l->index--;
 		l->m->index--;
 		l->m = dyacc(&env->edit_env.map.meshs, l->m->index);
-		printf("after : %d\n", l->m->index);
+		//printf("after : %d\n", l->m->index);
 		i++;
 	}
 
-	printf("extract mesh %d from scene\n", tmp);
+	//printf("extract mesh %d from scene\n", tmp);
 	extract_dynarray(&env->edit_env.map.meshs, tmp);
 
-	printf("---------- lauch_loot 2 ------------\n");
-	print_mobs(env);
+	//printf("---------- lauch_loot 2 ------------\n");
+	//print_mobs(env);
 	//sleep(1);
 
-	printf("---------- lauch_loot 3 ------------\n");
-	print_mobs(env);
+	//printf("---------- lauch_loot 3 ------------\n");
+	//print_mobs(env);
 	//sleep(1);
 
-	printf("replace_mobs\n");
+	//printf("replace_mobs\n");
 	replace_mobs_index(env, -1);
 
-	printf("---------- lauch_loot 4------------\n");
-	print_mobs(env);
+	//printf("---------- lauch_loot 4------------\n");
+	//print_mobs(env);
 	//sleep(1);
 
 //	exit(0);
