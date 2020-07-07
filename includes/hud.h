@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:13:21 by grudler           #+#    #+#             */
-/*   Updated: 2020/06/25 20:37:10 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/07 15:38:19 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define RED_HEALTH 0xA50016
 # define GREEN_HEALTH 0x009242
 # define ORA_HEALTH 0xF88F23
+# define NORMAL_BLACK 0x000000
 
 int		draw_hud(t_env *env);
 int		draw_health(t_env *env);

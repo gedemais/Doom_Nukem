@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:22:11 by grudler           #+#    #+#             */
-/*   Updated: 2020/06/30 02:29:14 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/07 15:47:07 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void		draw_events_indicator(t_env *env)
 	{
 
 			event = dyacc(&env->custom_env.events, i);
-			// if (event->id == BE_MOB_SPAWNER)
-			// {
+			if (event->id == BE_CHEST)
+			{
 				sub = vec_sub(get_block_center(event), env->cam.stats.pos);
 				angle = enemies_xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
 				offsetx = WDT * (angle + 180) / 360;
@@ -35,7 +35,7 @@ static void		draw_events_indicator(t_env *env)
 				if (offsetx > env->data.third_wdt && offsetx + EN_WDT < env->data.third_wdt * 2)
 					draw_rectangle(env->mlx.img_data, (t_point){offsetx, COMP_HGT + (dist / 2)},
 						(t_point){EN_WDT, COMP_HGT - dist}, 0x00FFFF);
-			// }
+			}
 	}
 }
 
