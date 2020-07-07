@@ -8,7 +8,8 @@ static int	select_map(t_env *env)
 	display_file(env);
 	if (s->s_path)
 	{
-		if (import_maped_map(&env->edit_env, s->s_path))
+		if (import_maped_map(&env->edit_env, s->s_path)
+			|| !(env->custom_env.map_path = ft_strdup(s->s_path)))
 		{
 			printf("Parsing Failed for map |%s|\n", s->s_path);
 			exit(1);

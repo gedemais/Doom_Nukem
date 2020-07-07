@@ -1,5 +1,27 @@
 #include "main.h"
 
+int		set_game_stats(t_env *env)
+{
+	int		i;
+
+	i = 0;
+	env->weapons[W_GLOCK_18].ammos = 80;
+	if (init_sky(env))
+		return (-1);
+	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
+		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), 0)
+		|| init_dynarray(&env->custom_env.loots, sizeof(t_loot), 0))
+			return (-1);
+	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
+		return (-1);
+	env->player.current_w = 0;
+	env->player.current = dyacc(&env->player.weapons, 0);
+	env->player.current->ammos = env->player.current->max_ammos;
+	env->player.hp = START_HP;
+	env->custom_env.game.moula = START_MOULA;
+	return (0);
+}
+
 static void		put_variables(t_env *env)
 {
 	t_ttf_config	*conf;
@@ -29,10 +51,7 @@ static int		handle_events_go(t_env *env)
 				if (i == GO_BUTTON_NO)
 					switch_context(env, C_TITLE_SCREEN);
 				if (i == GO_BUTTON_YES)
-				{
-					custom_menu_to_play(env);
 					switch_custom_context(env, CUSTOM_SC_PLAY);
-				}
 				clic = false;
 				return (1);
 			}
@@ -48,7 +67,6 @@ int		custom_game_over(t_env *env)
 {
 	(void)env;
 
-	mlx_mouse_show();
 	map_sprite(env->mlx.img_data, env->sprites[SP_GAME_OVER], (t_point){0, 0});
 	put_variables(env);
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_YES]);

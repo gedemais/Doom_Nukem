@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/07 15:57:27 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/07 21:45:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,13 @@ struct				s_custom_env
 	t_dynarray		loots;
 	t_dynarray		doors;
 	t_go_env		go_env;
-	t_map			scene;
 	t_scroll		scroll;
 	t_dynarray		events;
 	t_mesh			*moon;
 	t_node          *start;
     t_node          *end;
 	t_env			*env;
+	char			*map_path;
 	float			spawner;
 	int				sub_context;
 };
@@ -139,6 +139,7 @@ struct				s_custom_env
 
 
 int					custom_game_over(t_env *env);
+int					set_game_stats(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
@@ -176,5 +177,8 @@ int					switch_custom_context(t_env *env, unsigned int i);
 // Routines
 int					custom_menu_to_play(t_env *env);
 int					custom_play_to_menu(t_env *env);
+int					custom_play_to_game_over(t_env *env);
+int					custom_game_over_to_play(t_env *env);
+int					custom_game_over_to_menu(t_env *env);
 
 #endif

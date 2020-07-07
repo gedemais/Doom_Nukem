@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/03 13:31:01 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/07 21:37:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,15 @@ static void	free_custom(t_env *env)
 		free_map(&env->edit_env.map);
 }
 
-static void	free_maped(t_env *env)
+void	free_maped(t_env *env)
 {
 	if (env->edit_env.map.meshs.byte_size)
 		free_map(&env->edit_env.map);
+	if (env->edit_env.new_map.map)
+		free_matrice(&env->edit_env.new_map);
+	if (env->edit_env.new_map.name)
+		free(env->edit_env.new_map.name);
+	ft_memset(&env->edit_env.map, 0, sizeof(t_map));
 }
 
 int			free_env(t_env *env)
