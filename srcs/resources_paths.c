@@ -70,7 +70,14 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/map_editor_menu_title.xpm",
 					"resources/sprites/map_editor_new_map_title.xpm",
 					"resources/sprites/custom_background.xpm",
-					"resources/sprites/hitmarker.xpm"};
+					"resources/sprites/hitmarker.xpm",
+					"resources/sprites/game_over.xpm",
+					"resources/sprites/buttons/yes_off.xpm",
+					"resources/sprites/buttons/yes_hover.xpm",
+					"resources/sprites/buttons/yes_on.xpm",
+					"resources/sprites/buttons/no_off.xpm",
+					"resources/sprites/buttons/no_hover.xpm",
+					"resources/sprites/buttons/no_on.xpm"};
 
 	return (paths[index]);
 }
