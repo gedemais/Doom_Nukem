@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/07 21:45:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:52:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ struct				s_custom_env
 	t_custom_game	game;
 	t_dynarray		mobs;
 	t_dynarray		loots;
-	t_dynarray		doors;
 	t_go_env		go_env;
 	t_scroll		scroll;
 	t_dynarray		events;

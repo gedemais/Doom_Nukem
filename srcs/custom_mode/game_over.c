@@ -6,8 +6,6 @@ int		set_game_stats(t_env *env)
 
 	i = 0;
 	env->weapons[W_GLOCK_18].ammos = 80;
-	if (init_sky(env))
-		return (-1);
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
 		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), 0)
 		|| init_dynarray(&env->custom_env.loots, sizeof(t_loot), 0))
@@ -22,19 +20,33 @@ int		set_game_stats(t_env *env)
 	return (0);
 }
 
-static void		put_variables(t_env *env)
+static int		put_variables(t_env *env)
 {
 	t_ttf_config	*conf;
+	char			*ptr;
 
 	conf = ttf_config();
 
 	conf->size = 32;
-	ft_strcpy((char*)conf->s, ft_itoa(env->custom_env.game.kill_count));
+
+	if (!(ptr = ft_itoa(env->custom_env.game.kill_count)))
+		return (-1);
+	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 305}, FONT_COOLVETICA);
-	ft_strcpy((char*)conf->s, ft_itoa(env->custom_env.game.wave));
+	free(ptr);
+
+	if (!(ptr = ft_itoa(env->custom_env.game.wave)))
+		return (-1);
+	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 365}, FONT_COOLVETICA);
-	ft_strcpy((char*)conf->s, ft_itoa(env->custom_env.game.moula));
+	free(ptr);
+
+	if (!(ptr = ft_itoa(env->custom_env.game.moula)))
+		return (-1);
+	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 425}, FONT_COOLVETICA);
+	free(ptr);
+	return (0);
 }
 
 static int		handle_events_go(t_env *env)
@@ -49,7 +61,7 @@ static int		handle_events_go(t_env *env)
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
 				if (i == GO_BUTTON_NO)
-					switch_context(env, C_TITLE_SCREEN);
+					switch_custom_context(env, CUSTOM_SC_MENU);
 				if (i == GO_BUTTON_YES)
 					switch_custom_context(env, CUSTOM_SC_PLAY);
 				clic = false;
@@ -65,10 +77,9 @@ static int		handle_events_go(t_env *env)
 
 int		custom_game_over(t_env *env)
 {
-	(void)env;
-
 	map_sprite(env->mlx.img_data, env->sprites[SP_GAME_OVER], (t_point){0, 0});
-	put_variables(env);
+	if (put_variables(env))
+		return (-1);
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_YES]);
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_NO]);
 	handle_events_go(env);

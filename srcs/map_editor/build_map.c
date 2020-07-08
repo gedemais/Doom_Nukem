@@ -7,13 +7,17 @@ void			free_matrice(t_ed_map *env)
 
 	if (env->map == NULL)
 		return ;
-	i = -1;
-	while (*env->map && ++i < env->width)
+	i = 0;
+	while (i < env->width)
 	{
-		j = -1;
-		while (**env->map && ++j < env->height)
-			ft_strdel((char**)&env->map[i][j]);
-		ft_strdel((char**)&env->map[i]);
+		j = 0;
+		while (j < env->height)
+		{
+			free(env->map[i][j]);
+			j++;
+		}
+		free(env->map[i]);
+		i++;
 	}
 	free(env->map);
 	env->map = NULL;

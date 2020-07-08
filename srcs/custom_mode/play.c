@@ -92,7 +92,6 @@ int			custom_play(t_env *env)
 	camera_aim(env);
 	//physic_engine(env, &env->edit_env.map);
 	clear_screen_buffers(env);
-	printf("%d meshs\n", env->edit_env.map.nmesh);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_moon(env);
 	handle_weapons(env);

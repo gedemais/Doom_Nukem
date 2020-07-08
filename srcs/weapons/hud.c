@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	print_moulaga(t_env *env)
+static int		print_moulaga(t_env *env)
 {
 	t_ttf_config	*conf;
 	char			*moulaga;
@@ -8,7 +8,7 @@ static void	print_moulaga(t_env *env)
 
 	conf = ttf_config();
 	if (!(moulaga = ft_itoa(env->custom_env.game.moula)))
-		return ;
+		return (-1);
 	ft_strcpy((char*)conf->s, moulaga);
 	conf->size = 16;
 	o = (t_point){1000 - conf->size / 2, 200};
@@ -18,6 +18,7 @@ static void	print_moulaga(t_env *env)
 	o.x += conf->size / 2;
 	o.y += conf->size;
 	my_string_put(env, env->mlx.img_data, o, FONT_COOLVETICA);
+	return (0);
 }
 
 static void	hitmarker(t_env *env)
@@ -36,10 +37,10 @@ int			weapons_hud(t_env *env)
 	// hitmarker
 	if (env->player.current)
 		draw_reticule(env);
-	if (print_ammos(env, env->player.current))
+	if (print_ammos(env, env->player.current)
+		|| print_moulaga(env))
 		return (-1);
 	if (env->player.hitmarker > 0)
 		hitmarker(env);
-	print_moulaga(env);
 	return (0);
 }

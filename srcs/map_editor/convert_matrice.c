@@ -135,6 +135,7 @@ int				flat_to_matrice(t_ed_map *env, int offset, int len)
 		|| get_matrice_size(env, len) == 0 
 		|| init_matrice(env) == 0)
 	{
+		PUT
 		env->flat -= offset;
 		return (0);
 	}
