@@ -40,7 +40,7 @@ static void		enemies_get_goal(t_enemy *mob)
 	}
 }
 
-static void		enemies_smooth_movement(t_enemy *mob)
+static void		enemies_actions(t_env *env, t_enemy *mob)
 {
 	float	fcos;
 	float	fsin;
@@ -51,9 +51,15 @@ static void		enemies_smooth_movement(t_enemy *mob)
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
+	if (mob->noise++ == ENEMIES_NOISE_DELAY)
+	{
+		sound_system(env, SA_DEATHMONSTER, sp_stop());
+		sound_system(env, SA_DEATHMONSTER, sp_fork(0.05f, 1, mob->pos));
+		mob->noise = 0;
+	}
 }
 
-void			enemies_do_movement(t_enemy *mob)
+void			enemies_do_movement(t_env *env, t_enemy *mob)
 {
 	t_vec3d	goal;
 
@@ -62,7 +68,7 @@ void			enemies_do_movement(t_enemy *mob)
 		enemies_get_goal(mob);
 	if (mob->end == NULL)
 		return ;
-	enemies_smooth_movement(mob);
+	enemies_actions(env, mob);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (vec3d_dist(goal, mob->pos) < 0.1f)
 		mob->i = mob->goal->i;

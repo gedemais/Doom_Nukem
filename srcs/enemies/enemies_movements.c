@@ -86,13 +86,6 @@ void			enemies_movements(t_env *env, t_pf *a)
 				continue ;
 			}
 		}
-		static int gg = 0;
-		if (gg++ > 30)
-		{
-			sound_system(env, SA_DEATHMONSTER, sp_stop());
-			sound_system(env, SA_DEATHMONSTER, sp_play(0.3f, 1, mob->pos));
-			gg = 0;
-		}
-		enemies_do_movement(mob);
+		enemies_do_movement(env, mob);
 	}
 }

@@ -3,9 +3,10 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 1
+# define MAX_ENEMIES 3
 # define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f
+# define ENEMIES_NOISE_DELAY 80
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
 
@@ -49,6 +50,7 @@ struct				s_enemy
 	int			map_start;
 	int			map_end;
 	int			peace;
+	int			noise;
 	float		down;
 	float		up;
 	float		sum_angle;
@@ -74,7 +76,7 @@ int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 void			enemies_animations(t_enemy *mob);
 
 void			enemies_movements(t_env *env, t_pf *a);
-void			enemies_do_movement(t_enemy *mob);
+void			enemies_do_movement(t_env *env, t_enemy *mob);
 
 int				enemies_death(t_env *env, t_dynarray *mobs);
 int				enemies_damages(t_env *env);
