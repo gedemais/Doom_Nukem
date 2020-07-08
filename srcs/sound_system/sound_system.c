@@ -4,12 +4,13 @@ static int 		init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
 {
 	t_sound	sound;
 
+	alGetError();
     ft_memset(&sound, 0, sizeof(t_sound));
     sound.samples = &env->sound.samples[i];
 	sound.ambient = sources[i];
 	alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
 	alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
-	alSourcef(sound.ambient, AL_MAX_DISTANCE, 50);
+	alSourcef(sound.ambient, AL_MAX_DISTANCE, 80);
     return (push_dynarray(s, &sound, 0));
 }
 
@@ -19,15 +20,11 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	ALuint 	*sources;
 
 	env->volume = VOLUME;
-	if (init_dynarray(sounds, sizeof(t_sound), SA_MAX))
+	if (SA_MAX < 1 || init_dynarray(sounds, sizeof(t_sound), SA_MAX))
 		return (-1);
 	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX)))
 		return (-1);
 	alGenSources(SA_MAX - 1, sources);
-
-	//AL_INVERSE_DISTANCE 1/0.3
-	//AL_EXPONENT_DISTANCE R 1/0.3
-	//AL_LINEAR_DISTANCE 1/1
 	alDistanceModel(AL_LINEAR_DISTANCE);
 	i = -1;
 	while (++i < SA_MAX)

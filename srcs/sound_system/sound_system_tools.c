@@ -30,3 +30,14 @@ t_sparam		sp_stop()
 	param.stop = true;
 	return (param);
 }
+
+int 			stop_sound(t_dynarray *sounds, int source)
+{
+	t_sound	*sound;
+
+	sound = dyacc(sounds, source);
+	if (sound == NULL)
+		return (0);
+	alSourceStop(sound->ambient);	
+	return (0);
+}
