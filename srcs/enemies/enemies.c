@@ -60,6 +60,8 @@ static int		spawn_mob(t_env *env)
 	pos.x = p[0] * 2;
 	pos.y = p[1] * 2;
 	pos.z = p[2] * 2;
+	game->current_lmob--;
+	game->amob++;
 	return (create_mob(env, &env->edit_env.map, ENEMY_CORONA, pos));
 }
 
@@ -69,9 +71,10 @@ int				handle_enemies(t_env *env)
 	env->player.hitmarker--;
 	if (env->custom_env.spawner <= 0.0f)
 	{
-		if (env->custom_env.mobs.nb_cells < MAX_ENEMIES && spawn_mob(env))
+		if (env->custom_env.mobs.nb_cells < MAX_ENEMIES
+			&& env->custom_env.game.current_lmob > 0 && spawn_mob(env))
 			return (-1);
-		env->custom_env.spawner = RESPAWN_DELAY;
+		env->custom_env.spawner = env->custom_env.game.spawn_speed;
 	}
 	else
 		env->custom_env.spawner -= env->data.spent;

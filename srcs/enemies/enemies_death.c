@@ -79,9 +79,9 @@ int			enemies_death(t_env *env, t_dynarray *mobs)
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
 			{
+				if (spawn_loot(env, mob->pos))
+					return (-1);
 				enemies_delete_mob(env, mobs, mob, i);
-//				if (spawn_loot(env, mob->pos))
-//					return (-1);
 			}
 	}
 	return (0);

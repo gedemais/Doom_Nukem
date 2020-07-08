@@ -53,14 +53,22 @@ static int		handle_keys(t_env *env, t_events *e)
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }
-/*
-static void	print_mobs(t_env *env)
+
+void	print_mobs(t_env *env)
 {
 	t_enemy	*mob;
 	t_loot	*loot;
 	t_mesh	*m;
 	int		i;
 
+	i = 0;
+	while (i < env->custom_env.loots.nb_cells)
+	{
+		loot = dyacc(&env->custom_env.loots, i);
+		printf("loot n%d : %d\n", i, loot->m->index);
+		i++;
+	}
+	printf("------------------------\n");
 	i = 0;
 	while (i < env->custom_env.mobs.nb_cells)
 	{
@@ -74,26 +82,22 @@ static void	print_mobs(t_env *env)
 		printf(")\n");
 		i++;
 	}
-	printf("------------------------\n");
-	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		printf("loot n%d : %d\n", i, loot->m->index);
-		i++;
-	}
 	printf("--------------------------------------------\n");
-}*/
+}
 
 int			custom_play(t_env *env)
 {
 	if (sound_manager(env, SA_MAX))
 		return (-1);
-	camera_aim(env);
+//	printf("---------- custom_play ------------\n");
+//	print_mobs(env);
+	handle_waves(env);
 	//physic_engine(env, &env->edit_env.map);
+	camera_aim(env);
 	clear_screen_buffers(env);
 	assert(!rasterizer(env, &env->edit_env.map, false));
 	handle_moon(env);
+	handle_loots(env);
 	handle_weapons(env);
 	handle_block_events(env);
 	draw_hud(env);

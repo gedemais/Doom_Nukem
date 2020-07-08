@@ -158,7 +158,8 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/loots/ammos.wav",
 					"resources/samples/loots/cash.wav",
 					"resources/samples/loots/god_end.wav",
-					"resources/samples/loots/god_start.wav"};
+					"resources/samples/loots/god_start.wav",
+					"resources/samples/voices/player_damage.wav"};
 
 	return (paths[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 11:52:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:30:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define CUSTOM_H
 
 # define CUSTOM_WALK_SPEED 0.05f
-# define MAX_CUSTOM_MOBS 0
 # define EVENT_DIST 5
 
 # define MOB_PEACE_TIME 30
+# define INTER_WAVE 10
+
+# define SPAWN_SPEED_SUB 0.1f
 
 # define START_HP 100
 # define HEAL_SPEED 10
@@ -27,6 +29,12 @@
 # define KILL_DELAY 120
 
 # define START_MOULA 5000
+# define MOB_START_HP 50
+# define MOB_START_SPEED 0.05f
+# define MOB_LSTART 6
+# define MOB_PV_COEFF 1.3f
+# define MOB_SPEED_COEFF 1.1f
+# define MOB_NB_ADD 4
 
 # define MIN_CASH 100
 # define MAX_CASH 1000
@@ -39,8 +47,6 @@
 # define MOON_SCALE 1.8f
 
 # define LAVA_DELAY 2
-
-# define LOOT_FREQ 1
 
 enum				e_custom_sc_id
 {
@@ -101,10 +107,13 @@ struct				s_custom_door
 
 struct				s_custom_game
 {
+	float		spawn_speed;
 	int			nb_spawners;
 	int			wave; // index de la vague en cours
-	int			player_pv; // PVs du joueur / 100
+	float		mobs_speed;
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
+	int			lmob;
+	int			amob;
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
 	int 		kill_count;
@@ -135,8 +144,7 @@ struct				s_custom_env
 	int				sub_context;
 };
 
-
-
+void				handle_waves(t_env *env);
 int					custom_game_over(t_env *env);
 int					set_game_stats(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
@@ -149,6 +157,7 @@ int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
 void				handle_player(t_env *env);
+void				handle_loots(t_env *env);
 
 int					init_sky(t_env *env);
 void				handle_moon(t_env *env);

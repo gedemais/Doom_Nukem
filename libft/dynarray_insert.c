@@ -36,7 +36,6 @@ int		insert_dynarray(t_dynarray *arr, void *src, int index)
 	return (0);
 }
 
-
 int		extract_dynarray(t_dynarray *arr, int index)
 {
 	void	*mid;

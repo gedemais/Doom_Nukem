@@ -1,27 +1,20 @@
 #include "main.h"
 
-void	assign_enemys_stats(t_enemy *enemy, char type)
+void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 {
-	static int		hps[ENEMY_MAX] = {
-		[ENEMY_CORONA] = 100
-	};
 	static int		damages[ENEMY_MAX] = {
-		[ENEMY_CORONA] = 10
+		[ENEMY_CORONA] = EDAMAGES_CORONA
 	};
-	static float	speeds[ENEMY_MAX] = {
-		[ENEMY_CORONA] = 0.05f
-	};
-
-	enemy->hp = hps[(int)type];
+	enemy->hp = game->mobs_pv;
+	enemy->speed = game->mobs_speed;
 	enemy->damages = damages[(int)type];
-	enemy->speed = speeds[(int)type];
 }
 
 int		enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
-		[ENEMY_CORONA] = SCENE_UGLY
-		//[ENEMY_MAGE] = SCENE_MAGE
+		//[ENEMY_CORONA] = SCENE_UGLY
+		[ENEMY_CORONA] = SCENE_MAGE
 	};
 
 	return (map[(int)type]);
@@ -70,25 +63,6 @@ int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 	return (0);
 }
 
-static void		find_start_end(t_env *env, t_map *mob, t_enemy *enemy)
-{
-	t_enemy	*last_mob;
-	int		index;
-
-	if (env->custom_env.mobs.nb_cells == 0)
-	{
-		enemy->map_start = env->edit_env.map.meshs.nb_cells - env->custom_env.loots.nb_cells;
-		enemy->map_end = enemy->map_start + mob->nmesh;
-	}
-	else
-	{
-		index = env->custom_env.mobs.nb_cells - 1;
-		last_mob = dyacc(&env->custom_env.mobs, index);
-		enemy->map_start = last_mob->map_end;
-		enemy->map_end = enemy->map_start + mob->nmesh;
-	}
-}
-
 static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
 {
 	t_mesh		new;
@@ -96,18 +70,19 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 	int			i;
 
 	i = 0;
-	find_start_end(env, mob, enemy);
+	enemy->map_start = env->edit_env.map.nmesh;
+	enemy->map_end = enemy->map_start + mob->nmesh;
 	while (i < mob->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
 		m = dyacc(&mob->meshs, i);
 		new.type = 1;
-		new.index = map->nmesh - env->custom_env.loots.nb_cells;
+		new.index = enemy->map_start + i;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 			|| copy_triangles(map, mob, m, &new)
-			|| insert_dynarray(&map->meshs, &new, map->nmesh - env->custom_env.loots.nb_cells))
+			|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
-		assign_meshs(dyacc(&map->meshs, map->nmesh - env->custom_env.loots.nb_cells));
+		assign_meshs(dyacc(&map->meshs, map->nmesh));
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
 		map->nmesh++;
 		i++;
@@ -138,42 +113,24 @@ static int 		enemy_offset(t_enemy *mob)
 	return (0);
 }
 
-static void	replace_loots_index(t_env *env, int delta)
-{
-	t_loot	*loot;
-	int		i;
-
-	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		loot->m->index += delta;
-		loot->m = dyacc(&env->edit_env.map.meshs, loot->m->index);
-		loot->m->index += delta;
-		assign_meshs(loot->m);
-		i++;
-	}
-}
-
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
 
 	ft_memset((void *)&enemy, 0, sizeof(t_enemy));
-	assign_enemys_stats(&enemy, type);
+	assign_enemys_stats(&env->custom_env.game, &enemy, type);
 
 	enemy.head = (t_vec3d){ 0, 0, 1, 0 };
 	enemy.offset = (t_vec3d){ 0, 1, 0, 0 };
-	enemy.peace = MOB_PEACE_TIME;
+	enemy.peace = 0;
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
-
+	
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
-		if (enemy_offset(&enemy)
+	if (enemy_offset(&enemy)
 		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
-	replace_loots_index(env, enemy.map_end - enemy.map_start);
 	return (0);
 }

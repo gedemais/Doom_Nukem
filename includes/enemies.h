@@ -3,11 +3,11 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 5
+# define MAX_ENEMIES 12
+# define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
-
 
 # define DIST_TO_PLAYER 1.8f
 
@@ -16,6 +16,12 @@ enum				e_enemies
 	ENEMY_CORONA,
 	//ENEMY_MAGE,
 	ENEMY_MAX
+};
+
+enum				e_damages
+{
+	EDAMAGES_CORONA = 10,
+	EDAMAGES_MAGE = 35
 };
 
 enum				e_loots_id
@@ -31,6 +37,7 @@ struct				s_loot
 {
 	t_mesh			*m;
 	t_vec3d			pos;
+	int				index;
 	char			id;
 };
 
@@ -57,6 +64,8 @@ struct				s_enemy
 	t_node		*end;
 	t_map		*map;
 };
+
+void			print_mobs(t_env *env); // a tej
 
 int				handle_enemies(t_env *env);
 
