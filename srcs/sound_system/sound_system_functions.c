@@ -3,15 +3,21 @@
 int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
 	ALuint 	tmp;
+	ALfloat	pos[] = { env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z };
+	ALfloat	vel[] = { 0, 0, 0};
+	ALfloat	ori[] = { env->cam.stats.dir.x,
+		env->cam.stats.dir.y, env->cam.stats.dir.z };
 	t_sound	*sound;
 
 	sound = dyacc(s, source);
 	if (sound == NULL || p.fork == false)
 		return (0);
 	alGenSources(1, &tmp);
-	alListener3f(AL_POSITION, -env->cam.stats.pos.x,
-		env->cam.stats.pos.y, env->cam.stats.pos.z);
-	alSource3f(tmp, AL_POSITION, -p.pos.x, p.pos.y, p.pos.z);
+	alListenerfv(AL_POSITION, pos);
+	alListenerfv(AL_VELOCITY, vel);
+	alListenerfv(AL_ORIENTATION, ori);
+	alSource3f(tmp, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
 	alSourcef(tmp, AL_REFERENCE_DISTANCE, 1);
 	alSourcef(tmp, AL_ROLLOFF_FACTOR, 1);
 	alSourcef(tmp, AL_MAX_DISTANCE, 50);
@@ -25,6 +31,11 @@ int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 {
 	ALint 	status;
+	ALfloat	pos[] = { env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z };
+	ALfloat	vel[] = { 0, 0, 0};
+	ALfloat	ori[] = { env->cam.stats.dir.x,
+		env->cam.stats.dir.y, env->cam.stats.dir.z };
 	t_sound	*sound;
 
 	sound = dyacc(s, source);
@@ -35,9 +46,10 @@ int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
 	if (status == AL_PLAYING)
 		return (0);
-	alListener3f(AL_POSITION, -env->cam.stats.pos.x,
-		env->cam.stats.pos.y, env->cam.stats.pos.z);
-	alSource3f(sound->ambient, AL_POSITION, -p.pos.x, p.pos.y, p.pos.z);
+	alListenerfv(AL_POSITION, pos);
+	alListenerfv(AL_VELOCITY, vel);
+	alListenerfv(AL_ORIENTATION, ori);
+	alSource3f(sound->ambient, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
 	alSourcef(sound->ambient, AL_GAIN, p.volume);
 	alSourcef(sound->ambient, AL_PITCH, p.pitch);
 	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
