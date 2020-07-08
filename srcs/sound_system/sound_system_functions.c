@@ -6,10 +6,7 @@ static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 
 	angle = xz_angle(env->cam.stats.dir, vec_sub(p.pos, env->cam.stats.pos));
 	angle *= 180 / 3.1415;
-	printf("angle: %f\n", angle);
-	angle = angle > 0 ? 1 : -1;
-	angle = -1;
-	printf("angle: %d\n", (int)angle);
+	angle = angle > 0 ? -1 : 1;
 	alListener3f(AL_POSITION, env->cam.stats.pos.x * (int)angle,
 		env->cam.stats.pos.y, env->cam.stats.pos.z);
 	alListener3f(AL_VELOCITY, 0, 0, 0);
