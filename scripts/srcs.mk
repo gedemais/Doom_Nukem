@@ -148,6 +148,7 @@ SRCS_NAME =	main.c\
 			vectors/vectors.c\
 			vectors/vec2d_tools.c\
 			vectors/vec3d_ops.c\
+			vectors/vec3d_fops.c\
 			vectors/vec3d_tools.c\
 			\
 			weapons/weapons.c\

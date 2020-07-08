@@ -6,12 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:18:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/30 14:46:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 21:52:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
+// kessafou dans vectors/ ?
 float		rsqrt(float number)
 {
 	float	i;
@@ -26,6 +27,8 @@ float		rsqrt(float number)
 	return (conv.f);
 }
 
+
+// a bouger dans physics
 t_vec3d project_ortho(t_vec3d u, t_vec3d y)
 {
 	t_vec3d y_proj;
@@ -53,6 +56,7 @@ t_vec3d		vec_cross(t_vec3d a, t_vec3d b)
 	return (ret);
 }
 
+// a virer (printf)
 void	print_vec(t_vec3d vec)
 {
 	printf("vec.x = %f", vec.x);
@@ -86,17 +90,6 @@ float	vec_dot(t_vec3d a, t_vec3d b)
 	ret += a.x * b.x;
 	ret += a.y * b.y;
 	ret += a.z * b.z;
-	return (ret);
-}
-
-float	vec_sdist(t_vec3d o, t_vec3d v)
-{
-	float	ret;
-
-	ret = 0.0f;
-	ret += o.x * v.x;
-	ret += o.y * v.y;
-	ret += o.z * v.z;
 	return (ret);
 }
 
