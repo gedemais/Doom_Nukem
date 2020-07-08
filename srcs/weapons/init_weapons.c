@@ -95,7 +95,5 @@ int		init_weapons(t_env *env)
 	assign_wmeshs(env);
 	assign_weapons_stats(env);
 	assign_weapons_samples(env);
-	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0))
-		return (-1);
 	return (0);
 }

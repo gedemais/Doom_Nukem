@@ -89,10 +89,7 @@ static int		get_matrice_size(t_ed_map *env, int len)
 		if (env->flat[nb[0]] == 127)
 		{
 			if (handle_backline(env, nb, len) == 0)
-			{
-				PUT
 				return (0);
-			}
 		}
 		else if (nb[0] == len)
 		{
@@ -133,6 +130,9 @@ static void		stock_matrice(t_ed_map *env)
 int				flat_to_matrice(t_ed_map *env, int offset, int len)
 {
 	env->flat += offset;
+	env->width = 0;
+	env->height = 0;
+	env->depth = 0;
 	len -= offset;
 	if (env->flat == NULL
 		|| get_matrice_size(env, len) == 0 

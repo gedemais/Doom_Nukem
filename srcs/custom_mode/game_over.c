@@ -2,16 +2,19 @@
 
 int		set_game_stats(t_env *env)
 {
-	int		i;
+	t_custom_env	*c;
+	int				i;
 
 	i = 0;
+	c = &env->custom_env;
 	env->weapons[W_GLOCK_18].ammos = 80;
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
-		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), 0)
-		|| init_dynarray(&env->custom_env.loots, sizeof(t_loot), 0))
+		|| (!c->mobs.byte_size && init_dynarray(&c->mobs, sizeof(t_enemy), 0))
+		|| (!c->loots.byte_size && init_dynarray(&c->loots, sizeof(t_loot), 0)))
 			return (-1);
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
+	env->custom_env.game.wave = 0;
 	env->player.current_w = 0;
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;
