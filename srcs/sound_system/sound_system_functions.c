@@ -2,11 +2,22 @@
 
 static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 {
-	alListener3f(AL_POSITION, -env->cam.stats.pos.x,
+	float	angle;
+
+	angle = xz_angle(env->cam.stats.dir, vec_sub(p.pos, env->cam.stats.pos));
+	angle *= 180 / 3.1415;
+	printf("angle: %f\n", angle);
+	angle = angle > 0 ? 1 : -1;
+	angle = -1;
+	printf("angle: %d\n", (int)angle);
+	alListener3f(AL_POSITION, env->cam.stats.pos.x * (int)angle,
 		env->cam.stats.pos.y, env->cam.stats.pos.z);
-	alListener3f(AL_DIRECTION, -env->cam.stats.dir.x,
-		env->cam.stats.dir.y, env->cam.stats.dir.z);
-	alSource3f(*source, AL_POSITION, -p.pos.x, p.pos.y, p.pos.z);
+	alListener3f(AL_VELOCITY, 0, 0, 0);
+	alListener3f(AL_DIRECTION, p.pos.x * (int)angle, p.pos.y, p.pos.z);
+	alSource3f(*source, AL_POSITION, p.pos.x * (int)angle, p.pos.y, p.pos.z);
+	alSource3f(*source, AL_VELOCITY, 0, 0, 0);
+	alSource3f(*source, AL_DIRECTION, env->cam.stats.pos.x * (int)angle,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
 	if (p.fork)
 	{
 		alSourcef(*source, AL_REFERENCE_DISTANCE, 1);

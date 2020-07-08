@@ -41,10 +41,8 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 	return (mob->end->bobstacle);
 }
 
-static void		enemies_get_end(t_env *env, t_pf *a, t_enemy *mob, t_vec3d cam)
+static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 {
-	sound_system(env, SA_DEATHMONSTER, sp_stop());
-	sound_system(env, SA_DEATHMONSTER, sp_play(0.3f, 1, mob->pos));
 	a->end = NULL;
 	mob->end = NULL;
 	if (mob->goal == NULL)
@@ -79,7 +77,7 @@ void			enemies_movements(t_env *env, t_pf *a)
 		if (mob->end == NULL || mob->i == mob->end->i)
 		{
 			mob->goal = a->start;
-			enemies_get_end(env, a, mob, env->cam.stats.pos);
+			enemies_get_end(a, mob, env->cam.stats.pos);
 			astar(a);
 			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{
@@ -87,6 +85,13 @@ void			enemies_movements(t_env *env, t_pf *a)
 				mob->end = NULL;
 				continue ;
 			}
+		}
+		static int gg = 0;
+		if (gg++ > 30)
+		{
+			sound_system(env, SA_DEATHMONSTER, sp_stop());
+			sound_system(env, SA_DEATHMONSTER, sp_play(0.3f, 1, mob->pos));
+			gg = 0;
 		}
 		enemies_do_movement(mob);
 	}
