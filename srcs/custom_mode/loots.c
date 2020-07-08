@@ -126,7 +126,7 @@ int		spawn_loot(t_env *env, t_vec3d pos)
 	first = dyacc(&env->custom_env.mobs, 0);
 	map = &env->maps[SCENE_LOOT];
 	loots = &env->custom_env.loots;
-	if (rand() % LOOT_FREQ > 0)
+	if (env->custom_env.loots.nb_cells > 0 || rand() % LOOT_FREQ > 0)
 		return (0);
 	loot.index = env->custom_env.loots.nb_cells;
 	loot.id = rand() % LOOT_MAX;

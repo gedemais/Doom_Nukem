@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/04 19:41:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:16:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@
 
 # define START_MOULA 5000
 # define MOB_START_HP 50
+# define MOB_START_SPEED 0.05f
 # define MOB_LSTART 6
 # define MOB_PV_COEFF 1.3f
+# define MOB_SPEED_COEFF 1.1f
 # define MOB_NB_ADD 4
 
 # define MIN_CASH 100
@@ -45,8 +47,6 @@
 # define MOON_SCALE 1.8f
 
 # define LAVA_DELAY 2
-
-# define LOOT_FREQ 1
 
 enum				e_custom_sc_id
 {
@@ -103,6 +103,7 @@ struct				s_custom_game
 	float		spawn_speed;
 	int			nb_spawners;
 	int			wave; // index de la vague en cours
+	float		mobs_speed;
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
 	int			lmob;
 	int			amob;
