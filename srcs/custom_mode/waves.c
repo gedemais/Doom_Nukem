@@ -7,21 +7,13 @@ static void	start_game(t_env *env)
 	env->player.hp = START_HP;
 
 	game = &env->custom_env.game;
-	game->wave++;
+	game->wave = 1;
 	game->mobs_pv = MOB_START_HP;
 	game->mobs_speed = MOB_START_SPEED;
 	game->lmob = MOB_LSTART;
 	game->current_lmob = MOB_LSTART;
 	game->moula = START_MOULA;
 	game->spawn_speed = RESPAWN_DELAY;
-
-	env->weapons[W_GLOCK_18].ammos = 80;
-	push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false);
-
-	env->player.current_w = 0;
-	env->player.current = dyacc(&env->player.weapons, 0);
-	env->player.current->ammos = env->player.current->max_ammos;
-
 }
 
 static bool	next_wave(t_env *env)

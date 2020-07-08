@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/03 13:34:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 18:13:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int		render(void *param)
 		it = 0;
 		fps = 0;
 	}
-
 	if (env->events.keys[KEY_ESCAPE])
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
 	return (render_fts[((t_env*)param)->context](param));

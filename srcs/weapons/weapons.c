@@ -21,6 +21,8 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 		env->player.current_w = index;
 		env->player.current = dyacc(&env->player.weapons, index);
 	}
+	else
+		return ;
 }
 
 static void	handle_ready(t_env *env, t_weapon *w)
@@ -31,7 +33,10 @@ static void	handle_ready(t_env *env, t_weapon *w)
 	{
 		shoot_animation(env, w);
 		if (w->shoot_mode == SMODE_SBS)
+		{
 			w->ready = false;
+			return ;
+		}
 	}
 	if (w->reloading > 0)
 	{
@@ -64,7 +69,7 @@ static void	weapons_events(t_env *env, t_events *e)
 		return ;
 	}
 	r = e->keys[KEY_R];
-	if (((r && w->loaded < w->magazine) || w->loaded == 0) && w->ammos > 0)
+	if (((r && w->loaded < w->magazine) || w->loaded == 0) && w->ammos > 0 && w->shooting <= 0)
 		reload_current_weapon(env);
 	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
 		shoot_current_weapon(env);
