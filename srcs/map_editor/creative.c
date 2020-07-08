@@ -68,6 +68,11 @@ static void	handle_mouse(t_env *env, t_events *e)
 
 static void	handle_keys(t_env *env, t_events *e)
 {
+	if (e->keys[KEY_M])
+	{
+		export_maped_map(&env->edit_env);
+		switch_mecontext(env, MAPED_SC_MENU);
+	}
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
 
