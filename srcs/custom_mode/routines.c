@@ -7,7 +7,8 @@ int				custom_menu_to_play(t_env *env)
 	sound_system(env, SA_TITLE_SCREEN_L,
 		sp_overall(0, SA_MAX, sp_stop()));
 	map = &env->edit_env.map;
-	if (init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_ENEMIES)
+	if (map_to_scene(env) || parse_events_blocks(env)
+		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_ENEMIES)
 		|| astar_init(env) || init_map_physics(&env->edit_env.map)
 		|| (init_cameras_mesh(map, &map->cam)) || init_sky(env))
 		return (-1);
@@ -20,6 +21,7 @@ int				custom_play_to_menu(t_env *env)
 	sound_system(env, SA_TITLE_SCREEN_L,
 		sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_show();
+	free(env->custom_env.map_path);
 	free_maped(env);
 	free_dynarray(&env->player.weapons);
 	free_dynarray(&env->custom_env.mobs);
@@ -47,7 +49,6 @@ int			custom_game_over_to_play(t_env *env)
 {
 	t_map	*map;
 
-	mlx_mouse_hide();
 	map = &env->edit_env.map;
 	if (import_maped_map(&env->edit_env, env->custom_env.map_path)
 		|| map_to_scene(env) || parse_events_blocks(env)
@@ -56,11 +57,12 @@ int			custom_game_over_to_play(t_env *env)
 		|| (init_cameras_mesh(map, &map->cam)) || init_sky(env))
 		return (-1);
 	set_game_stats(env);
+	mlx_mouse_hide();
 	return (0);
 }
 
 int			custom_game_over_to_menu(t_env *env)
 {
-	(void)env;
+	free(env->custom_env.map_path);
 	return (0);
 }

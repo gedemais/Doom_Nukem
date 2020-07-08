@@ -17,6 +17,7 @@ int		set_game_stats(t_env *env)
 	env->player.current->ammos = env->player.current->max_ammos;
 	env->player.hp = START_HP;
 	env->custom_env.game.moula = START_MOULA;
+	env->custom_env.game.wave = 0;
 	return (0);
 }
 
