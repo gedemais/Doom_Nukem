@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites_effects.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/08 21:23:04 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/08 21:23:14 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	mirror_texture(t_sprite *txt)
@@ -24,7 +36,7 @@ static void	mirror_texture(t_sprite *txt)
 	}
 }
 
-void	reverse_texture(t_sprite *txt)
+void		reverse_texture(t_sprite *txt)
 {
 	int		i;
 	int		j;

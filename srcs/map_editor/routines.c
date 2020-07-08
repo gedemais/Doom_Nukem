@@ -46,6 +46,5 @@ int	me_creative_to_menu(t_env *env)
 		sp_overall(0, SA_MAX, sp_stop()));
 	free_maped(env);
 	mlx_mouse_show();
-	// free new_map
 	return (0);
 }

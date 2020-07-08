@@ -3,6 +3,20 @@
 
 # include "main.h"
 
+# define MOB_PEACE_TIME 30
+# define INTER_WAVE 10
+# define SPAWN_SPEED_SUB 0.1f
+# define HIT_REWARD 10
+# define KILL_REWARD 60
+# define KILL_DELAY 120
+
+# define MOB_START_HP 50
+# define MOB_START_SPEED 0.05f
+# define MOB_LSTART 6
+# define MOB_PV_COEFF 1.3f
+# define MOB_SPEED_COEFF 1.1f
+# define MOB_NB_ADD 4
+
 # define MAX_ENEMIES 12
 # define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f

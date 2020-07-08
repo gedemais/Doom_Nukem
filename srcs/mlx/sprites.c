@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/15 18:17:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 21:22:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	map_sprite(char *img, t_sprite sprite, t_point o)
+void		map_sprite(char *img, t_sprite sprite, t_point o)
 {
 	int		x;
 	int		y;
@@ -38,39 +38,44 @@ void	map_sprite(char *img, t_sprite sprite, t_point o)
 	}
 }
 
-char	*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
+static void	blit_line(char *img, t_sprite sprite, t_point o, int v[3])
 {
+	float	sample_x;
+	int		color;
 	int		x;
+
+	x = 0;
+	sample_x = 0;
+	while (x < v[0] - 1)
+	{
+		color = sample_pixel((int*)sprite.img_data,
+			(t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, v[1], 0.0f});
+		if (color != ALPHA)
+			draw_pixel(img, x + o.x, v[1] + o.y, color);
+		sample_x += sprite.delta_x;
+		x++;
+	}
+}
+
+char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
+{
 	int		y;
 	int		wdt;
 	int		hgt;
-	int		color;
-	float	sample_x;
 	float	sample_y;
-	float	delta_x;
-	float	delta_y;
 
 	y = 0;
 	wdt = (int)((float)sprite.wdt * scale);
 	hgt = (int)((float)sprite.hgt * scale);
-	delta_x = 1.0f / wdt;
-	delta_y = 1.0f / hgt;
+	sprite.delta_x = 1.0f / wdt;
+	sprite.delta_y = 1.0f / hgt;
 	if (wdt + o.x > WDT || hgt + o.y > HGT)
 		return (img);
 	sample_y = 0.0f;
 	while (y < hgt)
 	{
-		x = 0;
-		sample_x = 0.0f;
-		while (x < wdt - 1)
-		{
-			color = sample_pixel((int*)sprite.img_data, (t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, sample_y, 0.0f});
-			if (color != ALPHA)
-				draw_pixel(img, x + o.x, y + o.y, color); // A remplacer par un memcpy quand le pixloc sera actif
-			sample_x += delta_x;
-			x++;
-		}
-		sample_y += delta_y;
+		blit_line(img, sprite, o, (int[3]){y, sample_y, wdt});
+		sample_y += sprite.delta_y;
 		y++;
 	}
 	return (img);
@@ -80,7 +85,8 @@ int			load_texture(t_mlx *mlx, char *path, t_sprite *txt, bool rev)
 {
 	int		t;
 
-	if (!(txt->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &txt->wdt, &txt->hgt)))
+	if (!(txt->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
+												path, &txt->wdt, &txt->hgt)))
 	{
 		printf("failed to load %s\n", path);
 		return (-1);
@@ -105,9 +111,11 @@ t_sprite	*load_sprites(t_mlx *mlx)
 	while (i < SP_MAX)
 	{
 		loading_bar(i, SP_MAX, false);
-		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
+		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
+			sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
 			return (NULL);
-		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr, &t, &t, &t)))
+		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr,
+																&t, &t, &t)))
 			return (NULL);
 		if (i < SP_MAX - 1)
 			ft_putchar('\r');

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:10:39 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/30 16:52:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 21:30:46 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_vec3d		vec_fsub(t_vec3d a, float n)
 
 t_vec3d		vec_relu(t_vec3d v)
 {
-	if (fabs(v.x)  == 0.0f || fabs(v.y) == 0.0f || fabs(v.z) == 0.0f)
+	if (fabs(v.x) == 0.0f || fabs(v.y) == 0.0f || fabs(v.z) == 0.0f)
 		v = zero_vector();
 	return (v);
 }

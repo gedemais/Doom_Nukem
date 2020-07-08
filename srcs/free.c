@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 13:11:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 20:24:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ int			free_env(t_env *env)
 	int		i;
 
 	i = 0;
-	pixloc(0, 0, true);
 	free_fields(env);
 	free_cam(&env->cam);
 
