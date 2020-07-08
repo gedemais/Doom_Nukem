@@ -6,7 +6,7 @@
 /*   By: gedemais <gedemais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:05:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/05 16:43:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 22:53:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int					get_next_line(const int fd, char **line);
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to);
 double				ft_atof(const char *str);
 char				*ft_strlcpy(char *dst, const char *src, size_t len);
+int					ft_strclen(char *s, char c);
 /*
 ** Strings functions
 */

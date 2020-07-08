@@ -2,8 +2,16 @@
 
 static void	wound(t_env *env, t_enemy *mob)
 {
+	static float	sndelay = 1.0f;
+
 	env->player.hp -= mob->damages;
-	sound_system(env, SA_PLAYER_DAMAGE, sp_play(0.5f, 0, (t_vec3d){0, 0, 0, 0}));
+	if (sndelay >= 1.0f)
+	{
+		sound_system(env, SA_PLAYER_DAMAGE, sp_fork(env->volume, 1, env->cam.stats.pos));
+		sndelay = 1.0f;
+	}
+	else
+		sndelay -= env->data.spent;
 }
 
 static void	check_wounds(t_env *env)

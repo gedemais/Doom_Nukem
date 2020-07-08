@@ -11,6 +11,17 @@ static int	check_hps(t_env *env, t_enemy *mob)
 	return (0);
 }
 
+static int	moon_cheat(t_env *env, int index)
+{
+	if (env->player.current->shooting > 0 && env->player.hp < 100)
+		if (index == env->custom_env.moon->index)
+		{
+			env->player.hp++;
+			return (1);
+		}
+	return (0);
+}
+
 static int	enemies_do_damages(t_env *env, t_enemy *mob)
 {
 	env->player.hitmarker = HITMARKER_T;
@@ -49,6 +60,8 @@ int			enemies_damages(t_env *env)
 				return (enemies_do_damages(env, mob));
 			return (0);
 		}
+		if (moon_cheat(env, index))
+			return (0);
 	}
 	return (0);
 }

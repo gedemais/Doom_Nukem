@@ -4,28 +4,16 @@ Empecher les spawners qui te trouvent pas de faire spawn des mobs
 	INFINITY si joueur trop loin
 }
 
-Add waves en custom mode + système de règles
-Add CONTEXTE galerie
-
-Bruit de prise de degats du joueur
-
 Fix la physique
 => baisser s'accroupir + voir msg épinglé discord
 
 Fix le segfault du bonus wheel avec bc == BC_OBJ
-Fix les loots
 
-Gérer le changement de contexte reverse (custom to menu etc..)
-=> Decider de la duree de vie des pointeurs alloues :
-	- local
-	- frame
-	- subcontext
-	- contexte
-	- programme
+Gérer les leaks dans le changement de contexte reverse (custom to menu etc..)
 
 gérer le export ds le make install
 => l'user définit en brut dans le make install le path du .zshrc
- 
+
 NORME
 
 LEAKS
