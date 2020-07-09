@@ -141,15 +141,13 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	printf("nbr_cells = %d\n" ,wall->tris.nb_cells);
 	printf("f_avant");
 	print_vec(f);
-	vec = vec_sub(wall->corp.pos, cam->corp.pos);
+	vec = vec_sub(wall->corp.pos,  cam->corp.pos);
 	vec2 = (t_vec3d){vec.x, 0, vec.z, 0};
 	printf("vec_dotf = %f\n", vec_dot(f, vec2));
-	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) < 0.5
-			&& vec_norm(vec2) < 2)
-		f = vec_fmult(vec2, -0.1);
-	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) < 0.5
-			&& vec_norm(vec2) < 1)
-		f = vec_fmult(vec2, -1);
+	f = vec_fmult(f, 0.5);
+	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) > 0
+			&& vec_norm(vec2) < 3)
+		f = zero_vector();
 	//  translate_mesh(maps, cam, vec_sub(cam, cam->corp.o));
 	if (wall->tris.nb_cells == 8)
 	{

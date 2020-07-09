@@ -17,18 +17,42 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 	return (f);
 }
 
+static int	phy_crouch(t_env *env, bool key, t_map *maps)
+{
+	if (env->cam.stats.onfloor == 1)
+	{
+		if (env->cam.stats.crouch == 0 && key)
+		{
+			translate_mesh(maps, &maps->cam, (t_vec3d){0, 2 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y, 0, 0});
+		//	maps->cam.corp.pos = vec_add(maps->cam.corp.pos, (t_vec3d){0, 2, 0, 0});
+		//	maps->cam.corp.o = vec_add(maps->cam.corp.o, (t_vec3d){0, 2, 0, 0});
+			return (1);
+		}
+		else if (env->cam.stats.crouch == 1 && !key && env->cam.stats.onroof == 0)
+		{
+			translate_mesh(maps, &maps->cam, (t_vec3d){0, 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y, 0, 0});
+		//	maps->cam.corp.pos = vec_add(maps->cam.corp.pos, (t_vec3d){0, -2, 0, 0});
+		//	maps->cam.corp.o = vec_add(maps->cam.corp.o, (t_vec3d){0, -2, 0, 0});
+			return (0);
+		}
+		else
+			return (env->cam.stats.crouch);
+	}
+	else
+		return (0);
+}
 
 void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 {
 	t_mesh		*cam;
 	t_vec3d		f;
-	t_vec3d		r;
+	t_vec3d		r; 
 	int			i;
 
 	i = 0;
 	cam = &env->edit_env.map.cam;
 	env->cam.stats.speed = (keys[KEY_SHIFT_LEFT]) ? 2 : 1;
-	env->cam.stats.crouch = (keys[KEY_CTRL_LEFT]) ? 1 : 0;
+	env->cam.stats.crouch = phy_crouch(env,keys[KEY_CTRL_LEFT], maps);
 	if (env->cam.stats.onfloor == 1 || env->cam.stats.onwall == 1)
 		f = set_y_dir(env, maps); // a virer dans engine ! 
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, 0}, env->cam.stats.aspect_ratio);
@@ -41,7 +65,7 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 			f.y = 0.1;
 		if (env->cam.stats.onwall == 1)
 			f = test_dist_wall(env, maps->cam_wall, f);
-		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
+	//	env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 		cam->corp.v = f;
 	}
 	if (keys[KEY_O])

@@ -30,20 +30,20 @@ void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 		env->phy_env.tps = 0;
 		cam->corp.v.y = 0;
 		cam->corp.v = vec_fmult(cam->corp.v, 0.4);
-		printf("norm v = %f\n",vec_norm(cam->corp.v));
-		printf("actual %f\n", maps->cam_floor->a->corp.pos.y);
-		printf("pos.y%f\n", env->cam.stats.pos.y);
-		printf("diff_y%f\n", env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y);
-		printf("crouch%d\n", env->cam.stats.crouch);
-		if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y > 2 && env->cam.stats.crouch == 1)
-			cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, 2 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y, 0, 0});
-		else if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 3 && env->cam.stats.crouch == 0)
-			cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, 5 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y , 0, 0});
+
+//		printf("actual %f\n", maps->cam_floor->a->corp.pos.y);
+//		printf("pos.y%f\n", env->cam.stats.pos.y);
+//		printf("diff_y%f\n", env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y);
+//		printf("crouch%d\n", env->cam.stats.crouch);
+		if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 2 
+			&& env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y > 1.5
+			&& maps->cam_floor->a->tris.nb_cells == 8)
+			cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, 2.5 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y, 0, 0});
+	//	else if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 3 && env->cam.stats.crouch == 0)
+	//		cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, 5 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y , 0, 0});
 		if (env->cam.stats.pos.y < -10)
-		{
-			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.o));
-			env->phy_env.type_move = false;
-		}
+			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos));
+
 	}
 
 }
