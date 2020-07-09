@@ -80,12 +80,8 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	//printf("i = %d | %d loots\n", i, env->custom_env.loots.nb_cells);
 	while (i < env->custom_env.loots.nb_cells)
 	{
-//		PUT
 		if (!(l = dyacc(&env->custom_env.loots, i)))
-		{
-//			PUT1
 			break ;
-		}
 		//printf("before : %d\n", l->m->index);
 		l->index--;
 		l->m->index--;
@@ -95,6 +91,7 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	}
 
 	//printf("extract mesh %d from scene\n", tmp);
+	free_mesh(dyacc(&env->edit_env.map.meshs, tmp));
 	extract_dynarray(&env->edit_env.map.meshs, tmp);
 
 	//printf("---------- lauch_loot 2 ------------\n");

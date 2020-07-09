@@ -15,14 +15,13 @@ static void		replace_meshs(t_enemy *mob, int delta)
 	}
 }
 
-static int		enemies_delete_mob(t_env *env, t_dynarray *mobs, t_enemy *mob, int index)
+static int		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 {
 	int		i;
 	int		tmp;
 	t_enemy	*m;
 	t_mesh	*mesh;
 
-	(void)env;
 	i = mob->map_start - 1;
 	while (++i < mob->map_end)
 	{
@@ -79,9 +78,10 @@ int			enemies_death(t_env *env, t_dynarray *mobs)
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
 			{
+				env->custom_env.game.kills++;
 				if (spawn_loot(env, mob->pos))
 					return (-1);
-				enemies_delete_mob(env, mobs, mob, i);
+				enemies_delete_mob(mobs, mob, i);
 			}
 	}
 	return (0);

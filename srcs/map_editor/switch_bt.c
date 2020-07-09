@@ -27,7 +27,7 @@ static void		switch_cube_type(unsigned char *bt, t_events *e)
 	if (e->buttons[BUTTON_SCROLL_UP])
 		bt_cube = (bt_cube >= NB_CUBES_ICONES) ? 0 : bt_cube + 1;
 	else if (e->buttons[BUTTON_SCROLL_DOWN])
-		bt_cube = (bt_cube < 0) ? NB_CUBES_ICONES - 1 : bt_cube - 1;
+		bt_cube = (bt_cube <= 0) ? NB_CUBES_ICONES - 1 : bt_cube - 1;
 	*bt = (unsigned char)ptr[bt_cube];
 }
 

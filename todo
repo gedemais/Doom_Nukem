@@ -1,3 +1,5 @@
+Fix le segfault du bonus wheel avec bc == BC_OBJ
+
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
 {
 	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche
@@ -7,7 +9,6 @@ Empecher les spawners qui te trouvent pas de faire spawn des mobs
 Fix la physique
 => baisser s'accroupir + voir msg épinglé discord
 
-Fix le segfault du bonus wheel avec bc == BC_OBJ
 
 Gérer les leaks dans le changement de contexte reverse (custom to menu etc..)
 
@@ -16,7 +17,7 @@ gérer le export ds le make install
 
 NORME
 
-LEAKS
+LEAKS :
 
 remonter les chaines d'erreurs return (-1);
 

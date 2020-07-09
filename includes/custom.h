@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 20:11:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:59:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ struct				s_custom_game
 	int			moula;
 	int 		kill_count;
 	int 		kill_delay;
+	int			kills;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 

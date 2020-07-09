@@ -71,6 +71,7 @@ struct	s_sprite
 	int				wdt;
 	float			delta_x;
 	float			delta_y;
+	float			sample_y;
 	int				alpha;
 	int				pad;
 };

@@ -31,7 +31,7 @@ static int		put_variables(t_env *env)
 
 	conf->size = 32;
 
-	if (!(ptr = ft_itoa(env->custom_env.game.kill_count)))
+	if (!(ptr = ft_itoa(env->custom_env.game.kills)))
 		return (-1);
 	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 305}, FONT_COOLVETICA);

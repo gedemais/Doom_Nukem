@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 21:22:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:14:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		map_sprite(char *img, t_sprite sprite, t_point o)
 	}
 }
 
-static void	blit_line(char *img, t_sprite sprite, t_point o, int v[3])
+static void	blit_line(char *img, t_sprite sprite, t_point o, int v[2])
 {
 	float	sample_x;
 	int		color;
@@ -46,12 +46,12 @@ static void	blit_line(char *img, t_sprite sprite, t_point o, int v[3])
 
 	x = 0;
 	sample_x = 0;
-	while (x < v[0] - 1)
+	while (x < v[1] - 1)
 	{
 		color = sample_pixel((int*)sprite.img_data,
-			(t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, v[1], 0.0f});
+			(t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, sprite.sample_y, 0.0f});
 		if (color != ALPHA)
-			draw_pixel(img, x + o.x, v[1] + o.y, color);
+			draw_pixel(img, x + o.x, v[0] + o.y, color);
 		sample_x += sprite.delta_x;
 		x++;
 	}
@@ -62,7 +62,6 @@ char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 	int		y;
 	int		wdt;
 	int		hgt;
-	float	sample_y;
 
 	y = 0;
 	wdt = (int)((float)sprite.wdt * scale);
@@ -71,11 +70,11 @@ char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale)
 	sprite.delta_y = 1.0f / hgt;
 	if (wdt + o.x > WDT || hgt + o.y > HGT)
 		return (img);
-	sample_y = 0.0f;
+	sprite.sample_y = 0.0f;
 	while (y < hgt)
 	{
-		blit_line(img, sprite, o, (int[3]){y, sample_y, wdt});
-		sample_y += sprite.delta_y;
+		blit_line(img, sprite, o, (int[3]){y, wdt});
+		sprite.sample_y += sprite.delta_y;
 		y++;
 	}
 	return (img);
