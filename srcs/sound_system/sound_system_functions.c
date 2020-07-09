@@ -46,7 +46,7 @@ static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 	{
 		alSourcef(*source, AL_REFERENCE_DISTANCE, 1);
 		alSourcef(*source, AL_ROLLOFF_FACTOR, 1);
-		alSourcef(*source, AL_MAX_DISTANCE, 100);
+		alSourcef(*source, AL_MAX_DISTANCE, 60);
 	}
 	alSourcef(*source, AL_GAIN, p.volume);
 	alSourcef(*source, AL_PITCH, p.pitch);
