@@ -16,13 +16,18 @@ bool			enemies_up(t_enemy *mob)
 	return (false);
 }
 
-void			enemies_animations(t_enemy *mob)
+void			enemies_animations(t_env *env, t_enemy *mob)
 {
 	if (mob->end)
 	{
 		mob->down = 0;
 		mob->up = 0;
 		return ;
+	}
+	if (mob->noise++ == ENEMIES_NOISE_DELAY)
+	{
+		sound_system(env, SA_LEVITATION, sp_fork(0.005f, 1.2f, mob->pos));
+		mob->noise = 0;
 	}
 	if(mob->down == 0)
 		mob->down = mob->pos.y - MOB_ANIMATION_DOWN;

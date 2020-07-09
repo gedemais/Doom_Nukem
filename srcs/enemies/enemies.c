@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void		enemies_to_scene(t_dynarray *mobs)
+static void		enemies_to_scene(t_env *env, t_dynarray *mobs)
 {
 	int		i;
 	int		j;
@@ -11,7 +11,7 @@ static void		enemies_to_scene(t_dynarray *mobs)
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
-		enemies_animations(mob);
+		enemies_animations(env, mob);
 		j = mob->map_start - 1;
 		while (++j < mob->map_end)
 		{
@@ -84,7 +84,7 @@ int				handle_enemies(t_env *env)
 			enemies_damages(env);
 		enemies_movements(env, &env->astar);
 		enemies_death(env, &env->custom_env.mobs);
-		enemies_to_scene(&env->custom_env.mobs);
+		enemies_to_scene(env, &env->custom_env.mobs);
 		enemies_kills_annoucements(env);
 	}
 	return (0);
