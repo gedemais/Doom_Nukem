@@ -118,7 +118,7 @@ int		handle_loots(t_env *env)
 		{
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);
 			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.33f / dist));
-			if (dist < 0.1f)
+			if (dist < 0.2f)
 				return (launch_loot(env, loot));
 		}
 		rotate_mesh(loot->m, loot->m->corp.pos, 0.02f, rotate_y);

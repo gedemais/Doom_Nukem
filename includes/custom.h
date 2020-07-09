@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 17:12:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 19:33:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ struct				s_custom_game
 	int 		kill_count;
 	int 		kill_delay;
 	int			kills;
+	float		countdown;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 
@@ -129,6 +130,8 @@ struct				s_custom_env
 	int				sub_context;
 };
 
+int					draw_wave(t_env *env);
+int					print_countdown(t_env *env, float time);
 void				handle_waves(t_env *env);
 int					custom_game_over(t_env *env);
 int					set_game_stats(t_env *env);
@@ -141,7 +144,7 @@ t_vec3d				get_block_center(t_event_block *block);
 int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
-void				handle_player(t_env *env);
+int					handle_player(t_env *env);
 
 int					init_sky(t_env *env);
 void				handle_moon(t_env *env);

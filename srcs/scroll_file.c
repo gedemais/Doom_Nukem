@@ -78,8 +78,6 @@ static void	events_scroll_file(t_env *env)
 		else if (env->events.buttons[BUTTON_SCROLL_DOWN])
 			--env->scroll.current;
 	}
-	env->events.buttons[BUTTON_SCROLL_UP] = false;
-	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 }
 
 void		display_file(t_env *env)

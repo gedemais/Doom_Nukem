@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	map_letter(char *img, FT_Bitmap bmp, t_point o)
+static void	map_letter(char *img, FT_Bitmap bmp, int size, t_point o)
 {
 	int				x;
 	unsigned int	y;
@@ -11,6 +11,8 @@ static void	map_letter(char *img, FT_Bitmap bmp, t_point o)
 
 	i = 0;
 	y = 0;
+	if (!ft_inbounds(o.x, 0, WDT - size) || !ft_inbounds(o.y, 0, HGT - size))
+		return ;
 	while (y < bmp.rows && !(x = 0))
 	{
 		z = 0;
@@ -115,7 +117,7 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 		slot = ttf->faces[font]->glyph;
 		if (conf->s[i] == 'j')
 			o.x += conf->size / 2;
-		map_letter(img, slot->bitmap,
+		map_letter(img, slot->bitmap, conf->size,
 			(t_point){o.x + slot->bitmap_left, o.y - slot->bitmap_top});
 		if (conf->s[i] == ' ')
 			o.x += conf->size;

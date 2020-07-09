@@ -167,4 +167,5 @@ SRCS_NAME =	main.c\
 			\
 			hud/hud.c\
 			hud/health.c\
+			hud/waves.c\
 			hud/compass.c

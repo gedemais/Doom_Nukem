@@ -26,8 +26,7 @@ static void	handle_keys(t_env *env, t_events *e)
 static void	handle_mouse(t_env *env, t_events *e)
 {
 	(void)env;
-	e->buttons[BUTTON_SCROLL_UP] = false;
-	e->buttons[BUTTON_SCROLL_DOWN] = false;
+	(void)e;
 }
 
 static void	cmp_game_handle_events(t_env *env)

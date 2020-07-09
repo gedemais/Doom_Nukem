@@ -18,12 +18,15 @@ static void	start_game(t_env *env)
 
 static bool	next_wave(t_env *env)
 {
-	static float	time = INTER_WAVE;
+	static bool		first = true;
 
-	time -= env->data.spent;
-	if (time < 0)
+	if (first)
+		env->custom_env.game.countdown = INTER_WAVE;
+	first = false;
+	env->custom_env.game.countdown -= env->data.spent;
+	if (env->custom_env.game.countdown < 0)
 	{
-		time = INTER_WAVE;
+		env->custom_env.game.countdown = INTER_WAVE;
 		// sound
 		return (true);
 	}

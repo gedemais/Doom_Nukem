@@ -106,8 +106,6 @@ static void	refresh_last_gui(t_events *e, int *gui)
 	if (e->keys[KEY_UP] || e->keys[KEY_DOWN] || e->buttons[BUTTON_SCLIC]
 		|| e->buttons[BUTTON_SCROLL_DOWN] || e->buttons[BUTTON_SCROLL_UP])
 		*gui = 100;
-	e->buttons[BUTTON_SCROLL_UP] = false;
-	e->buttons[BUTTON_SCROLL_DOWN] = false;
 }
 
 int			maped_creative(t_env *env)

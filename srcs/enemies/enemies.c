@@ -83,7 +83,8 @@ int				handle_enemies(t_env *env)
 		if (env->mid.mesh)
 			enemies_damages(env);
 		enemies_movements(env, &env->astar);
-		enemies_death(env, &env->custom_env.mobs);
+		if (enemies_death(env, &env->custom_env.mobs))
+			return (-1);
 		enemies_to_scene(&env->custom_env.mobs);
 		enemies_kills_annoucements(env);
 	}

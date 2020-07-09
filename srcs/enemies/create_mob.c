@@ -90,7 +90,7 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 	return (0);
 }
 
-static int 		enemy_offset(t_enemy *mob)
+static void		enemy_offset(t_enemy *mob)
 {
 	int			i;
 	int			j;
@@ -110,7 +110,6 @@ static int 		enemy_offset(t_enemy *mob)
 			tri->points[2] = vec_add(tri->points[2], mob->offset);
 		}
 	}
-	return (0);
 }
 
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
@@ -129,8 +128,8 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
-	if (enemy_offset(&enemy)
-		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
+	enemy_offset(&enemy);
+	if (push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
 	return (0);
 }

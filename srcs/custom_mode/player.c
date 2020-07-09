@@ -57,7 +57,7 @@ static void	godmode(t_env *env)
 		end = true;
 }
 
-void	handle_player(t_env *env)
+int		handle_player(t_env *env)
 {
 	static int	heal = HEAL_SPEED;
 	int			i;
@@ -67,10 +67,10 @@ void	handle_player(t_env *env)
 	if (env->player.god > 0.0f)
 	{
 		godmode(env);
-		return ;
+		return (0);
 	}
-	if (env->player.hp < 1)
-		switch_custom_context(env, CUSTOM_SC_GAME_OVER);
+	if (env->player.hp < 1 && switch_custom_context(env, CUSTOM_SC_GAME_OVER))
+		return (-1);
 	if (heal <= 0)
 	{
 		if (env->player.hp < START_HP)
@@ -78,4 +78,5 @@ void	handle_player(t_env *env)
 		heal = HEAL_SPEED;
 	}
 	check_wounds(env);
+	return (0);
 }

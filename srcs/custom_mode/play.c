@@ -48,7 +48,8 @@ static int		handle_keys(t_env *env, t_events *e)
 		env->phy_env.type_move = true;
 	
 	if (e->keys[KEY_M])
-		switch_custom_context(env, CUSTOM_SC_MENU);
+		if (switch_custom_context(env, CUSTOM_SC_MENU))
+			return (-1);
 
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
@@ -68,11 +69,9 @@ int			custom_play(t_env *env)
 	if (handle_loots(env) || handle_weapons(env) || handle_block_events(env))
 		return (-1);
 	draw_hud(env);
-	handle_keys(env, &env->events);
-	handle_player(env);
-	handle_enemies(env);
+	if (handle_keys(env, &env->events)
+		|| handle_player(env) || handle_enemies(env))
+		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-	env->events.buttons[BUTTON_SCROLL_UP] = false;
-	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 	return (0);
 }

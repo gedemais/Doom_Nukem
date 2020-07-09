@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 16:12:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:37:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ int		render(void *param)
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
 	if (render_fts[((t_env*)param)->context](param))
 		exit_doom(env, "render failed", 2, EXIT_SUCCESS);
+	env->events.buttons[BUTTON_SCROLL_UP] = false;
+	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 	return (0);
 }
