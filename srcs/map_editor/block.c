@@ -26,7 +26,8 @@ int			replace_block(t_env *env)
 	i = -1;
 	if (!env->mid.mesh)
 		return (0);
-	mesh = env->mid.mesh;
+	if (!(mesh = env->mid.mesh))
+		return (0);
 	bt = env->edit_env.current_bt;
 	ft_memcpy(pos, mesh->m_pos, sizeof(int) * 3);
 	if (env->events.buttons[BUTTON_SCLIC] && env->edit_env.current_bc == BC_CUBE)
