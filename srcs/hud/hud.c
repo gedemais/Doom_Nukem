@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/09 17:36:17 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/09 17:54:20 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	draw_wave(t_env *env)
 	free(s);
 	ft_strcpy((char*)conf->s, str);
 	free(str);
-	my_string_put(env, env->mlx.img_data, (t_point){20, 600}, FONT_COOLVETICA);
+	my_string_put(env, env->mlx.img_data, (t_point){0.04 * WDT, 0.85 * HGT}, FONT_COOLVETICA);
 	return (0);
 }
 
