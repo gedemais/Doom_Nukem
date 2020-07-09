@@ -17,6 +17,7 @@ static	t_vec3d phy_handle_key(t_env *env, t_vec3d f, t_vec3d r, bool keys[NB_KEY
 	return (f);
 }
 
+
 void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 {
 	t_mesh		*cam;
@@ -27,6 +28,7 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 	i = 0;
 	cam = &env->edit_env.map.cam;
 	env->cam.stats.speed = (keys[KEY_SHIFT_LEFT]) ? 2 : 1;
+	env->cam.stats.crouch = (keys[KEY_CTRL_LEFT]) ? 1 : 0;
 	if (env->cam.stats.onfloor == 1 || env->cam.stats.onwall == 1)
 		f = set_y_dir(env, maps); // a virer dans engine ! 
 	r = vec_fdiv((t_vec3d){f.z, 0, -f.x, 0}, env->cam.stats.aspect_ratio);
@@ -35,14 +37,13 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps) //2
 		f = phy_handle_key(env, f, r, keys);
 		if (keys[KEY_SPACE])
 			f.y += 0.3;
+		if (f.y > 0 && env->cam.stats.onroof == 1)
+			f.y = 0.1;
 		if (env->cam.stats.onwall == 1)
 			f = test_dist_wall(env, maps->cam_wall, f);
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, f);
 		cam->corp.v = f;
 	}
 	if (keys[KEY_O])
-	{
-		env->phy_env.type_move = false;
-		translate_mesh(maps, cam, vec_sub(vec_add(maps->spawn, cam->corp.dims), cam->corp.o));
-	}
+			translate_mesh(maps, cam, vec_sub(vec_add(maps->spawn, (t_vec3d){0,3,0,0}), cam->corp.pos));
 }

@@ -46,11 +46,11 @@ struct	s_collide
 
 struct	s_physics
 {
+	t_vec3d			last_pos;
 	t_dynarray		collides;
 	t_dynarray		collides_cam;
 	bool			type_move;
-	double			time;
-	double			prev_time;
+	unsigned int 	stuck;
 	unsigned int	tps;
 	float			gravity;
 	t_vec3d			gravitax;
@@ -59,7 +59,8 @@ struct	s_physics
 	t_vec3d			diff_camfloor;
 	unsigned int	squat;
 };
-
+t_vec3d test_dist_roof(t_env *env, t_collide *c, t_vec3d f);
+unsigned int		return_test_collide(t_env *env);
 void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);
 int		physic_engine(t_env *env, t_map *maps);
 int		init_physic_engine(t_env *env);

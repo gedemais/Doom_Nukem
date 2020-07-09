@@ -97,6 +97,7 @@ struct	s_cam_stats
 	int			onfloor;
 	int			onroof;
 	int			onwall;
+	int 		crouch;
 	float		yaw;
 	float		pitch;
 	float		aspect_ratio;

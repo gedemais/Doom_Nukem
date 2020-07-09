@@ -93,18 +93,10 @@ t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir) //6
 	(void)cam;
 	w = (t_vec3d){2,0,2,0};
   	if (m->tris.nb_cells == 8 && env->cam.stats.onfloor == 1) 	
-	{
 		w = look_for_slope_vect(dyacc(&m->tris, 4), dir);
-//		print_vec(w);
-	}
-	// test diff pos btw point et cam.pos pour voir si c pas un mur
-	//else look_for_wall => zero_vector
 	new_dir = dir;
 	step_dir = project_ortho(w, *dir);
 	new_dir->y = step_dir.y;
-//	if (new_dir->y < 0.8 && m->tris.nb_cells == 8)
-//		new_dir->y = 0.8;
-//	print_vec(*new_dir);
 	return (new_dir);
 }
 
@@ -155,12 +147,47 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) < 0.5
 			&& vec_norm(vec2) < 2)
 		f = vec_fmult(vec2, -0.1);
+	if (wall->tris.nb_cells > 8 && vec_dot(f, vec2) < 0.5
+			&& vec_norm(vec2) < 1)
+		f = vec_fmult(vec2, -1);
 	//  translate_mesh(maps, cam, vec_sub(cam, cam->corp.o));
 	if (wall->tris.nb_cells == 8)
 	{
 		f = *coefdir_plan(env, c->a, c->b, &f);
 		printf("vec_y = %f", vec.y);
 	}
+	
+//		printf("f =  %f\n",f.y);
+//	}
+	printf("f_apres");
+	print_vec(f);	
+	return (f);
+}
+
+t_vec3d test_dist_roof(t_env *env, t_collide *c, t_vec3d f)
+{
+	t_mesh *cam;
+	t_mesh *roof;
+	t_vec3d vec;
+	t_vec3d vec2;
+	float norm_speed;
+	(void)env;
+	cam = c->b;
+	roof = c->a;
+	
+	norm_speed = fabs(f.y);
+	
+	printf("nbr_cells = %d\n" ,roof->tris.nb_cells);
+	printf("f_avant");
+	print_vec(f);
+
+	vec = vec_sub(roof->corp.pos, cam->corp.pos);
+	vec2 = (t_vec3d){0, vec.y, 0, 0};
+	printf("vec_dotf = %f\n", vec_dot(f, vec2));
+	printf("vec_norm_distance = %f\n", vec_norm(vec2));
+	f.y = 0.1;
+	//  translate_mesh(maps, cam, vec_sub(cam, cam->corp.o));
+	
 	
 //		printf("f =  %f\n",f.y);
 //	}
@@ -232,6 +259,7 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 		map->cam_roof = c;
 		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
 	}
+
 	/*
 	else if (env->cam.stats.onroof == 1 )
 	{

@@ -46,6 +46,7 @@ void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 	printf("floor %d \n", env->cam.stats.onfloor);
 	printf("wall %d \n", env->cam.stats.onwall);
 	printf("roof %d \n", env->cam.stats.onroof);
+	printf("sum %d \n", return_test_collide(env));
 	printf("------------------------------------------------\n");
 	printf("cam->corp.pos\n");
 	print_vec(cam->corp.pos);
@@ -136,12 +137,11 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 //		print_collide(*c);
 		i++;
 	}
-	if ((env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0) || i == 0)
+	if ((env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0) || (i == 0))
 	{
 		env->cam.stats.onfloor = 0;	
 		phy_gravitax_cam(env, cam, &env->cam.stats);
 	}
-	//env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0	
 }
 
 void	update_positions_gravity(t_env *env)
@@ -204,6 +204,7 @@ void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 	// add f and r to v here ?
 //	cam->corp.v = vec_add(*env->phy_env.f, cam->corp.v);
 //	cam->corp.v 
+
 	translate_mesh(map, cam, cam->corp.v);	
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims, 2.0f));
