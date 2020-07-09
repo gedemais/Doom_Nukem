@@ -3,7 +3,7 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 1
+# define MAX_ENEMIES 3
 # define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f
 # define ENEMIES_NOISE_DELAY 80

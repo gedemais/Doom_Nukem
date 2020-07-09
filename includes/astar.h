@@ -5,7 +5,7 @@
 
 # define NEIGHBOURG 18
 
-# define ASTAR_MAX_DIST 5
+# define ASTAR_MAX_DIST 4
 
 struct  s_node
 {
