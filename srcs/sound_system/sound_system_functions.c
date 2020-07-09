@@ -25,7 +25,7 @@ static int		source_param(ALuint *source, t_sparam p)
 
 	alSource3f(*source, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
 	alSource3f(*source, AL_VELOCITY, 0, 0, 0);
-	alSource3f(*source, AL_DIRECTION, p.pos.x, p.pos.y, p.pos.z + 1);
+	alSource3f(*source, AL_DIRECTION, 0, 0, 1);
 	vec[0] = 0;
 	vec[1] = 0;
 	vec[2] = 1;
