@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 15:29:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:17:23 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ struct			s_env
 	t_scroll		scroll;
 	t_ttf			ttfs;
 	t_pf			astar;
+	t_hud			hud;
 	int				context;
 	int				scene;
 	float			volume;

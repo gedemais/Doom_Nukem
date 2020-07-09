@@ -6,26 +6,29 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/09 13:06:25 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/09 15:33:08 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int	draw_physic(t_env *env)
+int	draw_physic(t_env *env)
 {
 	t_ttf_config	*conf;
 	char *str;
 
-	conf = ttf_config();
-	conf->size = 20;
-	if (env->phy_env.type_move == true && !(str = ft_strjoin("Physic : ", "On")))
-		return (-1);
-	else if (env->phy_env.type_move == false && !(str = ft_strjoin("Physic : ", "Off")))
-		return (-1);
-	ft_strcpy((char*)conf->s, str);
-	free(str);
-	my_string_put(env, env->mlx.img_data, (t_point){50, 500}, FONT_COOLVETICA);
+	if(env->data.time.tv_sec <= env->hud.timePhysic + 2)
+	{
+		conf = ttf_config();
+		conf->size = 16;
+		if (env->phy_env.type_move == true && !(str = ft_strjoin("Physic : ", "On")))
+			return (-1);
+		else if (env->phy_env.type_move == false && !(str = ft_strjoin("Physic : ", "Off")))
+			return (-1);
+		ft_strcpy((char*)conf->s, str);
+		free(str);
+		my_string_put(env, env->mlx.img_data, (t_point){35, 35}, FONT_COOLVETICA);
+	}
 	return (0);
 }
 

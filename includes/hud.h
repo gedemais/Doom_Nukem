@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:13:21 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/07 15:38:19 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/09 15:17:08 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,16 @@
 # define ORA_HEALTH 0xF88F23
 # define NORMAL_BLACK 0x000000
 
+struct	s_hud
+{
+	long timePhysic;
+	long timeWave;
+};
+
 int		draw_hud(t_env *env);
 int		draw_health(t_env *env);
 void	draw_compass(t_env *env);
+int		draw_physic(t_env *env);
+
 
 #endif

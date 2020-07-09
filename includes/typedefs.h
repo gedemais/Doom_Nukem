@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 00:21:40 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/07 15:55:08 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/09 15:17:03 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ typedef struct	s_node t_node;
 typedef struct  s_pathfinding t_pf;
 typedef struct	s_event_block t_event_block;
 typedef union	u_bep	t_bep;
+
+typedef struct s_hud t_hud;
 
 #endif
