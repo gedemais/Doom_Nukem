@@ -3,19 +3,18 @@
 static int		listener_param(t_env *env)
 {
 	float	vec[6];
-	t_vec3d	dir;
 
 	alListener3f(AL_POSITION, env->cam.stats.pos.x,
 		env->cam.stats.pos.y, env->cam.stats.pos.z);
 	alListener3f(AL_VELOCITY, 0, 0, 0);
-	dir = vec_add(env->cam.stats.pos, env->cam.stats.dir);
-	alListener3f(AL_DIRECTION, dir.x, dir.y, dir.z);
-	vec[0] = dir.x;
-	vec[1] = dir.y;
-	vec[2] = dir.z;
-	vec[3] = env->cam.stats.pos.x;
-	vec[4] = env->cam.stats.pos.y + 1;
-	vec[5] = env->cam.stats.pos.z;
+	alListener3f(AL_DIRECTION, env->cam.stats.dir.x,
+		env->cam.stats.dir.y, env->cam.stats.dir.z);
+	vec[0] = env->cam.stats.dir.x;
+	vec[1] = env->cam.stats.dir.y;
+	vec[2] = env->cam.stats.dir.z;
+	vec[3] = 0;
+	vec[4] = 1;
+	vec[5] = 0;
 	alListenerfv(AL_ORIENTATION, vec);
 	return (0);
 }
@@ -27,12 +26,12 @@ static int		source_param(ALuint *source, t_sparam p)
 	alSource3f(*source, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
 	alSource3f(*source, AL_VELOCITY, 0, 0, 0);
 	alSource3f(*source, AL_DIRECTION, p.pos.x, p.pos.y, p.pos.z + 1);
-	vec[0] = p.pos.x;
-	vec[1] = p.pos.y;
-	vec[2] = p.pos.z + 1;
-	vec[3] = p.pos.x;
-	vec[4] = p.pos.y + 1;
-	vec[5] = p.pos.z;
+	vec[0] = 0;
+	vec[1] = 0;
+	vec[2] = 1;
+	vec[3] = 0;
+	vec[4] = 1;
+	vec[5] = 0;
 	alSourcefv(*source, AL_ORIENTATION, vec);
 	return (0);
 }
