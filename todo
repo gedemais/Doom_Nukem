@@ -1,5 +1,3 @@
-Fix le segfault du bonus wheel avec bc == BC_OBJ
-
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
 {
 	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche

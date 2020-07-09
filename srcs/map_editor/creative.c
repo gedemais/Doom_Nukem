@@ -68,11 +68,6 @@ static void	handle_mouse(t_env *env, t_events *e)
 
 static void	handle_keys(t_env *env, t_events *e)
 {
-	if (e->keys[KEY_M])
-	{
-		export_maped_map(&env->edit_env);
-		switch_mecontext(env, MAPED_SC_MENU);
-	}
 	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
 		move(env, e->keys);
 
@@ -89,7 +84,14 @@ static void	check_export(t_env *env)
 	static int		err_time = 0;
 	static int		ret = 0;
 
-	if (env->events.keys[KEY_P])
+	if (env->events.keys[KEY_M])
+	{
+		ret = export_maped_map(&env->edit_env);
+		err_time = EXPORT_ERR_TIME;
+		if (ret == MAPERR_NONE)
+			switch_mecontext(env, MAPED_SC_MENU);
+	}
+	else if (env->events.keys[KEY_P])
 	{
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
