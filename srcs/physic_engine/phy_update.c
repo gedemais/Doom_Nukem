@@ -46,6 +46,7 @@ void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 	printf("floor %d \n", env->cam.stats.onfloor);
 	printf("wall %d \n", env->cam.stats.onwall);
 	printf("roof %d \n", env->cam.stats.onroof);
+	printf("nb_collides %d \n", env->phy_env.collides_cam.nb_cells);
 	printf("sum %d \n", return_test_collide(env));
 	printf("------------------------------------------------\n");
 	printf("cam->corp.pos\n");
@@ -63,7 +64,10 @@ void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps)
 		print_collide(*maps->cam_floor);
 	printf("-------------------COLIDE ROOF-------------------------\n");
 	if (env->cam.stats.onroof == 1)
+	{
 		print_collide(*maps->cam_roof);
+		print_vec(maps->cam_roof->cam_mesh_actual);
+	}
 
 }
 
@@ -130,6 +134,9 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map) // refactor
 	
 	i = 0;
 	j = 0;
+	
+	if (env->cam.stats.onwall == 1 || env->cam.stats.onfloor == 1 || env->cam.stats.onroof == 1)
+		scan_actuall_collide(env, map);
 	while (i < env->phy_env.collides_cam.nb_cells) //if collides but no camera ! 
 	{
 		c = dyacc(&env->phy_env.collides_cam, i);
@@ -163,39 +170,6 @@ void	update_positions_gravity(t_env *env)
 		i++;
 	}
 }
-/*
-void	ft_inertie(t_env *env, t_map map, t_vec3d v)
-{
-	static t_vec3d	v = (t_vec3d){-INFINITY, 0, 0, 0};
-
-	printf("corp speed : ");
-	print_vec(cam->corp.v);
-	printf("speed : ");
-	print_vec(v);
-
-
-	if (key_move(env->events.keys))
-	{
-		v = cam->corp.v;
-		translate_mesh(map, cam, cam->corp.v);
-	}
-	else if (vec_norm(v) > 0)
-	{
-		if (fabs(v.x) > INERTIE)
-			v.x = (v.x > 0) ? v.x - INERTIE : v.x + INERTIE;
-		else
-			v = zero_vector();
-		if (fabs(v.y) > INERTIE)
-			v.y = (v.y > 0) ? v.y - INERTIE : v.y + INERTIE;
-		else
-			v = zero_vector();
-		if (fabs(v.z) > INERTIE)
-			v.z = (v.z > 0) ? v.z - INERTIE : v.z + INERTIE;
-		else
-			v = zero_vector();
-	}
-}
-*/
 
 
 void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)

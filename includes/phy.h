@@ -59,6 +59,7 @@ struct	s_physics
 	t_vec3d			diff_camfloor;
 	unsigned int	squat;
 };
+void	scan_actuall_collide(t_env *env, t_map *map);
 t_vec3d test_dist_roof(t_env *env, t_collide *c, t_vec3d f);
 unsigned int		return_test_collide(t_env *env);
 void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);

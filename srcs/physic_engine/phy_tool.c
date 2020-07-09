@@ -137,10 +137,6 @@ t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f)
 	wall = c->a;
 	
 	norm_speed = fabs(f.y);
-	
-	printf("nbr_cells = %d\n" ,wall->tris.nb_cells);
-	printf("f_avant");
-	print_vec(f);
 	vec = vec_sub(wall->corp.pos,  cam->corp.pos);
 	vec2 = (t_vec3d){vec.x, 0, vec.z, 0};
 	printf("vec_dotf = %f\n", vec_dot(f, vec2));
@@ -199,7 +195,7 @@ static bool	is_mesh_mob(t_env *env, t_mesh *m)
 	t_enemy	*mob;
 	int		i;
 
-	i = 0;
+	i = 0;	
 	while (i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
@@ -210,27 +206,25 @@ static bool	is_mesh_mob(t_env *env, t_mesh *m)
 	return (false);
 }
 
-static	void	scan_actuall_collide(t_env *env, t_map *map)
+void	scan_actuall_collide(t_env *env, t_map *map)
 {
-	(void)map;
 	if (env->cam.stats.onwall == 1) 
 	{
-		map->cam_wall->cam_mesh_actual = vec_sub(env->cam.stats.pos, map->cam_wall->a->corp.pos);
+		map->cam_wall->cam_mesh_actual = vec_sub(map->cam.corp.pos, map->cam_wall->a->corp.pos);
 		map->cam_wall->norm_dist_actual = vec_norm(map->cam_wall->cam_mesh_actual);
 		if (map->cam_wall->norm_dist_actual > map->cam_wall->norm_dist_first)
 			env->cam.stats.onwall = 0;
-
 	}
 	if (env->cam.stats.onfloor == 1) 
 	{
-		map->cam_floor->cam_mesh_actual = vec_sub(env->cam.stats.pos, map->cam_floor->a->corp.pos);
+		map->cam_floor->cam_mesh_actual = vec_sub(map->cam.corp.pos, map->cam_floor->a->corp.pos);
 		map->cam_floor->norm_dist_actual = vec_norm(map->cam_floor->cam_mesh_actual);
 		if (map->cam_floor->norm_dist_actual > map->cam_floor->norm_dist_first)
 			env->cam.stats.onfloor = 0;
 	}
 	if (env->cam.stats.onroof == 1) 
 	{
-		map->cam_roof->cam_mesh_actual = vec_sub(env->cam.stats.pos, map->cam_roof->a->corp.pos);
+		map->cam_roof->cam_mesh_actual = vec_sub(map->cam.corp.pos, map->cam_roof->a->corp.pos);
 		map->cam_roof->norm_dist_actual = vec_norm(map->cam_roof->cam_mesh_actual);
 		if (map->cam_roof->norm_dist_actual > map->cam_roof->norm_dist_first)
 			env->cam.stats.onroof = 0;
@@ -239,8 +233,7 @@ static	void	scan_actuall_collide(t_env *env, t_map *map)
 
 void	type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if (env->cam.stats.onwall == 1 || env->cam.stats.onfloor == 1 || env->cam.stats.onroof == 1)
-		scan_actuall_collide(env, map);
+	
 	if (c->cam_mesh_first.y > 0) //
 	{
 		map->cam_floor = c;
