@@ -62,7 +62,7 @@ static int		spawn_mob(t_env *env)
 	pos.z = p[2] * 2;
 	game->current_lmob--;
 	game->amob++;
-	return (create_mob(env, &env->edit_env.map, ENEMY_CORONA, pos));
+	return (create_mob(env, &env->edit_env.map, rand() % ENEMY_MAX, pos));
 }
 
 int				handle_enemies(t_env *env)

@@ -2,7 +2,7 @@
 
 static void		animate_position(t_point *pos, float time)
 {
-	if (time > 5.7f || time < 1.5f)
+	if (time > 5.5f || time < 1.5f)
 		pos->x += 15;
 	else
 		pos->x++;
@@ -17,7 +17,7 @@ int		print_countdown(t_env *env, float time)
 
 	if (time > 6 || time <= 0)
 	{
-		pos = (t_point){-100, 300};
+		pos = (t_point){-200, 300};
 		return (0);
 	}
 	sec = floor(time);

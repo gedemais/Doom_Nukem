@@ -13,8 +13,8 @@
 # define MOB_START_HP 50
 # define MOB_START_SPEED 0.05f
 # define MOB_LSTART 6
-# define MOB_PV_COEFF 1.3f
-# define MOB_SPEED_COEFF 1.1f
+# define MOB_PV_COEFF 1.2f
+# define MOB_SPEED_COEFF 1.05f
 # define MOB_NB_ADD 4
 
 # define MAX_ENEMIES 12
@@ -28,14 +28,14 @@
 enum				e_enemies
 {
 	ENEMY_CORONA,
-	//ENEMY_MAGE,
+	ENEMY_MAGE,
 	ENEMY_MAX
 };
 
 enum				e_damages
 {
 	EDAMAGES_CORONA = 10,
-	EDAMAGES_MAGE = 35
+	EDAMAGES_MAGE = 25
 };
 
 enum				e_loots_id
