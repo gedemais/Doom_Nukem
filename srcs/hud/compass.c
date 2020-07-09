@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:22:11 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/07 16:03:21 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/09 15:31:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	print_cord(t_env *env, float index, t_point points, bool east)
 	char *cord;
 
 	conf = ttf_config();
+	conf->size = 20;
 	if (index == 0)
 		cord = "S";
 	else if (index == 180)
