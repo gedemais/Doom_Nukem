@@ -8,6 +8,7 @@ static void	start_game(t_env *env)
 
 	game = &env->custom_env.game;
 	game->wave++;
+	env->hud.timeWave = env->data.time.tv_sec;
 	game->mobs_pv = MOB_START_HP;
 	game->mobs_speed = MOB_START_SPEED;
 	game->lmob = MOB_LSTART;
@@ -52,6 +53,7 @@ void		handle_waves(t_env *env)
 		if (next_wave(env))
 		{
 			game->wave++;
+			env->hud.timeWave = env->data.time.tv_sec;
 			game->mobs_pv *= MOB_PV_COEFF;
 			game->mobs_speed *= MOB_SPEED_COEFF;
 			game->lmob += MOB_NB_ADD;
