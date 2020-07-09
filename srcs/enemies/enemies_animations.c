@@ -26,7 +26,7 @@ void			enemies_animations(t_env *env, t_enemy *mob)
 	}
 	if (mob->noise++ == ENEMIES_NOISE_DELAY)
 	{
-		sound_system(env, SA_LEVITATION, sp_fork(0.005f, 1.2f, mob->pos));
+		sound_system(env, SA_RING, sp_fork(0.005f, 0.2f, mob->pos));
 		mob->noise = 0;
 	}
 	if(mob->down == 0)
