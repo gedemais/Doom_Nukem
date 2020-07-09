@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 20:34:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:12:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ int		render(void *param)
 	gettimeofday(&data->time, NULL);
 	if (env->events.keys[KEY_ESCAPE])
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
-	return (render_fts[((t_env*)param)->context](param));
+	if (render_fts[((t_env*)param)->context](param))
+		exit_doom(env, "render failed", 2, EXIT_SUCCESS);
+	return (0);
 }
