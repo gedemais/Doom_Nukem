@@ -1,10 +1,48 @@
 #include "main.h"
 
+static int		listener_param(t_env *env)
+{
+	float	vec[6];
+	t_vec3d	dir;
+
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+		env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alListener3f(AL_VELOCITY, 0, 0, 0);
+	dir = vec_add(env->cam.stats.pos, env->cam.stats.dir);
+	alListener3f(AL_DIRECTION, dir.x, dir.y, dir.z);
+	vec[0] = dir.x;
+	vec[1] = dir.y;
+	vec[2] = dir.z;
+	vec[3] = env->cam.stats.pos.x;
+	vec[4] = env->cam.stats.pos.y + 1;
+	vec[5] = env->cam.stats.pos.z;
+	alListenerfv(AL_ORIENTATION, vec);
+	return (0);
+}
+
+static int		source_param(ALuint *source, t_sparam p)
+{
+	float	vec[6];
+
+	alSource3f(*source, AL_POSITION, p.pos.x, p.pos.y, p.pos.z);
+	alSource3f(*source, AL_VELOCITY, 0, 0, 0);
+	alSource3f(*source, AL_DIRECTION, p.pos.x, p.pos.y, p.pos.z + 1);
+	vec[0] = p.pos.x;
+	vec[1] = p.pos.y;
+	vec[2] = p.pos.z + 1;
+	vec[3] = p.pos.x;
+	vec[4] = p.pos.y + 1;
+	vec[5] = p.pos.z;
+	alSourcefv(*source, AL_ORIENTATION, vec);
+	return (0);
+}
+
 static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 {
-	alListener3f(AL_POSITION, -env->cam.stats.pos.x,
-		env->cam.stats.pos.y, -env->cam.stats.pos.z);
-	alSource3f(*source, AL_POSITION, -p.pos.x, p.pos.y, -p.pos.z);
+	if (listener_param(env))
+		return (-1);
+	if (source_param(source, p))
+		return (-1);
 	if (p.fork)
 	{
 		alSourcef(*source, AL_REFERENCE_DISTANCE, 1);
@@ -49,29 +87,5 @@ int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
 		return (-1);
 	alSourcei(sound->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
 	alSourcePlay(sound->ambient);
-	return (0);
-}
-
-int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
-{
-	ALint 	status;
-	t_sound	*sound;
-
-	sound = dyacc(s, source);
-	if (sound == NULL || p.sound == false)
-		return (0);
-	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
-	if (status == AL_PLAYING)
-	{
-		sound->volume += p.volume;
-		sound->volume = sound->volume > env->volume
-			? env->volume : sound->volume;
-		sound->volume = sound->volume < 0 ? 0 : sound->volume;
-		alSourcef(sound->ambient, AL_GAIN, sound->volume);
-		sound->pitch += p.pitch;
-		sound->pitch = sound->pitch > 2 ? 2 : sound->pitch;
-		sound->pitch = sound->pitch < 0 ? 0 : sound->pitch;
-		alSourcef(sound->ambient, AL_PITCH, sound->pitch);
-	}
 	return (0);
 }
