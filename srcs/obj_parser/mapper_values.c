@@ -1,4 +1,16 @@
-# include "main.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mapper_values.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 21:08:03 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/09 21:08:43 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "main.h"
 
 int			get_spawn_position(t_map *map, char **line)
 {
@@ -45,7 +57,8 @@ int			check_line(t_env *env, t_mesh *m, char **stats)
 											NULL, mapper_position, mapper_speed,
 											mapper_static, mapper_texture,
 											mapper_deps};
-	 i = 1;
+
+	i = 1;
 	while (stats[i])
 	{
 		if (mapper_fts[i](env, m, stats[i]))

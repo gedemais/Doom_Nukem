@@ -6,49 +6,24 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 03:27:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 19:46:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 22:17:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static inline int	get_line_type(char *c, t_parser *p, char states[PS_MAX][PS_MAX])
+static int		parse_line(t_parser *p, t_map *map, unsigned int i,
+													char states[PS_MAX][PS_MAX])
 {
-	char			*qualis[PS_MAX] = {"o", "v", "vt", "s", "f", "#", "mtllib",
-										"usemtl"};
-	unsigned int	i;
-
-	i = 0;
-	while (i < PS_MAX)
-	{
-		if (ft_strlen(c) == ft_strlen(qualis[i])
-			&& !ft_strcmp(c, qualis[i]))
-		{
-			p->tstate = (char)i;
-			if (!states[(int)p->state][(int)p->tstate])
-				return (-1);
-			p->state = p->tstate;
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MAX][PS_MAX])
-{
-	int				(*lines_fts[PS_MAX])(t_map*, char**) = {
-					new_mesh, new_vertex, new_txt_vertex, vertex_end, new_face,
-					comment, mtllib, usemtl};
+	static int		(*lines_fts[PS_MAX])(t_map*, char**) = {new_mesh,
+					new_vertex, new_txt_vertex, vertex_end,
+					new_face, comment, mtllib, usemtl};
 	unsigned int	j;
 
 	j = 0;
 	if (!(p->toks = ft_strsplit(p->lines[i], "\n\t\r "))
 		|| get_line_type(p->toks[0], p, states))
-	{
-		printf("Line %d\n", i);
 		return (-1);
-	}
 	if (p->state == PS_COMMENT)
 	{
 		ft_free_ctab(p->toks);
@@ -60,48 +35,7 @@ static int	parse_line(t_parser *p, t_map *map, unsigned int i, char states[PS_MA
 	return (0);
 }
 
-static void	access_faces(t_triangle *new, t_map *map, t_face *f, t_mesh *m)
-{
-	t_vec2d	*t;
-
-	ft_memcpy(&new->points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
-	ft_memcpy(&new->points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
-	ft_memcpy(&new->points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
-	new->points[0].w = 1.0f;
-	new->points[1].w = 1.0f;
-	new->points[2].w = 1.0f;
-
-	if (f->textured)
-	{
-		t = dyacc(&map->txt_pool, f->tx - 1);
-		new->txt[0].u = t->u;
-		new->txt[0].v = t->v;
-		new->txt[0].w = 1.0f;
-
-		t = dyacc(&map->txt_pool, f->ty - 1);
-		new->txt[1].u = t->u;
-		new->txt[1].v = t->v;
-		new->txt[1].w = 1.0f;
-
-		t = dyacc(&map->txt_pool, f->tz - 1);
-		new->txt[2].u = t->u;
-		new->txt[2].v = t->v;
-		new->txt[2].w = 1.0f;
-
-		new->mesh = m;
-		new->textured = true;
-	}
-	else
-	{
-		new->textured = false;
-		if (map->mtls.nb_cells > 0)
-			new->color = f->color;
-		else
-			new->color = 0xffffff;
-	}
-}
-
-static int	load_map_data(t_map *map)
+static int		load_map_data(t_map *map)
 {
 	t_triangle	new;
 	t_mesh		*m;
@@ -110,32 +44,28 @@ static int	load_map_data(t_map *map)
 	int			j;
 
 	i = -1;
-	while (++i < map->nmesh)
+	while (++i < map->nmesh && (j = -1))
 	{
-		j = -1;
 		if (!(m = dyacc(&map->meshs, i))
 			|| (init_dynarray(&m->tris, sizeof(t_triangle), m->faces.nb_cells)))
 			return (-1);
 		m->type = 1;
-		while (++j < m->faces.nb_cells)
+		while (++j < m->faces.nb_cells && (f = dyacc(&m->faces, j)))
 		{
-			if (!(f = dyacc(&m->faces, j)) || (f->x - 1 >= map->pool.nb_cells
-				|| f->y - 1 >= map->pool.nb_cells || f->z - 1 >= map->pool.nb_cells))
+			if (f->x - 1 >= map->pool.nb_cells || f->y - 1 >= map->pool.nb_cells
+				|| f->z - 1 >= map->pool.nb_cells)
 				return (-1);
-
 			ft_memset(&new, 0, sizeof(t_triangle));
-			access_faces(&new, map, f, m);
-
-			if (push_dynarray(&m->tris, &new, false))
+			if (!get_faces(&new, map, f, m) && push_dynarray(&m->tris, &new, 0))
 				return (-1);
 		}
 		free_dynarray(&m->faces);
-		//printf("mesh [%d] : %d triangles\n", i, m->tris.nb_cells);
 	}
 	return (0);
 }
 
-static int	init_map_parser(t_map *map, t_parser *parser, char *path, char states[PS_MAX][PS_MAX])
+static int		init_map_parser(t_map *map, t_parser *parser, char *path,
+													char states[PS_MAX][PS_MAX])
 {
 	unsigned int	i;
 	int				fd;
@@ -163,29 +93,30 @@ static int	init_map_parser(t_map *map, t_parser *parser, char *path, char states
 	return (0);
 }
 
-int			parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
+static int		err_msg(char *path, int i)
+{
+	ft_putstr_fd("Error parsing map ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(" at line ", 2);
+	ft_putnbr_fd(i, 2);
+	ft_putchar_fd('\n', 2);
+	return (-1);
+}
+
+int				parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX])
 {
 	t_parser		parser;
 	unsigned int	i;
 
 	i = 0;
-
 	*init_parser() = true;
 	if (init_map_parser(map, &parser, path, states))
 		return (-1);
 	*init_parser() = false;
-
 	while (parser.lines[i])
 	{
 		if (parse_line(&parser, map, i, states))
-		{
-			ft_putstr_fd("Error parsing map ", 2);
-			ft_putstr_fd(path, 2);
-			ft_putstr_fd(" at line ", 2);
-			ft_putnbr_fd(i, 2);
-			ft_putchar_fd('\n', 2);
-			return (-1);
-		}
+			return (err_msg(path, i));
 		i++;
 	}
 	if (load_map_data(map)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dependencies.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 20:05:06 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/09 20:05:16 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static int	seek_cycle(t_dynarray *meshs, t_mesh *m, t_mesh *master)
@@ -9,7 +21,8 @@ static int	seek_cycle(t_dynarray *meshs, t_mesh *m, t_mesh *master)
 	while (i < m->deps.nb_cells)
 	{
 		dep = *(int*)dyacc(&m->deps, i);
-		if (master->index == dep || seek_cycle(meshs, dyacc(meshs, dep), master))
+		if (master->index == dep
+			|| seek_cycle(meshs, dyacc(meshs, dep), master))
 			return (-1);
 		i++;
 	}

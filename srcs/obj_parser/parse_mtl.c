@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:12:24 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/06 18:02:36 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 22:24:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static int		open_mtl_file(char *file_name)
 {
-	char		r_path[PATH_MAX + 15] = "resources/maps/";
+	static char	r_path[PATH_MAX + 15] = "resources/maps/";
 	size_t		size;
 	int			fd;
 
+	ft_bzero(&r_path[15], PATH_MAX);
 	if ((size = ft_strlen(file_name)) < 4)
 		return (-1);
 	if (ft_strcmp(&file_name[size - 4], ".mtl"))
@@ -54,12 +55,12 @@ static char		**start_check(char *file)
 
 static int		load_mtl_data(t_dynarray *mtls, char **toks, unsigned int j)
 {
-	static char		*qualis[MTL_MAX] = {"#", "newmtl", "Ns", "Ka", "Kd", "Ks",
-													"Ke", "Ni", "d", "illum", "map_Kd"};
+	static char	*qualis[MTL_MAX] = {"#", "newmtl", "Ns", "Ka", "Kd", "Ks",
+											"Ke", "Ni", "d", "illum", "map_Kd"};
 	static int	(*mtl_lines_fts[MTL_MAX])(char**, t_dynarray*) = {0, mtl_new, 0,
 										0, mtl_color, 0, 0, 0, mtl_alpha, 0,
 										mtl_map_texture};
-	
+
 	if (!ft_strcmp(qualis[j], toks[0]))
 	{
 		if (mtl_lines_fts[j] && mtl_lines_fts[j](toks, mtls))
@@ -99,8 +100,9 @@ int				parse_mtl(char *file_name, t_dynarray *mtls)
 	int		len;
 	int		fd;
 
-	if ((fd = open_mtl_file(file_name)) == -1 || !(file = read_file(fd, &len))
-		|| len == 0)
+	len = 0;
+	if ((fd = open_mtl_file(file_name)) == -1
+		|| !(file = read_file(fd, &len)) || len == 0)
 		return (-1);
 	if (*init_parser())
 	{
@@ -110,7 +112,7 @@ int				parse_mtl(char *file_name, t_dynarray *mtls)
 	if (!(lines = start_check(file)) || load_materials(mtls, lines))
 		return (-1);
 	ft_free_ctab(lines);
-	munmap(file, ft_strlen(file));
+	munmap(file, len);
 	close(fd);
 	return (0);
 }

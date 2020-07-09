@@ -27,7 +27,6 @@ static bool	next_wave(t_env *env)
 	if (env->custom_env.game.countdown < 0)
 	{
 		env->custom_env.game.countdown = INTER_WAVE;
-		// sound
 		return (true);
 	}
 	return (false);
