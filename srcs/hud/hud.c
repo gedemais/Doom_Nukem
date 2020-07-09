@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/08 22:01:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:32:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static int	draw_wave(t_env *env)
 
 int		draw_hud(t_env *env)
 {
-	draw_health(env);
 	draw_compass(env);
-	draw_wave(env);
+	if (draw_wave(env)
+		|| draw_health(env))
+		return (-1);
 	return(0);
 
 }

@@ -79,12 +79,12 @@ struct				s_enemy
 	t_map		*map;
 };
 
-void			print_mobs(t_env *env); // a tej
 
 int				handle_enemies(t_env *env);
 
 int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 
+int				handle_loots(t_env *env);
 void			enemies_animations(t_enemy *mob);
 
 void			enemies_movements(t_env *env, t_pf *a);

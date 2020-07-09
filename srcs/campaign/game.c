@@ -49,12 +49,11 @@ int		cmp_game(void *param)
 	if (sound_manager(env, SA_MAX))
 		return (-1);
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
-	//physic_engine(env);
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	assert(!rasterizer(env, &env->maps[env->scene], false));
+	if (rasterizer(env, &env->maps[env->scene], false))
+		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-
 	return (0);
 }

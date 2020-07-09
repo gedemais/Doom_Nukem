@@ -40,7 +40,6 @@ int				handle_jukeboxs(t_env *env, t_event_block *block)
 		char	*current = ft_itoa(jukeboxs_play_sound(env));
 		textual_hint(env, current, "current track", 3),
 		ft_strdel(&current);
-
 		return (1);
 	}
 	return (0);
