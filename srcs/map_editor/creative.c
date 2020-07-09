@@ -85,12 +85,7 @@ static void	check_export(t_env *env)
 	static int		ret = 0;
 
 	if (env->events.keys[KEY_M])
-	{
-		ret = export_maped_map(&env->edit_env);
-		err_time = EXPORT_ERR_TIME;
-		if (ret == MAPERR_NONE)
-			switch_mecontext(env, MAPED_SC_MENU);
-	}
+		switch_mecontext(env, MAPED_SC_MENU);
 	else if (env->events.keys[KEY_P])
 	{
 		ret = export_maped_map(&env->edit_env);
