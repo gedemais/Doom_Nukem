@@ -24,12 +24,14 @@ static void	replace_mobs_index(t_env *env, int delta)
 	}
 }
 
-static t_mesh	*insert_loot(t_map *dest, t_map *src, t_vec3d pos, int index[2])
+static t_mesh	*insert_loot(t_env *env, t_map *src, t_vec3d pos, int index[2])
 {
+	t_map		*dest;
 	t_mesh		new;
 	t_mesh		*m;
 	t_mesh		*ret;
 
+	dest = &env->edit_env.map;
 	ft_memset(&new, 0, sizeof(t_mesh));
 	m = dyacc(&src->meshs, index[1]);
 	new.type = 1;
@@ -38,8 +40,9 @@ static t_mesh	*insert_loot(t_map *dest, t_map *src, t_vec3d pos, int index[2])
 		|| copy_triangles(dest, src, m, &new)
 		|| insert_dynarray(&dest->meshs, &new, index[0]))
 		return (NULL);
+	replace_mobs_index(env, 1);
 	ret = dyacc(&dest->meshs, index[0]);
-	assign_meshs(dyacc(&dest->meshs, index[0]));
+	assign_meshs(dyacc(&env->edit_env.map.meshs, index[0] + 1));
 	translate_mesh(dest, dyacc(&dest->meshs, index[0]), pos);
 	dest->nmesh++;
 	return (ret);
@@ -48,57 +51,32 @@ static t_mesh	*insert_loot(t_map *dest, t_map *src, t_vec3d pos, int index[2])
 static int	launch_loot(t_env *env, t_loot *loot)
 {
 	static int	(*loots_fts[LOOT_MAX])(t_env*) = {loot_nuke, loot_money, loot_shield, loot_ammos};
-	t_loot		*l;
-	int			tmp;
 	int			ret;
-	int			i;
 
-	i = loot->index;
 	ret = loots_fts[(int)loot->id](env);
-	tmp = loot->m->index;
-	while (loot->index >= env->custom_env.loots.nb_cells)
-		loot->index--;
-	if (loot->index == -1)
-		return (-1);
-	extract_dynarray(&env->custom_env.loots, loot->index);
 	env->edit_env.map.nmesh--;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		if (!(l = dyacc(&env->custom_env.loots, i)))
-			break ;
-		l->index--;
-		l->m->index--;
-		l->m = dyacc(&env->edit_env.map.meshs, l->m->index);
-		i++;
-	}
-	free_mesh(dyacc(&env->edit_env.map.meshs, tmp));
-	extract_dynarray(&env->edit_env.map.meshs, tmp);
+	free_mesh(dyacc(&env->edit_env.map.meshs, loot->m->index));
+	extract_dynarray(&env->edit_env.map.meshs, loot->m->index);
 	replace_mobs_index(env, -1);
+	ft_bzero(loot, sizeof(t_loot));
 	return (ret);
 }
 
 int		spawn_loot(t_env *env, t_vec3d pos)
 {
-	t_dynarray	*loots;
-	t_loot		loot;
+	t_loot		*loot;
 	t_map		*map;
 	t_enemy		*first;
 
-	first = dyacc(&env->custom_env.mobs, 0);
+	loot = &env->custom_env.loot;
 	map = &env->maps[SCENE_LOOT];
-	loots = &env->custom_env.loots;
-	if (env->custom_env.loots.nb_cells > 0 || rand() % LOOT_FREQ > 0)
+	first = dyacc(&env->custom_env.mobs, 0);
+	if (!first || loot->m || rand() % LOOT_FREQ > 0)
 		return (0);
-	loot.index = env->custom_env.loots.nb_cells;
-	loot.id = rand() % LOOT_MAX;
-	loot.pos = pos;
+	loot->id = rand() % LOOT_MAX;
+	loot->pos = pos;
 	pos.y += 4.0f;
-	if (!(loot.m = insert_loot(&env->edit_env.map, map, pos, (int[2]){first->map_start, loot.id})))
-		return (-1);
-	replace_mobs_index(env, 1);
-	if (loots->byte_size == 0 && init_dynarray(loots, sizeof(t_loot), 0))
-		return (-1);
-	if (push_dynarray(loots, &loot, false))
+	if (!(loot->m = insert_loot(env, map, pos, (int[2]){first->map_start, loot->id})))
 		return (-1);
 	return (0);
 }
@@ -111,9 +89,9 @@ int		handle_loots(t_env *env)
 	int				i;
 
 	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
+	loot = &env->custom_env.loot;
+	if (loot->m)
 	{
-		loot = dyacc(&env->custom_env.loots, i);
 		if ((dist = vec3d_dist(env->cam.stats.pos, loot->m->corp.pos)) < EVENT_DIST)
 		{
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);

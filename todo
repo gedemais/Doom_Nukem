@@ -4,6 +4,8 @@ Empecher les spawners qui te trouvent pas de faire spawn des mobs
 	INFINITY si joueur trop loin
 }
 
+Normer la libft
+
 Fix la physique
 => baisser s'accroupir + voir msg épinglé discord
 

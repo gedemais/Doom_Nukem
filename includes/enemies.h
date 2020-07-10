@@ -51,7 +51,6 @@ struct				s_loot
 {
 	t_mesh			*m;
 	t_vec3d			pos;
-	int				index;
 	char			id;
 };
 

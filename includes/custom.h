@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 19:33:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:49:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ struct				s_custom_env
 {
 	t_custom_game	game;
 	t_dynarray		mobs;
-	t_dynarray		loots;
 	t_go_env		go_env;
 	t_scroll		scroll;
 	t_dynarray		events;
@@ -125,6 +124,7 @@ struct				s_custom_env
 	t_node          *start;
     t_node          *end;
 	t_env			*env;
+	t_loot			loot;
 	char			*map_path;
 	float			spawner;
 	int				sub_context;

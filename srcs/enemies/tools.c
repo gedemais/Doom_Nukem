@@ -44,6 +44,8 @@ void		assign_meshs(t_mesh *m)
 	t_triangle	*t;
 	int			i;
 
+	if (!m)
+		return ;
 	i = 0;
 	while (i < m->tris.nb_cells)
 	{

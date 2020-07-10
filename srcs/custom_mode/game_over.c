@@ -9,9 +9,9 @@ int		set_game_stats(t_env *env)
 	c = &env->custom_env;
 	env->weapons[W_GLOCK_18].ammos = 80;
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
-		|| (!c->mobs.byte_size && init_dynarray(&c->mobs, sizeof(t_enemy), 0))
-		|| (!c->loots.byte_size && init_dynarray(&c->loots, sizeof(t_loot), 0)))
+		|| (!c->mobs.byte_size && init_dynarray(&c->mobs, sizeof(t_enemy), 0)))
 			return (-1);
+	env->custom_env.loot.m = NULL;
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
 	env->custom_env.game.wave = 0;

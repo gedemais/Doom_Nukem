@@ -26,10 +26,10 @@ int				custom_play_to_menu(t_env *env)
 	free_maped(env);
 	free_dynarray(&env->player.weapons);
 	free_dynarray(&env->custom_env.mobs);
-	free_dynarray(&env->custom_env.loots);
 	free_dynarray(&env->custom_env.events);
 	free_dynarray(&env->astar.d_nodes);
 	free_dynarray(&env->astar.d_astar);
+	env->custom_env.loot.m = NULL;
 	return (0);
 }
 
@@ -39,10 +39,10 @@ int			custom_play_to_game_over(t_env *env)
 	free_maped(env);
 	free_dynarray(&env->player.weapons);
 	free_dynarray(&env->custom_env.mobs);
-	free_dynarray(&env->custom_env.loots);
 	free_dynarray(&env->custom_env.events);
 	free_dynarray(&env->astar.d_nodes);
 	free_dynarray(&env->astar.d_astar);
+	env->custom_env.loot.m = NULL;
 	return (0);
 }
 
