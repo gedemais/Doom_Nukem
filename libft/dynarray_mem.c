@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dynarray_mem.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/10 18:04:09 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/10 18:04:26 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	realloc_content(t_dynarray *arr)
@@ -17,16 +29,11 @@ static int	realloc_content(t_dynarray *arr)
 	return (0);
 }
 
-#include <stdio.h>
-
 int			check_space(t_dynarray *arr)
 {
 	arr->nb_cells++;
 	while (arr->nb_cells * arr->cell_size >= arr->byte_size)
-	{
-		//printf("%d <-> %d\n", arr->nb_cells * arr->cell_size, arr->byte_size);
 		if (realloc_content(arr))
 			return (-1);
-	}
 	return (0);
 }

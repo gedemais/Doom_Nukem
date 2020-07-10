@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dynarray_stack.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/10 18:04:36 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/10 18:05:01 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dynarray.h"
 
 int			pop_dynarray(t_dynarray *arr, bool front)
@@ -46,10 +58,10 @@ int			replace_dynarray_cell(t_dynarray *arr, void *src, int index)
 	return (0);
 }
 
-int		dynarray_swap_cells(t_dynarray *add, int index1, int index2)
+int			dynarray_swap_cells(t_dynarray *add, int index1, int index2)
 {
-	void    *d1;
-	void    *d2;
+	void	*d1;
+	void	*d2;
 
 	if (index1 < 0 || index2 < 0 || !add
 		|| index1 > add->nb_cells || index2 > add->nb_cells)
