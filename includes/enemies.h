@@ -29,13 +29,15 @@ enum				e_enemies
 {
 	ENEMY_CORONA,
 	ENEMY_MAGE,
+	ENEMY_GOULE,
 	ENEMY_MAX
 };
 
 enum				e_damages
 {
-	EDAMAGES_CORONA = 10,
-	EDAMAGES_MAGE = 25
+	EDAMAGES_CORONA = 15,
+	EDAMAGES_MAGE = 42,
+	EDAMAGES_GOULE = 20
 };
 
 enum				e_loots_id
@@ -80,6 +82,7 @@ struct				s_enemy
 
 
 int				handle_enemies(t_env *env);
+char			enemy_wave(t_env *env);
 
 int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 

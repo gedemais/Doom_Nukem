@@ -32,6 +32,21 @@ static bool	next_wave(t_env *env)
 	return (false);
 }
 
+char	enemy_wave(t_env *env)
+{
+	char	type;
+
+	if (env->custom_env.game.wave % 5 == 0)
+		return (ENEMY_MAGE);
+	else
+	{
+		type = ENEMY_MAGE;
+		while (type == ENEMY_MAGE)
+			type = rand() % ENEMY_MAX;
+		return (type);
+	}
+}
+
 void		handle_waves(t_env *env)
 {
 	t_custom_game	*game;

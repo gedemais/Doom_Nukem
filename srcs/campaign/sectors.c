@@ -21,7 +21,6 @@ void	init_sectors(t_env *env)
 	cmp_env->sectors[SECTOR_NEGEV].map = SCENE_NEGEV;
 	cmp_env->sectors[SECTOR_TEC9].map = SCENE_TEC9;
 	cmp_env->sectors[SECTOR_UGLY].map = SCENE_UGLY;
-	cmp_env->sectors[SECTOR_MAD].map = SCENE_MAD;
 	cmp_env->sectors[SECTOR_MOON].map = SCENE_MOON;
 	cmp_env->sectors[SECTOR_STAR].map = SCENE_STAR;
 	cmp_env->sectors[SECTOR_MAGE].map = SCENE_MAGE;
