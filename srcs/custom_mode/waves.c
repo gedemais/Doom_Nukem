@@ -12,6 +12,7 @@ static void	start_game(t_env *env)
 	game->mobs_speed = MOB_START_SPEED;
 	game->lmob = MOB_LSTART;
 	game->current_lmob = MOB_LSTART;
+	game->amob = 0;
 	game->moula = START_MOULA;
 	game->spawn_speed = RESPAWN_DELAY;
 }

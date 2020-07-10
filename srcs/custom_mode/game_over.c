@@ -15,6 +15,7 @@ int		set_game_stats(t_env *env)
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
 	env->custom_env.game.wave = 0;
+	env->custom_env.game.amob = 0;
 	env->player.current_w = 0;
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;

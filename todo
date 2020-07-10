@@ -4,11 +4,12 @@ Empecher les spawners qui te trouvent pas de faire spawn des mobs
 	INFINITY si joueur trop loin
 }
 
-Normer la libft
+render failed quand on revient du map_editor
+
+Mobs qui spawnent en  0 0 0 (lie aux mobs en oedeme entre les contextes)
 
 Fix la physique
 => baisser s'accroupir + voir msg épinglé discord
-
 
 Gérer les leaks dans le changement de contexte reverse (custom to menu etc..)
 
@@ -19,6 +20,6 @@ NORME
 
 LEAKS :
 
-remonter les chaines d'erreurs return (-1);
+remonter les chaines d'erreurs return (-1); // fait pour les fonctions appelees dans les renders
 
 vérifier les .h et .c si fonctions / variables non utilisées => delete
