@@ -6,13 +6,22 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 03:46:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/02/11 04:30:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/08 20:23:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	loading_bar(unsigned int i, unsigned int max, bool last)
+static void	fill_blank(unsigned int j, unsigned int max)
+{
+	while (j < max - 1)
+	{
+		ft_putchar(' ');
+		j++;
+	}
+}
+
+void		loading_bar(unsigned int i, unsigned int max, bool last)
 {
 	unsigned int	j;
 
@@ -32,11 +41,7 @@ void	loading_bar(unsigned int i, unsigned int max, bool last)
 	ft_putstr(L_RED);
 	ft_putchar('>');
 	ft_putstr(STOP);
-	while (j < max - 1)
-	{
-		ft_putchar(' ');
-		j++;
-	}
+	fill_blank(j, max);
 	ft_putstr(L_GREEN);
 	ft_putchar(']');
 	ft_putstr(STOP);

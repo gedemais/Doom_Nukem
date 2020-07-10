@@ -90,11 +90,14 @@ SRCS_NAME =	main.c\
 			obj_parser/dependencies.c\
 			obj_parser/mapper.c\
 			obj_parser/mapper_fts.c\
+			obj_parser/mapper_fts_bis.c\
 			obj_parser/mapper_values.c\
 			obj_parser/load_face.c\
 			obj_parser/lines_fts.c\
+			obj_parser/lines_fts_bis.c\
 			obj_parser/check_formats.c\
 			obj_parser/parse_map.c\
+			obj_parser/parse_map_tools.c\
 			obj_parser/parse_mtl.c\
 			obj_parser/mtl_lines_fts.c\
 			obj_parser/states.c\
@@ -129,6 +132,7 @@ SRCS_NAME =	main.c\
 			\
 			mlx/init_mlx.c\
 			mlx/sprites.c\
+			mlx/pixloc.c\
 			mlx/sprites_effects.c\
 			mlx/render.c\
 			mlx/term_loading_bar.c\
@@ -147,6 +151,7 @@ SRCS_NAME =	main.c\
 			vectors/vectors.c\
 			vectors/vec2d_tools.c\
 			vectors/vec3d_ops.c\
+			vectors/vec3d_fops.c\
 			vectors/vec3d_tools.c\
 			\
 			weapons/weapons.c\
@@ -165,4 +170,5 @@ SRCS_NAME =	main.c\
 			\
 			hud/hud.c\
 			hud/health.c\
+			hud/waves.c\
 			hud/compass.c

@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2020/05/10 02:50:33 by gedemais         ###   ########.fr        #
+#    Updated: 2020/07/08 22:53:54 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,7 @@ SRCS  =	ft_atoi.c \
 		ft_constrain.c \
 		ft_to_degrees.c \
 		ft_strwlen.c\
+		ft_strclen.c\
 		ft_to_radians.c\
 		dynarray.c\
 		dynarray_insert.c\

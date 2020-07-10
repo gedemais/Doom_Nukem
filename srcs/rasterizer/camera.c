@@ -1,10 +1,9 @@
 #include "main.h"
 
-void	map_spawn(t_env *env, t_cam *cam, t_map *map, bool respawn)
+void	map_spawn(t_cam *cam, t_map *map, bool respawn)
 {
 	static t_map	*address = NULL;
 
-	(void)env;
 	if (address != map && !map->init)
 	{
 		map->init = true;

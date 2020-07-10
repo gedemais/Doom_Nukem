@@ -3,7 +3,9 @@
 void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 {
 	static int		damages[ENEMY_MAX] = {
-		[ENEMY_CORONA] = EDAMAGES_CORONA
+		[ENEMY_CORONA] = EDAMAGES_CORONA,
+		[ENEMY_MAGE] = EDAMAGES_MAGE,
+		[ENEMY_GOULE] = EDAMAGES_GOULE
 	};
 	enemy->hp = game->mobs_pv;
 	enemy->speed = game->mobs_speed;
@@ -13,8 +15,9 @@ void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 int		enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
-		//[ENEMY_CORONA] = SCENE_UGLY
-		[ENEMY_CORONA] = SCENE_MAGE
+		[ENEMY_MAGE] = SCENE_MAGE,
+		[ENEMY_CORONA] = SCENE_UGLY,
+		[ENEMY_GOULE] = SCENE_GOULE
 	};
 
 	return (map[(int)type]);
@@ -90,7 +93,7 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 	return (0);
 }
 
-static int 		enemy_offset(t_enemy *mob)
+static void		enemy_offset(t_enemy *mob)
 {
 	int			i;
 	int			j;
@@ -110,7 +113,6 @@ static int 		enemy_offset(t_enemy *mob)
 			tri->points[2] = vec_add(tri->points[2], mob->offset);
 		}
 	}
-	return (0);
 }
 
 int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
@@ -129,8 +131,8 @@ int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 	
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
-	if (enemy_offset(&enemy)
-		|| push_dynarray(&env->custom_env.mobs, &enemy, false))
+	enemy_offset(&enemy);
+	if (push_dynarray(&env->custom_env.mobs, &enemy, false))
 		return (-1);
 	return (0);
 }

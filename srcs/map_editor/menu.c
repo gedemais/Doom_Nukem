@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:02:32 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/13 16:48:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:56:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static int	select_map(t_env *env)
 	display_file(env);
 	if (s->s_path)
 	{
-		if (import_maped_map(&env->edit_env, s->s_path))
+		if (import_maped_map(&env->edit_env, s->s_path)) // to merge with
 		{
 			printf("Parsing Failed for map |%s|\n", s->s_path);
 			exit(0);
 			return (-1);
 		}
-		if (map_to_scene(env))
+		if (map_to_scene(env)) // this
 			return (-1);
 		switch_mecontext(env, MAPED_SC_CREATIVE);
 	}
@@ -68,15 +68,17 @@ static int	select_map(t_env *env)
 
 int			maped_menu(t_env *env)
 {
+	char	*data;
+
+	data = env->mlx.img_data;
 	if (sound_manager(env, SA_TITLE_SCREEN_L))
 		return (-1);
-	handle_events(env);
-	map_sprite(env->mlx.img_data, env->sprites[SP_ME_BACKGROUND], (t_point){0, 0});
-	map_sprite(env->mlx.img_data, env->sprites[SP_ME_MENU_TITLE], (t_point){420, 60});
-
+	if (handle_events(env))
+		return (-1);
+	map_sprite(data, env->sprites[SP_ME_BACKGROUND], (t_point){0, 0});
+	map_sprite(data, env->sprites[SP_ME_MENU_TITLE], (t_point){420, 60});
 	if (select_map(env))
 		return (-1);
-
 	render_buttons(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dynarray_insert.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/10 18:03:33 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/10 18:03:52 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	start_check(t_dynarray *arr, void *src, int index, bool insert)
@@ -19,7 +31,7 @@ static int	start_check(t_dynarray *arr, void *src, int index, bool insert)
 	return (0);
 }
 
-int		insert_dynarray(t_dynarray *arr, void *src, int index)
+int			insert_dynarray(t_dynarray *arr, void *src, int index)
 {
 	void	*mid;
 	int		rest;
@@ -36,7 +48,7 @@ int		insert_dynarray(t_dynarray *arr, void *src, int index)
 	return (0);
 }
 
-int		extract_dynarray(t_dynarray *arr, int index)
+int			extract_dynarray(t_dynarray *arr, int index)
 {
 	void	*mid;
 	int		rest;
@@ -46,10 +58,8 @@ int		extract_dynarray(t_dynarray *arr, int index)
 		return (ret == -1 ? -1 : 0);
 	mid = arr->c + (index * arr->cell_size);
 	rest = (arr->nb_cells - index - 2) * arr->cell_size;
-
 	ft_memcpy(arr->tmp, mid + arr->cell_size, rest);
 	ft_memcpy(mid, arr->tmp, rest);
-
 	arr->nb_cells -= 2;
 	return (0);
 }

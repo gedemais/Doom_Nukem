@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mapper.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 20:29:51 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/09 20:30:44 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static int		open_mapconf(char *map_name)
@@ -28,7 +40,7 @@ static int		open_mapconf(char *map_name)
 	return (fd);
 }
 
-char	**get_file_lines(int fd)
+static char		**get_file_lines(int fd)
 {
 	char	**ret;
 	char	*file;
@@ -45,7 +57,7 @@ char	**get_file_lines(int fd)
 	return (ret);
 }
 
-static int	load_mesh_config(t_env *env, t_mesh *m, char *line)
+static int		load_mesh_config(t_env *env, t_mesh *m, char *line)
 {
 	char		**stats;
 
@@ -60,48 +72,36 @@ static int	load_mesh_config(t_env *env, t_mesh *m, char *line)
 	return (0);
 }
 
-t_mesh		*find_mesh(t_map *map, char **line, bool *prop)
+t_mesh			*find_mesh(t_map *map, char **line, bool *prop)
 {
 	t_mesh	*m;
 	int		i;
 
-	i = 0;
-	*prop = true;
+	i = -1;
 	if (!line)
 		return (NULL);
-	if (!ft_strcmp(line[0], "spawn"))
+	*prop = false;
+	if (!ft_strcmp(line[0], "spawn") || !ft_strcmp(line[0], "orientation"))
 	{
-		if (get_spawn_position(map, line))
+		*prop = true;
+		if ((!ft_strcmp(line[0], "spawn") && get_spawn_position(map, line))
+			|| get_cam_direction(map, line))
 		{
 			ft_free_ctab(line);
 			return (NULL);
 		}
 	}
-	else if (!ft_strcmp(line[0], "orientation"))
-	{
-		if (get_cam_direction(map, line))
-		{
-			ft_free_ctab(line);
-			return (NULL);
-		}
-	}
-	else
-		*prop = false;
-	while (i < map->nmesh)
-	{
-		m = dyacc(&map->meshs, i);
-		if (!ft_strcmp(m->name, line[0]))
+	while (++i < map->nmesh)
+		if ((m = dyacc(&map->meshs, i)) && !ft_strcmp(m->name, line[0]))
 		{
 			ft_free_ctab(line);
 			return (m);
 		}
-		i++;
-	}
 	ft_free_ctab(line);
 	return (NULL);
 }
 
-int			load_map_config(t_env *env, t_map *map, char *map_path)
+int				load_map_config(t_env *env, t_map *map, char *map_path)
 {
 	char			**lines;
 	t_mesh			*m;
@@ -110,7 +110,8 @@ int			load_map_config(t_env *env, t_map *map, char *map_path)
 	int				i;
 
 	i = 3;
-	if ((fd = open_mapconf(map_path)) == -1 || !(lines = get_file_lines(fd)))
+	if ((fd = open_mapconf(map_path)) == -1
+		|| !(lines = get_file_lines(fd)))
 		return (0);
 	while (lines[++i])
 		if ((!(m = find_mesh(map, ft_strsplit(lines[i], "|"), &prop)) && !prop)

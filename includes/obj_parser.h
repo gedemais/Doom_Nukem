@@ -66,11 +66,11 @@ enum	e_scene_id
 	SCENE_MAP_TEST,
 	SCENE_SLENDER,
 	SCENE_UGLY,
-	SCENE_MAD,
 	SCENE_MOON,
 	SCENE_STAR,
 	SCENE_MAGE,
 	SCENE_LOOT,
+	SCENE_GOULE,
 	SCENE_MAX
 };
 
@@ -198,11 +198,13 @@ int					get_cam_direction(t_map *map, char **line);
 ** Parser tools
 */
 int					cross_whitespaces(char *line, int *i);
-int					cross_floats(char *line, int *i);
+int					cross_float(char *line, int *i);
 t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
 t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
 int					assign_triangle_texture(t_mesh *m , void *ptr);
 void				swap_bytes(char *a, char *b);
+int					get_line_type(char *c, t_parser *p, char s[PS_MAX][PS_MAX]);
+int					get_faces(t_triangle *n, t_map *map, t_face *f, t_mesh *m);
 
 /*
 ** Mapper functions

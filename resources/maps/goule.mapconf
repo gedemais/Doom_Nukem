@@ -4,5 +4,4 @@
 # Coordonnees d'apparition sur la map 
 spawn|{0.0, 0.0, 0.0}
 orientation|{0.0, 0.0}
-LavaGhoul|{}|[]|true|(resources/textures/mobs/mad_eyes.xpm)|
-LavaGhoul.001|{}|[]|true|(resources/textures/mobs/mad_body.xpm)|
+Ghoul_body_low_StingrayPBS1_0.001|{}|[]|true|(resources/textures/mobs/goule_dark.xpm)|

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/18 16:08:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:55:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ int			raster_triangles(t_env *env, t_dynarray *arr)
 {
 	t_rasthread	threads[NB_THREADS];
 
-	clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs);
-
+	if (clip_mesh_triangles(arr, &env->cam.to_raster, env->cam.clip_arrs))
+		return (-1);
 	if (env->cam.to_raster.nb_cells < NB_THREADS)
 		monothread_raster(env);
 	else
 	{
-		switch_threads(env, threads, env->cam.to_raster.nb_cells, false);
-		switch_threads(env, threads, env->cam.to_raster.nb_cells, true);
+		if (switch_threads(env, threads, env->cam.to_raster.nb_cells, false)
+			|| switch_threads(env, threads, env->cam.to_raster.nb_cells, true))
+			return (-1);
 	}
 	clear_dynarray(&env->cam.to_raster);
+	clear_dynarray(&env->cam.to_clip);
 	return (0);
 }

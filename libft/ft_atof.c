@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/10 18:05:35 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/10 18:06:09 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static double	part2(const char *str)
 {
-	int        count;
-	double    res2;
+	int		count;
+	double	res2;
 
 	count = 0;
 	res2 = ft_abs(ft_atoi(str));
@@ -22,10 +34,10 @@ static double	part2(const char *str)
 
 double			ft_atof(const char *str)
 {
-	double    res;
-	double    res1;
-	int        count;
-	int        neg;
+	double	res;
+	double	res1;
+	int		count;
+	int		neg;
 
 	neg = 1;
 	if (*str == '-')

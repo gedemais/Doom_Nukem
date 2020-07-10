@@ -7,35 +7,44 @@ static void	start_game(t_env *env)
 	env->player.hp = START_HP;
 
 	game = &env->custom_env.game;
-	game->wave++;
+	game->wave = 1;
 	game->mobs_pv = MOB_START_HP;
 	game->mobs_speed = MOB_START_SPEED;
 	game->lmob = MOB_LSTART;
 	game->current_lmob = MOB_LSTART;
 	game->moula = START_MOULA;
 	game->spawn_speed = RESPAWN_DELAY;
-
-	env->weapons[W_GLOCK_18].ammos = 80;
-	push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false);
-
-	env->player.current_w = 0;
-	env->player.current = dyacc(&env->player.weapons, 0);
-	env->player.current->ammos = env->player.current->max_ammos;
-
 }
 
 static bool	next_wave(t_env *env)
 {
-	static float	time = INTER_WAVE;
+	static bool		first = true;
 
-	time -= env->data.spent;
-	if (time < 0)
+	if (first)
+		env->custom_env.game.countdown = INTER_WAVE;
+	first = false;
+	env->custom_env.game.countdown -= env->data.spent;
+	if (env->custom_env.game.countdown < 0)
 	{
-		time = INTER_WAVE;
-		// sound
+		env->custom_env.game.countdown = INTER_WAVE;
 		return (true);
 	}
 	return (false);
+}
+
+char	enemy_wave(t_env *env)
+{
+	char	type;
+
+	if (env->custom_env.game.wave % 5 == 0)
+		return (ENEMY_MAGE);
+	else
+	{
+		type = ENEMY_MAGE;
+		while (type == ENEMY_MAGE)
+			type = rand() % ENEMY_MAX;
+		return (type);
+	}
 }
 
 void		handle_waves(t_env *env)

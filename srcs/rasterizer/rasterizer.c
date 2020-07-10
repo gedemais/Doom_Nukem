@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/04 20:51:37 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:55:27 by gedemais         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -56,29 +56,30 @@ int		raster_weapon(t_env *env, t_map *map)
 	return (0);
 }
 
-int		rasterizer(t_env *env, t_map *map, bool respawn)
+int		rasterizer(t_env *e, t_map *map, bool respawn)
 {
 	t_mesh		*m;
 	int			i;
 	int			j;
 
 	i = -1;
-	map_spawn(env, &env->cam, map, respawn);
-	compute_view_matrice(env);
+	map_spawn(&e->cam, map, respawn);
+	compute_view_matrice(e);
 	while (++i < map->nmesh)
 	{
+		while ((m = dyacc(&map->meshs, i))
+			&& i < map->nmesh && m->type == BTXT_NONE)
+			i++;
+		if (m == NULL)
+			return (0);
+		compute_rotation_matrices(e);
 		j = -1;
-		if (!(m = dyacc(&map->meshs, i)))
-			return (-1);
-		if (m->type == BTXT_NONE)
-			continue ;
-		compute_rotation_matrices(env);
 		while (++j < m->tris.nb_cells)
-			triangle_pipeline(env, dyacc(&m->tris, j), &env->cam.to_clip, m);
+			if (triangle_pipeline(e, dyacc(&m->tris, j), &e->cam.to_clip, m))
+				return (-1);
 	}
-	if (raster_triangles(env, &env->cam.to_clip))
+	if (raster_triangles(e, &e->cam.to_clip))
 		return (-1);
-	env->scene = map->index;
-	clear_dynarray(&env->cam.to_clip);
+	e->scene = map->index;
 	return (0);
 }

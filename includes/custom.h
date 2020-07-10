@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 15:30:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:49:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,10 @@
 # define CUSTOM_WALK_SPEED 0.05f
 # define EVENT_DIST 5
 
-# define MOB_PEACE_TIME 30
-# define INTER_WAVE 10
-
-# define SPAWN_SPEED_SUB 0.1f
-
 # define START_HP 100
 # define HEAL_SPEED 10
 
-# define HIT_REWARD 10
-# define KILL_REWARD 60
-# define KILL_DELAY 120
-
 # define START_MOULA 5000
-# define MOB_START_HP 50
-# define MOB_START_SPEED 0.05f
-# define MOB_LSTART 6
-# define MOB_PV_COEFF 1.3f
-# define MOB_SPEED_COEFF 1.1f
-# define MOB_NB_ADD 4
-
 # define MIN_CASH 100
 # define MAX_CASH 1000
 # define GOD_TIME 20
@@ -118,6 +102,8 @@ struct				s_custom_game
 	int			moula;
 	int 		kill_count;
 	int 		kill_delay;
+	int			kills;
+	float		countdown;
 	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 
@@ -131,7 +117,6 @@ struct				s_custom_env
 {
 	t_custom_game	game;
 	t_dynarray		mobs;
-	t_dynarray		loots;
 	t_go_env		go_env;
 	t_scroll		scroll;
 	t_dynarray		events;
@@ -139,11 +124,14 @@ struct				s_custom_env
 	t_node          *start;
     t_node          *end;
 	t_env			*env;
+	t_loot			loot;
 	char			*map_path;
 	float			spawner;
 	int				sub_context;
 };
 
+int					draw_wave(t_env *env);
+int					print_countdown(t_env *env, float time);
 void				handle_waves(t_env *env);
 int					custom_game_over(t_env *env);
 int					set_game_stats(t_env *env);
@@ -156,8 +144,7 @@ t_vec3d				get_block_center(t_event_block *block);
 int					handle_block_events(t_env *env);
 int					parse_events_blocks(t_env *env);
 
-void				handle_player(t_env *env);
-void				handle_loots(t_env *env);
+int					handle_player(t_env *env);
 
 int					init_sky(t_env *env);
 void				handle_moon(t_env *env);

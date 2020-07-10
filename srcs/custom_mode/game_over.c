@@ -2,22 +2,23 @@
 
 int		set_game_stats(t_env *env)
 {
-	int		i;
+	t_custom_env	*c;
+	int				i;
 
 	i = 0;
+	c = &env->custom_env;
 	env->weapons[W_GLOCK_18].ammos = 80;
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
-		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), 0)
-		|| init_dynarray(&env->custom_env.loots, sizeof(t_loot), 0))
+		|| (!c->mobs.byte_size && init_dynarray(&c->mobs, sizeof(t_enemy), 0)))
 			return (-1);
+	env->custom_env.loot.m = NULL;
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
+	env->custom_env.game.wave = 0;
 	env->player.current_w = 0;
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;
 	env->player.hp = START_HP;
-	env->custom_env.game.moula = START_MOULA;
-	env->custom_env.game.wave = 0;
 	return (0);
 }
 
@@ -30,7 +31,7 @@ static int		put_variables(t_env *env)
 
 	conf->size = 32;
 
-	if (!(ptr = ft_itoa(env->custom_env.game.kill_count)))
+	if (!(ptr = ft_itoa(env->custom_env.game.kills)))
 		return (-1);
 	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 305}, FONT_COOLVETICA);

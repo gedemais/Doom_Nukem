@@ -14,6 +14,10 @@ int	me_menu_to_new_map(t_env *env)
 
 int	me_menu_to_creative(t_env *env)
 {
+	env->cam.stats.pos = zero_vector();
+	env->cam.stats.pitch = 0;
+	env->cam.stats.yaw = 0;
+	env->mid.mesh = NULL;
 	sound_system(env, SA_TITLE_SCREEN_L,
 		sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_hide();
@@ -22,6 +26,7 @@ int	me_menu_to_creative(t_env *env)
 
 int	me_new_map_to_creative(t_env *env)
 {
+	env->cam.stats.pos = zero_vector();
 	sound_system(env, SA_TITLE_SCREEN_L,
 		sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_hide();
@@ -44,6 +49,7 @@ int	me_creative_to_menu(t_env *env)
 {
 	sound_system(env, SA_TITLE_SCREEN_L,
 		sp_overall(0, SA_MAX, sp_stop()));
-	// free new_map
+	free_maped(env);
+	mlx_mouse_show();
 	return (0);
 }

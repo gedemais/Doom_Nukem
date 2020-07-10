@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 13:11:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:03:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	free_maped(t_env *env)
 	if (env->edit_env.new_map.name)
 		free(env->edit_env.new_map.name);
 	ft_memset(&env->edit_env.map, 0, sizeof(t_map));
+	ft_memset(&env->edit_env.new_map, 0, sizeof(t_ed_map));
 }
 
 int			free_env(t_env *env)
@@ -143,7 +144,6 @@ int			free_env(t_env *env)
 	int		i;
 
 	i = 0;
-	pixloc(0, 0, true);
 	free_fields(env);
 	free_cam(&env->cam);
 

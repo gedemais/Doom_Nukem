@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shapes.c                                           :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 20:34:52 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 20:34:54 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/10 18:11:10 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/10 18:11:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "libft.h"
 
-void	draw_rectangle(char *img, t_point o, t_point dims, int color)
+int		ft_strclen(char *s, char c)
 {
-	int		xbound;
-	int		ybound;
-	int		x;
-	int		y;
+	int	i;
 
-	y = o.y;
-	xbound = o.x + dims.x;
-	ybound = o.y + dims.y;
-	while (y < ybound)
-	{
-		x = o.x;
-		while (x < xbound)
-		{
-			draw_pixel(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/14 16:51:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:55:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int		key_press_maped(int key, void *param)
 {
 	t_env	*env;
-	int		sc;
 
 	(void)key;
 	env = ((t_env*)param);
-	sc = env->edit_env.sub_context;
 	return (0);
 }
 

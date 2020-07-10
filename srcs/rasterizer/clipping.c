@@ -6,21 +6,16 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/14 21:46:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:52:56 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
+static int		count_to_add(unsigned int p, t_vec3d ps[4], t_triangle t, t_triangle clipped[2])
 {
-	static t_vec3d	ps[4] = {{0, 1.0f, 0, 0}, {0, -1.0f, 0, 0},
-								{1.0f, 0, 0, 0}, {-1.0f, 0, 0, 0}};
-	t_triangle		clipped[2];
-	int				to_add;
-	int				i;
+	int	to_add;
 
-	i = 0;
 	to_add = 0;
 	if (p == 0)
 		to_add = clip_triangle((t_vec3d){0, 0, 0, 0}, ps[0], t, clipped);
@@ -30,53 +25,64 @@ static void	clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 		to_add = clip_triangle((t_vec3d){0, 0, 0, 0}, ps[2], t, clipped);
 	else if (p == 3)
 		to_add = clip_triangle((t_vec3d){WDT - 1, 0, 0, 0}, ps[3], t, clipped);
-	while (i < to_add)
-	{
-		clipped[i].color = t.color;
-		clipped[i].textured = t.textured;
-		clipped[i].voxel = t.voxel;
-		clipped[i].scale = t.scale;
-		clipped[i].normal = t.normal;
-		clipped[i].sp = t.sp;
-		clipped[i].mesh = t.mesh;
-		if (push_dynarray(to_raster, &clipped[i], false))
-			return ;
-		i++;
-	}
+	return (to_add);
 }
 
-static void	fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
+static int		clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
+{
+	static t_vec3d	ps[4] = {{0, 1.0f, 0, 0}, {0, -1.0f, 0, 0},
+								{1.0f, 0, 0, 0}, {-1.0f, 0, 0, 0}};
+	t_triangle		clipped[2];
+	int				to_add;
+	int				i;
+
+	i = 0;
+	to_add = count_to_add(p, ps, t, clipped);
+	while (i < to_add)
+	{
+		clipped[i].normal = t.normal;
+		clipped[i].mesh = t.mesh;
+		clipped[i].scale = t.scale;
+		clipped[i].color = t.color;
+		clipped[i].sp = t.sp;
+		clipped[i].voxel = t.voxel;
+		clipped[i].textured = t.textured;
+		if (push_dynarray(to_raster, &clipped[i], false))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+static int		fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
 {
 	t_triangle		tmp;
 	unsigned int	p;
 	int				i;
 
-	p = 1;
+	p = 0;
 	if (is_triangle_in_screen(t))
-	{
-		push_dynarray(to_raster, &t, false);
-		return ;
-	}
+		return (push_dynarray(to_raster, &t, false));
 	clip_screen_edges(&arrs[0], t, 0);
-	while (p < 4)
+	while (++p < 4)
 	{
-		i = 0;
-		while (i < arrs[p - 1].nb_cells)
+		i = -1;
+		while (++i < arrs[p - 1].nb_cells)
 		{
 			tmp = *(t_triangle*)dyacc(&arrs[p - 1], i);
 			clip_screen_edges(&arrs[p], tmp, p);
-			i++;
 		}
 		clear_dynarray(&arrs[p - 1]);
-		p++;
 	}
 	i = -1;
 	while (++i < arrs[3].nb_cells)
-		push_dynarray(to_raster, dyacc(&arrs[3], i), false);
+		if (push_dynarray(to_raster, dyacc(&arrs[3], i), false))
+			return (-1);
 	clear_dynarray(&arrs[3]);
+	return (0);
 }
 
-void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4])
+int		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4])
 {
 	t_triangle		*t;
 	int				i;
@@ -85,12 +91,14 @@ void		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray ar
 	while (i < tris->nb_cells)
 	{
 		t = dyacc(tris, i);
-		fill_to_raster(to_raster, arrs, *t);
+		if (fill_to_raster(to_raster, arrs, *t))
+			return (-1);
 		i++;
 	}
 	i = -1;
 	while (++i < 4)
 		clear_dynarray(&arrs[i]);
+	return (0);
 }
 
 int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2])

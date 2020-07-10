@@ -6,17 +6,17 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:11:52 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/30 16:31:53 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/08 20:31:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /*
- * Pour definir les hooks a utiliser par type d'event / contexte du programme,
- * on utilisera des tableaux de pointeurs sur fonction (1 par type d'evenement,
- * pour eviter les conflits de typage)
- */
+** Pour definir les hooks a utiliser par type d'event / contexte du programme,
+** on utilisera des tableaux de pointeurs sur fonction (1 par type d'evenement,
+** pour eviter les conflits de typage)
+*/
 
 void		mlx_hooks(t_env *env)
 {

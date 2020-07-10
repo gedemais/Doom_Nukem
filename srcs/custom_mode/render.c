@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:37:10 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/07 22:20:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:25:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int			switch_custom_context(t_env *env, unsigned int i)
 		return (-1);
 	}
 	if (routines[custom_env->sub_context][i])
-		routines[custom_env->sub_context][i](env);
+		if (routines[custom_env->sub_context][i](env))
+			return (-1);
 	env->custom_env.sub_context = i;
 	first = false;
 	return (0);

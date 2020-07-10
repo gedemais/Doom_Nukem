@@ -15,26 +15,23 @@ static void		replace_meshs(t_enemy *mob, int delta)
 	}
 }
 
-static int		enemies_delete_mob(t_env *env, t_dynarray *mobs, t_enemy *mob, int index)
+static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 {
 	int		i;
 	int		tmp;
 	t_enemy	*m;
 	t_mesh	*mesh;
 
-	(void)env;
 	i = mob->map_start - 1;
 	while (++i < mob->map_end)
 	{
 		mesh = dyacc(&mob->map->meshs, mob->map_start);
 		free_mesh(mesh);
-		if (extract_dynarray(&mob->map->meshs, mob->map_start))
-			return (-1);
+		extract_dynarray(&mob->map->meshs, mob->map_start);
 		--mob->map->nmesh;
 	}
 	tmp = mob->map_end - mob->map_start;
-	if (extract_dynarray(mobs, index))
-		return (-1);
+	extract_dynarray(mobs, index);
 	while (index < mobs->nb_cells)
 	{
 		m = dyacc(mobs, index);
@@ -43,7 +40,6 @@ static int		enemies_delete_mob(t_env *env, t_dynarray *mobs, t_enemy *mob, int i
 		replace_meshs(m, tmp);
 		index++;
 	}
-	return (0);
 }
 
 static bool		enemies_death_animation(t_enemy *mob, float angle)
@@ -79,9 +75,10 @@ int			enemies_death(t_env *env, t_dynarray *mobs)
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
 			{
+				env->custom_env.game.kills++;
 				if (spawn_loot(env, mob->pos))
 					return (-1);
-				enemies_delete_mob(env, mobs, mob, i);
+				enemies_delete_mob(mobs, mob, i);
 			}
 	}
 	return (0);

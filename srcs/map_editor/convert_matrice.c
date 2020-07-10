@@ -116,7 +116,7 @@ static void		stock_matrice(t_ed_map *env)
 		while (++h < env->height)
 		{
 			d = -1;
-			while(++d < env->depth)
+			while (++d < env->depth)
 			{
 				while (env->flat[i] == 127)
 					++i;
@@ -130,12 +130,14 @@ static void		stock_matrice(t_ed_map *env)
 int				flat_to_matrice(t_ed_map *env, int offset, int len)
 {
 	env->flat += offset;
+	env->width = 0;
+	env->height = 0;
+	env->depth = 0;
 	len -= offset;
 	if (env->flat == NULL
 		|| get_matrice_size(env, len) == 0 
 		|| init_matrice(env) == 0)
 	{
-		PUT
 		env->flat -= offset;
 		return (0);
 	}

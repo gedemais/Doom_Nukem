@@ -16,7 +16,7 @@ int			del_block(t_env *env)
 	return (0);
 }
 
-int			replace_block(t_env *env)
+void	replace_block(t_env *env)
 {
 	int		pos[3];
 	t_mesh	*mesh;
@@ -24,21 +24,19 @@ int			replace_block(t_env *env)
 	char	bt;
 
 	i = -1;
-	if (!env->mid.mesh)
-		return (0);
-	mesh = env->mid.mesh;
-	bt = (env->edit_env.current_bt == 0) ? 1 : env->edit_env.current_bt;
+	if (!(mesh = env->mid.mesh))
+		return ;
+	bt = env->edit_env.current_bt;
 	ft_memcpy(pos, mesh->m_pos, sizeof(int) * 3);
-	if (env->events.buttons[BUTTON_SCLIC])
+	if (env->events.buttons[BUTTON_SCLIC] && env->edit_env.current_bc == BC_CUBE)
 		if (env->events.buttons[BUTTON_SCROLL_UP]
 			|| env->events.buttons[BUTTON_SCROLL_DOWN])
 		{
-			mesh->type = bt;
-			env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = bt;
+			mesh->type = bt + 1;
+			env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = bt + 1;
 			while (++i < mesh->tris.nb_cells)
 				((t_triangle*)dyacc(&mesh->tris, i))->sp = mesh->type;
 		}
-	return (0);
 }
 
 int			put_block(t_env *env)

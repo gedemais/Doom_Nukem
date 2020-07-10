@@ -3,7 +3,21 @@
 
 # include "main.h"
 
-# define MAX_ENEMIES 1
+# define MOB_PEACE_TIME 30
+# define INTER_WAVE 10
+# define SPAWN_SPEED_SUB 0.1f
+# define HIT_REWARD 10
+# define KILL_REWARD 60
+# define KILL_DELAY 120
+
+# define MOB_START_HP 50
+# define MOB_START_SPEED 0.05f
+# define MOB_LSTART 6
+# define MOB_PV_COEFF 1.2f
+# define MOB_SPEED_COEFF 1.05f
+# define MOB_NB_ADD 4
+
+# define MAX_ENEMIES 12
 # define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f
 # define ENEMIES_NOISE_DELAY 20
@@ -15,14 +29,16 @@
 enum				e_enemies
 {
 	ENEMY_CORONA,
-	//ENEMY_MAGE,
+	ENEMY_MAGE,
+	ENEMY_GOULE,
 	ENEMY_MAX
 };
 
 enum				e_damages
 {
-	EDAMAGES_CORONA = 10,
-	EDAMAGES_MAGE = 35
+	EDAMAGES_CORONA = 15,
+	EDAMAGES_MAGE = 42,
+	EDAMAGES_GOULE = 20
 };
 
 enum				e_loots_id
@@ -38,7 +54,6 @@ struct				s_loot
 {
 	t_mesh			*m;
 	t_vec3d			pos;
-	int				index;
 	char			id;
 };
 
@@ -67,12 +82,13 @@ struct				s_enemy
 	t_map		*map;
 };
 
-void			print_mobs(t_env *env); // a tej
 
 int				handle_enemies(t_env *env);
+char			enemy_wave(t_env *env);
 
 int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 
+int				handle_loots(t_env *env);
 void			enemies_animations(t_env *env, t_enemy *mob);
 void			enemies_movements(t_env *env, t_pf *a);
 void			enemies_do_movement(t_env *env, t_enemy *mob);

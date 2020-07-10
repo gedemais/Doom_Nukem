@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shapes.c                                           :+:      :+:    :+:   */
+/*   vec3d_fops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 20:34:52 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 20:34:54 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/08 21:51:11 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/08 21:51:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	draw_rectangle(char *img, t_point o, t_point dims, int color)
+t_vec3d		vec_fdiv(t_vec3d a, float n)
 {
-	int		xbound;
-	int		ybound;
-	int		x;
-	int		y;
+	t_vec3d		ret;
 
-	y = o.y;
-	xbound = o.x + dims.x;
-	ybound = o.y + dims.y;
-	while (y < ybound)
-	{
-		x = o.x;
-		while (x < xbound)
-		{
-			draw_pixel(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	ret.x = a.x / n;
+	ret.y = a.y / n;
+	ret.z = a.z / n;
+	ret.w = a.w / n;
+	return (ret);
+}
+
+t_vec3d		vec_fmult(t_vec3d a, float n)
+{
+	t_vec3d		ret;
+
+	ret.x = a.x * n;
+	ret.y = a.y * n;
+	ret.z = a.z * n;
+	return (ret);
+}
+
+t_vec3d		vec_fsub(t_vec3d a, float n)
+{
+	t_vec3d		ret;
+
+	ret.x = a.x - n;
+	ret.y = a.y - n;
+	ret.z = a.z - n;
+	return (ret);
 }

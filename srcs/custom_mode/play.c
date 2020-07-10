@@ -48,32 +48,26 @@ static int		handle_keys(t_env *env, t_events *e)
 		env->phy_env.type_move = true;
 	
 	if (e->keys[KEY_M])
-		switch_custom_context(env, CUSTOM_SC_MENU);
+		if (switch_custom_context(env, CUSTOM_SC_MENU))
+			return (-1);
 
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }
 
-void	print_mobs(t_env *env)
+static void	print_mobs(t_env *env)
 {
 	t_enemy	*mob;
-	t_loot	*loot;
 	t_mesh	*m;
 	int		i;
 
 	i = 0;
-	while (i < env->custom_env.loots.nb_cells)
-	{
-		loot = dyacc(&env->custom_env.loots, i);
-		printf("loot n%d : %d\n", i, loot->m->index);
-		i++;
-	}
-	printf("------------------------\n");
-	i = 0;
+	if (env->custom_env.loot.m)
+		printf("loot : %d\n", env->custom_env.loot.m->index);
 	while (i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
-		printf("mob n%d : %d <-> %d | (", i, mob->map_start, mob->map_end);
+		printf("mob %d : %d <-> %d (", i, mob->map_start, mob->map_end);
 		for (int j = mob->map_start; j < mob->map_end; j++)
 		{
 			m = dyacc(&env->edit_env.map.meshs, j);
@@ -82,30 +76,27 @@ void	print_mobs(t_env *env)
 		printf(")\n");
 		i++;
 	}
-	printf("--------------------------------------------\n");
+	printf("-----------------------------------------------------\n");
 }
 
 int			custom_play(t_env *env)
 {
+	print_mobs(env);
 	if (sound_manager(env, SA_MAX))
 		return (-1);
-//	printf("---------- custom_play ------------\n");
-//	print_mobs(env);
 	handle_waves(env);
 	//physic_engine(env, &env->edit_env.map);
 	camera_aim(env);
 	clear_screen_buffers(env);
-	assert(!rasterizer(env, &env->edit_env.map, false));
+	if (rasterizer(env, &env->edit_env.map, false))
+		return (-1);
 	handle_moon(env);
-	handle_loots(env);
-	handle_weapons(env);
-	handle_block_events(env);
+	if (handle_loots(env) || handle_weapons(env) || handle_block_events(env))
+		return (-1);
 	draw_hud(env);
-	handle_keys(env, &env->events);
-	handle_player(env);
-	handle_enemies(env);
+	if (handle_keys(env, &env->events)
+		|| handle_player(env) || handle_enemies(env))
+		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-	env->events.buttons[BUTTON_SCROLL_UP] = false;
-	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 	return (0);
 }

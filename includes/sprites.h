@@ -69,6 +69,9 @@ struct	s_sprite
 	char			*img_data;
 	int				hgt;
 	int				wdt;
+	float			delta_x;
+	float			delta_y;
+	float			sample_y;
 	int				alpha;
 	int				pad;
 };

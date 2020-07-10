@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/03 13:34:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:37:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ double	mesure_time(bool end)
 		return ((double)(clock() - start) / CLOCKS_PER_SEC);
 }
 
-
 int		render(void *param)
 {
-	static int				(*render_fts[C_MAX])(void*) = {render_ts, render_camp, render_custom, render_maped};
+	static int				(*render_fts[C_MAX])(void*) = {render_ts,
+									render_camp, render_custom, render_maped};
 	static struct timeval	t;
 	t_env					*env;
 	t_data					*data;
-
-	static float	fps;
-	static int		it = 0;
 
 	env = (t_env*)param;
 	data = &env->data;
@@ -43,18 +40,11 @@ int		render(void *param)
 	data->spent += (t.tv_usec - data->time.tv_usec) / 1000;
 	data->spent /= 1000;
 	gettimeofday(&data->time, NULL);
-
-	fps += 1 / data->spent;
-	it++;
-	if (it > 30)
-	{
-		printf("fps : %f\n", fps / it);
-		//system("leaks doom-nukem");
-		it = 0;
-		fps = 0;
-	}
-
 	if (env->events.keys[KEY_ESCAPE])
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
-	return (render_fts[((t_env*)param)->context](param));
+	if (render_fts[((t_env*)param)->context](param))
+		exit_doom(env, "render failed", 2, EXIT_SUCCESS);
+	env->events.buttons[BUTTON_SCROLL_UP] = false;
+	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
+	return (0);
 }

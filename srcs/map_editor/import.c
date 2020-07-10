@@ -1,15 +1,5 @@
 #include "main.h"
 
-static int	ft_strclen(char *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
-}
-
 static void	gen_path(char path[MAX_MAP_PATH_LEN], char *name)
 {
 	ft_bzero(path, MAX_MAP_PATH_LEN);
@@ -52,6 +42,22 @@ static char	*get_file_name(char *name)
 	return (dest);
 }
 
+static int	handle_file(t_edit_env *env, char *name, char p[MAX_MAP_PATH_LEN])
+{
+	int		fd;
+
+	if (!(env->new_map.name = get_file_name(name)))
+		return (-1);
+	gen_path(p, name);
+	if ((fd = open(p, O_RDONLY)) == -1)
+	{
+		perror(strerror(errno));
+		free(env->new_map.name);
+		return (-1);
+	}
+	return (fd);
+}
+
 int			import_maped_map(t_edit_env *env, char *name)
 {
 	char	path[MAX_MAP_PATH_LEN];
@@ -60,14 +66,8 @@ int			import_maped_map(t_edit_env *env, char *name)
 	int		offset;
 	int		fd;
 
-	if (!(env->new_map.name = get_file_name(name)))
+	if ((fd = handle_file(env, name, path)) < 0)
 		return (-1);
-	gen_path(path, name);
-	if ((fd = open(path, O_RDONLY)) == -1)
-	{
-		perror(strerror(errno));
-		return (-1);
-	}
 	if (!(file = read_file(fd, &len)) || len < 6)
 	{
 		close(fd);

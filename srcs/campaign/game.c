@@ -26,8 +26,7 @@ static void	handle_keys(t_env *env, t_events *e)
 static void	handle_mouse(t_env *env, t_events *e)
 {
 	(void)env;
-	e->buttons[BUTTON_SCROLL_UP] = false;
-	e->buttons[BUTTON_SCROLL_DOWN] = false;
+	(void)e;
 }
 
 static void	cmp_game_handle_events(t_env *env)
@@ -44,19 +43,16 @@ int		cmp_game(void *param)
 	t_env		*env;
 	t_camp_env	*cmp_env;
 
-	mesure_time(false);
 	env = (t_env*)param;
+	cmp_env = &env->cmp_env;
 	if (sound_manager(env, SA_MAX))
 		return (-1);
-	cmp_env = &env->cmp_env;
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
-	//physic_engine(env);
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	assert(!rasterizer(env, &env->maps[env->scene], false));
-	//handle_weapons(env);
+	if (rasterizer(env, &env->maps[env->scene], false))
+		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
-
 	return (0);
 }

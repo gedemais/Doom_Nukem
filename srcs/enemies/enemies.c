@@ -62,7 +62,7 @@ static int		spawn_mob(t_env *env)
 	pos.z = p[2] * 2;
 	game->current_lmob--;
 	game->amob++;
-	return (create_mob(env, &env->edit_env.map, ENEMY_CORONA, pos));
+	return (create_mob(env, &env->edit_env.map, enemy_wave(env), pos));
 }
 
 int				handle_enemies(t_env *env)
@@ -83,7 +83,8 @@ int				handle_enemies(t_env *env)
 		if (env->mid.mesh)
 			enemies_damages(env);
 		enemies_movements(env, &env->astar);
-		enemies_death(env, &env->custom_env.mobs);
+		if (enemies_death(env, &env->custom_env.mobs))
+			return (-1);
 		enemies_to_scene(env, &env->custom_env.mobs);
 		enemies_kills_annoucements(env);
 	}

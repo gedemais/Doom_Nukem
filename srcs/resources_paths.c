@@ -22,11 +22,11 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/map-test.obj",
 										"resources/maps/slender.obj",
 										"resources/maps/ugly.obj",
-										"resources/maps/mad.obj",
 										"resources/maps/moon.obj",
 										"resources/maps/star.obj",
 										"resources/maps/mage.obj",
-										"resources/maps/loot.obj"};
+										"resources/maps/loot.obj",
+										"resources/maps/goule.obj"};
 
 	return (paths[index]);
 }

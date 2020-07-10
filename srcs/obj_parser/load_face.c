@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 03:53:16 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/25 19:32:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/09 20:12:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool	check_format(char **toks)
 	while (toks[i])
 	{
 		j = 0;
-		if (!ft_isdigit(toks[i][j])) // Si le premier caractere du token n'est pas un digit
+		if (!ft_isdigit(toks[i][j]))
 			return (true);
 		while (toks[i][j])
 		{
@@ -53,7 +53,7 @@ static bool	check_format(char **toks)
 				return (true);
 			j++;
 		}
-		if (toks[i][j - 1] == '/') // __ dernier
+		if (toks[i][j - 1] == '/')
 			return (true);
 		i++;
 	}

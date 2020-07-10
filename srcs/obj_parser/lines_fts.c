@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lines_fts.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 20:07:57 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/09 20:11:07 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 int		new_mesh(t_map *map, char **toks)
 {
-	static char		zone[sizeof(t_mesh)] = {};
+	t_mesh			zone;
 	t_mesh			*m;
 
 	map->cmtl = -1;
 	if (ft_tablen(toks) != 2)
 		return (-1);
-	if (push_dynarray(&map->meshs, &zone[0], false)
+	ft_bzero(&zone, sizeof(t_mesh));
+	if (push_dynarray(&map->meshs, &zone, false)
 		|| !(m = dyacc(&map->meshs, map->nmesh))
 		|| !(m->name = ft_strdup(toks[1]))
 		|| init_dynarray(&m->faces, sizeof(t_face), 0))
@@ -73,54 +86,4 @@ int		new_face(t_map *map, char **toks)
 		|| push_dynarray(&m->faces, &face, false))
 		return (-1);
 	return (0);
-}
-
-int		vertex_end(t_map *map, char **toks)
-{
-	(void)map;
-	(void)toks;
-	return (0);
-}
-
-int		comment(t_map *map, char **toks)
-{
-	(void)map;
-	(void)toks;
-	return (0);
-}
-
-int		mtllib(t_map *map, char **toks)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (*init_parser())
-		return (0);
-	if (ft_tablen(toks) != 2 || (map->mtls.byte_size == 0
-		&& init_dynarray(&map->mtls, sizeof(t_mtl), 0)))
-		return (-1);
-	if (parse_mtl(toks[1], &map->mtls))
-		return (-1);
-	return (0);
-}
-
-int		usemtl(t_map *map, char **toks)
-{
-	t_mtl	*m;
-	int		i;
-
-	i = 0;
-	if (ft_tablen(toks) != 2)
-		return (-1);
-	while (i < map->mtls.nb_cells)
-	{
-		if ((m = dyacc(&map->mtls, i)) && !ft_strcmp(toks[1], m->name))
-		{
-			map->cmtl = i;
-			return (0);
-		}
-		i++;
-	}
-	map->cmtl = -1;
-	return (-1);
 }

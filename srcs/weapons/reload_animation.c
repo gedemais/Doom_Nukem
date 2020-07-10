@@ -21,7 +21,7 @@ void	reload_animation(t_env *env, t_weapon *w)
 	float	progress;
 
 	w->reloading -= env->data.spent;
-	if (!ft_inbounds(env->scene, W_FAMAS, W_MAX - 1)) // Protection
+	if (!ft_inbounds(env->scene, W_FAMAS, W_MAX - 1))
 		return ;
 	progress = w->reloading / RELOAD_TIME;
 	up_n_down(w, progress, progress < 0.01f);

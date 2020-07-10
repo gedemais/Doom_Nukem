@@ -84,7 +84,9 @@ static void	check_export(t_env *env)
 	static int		err_time = 0;
 	static int		ret = 0;
 
-	if (env->events.keys[KEY_P])
+	if (env->events.keys[KEY_M])
+		switch_mecontext(env, MAPED_SC_MENU);
+	else if (env->events.keys[KEY_P])
 	{
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
@@ -104,8 +106,6 @@ static void	refresh_last_gui(t_events *e, int *gui)
 	if (e->keys[KEY_UP] || e->keys[KEY_DOWN] || e->buttons[BUTTON_SCLIC]
 		|| e->buttons[BUTTON_SCROLL_DOWN] || e->buttons[BUTTON_SCROLL_UP])
 		*gui = 100;
-	e->buttons[BUTTON_SCROLL_UP] = false;
-	e->buttons[BUTTON_SCROLL_DOWN] = false;
 }
 
 int			maped_creative(t_env *env)
@@ -120,7 +120,8 @@ int			maped_creative(t_env *env)
 	clear_screen_buffers(env);
 	camera_aim(env);
 	env->mid.mesh = NULL;
-	assert(!rasterizer(env, &env->edit_env.map, false));
+	if (rasterizer(env, &env->edit_env.map, false))
+		return (-1);
 	refresh_last_gui(&env->events, &last_gui_use);
 	if (last_gui_use > 0)
 	{
