@@ -18,7 +18,7 @@
 # define MOB_NB_ADD 4
 
 # define MAX_ENEMIES 12
-# define LOOT_FREQ 12
+# define LOOT_FREQ 1
 # define RESPAWN_DELAY 3.0f
 # define ENEMIES_NOISE_DELAY 20
 # define MOB_ANIMATION_DOWN 0.1f
@@ -53,8 +53,8 @@ enum				e_loots_id
 struct				s_loot
 {
 	t_mesh			*m;
-	t_vec3d			pos;
 	char			id;
+	bool			on;
 };
 
 struct				s_enemy

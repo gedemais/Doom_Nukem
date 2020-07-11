@@ -43,6 +43,8 @@ static void		find_random_spawner(t_dynarray *events, int sp[3], int index)
 		}
 		i++;
 	}
+	printf("not found (%d)\n", index);
+	sleep(1);
 }
 
 static int		spawn_mob(t_env *env)

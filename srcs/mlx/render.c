@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/10 21:07:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/11 15:55:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		render(void *param)
 	gettimeofday(&data->time, NULL);
 	if (env->events.keys[KEY_ESCAPE])
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
+	printf("%d mobs left | %d mobs alive | %d in dynarray\n",
+		env->custom_env.game.current_lmob, env->custom_env.game.amob, env->custom_env.mobs.nb_cells);
 	if (render_fts[((t_env*)param)->context](param))
 		exit_doom(env, "render failed", 2, EXIT_SUCCESS);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;

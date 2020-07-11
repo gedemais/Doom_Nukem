@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/10 15:49:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/11 16:43:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ struct				s_custom_env
     t_node          *end;
 	t_env			*env;
 	t_loot			loot;
+	t_mesh			*loots[LOOT_MAX];
 	char			*map_path;
 	float			spawner;
 	int				sub_context;
@@ -137,6 +138,7 @@ int					custom_game_over(t_env *env);
 int					set_game_stats(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 
+int					init_loots(t_env *env);
 int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
 t_mesh				*copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
 
