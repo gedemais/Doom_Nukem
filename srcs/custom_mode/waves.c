@@ -58,7 +58,7 @@ void		handle_waves(t_env *env)
 		start_game(env);
 		return ;
 	}
-	if (game->current_lmob == 0 && game->amob == 0)
+	if (game->current_lmob == 0 && env->custom_env.mobs.nb_cells == 0)
 		if (next_wave(env))
 		{
 			game->wave++;

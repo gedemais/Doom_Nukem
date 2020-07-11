@@ -7,20 +7,6 @@ static void	stop_n_play(t_env *env, int source)
 		sp_play(env->volume, PITCH, env->cam.stats.pos));
 }
 
-static void	pichenette(t_env *env)
-{
-	t_data		*data;
-	int			x;
-	int			y;
-	int			max;
-
-	data = &env->data;
-	max = env->player.current->accuracy * ACC_START;
-	x = (rand() % max) - max / 2;
-	y = (rand() % max) - max / 2;
-	env->player.shoot = (t_point){data->half_wdt + x, data->half_hgt + y};
-}
-
 int			shoot_current_weapon(t_env *env)
 {
 	t_weapon	*w;
@@ -39,7 +25,6 @@ int			shoot_current_weapon(t_env *env)
 		stop_n_play(env, w->shoot);
 	}
 	w->shooting = 60.0f / w->cadency;
-	pichenette(env);
 	w->shot = true;
 	return (0);
 }

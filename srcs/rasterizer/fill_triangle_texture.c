@@ -6,11 +6,18 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/11 20:32:27 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/11 18:04:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+static inline void		get_pixel_info(t_env *env, t_triangle *t, int pos[4])
+{
+	if (pos[0] == env->data.half_hgt)
+		if (pos[1] == env->data.half_wdt)
+			env->mid = *t;
+}
 
 static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int pos[4])
 {
@@ -20,9 +27,7 @@ static inline void	write_pixel(t_env *env, t_texturizer *txt, t_triangle *t, int
 
 	if (txt->txt_w < env->cam.z_buffer[pos[2]])
 		return ;
-	if (pos[0] == env->data.half_hgt)
-		if (pos[1] == env->data.half_wdt)
-			env->mid = *t;
+	get_pixel_info(env, t, pos);
 	if (t->textured && t->sp >= 0)
 	{
 		cu = txt->txt_u / txt->txt_w;
