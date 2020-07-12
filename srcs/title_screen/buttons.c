@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 04:02:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/30 14:43:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/12 21:17:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,15 @@ void	init_button(t_button *button, t_point o, t_sprite *sp[3])
 {
 	button->l_up.x = o.x;
 	button->l_up.y = o.y;
-
 	button->r_up.x = o.x + sp[0]->wdt;
 	button->r_up.y = o.y;
-
 	button->l_down.x = o.x;
 	button->l_down.y = o.y + sp[0]->hgt;
-
 	button->r_down.x = o.x + sp[0]->wdt;
 	button->r_down.y = o.y + sp[0]->hgt;
-
 	button->on = sp[0];
 	button->hover = sp[1];
 	button->off = sp[2];
-	
 	button->is_hover = false;
 }
 
@@ -44,15 +39,17 @@ bool	is_on_button(t_point mouse, t_button button)
 void	render_button(t_env *env, t_button button)
 {
 	t_sprite	*sprite;
+	t_point		pos;
 	bool		clic;
 
+	pos = (t_point){button.l_up.x, button.l_up.y};
 	clic = false;
 	if (button.is_hover)
 	{
 		if (env->events.buttons[BUTTON_LCLIC])
 		{
 			sprite = button.on;
-			map_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y});
+			map_sprite(env->mlx.img_data, *sprite, pos);
 			clic = true;
 		}
 		else
@@ -61,6 +58,5 @@ void	render_button(t_env *env, t_button button)
 	else
 		sprite = button.off;
 	if (!clic)
-		map_sprite(env->mlx.img_data, *sprite, (t_point){button.l_up.x, button.l_up.y});
+		map_sprite(env->mlx.img_data, *sprite, pos);
 }
-

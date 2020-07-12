@@ -1,17 +1,11 @@
-export leak
-
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
 {
 	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche
 	INFINITY si joueur trop loin
 }
 
-Mobs qui spawnent en  0 0 0 (lie aux mobs en oedeme entre les contextes)
-
 Fix la physique
 => baisser s'accroupir + voir msg épinglé discord
-
-Gérer les leaks dans le changement de contexte reverse (custom to menu etc..)
 
 gérer le export ds le make install
 => l'user définit en brut dans le make install le path du .zshrc
@@ -20,6 +14,6 @@ NORME
 
 LEAKS :
 
-remonter les chaines d'erreurs return (-1); // fait pour les fonctions appelees dans les renders, a faire pour setup()
+remonter les chaines d'erreurs return (-1) dans setup; // fait pour les fonctions appelees dans les renders, a faire pour setup()
 
 vérifier les .h et .c si fonctions / variables non utilisées => delete

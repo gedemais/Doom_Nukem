@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 22:50:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 18:04:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/12 21:49:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void		fill_triangle_texture(t_env *env, t_triangle *t)
 {
 	t_texturizer	txt;
 
-	txt = (t_texturizer){};
+	ft_bzero(&txt, sizeof(t_texturizer));
 	starting_swap(t);
 	load_triangle_data(env, t, &txt);
 	compute_gradients(&txt, t, false);
