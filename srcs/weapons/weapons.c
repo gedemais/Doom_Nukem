@@ -21,8 +21,6 @@ static void	switch_current_weapon(t_env *env, t_events *e)
 		env->player.current_w = index;
 		env->player.current = dyacc(&env->player.weapons, index);
 	}
-	else
-		return ;
 }
 
 static void	handle_ready(t_env *env, t_weapon *w)

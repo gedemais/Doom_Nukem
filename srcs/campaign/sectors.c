@@ -6,25 +6,10 @@ void	init_sectors(t_env *env)
 
 	cmp_env = &env->cmp_env;
 	cmp_env->sectors[SECTOR_AXIS].map = SCENE_AXIS;
-	cmp_env->sectors[SECTOR_CUBE].map = SCENE_CUBE;
-	cmp_env->sectors[SECTOR_TEST].map = SCENE_MAP_TEST;
-	cmp_env->sectors[SECTOR_SLENDER].map = SCENE_SLENDER;
-
-	cmp_env->sectors[SECTOR_FAMAS].map = SCENE_FAMAS;
-	cmp_env->sectors[SECTOR_AK47].map = SCENE_AK47;
-	cmp_env->sectors[SECTOR_SAWED_OFF].map = SCENE_SAWED_OFF;
-	cmp_env->sectors[SECTOR_GLOCK_18].map = SCENE_GLOCK_18;
-	cmp_env->sectors[SECTOR_AUG].map = SCENE_AUG;
-	cmp_env->sectors[SECTOR_UMP45].map = SCENE_UMP45;
-	cmp_env->sectors[SECTOR_MAG7].map = SCENE_MAG7;
-	cmp_env->sectors[SECTOR_GALIL].map = SCENE_GALIL;
-	cmp_env->sectors[SECTOR_NEGEV].map = SCENE_NEGEV;
-	cmp_env->sectors[SECTOR_TEC9].map = SCENE_TEC9;
 	cmp_env->sectors[SECTOR_UGLY].map = SCENE_UGLY;
-	cmp_env->sectors[SECTOR_MOON].map = SCENE_MOON;
-	cmp_env->sectors[SECTOR_STAR].map = SCENE_STAR;
 	cmp_env->sectors[SECTOR_MAGE].map = SCENE_MAGE;
-	cmp_env->sectors[SECTOR_LOOT].map = SCENE_LOOT;
+	cmp_env->sectors[SECTOR_GOULE].map = SCENE_GOULE;
+	cmp_env->sectors[SECTOR_HOUSE].map = SCENE_HOUSE;
 	//cmp_env->sectors[SECTOR_].map = SCENE_;
 }
 

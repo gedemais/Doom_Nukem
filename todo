@@ -1,3 +1,5 @@
+export leak
+
 Empecher les spawners qui te trouvent pas de faire spawn des mobs
 {
 	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche

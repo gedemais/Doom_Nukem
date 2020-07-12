@@ -105,5 +105,8 @@ int			export_maped_map(t_edit_env *env)
 	if (!write_infile(path, str, len, true))
 		return (-1);
 	free(str);
+	free(env->new_map.flat);
+	PUT5
+	system("leaks doom-nukem");
 	return (0);
 }

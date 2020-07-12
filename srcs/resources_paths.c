@@ -20,13 +20,13 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/pente_sud.obj",
 										"resources/maps/pente_est.obj",
 										"resources/maps/map-test.obj",
-										"resources/maps/slender.obj",
 										"resources/maps/ugly.obj",
 										"resources/maps/moon.obj",
 										"resources/maps/star.obj",
 										"resources/maps/mage.obj",
 										"resources/maps/loot.obj",
-										"resources/maps/goule.obj"};
+										"resources/maps/goule.obj",
+										"resources/maps/house.obj"};
 
 	return (paths[index]);
 }
