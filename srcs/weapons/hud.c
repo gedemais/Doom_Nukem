@@ -6,6 +6,7 @@ static int		print_moulaga(t_env *env)
 	char			*moulaga;
 
 	conf = ttf_config();
+	map_sprite(env->mlx.img_data, env->sprites[SP_COIN], (t_point){900, 38});
 	if (!(moulaga = ft_itoa(env->custom_env.game.moula)))
 		return (-1);
 	ft_strcpy((char*)conf->s, moulaga);
