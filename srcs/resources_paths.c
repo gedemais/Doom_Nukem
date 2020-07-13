@@ -77,7 +77,9 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/yes_on.xpm",
 					"resources/sprites/buttons/no_off.xpm",
 					"resources/sprites/buttons/no_hover.xpm",
-					"resources/sprites/buttons/no_on.xpm"};
+					"resources/sprites/buttons/no_on.xpm",
+					"resources/sprites/coins.xpm",
+					"resources/sprites/new_wave.xpm"};
 
 	return (paths[index]);
 }

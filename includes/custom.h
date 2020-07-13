@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/10 15:49:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:50:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ struct				s_custom_env
 	int				sub_context;
 };
 
-int					draw_wave(t_env *env);
 int					print_countdown(t_env *env, float time);
 void				handle_waves(t_env *env);
 int					custom_game_over(t_env *env);

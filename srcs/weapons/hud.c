@@ -4,20 +4,14 @@ static int		print_moulaga(t_env *env)
 {
 	t_ttf_config	*conf;
 	char			*moulaga;
-	t_point			o;
 
 	conf = ttf_config();
+	map_sprite(env->mlx.img_data, env->sprites[SP_COIN], (t_point){900, 38});
 	if (!(moulaga = ft_itoa(env->custom_env.game.moula)))
 		return (-1);
 	ft_strcpy((char*)conf->s, moulaga);
-	conf->size = 16;
-	o = (t_point){1000 - conf->size / 2, 200};
-	draw_rectangle(env->mlx.img_data, o,
-		(t_point){conf->size * ft_strlen(moulaga), conf->size}, 0x770000);
-	free(moulaga);
-	o.x += conf->size / 2;
-	o.y += conf->size;
-	my_string_put(env, env->mlx.img_data, o, FONT_COOLVETICA);
+	conf->size = 18;
+	my_string_put(env, env->mlx.img_data, (t_point){930, 60}, FONT_COOLVETICA);
 	return (0);
 }
 

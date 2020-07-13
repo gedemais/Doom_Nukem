@@ -60,6 +60,8 @@ enum	e_sprite_id
 	SP_NO_OFF,
 	SP_NO_HOVER,
 	SP_NO_ON,
+	SP_COIN,
+	SP_NEW_WAVE,
 	SP_MAX
 };
 

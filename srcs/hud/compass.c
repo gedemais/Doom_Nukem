@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 08:22:11 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/09 15:31:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:48:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void		draw_events_indicator(t_env *env)
 	int i;
 	t_event_block *event;
 	float angle;
-	t_vec3d sub;
 	int offsetx;
 	float dist;
 
@@ -28,10 +27,9 @@ static void		draw_events_indicator(t_env *env)
 			event = dyacc(&env->custom_env.events, i);
 			if (event->id == BE_CHEST)
 			{
-				sub = vec_sub(get_block_center(event), env->cam.stats.pos);
-				angle = xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
+				angle = xz_angle(env->cam.stats.dir, vec_sub(get_block_center(event), env->cam.stats.pos)) * (180 / M_PI);
 				offsetx = WDT * (angle + 180) / 360;
-				dist = vec3d_dist(get_block_center(event), env->cam.stats.pos);
+				dist = vec3d_dist(get_block_center(event), env->cam.stats.pos) / 2;
 				if (offsetx > env->data.third_wdt && offsetx + EN_WDT < env->data.third_wdt * 2)
 					draw_rectangle(env->mlx.img_data, (t_point){offsetx, COMP_HGT + (dist / 2)},
 						(t_point){EN_WDT, COMP_HGT - dist}, 0x00FFFF);
@@ -44,7 +42,6 @@ static void		draw_ennemies_indicator(t_env *env)
 	int		i;
 	t_enemy	*mob;
 	float angle;
-	t_vec3d sub;
 	int offsetx;
 	float dist;
 
@@ -52,10 +49,9 @@ static void		draw_ennemies_indicator(t_env *env)
 	while (++i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
-		sub = vec_sub(mob->pos, env->cam.stats.pos);
-		angle = xz_angle(env->cam.stats.dir, sub) * (180 / M_PI);
+		angle = xz_angle(env->cam.stats.dir, vec_sub(mob->pos, env->cam.stats.pos)) * (180 / M_PI);
 		offsetx = WDT * (angle + 180) / 360;
-		dist = vec3d_dist(mob->pos, env->cam.stats.pos);
+		dist = vec3d_dist(mob->pos, env->cam.stats.pos) / 2;
 		if (offsetx > env->data.third_wdt && offsetx + EN_WDT < env->data.third_wdt * 2)
 			draw_rectangle(env->mlx.img_data, (t_point){offsetx, COMP_HGT + (dist / 2)},
 				(t_point){EN_WDT, COMP_HGT - dist}, NORMAL_RED);
