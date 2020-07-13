@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/10 18:51:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:35:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,11 @@ enum	e_cmp_menu_buttons_id
 
 enum	e_sector_id
 {
-	SECTOR_FAMAS,
-	SECTOR_AK47,
-	SECTOR_SAWED_OFF,
-	SECTOR_GLOCK_18,
-	SECTOR_AUG,
-	SECTOR_UMP45,
-	SECTOR_MAG7,
-	SECTOR_GALIL,
-	SECTOR_NEGEV,
-	SECTOR_TEC9,
-	SECTOR_CUBE,
 	SECTOR_AXIS,
-	SECTOR_TEST,
-	SECTOR_SLENDER,
 	SECTOR_UGLY,
-	SECTOR_MAD,
-	SECTOR_MOON,
-	SECTOR_STAR,
 	SECTOR_MAGE,
-	SECTOR_LOOT,
+	SECTOR_GOULE,
+	SECTOR_HOUSE,
 	SECTOR_MAX
 };
 
@@ -86,6 +71,8 @@ struct			s_camp_env
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];		
 	t_sector	sectors[SECTOR_MAX];
+	t_mesh		*key[SECTOR_MAX];
+	bool		have_key;
 	int			sector;
 	int			sub_context;
 };
@@ -104,6 +91,7 @@ int					render_camp(void *param);
 */
 void				init_sectors(t_env *env);
 void				check_doors(t_env *env, t_camp_env *cmp_env);
+int					handle_key(t_env *env);
 
 /*
 ** Sub_contexts functions

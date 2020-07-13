@@ -53,6 +53,7 @@ int		cmp_game(void *param)
 	clear_screen_buffers(env);
 	if (rasterizer(env, &env->maps[env->scene], false))
 		return (-1);
+	handle_key(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

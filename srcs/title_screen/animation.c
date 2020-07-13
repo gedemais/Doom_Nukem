@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 05:27:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/08 12:10:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/12 21:16:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 static bool	check_place(t_point l_up, unsigned int i)
 {
-	if (i == TS_BUTTON_CAMPAIGN && l_up.x == 415 && ft_inbounds(l_up.y, 320, 340))
+	if (i == TS_BUTTON_CAMPAIGN
+		&& l_up.x == 415 && ft_inbounds(l_up.y, 320, 340))
 		return (true);
-	else if (i == TS_BUTTON_CUSTOM && l_up.x == 415 && ft_inbounds(l_up.y, 410, 430))
+	else if (i == TS_BUTTON_CUSTOM
+		&& l_up.x == 415 && ft_inbounds(l_up.y, 410, 430))
 		return (true);
-	else if (i == TS_BUTTON_MAP_EDITOR && l_up.x == 415 && ft_inbounds(l_up.y, 500, 520))
+	else if (i == TS_BUTTON_MAP_EDITOR
+		&& l_up.x == 415 && ft_inbounds(l_up.y, 500, 520))
 		return (true);
-	else if (i == TS_BUTTON_QUIT && l_up.x == 415 && ft_inbounds(l_up.y, 590, 610))
+	else if (i == TS_BUTTON_QUIT
+		&& l_up.x == 415 && ft_inbounds(l_up.y, 590, 610))
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/26 19:35:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:35:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,32 @@ static void	init_buttons_cmp(t_env *env)
 	init_button(b, (t_point){330, 600}, sps);
 }
 
+int		init_keys(t_env *env)
+{
+	static t_vec3d	pos[SECTOR_MAX] = {{10.0f, 10.0f, 10.0f, 0},
+								{10.0f, 10.0f, 10.0f, 0}, {10.0f, 10.0f, 10.0f, 0},
+								{10.0f, 10.0f, 10.0f, 0}, {10.0f, 10.0f, 10.0f, 0}
+								};
+	t_map			*map;
+	int				i;
+
+	i = 0;
+	while (i < SECTOR_MAX)
+	{
+		map = &env->maps[env->cmp_env.sectors[i].map];
+		if (!(env->cmp_env.key[i] = copy_to_scene(map, &env->maps[SCENE_KEY], pos[i])))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 int		setup_cmp(t_env *env)
 {
 	env->ts_env.env = env;
 	init_buttons_cmp(env);
 	init_sectors(env);
+	if (init_keys(env))
+		return (-1);
 	return (0);
 }

@@ -1,0 +1,14 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+MBH1OBJ_07|{}|[]|true|()|
+MBH1OBJ_02|{}|[]|true|()|
+MBH1OBJ_06|{}|[]|true|(resources/textures/campaign/house/wood.xpm)|
+stone_MBH1OBJ_04|{}|[]|true|(resources/textures/campaign/house/stone.xpm)|
+stone.001_MBH1OBJ_03|{}|[]|true|(resources/textures/campaign/house/wood.xpm)|
+MBH1OBJ_01|{}|[]|true|()|
+brick_MBH1OBJ_05|{}|[]|true|(resources/textures/campaign/house/brick.xpm)|
+MBH1OBJ_06.001|{}|[]|true|()|

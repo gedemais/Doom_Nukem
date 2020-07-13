@@ -6,13 +6,14 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 01:02:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 16:52:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/12 21:44:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int		count_to_add(unsigned int p, t_vec3d ps[4], t_triangle t, t_triangle clipped[2])
+static int		count_to_add(unsigned int p, t_vec3d ps[4], t_triangle t,
+														t_triangle clipped[2])
 {
 	int	to_add;
 
@@ -28,7 +29,8 @@ static int		count_to_add(unsigned int p, t_vec3d ps[4], t_triangle t, t_triangle
 	return (to_add);
 }
 
-static int		clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int p)
+static int		clip_screen_edges(t_dynarray *to_raster, t_triangle t,
+																unsigned int p)
 {
 	static t_vec3d	ps[4] = {{0, 1.0f, 0, 0}, {0, -1.0f, 0, 0},
 								{1.0f, 0, 0, 0}, {-1.0f, 0, 0, 0}};
@@ -54,7 +56,8 @@ static int		clip_screen_edges(t_dynarray *to_raster, t_triangle t, unsigned int 
 	return (0);
 }
 
-static int		fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle t)
+static int		fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4],
+																t_triangle t)
 {
 	t_triangle		tmp;
 	unsigned int	p;
@@ -82,7 +85,8 @@ static int		fill_to_raster(t_dynarray *to_raster, t_dynarray arrs[4], t_triangle
 	return (0);
 }
 
-int		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4])
+int				clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster,
+														t_dynarray arrs[4])
 {
 	t_triangle		*t;
 	int				i;
@@ -101,26 +105,30 @@ int		clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arr
 	return (0);
 }
 
-int			clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2])
+int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in,
+															t_triangle out[2])
 {
 	t_clipper	clip;
+	t_vec3d		planes[2];
 
-	clip = (t_clipper){};
+	ft_bzero(&clip, sizeof(t_clipper));
 	plane_n = vec_normalize(plane_n);
 	clip.d[0] = distance_to_plane(plane_n, plane_p, in.points[0]);
 	clip.d[1] = distance_to_plane(plane_n, plane_p, in.points[1]);
 	clip.d[2] = distance_to_plane(plane_n, plane_p, in.points[2]);
-
 	classify_triangle(&clip, in);
-
-	if (clip.inside == 0) // No point in the triangle found inside
+	if (clip.inside == 0)
 		return (0);
-	else if (clip.inside == 3) // Every points of the triangle found inside
+	else if (clip.inside == 3)
 	{
 		out[0] = in;
 		return (1);
 	}
 	else
-		return (refactor_triangle(&clip, out, (t_vec3d[2]){plane_p, plane_n}, in));
+	{
+		planes[0] = plane_p;
+		planes[1] = plane_n;
+		return (refactor_triangle(&clip, out, planes, in));
+	}
 	return (0);
 }

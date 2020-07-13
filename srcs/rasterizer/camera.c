@@ -1,31 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/12 21:26:22 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/12 21:32:18 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-void	map_spawn(t_cam *cam, t_map *map, bool respawn)
-{
-	static t_map	*address = NULL;
-
-	if (address != map && !map->init)
-	{
-		map->init = true;
-		cam->stats.pos = map->spawn;
-		cam->stats.pos = vec_add(map->spawn, (t_vec3d){0, map->cam.corp.dims.y, 0, 0});
-		map->cam.corp.pos = map->spawn;
-		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
-		cam->stats.yaw = map->cam_dir.u;
-		cam->stats.pitch = map->cam_dir.v;
-	}
-	else if (address != map)
-	{
-		cam->stats.pos = respawn ? map->spawn : map->cam.corp.pos;
-		map->cam.corp.pos = respawn ? map->spawn : map->cam.corp.pos;
-		map->cam.corp.o = vec_sub(map->cam.corp.pos, vec_fdiv(map->cam.corp.dims, 2.0f));
-		cam->stats.yaw = respawn ? map->cam.yaw : cam->stats.yaw;
-		cam->stats.pitch = respawn ? map->cam.pitch : cam->stats.pitch;
-	}
-	address = map;
-}
-
-int		allocate_clipping_arrays(t_dynarray arrays[4])
+int				allocate_clipping_arrays(t_dynarray arrays[4])
 {
 	unsigned int	i;
 
@@ -39,21 +26,35 @@ int		allocate_clipping_arrays(t_dynarray arrays[4])
 	return (0);
 }
 
-void		print_first_mesh(t_env *env)
+void			map_spawn(t_cam *cam, t_map *map, bool respawn)
 {
-	t_mesh		*m;
-	int			i;
-	
-	i = 0;
-	while (i < SCENE_MAX)
+	static t_map	*address = NULL;
+
+	if (address != map && !map->init)
 	{
-		m = dyacc(&env->maps[i].meshs, 0);
-		printf("scene %d : mesh 0 : %d triangles\n", i, m->tris.nb_cells);
-		i++;
+		map->init = true;
+		cam->stats.pos = map->spawn;
+		cam->stats.pos = vec_add(map->spawn,
+			(t_vec3d){0, map->cam.corp.dims.y, 0, 0});
+		map->cam.corp.pos = map->spawn;
+		map->cam.corp.o = vec_sub(map->cam.corp.pos,
+			vec_fdiv(map->cam.corp.dims, 2.0f));
+		cam->stats.yaw = map->cam_dir.u;
+		cam->stats.pitch = map->cam_dir.v;
 	}
+	else if (address != map)
+	{
+		cam->stats.pos = respawn ? map->spawn : map->cam.corp.pos;
+		map->cam.corp.pos = respawn ? map->spawn : map->cam.corp.pos;
+		map->cam.corp.o = vec_sub(map->cam.corp.pos,
+			vec_fdiv(map->cam.corp.dims, 2.0f));
+		cam->stats.yaw = respawn ? map->cam.yaw : cam->stats.yaw;
+		cam->stats.pitch = respawn ? map->cam.pitch : cam->stats.pitch;
+	}
+	address = map;
 }
 
-static int	init_cameras_meshs(t_env *env)
+static int		init_cameras_meshs(t_env *env)
 {
 	t_mesh		*cam;
 	int			i;
@@ -68,7 +69,7 @@ static int	init_cameras_meshs(t_env *env)
 	return (0);
 }
 
-int	init_cameras_mesh(t_map *map, t_mesh *cam)
+int				init_cameras_mesh(t_map *map, t_mesh *cam)
 {
 	cam->yaw = map->cam_dir.u;
 	cam->pitch = map->cam_dir.v;
@@ -78,19 +79,19 @@ int	init_cameras_mesh(t_map *map, t_mesh *cam)
 	return (0);
 }
 
-int		init_camera(t_env *env, t_cam *cam)
+int				init_camera(t_env *env, t_cam *cam)
 {
 	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
 	cam->stats.fnear = 0.01f;
 	cam->stats.ffar = 1000.0f;
 	cam->stats.fovd = 70.0f;
-	cam->stats.fovr = (float)(1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f));
+	cam->stats.fovr = 1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f);
 	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
 	cam->stats.pos = (t_vec3d){0, 0, 0, 0};
 	cam->stats.dir = (t_vec3d){10.0f, 40.0f, 0.0f, 0.0f};
 	cam->stats.pitch = 0;
 	cam->stats.yaw = 0;
-	cam->light = (t_vec3d){0.0f, 2.0f, 0.0f, 0.0f};
+	cam->light = (t_vec3d){1.0f, 2.0f, 1.0f, 0.0f};
 	cam->light = vec_normalize(cam->light);
 	init_matrices(cam);
 	if (init_cameras_meshs(env) || allocate_clipping_arrays(cam->clip_arrs)

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 02:39:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/08 21:53:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/11 17:34:29 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ float			rsqrt(float number);
 t_vec3d			vec_add(t_vec3d a, t_vec3d b);
 t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
 t_vec3d			vec_mult(t_vec3d a, t_vec3d b);
+t_vec3d			vec_div(t_vec3d a, t_vec3d b);
 t_vec3d			vec_relu(t_vec3d v);
 
 t_vec3d			vec_fdiv(t_vec3d a, float n);

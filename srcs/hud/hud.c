@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/13 14:48:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 16:10:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static int	draw_wave(t_env *env)
 	my_string_put(env, env->mlx.img_data, (t_point){0.04 * WDT, 0.85 * HGT}, FONT_COOLVETICA);
 	return (0);
 }
-int		draw_hud(t_env *env)
 
+int		draw_hud(t_env *env)
 {
 	draw_compass(env);
 	if (draw_wave(env) || draw_health(env)
 		|| print_countdown(env, env->custom_env.game.countdown))
 		return (-1);
-	if(env->data.time.tv_sec <= env->hud.timePhysic + 2)
+	if (env->data.time.tv_sec <= env->hud.timePhysic + 2)
 		draw_physic(env);
 	if (env->data.time.tv_sec <= env->hud.timeWave + 3)
 		map_sprite(env->mlx.img_data, env->sprites[SP_NEW_WAVE], (t_point){env->data.third_wdt, 100});

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/06/29 16:42:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:40:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				setup(t_env *env)
 		|| init_openal(&env->sound) != 0 || load_maps(env) != 0
 		|| init_contexts(env) || init_physic_engine(env)
 		|| init_camera(env, &env->cam) || load_fonts(env)
-		|| init_weapons(env)) // Reorganiser le foutoir
+		|| init_weapons(env))
 		return (-1);
 	load_values(env, &env->data);
 	return (0);

@@ -12,6 +12,7 @@ static int		print_moulaga(t_env *env)
 	ft_strcpy((char*)conf->s, moulaga);
 	conf->size = 18;
 	my_string_put(env, env->mlx.img_data, (t_point){930, 60}, FONT_COOLVETICA);
+	free(moulaga);
 	return (0);
 }
 

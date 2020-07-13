@@ -15,6 +15,7 @@ SRCS_NAME =	main.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
+			campaign/key.c\
 			campaign/setup_cmp.c\
 			campaign/menu.c\
 			campaign/game.c\
@@ -117,6 +118,7 @@ SRCS_NAME =	main.c\
 			\
 			rasterizer/clipping.c\
 			rasterizer/clipping_bis.c\
+			rasterizer/clipping_tools.c\
 			rasterizer/fill_triangle_texture.c\
 			rasterizer/fill_triangle_texture_bis.c\
 			rasterizer/rasterizer.c\

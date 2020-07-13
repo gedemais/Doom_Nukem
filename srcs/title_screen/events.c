@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/12 21:18:24 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/12 21:18:37 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 int		key_press_ts(int key, void *param)
@@ -15,7 +27,6 @@ int		key_release_ts(int key, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)key;
 	return (0);
 }
@@ -25,7 +36,6 @@ int		mouse_press_ts(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)button;
 	(void)x;
 	(void)y;
@@ -37,7 +47,6 @@ int		mouse_release_ts(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)button;
 	(void)x;
 	(void)y;

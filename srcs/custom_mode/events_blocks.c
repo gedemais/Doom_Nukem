@@ -56,6 +56,7 @@ int		parse_events_blocks(t_env *env)
 	int			k;
 
 	i = -1;
+	env->custom_env.game.nb_spawners = 0;
 	map = &env->edit_env.new_map;
 	while (++i < map->width)
 	{

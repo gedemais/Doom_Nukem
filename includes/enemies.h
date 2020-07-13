@@ -53,8 +53,8 @@ enum				e_loots_id
 struct				s_loot
 {
 	t_mesh			*m;
-	t_vec3d			pos;
 	char			id;
+	bool			on;
 };
 
 struct				s_enemy

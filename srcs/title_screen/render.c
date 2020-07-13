@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/12 21:18:51 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/12 21:19:22 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static int				handle_events(t_env *env)
+static int		handle_events(t_env *env)
 {
 	static bool	clic = false;
 	int			i;
@@ -26,7 +38,7 @@ static int				handle_events(t_env *env)
 	return (0);
 }
 
-static void			render_buttons(t_env *env)
+static void		render_buttons(t_env *env)
 {
 	unsigned int	i;
 
@@ -38,7 +50,7 @@ static void			render_buttons(t_env *env)
 	}
 }
 
-static void			wait_frame(void)
+static void		wait_frame(void)
 {
 	float		t;
 
@@ -46,7 +58,7 @@ static void			wait_frame(void)
 	usleep(13500 - t);
 }
 
-int			render_ts(void *param)
+int				render_ts(void *param)
 {
 	static int	anim = 120;
 	t_env		*env;
@@ -68,9 +80,6 @@ int			render_ts(void *param)
 	if (anim-- > 0)
 		wait_frame();
 	else if (sound_manager(env, SA_TITLE_SCREEN_L))
-	{
-		PUT
 		return (-1);
-	}
 	return (0);
 }
