@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:37:15 by gedemais          #+#    #+#             */
-/*   Updated: 2020/05/28 16:33:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:26:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int		key_press_custom(int key, void *param)
 {
 	t_env	*env;
 
-	(void)key;
 	env = ((t_env*)param);
+	if (env->custom_env.sub_context == CUSTOM_SC_PLAY && key == KEY_Q)
+		env->data.wireframe = !env->data.wireframe;
 	return (0);
 }
 

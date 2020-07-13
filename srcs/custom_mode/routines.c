@@ -14,6 +14,7 @@ int				custom_menu_to_play(t_env *env)
 		|| init_loots(env))
 		return (-1);
 	set_game_stats(env);
+	env->data.wireframe = false;
 	mlx_mouse_hide();
 	return (0);
 }
@@ -60,6 +61,7 @@ int			custom_game_over_to_play(t_env *env)
 		|| init_loots(env))
 		return (-1);
 	set_game_stats(env);
+	env->data.wireframe = false;
 	mlx_mouse_hide();
 	return (0);
 }

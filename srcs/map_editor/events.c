@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:51:41 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 13:55:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:26:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int		key_press_maped(int key, void *param)
 {
 	t_env	*env;
 
-	(void)key;
 	env = ((t_env*)param);
+	if (env->edit_env.sub_context == MAPED_SC_CREATIVE && key == KEY_Q)
+		env->data.wireframe = !env->data.wireframe;
 	return (0);
 }
 

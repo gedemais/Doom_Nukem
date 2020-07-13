@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 18:05:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 14:10:15 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@
 # define WINDOW_NAME "Doom Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.3f
+# define WALK_SPEED 0.1f
 # define WSPEED 3.0f
 # define PLAYER_SIZE 3.0f
 
@@ -120,6 +120,7 @@ struct			s_data
 	float		third_wdt;
 	float		half_hgt;
 	int			data_size;
+	bool		wireframe;
 };
 
 struct			s_env
