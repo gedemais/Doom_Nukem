@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_mesh.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:56 by bebosson          #+#    #+#             */
-/*   Updated: 2020/06/24 20:45:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:36:38 by benji_code       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-void			rotate_x(t_vec3d *v, t_vec3d m, float fcos, float fsin)
-{
-	float	y;
-	float	z;
-
-	y = (v->y - m.y) * fcos - (v->z - m.z) * fsin;
-	z = (v->y - m.y) * fsin + (v->z - m.z) * fcos;
-	v->y = y + m.y;
-	v->z = z + m.z;
-}
-
-void			rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin)
-{
-	float	x;
-	float	z;
-
-	x = (v->x - m.x) * fcos - (v->z - m.z) * fsin;
-	z = (v->x - m.x) * fsin + (v->z - m.z) * fcos;
-	v->x = x + m.x;
-	v->z = z + m.z;
-}
-
-void			rotate_z(t_vec3d *v, t_vec3d m, float fcos, float fsin)
-{
-	float	x;
-	float	y;
-
-	x = (v->x - m.x) * fcos - (v->y - m.y) * fsin;
-	y = (v->x - m.x) * fsin + (v->y - m.y) * fcos;
-	v->x = x + m.x;
-	v->y = y + m.y;
-}
 
 void			rotate_mesh(t_mesh *mesh, t_vec3d mesh_center, float angle,
 			void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin))

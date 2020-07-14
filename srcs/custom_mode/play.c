@@ -29,7 +29,6 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, WSPEED));
 		translate_mesh(map, &map->cam, vec_fmult(r, -WSPEED));
 	}
-//	print_info_phy(env, &map->cam);
 }
 
 static void ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
