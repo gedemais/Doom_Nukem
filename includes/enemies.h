@@ -20,7 +20,7 @@
 # define MAX_ENEMIES 12
 # define LOOT_FREQ 12
 # define RESPAWN_DELAY 3.0f
-# define ENEMIES_NOISE_DELAY 20
+# define ENEMIES_NOISE_DELAY 10
 # define MOB_ANIMATION_DOWN 0.1f
 # define MOB_ANIMATION_UP 0.1f
 
