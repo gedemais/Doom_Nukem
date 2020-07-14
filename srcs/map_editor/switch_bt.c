@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   switch_bt.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 17:44:40 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 17:52:11 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static int		*bt_arrays(int index)
 {
-	static int	arrays[3][128] = {{}, {}, {}};
+	static int	arrays[3][128];
 	static bool	first = true;
 	int			i;
 
@@ -16,7 +28,7 @@ static int		*bt_arrays(int index)
 	}
 	first = false;
 	return (arrays[index]);
- }
+}
 
 static void		switch_cube_type(unsigned char *bt, t_events *e)
 {
@@ -31,46 +43,32 @@ static void		switch_cube_type(unsigned char *bt, t_events *e)
 	*bt = (unsigned char)ptr[bt_cube];
 }
 
-static void		switch_slope_type(unsigned char bc, unsigned char *bt, t_events *e)
+static void		switch_slope_type(unsigned char bc, unsigned char *bt,
+																	t_events *e)
 {
-	static int				bt_slope = 0;
+	static int				bt_s = 0;
 	static unsigned char	last_bc = 0;
-	int			*ptr;
+	int						*ptr;
+	int						start;
 
 	ptr = bt_arrays(1);
-	if (bt_slope == 0 || last_bc != bc)
-		bt_slope = bc * 32;
+	if (bt_s == 0 || last_bc != bc)
+		bt_s = bc * 32;
 	if (bc == BC_SLOPE_NORD)
-	{
-		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 32 + NB_CUBES_ICONES - 1) ? 32 : bt_slope + 1;
-		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 32) ? 32 + NB_CUBES_ICONES - 1 : bt_slope - 1;
-	}
+		start = 32;
 	else if (bc == BC_SLOPE_SUD)
-	{
-		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 64 + NB_CUBES_ICONES - 1) ? 64 : bt_slope + 1;
-		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 64) ? 64 + NB_CUBES_ICONES - 1 : bt_slope - 1;
-	}
+		start = 64;
 	else if (bc == BC_SLOPE_OUEST)
-	{
-		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 96 + NB_CUBES_ICONES - 1) ? 96 : bt_slope + 1;
-		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 96) ? 96 + NB_CUBES_ICONES - 1 : bt_slope - 1;
-	}
+		start = 96;
 	else if (bc == BC_SLOPE_EST)
-	{
-		if (e->buttons[BUTTON_SCROLL_UP])
-			bt_slope = (bt_slope >= 128 + NB_CUBES_ICONES - 1) ? 128 : bt_slope + 1;
-		else if (e->buttons[BUTTON_SCROLL_DOWN])
-			bt_slope = (bt_slope < 128) ? 128 + NB_CUBES_ICONES - 1 : bt_slope - 1;
-	}
+		start = 128;
 	else
 		return ;
-	*bt = (unsigned char)ptr[bt_slope];
+	if (e->buttons[BUTTON_SCROLL_UP])
+		bt_s = (bt_s >= start + NB_CUBES_ICONES - 1) ? start : bt_s + 1;
+	else if (e->buttons[BUTTON_SCROLL_DOWN])
+		bt_s = (bt_s < start) ? start + NB_CUBES_ICONES - 1 : bt_s - 1;
+	*bt = (unsigned char)ptr[bt_s];
 	last_bc = bc;
 }
 

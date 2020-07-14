@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_pallet.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 17:25:42 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 17:26:16 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	draw_focus_square(t_env *env, t_point pos, t_point o, int index)
@@ -14,12 +26,11 @@ static void	draw_focus_square(t_env *env, t_point pos, t_point o, int index)
 
 static void	render_obj_name(t_env *env)
 {
-	static char	*names[NB_INTERACTIVES] = {"Jukebox",
-								"Weapons Chest", "Door", "Lava",
-								"Player Spawner", "Mob Spawner"};
-	int						index;
-	t_ttf_config			*conf;
-	t_point					o;
+	static char		*names[NB_INTERACTIVES] = {"Jukebox", "Weapons Chest",
+							"Door", "Lava", "Player Spawner", "Mob Spawner"};
+	int				index;
+	t_ttf_config	*conf;
+	t_point			o;
 
 	conf = ttf_config();
 	conf->size = 14;

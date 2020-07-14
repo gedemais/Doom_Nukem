@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:32:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/14 16:42:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/14 17:53:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static bool	full_neighbours(t_ed_map *map, int *pos)
 	return (neighbours == 6);
 }
 
-
-int		get_block_type(t_env *env, t_mesh *new, unsigned char type)
+int			get_block_type(t_env *env, t_mesh *new, unsigned char type)
 {
 	int		ret;
 
@@ -50,7 +49,7 @@ int		get_block_type(t_env *env, t_mesh *new, unsigned char type)
 	return (ret);
 }
 
-void	attribute_mesh(t_map *scene, int index)
+void		attribute_mesh(t_map *scene, int index)
 {
 	t_mesh		*mesh;
 	t_triangle	*t;
@@ -65,4 +64,3 @@ void	attribute_mesh(t_map *scene, int index)
 		i++;
 	}
 }
-
