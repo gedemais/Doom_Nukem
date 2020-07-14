@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 17:35:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/13 20:24:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static void	init_buttons_cmp(t_env *env)
 int		init_keys(t_env *env)
 {
 	static t_vec3d	pos[SECTOR_MAX] = {{10.0f, 10.0f, 10.0f, 0},
-								{10.0f, 10.0f, 10.0f, 0}, {10.0f, 10.0f, 10.0f, 0},
-								{10.0f, 10.0f, 10.0f, 0}, {10.0f, 10.0f, 10.0f, 0}
-								};
+								{10.0f, 10.0f, 10.0f, 0}};
 	t_map			*map;
 	int				i;
 

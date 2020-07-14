@@ -6,9 +6,6 @@ void	init_sectors(t_env *env)
 
 	cmp_env = &env->cmp_env;
 	cmp_env->sectors[SECTOR_AXIS].map = SCENE_AXIS;
-	cmp_env->sectors[SECTOR_UGLY].map = SCENE_UGLY;
-	cmp_env->sectors[SECTOR_MAGE].map = SCENE_MAGE;
-	cmp_env->sectors[SECTOR_GOULE].map = SCENE_GOULE;
 	cmp_env->sectors[SECTOR_HOUSE].map = SCENE_HOUSE;
 	//cmp_env->sectors[SECTOR_].map = SCENE_;
 }
