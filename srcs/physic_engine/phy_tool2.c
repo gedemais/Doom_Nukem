@@ -94,6 +94,7 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 		{
 			move = 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
 			cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, move, 0, 0});
+			translate_mesh(maps, cam, cam->corp.v);
 		}
 		if (env->cam.stats.pos.y < -10)
 			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos));
