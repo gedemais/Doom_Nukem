@@ -1,18 +1,16 @@
 /* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   phy.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/15 03:01:19 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/27 19:59:43 by gedemais         ###   ########.fr       */
+/*   Created: 2020/03/27 19:59:43 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 20:57:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHY_H
-# define PHY_H
-
-# define INERTIE 0.01f
+# ifndef PHY_H
 
 struct	s_corp
 {
@@ -32,28 +30,27 @@ struct	s_collide
 	t_mesh	*b;
 	unsigned int i_a;
 	unsigned int i_b;
-	float dot;
+	t_vec3d		cam_mesh_first;
+	float		norm_dist_first;
+	t_vec3d		cam_actual;
+	float		norm_actual;
 };
 
 // struct s_collde
 
 struct	s_physics
 {
+	t_vec3d			last_pos;
 	t_dynarray		collides;
 	t_dynarray		collides_cam;
 	bool			type_move;
-	double			time;
-	double			prev_time;
 	unsigned int	tps;
 	float			gravity;
 	t_vec3d			gravitax;
-	t_vec3d			f;
-	t_vec3d			r;
-	t_vec3d			diff_camfloor;
 	unsigned int	squat;
 };
 
-void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);
+void	scan_actuall_collide(t_env *env, t_map *map);
 int		physic_engine(t_env *env, t_map *maps);
 int		init_physic_engine(t_env *env);
 int		init_bounding_box(t_mesh *m);
@@ -73,8 +70,7 @@ void	print_mesh_corp(t_mesh m);
 void	print_collide(t_collide c);
 void	tp_mesh_print(t_mesh *m);
 /*			phy_gravity		*/
-void	phy_gravitax_cam(t_env *env, t_mesh *m, t_cam_stats *stats);
-void	phy_gravitax(t_env *env, t_mesh *m, int i);
+void	phy_gravitax_cam(t_env *env, t_mesh *m);
 /*			phy_update.c	*/
 t_vec3d	update_angle(t_env *env, int index);
 void	update_speeds_collide(t_env *env);
@@ -90,10 +86,10 @@ void	phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps);
 void	type_of_plan(t_env *env, t_collide *c, t_map *map);
 t_vec3d	set_y_dir(t_env *env, t_map *map);
 t_vec3d	phy_move_collide(t_env *env, t_collide *c, t_vec3d dir);
-t_vec3d *coefdir_plan(t_env *env, t_mesh *m, t_mesh *cam, t_vec3d *dir);
 t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f);
-void	print_info_phy(t_env *env, t_mesh *cam);
+void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps);
 /*			phy_tool2.c		*/
 void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam);
 bool	key_move(bool keys[NB_KEYS]);
+void	scan_collide(t_collide *c, int i);
 #endif

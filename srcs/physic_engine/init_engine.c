@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:44 by bebosson          #+#    #+#             */
-/*   Updated: 2020/07/13 17:45:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/14 20:57:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		set_mesh_position(t_mesh *m)
 	return (0);
 }
 
-int			init_map_physics(t_map *map)
+int				init_map_physics(t_map *map)
 {
 	t_mesh	*m;
 	int		i;
@@ -51,7 +51,7 @@ int			init_map_physics(t_map *map)
 	return (0);
 }
 
-int			init_physic_engine(t_env *env)
+int				init_physic_engine(t_env *env)
 {
 	int			i;
 

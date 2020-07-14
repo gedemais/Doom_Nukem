@@ -93,9 +93,11 @@ struct	s_cam_stats
 {
 	t_vec3d		pos;
 	t_vec3d		dir;
+	int			speed;
 	int			onfloor;
-	int			onplan;
+	int			onroof;
 	int			onwall;
+	int 		crouch;
 	float		yaw;
 	float		pitch;
 	float		aspect_ratio;

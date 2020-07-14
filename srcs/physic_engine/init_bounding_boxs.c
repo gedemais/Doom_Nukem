@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bounding_boxs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:34 by bebosson          #+#    #+#             */
-/*   Updated: 2020/05/22 14:45:48 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/07/14 20:19:21 by benji_code       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ static void	cmp_xyz(t_vec3d pos, t_vec3d p, t_vec3d *min, t_vec3d *max)
 		min->x = p.x - pos.x;
 	else if (p.x - pos.x > max->x)
 		max->x = p.x - pos.x;
-
 	if (p.y - pos.y < min->y)
 		min->y = p.y - pos.y;
 	else if (p.y - pos.y > max->y)
 		max->y = p.y - pos.y;
-
 	if (p.z - pos.z < min->z)
 		min->z = p.z - pos.z;
 	else if (p.z - pos.z > max->z)
@@ -57,7 +55,7 @@ static int	get_box_dims(t_mesh *m)
 	return (0);
 }
 
-int		init_bounding_box(t_mesh *m)
+int			init_bounding_box(t_mesh *m)
 {
 	if (get_box_dims(m))
 		return (-1);
