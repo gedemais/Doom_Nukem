@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:02:32 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 13:04:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:35:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int				handle_events(t_env *env)
+static int	handle_events(t_env *env)
 {
 	static bool	clic = false;
 	int			i;
@@ -52,13 +52,7 @@ static int	select_map(t_env *env)
 	display_file(env);
 	if (s->s_path)
 	{
-		if (import_maped_map(&env->edit_env, s->s_path)) // to merge with
-		{
-			printf("Parsing Failed for map |%s|\n", s->s_path);
-			exit(0);
-			return (-1);
-		}
-		if (map_to_scene(env)) // this
+		if (import_maped_map(&env->edit_env, s->s_path) || map_to_scene(env))
 			return (-1);
 		switch_mecontext(env, MAPED_SC_CREATIVE);
 	}
@@ -80,6 +74,7 @@ int			maped_menu(t_env *env)
 	if (select_map(env))
 		return (-1);
 	render_buttons(env);
-	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	mlx_put_image_to_window(env->mlx.mlx_ptr,
+		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 15:36:03 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 15:36:25 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static int	check_digits(char *str)
+static int		check_digits(char *str)
 {
 	int		i;
 
@@ -39,7 +51,7 @@ static int		get_dimensions(t_env *env)
 	return (0);
 }
 
-static int	get_map_name(t_env *env)
+static int		get_map_name(t_env *env)
 {
 	char	*input;
 	int		i;
@@ -59,7 +71,7 @@ static int	get_map_name(t_env *env)
 	return (0);
 }
 
-int			create_me_map(t_env *env)
+int				create_me_map(t_env *env)
 {
 	int		errcode;
 

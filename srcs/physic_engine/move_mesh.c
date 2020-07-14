@@ -6,7 +6,7 @@
 /*   By: bebosson <bebosson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:56 by bebosson          #+#    #+#             */
-/*   Updated: 2020/07/13 17:45:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:32:26 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,31 +92,12 @@ void			translate_mesh(t_map *map, t_mesh *m, t_vec3d t)
 	m->corp.o = vec_add(m->corp.o, t);
 }
 
-void			tp_mesh_print(t_mesh *m)
-{
-	t_triangle	*tri;
-	int			i;
-
-	i = 0;
-	while (i < m->tris.nb_cells)
-	{
-		tri = dyacc(&m->tris, i);
-		print_vec(tri->points[0]);
-		print_vec(tri->points[1]);
-		print_vec(tri->points[2]);
-		i++;
-	}
-	if (i == m->tris.nb_cells)
-		printf("%d \n", i);
-}
-
 void			tp_mesh(t_map *map, t_mesh *m, t_vec3d p)
 {
 	t_triangle	*tri;
 	t_vec3d		diff;
 	int			i;
 
-	(void)map;
 	i = 0;
 	diff = vec_sub(m->corp.pos, p);
 	while (i < m->tris.nb_cells)

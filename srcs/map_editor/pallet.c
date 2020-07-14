@@ -1,35 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pallet.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 16:45:06 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 16:51:53 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	set_renderable(t_cube_pallet p[BTXT_MAX])
 {
-	p[BTXT_BRICK - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_DARK_BRICK - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_CLEAN_STONE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_DIRT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_DIRT_GRASS - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_DIRT_SNOW - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_ICE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_GOLD - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_IRON - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_LIGHT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_OBSIDIENNE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_SAND - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_STONE - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_A - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_A_CUT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_B - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_B_CUT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_C - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_C_CUT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_D - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
-	p[BTXT_WOOD_D_CUT - 1] = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
+	t_cube_pallet	pallet;
+	int				i;
+
+	i = 0;
+	pallet = (t_cube_pallet){.cube = 1, .slope = 1, .obj = 0};
+	while (i < BTXT_JUKEBOX)
+	{
+		ft_memcpy(&p[i], &pallet, sizeof(t_cube_pallet));
+		i++;
+	}
 	p[BTXT_JUKEBOX - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_MYSTERY_BOX - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_DOOR - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_LAVA - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_SPAWNER - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
 	p[BTXT_MOB_SPAWNER - 1] = (t_cube_pallet){.cube = 0, .slope = 0, .obj = 1};
-	//pallet[BTXT_ - 1] = (t_cube_pallet){.cube = , .slope = , .obj = };
 }
 
 static int	count_icones(t_cube_pallet *p, char bc)
@@ -63,20 +63,18 @@ static void	draw_pallet_bbox(t_env *env, t_point *origin, char bc)
 	if (!(nb_icones = count_icones(env->edit_env.pallet, bc)))
 		return ;
 	offset = nb_icones * 34;
-	o = (t_point){env->data.half_wdt - (offset / 2), 600}; // bbox origin
+	o = (t_point){env->data.half_wdt - (offset / 2), 600};
 	*origin = o;
 	dims = (t_point){offset, 2};
 	s_dims = (t_point){2, 34};
-
-	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // top
-
-	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff); // sides
+	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
+	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff);
 	o.x += offset;
 	draw_rectangle(env->mlx.img_data, o, s_dims, 0xffffff);
 	o.x -= offset;
 	dims.x += 2;
 	o.y += s_dims.y;
-	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff); // bottom
+	draw_rectangle(env->mlx.img_data, o, dims, 0xffffff);
 }
 
 int			render_pallets(t_env *env)

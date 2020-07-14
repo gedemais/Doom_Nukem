@@ -1,45 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_matrice.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 15:20:48 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 15:24:38 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
-
-static void		copy_matrice(t_ed_map *env, int *len)
-{
-	int     nb[4];
-	
-	nb[0] = 0;
-	nb[1] = -1;	
-	while (++nb[1] < env->width)
-	{
-		nb[2] = -1;
-		while (++nb[2] < env->height)
-		{
-			nb[3] = -1;
-			while (++nb[3] < env->depth)
-				env->flat[nb[0]++] = env->map[nb[1]][nb[2]][nb[3]];
-			if (nb[2] + 1 < env->height)
-				env->flat[nb[0]++] = 127;
-		}
-		if (nb[1] + 1 < env->width)
-		{
-			env->flat[nb[0]++] = 127;
-			env->flat[nb[0]++] = 127;
-		}
-	}
-	env->flat[nb[0]] = '\0';
-	*len = nb[0];
-}
-
-int			flat_map(t_ed_map *env, int *len)
-{
-	int     size;
-
-	if (env->map == NULL
-		|| env->width + env->height + env->depth == 0)
-		return (0);
-	size = (env->width + 1) * (env->height + 2) * env->depth;
-	if (!(env->flat = (unsigned char *)ft_memalloc((sizeof(unsigned char) * (size + 1)))))
-		return (0);
-	copy_matrice(env, len);
-	return (1);
-}
 
 static int		handle_backline(t_ed_map *env, int *nb, int len)
 {
@@ -135,7 +106,7 @@ int				flat_to_matrice(t_ed_map *env, int offset, int len)
 	env->depth = 0;
 	len -= offset;
 	if (env->flat == NULL
-		|| get_matrice_size(env, len) == 0 
+		|| get_matrice_size(env, len) == 0
 		|| init_matrice(env) == 0)
 	{
 		env->flat -= offset;
