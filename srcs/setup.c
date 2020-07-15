@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:34:45 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 17:40:32 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:44:21 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		load_values(t_env *env, t_data *data)
 {
-	(void)env;
 	gettimeofday(&data->time, NULL);
+	data->env = env;
 	data->half_wdt = (float)WDT / 2;
 	data->half_hgt = (float)HGT / 2;
 	data->third_wdt = (float)WDT / 3;

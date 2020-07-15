@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   weapons.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:42:08 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:43:08 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	switch_current_weapon(t_env *env, t_events *e)
@@ -36,21 +48,20 @@ static void	handle_ready(t_env *env, t_weapon *w)
 			return ;
 		}
 	}
-	if (w->reloading > 0)
+	if (w->reloading > 0 && !(w->ready = false))
 	{
 		reload_animation(env, w);
-		w->ready = false;
 		return ;
 	}
 	if (w->shoot_mode == SMODE_FULL_AUTO)
 	{
-		w->ready = (60 / since) < w->cadency; // Cap with time
+		w->ready = (60 / since) < w->cadency;
 		since = w->ready ? env->data.spent : since + env->data.spent;
 	}
 	else if (w->shoot_mode == SMODE_SINGLE)
 		w->ready = !env->events.buttons[BUTTON_LCLIC];
 	else if (w->shoot_mode == SMODE_SBS)
-		w->ready = !env->events.buttons[BUTTON_LCLIC]; // Cap with animation time
+		w->ready = !env->events.buttons[BUTTON_LCLIC];
 }
 
 static void	weapons_events(t_env *env, t_events *e)
@@ -67,7 +78,8 @@ static void	weapons_events(t_env *env, t_events *e)
 		return ;
 	}
 	r = e->keys[KEY_R];
-	if (((r && w->loaded < w->magazine) || w->loaded == 0) && w->ammos > 0 && w->shooting <= 0)
+	if (((r && w->loaded < w->magazine) || w->loaded == 0)
+		&& w->ammos > 0 && w->shooting <= 0)
 		reload_current_weapon(env);
 	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
 		shoot_current_weapon(env);

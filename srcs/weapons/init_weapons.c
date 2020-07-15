@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_weapons.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:16:06 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:36:53 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-int		dup_names(t_env *env)
+int				dup_names(t_env *env)
 {
-	const char	*names[W_MAX] = {"FAMAS", "AK-47", "Sawed-Off", "Glock-18",
-									"AUG", "UMP45", "mag-7", "Galil",
-									"Negev", "TEC-9"};
+	const char		*names[W_MAX] = {"FAMAS", "AK-47", "Sawed-Off", "Glock-18",
+									"AUG", "UMP45", "mag-7", "Galil", "Negev",
+									"TEC-9"};
 	unsigned int	i;
 
 	i = 0;
@@ -18,52 +30,49 @@ int		dup_names(t_env *env)
 	return (0);
 }
 
-// Assigne tous les premiers meshs des objs d'armes aux t_weapon
-static void		assign_wmeshs(t_env *env)
+static void		assign_wmeshs_bis(t_env *env)
 {
-	env->weapons[W_FAMAS].mesh = (t_mesh*)env->maps[SCENE_FAMAS].meshs.c;
-	env->weapons[W_FAMAS].breech = dyacc(&env->maps[SCENE_FAMAS].meshs, 2);
-	env->weapons[W_FAMAS].w_map = &env->maps[SCENE_FAMAS];
-//	printf("%s\n", env->weapons[W_FAMAS].mesh->name);
-	env->weapons[W_AK47].mesh = (t_mesh*)env->maps[SCENE_AK47].meshs.c;
-	env->weapons[W_AK47].breech = dyacc(&env->maps[SCENE_AK47].meshs, 1);
-	env->weapons[W_AK47].w_map = &env->maps[SCENE_AK47];
-//	printf("%s\n", env->weapons[W_AK47].mesh->name);
-	env->weapons[W_SAWED_OFF].mesh = (t_mesh*)env->maps[SCENE_SAWED_OFF].meshs.c;
-	env->weapons[W_SAWED_OFF].breech = dyacc(&env->maps[SCENE_SAWED_OFF].meshs, 1);
-	env->weapons[W_SAWED_OFF].w_map = &env->maps[SCENE_SAWED_OFF];
-//	printf("%s\n", env->weapons[W_SAWED_OFF].mesh->name);
-	env->weapons[W_GLOCK_18].mesh = (t_mesh*)env->maps[SCENE_GLOCK_18].meshs.c;
-	env->weapons[W_GLOCK_18].breech = dyacc(&env->maps[SCENE_GLOCK_18].meshs, 2);
-	env->weapons[W_GLOCK_18].w_map = &env->maps[SCENE_GLOCK_18];
-//	printf("%s\n", env->weapons[W_GLOCK_18].mesh->name);
-	env->weapons[W_AUG].mesh = (t_mesh*)env->maps[SCENE_AUG].meshs.c;
-	env->weapons[W_AUG].breech = dyacc(&env->maps[SCENE_AUG].meshs, 2);
-	env->weapons[W_AUG].w_map = &env->maps[SCENE_AUG];
-//	printf("%s\n", env->weapons[W_AUG].mesh->name);
-	env->weapons[W_UMP45].mesh = (t_mesh*)env->maps[SCENE_UMP45].meshs.c;
+	env->weapons[W_UMP45].mesh = env->maps[SCENE_UMP45].meshs.c;
 	env->weapons[W_UMP45].breech = dyacc(&env->maps[SCENE_UMP45].meshs, 2);
 	env->weapons[W_UMP45].w_map = &env->maps[SCENE_UMP45];
-//	printf("%s\n", env->weapons[W_UMP45].mesh->name);
-	env->weapons[W_MAG7].mesh = (t_mesh*)env->maps[SCENE_MAG7].meshs.c;
+	env->weapons[W_MAG7].mesh = env->maps[SCENE_MAG7].meshs.c;
 	env->weapons[W_MAG7].breech = dyacc(&env->maps[SCENE_MAG7].meshs, 1);
 	env->weapons[W_MAG7].w_map = &env->maps[SCENE_MAG7];
-//	printf("%s\n", env->weapons[W_MAG7].mesh->name);
-	env->weapons[W_GALIL].mesh = (t_mesh*)env->maps[SCENE_GALIL].meshs.c;
+	env->weapons[W_GALIL].mesh = env->maps[SCENE_GALIL].meshs.c;
 	env->weapons[W_GALIL].breech = dyacc(&env->maps[SCENE_GALIL].meshs, 2);
 	env->weapons[W_GALIL].w_map = &env->maps[SCENE_GALIL];
-//	printf("%s\n", env->weapons[W_GALIL].mesh->name);
-	env->weapons[W_NEGEV].mesh = (t_mesh*)env->maps[SCENE_NEGEV].meshs.c;
+	env->weapons[W_NEGEV].mesh = env->maps[SCENE_NEGEV].meshs.c;
 	env->weapons[W_NEGEV].breech = dyacc(&env->maps[SCENE_NEGEV].meshs, 2);
 	env->weapons[W_NEGEV].w_map = &env->maps[SCENE_NEGEV];
-//	printf("%s\n", env->weapons[W_NEGEV].mesh->name);
-	env->weapons[W_TEC9].mesh = (t_mesh*)env->maps[SCENE_TEC9].meshs.c;
+	env->weapons[W_TEC9].mesh = env->maps[SCENE_TEC9].meshs.c;
 	env->weapons[W_TEC9].breech = dyacc(&env->maps[SCENE_TEC9].meshs, 2);
 	env->weapons[W_TEC9].w_map = &env->maps[SCENE_TEC9];
-//	printf("%s\n", env->weapons[W_TEC9].mesh->name);
 }
 
-static void	assign_weapons_samples(t_env *env)
+static void		assign_wmeshs(t_env *env)
+{
+	t_map	*maps;
+
+	maps = &env->maps[0];
+	env->weapons[W_FAMAS].mesh = maps[SCENE_FAMAS].meshs.c;
+	env->weapons[W_FAMAS].breech = dyacc(&maps[SCENE_FAMAS].meshs, 2);
+	env->weapons[W_FAMAS].w_map = &maps[SCENE_FAMAS];
+	env->weapons[W_AK47].mesh = maps[SCENE_AK47].meshs.c;
+	env->weapons[W_AK47].breech = dyacc(&maps[SCENE_AK47].meshs, 1);
+	env->weapons[W_AK47].w_map = &maps[SCENE_AK47];
+	env->weapons[W_SAWED_OFF].mesh = maps[SCENE_SAWED_OFF].meshs.c;
+	env->weapons[W_SAWED_OFF].breech = dyacc(&maps[SCENE_SAWED_OFF].meshs, 1);
+	env->weapons[W_SAWED_OFF].w_map = &maps[SCENE_SAWED_OFF];
+	env->weapons[W_GLOCK_18].mesh = maps[SCENE_GLOCK_18].meshs.c;
+	env->weapons[W_GLOCK_18].breech = dyacc(&maps[SCENE_GLOCK_18].meshs, 2);
+	env->weapons[W_GLOCK_18].w_map = &maps[SCENE_GLOCK_18];
+	env->weapons[W_AUG].mesh = maps[SCENE_AUG].meshs.c;
+	env->weapons[W_AUG].breech = dyacc(&maps[SCENE_AUG].meshs, 2);
+	env->weapons[W_AUG].w_map = &maps[SCENE_AUG];
+	assign_wmeshs_bis(env);
+}
+
+static void		assign_weapons_samples(t_env *env)
 {
 	env->weapons[W_FAMAS].shoot = SA_FAMAS_FIRE;
 	env->weapons[W_AK47].shoot = SA_AK47_FIRE;
@@ -75,7 +84,6 @@ static void	assign_weapons_samples(t_env *env)
 	env->weapons[W_GALIL].shoot = SA_GALIL_FIRE;
 	env->weapons[W_NEGEV].shoot = SA_NEGEV_FIRE;
 	env->weapons[W_TEC9].shoot = SA_TEC9_FIRE;
-
 	env->weapons[W_FAMAS].reload = SA_FAMAS_RELOAD;
 	env->weapons[W_AK47].reload = SA_AK47_RELOAD;
 	env->weapons[W_SAWED_OFF].reload = SA_SAWED_OFF_FILL;
@@ -88,7 +96,7 @@ static void	assign_weapons_samples(t_env *env)
 	env->weapons[W_TEC9].reload = SA_TEC9_RELOAD;
 }
 
-int		init_weapons(t_env *env)
+int				init_weapons(t_env *env)
 {
 	if (dup_names(env))
 		return (-1);

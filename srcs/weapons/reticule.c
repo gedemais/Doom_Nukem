@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reticule.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:37:53 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:44:36 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static void	draw_vertical(t_data *data, t_mlx *mlx, int size, float spread, bool hover)
+static void	draw_vertical(t_data *data, t_mlx *mlx, int size, float spread)
 {
 	int		x;
 	int		y;
 	float	pre_bound;
 	int		bound;
+	bool	hover;
 
+	hover = data->env->player.hover;
 	pre_bound = (size * (1.2f - spread));
 	bound = data->half_hgt + size;
 	x = data->half_wdt;
@@ -19,13 +33,15 @@ static void	draw_vertical(t_data *data, t_mlx *mlx, int size, float spread, bool
 		}
 }
 
-static void	draw_horizontal(t_data *data, t_mlx *mlx, int size, float spread, bool hover)
+static void	draw_horizontal(t_data *data, t_mlx *mlx, int size, float spread)
 {
 	int		x;
 	int		y;
 	float	pre_bound;
 	int		bound;
+	bool	hover;
 
+	hover = data->env->player.hover;
 	pre_bound = (size * (1.2f - spread));
 	bound = data->half_wdt + size;
 	x = data->half_wdt - size - 1;
@@ -38,7 +54,7 @@ static void	draw_horizontal(t_data *data, t_mlx *mlx, int size, float spread, bo
 		}
 }
 
-void	draw_reticule(t_env *env)
+void		draw_reticule(t_env *env)
 {
 	t_data			*data;
 	t_mlx			*mlx;
@@ -49,12 +65,6 @@ void	draw_reticule(t_env *env)
 	mlx = &env->mlx;
 	pl = &env->player;
 	line_size = env->player.current->reticle;
-	// Askip c'est moche
-//	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt, 0x00ff00);
-//	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt, 0x00ff00);
-//	draw_pixel(mlx->img_data, data->half_wdt, data->half_hgt - 1, 0x00ff00);
-//	draw_pixel(mlx->img_data, data->half_wdt - 1, data->half_hgt - 1, 0x00ff00);
-
-	draw_vertical(data, mlx, line_size, pl->current->accuracy, pl->hover);
-	draw_horizontal(data, mlx, line_size, pl->current->accuracy, pl->hover);
+	draw_vertical(data, mlx, line_size, pl->current->accuracy);
+	draw_horizontal(data, mlx, line_size, pl->current->accuracy);
 }
