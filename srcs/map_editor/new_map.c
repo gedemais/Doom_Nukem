@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 16:37:34 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 16:41:06 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	background(t_env *env)
@@ -44,24 +56,25 @@ static void	display_new_map_error(t_env *env, int error)
 
 static void	handle_events(t_env *env)
 {
-	bool	ret;
+	t_edit_env	*ed;
+	bool		ret;
 
-	ret = is_on_button(env->events.mouse_pos, env->edit_env.buttons[MAPED_NM_BUTTON_CREATE]);
-	env->edit_env.buttons[MAPED_NM_BUTTON_CREATE].is_hover = ret;
+	ed = &env->edit_env;
+	ret = is_on_button(env->events.mouse_pos,
+		ed->buttons[MAPED_NM_BUTTON_CREATE]);
+	ed->buttons[MAPED_NM_BUTTON_CREATE].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC]
-		&& !(env->edit_env.error = create_me_map(env)))
+		&& !(ed->error = create_me_map(env)))
 		switch_mecontext(env, MAPED_SC_CREATIVE);
-
-	ret = is_on_button(env->events.mouse_pos, env->edit_env.buttons[MAPED_NM_BUTTON_MAPED]);
-	env->edit_env.buttons[MAPED_NM_BUTTON_MAPED].is_hover = ret;
+	ret = is_on_button(env->events.mouse_pos,
+		ed->buttons[MAPED_NM_BUTTON_MAPED]);
+	ed->buttons[MAPED_NM_BUTTON_MAPED].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC])
 		switch_mecontext(env, MAPED_SC_MENU);
-
-
-	if (env->edit_env.error == -1)
+	if (ed->error == -1)
 		exit(1);
 	else
-		display_new_map_error(env, env->edit_env.error);
+		display_new_map_error(env, ed->error);
 }
 
 int			maped_new_map(t_env *env)
@@ -73,6 +86,7 @@ int			maped_new_map(t_env *env)
 	handle_events(env);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_CREATE]);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_MAPED]);
-	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	mlx_put_image_to_window(env->mlx.mlx_ptr,
+		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

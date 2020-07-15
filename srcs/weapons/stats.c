@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stats.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:41:52 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:41:53 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	damages_n_accuracy(t_env *env)
@@ -12,7 +24,6 @@ static void	damages_n_accuracy(t_env *env)
 	env->weapons[W_GALIL].damages = 25;
 	env->weapons[W_NEGEV].damages = 60;
 	env->weapons[W_TEC9].damages = 45;
-
 	env->weapons[W_FAMAS].accuracy = 0.8f;
 	env->weapons[W_AK47].accuracy = 0.6f;
 	env->weapons[W_SAWED_OFF].accuracy = 0.3f;
@@ -37,7 +48,6 @@ static void	magazine_n_reticle(t_env *env)
 	env->weapons[W_GALIL].magazine = 35;
 	env->weapons[W_NEGEV].magazine = 100;
 	env->weapons[W_TEC9].magazine = 18;
-
 	env->weapons[W_FAMAS].reticle = 20;
 	env->weapons[W_AK47].reticle = 24;
 	env->weapons[W_SAWED_OFF].reticle = 32;
@@ -50,7 +60,7 @@ static void	magazine_n_reticle(t_env *env)
 	env->weapons[W_TEC9].reticle = 20;
 }
 
-static void		cadency_n_shoot_mode(t_env *env)
+static void	cadency_n_shoot_mode(t_env *env)
 {
 	env->weapons[W_FAMAS].cadency = 1000;
 	env->weapons[W_AK47].cadency = 600;
@@ -62,7 +72,6 @@ static void		cadency_n_shoot_mode(t_env *env)
 	env->weapons[W_GALIL].cadency = 650;
 	env->weapons[W_NEGEV].cadency = 850;
 	env->weapons[W_TEC9].cadency = 300;
-
 	env->weapons[W_FAMAS].shoot_mode = SMODE_FULL_AUTO;
 	env->weapons[W_AK47].shoot_mode = SMODE_FULL_AUTO;
 	env->weapons[W_SAWED_OFF].shoot_mode = SMODE_SBS;
@@ -87,7 +96,6 @@ static void	recoil_n_max_ammos(t_env *env)
 	env->weapons[W_GALIL].recoil = 0.1f;
 	env->weapons[W_NEGEV].recoil = 0.1f;
 	env->weapons[W_TEC9].recoil = 0.05f;
-
 	env->weapons[W_FAMAS].max_ammos = 200;
 	env->weapons[W_AK47].max_ammos = 250;
 	env->weapons[W_SAWED_OFF].max_ammos = 60;

@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 15:02:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:44:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ struct			s_events
 
 struct			s_data
 {
+	t_env		*env;
 	struct timeval		time;
 	float		spent;
 	float		half_wdt;

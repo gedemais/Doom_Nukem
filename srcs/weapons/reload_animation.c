@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reload_animation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:37:20 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:37:32 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	up_n_down(t_weapon *w, float progress, bool reset)
@@ -16,7 +28,7 @@ static void	up_n_down(t_weapon *w, float progress, bool reset)
 		w->w_map->spawn = w->start;
 }
 
-void	reload_animation(t_env *env, t_weapon *w)
+void		reload_animation(t_env *env, t_weapon *w)
 {
 	float	progress;
 

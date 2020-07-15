@@ -167,6 +167,7 @@ void			inverse_matrix(float m[4][4], float ret[4][4]);
 /*
 ** Texturing
 */
+void			draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle *t, int i);
 void			starting_swap(t_triangle *t);
 void			compute_steps(t_texturizer *txt, bool t);
 void			compute_gradients(t_texturizer *txt, t_triangle *t, bool flatbot);

@@ -161,6 +161,8 @@ struct				s_edit_env
 	unsigned char	current_bt;
 };
 
+int					handle_creative_events(t_env *env);
+int					flat_map(t_ed_map *env, int *len);
 void				culling(t_env *env, t_mesh *news, unsigned char type);
 int 				check_face(t_ed_map *map, int type, int *pos, int face);
 void				cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type);
@@ -193,6 +195,9 @@ int					me_creative_to_menu(t_env *env);
 
 void				free_maped(t_env *env);
 
+char				matcher(int key_id);
+int					add_char(t_dynarray *txt, bool keys[NB_KEYS]);
+int					get_boxs(t_ttf *ttfs, t_dynarray *boxs);
 int					input_field(t_env *env, t_point o, int nfield, char **ret);
 void				draw_rectangle(char *img, t_point o, t_point dims, int color);
 

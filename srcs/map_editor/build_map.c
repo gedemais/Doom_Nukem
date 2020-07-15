@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 15:14:13 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 15:17:14 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-void			free_matrice(t_ed_map *env)
+void		free_matrice(t_ed_map *env)
 {
 	int		i;
 	int		j;
@@ -27,20 +39,22 @@ int			init_matrice(t_ed_map *env)
 {
 	int		x;
 	int		y;
-	int     error;
+	int		size;
+	int		error;
 
 	error = 0;
-	if (!(env->map = (unsigned char ***)ft_memalloc(sizeof(unsigned char **) * env->width)))
+	if (!(env->map = ft_memalloc(sizeof(unsigned char**) * env->width)))
 		error = 1;
 	x = -1;
 	while (error == 0 && ++x < env->width)
 	{
-		if (!(env->map[x] = (unsigned char **)ft_memalloc(sizeof(unsigned char *) * env->height)))
+		if (!(env->map[x] = ft_memalloc(sizeof(unsigned char*) * env->height)))
 			error = 1;
 		y = -1;
 		while (error == 0 && ++y < env->height)
 		{
-			if (!(env->map[x][y] = (unsigned char *)ft_memalloc(sizeof(unsigned char) * env->depth)))
+			size = sizeof(unsigned char) * env->depth;
+			if (!(env->map[x][y] = ft_memalloc(size)))
 				error = 1;
 		}
 	}

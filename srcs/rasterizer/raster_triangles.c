@@ -6,19 +6,19 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 02:08:49 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 16:55:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:28:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static int	launch_thread(t_env *env, t_rasthread *thread, int part, int rest)
+static int	launch_thread(t_env *env, t_rasthread *thread, int p, int rest)
 {
 	thread->env = env;
 	thread->tris = &env->cam.to_raster;
-	thread->start = thread->id * part;
+	thread->start = thread->id * p;
 	thread->index = thread->start;
-	thread->end = thread->start + part + (thread->id == NB_THREADS - 1 ? rest : 0);
+	thread->end = thread->start + p + (thread->id == NB_THREADS - 1 ? rest : 0);
 	thread->mono = false;
 	if (pthread_create(&thread->thread, NULL, rasthreader, thread))
 		return (-1);

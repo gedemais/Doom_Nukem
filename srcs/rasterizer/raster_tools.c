@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 04:33:11 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 18:05:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:26:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,15 @@ void	compute_view_matrice(t_env *env)
 	env->cam.stats.dir = (t_vec3d){0, 0, 1, 0};
 	up = (t_vec3d){0, -1, 0, 0};
 	target = (t_vec3d){0, 0, 1, 0};
-
 	yaw_rad = ft_to_radians(env->cam.stats.yaw);
 	pitch_rad = ft_to_radians(env->cam.stats.pitch);
-	
 	update_yrotation_matrix(env->cam.cry_m, yaw_rad);
 	update_xrotation_matrix(env->cam.crx_m, pitch_rad);
 	matrix_mult_matrix(env->cam.crx_m, env->cam.cry_m, env->cam.cr_m);
-
 	env->cam.stats.dir = matrix_mult_vec(env->cam.cr_m, target);
 	up = matrix_mult_vec(env->cam.cr_m, (t_vec3d){0, -1, 0, 0});
 	target = vec_add(env->cam.stats.pos, env->cam.stats.dir);
-
 	matrix_pointat(env->cam.c_m, env->cam.stats.pos, target, up);
-
 	inverse_matrix(env->cam.c_m, env->cam.v_m);
 }
 

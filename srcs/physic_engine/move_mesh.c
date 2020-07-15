@@ -6,7 +6,7 @@
 /*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 14:43:56 by bebosson          #+#    #+#             */
-/*   Updated: 2020/07/14 20:39:59 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:39:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			tp_mesh(t_map *map, t_mesh *m, t_vec3d p)
 	t_vec3d		diff;
 	int			i;
 
-	(void)map;
 	i = 0;
 	diff = vec_sub(m->corp.pos, p);
 	while (i < m->tris.nb_cells)

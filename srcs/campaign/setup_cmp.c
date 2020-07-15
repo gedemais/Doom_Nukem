@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 20:24:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:55:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int		init_keys(t_env *env)
 	static t_vec3d	pos[SECTOR_MAX] = {{10.0f, 10.0f, 10.0f, 0},
 								{10.0f, 10.0f, 10.0f, 0}};
 	t_map			*map;
+	t_cmp_env		*cmp;
 	int				i;
 
 	i = 0;
+	cmp = &env->cmp_env;
 	while (i < SECTOR_MAX)
 	{
-		map = &env->maps[env->cmp_env.sectors[i].map];
-		if (!(env->cmp_env.key[i] = copy_to_scene(map, &env->maps[SCENE_KEY], pos[i])))
+		map = &env->maps[cmp->sectors[i].map];
+		if (!(cmp->key[i] = copy_to_scene(map, &env->maps[SCENE_KEY], pos[i])))
 			return (-1);
 		i++;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix_ops.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 13:14:55 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 13:15:57 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
@@ -11,10 +23,11 @@ t_vec3d		multiply_matrix(float m[4][4], t_vec3d o)
 	return (ret);
 }
 
-void	matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4])
+void		matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4])
 {
 	unsigned int	c;
 	unsigned int	r;
+	float			tmp;
 
 	c = 0;
 	while (c < 4)
@@ -22,14 +35,16 @@ void	matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4])
 		r = 0;
 		while (r < 4)
 		{
-			ret[r][c] = m1[r][0] * m2[0][c] + m1[r][1] * m2[1][c] + m1[r][2] * m2[2][c] + m1[r][3] * m2[3][c];
+			tmp = m1[r][0] * m2[0][c] + m1[r][1] * m2[1][c];
+			tmp += m1[r][2] * m2[2][c] + m1[r][3] * m2[3][c];
+			ret[r][c] = tmp;
 			r++;
 		}
 		c++;
 	}
 }
 
-t_vec3d matrix_mult_vec(float m[4][4], t_vec3d i)
+t_vec3d		matrix_mult_vec(float m[4][4], t_vec3d i)
 {
 	t_vec3d v;
 

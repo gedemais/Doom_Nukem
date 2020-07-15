@@ -1,11 +1,10 @@
-Empecher les spawners qui te trouvent pas de faire spawn des mobs
-{
-	mettre un delay sur chaque spawner qui ce reduit plus le joueur est proche
-	INFINITY si joueur trop loin
-}
+Bosson :
+Leaks du physic_engine
+Degats de chute
+Retirer des golds quand le player tombe de la map
 
-Fix la physique
-=> baisser s'accroupir + voir msg épinglé discord
+Maboye :
+Finir les sons
 
 gérer le export ds le make install
 => l'user définit en brut dans le make install le path du .zshrc

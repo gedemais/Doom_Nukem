@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 01:34:14 by gedemais          #+#    #+#             */
-/*   Updated: 2020/03/03 19:24:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:26:28 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up)
 	m[3][3] = 1;
 }
 
-void	inverse_matrix(float m[4][4], float r[4][4]) // Only for Rotation/Translation Matrices
+void	inverse_matrix(float m[4][4], float r[4][4])
 {
 	r[0][0] = m[0][0];
 	r[0][1] = m[1][0];
@@ -64,5 +64,3 @@ void	translation_matrix(float m[4][4], t_vec3d v)
 	m[3][1] = v.y;
 	m[3][2] = v.z;
 }
-
-

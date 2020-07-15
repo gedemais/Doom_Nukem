@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 15:52:17 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 15:53:32 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-char				*read_file(int fd, int *len)
+char	*read_file(int fd, int *len)
 {
 	struct stat	file_stat;
 	char		*dest;
@@ -10,14 +22,15 @@ char				*read_file(int fd, int *len)
 		return (NULL);
 	size = file_stat.st_size;
 	*len = size;
-	if (!(dest = mmap(NULL, (size_t)size, PROT_READ|PROT_WRITE, MAP_FILE|MAP_PRIVATE, fd, 0)))
+	if (!(dest = mmap(NULL, (size_t)size,
+		PROT_READ | PROT_WRITE, MAP_FILE | MAP_PRIVATE, fd, 0)))
 		return (NULL);
 	return (dest);
 }
 
 int		write_infile(char *f_path, char *str, int len, bool token)
 {
-	int        file;
+	int		file;
 
 	if (token)
 		unlink(f_path);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_shapes.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/14 16:28:36 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/14 16:29:32 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	attribute_cube_faces(t_mesh *new, char bc)
@@ -16,18 +28,16 @@ static void	attribute_cube_faces(t_mesh *new, char bc)
 		((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
 		((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
 		((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
+		return ;
 	}
-	else
-	{
-		((t_triangle*)dyacc(&new->tris, 4))->face_i = SFACE_SLOPE;
-		((t_triangle*)dyacc(&new->tris, 7))->face_i = SFACE_SLOPE;
-		((t_triangle*)dyacc(&new->tris, 2))->face_i = SFACE_LEFT;
-		((t_triangle*)dyacc(&new->tris, 1))->face_i = SFACE_RIGHT;
-		((t_triangle*)dyacc(&new->tris, 3))->face_i = SFACE_BOTTOM;
-		((t_triangle*)dyacc(&new->tris, 0))->face_i = SFACE_FRONT;
-		((t_triangle*)dyacc(&new->tris, 5))->face_i = SFACE_FRONT;
-		((t_triangle*)dyacc(&new->tris, 6))->face_i = SFACE_BOTTOM;
-	}
+	((t_triangle*)dyacc(&new->tris, 4))->face_i = SFACE_SLOPE;
+	((t_triangle*)dyacc(&new->tris, 7))->face_i = SFACE_SLOPE;
+	((t_triangle*)dyacc(&new->tris, 2))->face_i = SFACE_LEFT;
+	((t_triangle*)dyacc(&new->tris, 1))->face_i = SFACE_RIGHT;
+	((t_triangle*)dyacc(&new->tris, 3))->face_i = SFACE_BOTTOM;
+	((t_triangle*)dyacc(&new->tris, 0))->face_i = SFACE_FRONT;
+	((t_triangle*)dyacc(&new->tris, 5))->face_i = SFACE_FRONT;
+	((t_triangle*)dyacc(&new->tris, 6))->face_i = SFACE_BOTTOM;
 }
 
 int			create_cube(t_env *env, t_mesh *new, unsigned char type)
@@ -69,7 +79,7 @@ static int	get_slope_obj(unsigned char type)
 	return (0);
 }
 
-int		create_slope(t_env *env, t_mesh *new, unsigned char type)
+int			create_slope(t_env *env, t_mesh *new, unsigned char type)
 {
 	t_mesh		*mesh;
 	t_triangle	t;

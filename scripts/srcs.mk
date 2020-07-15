@@ -64,9 +64,11 @@ SRCS_NAME =	main.c\
 			map_editor/block.c\
 			map_editor/category_pallet.c\
 			map_editor/convert_matrice.c\
+			map_editor/flat_map.c\
 			map_editor/crosshair.c\
 			map_editor/create_map.c\
 			map_editor/creative.c\
+			map_editor/handle_creative_events.c\
 			map_editor/export.c\
 			map_editor/setup_me.c\
 			map_editor/render.c\
@@ -84,8 +86,10 @@ SRCS_NAME =	main.c\
 			map_editor/replace_by_face.c\
 			map_editor/routines.c\
 			map_editor/input_field.c\
+			map_editor/input_field_tools.c\
 			map_editor/culling.c\
 			map_editor/cull_slopes.c\
+			map_editor/tools.c\
 			\
 			obj_parser/load_maps.c\
 			obj_parser/dependencies.c\
@@ -119,6 +123,7 @@ SRCS_NAME =	main.c\
 			rasterizer/clipping.c\
 			rasterizer/clipping_bis.c\
 			rasterizer/clipping_tools.c\
+			rasterizer/draw_triangle_line.c\
 			rasterizer/fill_triangle_texture.c\
 			rasterizer/fill_triangle_texture_bis.c\
 			rasterizer/rasterizer.c\

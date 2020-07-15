@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hud.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/15 14:15:15 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 14:15:40 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static int		print_moulaga(t_env *env)
+static int	print_moulaga(t_env *env)
 {
 	t_ttf_config	*conf;
 	char			*moulaga;
@@ -29,7 +41,6 @@ static void	hitmarker(t_env *env)
 
 int			weapons_hud(t_env *env)
 {
-	// hitmarker
 	if (env->player.current)
 		draw_reticule(env);
 	if (print_ammos(env, env->player.current)
