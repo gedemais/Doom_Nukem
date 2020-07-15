@@ -5,8 +5,9 @@
 # include <AL/alc.h>
 # include <sndfile.h>
 
-# define VOLUME	0.2f
-# define PITCH	1.0f
+# define VOLUME		0.2f
+# define PITCH		1.0f
+# define SA_BUFFER	42
 
 enum	e_sample_id
 {
@@ -91,6 +92,8 @@ typedef struct	s_sound
 	ALuint		ambient;
 	float		volume;
 	float		pitch;
+	t_dynarray	*sounds;
+	t_dynarray	*fork;
 }				t_sound;
 
 int				sound_system(t_env *env, int source, t_sparam param);
@@ -101,13 +104,13 @@ t_sparam		sp_fork(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_no_sound(int start, int end);
 t_sparam		sp_overall(int start, int end, t_sparam p);
 t_sparam		sp_play(float volume, float pitch, t_vec3d pos);
-t_sparam		sp_stop();
+t_sparam		sp_stop(void);
 t_sparam		sp_volume(float volume, float pitch);
 
-int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p);
-int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p);
-int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p);
-int 			stop_sound(t_dynarray *sounds, int source);
+int 			fork_sound(t_env *env, int source, t_sparam param);
+int 			play_sound(t_env *env, int source, t_sparam param);
+int 			sound_volume(t_env *env, int source, t_sparam param);
+int 			stop_sound(t_env *env, int source);
 
 char			*samples_paths(unsigned int index);
 

@@ -53,7 +53,7 @@ static void		enemies_actions(t_env *env, t_enemy *mob)
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
 	if (mob->noise++ == ENEMIES_NOISE_DELAY)
 	{
-		sound_system(env, SA_LEVITATION, sp_play(0.1f, 1, mob->pos));
+		sound_system(env, SA_LEVITATION, sp_fork(0.1f, 1, mob->pos));
 		mob->noise = 0;
 	}
 }

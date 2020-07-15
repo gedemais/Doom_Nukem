@@ -22,7 +22,7 @@ t_sparam		sp_no_sound(int start, int end)
 	return (param);	
 }
 
-t_sparam		sp_stop()
+t_sparam		sp_stop(void)
 {
 	t_sparam	param;
 
@@ -31,23 +31,23 @@ t_sparam		sp_stop()
 	return (param);
 }
 
-int 			stop_sound(t_dynarray *sounds, int source)
+int 			stop_sound(t_env *env, int source)
 {
 	t_sound	*sound;
 
-	sound = dyacc(sounds, source);
+	sound = dyacc(env->sound.sounds, source);
 	if (sound == NULL)
 		return (0);
 	alSourceStop(sound->ambient);	
 	return (0);
 }
 
-int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
+int 			sound_volume(t_env *env, int source, t_sparam p)
 {
 	ALint 	status;
 	t_sound	*sound;
 
-	sound = dyacc(s, source);
+	sound = dyacc(env->sound.sounds, source);
 	if (sound == NULL || p.sound == false)
 		return (0);
 	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);

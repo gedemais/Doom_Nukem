@@ -42,39 +42,39 @@ static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 		return (-1);
 	if (source_param(source, p))
 		return (-1);
-	if (p.fork)
-	{
-		alSourcef(*source, AL_REFERENCE_DISTANCE, 1);
-		alSourcef(*source, AL_ROLLOFF_FACTOR, 1);
-		alSourcef(*source, AL_MAX_DISTANCE, 60);
-	}
 	alSourcef(*source, AL_GAIN, p.volume);
 	alSourcef(*source, AL_PITCH, p.pitch);
 	return (0);
 }
 
-int 			fork_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
+int 			fork_sound(t_env *env, int source, t_sparam p)
 {
-	ALuint 	tmp;
-	t_sound	*sound;
+	t_sound		*sound;
+	t_sound		*fork;
+	static int	current = 0;
 
-	sound = dyacc(s, source);
-	if (sound == NULL || p.fork == false)
-		return (0);
-	alGenSources(1, &tmp);
-	if (sound_param(env, &tmp, p))
+	sound = dyacc(env->sound.sounds, source);
+	current = current > SA_BUFFER - 1 ? 0 : current;
+	fork = dyacc(env->sound.fork, current++);
+	if (sound == NULL)
 		return (-1);
-	alSourcei(tmp, AL_BUFFER, (ALint)sound->samples->buffer);
-	alSourcePlay(tmp);
+	if (fork == NULL)
+		return (-1);
+	if (p.fork == false)
+		return (0);
+	if (sound_param(env, &fork->ambient, p))
+		return (-1);
+	alSourcei(fork->ambient, AL_BUFFER, (ALint)sound->samples->buffer);
+	alSourcePlay(fork->ambient);
 	return (0);
 }
 
-int 			play_sound(t_env *env, t_dynarray *s, int source, t_sparam p)
+int 			play_sound(t_env *env, int source, t_sparam p)
 {
 	ALint 	status;
 	t_sound	*sound;
 
-	sound = dyacc(s, source);
+	sound = dyacc(env->sound.sounds, source);
 	if (sound == NULL || p.play == false)
 		return (0);
 	sound->volume = p.volume;
