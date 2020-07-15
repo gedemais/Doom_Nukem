@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 16:55:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:09:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		init_keys(t_env *env)
 	static t_vec3d	pos[SECTOR_MAX] = {{10.0f, 10.0f, 10.0f, 0},
 								{10.0f, 10.0f, 10.0f, 0}};
 	t_map			*map;
-	t_cmp_env		*cmp;
+	t_camp_env		*cmp;
 	int				i;
 
 	i = 0;
