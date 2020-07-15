@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:41:52 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 14:41:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:49:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	damages_n_accuracy(t_env *env)
 {
 	env->weapons[W_FAMAS].damages = 30;
 	env->weapons[W_AK47].damages = 50;
-	env->weapons[W_SAWED_OFF].damages = 90;
+	env->weapons[W_SAWED_OFF].damages = 100;
 	env->weapons[W_GLOCK_18].damages = 30;
 	env->weapons[W_AUG].damages = 40;
 	env->weapons[W_UMP45].damages = 30;
@@ -40,11 +40,11 @@ static void	magazine_n_reticle(t_env *env)
 {
 	env->weapons[W_FAMAS].magazine = 25;
 	env->weapons[W_AK47].magazine = 30;
-	env->weapons[W_SAWED_OFF].magazine = 6;
+	env->weapons[W_SAWED_OFF].magazine = 8;
 	env->weapons[W_GLOCK_18].magazine = 18;
 	env->weapons[W_AUG].magazine = 30;
 	env->weapons[W_UMP45].magazine = 32;
-	env->weapons[W_MAG7].magazine = 6;
+	env->weapons[W_MAG7].magazine = 12;
 	env->weapons[W_GALIL].magazine = 35;
 	env->weapons[W_NEGEV].magazine = 100;
 	env->weapons[W_TEC9].magazine = 18;

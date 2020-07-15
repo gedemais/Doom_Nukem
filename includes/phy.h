@@ -6,11 +6,12 @@
 /*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 19:59:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/14 20:57:43 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:47:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PHY_H
+#ifndef PHY_H
+# define PHY_H
 
 struct	s_corp
 {

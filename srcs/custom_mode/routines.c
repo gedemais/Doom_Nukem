@@ -32,6 +32,7 @@ int				custom_play_to_menu(t_env *env)
 	free_dynarray(&env->astar.d_nodes);
 	free_dynarray(&env->astar.d_astar);
 	env->custom_env.loot.m = NULL;
+	env->phy_env.type_move = false;
 	return (0);
 }
 

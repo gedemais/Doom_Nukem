@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 15:03:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 19:49:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define START_HP 100
 # define HEAL_SPEED 10
 
-# define START_MOULA 1000
+# define START_MOULA 15000
 # define MIN_CASH 100
 # define MAX_CASH 1000
 # define GOD_TIME 20
