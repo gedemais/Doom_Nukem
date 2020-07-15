@@ -63,6 +63,7 @@ int			custom_game_over_to_play(t_env *env)
 	set_game_stats(env);
 	env->data.wireframe = false;
 	mlx_mouse_hide();
+	env->phy_env.type_move = true;
 	return (0);
 }
 

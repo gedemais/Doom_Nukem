@@ -58,7 +58,7 @@ void		scan_actuall_collide(t_env *env, t_map *map)
 
 void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if (c->cam_mesh_first.y > 0)
+	if (c->cam_mesh_first.y > 0 && env->cam.stats.onfloor == 0)
 	{
 		map->cam_floor = c;
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
@@ -75,29 +75,44 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
 	}
 }
+void		fall_damage(t_env *env, t_mesh *cam)
+{
+	float dam;
+	
+	dam = 0.0f;
+	if (vec_norm(cam->corp.v) > 0.9f && cam->corp.v.y < 0)
+	{
+		dam = (1.0f - vec_norm(cam->corp.v)) * 100;
+		env->player.hp += dam;
+	}
+}
 
 void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 {
 	float		move;
 
-	(void)maps;
 	move = 0.0f;
-	if (env->cam.stats.pos.y < -10 || env->cam.stats.onfloor == 1)
+	if (env->cam.stats.pos.y > -10 && env->cam.stats.onfloor == 0)
+		return ;
+	fall_damage(env, cam);	
+	env->phy_env.tps = 0;
+	cam->corp.v.y = 0;
+	cam->corp.v = vec_fmult(cam->corp.v, 0.4);
+	if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 4
+		&& env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y > 1
+		&& maps->cam_floor->a->tris.nb_cells == 8
+		&& env->cam.stats.onroof == 0)
 	{
-		env->phy_env.tps = 0;
-		cam->corp.v.y = 0;
-		cam->corp.v = vec_fmult(cam->corp.v, 0.4);
-		if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 4
-			&& env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y > 0
-			&& maps->cam_floor->a->tris.nb_cells == 8
-			&& env->cam.stats.onroof == 0)
-		{
-			move = 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
-			cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, move, 0, 0});
-			translate_mesh(maps, cam, cam->corp.v);
-		}
-		if (env->cam.stats.pos.y < -10)
-			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos));
+		move = 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
+		cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, move, 0, 0});
+		translate_mesh(maps, cam, cam->corp.v);
+	}
+	if (env->cam.stats.pos.y < -10)
+	{
+		env->custom_env.game.moula -= 500;
+		(env->custom_env.game.moula >= 0) ? 
+			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos)) 
+			: (env->player.hp = 0);
 	}
 }
 

@@ -55,7 +55,8 @@ int			report_cam_collisions(t_env *env, t_map *maps)
 	t_mesh		*cam;
 
 	cam = &maps->cam;
-	if (init_dynarray(&env->phy_env.collides_cam,
+	if (!env->phy_env.collides_cam.byte_size
+		&& init_dynarray(&env->phy_env.collides_cam,
 		sizeof(t_collide), maps->nmesh))
 		return (-1);
 	i = 0;

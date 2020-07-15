@@ -19,7 +19,7 @@
 # define START_HP 100
 # define HEAL_SPEED 10
 
-# define START_MOULA 5000
+# define START_MOULA 1000
 # define MIN_CASH 100
 # define MAX_CASH 1000
 # define GOD_TIME 20
