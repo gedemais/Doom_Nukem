@@ -71,5 +71,6 @@ int			custom_game_over_to_play(t_env *env)
 int			custom_game_over_to_menu(t_env *env)
 {
 	free(env->custom_env.map_path);
+	env->phy_env.type_move = false;
 	return (0);
 }
