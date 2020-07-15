@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:42:08 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 14:43:08 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 20:47:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void	weapons_events(t_env *env, t_events *e)
 int			handle_weapons(t_env *env)
 {
 	env->player.current->shot = false;
+	handle_sprint(env);
 	if (raster_weapon(env, env->player.current->w_map) || weapons_hud(env))
 		return (-1);
 	weapons_events(env, &env->events);

@@ -1,6 +1,7 @@
 #include "main.h"
 
-int		astar_init(t_env *env)
+int
+	astar_init(t_env *env)
 {
 	t_pf		*astar;
 	t_ed_map	map;
@@ -14,31 +15,33 @@ int		astar_init(t_env *env)
 	return (0);
 }
 
-void            astar_delvisited_nodes(t_dynarray *arr)
+void
+	astar_delvisited_nodes(t_dynarray *arr)
 {
-    int     i;
+	int	i;
 
-    i = -1;
-    while (++i < arr->nb_cells)
-    {
-        if (((t_node *)dyacc(arr, i))->bvisited)
-            extract_dynarray(arr, i);
-    }
+	i = -1;
+	while (++i < arr->nb_cells)
+	{
+		if (((t_node *)dyacc(arr, i))->bvisited)
+			extract_dynarray(arr, i);
+	}
 }
 
-void            astar_reset(t_pf *env)
+void
+	astar_reset(t_pf *env)
 {
-    int     i;
-    t_node  *node;
+	int		i;
+	t_node	*node;
 
-    i = -1;
-    while (++i < env->d_nodes.nb_cells)
-    {
-        node = dyacc(&env->d_nodes, i);
-        node->bvisited = 0;
-        node->globalgoal = INFINITY;
-        node->localgoal = INFINITY;
-        node->parent = NULL;
-    }
-    clear_dynarray(&env->d_astar);
+	i = -1;
+	while (++i < env->d_nodes.nb_cells)
+	{
+		node = dyacc(&env->d_nodes, i);
+		node->bvisited = 0;
+		node->globalgoal = INFINITY;
+		node->localgoal = INFINITY;
+		node->parent = NULL;
+	}
+	clear_dynarray(&env->d_astar);
 }

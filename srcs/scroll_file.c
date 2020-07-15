@@ -1,8 +1,6 @@
 #include "main.h"
 
-//int		free_scroll_file(t_env *env)
-
-int		init_scroll_file(t_env *env, char *path, char *extension)
+int				init_scroll_file(t_env *env, char *path, char *extension)
 {
 	t_scroll	*s;
 
@@ -33,6 +31,7 @@ static void		display_str(t_env *env, t_point police, int i)
 
 	s = &env->scroll;
 	conf = ttf_config();
+	conf->size = 20;
 	ft_bzero(conf->s, sizeof(unsigned char) * 1024);
 	if (s->max == 0)
 		ft_strlcpy((char *)conf->s, "No map found!", 13);
@@ -69,7 +68,7 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 		s->mouse_index = -1;
 }
 
-static void	events_scroll_file(t_env *env)
+static void		events_scroll_file(t_env *env)
 {
 	if (env->scroll.mouse_index > -1)
 	{
@@ -80,13 +79,15 @@ static void	events_scroll_file(t_env *env)
 	}
 }
 
-void		display_file(t_env *env)
+void			display_file(t_env *env)
 {
 	int				i;
 	t_point			pos;
 	t_scroll		*s;
 
 	s = &env->scroll;
+	if (s->list == NULL)
+		return ;
 	s->current = s->current < 0 ? s->max : s->current;
 	s->current = s->current > s->max ? 0 : s->current;
 	i = -1;
@@ -102,4 +103,3 @@ void		display_file(t_env *env)
 		ft_strdel(&s->s_path);
 	events_scroll_file(env);
 }
-

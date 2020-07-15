@@ -2,7 +2,7 @@
 
 static void		enemies_check_neighbours(t_pf *a, t_enemy *mob)
 {
-	int 	i;
+	int		i;
 	t_node	*node;
 
 	i = -1;
@@ -14,13 +14,6 @@ static void		enemies_check_neighbours(t_pf *a, t_enemy *mob)
 	}
 }
 
-static bool		enemies_vec_outrange(t_vec3d dim, t_vec3d pos)
-{
-	return (pos.x < 0 || pos.x > dim.x - 1
-		|| pos.y < 0 || pos.y > dim.y - 1
-		|| pos.z < 0 || pos.z > dim.z - 1);
-}
-
 static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 {
 	t_vec3d	end;
@@ -30,7 +23,7 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 		end.x = (int)(mob->end->pos.x / 2 + mob->goal->pos.x / 2);
 		end.y = (int)(mob->end->pos.y / 2 + mob->goal->pos.y / 2);
 		end.z = (int)(mob->end->pos.z / 2 + mob->goal->pos.z / 2);
-		if (enemies_vec_outrange(a->dim, end))
+		if (vec_outrange(a->dim, end))
 			return (-1);
 		mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, end));
 		if (mob->end == NULL)
@@ -50,7 +43,7 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	cam.x = (int)cam.x / 2;
 	cam.y = (int)cam.y / 2;
 	cam.z = (int)cam.z / 2;
-	if (enemies_vec_outrange(a->dim, cam))
+	if (vec_outrange(a->dim, cam))
 		return ;
 	if (vec3d_dist(a->start->pos, cam) < DIST_TO_PLAYER)
 		return ;

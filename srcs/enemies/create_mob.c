@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
+void		assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 {
 	static int		damages[ENEMY_MAX] = {
 		[ENEMY_CORONA] = EDAMAGES_CORONA,
@@ -12,7 +12,7 @@ void	assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 	enemy->damages = damages[(int)type];
 }
 
-int		enemy_map_mapper(char type)
+int			enemy_map_mapper(char type)
 {
 	static int		map[ENEMY_MAX] = {
 		[ENEMY_MAGE] = SCENE_MAGE,
@@ -23,7 +23,7 @@ int		enemy_map_mapper(char type)
 	return (map[(int)type]);
 }
 
-static bool		handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
+static bool	handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
 {
 	int			i;
 
@@ -66,7 +66,7 @@ int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
 	return (0);
 }
 
-static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
+static int	copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
 {
 	t_mesh		new;
 	t_mesh		*m;
@@ -82,8 +82,8 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 		new.type = 1;
 		new.index = enemy->map_start + i;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
-			|| copy_triangles(map, mob, m, &new)
-			|| push_dynarray(&map->meshs, &new, false))
+				|| copy_triangles(map, mob, m, &new)
+				|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
 		assign_meshs(dyacc(&map->meshs, map->nmesh));
 		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
@@ -93,11 +93,11 @@ static int		copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy
 	return (0);
 }
 
-static void		enemy_offset(t_enemy *mob)
+static void	enemy_offset(t_enemy *mob)
 {
 	int			i;
 	int			j;
-	t_mesh 		*mesh;
+	t_mesh		*mesh;
 	t_triangle	*tri;
 
 	i = mob->map_start - 1;
@@ -115,20 +115,18 @@ static void		enemy_offset(t_enemy *mob)
 	}
 }
 
-int		create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
+int			create_mob(t_env *env, t_map *map, char type, t_vec3d pos)
 {
 	t_enemy	enemy;
 
 	ft_memset((void *)&enemy, 0, sizeof(t_enemy));
 	assign_enemys_stats(&env->custom_env.game, &enemy, type);
-
 	enemy.head = (t_vec3d){ 0, 0, 1, 0 };
 	enemy.offset = (t_vec3d){ 0, 1, 0, 0 };
 	enemy.peace = 0;
 	enemy.pos = pos;
 	enemy.i = nodes_3d_1d(env->astar.dim, vec_fdiv(pos, 2));
 	enemy.map = map;
-	
 	if (copy_mob_to_scene(env, map, &env->maps[enemy_map_mapper(type)], &enemy))
 		return (-1);
 	enemy_offset(&enemy);

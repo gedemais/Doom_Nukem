@@ -71,7 +71,7 @@ void				del_door(t_env *env, t_event_block *block)
 	{
 		del_recursif(env, (int[3]){block->x, block->y, block->z});
 		sound_system(env, SA_DOOR,
-			sp_fork(env->volume, PITCH, env->cam.stats.pos));
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	}
 }
 

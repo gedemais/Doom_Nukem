@@ -16,7 +16,7 @@ static void	stop_n_play(t_env *env, int source)
 {
 	sound_system(env, source, sp_stop());
 	sound_system(env, source,
-		sp_play(env->volume, PITCH, env->cam.stats.pos));
+		sp_play(env->sound.volume, PITCH, env->cam.stats.pos));
 }
 
 int			shoot_current_weapon(t_env *env)

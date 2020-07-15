@@ -1,32 +1,19 @@
 #include "main.h"
 
-static int 		init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
+static int
+	init_sound_system(t_env *env, t_dynarray *sounds, int size)
 {
-	t_sound	sound;
+	int		i;
+	ALuint	*sources;
 
-    ft_memset(&sound, 0, sizeof(t_sound));
-    sound.samples = &env->sound.samples[i];
-	sound.ambient = sources[i];
-	alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
-	alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
-	alSourcef(sound.ambient, AL_MAX_DISTANCE, 60);
-    return (push_dynarray(s, &sound, 0));
-}
-
-static int 		init_sound_system(t_env *env, t_dynarray *sounds)
-{
-	int 	i;
-	ALuint 	*sources;
-
-	env->volume = VOLUME;
-	if (SA_MAX < 1 || init_dynarray(sounds, sizeof(t_sound), SA_MAX))
+	if (size < 1 || init_dynarray(sounds, sizeof(t_sound), size))
 		return (-1);
-	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * SA_MAX)))
+	if (!(sources = (ALuint *)malloc(sizeof(ALuint) * size)))
 		return (-1);
-	alGenSources(SA_MAX - 1, sources);
+	alGenSources(size - 1, sources);
 	alDistanceModel(AL_LINEAR_DISTANCE);
 	i = -1;
-	while (++i < SA_MAX)
+	while (++i < size)
 		if (init_sound(env, sounds, sources, i))
 		{
 			free(sources);
@@ -36,32 +23,27 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds)
 	return (0);
 }
 
-static int 		quit_sound_system(t_dynarray *sounds)
+static int
+	quit_sound_system(t_env *env)
 {
-	int		i;
-	t_sound	*sound;
-
-	i = -1;
-	while (++i < sounds->nb_cells)
-	{
-		sound = dyacc(sounds, i);
-		stop_sound(sounds, sound->ambient);
-		alDeleteSources(1, &sound->ambient);
-	}
-	free_dynarray(sounds);
+	delete_sources(env->sound.sounds);
+	free_dynarray(env->sound.sounds);
+	delete_sources(env->sound.fork);
+	free_dynarray(env->sound.fork);
 	return (-1);
 }
 
-static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
+static int
+	sound_overall(t_env *env, int source, t_sparam p)
 {
-	int 	i;
-	ALint 	status;
-	t_sound	*sound;
+	int			i;
+	ALint		status;
+	t_sound		*sound;
 
 	i = p.start - 1;
-	while (++i <= p.end && i < s->nb_cells)
+	while (++i <= p.end && i < env->sound.sounds->nb_cells)
 	{
-		sound = dyacc(s, i);
+		sound = dyacc(env->sound.sounds, i);
 		if (p.no_sound)
 		{
 			alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
@@ -69,31 +51,39 @@ static int 		sound_overall(t_env *env, t_dynarray *s, int source, t_sparam p)
 				return (1);
 			continue ;
 		}
-		if ((sound_volume(env, s, sound->ambient, p))
-			|| ((p.play || p.fork || p.stop)
-				&& stop_sound(s, sound->ambient)))
-			return (quit_sound_system(s));
+		if ((sound_volume(env, sound->ambient, p))
+				|| ((p.play || p.fork || p.stop)
+					&& stop_sound(env, sound->ambient)))
+			return (quit_sound_system(env));
 	}
-	if ((fork_sound(env, s, source, p))
-		|| (play_sound(env, s, source, p)))
-		return (quit_sound_system(s));
+	if ((fork_sound(env, source, p)) || (play_sound(env, source, p)))
+		return (quit_sound_system(env));
 	return (0);
 }
 
-int				sound_system(t_env *env, int source, t_sparam param)
+int
+	sound_system(t_env *env, int source, t_sparam param)
 {
 	static t_dynarray	sounds;
+	static t_dynarray	fork;
 
-	if (sounds.byte_size == 0 && init_sound_system(env, &sounds))
-		return (quit_sound_system(&sounds));
+	if (sounds.byte_size == 0)
+	{
+		if (init_sound_system(env, &sounds, SA_MAX)
+				|| init_sound_system(env, &fork, SA_BUFFER))
+			return (quit_sound_system(env));
+		env->sound.volume = VOLUME;
+		env->sound.sounds = &sounds;
+		env->sound.fork = &fork;
+	}
 	if (source < 0 || source > sounds.nb_cells - 1)
-		return (!quit_sound_system(&sounds));
+		return (!quit_sound_system(env));
 	if (param.overall || param.no_sound)
-		return (sound_overall(env, &sounds, source, param));
-	if ((sound_volume(env, &sounds, source, param))
-		|| (fork_sound(env, &sounds, source, param))
-		|| (play_sound(env, &sounds, source, param))
-		|| (param.stop && stop_sound(&sounds, source)))
-		return (quit_sound_system(&sounds));
+		return (sound_overall(env, source, param));
+	if ((sound_volume(env, source, param))
+			|| (fork_sound(env, source, param))
+			|| (play_sound(env, source, param))
+			|| (param.stop && stop_sound(env, source)))
+		return (quit_sound_system(env));
 	return (0);
 }

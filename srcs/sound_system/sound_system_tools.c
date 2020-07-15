@@ -1,6 +1,7 @@
 #include "main.h"
 
-t_sparam		sp_no_sound(int start, int end)
+t_sparam
+	sp_no_sound(int start, int end)
 {
 	int			tmp;
 	t_sparam	param;
@@ -19,10 +20,11 @@ t_sparam		sp_no_sound(int start, int end)
 	param.start = start;
 	param.end = end;
 	param.no_sound = true;
-	return (param);	
+	return (param);
 }
 
-t_sparam		sp_stop()
+t_sparam
+	sp_stop(void)
 {
 	t_sparam	param;
 
@@ -31,37 +33,30 @@ t_sparam		sp_stop()
 	return (param);
 }
 
-int 			stop_sound(t_dynarray *sounds, int source)
+void
+	delete_sources(t_dynarray *sounds)
 {
+	int		i;
 	t_sound	*sound;
 
-	sound = dyacc(sounds, source);
-	if (sound == NULL)
-		return (0);
-	alSourceStop(sound->ambient);	
-	return (0);
+	i = -1;
+	while (++i < sounds->nb_cells)
+	{
+		sound = dyacc(sounds, i);
+		alDeleteSources(1, &sound->ambient);
+	}
 }
 
-int 			sound_volume(t_env *env, t_dynarray *s, int source, t_sparam p)
+int
+	init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
 {
-	ALint 	status;
-	t_sound	*sound;
+	t_sound	sound;
 
-	sound = dyacc(s, source);
-	if (sound == NULL || p.sound == false)
-		return (0);
-	alGetSourcei(sound->ambient, AL_SOURCE_STATE, &status);
-	if (status == AL_PLAYING)
-	{
-		sound->volume += p.volume;
-		sound->volume = sound->volume > env->volume
-			? env->volume : sound->volume;
-		sound->volume = sound->volume < 0 ? 0 : sound->volume;
-		alSourcef(sound->ambient, AL_GAIN, sound->volume);
-		sound->pitch += p.pitch;
-		sound->pitch = sound->pitch > 2 ? 2 : sound->pitch;
-		sound->pitch = sound->pitch < 0 ? 0 : sound->pitch;
-		alSourcef(sound->ambient, AL_PITCH, sound->pitch);
-	}
-	return (0);
+	ft_memset(&sound, 0, sizeof(t_sound));
+	sound.samples = &env->sound.samples[i];
+	sound.ambient = sources[i];
+	alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
+	alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
+	alSourcef(sound.ambient, AL_MAX_DISTANCE, 60);
+	return (push_dynarray(s, &sound, 0));
 }

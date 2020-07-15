@@ -7,7 +7,8 @@ static void	wound(t_env *env, t_enemy *mob)
 	env->player.hp -= mob->damages;
 	if (sndelay >= 1.0f)
 	{
-		sound_system(env, SA_PLAYER_DAMAGE, sp_fork(env->volume, 1, env->cam.stats.pos));
+		sound_system(env, SA_PLAYER_DAMAGE,
+			sp_fork(env->sound.volume, 1, env->cam.stats.pos));
 		sndelay = 1.0f;
 	}
 	else
@@ -47,8 +48,8 @@ static void	godmode(t_env *env)
 	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
 	{
 		sound_system(env, SA_LGODEND, end
-			? sp_fork(env->volume, PITCH, env->cam.stats.pos)
-			: sp_play(env->volume, PITCH, env->cam.stats.pos));
+			? sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)
+			: sp_play(env->sound.volume, PITCH, env->cam.stats.pos));
 		end = true;
 		env->player.hp--;
 	}

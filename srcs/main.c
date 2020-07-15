@@ -18,6 +18,7 @@ int			exit_doom(t_env *env, char *msg, int fd, int code)
 	if (msg)
 		ft_putendl_fd(msg, fd);
 	free_env(env);
+	sound_system(env, -1, sp_stop());
 /*	if (archive_directory("./resources"))
 	{
 		ft_putendl_fd(ARCHIVE_ERR, 2);

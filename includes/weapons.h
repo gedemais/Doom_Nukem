@@ -5,6 +5,7 @@
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
 # define AMMO_FONT_SIZE 24
 # define W_NAME_FONT_SIZE 16
+# define W_SHAKE 10
 
 # define RELOAD_TIME 2.5f // seconds
 # define RELOAD_SPEED 0.05f;
@@ -63,6 +64,7 @@ struct	s_weapon
 
 int			init_weapons(t_env *env);
 
+void		handle_sprint(t_env *env);
 int			shoot_current_weapon(t_env *env);
 void		shoot_animation(t_env *env, t_weapon *w);
 int			reload_current_weapon(t_env *env);

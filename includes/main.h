@@ -147,7 +147,6 @@ struct			s_env
 	t_hud			hud;
 	int				context;
 	int				scene;
-	float			volume;
 };
 
 void	free_mesh(t_mesh *m);

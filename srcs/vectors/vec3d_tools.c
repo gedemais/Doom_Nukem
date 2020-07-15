@@ -12,6 +12,13 @@
 
 #include "main.h"
 
+bool		vec_outrange(t_vec3d dim, t_vec3d pos)
+{
+    return (pos.x < 0 || pos.x > dim.x - 1
+        || pos.y < 0 || pos.y > dim.y - 1
+        || pos.z < 0 || pos.z > dim.z - 1);
+}
+
 // kessafou dans vectors/ ?
 float		rsqrt(float number)
 {

@@ -11,7 +11,7 @@ void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
 
 	middle = vec_add(mob->pos, mob->offset);
 	rotation(&mob->head, zero_vector(), fcos, fsin);
-	i = mob->map_start - 1;;
+	i = mob->map_start - 1;
 	while (++i < mob->map_end)
 	{
 		mesh = dyacc(&mob->map->meshs, i);

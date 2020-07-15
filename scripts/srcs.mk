@@ -11,6 +11,7 @@ SRCS_NAME =	main.c\
 			sound_system/sound_system_functions.c\
 			sound_system/sound_system_manager.c\
 			sound_system/sound_system_params.c\
+			sound_system/sound_system_play.c\
 			sound_system/sound_system_tools.c\
 			\
 			campaign/render.c\
@@ -169,6 +170,7 @@ SRCS_NAME =	main.c\
 			weapons/reticule.c\
 			weapons/shoot.c\
 			weapons/shoot_animation.c\
+			weapons/sprint.c\
 			weapons/stats.c\
 			\
 			archive/archive.c\

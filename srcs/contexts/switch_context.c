@@ -41,8 +41,8 @@ void	init_routines(void (*routines[C_MAX][C_MAX])(t_env*))
 int		switch_context(t_env *env, unsigned int i)
 {
 	static bool		first = true;
-	static bool		gates[C_MAX][C_MAX] = {};
-	static void		(*routines[C_MAX][C_MAX])(t_env*) = {};
+	static bool		gates[C_MAX][C_MAX];
+	static void		(*routines[C_MAX][C_MAX])(t_env*);
 
 	if (first)
 	{
