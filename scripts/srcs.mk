@@ -123,6 +123,7 @@ SRCS_NAME =	main.c\
 			rasterizer/clipping.c\
 			rasterizer/clipping_bis.c\
 			rasterizer/clipping_tools.c\
+			rasterizer/draw_triangle_line.c\
 			rasterizer/fill_triangle_texture.c\
 			rasterizer/fill_triangle_texture_bis.c\
 			rasterizer/rasterizer.c\

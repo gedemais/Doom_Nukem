@@ -5,8 +5,9 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/10 20:30:36 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 17:23:47 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/15 13:30:19 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/15 13:31:46 by gedemais         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
@@ -15,14 +16,16 @@ void	*rasthreader(void *param)
 {
 	t_rasthread	*thr;
 	t_env		*env;
+	t_triangle	*t;
 
 	thr = (t_rasthread*)param;
 	env = thr->env;
 	while (thr->index < thr->end)
 	{
-		fill_triangle_texture((t_env*)thr->env, dyacc(&env->cam.to_raster, thr->index));
+		t = dyacc(&env->cam.to_raster, thr->index);
+		fill_triangle_texture((t_env*)thr->env, t);
 		if (env->data.wireframe)
-			draw_triangle(&env->mlx, *(t_triangle*)dyacc(&env->cam.to_raster, thr->index));
+			draw_triangle(&env->mlx, *t);
 		thr->index++;
 	}
 	if (thr->mono)
