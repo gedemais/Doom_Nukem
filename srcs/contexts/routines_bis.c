@@ -14,15 +14,13 @@
 
 void	custom_to_ts(t_env *env)
 {
-	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0, SA_MAX, sp_stop()));
+	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_show();
 	ft_free_ctab(env->scroll.list);
 }
 
 void	map_editor_to_ts(t_env *env)
 {
-	sound_system(env, SA_TITLE_SCREEN_L,
-		sp_overall(0, SA_MAX, sp_stop()));
+	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	ft_free_ctab(env->scroll.list);
 }

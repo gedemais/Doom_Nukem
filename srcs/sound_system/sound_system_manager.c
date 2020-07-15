@@ -4,16 +4,16 @@ static int 		volume_events(t_env *env)
 {
 	if (env->events.keys[KEY_F])
 	{
-		env->volume += 0.01f;
-		env->volume = env->volume > 1 ? 1 : env->volume;
+		env->sound.volume += 0.01f;
+		env->sound.volume = env->sound.volume > 1 ? 1 : env->sound.volume;
 		if (sound_system(env, 0,
 				sp_overall(0, SA_MAX - 1, sp_volume(0.01f, 0))))
 			return (-1);
 	}
 	else if (env->events.keys[KEY_V])
 	{
-		env->volume -= 0.01f;
-		env->volume = env->volume < 0 ? 0 : env->volume;
+		env->sound.volume -= 0.01f;
+		env->sound.volume = env->sound.volume < 0 ? 0 : env->sound.volume;
 		if (sound_system(env, 0,
 				sp_overall(0, SA_MAX - 1, sp_volume(-0.01f, 0))))
 			return (-1);
@@ -55,7 +55,7 @@ int				sound_manager(t_env *env, int source)
 		return (0);
 	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
 		if (sound_system(env, source,
-				sp_play(env->volume, PITCH, env->cam.stats.pos)))
+				sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
 			return (-1);
 	return (0);
 }

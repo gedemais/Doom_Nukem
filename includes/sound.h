@@ -97,8 +97,11 @@ typedef struct	s_sound
 }				t_sound;
 
 int				sound_system(t_env *env, int source, t_sparam param);
+void			delete_sources(t_dynarray *sounds);
 
 int				sound_manager(t_env *env, int source);
+
+int 			init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i);
 
 t_sparam		sp_fork(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_no_sound(int start, int end);

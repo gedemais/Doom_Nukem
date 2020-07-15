@@ -32,7 +32,7 @@ static int	enemies_do_damages(t_env *env, t_enemy *mob)
 		env->custom_env.game.amob--;
 		++env->custom_env.game.kill_count;
 		sound_system(env, SA_DEATHMONSTER,
-			sp_fork(env->volume, PITCH, mob->pos));
+			sp_fork(env->sound.volume, PITCH, mob->pos));
 		if (env->custom_env.game.kill_delay == 0)
 			env->custom_env.game.kill_delay = KILL_DELAY;
 	}
