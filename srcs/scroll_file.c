@@ -87,6 +87,8 @@ void		display_file(t_env *env)
 	t_scroll		*s;
 
 	s = &env->scroll;
+	if (s->list == NULL)
+		return ;
 	s->current = s->current < 0 ? s->max : s->current;
 	s->current = s->current > s->max ? 0 : s->current;
 	i = -1;
