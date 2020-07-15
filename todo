@@ -1,18 +1,20 @@
+MODE HISTOIRE URGENT:
+- Maps
+- histoire avec des notes (sprites)
+- bbox pour fermer les maps
+
 Bosson :
-Leaks du physic_engine
-Degats de chute
-Retirer des golds quand le player tombe de la map
+Debug le moteur physique
+
+Demarcher des correcteurs
 
 Maboye :
 Finir les sons
 
-gérer le export ds le make install
-=> l'user définit en brut dans le make install le path du .zshrc
-
 NORME
-
-LEAKS :
 
 remonter les chaines d'erreurs return (-1) dans setup; // fait pour les fonctions appelees dans les renders, a faire pour setup()
 
 vérifier les .h et .c si fonctions / variables non utilisées => delete
+
+TESTS
