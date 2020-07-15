@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 06:34:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/12 21:08:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 18:55:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int			sample_pixel(int *img, t_point size, t_vec2d point)
 		point.u += (point.u >= 1.0f) ? -1.0f: 1.0f;
 	while (point.v >= 1.0f || point.v < 0)
 		point.v += (point.v >= 1.0f) ? -1.0f: 1.0f;
-	pos = (int)(point.v * size.y) * size.x;
-	pos += (int)(point.u * size.x);
+	pos = (int)(point.v * (float)size.y) * size.x;
+	pos += (int)(point.u * (float)size.x);
 	return (img[pos]);
 }
 
