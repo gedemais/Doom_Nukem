@@ -1,25 +1,7 @@
 #include "main.h"
 
-static int		listener_param(t_env *env)
-{
-	float	vec[6];
-
-	alListener3f(AL_POSITION, env->cam.stats.pos.x,
-		env->cam.stats.pos.y, env->cam.stats.pos.z);
-	alListener3f(AL_VELOCITY, 0, 0, 0);
-	alListener3f(AL_DIRECTION, env->cam.stats.dir.x,
-		env->cam.stats.dir.y, env->cam.stats.dir.z);
-	vec[0] = env->cam.stats.dir.x;
-	vec[1] = env->cam.stats.dir.y;
-	vec[2] = env->cam.stats.dir.z;
-	vec[3] = 0;
-	vec[4] = 1;
-	vec[5] = 0;
-	alListenerfv(AL_ORIENTATION, vec);
-	return (0);
-}
-
-static int		source_param(ALuint *source, t_sparam p)
+static int
+	source_param(ALuint *source, t_sparam p)
 {
 	float	vec[6];
 
@@ -36,10 +18,23 @@ static int		source_param(ALuint *source, t_sparam p)
 	return (0);
 }
 
-static int		sound_param(t_env *env, ALuint *source, t_sparam p)
+static int
+	sound_param(t_env *env, ALuint *source, t_sparam p)
 {
-	if (listener_param(env))
-		return (-1);
+	float	vec[6];
+
+	alListener3f(AL_POSITION, env->cam.stats.pos.x,
+			env->cam.stats.pos.y, env->cam.stats.pos.z);
+	alListener3f(AL_VELOCITY, 0, 0, 0);
+	alListener3f(AL_DIRECTION, env->cam.stats.dir.x,
+			env->cam.stats.dir.y, env->cam.stats.dir.z);
+	vec[0] = env->cam.stats.dir.x;
+	vec[1] = env->cam.stats.dir.y;
+	vec[2] = env->cam.stats.dir.z;
+	vec[3] = 0;
+	vec[4] = 1;
+	vec[5] = 0;
+	alListenerfv(AL_ORIENTATION, vec);
 	if (source_param(source, p))
 		return (-1);
 	alSourcef(*source, AL_GAIN, p.volume);
@@ -47,7 +42,8 @@ static int		sound_param(t_env *env, ALuint *source, t_sparam p)
 	return (0);
 }
 
-static int		reset_fork(t_env *env)
+static int
+	reset_fork(t_env *env)
 {
 	int		i;
 	ALuint	*sources;
@@ -71,7 +67,8 @@ static int		reset_fork(t_env *env)
 	return (0);
 }
 
-int 			fork_sound(t_env *env, int source, t_sparam p)
+int
+	fork_sound(t_env *env, int source, t_sparam p)
 {
 	t_sound		*sound;
 	t_sound		*fork;
@@ -84,7 +81,7 @@ int 			fork_sound(t_env *env, int source, t_sparam p)
 	if (current > SA_BUFFER - 1)
 	{
 		if (reset_fork(env))
-			return(-1);
+			return (-1);
 		current = 0;
 	}
 	if ((fork = dyacc(env->sound.fork, current++)) == NULL)
@@ -96,9 +93,10 @@ int 			fork_sound(t_env *env, int source, t_sparam p)
 	return (0);
 }
 
-int 			play_sound(t_env *env, int source, t_sparam p)
+int
+	play_sound(t_env *env, int source, t_sparam p)
 {
-	ALint 	status;
+	ALint	status;
 	t_sound	*sound;
 
 	sound = dyacc(env->sound.sounds, source);

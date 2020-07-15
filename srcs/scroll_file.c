@@ -1,8 +1,6 @@
 #include "main.h"
 
-//int		free_scroll_file(t_env *env)
-
-int		init_scroll_file(t_env *env, char *path, char *extension)
+int				init_scroll_file(t_env *env, char *path, char *extension)
 {
 	t_scroll	*s;
 
@@ -69,7 +67,7 @@ static void		get_mouse_index(t_env *env, t_point pos, t_point rect_d, int i)
 		s->mouse_index = -1;
 }
 
-static void	events_scroll_file(t_env *env)
+static void		events_scroll_file(t_env *env)
 {
 	if (env->scroll.mouse_index > -1)
 	{
@@ -80,7 +78,7 @@ static void	events_scroll_file(t_env *env)
 	}
 }
 
-void		display_file(t_env *env)
+void			display_file(t_env *env)
 {
 	int				i;
 	t_point			pos;
@@ -104,4 +102,3 @@ void		display_file(t_env *env)
 		ft_strdel(&s->s_path);
 	events_scroll_file(env);
 }
-

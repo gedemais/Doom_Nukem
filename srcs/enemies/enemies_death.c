@@ -1,6 +1,7 @@
 #include "main.h"
 
-static void		replace_meshs(t_enemy *mob, int delta)
+static void
+	replace_meshs(t_enemy *mob, int delta)
 {
 	t_mesh	*m;
 	int		i;
@@ -15,7 +16,8 @@ static void		replace_meshs(t_enemy *mob, int delta)
 	}
 }
 
-static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
+static void
+	enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 {
 	int		i;
 	int		tmp;
@@ -42,7 +44,8 @@ static void		enemies_delete_mob(t_dynarray *mobs, t_enemy *mob, int index)
 	}
 }
 
-static bool		enemies_death_animation(t_enemy *mob, float angle)
+static bool
+	enemies_death_animation(t_enemy *mob, float angle)
 {
 	float			fcos;
 	float			fsin;
@@ -63,7 +66,8 @@ static bool		enemies_death_animation(t_enemy *mob, float angle)
 	return (true);
 }
 
-int			enemies_death(t_env *env, t_dynarray *mobs)
+int
+	enemies_death(t_env *env, t_dynarray *mobs)
 {
 	int		i;
 	t_enemy	*mob;

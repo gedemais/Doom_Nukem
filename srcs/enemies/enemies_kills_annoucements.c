@@ -8,7 +8,7 @@ void			enemies_kills_annoucements(t_env *env)
 	if (env->custom_env.game.kill_delay > 0)
 		--env->custom_env.game.kill_delay;
 	if (env->custom_env.game.kill_delay == 0)
-	{	
+	{
 		env->custom_env.game.kill_count = 0;
 		return ;
 	}

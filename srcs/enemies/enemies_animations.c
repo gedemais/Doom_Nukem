@@ -29,7 +29,7 @@ void			enemies_animations(t_env *env, t_enemy *mob)
 		sound_system(env, SA_LEVITATION, sp_fork(0.1f, 1, mob->pos));
 		mob->noise = 0;
 	}
-	if(mob->down == 0)
+	if (mob->down == 0)
 		mob->down = mob->pos.y - MOB_ANIMATION_DOWN;
 	if (mob->up == 0)
 		mob->up = mob->pos.y + MOB_ANIMATION_UP;

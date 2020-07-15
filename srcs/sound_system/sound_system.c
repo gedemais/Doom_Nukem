@@ -1,9 +1,10 @@
 #include "main.h"
 
-static int 		init_sound_system(t_env *env, t_dynarray *sounds, int size)
+static int
+	init_sound_system(t_env *env, t_dynarray *sounds, int size)
 {
-	int 	i;
-	ALuint 	*sources;
+	int		i;
+	ALuint	*sources;
 
 	if (size < 1 || init_dynarray(sounds, sizeof(t_sound), size))
 		return (-1);
@@ -22,7 +23,8 @@ static int 		init_sound_system(t_env *env, t_dynarray *sounds, int size)
 	return (0);
 }
 
-static int 			quit_sound_system(t_env *env)
+static int
+	quit_sound_system(t_env *env)
 {
 	delete_sources(env->sound.sounds);
 	free_dynarray(env->sound.sounds);
@@ -31,10 +33,11 @@ static int 			quit_sound_system(t_env *env)
 	return (-1);
 }
 
-static int 		sound_overall(t_env *env, int source, t_sparam p)
+static int
+	sound_overall(t_env *env, int source, t_sparam p)
 {
-	int 		i;
-	ALint 		status;
+	int			i;
+	ALint		status;
 	t_sound		*sound;
 
 	i = p.start - 1;
@@ -49,8 +52,8 @@ static int 		sound_overall(t_env *env, int source, t_sparam p)
 			continue ;
 		}
 		if ((sound_volume(env, sound->ambient, p))
-			|| ((p.play || p.fork || p.stop)
-				&& stop_sound(env, sound->ambient)))
+				|| ((p.play || p.fork || p.stop)
+					&& stop_sound(env, sound->ambient)))
 			return (quit_sound_system(env));
 	}
 	if ((fork_sound(env, source, p)) || (play_sound(env, source, p)))
@@ -58,7 +61,8 @@ static int 		sound_overall(t_env *env, int source, t_sparam p)
 	return (0);
 }
 
-int				sound_system(t_env *env, int source, t_sparam param)
+int
+	sound_system(t_env *env, int source, t_sparam param)
 {
 	static t_dynarray	sounds;
 	static t_dynarray	fork;
@@ -66,8 +70,8 @@ int				sound_system(t_env *env, int source, t_sparam param)
 	if (sounds.byte_size == 0)
 	{
 		if (init_sound_system(env, &sounds, SA_MAX)
-			|| init_sound_system(env, &fork, SA_BUFFER))
-		return (quit_sound_system(env));
+				|| init_sound_system(env, &fork, SA_BUFFER))
+			return (quit_sound_system(env));
 		env->sound.volume = VOLUME;
 		env->sound.sounds = &sounds;
 		env->sound.fork = &fork;
@@ -77,9 +81,9 @@ int				sound_system(t_env *env, int source, t_sparam param)
 	if (param.overall || param.no_sound)
 		return (sound_overall(env, source, param));
 	if ((sound_volume(env, source, param))
-		|| (fork_sound(env, source, param))
-		|| (play_sound(env, source, param))
-		|| (param.stop && stop_sound(env, source)))
+			|| (fork_sound(env, source, param))
+			|| (play_sound(env, source, param))
+			|| (param.stop && stop_sound(env, source)))
 		return (quit_sound_system(env));
 	return (0);
 }

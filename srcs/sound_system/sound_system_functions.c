@@ -1,19 +1,21 @@
 #include "main.h"
 
-int 			stop_sound(t_env *env, int source)
+int
+	stop_sound(t_env *env, int source)
 {
 	t_sound	*sound;
 
 	sound = dyacc(env->sound.sounds, source);
 	if (sound == NULL)
 		return (0);
-	alSourceStop(sound->ambient);	
+	alSourceStop(sound->ambient);
 	return (0);
 }
 
-int 			sound_volume(t_env *env, int source, t_sparam p)
+int
+	sound_volume(t_env *env, int source, t_sparam p)
 {
-	ALint 	status;
+	ALint	status;
 	t_sound	*sound;
 
 	sound = dyacc(env->sound.sounds, source);

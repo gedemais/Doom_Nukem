@@ -2,7 +2,7 @@
 
 static void		enemies_check_neighbours(t_pf *a, t_enemy *mob)
 {
-	int 	i;
+	int		i;
 	t_node	*node;
 
 	i = -1;

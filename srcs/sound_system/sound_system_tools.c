@@ -1,6 +1,7 @@
 #include "main.h"
 
-t_sparam		sp_no_sound(int start, int end)
+t_sparam
+	sp_no_sound(int start, int end)
 {
 	int			tmp;
 	t_sparam	param;
@@ -19,10 +20,11 @@ t_sparam		sp_no_sound(int start, int end)
 	param.start = start;
 	param.end = end;
 	param.no_sound = true;
-	return (param);	
+	return (param);
 }
 
-t_sparam		sp_stop(void)
+t_sparam
+	sp_stop(void)
 {
 	t_sparam	param;
 
@@ -31,7 +33,8 @@ t_sparam		sp_stop(void)
 	return (param);
 }
 
-void			delete_sources(t_dynarray *sounds)
+void
+	delete_sources(t_dynarray *sounds)
 {
 	int		i;
 	t_sound	*sound;
@@ -44,15 +47,16 @@ void			delete_sources(t_dynarray *sounds)
 	}
 }
 
-int 			init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
+int
+	init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i)
 {
 	t_sound	sound;
 
-    ft_memset(&sound, 0, sizeof(t_sound));
-    sound.samples = &env->sound.samples[i];
+	ft_memset(&sound, 0, sizeof(t_sound));
+	sound.samples = &env->sound.samples[i];
 	sound.ambient = sources[i];
 	alSourcef(sound.ambient, AL_REFERENCE_DISTANCE, 1);
 	alSourcef(sound.ambient, AL_ROLLOFF_FACTOR, 1);
 	alSourcef(sound.ambient, AL_MAX_DISTANCE, 60);
-    return (push_dynarray(s, &sound, 0));
+	return (push_dynarray(s, &sound, 0));
 }
