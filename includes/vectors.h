@@ -36,6 +36,8 @@ typedef union	u_rsqrt
 
 float			rsqrt(float number);
 
+bool			vec_outrange(t_vec3d dim, t_vec3d pos);
+
 t_vec3d			vec_add(t_vec3d a, t_vec3d b);
 t_vec3d			vec_sub(t_vec3d a, t_vec3d b);
 t_vec3d			vec_mult(t_vec3d a, t_vec3d b);

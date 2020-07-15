@@ -63,17 +63,6 @@ static bool		enemies_death_animation(t_enemy *mob, float angle)
 	return (true);
 }
 
-static void	enemies_pos(t_env *env, t_enemy *mob)
-{
-	if (mob->pos.x < 0 || mob->pos.x > env->astar.dim.x - 1
-		|| mob->pos.y < 0 || mob->pos.y > env->astar.dim.y - 1
-		|| mob->pos.z < 0 || mob->pos.z > env->astar.dim.z - 1)
-	{
-		mob->dead = 1;
-		mob->hp = 0;
-	}
-}
-
 int			enemies_death(t_env *env, t_dynarray *mobs)
 {
 	int		i;
@@ -83,7 +72,11 @@ int			enemies_death(t_env *env, t_dynarray *mobs)
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
-		enemies_pos(env, mob);
+		if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), mob->pos))
+		{
+			mob->dead = 1;
+			mob->hp = 0;
+		}
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
 			{
