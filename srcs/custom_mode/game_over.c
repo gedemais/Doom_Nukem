@@ -20,6 +20,9 @@ int		set_game_stats(t_env *env)
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;
 	env->player.hp = START_HP;
+	env->cam.stats.onfloor = 0;
+	env->cam.stats.onwall = 0;
+	env->cam.stats.onroof = 0;
 	return (0);
 }
 

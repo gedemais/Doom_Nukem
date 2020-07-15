@@ -23,6 +23,7 @@ int		physic_engine(t_env *env, t_map *maps)
 	update_speeds_collide_cam(env, cam, maps);
 	update_positions_cam(env, maps, cam);
 	stop_position_cam(env, maps, cam);
-	clear_dynarray(&env->phy_env.collides);
+	clear_dynarray(&env->phy_env.collides_cam);
+	env->custom_env.game.moula < 0 ? env->custom_env.game.moula = 0 : 0;
 	return (0);
 }

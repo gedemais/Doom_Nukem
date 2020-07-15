@@ -25,7 +25,7 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map)
 		scan_actuall_collide(env, map);
 	while (i < env->phy_env.collides_cam.nb_cells)
 	{
-		c = dyacc(&env->phy_env.collides_cam, i);
+		c = dyacc(&env->phy_env.collides_cam, i);	
 		type_of_plan(env, c, map);
 		i++;
 	}

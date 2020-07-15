@@ -66,8 +66,6 @@ void	rotate_y(t_vec3d *v, t_vec3d m, float fcos, float fsin);
 void	rotate_z(t_vec3d *v, t_vec3d m, float fcos, float fsin);
 
 void	tp_mesh(t_map *map, t_mesh *m, t_vec3d t);
-void	print_mesh_corp(t_mesh m);
-void	print_collide(t_collide c);
 void	tp_mesh_print(t_mesh *m);
 /*			phy_gravity		*/
 void	phy_gravitax_cam(t_env *env, t_mesh *m);
@@ -87,9 +85,9 @@ void	type_of_plan(t_env *env, t_collide *c, t_map *map);
 t_vec3d	set_y_dir(t_env *env, t_map *map);
 t_vec3d	phy_move_collide(t_env *env, t_collide *c, t_vec3d dir);
 t_vec3d test_dist_wall(t_env *env, t_collide *c, t_vec3d f);
-void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps);
 /*			phy_tool2.c		*/
 void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam);
 bool	key_move(bool keys[NB_KEYS]);
 void	scan_collide(t_collide *c, int i);
+void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps);
 #endif

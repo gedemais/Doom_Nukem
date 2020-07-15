@@ -66,5 +66,6 @@ int				init_physic_engine(t_env *env)
 	}
 	ft_memset((void*)&env->phy_env, 0, sizeof(t_physics));
 	env->phy_env.gravity = 0.0000981;
+	env->phy_env.type_move = true;
 	return (0);
 }
