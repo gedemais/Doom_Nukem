@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 04:50:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 19:32:11 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:50:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		render(void *param)
 		exit_doom(env, NULL, 0, EXIT_SUCCESS);
 	if (render_fts[((t_env*)param)->context](param))
 		exit_doom(env, "render failed", 2, EXIT_SUCCESS);
+	printf("left mobs : %d | alive mobs : %d\n", env->custom_env.game.current_lmob, env->custom_env.game.amob);
 	env->events.buttons[BUTTON_SCROLL_UP] = false;
 	env->events.buttons[BUTTON_SCROLL_DOWN] = false;
 	return (0);
