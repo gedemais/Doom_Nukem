@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:42:08 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 15:12:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 19:07:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		replace_weapons(t_env *env)
 	i = 0;
 	while (i < W_MAX)
 	{
-		env->weapons[i].start = env->weapons[i].w_map->spawn;
+		env->weapons[i].w_map->spawn = env->weapons[i].start;
 		i++;
 	}
 }

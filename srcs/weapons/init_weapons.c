@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:16:06 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 14:36:53 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 19:04:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				dup_names(t_env *env)
 	{
 		if (!(env->weapons[i].name = ft_strdup((char*)names[i])))
 			return (-1);
+		env->weapons[i].start = env->weapons[i].w_map->spawn;
 		env->weapons[i].index = (int)i;
 		i++;
 	}
@@ -98,10 +99,10 @@ static void		assign_weapons_samples(t_env *env)
 
 int				init_weapons(t_env *env)
 {
-	if (dup_names(env))
-		return (-1);
 	assign_wmeshs(env);
 	assign_weapons_stats(env);
 	assign_weapons_samples(env);
+	if (dup_names(env))
+		return (-1);
 	return (0);
 }

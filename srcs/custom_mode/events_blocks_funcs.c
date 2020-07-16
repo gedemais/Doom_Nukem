@@ -73,20 +73,26 @@ static int		add_random_weapon(t_env *env)
 	return (0);
 }
 
+
 int				handle_mystery_boxs(t_env *env, t_event_block *block)
 {
 	static bool	button = false;
+	bool		full;
 
 	if (block->id != BE_CHEST)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
-		textual_hint(env, "F", "GET RANDOM WEAPON ( 1000)", 0);
-		if (env->events.keys[KEY_F] && env->custom_env.game.moula >= 1000 && button)
+		full = (env->player.weapons.nb_cells == W_MAX);
+		textual_hint(env, "F", full ? "fuck off, you full equiped bastard"
+			: "GET RANDOM WEAPON ( 1000)", 0);
+		if (!full && env->events.keys[KEY_F]
+			&& env->custom_env.game.moula >= 1000 && button)
 		{
 			button = false;
 			env->custom_env.game.moula -= 1000;
-			add_random_weapon(env);
+			if (add_random_weapon(env))
+				return (-1);
 			sound_system(env, SA_INVOCATION,
 				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 		}

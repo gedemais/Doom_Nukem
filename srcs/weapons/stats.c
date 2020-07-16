@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:41:52 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 19:49:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 19:11:08 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,15 @@ static void	recoil_n_max_ammos(t_env *env)
 	env->weapons[W_GALIL].recoil = 0.1f;
 	env->weapons[W_NEGEV].recoil = 0.1f;
 	env->weapons[W_TEC9].recoil = 0.05f;
-	env->weapons[W_FAMAS].max_ammos = 200;
-	env->weapons[W_AK47].max_ammos = 250;
+	env->weapons[W_FAMAS].max_ammos = 150;
+	env->weapons[W_AK47].max_ammos = 150;
 	env->weapons[W_SAWED_OFF].max_ammos = 60;
-	env->weapons[W_GLOCK_18].max_ammos = 80;
-	env->weapons[W_AUG].max_ammos = 220;
-	env->weapons[W_UMP45].max_ammos = 180;
-	env->weapons[W_MAG7].max_ammos = 76;
-	env->weapons[W_GALIL].max_ammos = 270;
-	env->weapons[W_NEGEV].max_ammos = 400;
+	env->weapons[W_GLOCK_18].max_ammos = 54;
+	env->weapons[W_AUG].max_ammos = 180;
+	env->weapons[W_UMP45].max_ammos = 160;
+	env->weapons[W_MAG7].max_ammos = 72;
+	env->weapons[W_GALIL].max_ammos = 200;
+	env->weapons[W_NEGEV].max_ammos = 300;
 	env->weapons[W_TEC9].max_ammos = 144;
 }
 

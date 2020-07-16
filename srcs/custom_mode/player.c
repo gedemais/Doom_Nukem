@@ -15,10 +15,32 @@ static void	wound(t_env *env, t_enemy *mob)
 		sndelay -= env->data.spent;
 }
 
+static void	animate_wound(t_env *env, float *t)
+{
+	static t_vec3d	offset;
+	float			ratio;
+
+	ratio = *t + 0.5f;
+	if (ratio > 0)
+	{
+		offset.x = 0.5f;
+		offset.y = 0.5f;
+	}
+	else if (ratio <= 0)
+	{
+		offset.x = -0.5f;
+		offset.y = -0.5f;
+	}
+	*t -= 0.1f;
+	env->cam.stats.pos = vec_add(env->cam.stats.pos, offset);
+	translate_mesh(&env->edit_env.map, &env->edit_env.map.cam, offset);
+}
+
 static void	check_wounds(t_env *env)
 {
-	t_enemy	*mob;
-	int		i;
+	static float	wound_t = -0.5f;
+	t_enemy			*mob;
+	int				i;
 
 	i = 0;
 	while (i < env->custom_env.mobs.nb_cells)
@@ -31,10 +53,13 @@ static void	check_wounds(t_env *env)
 			{
 				mob->peace = MOB_PEACE_TIME;
 				wound(env, mob);
+				wound_t = 0.5f;
 			}
 		}
 		i++;
 	}
+	if (wound_t > -0.5f)
+		animate_wound(env, &wound_t);
 }
 
 static void	godmode(t_env *env)
