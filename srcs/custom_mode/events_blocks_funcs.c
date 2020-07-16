@@ -87,7 +87,7 @@ int				handle_mystery_boxs(t_env *env, t_event_block *block)
 			button = false;
 			env->custom_env.game.moula -= 1000;
 			add_random_weapon(env);
-			sound_system(env, SA_INVOCATION,
+			sound_system(env, SA_CHANGE,
 				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 		}
 		button = !env->events.keys[KEY_F];
@@ -117,17 +117,25 @@ int				handle_doors(t_env *env, t_event_block *block)
 
 int				handle_lavas(t_env *env, t_event_block *block)
 {
+	float			dst;
 	static int		delay = LAVA_DELAY;
+	static int		delay2 = 10;
 
 	if (block->id != BE_LAVA)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
+	dst = vec3d_dist(env->cam.stats.pos, get_block_center(block));
+	dst < EVENT_DIST + EVENT_DIST + EVENT_DIST ? sound_system(env, SA_LAVA,
+		sp_play(env->sound.volume, PITCH, env->cam.stats.pos)) : 0;
+	if (dst < EVENT_DIST)
 	{
-		delay--;
-		if (delay == 0)
+		if (--delay == 0)
 		{
-			sound_system(env, SA_GONG,
-				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+			if (delay2++ == 10)
+			{
+				sound_system(env, SA_PLAYER_DAMAGE,
+					sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+				delay2 = 0;			
+			}
 			env->player.hp--;
 			delay = LAVA_DELAY;
 		}
