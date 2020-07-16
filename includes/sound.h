@@ -49,6 +49,7 @@ enum	e_sample_id
 	SA_LEVITATION,
 	SA_PUT,
 	SA_TAKE,
+	SA_STEP,
 	SA_LAVA,
 	SA_DOOR,
 	SA_CHANGE,

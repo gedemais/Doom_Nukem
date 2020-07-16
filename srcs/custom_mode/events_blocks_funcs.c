@@ -118,14 +118,15 @@ int				handle_doors(t_env *env, t_event_block *block)
 int				handle_lavas(t_env *env, t_event_block *block)
 {
 	float			dst;
+	t_vec3d			center;
 	static int		delay = LAVA_DELAY;
 	static int		delay2 = 10;
 
 	if (block->id != BE_LAVA)
 		return (0);
-	dst = vec3d_dist(env->cam.stats.pos, get_block_center(block));
-	dst < EVENT_DIST + EVENT_DIST + EVENT_DIST ? sound_system(env, SA_LAVA,
-		sp_play(env->sound.volume, PITCH, env->cam.stats.pos)) : 0;
+	center = get_block_center(block);
+	dst = vec3d_dist(env->cam.stats.pos, center);
+	sound_system(env, SA_LAVA, sp_play(env->sound.volume, PITCH, center));
 	if (dst < EVENT_DIST)
 	{
 		if (--delay == 0)

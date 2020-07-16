@@ -28,6 +28,40 @@ static bool	move_keys(t_env *env)
 		|| env->events.keys[KEY_D]));
 }
 
+static void	step_sound(t_env *env)
+{
+	static int	delay = 0;
+	t_vec3d		pos;
+
+	if (delay-- == 0)
+	{
+		pos = env->cam.stats.pos;
+		pos.y -= 2;
+		if (move_keys(env))
+			sound_system(env, SA_STEP,
+				sp_play(env->sound.volume, PITCH, pos));
+		delay = env->events.keys[KEY_SHIFT_LEFT] ? 5 : 10;
+	}
+	if (env->events.keys[KEY_SPACE])
+		sound_system(env, SA_STEP, sp_stop());
+}
+
+static void	movements(t_env *env, float speeds[2], int *frame)
+{
+	if  (*frame > 0)
+	{
+		env->player.current->w_map->spawn.y -= speeds[0];
+		(*frame)--;
+	}
+	else if (*frame > -speeds[1])
+	{
+		env->player.current->w_map->spawn.y += speeds[0];
+		(*frame)--;
+	}
+	if (*frame == -speeds[1])
+		*frame = speeds[1];
+}
+
 void		handle_sprint(t_env *env)
 {
 	static t_vec3d	reset;
@@ -36,6 +70,7 @@ void		handle_sprint(t_env *env)
 	static bool		first = true;
 	float			speeds[2];
 
+	step_sound(env);
 	if (!do_sprint(env))
 		return ;
 	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.01f : 0.005f; 
@@ -44,26 +79,12 @@ void		handle_sprint(t_env *env)
 		reset = env->player.current->w_map->spawn;
 	on = (!on && move_keys(env));
 	if (on)
-	{
-		if  (frame > 0)
-		{
-			env->player.current->w_map->spawn.y -= speeds[0];
-			frame--;
-		}
-		else if (frame > -speeds[1])
-		{
-			env->player.current->w_map->spawn.y += speeds[0];
-			frame--;
-		}
-		if (frame == -speeds[1])
-			frame = speeds[1];
-
-	}
+		movements(env, speeds, &frame);
 	if (on && !move_keys(env))
 	{
-		PUT
 		on = false;
 		frame = speeds[1];
 		env->player.current->w_map->spawn = reset;
+		sound_system(env, SA_STEP, sp_stop());
 	}
 }

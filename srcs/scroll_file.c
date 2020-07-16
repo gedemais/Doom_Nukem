@@ -17,8 +17,8 @@ int				init_scroll_file(t_env *env, char *path, char *extension)
 	s->nb_case = s->d.y / s->case_size - 1;
 	if (s->case_size > s->max)
 		s->nb_case = s->max;
-	if (s->nb_case < 1)
-		s->nb_case = 1;
+	s->nb_case = s->nb_case < 1 ? 1 : s->nb_case;
+	s->nb_case = s->nb_case > 6 ? 6 : s->nb_case;
 	return (0);
 }
 

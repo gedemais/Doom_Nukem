@@ -84,6 +84,8 @@ void		fall_damage(t_env *env, t_mesh *cam)
 	{
 		dam = (1.0f - vec_norm(cam->corp.v)) * 100;
 		env->player.hp += dam;
+		sound_system(env, SA_PLAYER_DAMAGE,
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	}
 }
 
@@ -100,8 +102,7 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	cam->corp.v = vec_fmult(cam->corp.v, 0.4);
 	if (env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y < 4
 		&& env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y > 1
-		&& maps->cam_floor->a->tris.nb_cells == 8
-		&& env->cam.stats.onroof == 0)
+		&& maps->cam_floor->a->tris.nb_cells == 8 && env->cam.stats.onroof == 0)
 	{
 		move = 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
 		cam->corp.v = vec_add(cam->corp.v, (t_vec3d){0, move, 0, 0});
@@ -109,10 +110,10 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	}
 	if (env->cam.stats.pos.y < -10)
 	{
+		sound_system(env, SA_PLAYER_DAMAGE, sp_fork(1, PITCH, maps->spawn));
 		env->custom_env.game.moula -= 500;
-		(env->custom_env.game.moula >= 0) ? 
-			translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos)) 
-			: (env->player.hp = 0);
+		(env->custom_env.game.moula < 0) ? (env->player.hp = 0)
+			: translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos));
 	}
 }
 

@@ -160,6 +160,7 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/monsters/levitation.wav",
 					"resources/samples/world/put.wav",
 					"resources/samples/world/take.wav",
+					"resources/samples/world/step.wav",
 					"resources/samples/world/lava.wav",
 					"resources/samples/world/door.wav",
 					"resources/samples/world/change.wav",
