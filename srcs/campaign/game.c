@@ -45,7 +45,7 @@ int		cmp_game(void *param)
 
 	env = (t_env*)param;
 	cmp_env = &env->cmp_env;
-	if (sound_manager(env, SA_MAX))
+	if (sound_manager(env, SA_GAME1))
 		return (-1);
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
 	camera_aim(env);

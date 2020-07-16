@@ -18,7 +18,7 @@
 # define MOB_NB_ADD 4
 
 # define MAX_ENEMIES 12
-# define LOOT_FREQ 12
+# define LOOT_FREQ 4
 
 # define RESPAWN_DELAY 3.0f
 # define ENEMIES_NOISE_DELAY 10
