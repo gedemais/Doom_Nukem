@@ -14,7 +14,6 @@
 
 void	custom_to_ts(t_env *env)
 {
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	mlx_mouse_show();
 	ft_free_ctab(env->scroll.list);
 	env->scroll.list = NULL;
@@ -23,7 +22,6 @@ void	custom_to_ts(t_env *env)
 
 void	map_editor_to_ts(t_env *env)
 {
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	ft_free_ctab(env->scroll.list);
 	env->scroll.list = NULL;
 	ft_strdel(&env->scroll.s_path);

@@ -25,6 +25,8 @@ int			del_block(t_env *env)
 		return (0);
 	mesh->type = BTXT_NONE;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
+	sound_system(env, SA_TAKE,
+		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	return (0);
 }
 
@@ -73,5 +75,7 @@ int			put_block(t_env *env)
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
 		create_slope(env, new, new->type);
 	attribute_mesh(&env->edit_env.map, m_index);
+	sound_system(env, SA_PUT,
+		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	return (0);
 }

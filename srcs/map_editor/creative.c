@@ -24,6 +24,8 @@ static void		check_export(t_env *env)
 		switch_mecontext(env, MAPED_SC_MENU);
 	else if (env->events.keys[KEY_P])
 	{
+		sound_system(env, SA_CHANGE,
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
 	}

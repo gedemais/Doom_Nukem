@@ -10,9 +10,9 @@ static int 		jukeboxs_play_sound(t_env *env)
 	if (e->keys[KEY_F] && env->custom_env.game.moula >= 1000 && delay == 0)
 	{
 		delay = 40;
-		if (ambient < 0 || ambient > SA_PNL)
+		if (ambient < 0 || ambient > SA_MAPED)
 			ambient = 0;
-		sound_system(env, ambient, sp_overall(0, SA_PNL,
+		sound_system(env, ambient, sp_overall(0, SA_MAPED,
 			sp_play(env->sound.volume, PITCH, env->cam.stats.pos)));
 		env->custom_env.game.moula -= 1000;
 	}
@@ -20,8 +20,8 @@ static int 		jukeboxs_play_sound(t_env *env)
 	{
 		delay = 5;
 		ambient = e->keys[KEY_LEFT] ? ambient - 1 : ambient + 1;
-		ambient = ambient < 0 ? SA_PNL : ambient;
-		ambient = ambient > SA_PNL ? 0 : ambient;
+		ambient = ambient < 0 ? SA_MAPED : ambient;
+		ambient = ambient > SA_MAPED ? 0 : ambient;
 	}
 	delay = delay > 0 ? delay - 1 : delay;
 	return (ambient);
