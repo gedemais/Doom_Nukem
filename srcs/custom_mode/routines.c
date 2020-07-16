@@ -2,7 +2,8 @@
 
 int				custom_menu_to_play(t_env *env)
 {
-	t_map	*map;
+	static bool	first = true;
+	t_map		*map;
 
 	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	map = &env->edit_env.map;
@@ -13,7 +14,10 @@ int				custom_menu_to_play(t_env *env)
 		|| init_loots(env))
 		return (-1);
 	set_game_stats(env);
+	if (first)
+		replace_weapons(env);
 	env->data.wireframe = false;
+	first = false;
 	mlx_mouse_hide();
 	return (0);
 }
@@ -59,6 +63,7 @@ int			custom_game_over_to_play(t_env *env)
 		|| (init_cameras_mesh(map, &map->cam)) || init_sky(env)
 		|| init_loots(env))
 		return (-1);
+	replace_weapons(env);
 	set_game_stats(env);
 	env->data.wireframe = false;
 	mlx_mouse_hide();

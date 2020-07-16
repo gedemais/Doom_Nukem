@@ -1,0 +1,142 @@
+Binary file srcs/rasterizer/clipping_bis.o matches
+srcs/map_editor/build_map.c:72:	while (x < new->width)
+srcs/map_editor/build_map.c:75:		while (z < new->depth)
+srcs/map_editor/build_map.c:77:			new->map[x][0][z] = BTXT_OBSIDIENNE;
+srcs/map_editor/block.c:68:	new->type = env->edit_env.current_bt + 1;
+srcs/map_editor/block.c:69:	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = new->type;
+srcs/map_editor/block.c:70:	free_dynarray(&new->tris);
+srcs/map_editor/block.c:72:		create_cube(env, new, new->type);
+srcs/map_editor/block.c:74:		create_slope(env, new, new->type);
+srcs/map_editor/tools.c:47:		if (full_neighbours(&env->edit_env.new_map, new->m_pos))
+srcs/map_editor/cull_slopes.c:19:	pos = new->m_pos;
+srcs/map_editor/cull_slopes.c:21:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:24:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:27:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:30:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:38:	pos = new->m_pos;
+srcs/map_editor/cull_slopes.c:40:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:43:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:46:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:49:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:57:	pos = new->m_pos;
+srcs/map_editor/cull_slopes.c:59:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:62:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:65:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:68:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:76:	pos = new->m_pos;
+srcs/map_editor/cull_slopes.c:78:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:81:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:84:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/cull_slopes.c:87:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:44:	pos = new->m_pos;
+srcs/map_editor/culling.c:46:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:49:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:52:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:55:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:58:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:61:		tri->sp = check_face(&env->edit_env.new_map, new->type,
+srcs/map_editor/culling.c:73:	while (++i < new->tris.nb_cells)
+srcs/map_editor/culling.c:75:		tri = dyacc(&new->tris, i);
+srcs/map_editor/map_to_scene.c:22:		t->points[i].x += new->m_pos[0] * 2;
+srcs/map_editor/map_to_scene.c:23:		t->points[i].y += new->m_pos[1] * 2;
+srcs/map_editor/map_to_scene.c:24:		t->points[i].z += new->m_pos[2] * 2;
+srcs/map_editor/load_shapes.c:19:		((t_triangle*)dyacc(&new->tris, 5))->face_i = FACE_NORD;
+srcs/map_editor/load_shapes.c:20:		((t_triangle*)dyacc(&new->tris, 11))->face_i = FACE_NORD;
+srcs/map_editor/load_shapes.c:21:		((t_triangle*)dyacc(&new->tris, 1))->face_i = FACE_SUD;
+srcs/map_editor/load_shapes.c:22:		((t_triangle*)dyacc(&new->tris, 7))->face_i = FACE_SUD;
+srcs/map_editor/load_shapes.c:23:		((t_triangle*)dyacc(&new->tris, 2))->face_i = FACE_BOTTOM;
+srcs/map_editor/load_shapes.c:24:		((t_triangle*)dyacc(&new->tris, 8))->face_i = FACE_BOTTOM;
+srcs/map_editor/load_shapes.c:25:		((t_triangle*)dyacc(&new->tris, 3))->face_i = FACE_OUEST;
+srcs/map_editor/load_shapes.c:26:		((t_triangle*)dyacc(&new->tris, 9))->face_i = FACE_OUEST;
+srcs/map_editor/load_shapes.c:27:		((t_triangle*)dyacc(&new->tris, 4))->face_i = FACE_UP;
+srcs/map_editor/load_shapes.c:28:		((t_triangle*)dyacc(&new->tris, 10))->face_i = FACE_UP;
+srcs/map_editor/load_shapes.c:29:		((t_triangle*)dyacc(&new->tris, 0))->face_i = FACE_EST;
+srcs/map_editor/load_shapes.c:30:		((t_triangle*)dyacc(&new->tris, 6))->face_i = FACE_EST;
+srcs/map_editor/load_shapes.c:33:	((t_triangle*)dyacc(&new->tris, 4))->face_i = SFACE_SLOPE;
+srcs/map_editor/load_shapes.c:34:	((t_triangle*)dyacc(&new->tris, 7))->face_i = SFACE_SLOPE;
+srcs/map_editor/load_shapes.c:35:	((t_triangle*)dyacc(&new->tris, 2))->face_i = SFACE_LEFT;
+srcs/map_editor/load_shapes.c:36:	((t_triangle*)dyacc(&new->tris, 1))->face_i = SFACE_RIGHT;
+srcs/map_editor/load_shapes.c:37:	((t_triangle*)dyacc(&new->tris, 3))->face_i = SFACE_BOTTOM;
+srcs/map_editor/load_shapes.c:38:	((t_triangle*)dyacc(&new->tris, 0))->face_i = SFACE_FRONT;
+srcs/map_editor/load_shapes.c:39:	((t_triangle*)dyacc(&new->tris, 5))->face_i = SFACE_FRONT;
+srcs/map_editor/load_shapes.c:40:	((t_triangle*)dyacc(&new->tris, 6))->face_i = SFACE_BOTTOM;
+srcs/map_editor/load_shapes.c:50:	new->type = get_block_type(env, new, type);
+srcs/map_editor/load_shapes.c:52:	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
+srcs/map_editor/load_shapes.c:60:		t.sp = new->type;
+srcs/map_editor/load_shapes.c:61:		if (push_dynarray(&new->tris, &t, false))
+srcs/map_editor/load_shapes.c:92:	new->type = get_block_type(env, new, type);
+srcs/map_editor/load_shapes.c:94:	if (init_dynarray(&new->tris, sizeof(t_triangle), 0))
+srcs/map_editor/load_shapes.c:102:		t.sp = new->type;
+srcs/map_editor/load_shapes.c:103:		if (push_dynarray(&new->tris, &t, false))
+srcs/obj_parser/parse_map_tools.c:17:	new->textured = false;
+srcs/obj_parser/parse_map_tools.c:19:		new->color = f->color;
+srcs/obj_parser/parse_map_tools.c:21:		new->color = 0xffffff;
+srcs/obj_parser/parse_map_tools.c:28:	ft_memcpy(&new->points[0], dyacc(&map->pool, f->x - 1), sizeof(t_vec3d));
+srcs/obj_parser/parse_map_tools.c:29:	ft_memcpy(&new->points[1], dyacc(&map->pool, f->y - 1), sizeof(t_vec3d));
+srcs/obj_parser/parse_map_tools.c:30:	ft_memcpy(&new->points[2], dyacc(&map->pool, f->z - 1), sizeof(t_vec3d));
+srcs/obj_parser/parse_map_tools.c:31:	new->points[0].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:32:	new->points[1].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:33:	new->points[2].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:37:		ft_memcpy(&new->txt[0], t, sizeof(t_vec2d));
+srcs/obj_parser/parse_map_tools.c:38:		new->txt[0].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:40:		ft_memcpy(&new->txt[1], t, sizeof(t_vec2d));
+srcs/obj_parser/parse_map_tools.c:41:		new->txt[1].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:43:		ft_memcpy(&new->txt[2], t, sizeof(t_vec2d));
+srcs/obj_parser/parse_map_tools.c:44:		new->txt[2].w = 1.0f;
+srcs/obj_parser/parse_map_tools.c:45:		new->mesh = m;
+srcs/obj_parser/parse_map_tools.c:46:		new->textured = true;
+srcs/custom_mode/events_blocks_funcs.c:64:			if (w->index == index && (same = true))
+srcs/custom_mode/loots_functions.c:53:		w->ammos = w->max_ammos;
+srcs/weapons/weapons.c:54:	if (w->shooting > 0)
+srcs/weapons/weapons.c:57:		if (w->shoot_mode == SMODE_SBS)
+srcs/weapons/weapons.c:59:			w->ready = false;
+srcs/weapons/weapons.c:63:	if (w->reloading > 0 && !(w->ready = false))
+srcs/weapons/weapons.c:68:	if (w->shoot_mode == SMODE_FULL_AUTO)
+srcs/weapons/weapons.c:70:		w->ready = (60 / since) < w->cadency;
+srcs/weapons/weapons.c:71:		since = w->ready ? env->data.spent : since + env->data.spent;
+srcs/weapons/weapons.c:73:	else if (w->shoot_mode == SMODE_SINGLE)
+srcs/weapons/weapons.c:74:		w->ready = !env->events.buttons[BUTTON_LCLIC];
+srcs/weapons/weapons.c:75:	else if (w->shoot_mode == SMODE_SBS)
+srcs/weapons/weapons.c:76:		w->ready = !env->events.buttons[BUTTON_LCLIC];
+srcs/weapons/weapons.c:93:	if (((r && w->loaded < w->magazine) || w->loaded == 0)
+srcs/weapons/weapons.c:94:		&& w->ammos > 0 && w->shooting <= 0)
+srcs/weapons/weapons.c:96:	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
+srcs/weapons/shoot.c:30:	sbs = w->shoot_mode == SMODE_SBS;
+srcs/weapons/shoot.c:31:	single = w->shoot_mode == SMODE_SINGLE;
+srcs/weapons/shoot.c:32:	full_auto = w->shoot_mode == SMODE_FULL_AUTO;
+srcs/weapons/shoot.c:35:		w->ready = false;
+srcs/weapons/shoot.c:36:		w->loaded--;
+srcs/weapons/shoot.c:37:		stop_n_play(env, w->shoot);
+srcs/weapons/shoot.c:39:	w->shooting = 60.0f / w->cadency;
+srcs/weapons/shoot.c:40:	w->shot = true;
+srcs/weapons/shoot.c:50:	if (w->loaded == 0 && w->ammos >= w->magazine)
+srcs/weapons/shoot.c:52:		w->loaded += w->magazine;
+srcs/weapons/shoot.c:53:		w->ammos -= w->magazine;
+srcs/weapons/shoot.c:55:	else if ((need = w->magazine - w->loaded) <= w->ammos)
+srcs/weapons/shoot.c:57:		w->loaded += need;
+srcs/weapons/shoot.c:58:		w->ammos -= need;
+srcs/weapons/shoot.c:62:		w->loaded += w->ammos;
+srcs/weapons/shoot.c:63:		w->ammos = 0;
+srcs/weapons/shoot.c:65:	stop_n_play(env, w->reload);
+srcs/weapons/shoot.c:66:	w->reloading = RELOAD_TIME;
+srcs/weapons/shoot.c:67:	w->start = w->w_map->spawn;
+srcs/weapons/shoot_animation.c:21:		w->w_map->spawn.z += w->recoil;
+srcs/weapons/shoot_animation.c:23:		w->w_map->spawn.z -= w->recoil;
+srcs/weapons/shoot_animation.c:24:	if (reset || w->w_map->spawn.y < w->start.y)
+srcs/weapons/shoot_animation.c:25:		w->w_map->spawn = w->start;
+srcs/weapons/shoot_animation.c:32:	w->shooting -= env->data.spent;
+srcs/weapons/shoot_animation.c:33:	progress = 1 - (w->shooting / (60.0f / w->cadency));
+srcs/weapons/ammos.c:17:	if (!(*l = ft_itoa(w->loaded)))
+srcs/weapons/ammos.c:37:	if (!(m = ft_itoa(w->ammos)))
+srcs/weapons/ammos.c:65:	ft_strcpy((char*)conf->s, w->name);
+srcs/weapons/reload_animation.c:19:		w->w_map->spawn.y -= RELOAD_SPEED;
+srcs/weapons/reload_animation.c:20:		w->w_map->spawn.z -= RELOAD_SPEED;
+srcs/weapons/reload_animation.c:24:		w->w_map->spawn.y += RELOAD_SPEED;
+srcs/weapons/reload_animation.c:25:		w->w_map->spawn.z += RELOAD_SPEED;
+srcs/weapons/reload_animation.c:27:	if (reset || w->w_map->spawn.y < w->start.y)
+srcs/weapons/reload_animation.c:28:		w->w_map->spawn = w->start;
+srcs/weapons/reload_animation.c:35:	w->reloading -= env->data.spent;
+srcs/weapons/reload_animation.c:38:	progress = w->reloading / RELOAD_TIME;
+srcs/free.c:103:		free(w->name);
+srcs/enemies/create_mob.c:36:			new->sp = i;
+srcs/enemies/create_mob.c:62:		if (push_dynarray(&new->tris, &t, false))

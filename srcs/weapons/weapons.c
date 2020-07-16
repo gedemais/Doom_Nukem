@@ -6,11 +6,23 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:42:08 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 20:47:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:12:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void		replace_weapons(t_env *env)
+{
+	int			i;
+
+	i = 0;
+	while (i < W_MAX)
+	{
+		env->weapons[i].start = env->weapons[i].w_map->spawn;
+		i++;
+	}
+}
 
 static void	switch_current_weapon(t_env *env, t_events *e)
 {
