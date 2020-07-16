@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:42:08 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 19:07:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:30:12 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	handle_ready(t_env *env, t_weapon *w)
 		w->ready = !env->events.buttons[BUTTON_LCLIC];
 }
 
-static void	weapons_events(t_env *env, t_events *e)
+static int	weapons_events(t_env *env, t_events *e)
 {
 	t_weapon	*w;
 	bool		r;
@@ -87,23 +87,24 @@ static void	weapons_events(t_env *env, t_events *e)
 	if (scroll && w)
 	{
 		switch_current_weapon(env, &env->events);
-		return ;
+		return (0);
 	}
 	r = e->keys[KEY_R];
 	if (((r && w->loaded < w->magazine) || w->loaded == 0)
-		&& w->ammos > 0 && w->shooting <= 0)
-		reload_current_weapon(env);
-	else if (e->buttons[BUTTON_LCLIC] && w->ready && w->loaded > 0)
-		shoot_current_weapon(env);
+		&& w->ammos > 0 && w->shooting <= 0 && reload_current_weapon(env))
+		return (-1);
+	else if (e->buttons[BUTTON_LCLIC] && w->ready
+		&& w->loaded > 0 && shoot_current_weapon(env))
+		return (-1);
 	handle_ready(env, w);
+	return (0);
 }
 
 int			handle_weapons(t_env *env)
 {
 	env->player.current->shot = false;
-	handle_sprint(env);
-	if (raster_weapon(env, env->player.current->w_map) || weapons_hud(env))
+	if (handle_sprint(env) || raster_weapon(env, env->player.current->w_map)
+		|| weapons_hud(env) || weapons_events(env, &env->events))
 		return (-1);
-	weapons_events(env, &env->events);
 	return (0);
 }

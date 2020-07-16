@@ -65,15 +65,15 @@ int			custom_play(t_env *env)
 		return (-1);
 	handle_waves(env);
 	camera_aim(env);
-	if (env->phy_env.type_move == true)
-		physic_engine(env, &env->edit_env.map);
+	if (env->phy_env.type_move && physic_engine(env, &env->edit_env.map))
+		return (-1);
 	clear_screen_buffers(env);
 	if (rasterizer(env, &env->edit_env.map, false))
 		return (-1);
 	handle_moon(env);
-	if (handle_loots(env) || handle_weapons(env) || handle_block_events(env))
+	if (handle_loots(env) || handle_weapons(env) || handle_block_events(env)
+		|| draw_hud(env))
 		return (-1);
-	draw_hud(env);
 	if (handle_keys(env, &env->events)
 		|| handle_player(env) || handle_enemies(env))
 		return (-1);

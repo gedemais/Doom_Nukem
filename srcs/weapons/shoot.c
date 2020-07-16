@@ -6,17 +6,19 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:40:20 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 14:40:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:22:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void	stop_n_play(t_env *env, int source)
+static int	stop_n_play(t_env *env, int source)
 {
-	sound_system(env, source, sp_stop());
-	sound_system(env, source,
-		sp_play(env->sound.volume, PITCH, env->cam.stats.pos));
+	if (sound_system(env, source, sp_stop())
+		|| sound_system(env, source,
+		sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
+		return (-1);
+	return (0);
 }
 
 int			shoot_current_weapon(t_env *env)
@@ -62,7 +64,8 @@ int			reload_current_weapon(t_env *env)
 		w->loaded += w->ammos;
 		w->ammos = 0;
 	}
-	stop_n_play(env, w->reload);
+	if (stop_n_play(env, w->reload))
+		return (-1);
 	w->reloading = RELOAD_TIME;
 	w->start = w->w_map->spawn;
 	return (0);

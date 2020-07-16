@@ -65,13 +65,15 @@ static void			del_recursif(t_env *env, int pos[3])
 	}
 }
 
-void				del_door(t_env *env, t_event_block *block)
+int					del_door(t_env *env, t_event_block *block)
 {
 	if (block->id == BE_DOOR)
 	{
 		del_recursif(env, (int[3]){block->x, block->y, block->z});
-		sound_system(env, SA_DOOR,
-			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+		if (sound_system(env, SA_DOOR,
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+			return (-1);
 	}
+	return (0);
 }
 

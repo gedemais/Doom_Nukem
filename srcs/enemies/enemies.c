@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void		enemies_to_scene(t_env *env, t_dynarray *mobs)
+static int		enemies_to_scene(t_env *env, t_dynarray *mobs)
 {
 	int		i;
 	int		j;
@@ -11,7 +11,8 @@ static void		enemies_to_scene(t_env *env, t_dynarray *mobs)
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
-		enemies_animations(env, mob);
+		if (enemies_animations(env, mob))
+			return (-1);
 		j = mob->map_start - 1;
 		while (++j < mob->map_end)
 		{
@@ -19,6 +20,7 @@ static void		enemies_to_scene(t_env *env, t_dynarray *mobs)
 			translate_mesh(mob->map, mesh, vec_sub(mob->pos, mesh->corp.pos));
 		}
 	}
+	return (0);
 }
 
 static void		find_random_spawner(t_dynarray *events, int sp[3], int index)
@@ -82,13 +84,13 @@ int				handle_enemies(t_env *env)
 		env->custom_env.spawner -= env->data.spent;
 	if (env->custom_env.mobs.nb_cells)
 	{
-		if (env->mid.mesh)
-			enemies_damages(env);
-		enemies_movements(env, &env->astar);
-		if (enemies_death(env, &env->custom_env.mobs))
+		if (env->mid.mesh && enemies_damages(env))
 			return (-1);
-		enemies_to_scene(env, &env->custom_env.mobs);
-		enemies_kills_annoucements(env);
+		enemies_movements(env, &env->astar);
+		if (enemies_death(env, &env->custom_env.mobs)
+			|| enemies_to_scene(env, &env->custom_env.mobs)
+			|| enemies_kills_annoucements(env))
+			return (-1);
 	}
 	return (0);
 }

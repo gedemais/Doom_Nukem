@@ -90,13 +90,13 @@ char			enemy_wave(t_env *env);
 int				create_mob(t_env *env, t_map *map, char type, t_vec3d pos);
 
 int				handle_loots(t_env *env);
-void			enemies_animations(t_env *env, t_enemy *mob);
-void			enemies_movements(t_env *env, t_pf *a);
-void			enemies_do_movement(t_env *env, t_enemy *mob);
+int				enemies_animations(t_env *env, t_enemy *mob);
+int				enemies_movements(t_env *env, t_pf *a);
+int				enemies_do_movement(t_env *env, t_enemy *mob);
 
 int				enemies_death(t_env *env, t_dynarray *mobs);
 int				enemies_damages(t_env *env);
-void			enemies_kills_annoucements(t_env *env);
+int				enemies_kills_annoucements(t_env *env);
 
 int				spawn_loot(t_env *env, t_vec3d pos);
 int				loot_nuke(t_env *env);

@@ -12,8 +12,9 @@ static int 		jukeboxs_play_sound(t_env *env)
 		delay = 40;
 		if (ambient < 0 || ambient > SA_MAPED)
 			ambient = 0;
-		sound_system(env, ambient, sp_overall(0, SA_MAPED,
-			sp_play(env->sound.volume, PITCH, env->cam.stats.pos)));
+		if (sound_system(env, ambient, sp_overall(0, SA_MAPED,
+			sp_play(env->sound.volume, PITCH, env->cam.stats.pos))))
+			return (-1);
 		env->custom_env.game.moula -= 1000;
 	}
 	else if ((e->keys[KEY_LEFT] || e->keys[KEY_RIGHT]) && delay == 0)
@@ -93,8 +94,9 @@ int				handle_mystery_boxs(t_env *env, t_event_block *block)
 			env->custom_env.game.moula -= 1000;
 			if (add_random_weapon(env))
 				return (-1);
-			sound_system(env, SA_CHANGE,
-				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+			if (sound_system(env, SA_CHANGE,
+				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+				return (-1);
 		}
 		button = !env->events.keys[KEY_F];
 		return (1);
@@ -112,9 +114,11 @@ int				handle_doors(t_env *env, t_event_block *block)
 		if (env->events.keys[KEY_F] && env->custom_env.game.moula >= 500)
 		{
 			env->custom_env.game.moula -= 500;
-			del_door(env, block);
-			sound_system(env, SA_DOOR,
-				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+			if (del_door(env, block))
+				return (-1);
+			if (sound_system(env, SA_DOOR,
+				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+				return (-1);
 		}
 		return (1);
 	}
@@ -132,15 +136,17 @@ int				handle_lavas(t_env *env, t_event_block *block)
 		return (0);
 	center = get_block_center(block);
 	dst = vec3d_dist(env->cam.stats.pos, center);
-	sound_system(env, SA_LAVA, sp_play(env->sound.volume, PITCH, center));
+	if (sound_system(env, SA_LAVA, sp_play(env->sound.volume, PITCH, center)))
+		return (-1);
 	if (dst < EVENT_DIST)
 	{
 		if (--delay == 0)
 		{
 			if (delay2++ == 10)
 			{
-				sound_system(env, SA_PLAYER_DAMAGE,
-					sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+				if (sound_system(env, SA_PLAYER_DAMAGE,
+					sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+					return (-1);
 				delay2 = 0;			
 			}
 			env->player.hp--;

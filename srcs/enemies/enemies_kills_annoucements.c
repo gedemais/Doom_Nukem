@@ -1,6 +1,6 @@
 #include "main.h"
 
-void			enemies_kills_annoucements(t_env *env)
+int			enemies_kills_annoucements(t_env *env)
 {
 	int			source;
 	static int	tmp = 0;
@@ -10,7 +10,7 @@ void			enemies_kills_annoucements(t_env *env)
 	if (env->custom_env.game.kill_delay == 0)
 	{
 		env->custom_env.game.kill_count = 0;
-		return ;
+		return (0);
 	}
 	if (env->custom_env.game.kill_delay == KILL_DELAY - 1)
 		tmp = 0;
@@ -21,10 +21,12 @@ void			enemies_kills_annoucements(t_env *env)
 	{
 		source += SA_DOUBLEKILL - 2;
 		if (tmp == source)
-			return ;
+			return (0);
 		tmp = source;
-		sound_system(env, source,
+		if (sound_system(env, source,
 			sp_overall(SA_DOUBLEKILL, SA_WICKEDSICK,
-				sp_play(env->sound.volume, PITCH, env->cam.stats.pos)));
+				sp_play(env->sound.volume, PITCH, env->cam.stats.pos))))
+			return (-1);
 	}
+	return (0);
 }

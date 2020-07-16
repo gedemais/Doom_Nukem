@@ -16,17 +16,18 @@ bool			enemies_up(t_enemy *mob)
 	return (false);
 }
 
-void			enemies_animations(t_env *env, t_enemy *mob)
+int				enemies_animations(t_env *env, t_enemy *mob)
 {
 	if (mob->end)
 	{
 		mob->down = 0;
 		mob->up = 0;
-		return ;
+		return (0);
 	}
 	if (mob->noise++ == ENEMIES_NOISE_DELAY)
 	{
-		sound_system(env, SA_LEVITATION, sp_fork(0.1f, 1, mob->pos));
+		if (sound_system(env, SA_LEVITATION, sp_fork(0.1f, 1, mob->pos)))
+			return (-1);
 		mob->noise = 0;
 	}
 	if (mob->down == 0)
@@ -37,4 +38,5 @@ void			enemies_animations(t_env *env, t_enemy *mob)
 		mob->up_token = true;
 	if (mob->up_token == true && enemies_down(mob))
 		mob->up_token = false;
+	return (0);
 }

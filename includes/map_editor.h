@@ -234,7 +234,7 @@ void				maped_crosshair(t_env *env);
 int					put_block(t_env *env);
 int					del_block(t_env *env);
 void				replace_block(t_env *env);
-void				del_door(t_env *env, t_event_block *block);
+int					del_door(t_env *env, t_event_block *block);
 void				attribute_mesh(t_map *scene, int index);
 void				switch_block_type(t_env *env, t_events *e);
 

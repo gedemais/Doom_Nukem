@@ -1,6 +1,6 @@
 #include "main.h"
 
-static int	select_map(t_env *env)
+static void	select_map(t_env *env)
 {
 	t_scroll	*s;
 
@@ -10,15 +10,10 @@ static int	select_map(t_env *env)
 	{
 		if (import_maped_map(&env->edit_env, s->s_path)
 			|| !(env->custom_env.map_path = ft_strdup(s->s_path)))
-		{
-			printf("Parsing Failed for map |%s|\n", s->s_path);
-			exit(1);
-			return (-1);
-		}
+			exit_doom(env, "Parsing Failed for a custom map", 2, EXIT_FAILURE);
 		switch_custom_context(env, CUSTOM_SC_PLAY);
 	}
 	ft_strdel(&s->s_path);
-	return (0);
 }
 
 static int				handle_events(t_env *env)
@@ -49,11 +44,11 @@ int			custom_menu(t_env *env)
 {
 	if (sound_manager(env, SA_TITLE_SCREEN_L))
 		return (-1);
-	handle_events(env);
+	if (handle_events(env))
+		return (0);
 	map_sprite(env->mlx.img_data, env->sprites[SP_CUSTOM_BACKGROUND], (t_point){0, 0});
 	render_button(env, env->edit_env.buttons[MAPED_MENU_BUTTON_MAIN_MENU]);
-	if (select_map(env))
-		return (-1);
+	select_map(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

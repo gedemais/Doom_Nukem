@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 15:36:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/14 15:58:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 21:52:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void		check_export(t_env *env)
+static int		check_export(t_env *env, char *data)
 {
 	static char		*msgs[MAPERR_MAX] = {"Map saved",
 											"Player should have one spawner"};
@@ -20,12 +20,13 @@ static void		check_export(t_env *env)
 	static int		err_time = 0;
 	static int		ret = 0;
 
-	if (env->events.keys[KEY_M])
-		switch_mecontext(env, MAPED_SC_MENU);
+	if (env->events.keys[KEY_M] && switch_mecontext(env, MAPED_SC_MENU))
+		return (-1);
 	else if (env->events.keys[KEY_P])
 	{
-		sound_system(env, SA_CHANGE,
-			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+		if (sound_system(env, SA_CHANGE,
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+			return (-1);
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
 	}
@@ -34,10 +35,10 @@ static void		check_export(t_env *env)
 		conf = ttf_config();
 		conf->size = 20;
 		ft_strcpy((char*)conf->s, msgs[ret]);
-		my_string_put(env, env->mlx.img_data,
-			(t_point){200, 200}, FONT_COOLVETICA);
+		my_string_put(env, data, (t_point){200, 200}, FONT_COOLVETICA);
 		err_time--;
 	}
+	return (0);
 }
 
 static void		refresh_last_gui(t_events *e, int *gui)
@@ -68,7 +69,7 @@ int				maped_creative(t_env *env)
 		last_gui_use--;
 	}
 	maped_crosshair(env);
-	check_export(env);
+	check_export(env, env->mlx.img_data);
 	mlx_put_image_to_window(env->mlx.mlx_ptr,
 		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

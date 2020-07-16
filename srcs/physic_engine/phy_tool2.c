@@ -6,7 +6,7 @@
 /*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 20:18:33 by benji_code        #+#    #+#             */
-/*   Updated: 2020/07/14 20:18:39 by benji_code       ###   ########.fr       */
+/*   Updated: 2020/07/16 22:34:02 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
 	}
 }
+
 void		fall_damage(t_env *env, t_mesh *cam)
 {
 	float dam;

@@ -90,7 +90,8 @@ int		custom_game_over(t_env *env)
 		return (-1);
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_YES]);
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_NO]);
-	handle_events_go(env);
+	if (handle_events_go(env))
+		return (0);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

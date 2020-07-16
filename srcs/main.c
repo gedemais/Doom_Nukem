@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 16:20:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:35:16 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int			exit_doom(t_env *env, char *msg, int fd, int code)
 	if (msg)
 		ft_putendl_fd(msg, fd);
 	free_env(env);
-	sound_system(env, -1, sp_stop());
+	if (sound_system(env, -1, sp_stop()))
+		return (-1);
 /*	if (archive_directory("./resources"))
 	{
 		ft_putendl_fd(ARCHIVE_ERR, 2);

@@ -1,21 +1,23 @@
 #include "main.h"
 
-static void	wound(t_env *env, t_enemy *mob)
+static int	wound(t_env *env, t_enemy *mob)
 {
 	static float	sndelay = 1.0f;
 
 	env->player.hp -= mob->damages;
 	if (sndelay >= 1.0f)
 	{
-		sound_system(env, SA_PLAYER_DAMAGE,
-			sp_fork(env->sound.volume, 1, env->cam.stats.pos));
+		if (sound_system(env, SA_PLAYER_DAMAGE,
+			sp_fork(env->sound.volume, 1, env->cam.stats.pos)))
+			return (-1);
 		sndelay = 1.0f;
 	}
 	else
 		sndelay -= env->data.spent;
+	return (0);
 }
 
-static void	check_wounds(t_env *env)
+static int		check_wounds(t_env *env)
 {
 	t_enemy			*mob;
 	int				i;
@@ -30,14 +32,16 @@ static void	check_wounds(t_env *env)
 			if (mob->peace <= 0)
 			{
 				mob->peace = MOB_PEACE_TIME;
-				wound(env, mob);
+				if (wound(env, mob))
+					return (-1);
 			}
 		}
 		i++;
 	}
+	return (0);
 }
 
-static void	godmode(t_env *env)
+static int	godmode(t_env *env)
 {
 	static bool	end = true;
 	int			fade;
@@ -47,15 +51,17 @@ static void	godmode(t_env *env)
 		env->player.hp++;
 	if (env->player.hp > 100 && env->player.god < (GOD_TIME / fade))
 	{
-		sound_system(env, SA_LGODEND, end
+		if (sound_system(env, SA_LGODEND, end
 			? sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)
-			: sp_play(env->sound.volume, PITCH, env->cam.stats.pos));
+			: sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
+			return (-1);
 		end = true;
 		env->player.hp--;
 	}
 	env->player.god -= env->data.spent;
 	if (env->player.god <= 0.0f)
 		end = true;
+	return (0);
 }
 
 int		handle_player(t_env *env)
@@ -66,10 +72,7 @@ int		handle_player(t_env *env)
 	i = 0;
 	heal--;
 	if (env->player.god > 0.0f)
-	{
-		godmode(env);
-		return (0);
-	}
+		return (godmode(env));
 	if (env->player.hp < 1 && switch_custom_context(env, CUSTOM_SC_GAME_OVER))
 		return (-1);
 	if (heal <= 0)
@@ -78,6 +81,5 @@ int		handle_player(t_env *env)
 			env->player.hp++;
 		heal = HEAL_SPEED;
 	}
-	check_wounds(env);
-	return (0);
+	return (check_wounds(env));
 }

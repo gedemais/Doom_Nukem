@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 15:12:59 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/14 15:13:54 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:03:31 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int			del_block(t_env *env)
 		return (0);
 	mesh->type = BTXT_NONE;
 	env->edit_env.new_map.map[pos[0]][pos[1]][pos[2]] = BTXT_NONE;
-	sound_system(env, SA_TAKE,
-		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+	if (sound_system(env, SA_TAKE,
+		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+		return (-1);
 	return (0);
 }
 
@@ -75,7 +76,8 @@ int			put_block(t_env *env)
 	else if (ft_inbounds(bc, BC_SLOPE_NORD, BC_SLOPE_EST))
 		create_slope(env, new, new->type);
 	attribute_mesh(&env->edit_env.map, m_index);
-	sound_system(env, SA_PUT,
-		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+	if (sound_system(env, SA_PUT,
+		sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
+		return (-1);
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "main.h"
 
-static void	astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
+static int	astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
 {
 	int	i;
 
@@ -8,19 +8,19 @@ static void	astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
 	while (++i < arr->nb_cells)
 	{
 		if (((t_node *)dyacc(arr, i))->i == ngbhr->i)
-			return ;
+			return (0);
 	}
-	push_dynarray(arr, ngbhr, 0);
+	return (push_dynarray(arr, ngbhr, 0));
 }
 
-static void	astar_neighbour(t_pf *env, t_node **c, int i)
+static int	astar_neighbour(t_pf *env, t_node **c, int i)
 {
 	float	plowergoal;
 	t_node	*nghbr;
 
 	nghbr = dyacc(&env->d_nodes, (*c)->nghbr[i]);
 	if (nghbr == NULL)
-		return ;
+		return (0);
 	plowergoal = (*c)->localgoal + vec3d_dist((*c)->pos, nghbr->pos);
 	if (plowergoal < nghbr->localgoal)
 	{
@@ -29,9 +29,11 @@ static void	astar_neighbour(t_pf *env, t_node **c, int i)
 			+ vec3d_dist(nghbr->pos, env->end->pos);
 		nghbr->parent = dyacc(&env->d_nodes, (*c)->i);
 	}
-	if (nghbr->bvisited == 0 && nghbr->bobstacle == 0)
-		astar_stock_neighbour(&env->d_astar, nghbr);
+	if (nghbr->bvisited == 0 && nghbr->bobstacle == 0
+		&& astar_stock_neighbour(&env->d_astar, nghbr))
+		return (-1);
 	*c = env->d_astar.c;
+	return (0);
 }
 
 static bool	astar_exit(t_pf *env, t_node *current)
@@ -58,23 +60,27 @@ static int	astar_solve(t_pf *env, t_node *c)
 		return (1);
 	i = -1;
 	while (++i < NEIGHBOURG)
-		astar_neighbour(env, &c, i);
+		if (astar_neighbour(env, &c, i))
+			return (-1);
 	return (0);
 }
 
-void		astar(t_pf *env)
+int		astar(t_pf *env)
 {
 	t_node	*current;
+	int		ret;
 
 	if (env->start == NULL || env->end == NULL)
-		return ;
+		return (0);
 	astar_reset(env);
-	push_dynarray(&env->d_astar, env->start, 0);
+	if (push_dynarray(&env->d_astar, env->start, 0))
+		return (-1);
 	current = env->d_astar.c;
 	if (current == NULL)
-		return ;
+		return (0);
 	current->localgoal = 0;
 	current->globalgoal = vec3d_dist(env->start->pos, env->end->pos);
-	while (astar_solve(env, current) == 0)
+	while ((ret = astar_solve(env, current)) == 0)
 		;
+	return (ret);
 }

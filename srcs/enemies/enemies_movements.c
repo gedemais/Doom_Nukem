@@ -55,7 +55,7 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	a->end = mob->end;
 }
 
-void			enemies_movements(t_env *env, t_pf *a)
+int		enemies_movements(t_env *env, t_pf *a)
 {
 	int		i;
 	t_enemy	*mob;
@@ -71,7 +71,8 @@ void			enemies_movements(t_env *env, t_pf *a)
 		{
 			mob->goal = a->start;
 			enemies_get_end(a, mob, env->cam.stats.pos);
-			astar(a);
+			if (astar(a))
+				return (-1);
 			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{
 				enemies_last_rotation(mob, env->cam.stats.pos);
@@ -79,6 +80,8 @@ void			enemies_movements(t_env *env, t_pf *a)
 				continue ;
 			}
 		}
-		enemies_do_movement(env, mob);
+		if (enemies_do_movement(env, mob))
+			return (-1);
 	}
+	return (0);
 }
