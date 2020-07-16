@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 20:46:53 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 21:12:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/16 21:10:37 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		handle_sprint(t_env *env)
 
 	if (!do_sprint(env))
 		return ;
-	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.01f : 0.005f; 
+	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.03f : 0.01f; 
 	speeds[1] = env->events.keys[KEY_SHIFT_LEFT] ? W_SHAKE / 2 : W_SHAKE;
 	if (first && !(first = false))
 		reset = env->player.current->w_map->spawn;
@@ -61,9 +61,8 @@ void		handle_sprint(t_env *env)
 	}
 	if (on && !move_keys(env))
 	{
-		PUT
 		on = false;
-		frame = speeds[1];
+		frame = env->events.keys[KEY_SHIFT_LEFT] ? -speeds[1] : speeds[1];
 		env->player.current->w_map->spawn = reset;
 	}
 }

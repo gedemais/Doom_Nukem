@@ -11,13 +11,13 @@ static void		animate_position(t_point *pos, float time)
 int		print_countdown(t_env *env, float time)
 {
 	t_ttf_config	*conf;
-	static t_point	pos = {-200, 300};
+	static t_point	pos = {-100, 300};
 	char			*second;
 	int				sec;
 
 	if (time > 6 || time <= 0)
 	{
-		pos = (t_point){-200, 300};
+		pos = (t_point){-100, 300};
 		return (0);
 	}
 	sec = floor(time);
