@@ -83,6 +83,8 @@ static int		handle_events_go(t_env *env)
 
 int		custom_game_over(t_env *env)
 {
+	if (sound_manager(env, SA_GAMEOVER))
+		return (-1);
 	map_sprite(env->mlx.img_data, env->sprites[SP_GAME_OVER], (t_point){0, 0});
 	if (put_variables(env))
 		return (-1);

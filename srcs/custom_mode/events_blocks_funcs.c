@@ -10,9 +10,9 @@ static int 		jukeboxs_play_sound(t_env *env)
 	if (e->keys[KEY_F] && env->custom_env.game.moula >= 1000 && delay == 0)
 	{
 		delay = 40;
-		if (ambient < 0 || ambient > SA_PNL)
+		if (ambient < 0 || ambient > SA_MAPED)
 			ambient = 0;
-		sound_system(env, ambient, sp_overall(0, SA_PNL,
+		sound_system(env, ambient, sp_overall(0, SA_MAPED,
 			sp_play(env->sound.volume, PITCH, env->cam.stats.pos)));
 		env->custom_env.game.moula -= 1000;
 	}
@@ -20,8 +20,8 @@ static int 		jukeboxs_play_sound(t_env *env)
 	{
 		delay = 5;
 		ambient = e->keys[KEY_LEFT] ? ambient - 1 : ambient + 1;
-		ambient = ambient < 0 ? SA_PNL : ambient;
-		ambient = ambient > SA_PNL ? 0 : ambient;
+		ambient = ambient < 0 ? SA_MAPED : ambient;
+		ambient = ambient > SA_MAPED ? 0 : ambient;
 	}
 	delay = delay > 0 ? delay - 1 : delay;
 	return (ambient);
@@ -93,7 +93,7 @@ int				handle_mystery_boxs(t_env *env, t_event_block *block)
 			env->custom_env.game.moula -= 1000;
 			if (add_random_weapon(env))
 				return (-1);
-			sound_system(env, SA_INVOCATION,
+			sound_system(env, SA_CHANGE,
 				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 		}
 		button = !env->events.keys[KEY_F];
@@ -123,17 +123,26 @@ int				handle_doors(t_env *env, t_event_block *block)
 
 int				handle_lavas(t_env *env, t_event_block *block)
 {
+	float			dst;
+	t_vec3d			center;
 	static int		delay = LAVA_DELAY;
+	static int		delay2 = 10;
 
 	if (block->id != BE_LAVA)
 		return (0);
-	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
+	center = get_block_center(block);
+	dst = vec3d_dist(env->cam.stats.pos, center);
+	sound_system(env, SA_LAVA, sp_play(env->sound.volume, PITCH, center));
+	if (dst < EVENT_DIST)
 	{
-		delay--;
-		if (delay == 0)
+		if (--delay == 0)
 		{
-			sound_system(env, SA_GONG,
-				sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+			if (delay2++ == 10)
+			{
+				sound_system(env, SA_PLAYER_DAMAGE,
+					sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
+				delay2 = 0;			
+			}
 			env->player.hp--;
 			delay = LAVA_DELAY;
 		}

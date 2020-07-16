@@ -57,7 +57,7 @@ int
 		return (-1);
 	if (source >= SA_MAX || source < 0)
 		return (0);
-	if (sound_system(env, 0, sp_no_sound(0, SA_PNL)) == 0)
+	if (sound_system(env, 0, sp_no_sound(0, SA_MAPED)) == 0)
 		if (sound_system(env, source,
 					sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
 			return (-1);

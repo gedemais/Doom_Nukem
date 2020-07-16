@@ -24,6 +24,8 @@ static void		check_export(t_env *env)
 		switch_mecontext(env, MAPED_SC_MENU);
 	else if (env->events.keys[KEY_P])
 	{
+		sound_system(env, SA_CHANGE,
+			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
 	}
@@ -49,7 +51,7 @@ int				maped_creative(t_env *env)
 {
 	static int	last_gui_use = -1;
 
-	if (sound_manager(env, SA_MAX))
+	if (sound_manager(env, SA_MAPED))
 		return (-1);
 	last_gui_use == -1 ? last_gui_use = 500 : 0;
 	handle_creative_events(env);
