@@ -45,6 +45,14 @@ static void		enemies_get_goal(t_enemy *mob)
 		}
 		if (mob->end->parent->i == mob->goal->i)
 		{
+			// if (vec3d_dist(vec_add(mob->end->pos, mob->end->pos),
+			// 	mob->pos) > 5)
+			// {
+			// 	printf("test %f\n", vec3d_dist(vec_add(mob->end->pos, mob->end->pos),
+			// 	mob->pos));
+			// 	mob->end = mob->goal;
+			// 	return ;
+			// }
 			mob->goal = mob->end;
 			enemies_goals(mob);
 			return ;
@@ -62,13 +70,17 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 {
 	float	fcos;
 	float	fsin;
+	t_vec3d	pos;
 
 	if (mob->i == mob->end->i || mob->i == mob->goal->i)
+		return (0);
+	pos = vec_add(mob->pos, mob->pitch);
+	if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), pos))
 	{
 		mob->end = NULL;
 		return (0);
 	}
-	mob->pos = vec_add(mob->pos, mob->pitch);
+	mob->pos = pos;
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
@@ -86,10 +98,7 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 	t_vec3d	goal;
 
 	if (mob->i == mob->end->i || mob->end == NULL)
-	{
-		mob->end = NULL;
 		return (0);
-	}
 	mob->goal->bobstacle = 0;
 	if (mob->i == mob->goal->i || mob->goal == NULL)
 		enemies_get_goal(mob);
@@ -99,11 +108,7 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 		return (-1);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (vec3d_dist(goal, mob->pos) < 0.1f)
-	{
 		mob->i = mob->goal->i;
-		if (mob->end == NULL)
-			mob->end = mob->goal;
-	}
 	mob->goal->bobstacle = 1;
 	return (0);
 }
