@@ -14,7 +14,8 @@
 
 int	me_menu_to_new_map(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	env->ttfs.fields[0].rendered = true;
 	env->ttfs.fields[1].rendered = true;
@@ -27,7 +28,8 @@ int	me_menu_to_creative(t_env *env)
 {
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
 		return (-1);
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	env->cam.stats.pos = zero_vector();
 	env->cam.stats.pitch = 0;
@@ -41,7 +43,8 @@ int	me_new_map_to_creative(t_env *env)
 {
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
 		return (-1);
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	env->cam.stats.pos = zero_vector();
 	mlx_mouse_hide();
@@ -50,7 +53,8 @@ int	me_new_map_to_creative(t_env *env)
 
 int	me_new_map_to_menu(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	env->ttfs.fields[0].rendered = false;
 	env->ttfs.fields[1].rendered = false;
@@ -63,7 +67,8 @@ int	me_creative_to_menu(t_env *env)
 {
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
 		return (-1);
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	free_maped(env);
 	mlx_mouse_show();

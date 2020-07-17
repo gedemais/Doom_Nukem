@@ -14,21 +14,24 @@
 
 void	ts_to_dev(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		exit_doom(env, "error sound_system", 0, -1);
 	mlx_mouse_hide();
 }
 
 void	ts_to_campaign(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		exit_doom(env, "error sound_system", 0, -1);
 	env->cmp_env.sub_context = CMP_SC_MENU;
 }
 
 void	ts_to_custom(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		exit_doom(env, "error sound_system", 0, -1);
 	if (init_scroll_file(env, MAPED_SAVE_PATH, ".map"))
 		exit_doom(env, "error scroll file", 0, -1);
@@ -38,7 +41,8 @@ void	ts_to_custom(t_env *env)
 
 void	ts_to_map_editor(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		exit_doom(env, "error sound_system", 0, -1);
 	if (init_scroll_file(env, MAPED_SAVE_PATH, ".map"))
 		exit_doom(env, "error scroll file", 0, -1);
@@ -46,7 +50,8 @@ void	ts_to_map_editor(t_env *env)
 
 void	campaign_to_ts(t_env *env)
 {
-	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		exit_doom(env, "error sound_system", 0, -1);
 	mlx_mouse_show();
 }
