@@ -29,9 +29,52 @@ Debug le moteur physique
 Demarcher des correcteurs
 
 Maboye :
-Finir les sons
+Finir les sons de hover des boutons
 
 NORME
+------------------------------
+Maboye :
+srcs/enemies/
+srcs/sound_system/
+includes/astar.h
+includes/enemies.h
+includes/sound.h
+includes/map_editor.h
+includes/sprites.h
+includes/text.h
+includes/vectors.h
+
+
+Geoffrey :
+srcs/contexts/
+srcs/custom_mode/
+srcs/map_editor/
+srcs/mlx/
+srcs/obj_parser/
+srcs/rasterizer/
+srcs/title_screen/
+srcs/vectors/
+srcs/weapons/
+includes/title_screen.h
+includes/typedefs.h
+includes/keys.h
+includes/main.h
+includes/obj_parser.h
+includes/raster.h
+includes/weapons.h
+
+
+Lise :
+srcs/archive/
+includes/archive.h
+srcs/hud/
+includes/hud.h
+
+Bosson:
+srcs/physic_engine/
+includes/phy.h
+------------------------------
+
 
 remonter les chaines d'erreurs return (-1) dans setup; // fait pour les fonctions appelees dans les renders, a faire pour setup()
 
