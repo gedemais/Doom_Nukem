@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 14:44:01 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 15:09:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:01:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		jukeboxs_play_sound(t_env *env)
 	static int	delay = 0;
 
 	e = &env->events;
-	if (e->keys[KEY_F] && env->custom_env.game.moula >= 1000 && delay == 0)
+	if (e->keys[KEY_F] && env->custom_env.game.moula >= 500 && delay == 0)
 	{
 		delay = 40;
 		if (ambient < 0 || ambient > SA_MAPED)
@@ -27,7 +27,7 @@ static int		jukeboxs_play_sound(t_env *env)
 		if (sound_system(env, ambient, sp_overall(0, SA_MAPED,
 			sp_play(env->sound.volume, PITCH, env->cam.stats.pos))))
 			return (-1);
-		env->custom_env.game.moula -= 1000;
+		env->custom_env.game.moula -= 500;
 	}
 	else if ((e->keys[KEY_LEFT] || e->keys[KEY_RIGHT]) && delay == 0)
 	{
@@ -48,7 +48,7 @@ int				handle_jukeboxs(t_env *env, t_event_block *block)
 		return (0);
 	if (vec3d_dist(env->cam.stats.pos, get_block_center(block)) < EVENT_DIST)
 	{
-		textual_hint(env, "F", "PLAY ( 1000)", 0);
+		textual_hint(env, "F", "PLAY ( 500)", 0);
 		textual_hint(env, "{", "PREVIOUS", 1);
 		textual_hint(env, "}", "NEXT", 2);
 		if (!(current = ft_itoa(jukeboxs_play_sound(env))))
