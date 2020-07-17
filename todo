@@ -34,8 +34,6 @@ Finir les sons de hover des boutons
 NORME
 -----------------------------
 
-srcs/vectors/
-
 Geoffrey :
 srcs/contexts/
 srcs/custom_mode/
@@ -44,8 +42,6 @@ srcs/mlx/
 srcs/obj_parser/
 srcs/rasterizer/
 srcs/weapons/
-includes/title_screen.h
-includes/typedefs.h
 includes/keys.h
 includes/main.h
 includes/obj_parser.h
