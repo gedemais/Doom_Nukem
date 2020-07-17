@@ -44,7 +44,6 @@ srcs/rasterizer/
 srcs/weapons/
 includes/keys.h
 includes/main.h
-includes/obj_parser.h
 includes/raster.h
 includes/weapons.h
 
