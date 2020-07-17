@@ -49,7 +49,6 @@ t_vec3d			vec_fmult(t_vec3d a, float n);
 t_vec3d			vec_fsub(t_vec3d a, float n);
 
 t_vec3d			zero_vector();
-void			print_vec(t_vec3d vec);
 
 void			vec3d_swap(t_vec3d *a, t_vec3d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);

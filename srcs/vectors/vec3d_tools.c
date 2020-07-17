@@ -12,86 +12,14 @@
 
 #include "main.h"
 
-bool		vec_outrange(t_vec3d dim, t_vec3d pos)
+t_vec3d	zero_vector(void)
 {
-    return (pos.x < 0 || pos.x > dim.x - 1
-        || pos.y < 0 || pos.y > dim.y - 1
-        || pos.z < 0 || pos.z > dim.z - 1);
-}
-
-// kessafou dans vectors/ ?
-float		rsqrt(float number)
-{
-	float	i;
-	float	threehalfs;
-	t_rsqrt	conv;
-
-	i = number * 0.5f;
-	threehalfs = 1.5f;
-	conv = (t_rsqrt){ number };
-	conv.i = 0x5f3759df - (conv.i >> 1);
-	conv.f *= (threehalfs - (i * conv.f * conv.f));
-	return (conv.f);
-}
-
-
-// a bouger dans physics
-t_vec3d project_ortho(t_vec3d u, t_vec3d y)
-{
-	t_vec3d y_proj;
-	
-	if (vec_dot(u,u) == 0)
-	{
-		(void)y_proj;
-		return (zero_vector());
-	}
-	else
-	{
-		y_proj = vec_fmult(u, (vec_dot(y, u) / vec_dot(u, u)));
-		return (y_proj);
-	}
-}
-
-void		vec3d_swap(t_vec3d *a, t_vec3d *b)
-{
-	t_vec3d		t;
-
-	t = *a;
-	*a = *b;
-	*b = t;
-}
-
-t_vec3d		vec_cross(t_vec3d a, t_vec3d b)
-{
-	t_vec3d	ret;
-
-	ret.x = (a.y * b.z) - (a.z * b.y);
-	ret.y = (a.z * b.x) - (a.x * b.z);
-	ret.z = (a.x * b.y) - (a.y * b.x);
-	return (ret);
-}
-
-// a virer (printf)
-void	print_vec(t_vec3d vec)
-{
-	printf("vec.x = %f", vec.x);
-	printf(" vec.y = %f", vec.y);
-	printf(" vec.z = %f\n", vec.z);
-}
-
-t_vec3d abs_vector(t_vec3d vec)
-{
-	return ((t_vec3d){fabs(vec.x), fabs(vec.y), fabs(vec.z), 0});
-}
-
-t_vec3d zero_vector()
-{
-	return ((t_vec3d){0,0,0,0});
+	return ((t_vec3d){ 0, 0, 0, 0 });
 }
 
 float	vec_norm(t_vec3d vec)
 {
-	return (1/ rsqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (1 / rsqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
 t_vec3d	vec_normalize(t_vec3d vec)
@@ -115,7 +43,7 @@ float	vec_dot(t_vec3d a, t_vec3d b)
 
 float	vec3d_dist(t_vec3d o, t_vec3d v)
 {
-    return (1 / rsqrt((o.x - v.x) * (o.x - v.x)
-        + (o.y - v.y) * (o.y - v.y)
-        + (o.z - v.z) * (o.z - v.z)));
+	return (1 / rsqrt((o.x - v.x) * (o.x - v.x)
+		+ (o.y - v.y) * (o.y - v.y)
+		+ (o.z - v.z) * (o.z - v.z)));
 }
