@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raster.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RASTER_H
 # define RASTER_H
 
@@ -6,13 +18,13 @@
 # define NB_OBJ_TYPES 4
 # define OBJS_MAX 10000
 
-struct	s_point
+struct			s_point
 {
 	int			x;
 	int			y;
 };
 
-struct	s_filler
+struct			s_filler
 {
 	float		m0;
 	float		m1;
@@ -29,7 +41,7 @@ struct	s_filler
 	float		w;
 };
 
-struct	s_texturizer
+struct			s_texturizer
 {
 	t_sprite	*texture;
 	float		txt_u;
@@ -64,7 +76,7 @@ struct	s_texturizer
 	float		w2_step;
 };
 
-struct	s_clipper
+struct			s_clipper
 {
 	t_vec3d		in[3];
 	t_vec3d		out[3];
@@ -77,7 +89,7 @@ struct	s_clipper
 	float		d[3];
 };
 
-struct	s_rasthread
+struct			s_rasthread
 {
 	void		*env;
 	t_dynarray	*tris;
@@ -89,7 +101,7 @@ struct	s_rasthread
 	int			id;
 };
 
-struct	s_cam_stats
+struct			s_cam_stats
 {
 	t_vec3d		pos;
 	t_vec3d		dir;
@@ -97,7 +109,7 @@ struct	s_cam_stats
 	int			onfloor;
 	int			onroof;
 	int			onwall;
-	int 		crouch;
+	int			crouch;
 	float		yaw;
 	float		pitch;
 	float		aspect_ratio;
@@ -108,7 +120,7 @@ struct	s_cam_stats
 	float		fovr;
 };
 
-struct	s_cam
+struct			s_cam
 {
 	t_cam_stats	stats;
 	t_dynarray	to_clip;
@@ -128,7 +140,8 @@ struct	s_cam
 	float		rz_m[4][4];
 };
 
-int				triangle_pipeline(t_env *env, t_triangle *t, t_dynarray *tris, t_mesh *m);
+int				triangle_pipeline(t_env *env, t_triangle *t,
+					t_dynarray *tris, t_mesh *m);
 int				raster_triangles(t_env *env, t_dynarray *arr);
 void			monothread_raster(void *env);
 void			*rasthreader(void *param);
@@ -145,9 +158,12 @@ int				init_cameras_mesh(t_map *map, t_mesh *cam);
 int				allocate_clipping_arrays(t_dynarray arrays[4]);
 void			classify_triangle(t_clipper *clip, t_triangle in);
 bool			is_triangle_in_screen(t_triangle t);
-int				refactor_triangle(t_clipper *clip, t_triangle out[2], t_vec3d planes[2], t_triangle t);
-int				clip_mesh_triangles(t_dynarray *tris, t_dynarray *to_raster, t_dynarray arrs[4]);
-int				clip_triangle(t_vec3d plane_p, t_vec3d plane_n, t_triangle in, t_triangle out[2]);
+int				refactor_triangle(t_clipper *clip,
+					t_triangle out[2], t_vec3d planes[2], t_triangle t);
+int				clip_mesh_triangles(t_dynarray *tris,
+					t_dynarray *to_raster, t_dynarray arrs[4]);
+int				clip_triangle(t_vec3d plane_p,
+					t_vec3d plane_n, t_triangle in, t_triangle out[2]);
 void			copy_triangle_stats(t_triangle *tri, t_triangle *t);
 
 /*
@@ -160,19 +176,25 @@ void			update_yrotation_matrix(float m[4][4], float theta);
 void			update_zrotation_matrix(float m[4][4], float theta);
 t_vec3d			multiply_matrix(float m[4][4], t_vec3d o);
 t_vec3d			matrix_mult_vec(float m[4][4], t_vec3d i);
-void			matrix_mult_matrix(float m1[4][4], float m2[4][4], float ret[4][4]);
-void			matrix_pointat(float m[4][4], t_vec3d pos, t_vec3d target, t_vec3d up);
+void			matrix_mult_matrix(float m1[4][4],
+					float m2[4][4], float ret[4][4]);
+void			matrix_pointat(float m[4][4],
+					t_vec3d pos, t_vec3d target, t_vec3d up);
 void			inverse_matrix(float m[4][4], float ret[4][4]);
 
 /*
 ** Texturing
 */
-void			draw_triangle_line(t_env *env, t_texturizer *txt, t_triangle *t, int i);
+void			draw_triangle_line(t_env *env,
+					t_texturizer *txt, t_triangle *t, int i);
 void			starting_swap(t_triangle *t);
 void			compute_steps(t_texturizer *txt, bool t);
-void			compute_gradients(t_texturizer *txt, t_triangle *t, bool flatbot);
-void			set_line_bounds_top(t_texturizer *txt, t_triangle *t, float current);
-void			set_line_bounds_bot(t_texturizer *txt, t_triangle *t, float currents[2]);
+void			compute_gradients(t_texturizer *txt,
+					t_triangle *t, bool flatbot);
+void			set_line_bounds_top(t_texturizer *txt,
+					t_triangle *t, float current);
+void			set_line_bounds_bot(t_texturizer *txt,
+					t_triangle *t, float currents[2]);
 void			fill_triangle_texture(t_env *env, t_triangle *t);
 
 /*
@@ -184,5 +206,5 @@ void			compute_view_matrice(t_env *env);
 void			swap_floats(float *a, float *b);
 void			clear_screen_buffers(t_env *env);
 
-void		print_first_mesh(t_env *env);
+void			print_first_mesh(t_env *env);
 #endif

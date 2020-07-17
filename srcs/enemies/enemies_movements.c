@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemies_movements.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void		enemies_check_neighbours(t_pf *a, t_enemy *mob)
@@ -55,7 +67,14 @@ static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
 	a->end = mob->end;
 }
 
-int		enemies_movements(t_env *env, t_pf *a)
+static int		enemies_astar(t_env *env, t_pf *a, t_enemy *mob)
+{
+	mob->goal = a->start;
+	enemies_get_end(a, mob, env->cam.stats.pos);
+	return (astar(a));
+}
+
+int				enemies_movements(t_env *env, t_pf *a)
 {
 	int		i;
 	t_enemy	*mob;
@@ -69,9 +88,7 @@ int		enemies_movements(t_env *env, t_pf *a)
 		a->start = dyacc(&a->d_nodes, mob->i);
 		if (mob->end == NULL || mob->i == mob->end->i)
 		{
-			mob->goal = a->start;
-			enemies_get_end(a, mob, env->cam.stats.pos);
-			if (astar(a))
+			if (enemies_astar(env, a, mob))
 				return (-1);
 			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{

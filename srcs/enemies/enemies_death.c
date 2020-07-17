@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemies_death.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void
@@ -71,12 +83,15 @@ int
 {
 	int		i;
 	t_enemy	*mob;
+	t_vec3d	dim;
 
+	dim = vec_add(env->astar.dim, env->astar.dim);
+	dim = (t_vec3d){ dim.x + 10, dim.y + 10, dim.z + 10, dim.w };
 	i = -1;
 	while (++i < mobs->nb_cells)
 	{
 		mob = dyacc(mobs, i);
-		if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), mob->pos))
+		if (vec_outrange(dim, mob->pos))
 		{
 			mob->dead = 1;
 			mob->hp = 0;

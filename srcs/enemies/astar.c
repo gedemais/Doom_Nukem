@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   astar.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static int	astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
+static int		astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
 {
 	int	i;
 
@@ -13,7 +25,7 @@ static int	astar_stock_neighbour(t_dynarray *arr, t_node *ngbhr)
 	return (push_dynarray(arr, ngbhr, 0));
 }
 
-static int	astar_neighbour(t_pf *env, t_node **c, int i)
+static int		astar_neighbour(t_pf *env, t_node **c, int i)
 {
 	float	plowergoal;
 	t_node	*nghbr;
@@ -36,7 +48,7 @@ static int	astar_neighbour(t_pf *env, t_node **c, int i)
 	return (0);
 }
 
-static bool	astar_exit(t_pf *env, t_node *current)
+static bool		astar_exit(t_pf *env, t_node *current)
 {
 	if (vec3d_dist(env->start->pos, current->pos) > ASTAR_MAX_DIST)
 	{
@@ -47,7 +59,7 @@ static bool	astar_exit(t_pf *env, t_node *current)
 			|| env->d_astar.nb_cells < 1);
 }
 
-static int	astar_solve(t_pf *env, t_node *c)
+static int		astar_solve(t_pf *env, t_node *c)
 {
 	int	i;
 
@@ -65,7 +77,7 @@ static int	astar_solve(t_pf *env, t_node *c)
 	return (0);
 }
 
-int		astar(t_pf *env)
+int				astar(t_pf *env)
 {
 	t_node	*current;
 	int		ret;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemies.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENEMIES_H
 # define ENEMIES_H
 
@@ -28,7 +40,7 @@
 
 # define DIST_TO_PLAYER 1.8f
 
-enum				e_enemies
+enum			e_enemies
 {
 	ENEMY_CORONA,
 	ENEMY_MAGE,
@@ -36,14 +48,14 @@ enum				e_enemies
 	ENEMY_MAX
 };
 
-enum				e_damages
+enum			e_damages
 {
 	EDAMAGES_CORONA = 15,
 	EDAMAGES_MAGE = 42,
 	EDAMAGES_GOULE = 20
 };
 
-enum				e_loots_id
+enum			e_loots_id
 {
 	LOOT_NUKE,
 	LOOT_MONEY,
@@ -52,7 +64,7 @@ enum				e_loots_id
 	LOOT_MAX
 };
 
-struct				s_loot
+struct			s_loot
 {
 	t_mesh			*m;
 	float			left;
@@ -60,9 +72,9 @@ struct				s_loot
 	bool			on;
 };
 
-struct				s_enemy
+struct			s_enemy
 {
-	int 		i;
+	int			i;
 	int			hp;
 	int			damages;
 	int			map_start;
@@ -84,7 +96,6 @@ struct				s_enemy
 	t_node		*end;
 	t_map		*map;
 };
-
 
 int				handle_enemies(t_env *env);
 char			enemy_wave(t_env *env);
@@ -110,6 +121,6 @@ void			enemies_last_rotation(t_enemy *mob, t_vec3d cam);
 void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
 		void (*rotation)(t_vec3d *v, t_vec3d m, float fcos, float fsin));
 
-float           xz_angle(t_vec3d a, t_vec3d b);
+float			xz_angle(t_vec3d a, t_vec3d b);
 
 #endif

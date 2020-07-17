@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_editor.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_EDITOR_H
 # define MAP_EDITOR_H
 
@@ -164,8 +176,9 @@ struct				s_edit_env
 int					handle_creative_events(t_env *env);
 int					flat_map(t_ed_map *env, int *len);
 void				culling(t_env *env, t_mesh *news, unsigned char type);
-int 				check_face(t_ed_map *map, int type, int *pos, int face);
-void				cull_slopes(t_env *env, t_mesh *new, t_triangle *tri, int type);
+int					check_face(t_ed_map *map, int type, int *pos, int face);
+void				cull_slopes(t_env *env,
+						t_mesh *new, t_triangle *tri, int type);
 
 t_mesh				*get_blockindex(t_map *map, int *pos, int *m_index);
 
@@ -180,13 +193,11 @@ int					mouse_release_maped(int button, int x, int y, void *param);
 int					mouse_position_maped(int x, int y, void *param);
 int					render_maped(void *param);
 
-/*          sous contextes du mode editeur            */
 int					switch_mecontext(t_env *env, unsigned int i);
 int					maped_menu(t_env *env);
 int					maped_new_map(t_env *env);
 int					maped_creative(t_env *env);
 
-// Routines
 int					me_menu_to_new_map(t_env *env);
 int					me_menu_to_creative(t_env *env);
 int					me_new_map_to_creative(t_env *env);
@@ -199,9 +210,9 @@ char				matcher(int key_id);
 int					add_char(t_dynarray *txt, bool keys[NB_KEYS]);
 int					get_boxs(t_ttf *ttfs, t_dynarray *boxs);
 int					input_field(t_env *env, t_point o, int nfield, char **ret);
-void				draw_rectangle(char *img, t_point o, t_point dims, int color);
+void				draw_rectangle(char *img,
+						t_point o, t_point dims, int color);
 
-// Map
 int					create_me_map(t_env *env);
 int					build_map(t_env *env, t_ed_map *new);
 int					map_to_scene(t_env *env);
@@ -212,24 +223,22 @@ int					import_maped_map(t_edit_env *env, char *path);
 int					flat_map(t_ed_map *env, int *len);
 int					flat_to_matrice(t_ed_map *env, int offset, int len);
 
-// Blocks
 int					create_cube(t_env *env, t_mesh *new, unsigned char type);
 int					create_slope(t_env *env, t_mesh *new, unsigned char type);
 int					get_block_type(t_env *env, t_mesh *new, unsigned char type);
 void				translate_triangle(t_mesh *new, t_triangle *t);
-int					replace_by_face(t_env *env, int *pos, char face, unsigned char type);
+int					replace_by_face(t_env *env,
+						int *pos, char face, unsigned char type);
 
-// Pallet
 int					init_cubes_pallet(t_env *env, t_edit_env *edit_env);
 int					render_pallets(t_env *env);
-void				render_pallet(t_env *env, t_cube_pallet *pallet, t_point o, char bc);
+void				render_pallet(t_env *env,
+						t_cube_pallet *pallet, t_point o, char bc);
 void				draw_cg_pallet(t_env *env);
 
-// Scroll
 int					init_maped_scroll_file(t_env *env);
 void				display_file(t_env *env);
 
-// Events
 void				maped_crosshair(t_env *env);
 int					put_block(t_env *env);
 int					del_block(t_env *env);
@@ -238,7 +247,6 @@ int					del_door(t_env *env, t_event_block *block);
 void				attribute_mesh(t_map *scene, int index);
 void				switch_block_type(t_env *env, t_events *e);
 
-// Saves
 int					write_infile(char *f_path, char *str, int len, bool token);
 char				**listpath(char *d_path, char *format);
 #endif

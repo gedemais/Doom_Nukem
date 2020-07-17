@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 02:39:04 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/11 17:34:29 by gedemais         ###   ########.fr       */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_vec3d			vec_fmult(t_vec3d a, float n);
 t_vec3d			vec_fsub(t_vec3d a, float n);
 
 t_vec3d			zero_vector();
-void			print_vec(t_vec3d vec);
 
 void			vec3d_swap(t_vec3d *a, t_vec3d *b);
 t_vec3d			vec_cross(t_vec3d a, t_vec3d b);

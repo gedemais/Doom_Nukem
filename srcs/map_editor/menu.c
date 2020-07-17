@@ -67,8 +67,8 @@ int			maped_menu(t_env *env)
 	char	*data;
 
 	data = env->mlx.img_data;
-	if (sound_manager(env, SA_TITLE_SCREEN_L))
-		return (-1);
+	// if (sound_manager(env, SA_TITLE_SCREEN_L))
+	// 	return (-1);
 	if (handle_events(env))
 		return (-1);
 	map_sprite(data, env->sprites[SP_ME_BACKGROUND], (t_point){0, 0});

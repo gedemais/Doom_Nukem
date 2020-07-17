@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   obj_pasrer.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OBJ_PARSER_H
 # define OBJ_PARSER_H
 
 # define BUFF_READ 4194304
 
-enum	e_mapper
+enum				e_mapper
 {
 	MAPPER_NAME,
 	MAPPER_POSITION,
@@ -15,7 +27,7 @@ enum	e_mapper
 	MAPPER_MAX
 };
 
-enum	e_mtl
+enum				e_mtl
 {
 	MTL_COMMENT,
 	MTL_NEW,
@@ -31,7 +43,7 @@ enum	e_mtl
 	MTL_MAX
 };
 
-enum	e_pstate
+enum				e_pstate
 {
 	PS_OBJ,
 	PS_VERTEXS,
@@ -44,7 +56,7 @@ enum	e_pstate
 	PS_MAX
 };
 
-enum	e_scene_id
+enum				e_scene_id
 {
 	SCENE_FAMAS,
 	SCENE_AK47,
@@ -75,7 +87,7 @@ enum	e_scene_id
 	SCENE_MAX
 };
 
-struct	s_mtl
+struct				s_mtl
 {
 	char	*name;
 	char	color[4];
@@ -83,7 +95,7 @@ struct	s_mtl
 	bool	textured;
 };
 
-struct	s_face
+struct				s_face
 {
 	int				x;
 	int				y;
@@ -95,7 +107,7 @@ struct	s_face
 	bool			textured;
 };
 
-struct	s_triangle
+struct				s_triangle
 {
 	t_vec3d		points[3];
 	t_vec2d		txt[3];
@@ -109,23 +121,23 @@ struct	s_triangle
 	bool		voxel;
 };
 
-struct	s_mesh
+struct				s_mesh
 {
-	t_dynarray	tris;
-	t_dynarray	deps;
-	t_dynarray	faces;
-	t_corp		corp;
-	int			m_pos[3];
-	char		*name;
-	float		yaw;
-	float		pitch;
-	int			index;
-	bool		textured;
-	bool		phy;
+	t_dynarray		tris;
+	t_dynarray		deps;
+	t_dynarray		faces;
+	t_corp			corp;
+	int				m_pos[3];
+	char			*name;
+	float			yaw;
+	float			pitch;
+	int				index;
+	bool			textured;
+	bool			phy;
 	unsigned char	type;
 };
 
-struct	s_map
+struct				s_map
 {
 	t_dynarray		meshs;
 	t_dynarray		txts;
@@ -146,7 +158,7 @@ struct	s_map
 	bool			init;
 };
 
-struct	s_parser
+struct				s_parser
 {
 	char			**lines;
 	char			**toks;
@@ -162,7 +174,8 @@ t_mesh				*find_mesh(t_map *map, char **line, bool *prop);
 char				*read_file(int fd, int *len);
 char				*maps_paths(unsigned int index);
 void				init_states(char states[PS_MAX][PS_MAX]);
-int					parse_map(t_map *map, char *path, char states[PS_MAX][PS_MAX]);
+int					parse_map(t_map *map,
+						char *path, char states[PS_MAX][PS_MAX]);
 int					load_face(char **toks, t_map *map, t_face *face);
 
 int					load_map_config(t_env *env, t_map *map, char *map_path);
@@ -203,7 +216,7 @@ int					cross_whitespaces(char *line, int *i);
 int					cross_float(char *line, int *i);
 t_vec3d				read_vec3d(char *tok, char start_sep, char end_sep);
 t_vec2d				read_vec2d(char *tok, char start_sep, char end_sep);
-int					assign_triangle_texture(t_mesh *m , void *ptr);
+int					assign_triangle_texture(t_mesh *m, void *ptr);
 void				swap_bytes(char *a, char *b);
 int					get_line_type(char *c, t_parser *p, char s[PS_MAX][PS_MAX]);
 int					get_faces(t_triangle *n, t_map *map, t_face *f, t_mesh *m);

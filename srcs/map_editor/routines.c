@@ -14,8 +14,6 @@
 
 int	me_menu_to_new_map(t_env *env)
 {
-	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
-		return (-1);
 	if (sound_system(env, SA_BUTTON,
 		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
@@ -55,8 +53,6 @@ int	me_new_map_to_creative(t_env *env)
 
 int	me_new_map_to_menu(t_env *env)
 {
-	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
-		return (-1);
 	if (sound_system(env, SA_BUTTON,
 		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
