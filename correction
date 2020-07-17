@@ -1,0 +1,252 @@
+DOOM
+Introduction
+
+Nous vous demandons pour le bon déroulement de cette évaluation de
+respecter les règles suivantes :
+
+- Restez courtois, polis, respectueux et constructifs en toutes
+situations lors de cet échange. Le lien de confiance entre la
+communauté 42 et vous en dépend.
+
+- Mettez en évidence auprès de la personne (ou du Group) évaluée les
+dysfonctionnements éventuels du travail rendu, et prenez le temps
+d'en discuter et d'en débattre.
+
+- Acceptez qu'il puisse y avoir parfois des différences
+d'interprétation sur les demandes du sujet ou l'étendue des
+fonctionnalités. Restez ouvert d'esprit face à la vision de
+l'autre (a-t-il ou elle raison ou tort ?), et notez le plus
+honnêtement possible. La pédagogie de 42 n'a de sens que si
+la peer-évaluation est faite sérieusement.
+
+Guidelines
+
+- Vous ne devez évaluer que ce qui se trouve sur le depôt GiT de rendu
+de l'étudiant(e) ou du Groupe.
+
+
+
+
+- Prenez soin de vérifier que le depôt GiT est bien celui
+correspondant à l'étudiant(e) ou au Groupe, et au projet.
+
+
+
+
+- Verifiez méticuleusement qu'aucun alias malicieux n'a été utilisé
+pour vous induire en erreur et vous faire évaluer autre chose que
+le contenu du dépot officiel.
+
+
+
+
+- Tout script sensé faciliter l'évaluation fourni par l'une des deux
+parties doit être rigoureusement vérifié par l'autre partie pour
+éviter des mauvaises surprises.
+
+
+
+
+- Si l'étudiant(e) evaluateur/evaluatrice n'a pas encore fait ce
+projet, il est obligatoire pour cet(te) étudiant(e) de lire le
+sujet en entier avant de commencer cette soutenance.
+
+
+
+
+- Utilisez les flags disponibles sur ce barème pour signaler un
+rendu vide, non fonctionnel, une faute de norme si applicable, un
+cas de triche, etc. Dans ce cas, l'évaluation est terminée et la
+note finale est 0 (ou -42 dans le cas spécial de la
+triche). Toutefois, hors cas de triche, vous êtes encouragés à
+continuer d'échanger autour du travail effectué (ou non effectué
+justement) pour identifier les problèmes ayant entrainé cette
+situation et les éviter pour le prochain rendu.
+
+
+
+
+- Tout le Groupe doit être present pour cette soutenance. Aucun
+absent, meme avec une soit-disant bonne raison.
+Attachments
+Subject
+Sujet
+Partie obligatoire
+
+
+
+
+Rappel : si a un moment ou un autre, le programme ne réagit pas correctement (bus error, segfault, etc..), la soutenance est terminée et la note est 0. Pensez à utiliser les flags correspondants. Cette consigne est active d'un bout à l'autre de la soutenance. Attention toute accélération materielle est strictement interdite dans la partie obligatoire. Seul l'utilisation de pthread est accepté dans la partie bonus du sujet.
+Fichier auteur
+
+
+
+
+
+
+
+
+Vérifiez que le fichier auteur est bien présent à la racine
+du dépot et formaté tel que demandé dans le sujet. Dans le cas
+contraire, la soutenance est terminée et la note est 0.
+Welcome back Wolf3D
+
+
+
+
+Les fonctionnalitées du projet Wolf3D sont présentes et fonctionnent
+parfaitement.
+On doit donc obligatoirement pouvoir:
+- Se déplacer avec des touches du clavier en temps réel, tourner à
+360 degrés, avancer, reculer.
+- Fermer la fenetre et quitter proprement le programme avec la touche
+ESC ou bien en cliquant sur la croix rouge en bordure de fenêtre.
+- Il y a des textures sur les murs.
+Éléments visuels
+
+
+
+
+
+
+
+
+Vérifiez que ces éléments graphiques sont bien présents (1 points par éléments):
+- On doit pouvoir regarder dans toutes les directions (de haut en bas et de droite à gauche).
+- Les espaces doivent avoir des formes quelconques, des pieces avec un nombre
+de mur différent, avec plusieurs orientations.
+- Le sol et le plafond ont une hauteur réglable, avec donc des dénivelés entre
+les différents espaces.
+- Le sol et le plafond doivent pouvoir être inclinés.
+- Des textures sont présentes sur le sol et le plafond.
+Rate it from 0 (failed) through 5 (excellent)
+Éléments du décors
+
+20 h 15
+[18 h 44]
+
+[23 h 04]
+Vérifiez que ces éléments du décor sont bien présents (1 points par élément):
+- Un ciel doit pouvoir etre présent (ne pas remplacer la texture du plafond par un ciel...).
+- Il doit y avoir des murs partiellement transparents afin de voir les espace a l'arriere.
+- Il doit y avoir des éléments du décors sur les murs, au dessus de la texture principale.
+- Il y a présence de sprites qui font toujours face au joueur ainsi que de
+multi-sprites affichés selon l'orientation du joueur, comme voir un
+personnage de face, coté ou de dos.
+- Une luminosité ambiante peut bien être appliquée à une zone
+donnée du jeu, affectant les murs et les objets présents.
+Rate it from 0 (failed) through 5 (excellent)
+Affichage de texte a l'écran
+
+
+
+
+Vérifiez que des messages peuvent etre affichés pendant le jeu, en surimpression.
+HUD - Head-Up Display
+
+
+
+
+Vérifiez qu'il y ait au moins 3 éléments présent sur le HUD.
+Déplacements
+
+
+
+
+Vérifiez que ces éléments de gameplay simples sont fonctionnels:
+- Les déplacements sont fluides, on peut tourner sur soi meme et de haut en bas. (2 points)
+- Il est possible de straffer de manière fluide. (1 point)
+- Les interactions avec les murs et les marches sont correctement
+gérés selon leur taille et de manière fluide. (2 points)
+Rate it from 0 (failed) through 5 (excellent)
+Déplacements avancés
+
+
+
+
+Vérifiez que ces éléments de gameplay plus avancés sont fonctionnels:
+- Il est possible de courrir, sauter, tomber, se baisser et se relever de manière fluide. (3 points)
+- Il est possible de voler et/ou nager de manière fluide. (2 points)
+Rate it from 0 (failed) through 5 (excellent)
+Interactions avec le décors
+
+
+
+
+Vérifiez que les interactions suivantes sont fonctionnelles:
+- Les objets présents réagissent bien proportionnellement à leur représentation visuelle. (1 points)
+- Les objets présents peuvent être ramassés ou non et alimenter un inventaire. (2 points)
+- Des interactions sont possibles avec les éléments du décors
+(Actionner une plaque, un bouton...). (2 points)
+Rate it from 0 (failed) through 5 (excellent)
+Interactions avancés
+
+
+
+
+Vérifiez que les interactions suivantes sont fonctionnelles:
+- Il y a des actions qui s'effectue suite à une/plusieurs action(s),
+soyez ouverts. (1 points)
+- Les actions peuvent modifier tous les éléments du jeu, les formes,
+leurs propriétés. (2 points)
+- Il y a des animations présentes suite à une interaction
+(Comme l'ouverture d'une porte). (2 points)
+Rate it from 0 (failed) through 5 (excellent)
+Ambiance globale du jeu
+
+
+
+
+Vérifier les éléments suivants afin de noter l'ambiance du jeu (1 point par élément):
+- Les personnages et objets peuvent avoir leurs propres actions.
+- Des projectiles peuvent etre tirés avec interaction sur l'environnement.
+- Le jeu contient une histoire, avec une mission et un objectif à atteindre.
+- Il y a un a début et une fin de niveau.
+- Des musiques et bruitages sont présent(e)s.
+Rate it from 0 (failed) through 5 (excellent)
+Editeur de niveau
+
+
+
+
+Vérifier qu'il y a un éditeur de niveau fonctionnel avec les features
+suivantes (1 point par élément) :
+- Edition des espaces (murs, sols, plafonds)
+- Edition des textures.
+- Edition des actions.
+- Edition des objets.
+- Edition des éléments généraux (début et fin de level,
+gravité terrestre ou lunaire, type d'armes dispo et dégats,
+niveau de vie au depart, musique d'ambiance, solo/equipe, etc).
+Rate it from 0 (failed) through 5 (excellent)
+Packaging
+Tous les éléments nécessaires à un niveau doit être dans un seul et unique fichier.
+Vous devez pouvoir lancer le jeu uniquement avec le binaire doom-nukem et ce fichier.
+Partie bonus
+
+
+20 h 15
+Rappel : si a un moment ou un autre, le programme ne réagit pas correctement (bus error, segfault, etc...), la soutenance est terminée et la note est 0. Pensez à utiliser les flags correspondants. Cette consigne est active d'un bout à l'autre de la soutenance. Les bonus ne doivent être évalués que si et seulement si la partie obligatoire est PARFAITE. Par PARFAITE, on entend bien évidemment qu'elle est entièrement réalisée, qu'il n'est pas possible de mettre son comportement en défaut, même en cas d'erreur, aussi vicieuse soit-elle, de mauvaise utilisation, etc. Concrètement, cela signifie que si la partie obligatoire n'a pas obtenu TOUS les points pendant cette soutenance, les bonus doivent être intégralement IGNORÉS.
+Bonus conseillés
+
+Vérifiez que les bonus conseillés sont bien implémentés:
+- Un menu pour choisir le niveau ou des options de difficulté. (2 points)
+- L'ambiance et les décors sont soignés. (1 points)
+- L'histoire et la scénarisation sont complexes et recherchés. (1 points)
+- Une immersion au poil, si vous etes transporté dans le jeu c'est que
+le groupe a réussis son travail. (1 points)
+Rate it from 0 (failed) through 5 (excellent)
+Rendu multithread
+
+Le jeu dispose d'un mode de rendu utilisant les threads grâce à la librairie
+du processeur pour accélerer le rendu et la fluidité du jeu.
+Réseau
+
+Un lobby est présent et il est possible de jouer en multi en réseau.
+Soyez fou
+
+Vous voilà dans le section bonus libres, notez la créativitée et l'originalité
+du jeu. Attribuez un points par bonus supplémentaires que vous jugez bons.
+La créativité est un point important dans votre scolarité et dans le monde du
+numérique, ne l'oubliez jamais !
+Rate it from 0 (failed) through 5 (excellent)
