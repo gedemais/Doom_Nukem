@@ -72,6 +72,8 @@ void		handle_sprint(t_env *env)
 	static bool		first = true;
 	float			speeds[2];
 
+	if (env->phy_env.type_move == false)
+		return ;
 	step_sound(env);
 	if (!do_sprint(env))
 		return ;
