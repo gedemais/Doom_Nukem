@@ -38,7 +38,10 @@ static void		enemies_get_goal(t_enemy *mob)
 	while (mob->end && mob->end->i != mob->goal->i)
 	{
 		if (mob->end->parent == NULL)
+		{
+			mob->end = NULL;
 			return ;
+		}
 		if (mob->end->parent->i == mob->goal->i)
 		{
 			mob->goal = mob->end;
