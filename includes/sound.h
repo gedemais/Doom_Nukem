@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sound.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SOUND_H
 # define SOUND_H
 
@@ -83,8 +95,8 @@ typedef struct	s_sound_param
 	bool		play;
 	bool		sound;
 	bool		stop;
-	int 		start;
-	int 		end;
+	int			start;
+	int			end;
 	float		volume;
 	float		pitch;
 	t_vec3d		pos;
@@ -107,7 +119,7 @@ void			delete_sources(t_dynarray *sounds);
 
 int				sound_manager(t_env *env, int source);
 
-int 			init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i);
+int				init_sound(t_env *env, t_dynarray *s, ALuint *sources, int i);
 
 t_sparam		sp_fork(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_no_sound(int start, int end);
@@ -116,10 +128,10 @@ t_sparam		sp_play(float volume, float pitch, t_vec3d pos);
 t_sparam		sp_stop(void);
 t_sparam		sp_volume(float volume, float pitch);
 
-int 			fork_sound(t_env *env, int source, t_sparam param);
-int 			play_sound(t_env *env, int source, t_sparam param);
-int 			sound_volume(t_env *env, int source, t_sparam param);
-int 			stop_sound(t_env *env, int source);
+int				fork_sound(t_env *env, int source, t_sparam param);
+int				play_sound(t_env *env, int source, t_sparam param);
+int				sound_volume(t_env *env, int source, t_sparam param);
+int				stop_sound(t_env *env, int source);
 
 char			*samples_paths(unsigned int index);
 

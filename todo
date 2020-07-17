@@ -32,17 +32,7 @@ Maboye :
 Finir les sons de hover des boutons
 
 NORME
-------------------------------
-Maboye :
-srcs/sound_system/
-includes/astar.h
-includes/enemies.h
-includes/sound.h
-includes/map_editor.h
-includes/sprites.h
-includes/text.h
-includes/vectors.h
-
+-----------------------------
 
 Geoffrey :
 srcs/contexts/

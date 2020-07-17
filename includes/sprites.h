@@ -1,5 +1,17 @@
-#ifndef BMP_H
-# define BMP_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SPRITES_H
+# define SPRITES_H
 
 # define ALPHA -16777216
 
@@ -11,11 +23,8 @@
 # define GRA "\033[1m"
 # define STOP "\033[0m"
 
-enum	e_sprite_id
+enum		e_sprite_id
 {
-/*
-** Title screen
-*/
 	SP_TS_BUTTON_1C,
 	SP_TS_BUTTON_1H,
 	SP_TS_BUTTON_1O,
@@ -66,7 +75,7 @@ enum	e_sprite_id
 	SP_MAX
 };
 
-struct	s_sprite
+struct		s_sprite
 {
 	void			*img_ptr;
 	char			*img_data;
@@ -82,7 +91,8 @@ struct	s_sprite
 char		*sprites_paths(unsigned int index);
 char		*blit_sprite(char *img, t_sprite sprite, t_point o, float scale);
 void		map_sprite(char *img, t_sprite sprite, t_point o);
-int			crop_sprite(t_env *env, t_sprite base, t_sprite *crop, t_vec2d csize[2]);
+int			crop_sprite(t_env *env,
+				t_sprite base, t_sprite *crop, t_vec2d csize[2]);
 t_sprite	*load_sprites(t_mlx *mlx);
 int			load_texture(t_mlx *mlx, char *path, t_sprite *txt, bool rev);
 void		reverse_texture(t_sprite *txt);

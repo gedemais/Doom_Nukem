@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   text.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TEXT_H
 # define TEXT_H
 
 # define MAX_STR_CHARS 1024
 
-# define TEXT_BOX_DIMS (t_point){200, 30}
+# define TEXT_BOX_DIMSX 200
+# define TEXT_BOX_DIMSY 30
 # define TEXT_BOX_COLOR 0x333333
 # define CURSOR_COLOR 0xaaaaaa
 
-enum	e_font_id
+enum			e_font_id
 {
 	FONT_ARIAL,
 	FONT_AMMOS,
@@ -17,7 +30,7 @@ enum	e_font_id
 	FONT_MAX
 };
 
-enum	e_input_fields_id
+enum			e_input_fields_id
 {
 	FIELD_NM_MAP_WIDTH,
 	FIELD_NM_MAP_HEIGHT,
@@ -26,7 +39,7 @@ enum	e_input_fields_id
 	FIELD_MAX
 };
 
-struct	s_text_box
+struct			s_text_box
 {
 	t_dynarray		str;
 	char			*name;
@@ -36,19 +49,19 @@ struct	s_text_box
 	bool			in;
 };
 
-struct	s_kerning
+struct			s_kerning
 {
 	float	*left_pad;
 	float	*right_pad;
 };
 
-struct	s_ttf_config
+struct			s_ttf_config
 {
 	unsigned char	s[MAX_STR_CHARS];
 	int				size;
 };
 
-struct	s_ttf
+struct			s_ttf
 {
 	FT_Library	fontlib;
 	FT_Face		faces[FONT_MAX - 1];

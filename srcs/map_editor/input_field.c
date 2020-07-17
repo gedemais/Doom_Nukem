@@ -27,7 +27,8 @@ static void			render_field(t_env *env, void *addr)
 	name_pos = (t_point){box->o.x + 50, box->o.y};
 	my_string_put(env, env->mlx.img_data, name_pos, FONT_ARIAL);
 	box->b_o = (t_point){box->o.x, box->o.y + conf->size};
-	draw_rectangle(env->mlx.img_data, box->b_o, TEXT_BOX_DIMS, TEXT_BOX_COLOR);
+	draw_rectangle(env->mlx.img_data, box->b_o,
+		(t_point){TEXT_BOX_DIMSX, TEXT_BOX_DIMSY}, TEXT_BOX_COLOR);
 	ft_memset(conf->s, 0, sizeof(char) * MAX_STR_CHARS);
 	s = (unsigned char *)box->str.c;
 	s[box->str.nb_cells] = 0;
@@ -68,8 +69,8 @@ static void			refresh_in(t_env *env, t_dynarray *boxs)
 	{
 		tmp = dyacc(boxs, i);
 		ft_memcpy(&box, tmp, sizeof(void*));
-		if (ft_inbounds(mp.x, box->b_o.x, box->b_o.x + (TEXT_BOX_DIMS).x)
-			&& ft_inbounds(mp.y, box->b_o.y, box->b_o.y + (TEXT_BOX_DIMS).y))
+		if (ft_inbounds(mp.x, box->b_o.x, box->b_o.x + TEXT_BOX_DIMSX)
+			&& ft_inbounds(mp.y, box->b_o.y, box->b_o.y + TEXT_BOX_DIMSY))
 			box->in = true;
 		else
 			box->in = false;
