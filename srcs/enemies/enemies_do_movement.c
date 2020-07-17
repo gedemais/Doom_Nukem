@@ -39,7 +39,8 @@ static void		enemies_get_goal(t_enemy *mob)
 	{
 		if (mob->end->parent == NULL)
 		{
-			mob->end = NULL;
+			mob->goal = mob->end;
+			enemies_goals(mob);
 			return ;
 		}
 		if (mob->end->parent->i == mob->goal->i)
@@ -85,7 +86,10 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 	t_vec3d	goal;
 
 	if (mob->i == mob->end->i || mob->end == NULL)
+	{
+		mob->end = NULL;
 		return (0);
+	}
 	mob->goal->bobstacle = 0;
 	if (mob->i == mob->goal->i || mob->goal == NULL)
 		enemies_get_goal(mob);
