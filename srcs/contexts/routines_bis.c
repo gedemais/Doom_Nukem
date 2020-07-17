@@ -14,6 +14,9 @@
 
 void	custom_to_ts(t_env *env)
 {
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
+		exit_doom(env, "error sound_system", 0, -1);
 	mlx_mouse_show();
 	ft_free_ctab(env->scroll.list);
 	env->scroll.list = NULL;
@@ -22,6 +25,9 @@ void	custom_to_ts(t_env *env)
 
 void	map_editor_to_ts(t_env *env)
 {
+	if (sound_system(env, SA_BUTTON,
+		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
+		exit_doom(env, "error sound_system", 0, -1);
 	ft_free_ctab(env->scroll.list);
 	env->scroll.list = NULL;
 	ft_strdel(&env->scroll.s_path);

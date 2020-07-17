@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 20:46:53 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 22:29:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:46:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	step_sound(t_env *env)
 		pos = env->cam.stats.pos;
 		pos.y -= 2;
 		if (move_keys(env) && sound_system(env, SA_STEP,
-			sp_play(env->sound.volume, PITCH, pos)))
+			sp_play(env->sound.volume / 1.8f, PITCH, pos)))
 			return (-1);
 		delay = env->events.keys[KEY_SHIFT_LEFT] ? 5 : 10;
 	}
@@ -49,6 +49,8 @@ static int	step_sound(t_env *env)
 
 static void	movements(t_env *env, float speeds[2], int *frame)
 {
+	if (env->events.keys[KEY_SPACE])
+		return ;
 	if  (*frame > 0)
 	{
 		env->player.current->w_map->spawn.y -= speeds[0];
@@ -71,11 +73,13 @@ int		handle_sprint(t_env *env)
 	static bool		first = true;
 	float			speeds[2];
 
+	if (env->phy_env.type_move == false)
+		return(0) ;
 	if (step_sound(env))
 		return (-1);
 	if (!do_sprint(env))
 		return (0);
-	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.03f : 0.01f; 
+	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.002f : 0.001f; 
 	speeds[1] = env->events.keys[KEY_SHIFT_LEFT] ? W_SHAKE / 2 : W_SHAKE;
 	if (first && !(first = false))
 		reset = env->player.current->w_map->spawn;

@@ -136,7 +136,8 @@ int				handle_lavas(t_env *env, t_event_block *block)
 		return (0);
 	center = get_block_center(block);
 	dst = vec3d_dist(env->cam.stats.pos, center);
-	if (sound_system(env, SA_LAVA, sp_play(env->sound.volume, PITCH, center)))
+	if (sound_system(env, SA_LAVA,
+		sp_play(env->sound.volume / 1.8f, PITCH, center)))
 		return (-1);
 	if (dst < EVENT_DIST)
 	{
