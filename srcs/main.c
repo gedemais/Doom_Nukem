@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 22:35:16 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:07:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			exit_doom(t_env *env, char *msg, int fd, int code)
 {
-	system("leaks doom-nukem");
 	if (msg)
 		ft_putendl_fd(msg, fd);
 	free_env(env);
