@@ -5,7 +5,7 @@
 # define ACC_SPREAD 0.6f // a remplacer par l'accuracy de l'arme
 # define AMMO_FONT_SIZE 24
 # define W_NAME_FONT_SIZE 16
-# define W_SHAKE 8
+# define W_SHAKE 12
 
 # define RELOAD_TIME 2.5f // seconds
 # define RELOAD_SPEED 0.05f;

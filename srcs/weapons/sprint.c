@@ -39,7 +39,7 @@ static void	step_sound(t_env *env)
 		pos.y -= 2;
 		if (move_keys(env))
 			sound_system(env, SA_STEP,
-				sp_play(env->sound.volume, PITCH, pos));
+				sp_play(env->sound.volume / 1.8f, PITCH, pos));
 		delay = env->events.keys[KEY_SHIFT_LEFT] ? 5 : 10;
 	}
 	if (env->events.keys[KEY_SPACE])
@@ -48,6 +48,8 @@ static void	step_sound(t_env *env)
 
 static void	movements(t_env *env, float speeds[2], int *frame)
 {
+	if (env->events.keys[KEY_SPACE])
+		return ;
 	if  (*frame > 0)
 	{
 		env->player.current->w_map->spawn.y -= speeds[0];
@@ -73,7 +75,7 @@ void		handle_sprint(t_env *env)
 	step_sound(env);
 	if (!do_sprint(env))
 		return ;
-	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.03f : 0.01f; 
+	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.002f : 0.001f; 
 	speeds[1] = env->events.keys[KEY_SHIFT_LEFT] ? W_SHAKE / 2 : W_SHAKE;
 	if (first && !(first = false))
 		reset = env->player.current->w_map->spawn;

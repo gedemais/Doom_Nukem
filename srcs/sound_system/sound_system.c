@@ -73,6 +73,8 @@ int
 				|| init_sound_system(env, &fork, SA_BUFFER))
 			return (quit_sound_system(env));
 		env->sound.volume = VOLUME;
+		env->sound.volume = env->sound.volume < 0 ? 0 : env->sound.volume;
+		env->sound.volume = env->sound.volume > 1 ? 1 : env->sound.volume;
 		env->sound.sounds = &sounds;
 		env->sound.fork = &fork;
 	}
