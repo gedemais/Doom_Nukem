@@ -19,6 +19,15 @@ int			init_loots(t_env *env)
 	return (0);
 }
 
+static void	loot_death(t_env *env, t_loot *loot)
+{
+	t_vec3d	v;
+
+	v = vec_fmult(loot->m->corp.pos, -1.0f);
+	translate_mesh(&env->edit_env.map, loot->m, v);
+	ft_bzero(loot, sizeof(t_loot));
+}
+
 static int	launch_loot(t_env *env, t_loot *loot)
 {
 	static int	(*loots_fts[LOOT_MAX])(t_env*) = {loot_nuke, loot_money,
@@ -26,8 +35,7 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	int			ret;
 
 	ret = loots_fts[(int)loot->id](env);
-	translate_mesh(&env->edit_env.map, loot->m, vec_fmult(loot->m->corp.pos, -1.0f));
-	ft_bzero(loot, sizeof(t_loot));
+	loot_death(env, loot);
 	return (ret);
 }
 
@@ -43,6 +51,7 @@ int		spawn_loot(t_env *env, t_vec3d pos)
 	loot->id = rand() % LOOT_MAX;
 	loot->m = env->custom_env.loots[(int)loot->id];
 	loot->on = true;
+	loot->left = LOOT_LIFETIME;
 	pos.y += 4.0f;
 	translate_mesh(&env->edit_env.map, loot->m, pos);
 	return (0);
@@ -59,14 +68,17 @@ int		handle_loots(t_env *env)
 	loot = &env->custom_env.loot;
 	if (loot->m)
 	{
-		if ((dist = vec3d_dist(env->cam.stats.pos, loot->m->corp.pos)) < EVENT_DIST)
+		loot->left -= env->data.spent;
+		rotate_mesh(loot->m, loot->m->corp.pos, LOOT_LIFETIME / loot->left / 10, rotate_y);
+		if (loot->left <= 0)
+			loot_death(env, loot);
+		else if ((dist = vec3d_dist(env->cam.stats.pos, loot->m->corp.pos)) < EVENT_DIST)
 		{
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);
 			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.33f / dist));
 			if (dist < 0.2f)
 				return (launch_loot(env, loot));
 		}
-		rotate_mesh(loot->m, loot->m->corp.pos, 0.02f, rotate_y);
 		i++;
 	}
 	return (0);

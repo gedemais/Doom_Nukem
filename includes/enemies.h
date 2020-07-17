@@ -19,6 +19,7 @@
 
 # define MAX_ENEMIES 12
 # define LOOT_FREQ 7
+# define LOOT_LIFETIME 25
 
 # define RESPAWN_DELAY 3.0f
 # define ENEMIES_NOISE_DELAY 10
@@ -54,6 +55,7 @@ enum				e_loots_id
 struct				s_loot
 {
 	t_mesh			*m;
+	float			left;
 	char			id;
 	bool			on;
 };
