@@ -12,6 +12,19 @@
 
 #include "main.h"
 
+static int		sound_button(t_env *env, bool hover)
+{
+	if (hover == false)
+	{
+		if (sound_system(env, SA_BUTTON, sp_stop()))
+			return (-1);
+		if (sound_system(env, SA_BUTTON,
+				sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
+			return (-1);
+	}
+	return (0);
+}
+
 static int		handle_events(t_env *env)
 {
 	static bool	clic = false;
@@ -21,6 +34,8 @@ static int		handle_events(t_env *env)
 	while (++i < TS_BUTTON_MAX)
 		if (is_on_button(env->events.mouse_pos, env->ts_env.buttons[i]))
 		{
+			if (sound_button(env, env->ts_env.buttons[i].is_hover))
+				return (-1);
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
 				if (i == TS_BUTTON_QUIT)

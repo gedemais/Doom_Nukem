@@ -72,7 +72,7 @@ static void	handle_events(t_env *env)
 	if (ret && env->events.buttons[BUTTON_LCLIC])
 		switch_mecontext(env, MAPED_SC_MENU);
 	if (ed->error == -1)
-		exit(1);
+		exit_doom(env, "error new_map", 0, -1);
 	else
 		display_new_map_error(env, ed->error);
 }
