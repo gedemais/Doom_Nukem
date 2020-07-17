@@ -48,7 +48,8 @@ struct	s_physics
 	unsigned int	tps;
 	float			gravity;
 	t_vec3d			gravitax;
-	unsigned int	squat;
+	float			crch;
+	float			crch_v;
 };
 
 void	scan_actuall_collide(t_env *env, t_map *map);

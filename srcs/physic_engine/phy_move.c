@@ -31,24 +31,37 @@ static	int		phy_crouch(t_env *env, bool key, t_map *maps)
 {
 	float move;
 
-	move = 0.0f;
+	move = env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y;
+	printf("move = %f \n", move);
 	if (env->cam.stats.onfloor == 1)
 	{
 		if (env->cam.stats.crouch == 0 && key)
 		{
-			move = 2 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
-			translate_mesh(maps, &maps->cam, (t_vec3d){0, move, 0, 0});
-			return (1);
+			if (move < 3.8) 
+				return (1);
+			else
+			{
+				env->phy_env.crch_v = -2;
+				return (0);
+			}
 		}
 		else if (env->cam.stats.crouch == 1
 		&& !key && env->cam.stats.onroof == 0)
 		{
-			move = 4 - env->cam.stats.pos.y + maps->cam_floor->a->corp.pos.y;
-			translate_mesh(maps, &maps->cam, (t_vec3d){0, move, 0, 0});
-			return (0);
+			if (move > 3.9) 
+				return (0);
+			else
+			{
+				env->phy_env.crch_v = 2;
+				return (1);
+			}
+
 		}
 		else
+		{
+			env->phy_env.crch_v = 0;
 			return (env->cam.stats.crouch);
+		}
 	}
 	else
 		return (0);
