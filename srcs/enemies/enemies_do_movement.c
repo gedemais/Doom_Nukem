@@ -59,15 +59,18 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 	float	fcos;
 	float	fsin;
 
-	if (mob->i == mob->goal->i)
+	if (mob->i == mob->end->i || mob->i == mob->goal->i)
+	{
+		mob->end = NULL;
 		return (0);
+	}
 	mob->pos = vec_add(mob->pos, mob->pitch);
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
 	if (mob->noise++ == ENEMIES_NOISE_DELAY)
 	{
-		if (sound_system(env, SA_LEVITATION, sp_fork(0.1f, 1, mob->pos)))
+		if (sound_system(env, SA_LEVITATION, sp_fork(0.05f, 1, mob->pos)))
 			return (-1);
 		mob->noise = 0;
 	}
@@ -78,8 +81,10 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 {
 	t_vec3d	goal;
 
+	if (mob->i == mob->end->i || mob->end == NULL)
+		return (0);
 	mob->goal->bobstacle = 0;
-	if (mob->i == mob->goal->i)
+	if (mob->i == mob->goal->i || mob->goal == NULL)
 		enemies_get_goal(mob);
 	if (mob->end == NULL)
 		return (0);
@@ -87,7 +92,11 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 		return (-1);
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (vec3d_dist(goal, mob->pos) < 0.1f)
+	{
 		mob->i = mob->goal->i;
+		if (mob->end == NULL)
+			mob->end = mob->goal;
+	}
 	mob->goal->bobstacle = 1;
 	return (0);
 }
