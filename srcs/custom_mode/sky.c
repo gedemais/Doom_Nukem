@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sky.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 15:18:14 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:18:15 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void		tweek_stars_height(t_env *env, t_vec3d star, float *y)
@@ -50,7 +62,7 @@ static int		spawn_moon(t_env *env, t_vec3d o)
 int				init_sky(t_env *env)
 {
 	int			i;
-	int 		stars_scale;
+	int			stars_scale;
 	t_vec3d		box;
 	t_vec3d		o;
 	t_ed_map	*map;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 15:13:47 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:14:12 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static int	wound(t_env *env, t_enemy *mob)
@@ -17,7 +29,7 @@ static int	wound(t_env *env, t_enemy *mob)
 	return (0);
 }
 
-static int		check_wounds(t_env *env)
+static int	check_wounds(t_env *env)
 {
 	t_enemy			*mob;
 	int				i;
@@ -64,7 +76,7 @@ static int	godmode(t_env *env)
 	return (0);
 }
 
-int		handle_player(t_env *env)
+int			handle_player(t_env *env)
 {
 	static int	heal = HEAL_SPEED;
 	int			i;

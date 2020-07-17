@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   waves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 15:19:04 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:31:27 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	start_game(t_env *env)
@@ -5,7 +17,6 @@ static void	start_game(t_env *env)
 	t_custom_game	*game;
 
 	env->player.hp = START_HP;
-
 	game = &env->custom_env.game;
 	game->wave = 1;
 	env->hud.timeWave = env->data.time.tv_sec;
@@ -13,7 +24,6 @@ static void	start_game(t_env *env)
 	game->mobs_speed = MOB_START_SPEED;
 	game->lmob = MOB_LSTART;
 	game->current_lmob = MOB_LSTART;
-	game->amob = 0;
 	game->moula = START_MOULA;
 	game->spawn_speed = RESPAWN_DELAY;
 }
@@ -34,7 +44,7 @@ static bool	next_wave(t_env *env)
 	return (false);
 }
 
-char	enemy_wave(t_env *env)
+char		enemy_wave(t_env *env)
 {
 	char	type;
 

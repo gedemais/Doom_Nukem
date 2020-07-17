@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_blocks.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 14:42:17 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 14:43:40 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 t_vec3d		get_block_center(t_event_block *block)
@@ -10,7 +22,8 @@ t_vec3d		get_block_center(t_event_block *block)
 	return (ret);
 }
 
-static int	parse_block_type(t_env *env, t_custom_env *c, t_event_block block, int p[3])
+static int	parse_block_type(t_env *env, t_custom_env *c, t_event_block block,
+																	int p[3])
 {
 	if (block.id == BE_MOB_SPAWNER)
 		env->custom_env.game.nb_spawners++;
@@ -48,7 +61,7 @@ static int	parse_event_block(t_env *env, t_ed_map *map, int p[3])
 	return (0);
 }
 
-int		parse_events_blocks(t_env *env)
+int			parse_events_blocks(t_env *env)
 {
 	t_ed_map	*map;
 	int			i;
@@ -72,11 +85,11 @@ int		parse_events_blocks(t_env *env)
 	return (0);
 }
 
-int		handle_block_events(t_env *env)
+int			handle_block_events(t_env *env)
 {
-	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*) = {
-						NULL, handle_jukeboxs, handle_mystery_boxs, handle_doors,
-						handle_lavas, NULL};
+	static int		(*block_fts[BE_MAX])(t_env*, t_event_block*) = {NULL,
+							handle_jukeboxs, handle_mystery_boxs, handle_doors,
+							handle_lavas, NULL};
 	t_event_block	*block;
 	int				ret;
 	int				i;

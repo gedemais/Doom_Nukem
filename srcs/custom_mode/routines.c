@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routines.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 15:15:25 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:15:47 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-int				custom_menu_to_play(t_env *env)
+int			custom_menu_to_play(t_env *env)
 {
 	static bool	first = true;
 	t_map		*map;
@@ -26,7 +38,7 @@ int				custom_menu_to_play(t_env *env)
 	return (0);
 }
 
-int				custom_play_to_menu(t_env *env)
+int			custom_play_to_menu(t_env *env)
 {
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
 		return (-1);

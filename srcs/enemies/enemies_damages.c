@@ -1,11 +1,10 @@
 #include "main.h"
 
-static int	check_hps(t_env *env, t_enemy *mob)
+static int	check_hps(t_enemy *mob)
 {
 	if (mob->hp < 1 && !mob->dead)
 	{
 		mob->dead = true;
-		env->custom_env.game.amob--;
 		return (1);
 	}
 	return (0);
@@ -29,7 +28,6 @@ static int	enemies_do_damages(t_env *env, t_enemy *mob)
 	if (mob->hp < 1)
 	{
 		mob->dead = true;
-		env->custom_env.game.amob--;
 		++env->custom_env.game.kill_count;
 		if (sound_system(env, SA_DEATHMONSTER,
 			sp_fork(env->sound.volume, PITCH, mob->pos)))
@@ -52,7 +50,7 @@ int			enemies_damages(t_env *env)
 	while (++i < env->custom_env.mobs.nb_cells)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
-		if (check_hps(env, mob))
+		if (check_hps(mob))
 			continue ;
 		if (index >= mob->map_start && index < mob->map_end)
 		{

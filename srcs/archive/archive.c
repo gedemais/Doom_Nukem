@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:54:03 by grudler           #+#    #+#             */
-/*   Updated: 2020/05/14 17:11:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:35:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ int		archive_directory(char *dir_path)
 		return(-1);
 	}
 	if (readFolder(dir_path, fd_archi))
-	{
-		PUT1
 		return (-1);
-	}
 	close(fd_archi);
 	rmdir(dir_path);
 	return (0);

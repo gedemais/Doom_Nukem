@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:38:37 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 21:14:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:21:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ struct				s_custom_game
 	float		mobs_speed;
 	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
 	int			lmob;
-	int			amob;
 	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
 	int 		kill_count;

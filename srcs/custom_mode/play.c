@@ -1,37 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   play.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 15:00:32 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:09:40 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-static void	move(t_env *env, bool keys[NB_KEYS])
+static void	handle_move_keys(t_env *env, bool k[NB_KEYS], t_vec3d f, t_vec3d r)
 {
 	t_map		*map;
-	t_vec3d		f;
-	t_vec3d		r;
 
 	map = &env->edit_env.map;
-	f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
-	r = (t_vec3d){f.z, 0, -f.x, f.w};
-	if (keys[KEY_W])
+	if (k[KEY_W])
 	{
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, WSPEED));
 		translate_mesh(map, &map->cam, vec_fmult(f, WSPEED));
 	}
-	if (keys[KEY_S])
-	{
-		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, WSPEED));
-		translate_mesh(map, &map->cam, vec_fmult(f, -WSPEED));
-	}
-	if (keys[KEY_A])
+	if (k[KEY_A])
 	{
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, WSPEED));
 		translate_mesh(map, &map->cam, vec_fmult(r, WSPEED));
 	}
-	if (keys[KEY_D])
+	if (k[KEY_S])
+	{
+		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(f, WSPEED));
+		translate_mesh(map, &map->cam, vec_fmult(f, -WSPEED));
+	}
+	if (k[KEY_D])
 	{
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, WSPEED));
 		translate_mesh(map, &map->cam, vec_fmult(r, -WSPEED));
 	}
 }
 
-static void ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
+static void	move(t_env *env, bool keys[NB_KEYS])
+{
+	t_vec3d		f;
+	t_vec3d		r;
+
+	f = vec_fmult(env->cam.stats.dir, MAPED_WALK_SPEED);
+	r = (t_vec3d){f.z, 0, -f.x, f.w};
+	handle_move_keys(env, keys, f, r);
+}
+
+static void	ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
 {
 	if (env->phy_env.type_move == false)
 		move(env, keys);
@@ -39,7 +57,7 @@ static void ft_type_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
 		phy_move(env, keys, maps);
 }
 
-static int		handle_keys(t_env *env, t_events *e)
+static int	handle_keys(t_env *env, t_events *e)
 {
 	if (e->keys[KEY_T])
 	{
@@ -54,7 +72,6 @@ static int		handle_keys(t_env *env, t_events *e)
 	if (e->keys[KEY_M])
 		if (switch_custom_context(env, CUSTOM_SC_MENU))
 			return (-1);
-
 	ft_type_move(env, e->keys, &env->edit_env.map);
 	return (0);
 }

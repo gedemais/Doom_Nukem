@@ -45,8 +45,6 @@ static void		find_random_spawner(t_dynarray *events, int sp[3], int index)
 		}
 		i++;
 	}
-	printf("not found (%d)\n", index);
-	sleep(1);
 }
 
 static int		spawn_mob(t_env *env)
@@ -65,7 +63,6 @@ static int		spawn_mob(t_env *env)
 	pos.y = p[1] * 2;
 	pos.z = p[2] * 2;
 	game->current_lmob--;
-	game->amob++;
 	return (create_mob(env, &env->edit_env.map, enemy_wave(env), pos));
 }
 

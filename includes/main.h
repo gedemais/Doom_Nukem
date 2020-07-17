@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 14:44:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:33:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <dirent.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-
-#include <sys/resource.h>
-
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
+# include <sys/resource.h>
 # include <sys/time.h>
 # include <time.h>
 # include <math.h>
@@ -49,42 +47,24 @@
 # include "text.h"
 # include "weapons.h"
 # include "astar.h"
-
 # include "title_screen.h"
 # include "campaign.h"
 # include "map_editor.h"
 # include "custom.h"
-
 # include "archive.h"
-
 # include "hud.h"
-
-// TMP
-#define PUT ft_putstr("There\n"); fflush(stdout);
-#define PUT1 ft_putstr("There1\n"); fflush(stdout);
-#define PUT2 ft_putstr("There2\n"); fflush(stdout);
-#define PUT3 ft_putstr("There3\n"); fflush(stdout);
-#define PUT4 ft_putstr("There4\n"); fflush(stdout);
-#define PUT5 ft_putstr("There5\n"); fflush(stdout);
-#define PUT6 ft_putstr("There6\n"); fflush(stdout);
-#define PUT7 ft_putstr("There7\n"); fflush(stdout);
-#define PUT8 ft_putstr("There8\n"); fflush(stdout);
-#define PUT9 ft_putstr("There9\n"); fflush(stdout);
-
-# define BREAKPOINT printf("%s at line %d in %s\n", __FUNCTION__, __LINE__, __FILE__); fflush(stdout);
-
 
 # define NB_THREADS 8
 # define WDT 1080
 # define HGT 720
-# define WINDOW_NAME "Doom Nukem"
+# define WINDOW_NAME "Doom-Nukem"
 
 # define SENSI 0.1f
 # define WALK_SPEED 0.1f
 # define WSPEED 3.0f
 # define PLAYER_SIZE 3.0f
 
-enum		e_context_id
+enum			e_context_id
 {
 	C_TITLE_SCREEN,
 	C_CAMPAIGN,
@@ -93,7 +73,7 @@ enum		e_context_id
 	C_MAX
 };
 
-struct		s_mlx
+struct			s_mlx
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
@@ -114,14 +94,14 @@ struct			s_events
 
 struct			s_data
 {
-	t_env		*env;
-	struct timeval		time;
-	float		spent;
-	float		half_wdt;
-	float		third_wdt;
-	float		half_hgt;
-	int			data_size;
-	bool		wireframe;
+	t_env			*env;
+	struct timeval	time;
+	float			spent;
+	float			half_wdt;
+	float			third_wdt;
+	float			half_hgt;
+	int				data_size;
+	bool			wireframe;
 };
 
 struct			s_env
@@ -149,19 +129,15 @@ struct			s_env
 	int				scene;
 };
 
-void	free_mesh(t_mesh *m);
-
-void	print_mem_usage(void);
-
-void			print_camera_stats(t_cam *cam, char *title);
-
-int				exit_doom(t_env *env, char *msg, int fd, int code);
-int				setup(t_env *env);
+double			mesure_time(bool end);
 int				free_env(t_env *env);
+void			free_mesh(t_mesh *m);
+int				exit_doom(t_env *env, char *msg, int fd, int code);
 
 /*
 ** Setup
 */
+int				setup(t_env *env);
 int				init_mlx(t_env *env);
 void			loading_bar(unsigned int i, unsigned int max, bool last);
 int				init_openal(t_sound *env);
@@ -187,7 +163,6 @@ int				sample_pixel(int *img, t_point size, t_vec2d point);
 ** Contexts
 */
 int				switch_context(t_env *env, unsigned int i);
-void			ts_to_dev(t_env *env);
 void			ts_to_campaign(t_env *env);
 void			ts_to_custom(t_env *env);
 void			ts_to_map_editor(t_env *env);
@@ -199,16 +174,7 @@ void			map_editor_to_ts(t_env *env);
 ** Main Loop
 */
 int				render(void *param);
-void			dev_handle_events(t_env *env);
 void			test_distance_camplan(t_collide c, t_vec3d *cam_vec);
-double			mesure_time(bool end);
-
-int				key_press_dev(int key, void *param);
-int				key_release_dev(int key, void *param);
-int				mouse_press_dev(int button, int x, int y, void *param);
-int				mouse_release_dev(int button, int x, int y, void *param);
-int				mouse_position_dev(int x, int y, void *param);
-int				render_dev(void *param);
 
 /*
 ** GUI

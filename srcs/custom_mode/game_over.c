@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_over.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 14:52:55 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 15:30:14 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-int		set_game_stats(t_env *env)
+int				set_game_stats(t_env *env)
 {
 	t_custom_env	*c;
 	int				i;
@@ -10,12 +22,11 @@ int		set_game_stats(t_env *env)
 	env->weapons[W_GLOCK_18].ammos = 80;
 	if (init_dynarray(&env->player.weapons, sizeof(t_weapon), 0)
 		|| (!c->mobs.byte_size && init_dynarray(&c->mobs, sizeof(t_enemy), 0)))
-			return (-1);
+		return (-1);
 	env->custom_env.loot.m = NULL;
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
 	env->custom_env.game.wave = 0;
-	env->custom_env.game.amob = 0;
 	env->player.current_w = 0;
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;
@@ -32,21 +43,17 @@ static int		put_variables(t_env *env)
 	char			*ptr;
 
 	conf = ttf_config();
-
 	conf->size = 32;
-
 	if (!(ptr = ft_itoa(env->custom_env.game.kills)))
 		return (-1);
 	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 305}, FONT_COOLVETICA);
 	free(ptr);
-
 	if (!(ptr = ft_itoa(env->custom_env.game.wave)))
 		return (-1);
 	ft_strcpy((char*)conf->s, ptr);
 	my_string_put(env, env->mlx.img_data, (t_point){600, 365}, FONT_COOLVETICA);
 	free(ptr);
-
 	if (!(ptr = ft_itoa(env->custom_env.game.moula)))
 		return (-1);
 	ft_strcpy((char*)conf->s, ptr);
@@ -62,7 +69,8 @@ static int		handle_events_go(t_env *env)
 
 	i = -1;
 	while (++i < GO_BUTTON_MAX)
-		if (is_on_button(env->events.mouse_pos, env->custom_env.go_env.buttons[i]))
+		if (is_on_button(env->events.mouse_pos,
+			env->custom_env.go_env.buttons[i]))
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
@@ -81,7 +89,7 @@ static int		handle_events_go(t_env *env)
 	return (0);
 }
 
-int		custom_game_over(t_env *env)
+int				custom_game_over(t_env *env)
 {
 	if (sound_manager(env, SA_GAMEOVER))
 		return (-1);
@@ -92,6 +100,7 @@ int		custom_game_over(t_env *env)
 	render_button(env, env->custom_env.go_env.buttons[GO_BUTTON_NO]);
 	if (handle_events_go(env))
 		return (0);
-	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	mlx_put_image_to_window(env->mlx.mlx_ptr,
+		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

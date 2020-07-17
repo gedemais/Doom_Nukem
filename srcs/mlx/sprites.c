@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 13:14:26 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:21:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void	blit_line(char *img, t_sprite sprite, t_point o, int v[2])
 	while (x < v[1] - 1)
 	{
 		color = sample_pixel((int*)sprite.img_data,
-			(t_point){sprite.wdt, sprite.hgt}, (t_vec2d){sample_x, sprite.sample_y, 0.0f});
+			(t_point){sprite.wdt, sprite.hgt},
+			(t_vec2d){sample_x, sprite.sample_y, 0.0f});
 		if (color != ALPHA)
 			draw_pixel(img, x + o.x, v[0] + o.y, color);
 		sample_x += sprite.delta_x;

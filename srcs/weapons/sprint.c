@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 20:46:53 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 13:46:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:26:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	movements(t_env *env, float speeds[2], int *frame)
 {
 	if (env->events.keys[KEY_SPACE])
 		return ;
-	if  (*frame > 0)
+	if (*frame > 0)
 	{
 		env->player.current->w_map->spawn.y -= speeds[0];
 		(*frame)--;
@@ -65,7 +65,7 @@ static void	movements(t_env *env, float speeds[2], int *frame)
 		*frame = speeds[1];
 }
 
-int		handle_sprint(t_env *env)
+int			handle_sprint(t_env *env)
 {
 	static t_vec3d	reset;
 	static int		frame = 0;
@@ -73,19 +73,17 @@ int		handle_sprint(t_env *env)
 	static bool		first = true;
 	float			speeds[2];
 
-	if (env->phy_env.type_move == false)
-		return(0) ;
 	if (step_sound(env))
 		return (-1);
-	if (!do_sprint(env))
+	if (env->phy_env.type_move == false
+		|| !do_sprint(env))
 		return (0);
-	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.002f : 0.001f; 
+	speeds[0] = env->events.keys[KEY_SHIFT_LEFT] ? 0.002f : 0.001f;
 	speeds[1] = env->events.keys[KEY_SHIFT_LEFT] ? W_SHAKE / 2 : W_SHAKE;
 	if (first && !(first = false))
 		reset = env->player.current->w_map->spawn;
 	on = (!on && move_keys(env));
-	if (on)
-		movements(env, speeds, &frame);
+	on ? movements(env, speeds, &frame) : 0;
 	if (on && !move_keys(env))
 	{
 		on = false;

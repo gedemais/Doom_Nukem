@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   loots.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/17 14:54:49 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/17 14:56:52 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 int			init_loots(t_env *env)
@@ -39,7 +51,7 @@ static int	launch_loot(t_env *env, t_loot *loot)
 	return (ret);
 }
 
-int		spawn_loot(t_env *env, t_vec3d pos)
+int			spawn_loot(t_env *env, t_vec3d pos)
 {
 	t_loot		*loot;
 	t_map		*map;
@@ -57,29 +69,29 @@ int		spawn_loot(t_env *env, t_vec3d pos)
 	return (0);
 }
 
-int		handle_loots(t_env *env)
+int			handle_loots(t_env *env)
 {
 	t_loot			*loot;
 	t_vec3d			diff;
 	float			dist;
-	int				i;
 
-	i = 0;
 	loot = &env->custom_env.loot;
 	if (loot->m)
 	{
 		loot->left -= env->data.spent;
-		rotate_mesh(loot->m, loot->m->corp.pos, LOOT_LIFETIME / loot->left / 10, rotate_y);
+		rotate_mesh(loot->m, loot->m->corp.pos,
+			LOOT_LIFETIME / loot->left / 10, rotate_y);
 		if (loot->left <= 0)
 			loot_death(env, loot);
-		else if ((dist = vec3d_dist(env->cam.stats.pos, loot->m->corp.pos)) < EVENT_DIST)
+		else if ((dist = vec3d_dist(env->cam.stats.pos,
+			loot->m->corp.pos)) < EVENT_DIST)
 		{
 			diff = vec_sub(env->cam.stats.pos, loot->m->corp.pos);
-			translate_mesh(&env->edit_env.map, loot->m, vec_fmult(diff, 0.33f / dist));
+			translate_mesh(&env->edit_env.map,
+				loot->m, vec_fmult(diff, 0.33f / dist));
 			if (dist < 0.2f)
 				return (launch_loot(env, loot));
 		}
-		i++;
 	}
 	return (0);
 }
