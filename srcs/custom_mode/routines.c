@@ -5,7 +5,10 @@ int				custom_menu_to_play(t_env *env)
 	static bool	first = true;
 	t_map		*map;
 
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
+		return (-1);
+	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+		return (-1);
 	map = &env->edit_env.map;
 	if (map_to_scene(env) || parse_events_blocks(env)
 		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_ENEMIES)
@@ -24,8 +27,11 @@ int				custom_menu_to_play(t_env *env)
 
 int				custom_play_to_menu(t_env *env)
 {
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
+		return (-1);
+	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+		return (-1);
 	mlx_mouse_show();
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	ft_strdel(&env->custom_env.map_path);
 	free_maped(env);
 	free_dynarray(&env->player.weapons);
@@ -40,8 +46,9 @@ int				custom_play_to_menu(t_env *env)
 
 int			custom_play_to_game_over(t_env *env)
 {
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
+		return (-1);
 	mlx_mouse_show();
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	free_maped(env);
 	free_dynarray(&env->player.weapons);
 	free_dynarray(&env->custom_env.mobs);
@@ -56,8 +63,11 @@ int			custom_game_over_to_play(t_env *env)
 {
 	t_map	*map;
 
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
+		return (-1);
+	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+		return (-1);
 	map = &env->edit_env.map;
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
 	if (import_maped_map(&env->edit_env, env->custom_env.map_path)
 		|| map_to_scene(env) || parse_events_blocks(env)
 		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_ENEMIES)
@@ -75,7 +85,10 @@ int			custom_game_over_to_play(t_env *env)
 
 int			custom_game_over_to_menu(t_env *env)
 {
-	sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()));
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
+		return (-1);
+	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))
+		return (-1);
 	free(env->custom_env.map_path);
 	env->phy_env.type_move = false;
 	return (0);
