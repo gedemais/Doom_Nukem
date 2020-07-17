@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemies_do_movements.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static bool		enemies_infinite_loop(t_enemy *mob)
@@ -62,7 +74,7 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 	return (0);
 }
 
-int			enemies_do_movement(t_env *env, t_enemy *mob)
+int				enemies_do_movement(t_env *env, t_enemy *mob)
 {
 	t_vec3d	goal;
 

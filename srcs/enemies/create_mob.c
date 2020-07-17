@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_mob.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 void		assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
@@ -7,6 +19,7 @@ void		assign_enemys_stats(t_custom_game *game, t_enemy *enemy, char type)
 		[ENEMY_MAGE] = EDAMAGES_MAGE,
 		[ENEMY_GOULE] = EDAMAGES_GOULE
 	};
+
 	enemy->hp = game->mobs_pv;
 	enemy->speed = game->mobs_speed;
 	enemy->damages = damages[(int)type];
@@ -23,70 +36,27 @@ int			enemy_map_mapper(char type)
 	return (map[(int)type]);
 }
 
-static bool	handle_texture(t_map *map, t_sprite *sprite, t_triangle *new)
-{
-	int			i;
-
-	i = -1;
-	if (!map->txts.byte_size)
-		return (false);
-	while (++i < map->txts.nb_cells)
-		if (!ft_memcmp(sprite, dyacc(&map->txts, i), sizeof(t_sprite)))
-		{
-			new->sp = i;
-			return (true);
-		}
-	return (false);
-}
-
-int			copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new)
-{
-	t_sprite	*sprite;
-	t_triangle	t;
-	int			i;
-
-	i = 0;
-	if (!map->txts.byte_size && init_dynarray(&map->txts, sizeof(t_sprite), 0))
-		return (-1);
-	while (i < m->tris.nb_cells)
-	{
-		ft_memcpy(&t, dyacc(&m->tris, i), sizeof(t_triangle));
-		t.voxel = false;
-		if (t.textured && !handle_texture(map, dyacc(&mob->txts, t.sp), &t))
-		{
-			sprite = dyacc(&mob->txts, t.sp);
-			if (push_dynarray(&map->txts, sprite, false))
-				return (-1);
-			t.sp = map->txts.nb_cells - 1;
-		}
-		if (push_dynarray(&new->tris, &t, false))
-			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-static int	copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *enemy)
+static int	copy_mob_to_scene(t_env *env, t_map *map, t_map *mob, t_enemy *e)
 {
 	t_mesh		new;
 	t_mesh		*m;
 	int			i;
 
 	i = 0;
-	enemy->map_start = env->edit_env.map.nmesh;
-	enemy->map_end = enemy->map_start + mob->nmesh;
+	e->map_start = env->edit_env.map.nmesh;
+	e->map_end = e->map_start + mob->nmesh;
 	while (i < mob->meshs.nb_cells)
 	{
 		ft_memset(&new, 0, sizeof(t_mesh));
 		m = dyacc(&mob->meshs, i);
 		new.type = 1;
-		new.index = enemy->map_start + i;
+		new.index = e->map_start + i;
 		if (init_dynarray(&new.tris, sizeof(t_triangle), 12)
 				|| copy_triangles(map, mob, m, &new)
 				|| push_dynarray(&map->meshs, &new, false))
 			return (-1);
 		assign_meshs(dyacc(&map->meshs, map->nmesh));
-		translate_mesh(map, dyacc(&map->meshs, map->nmesh), enemy->pos);
+		translate_mesh(map, dyacc(&map->meshs, map->nmesh), e->pos);
 		map->nmesh++;
 		i++;
 	}
