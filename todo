@@ -34,7 +34,6 @@ Finir les sons de hover des boutons
 NORME
 ------------------------------
 Maboye :
-srcs/enemies/
 srcs/sound_system/
 includes/astar.h
 includes/enemies.h
