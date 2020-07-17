@@ -11,10 +11,12 @@ static int				handle_events_cmp_menu(t_env *env)
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
-				if (i == CMP_BUTTON_MAIN_MENU)
-					switch_context(env, C_TITLE_SCREEN);
-				else if (i == CMP_BUTTON_NEW_GAME)
-					switch_campaign_subcontext(env, CMP_SC_GAME);
+				if (i == CMP_BUTTON_MAIN_MENU
+					&& switch_context(env, C_TITLE_SCREEN))
+					return (-1);
+				else if (i == CMP_BUTTON_NEW_GAME
+					&& switch_campaign_subcontext(env, CMP_SC_GAME))
+					return (-1);
 				clic = false;
 				return (1);
 			}

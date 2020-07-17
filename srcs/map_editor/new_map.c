@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 16:37:34 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/14 16:41:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:58:32 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	display_new_map_error(t_env *env, int error)
 	ft_memset(conf->s, 0, MAX_STR_CHARS);
 }
 
-static void	handle_events(t_env *env)
+static int	handle_events(t_env *env)
 {
 	t_edit_env	*ed;
 	bool		ret;
@@ -65,16 +65,19 @@ static void	handle_events(t_env *env)
 	ed->buttons[MAPED_NM_BUTTON_CREATE].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC]
 		&& !(ed->error = create_me_map(env)))
-		switch_mecontext(env, MAPED_SC_CREATIVE);
+		if (switch_mecontext(env, MAPED_SC_CREATIVE))
+			return (-1);
 	ret = is_on_button(env->events.mouse_pos,
 		ed->buttons[MAPED_NM_BUTTON_MAPED]);
 	ed->buttons[MAPED_NM_BUTTON_MAPED].is_hover = ret;
 	if (ret && env->events.buttons[BUTTON_LCLIC])
-		switch_mecontext(env, MAPED_SC_MENU);
+		if (switch_mecontext(env, MAPED_SC_MENU))
+			return (-1);
 	if (ed->error == -1)
-		exit(1);
+		exit_doom(env, "Failed to create new_map", 2, EXIT_FAILURE);
 	else
 		display_new_map_error(env, ed->error);
+	return (0);
 }
 
 int			maped_new_map(t_env *env)
@@ -83,7 +86,8 @@ int			maped_new_map(t_env *env)
 	map_sprite(env->mlx.img_data, env->sprites[SP_ME_NM_TITLE],
 		(t_point){420, 60});
 	input_fields(env, false, false);
-	handle_events(env);
+	if (handle_events(env))
+		return (-1);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_CREATE]);
 	render_button(env, env->edit_env.buttons[MAPED_NM_BUTTON_MAPED]);
 	mlx_put_image_to_window(env->mlx.mlx_ptr,

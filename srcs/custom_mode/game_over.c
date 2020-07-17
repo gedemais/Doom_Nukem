@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 14:52:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 15:30:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:18:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int				set_game_stats(t_env *env)
 	if (push_dynarray(&env->player.weapons, &env->weapons[W_GLOCK_18], false))
 		return (-1);
 	env->custom_env.game.wave = 0;
+	env->custom_env.game.kills = 0;
 	env->player.current_w = 0;
 	env->player.current = dyacc(&env->player.weapons, 0);
 	env->player.current->ammos = env->player.current->max_ammos;
@@ -74,10 +75,12 @@ static int		handle_events_go(t_env *env)
 		{
 			if (!env->events.buttons[BUTTON_LCLIC] && clic)
 			{
-				if (i == GO_BUTTON_NO)
-					switch_custom_context(env, CUSTOM_SC_MENU);
-				if (i == GO_BUTTON_YES)
-					switch_custom_context(env, CUSTOM_SC_PLAY);
+				if (i == GO_BUTTON_NO
+					&& switch_custom_context(env, CUSTOM_SC_MENU))
+					return (-1);
+				if (i == GO_BUTTON_YES
+					&& switch_custom_context(env, CUSTOM_SC_PLAY))
+					return (-1);
 				clic = false;
 				return (1);
 			}

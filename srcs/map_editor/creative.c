@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 15:36:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 21:52:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:56:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int				maped_creative(t_env *env)
 		last_gui_use--;
 	}
 	maped_crosshair(env);
-	check_export(env, env->mlx.img_data);
+	if (check_export(env, env->mlx.img_data))
+		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr,
 		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

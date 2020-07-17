@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 21:18:51 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/12 21:19:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:09:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int		handle_events(t_env *env)
 			{
 				if (i == TS_BUTTON_QUIT)
 					exit_doom(env, NULL, 1, 0);
-				else
-					switch_context(env, i + 1);
+				else if (switch_context(env, i + 1))
+					return (-1);
 				clic = false;
 				return (1);
 			}
@@ -62,21 +62,22 @@ int				render_ts(void *param)
 {
 	static int	anim = 120;
 	t_env		*env;
-	char		*data;
+	t_mlx		*mlx;
+	int			ret;
 
 	env = ((t_env*)param);
-	data = env->mlx.img_data;
+	mlx = &env->mlx;
 	mesure_time(false);
-	if (handle_events(env))
-		return (0);
-	map_sprite(data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
+	ret = handle_events(env);
+	if (ret != 0)
+		return (ret > 0 ? 0 : -1);
+	map_sprite(mlx->img_data, env->sprites[SP_TS_BACKGROUND], (t_point){0, 0});
 	if (anim > 0)
 		animation(env);
 	else
-		map_sprite(data, env->sprites[SP_TS_LOGO], (t_point){180, 50});
+		map_sprite(mlx->img_data, env->sprites[SP_TS_LOGO], (t_point){180, 50});
 	render_buttons(env);
-	mlx_put_image_to_window(env->mlx.mlx_ptr,
-		env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_win, mlx->img_ptr, 0, 0);
 	if (anim-- > 0)
 		wait_frame();
 	else if (sound_manager(env, SA_TITLE_SCREEN_L))
