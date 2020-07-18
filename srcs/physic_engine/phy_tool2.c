@@ -12,6 +12,7 @@
 
 #include "main.h"
 
+
 static bool	is_mesh_mob(t_env *env, t_mesh *m)
 {
 	t_enemy	*mob;
@@ -45,6 +46,7 @@ void		scan_actuall_collide(t_env *env, t_map *map)
 		map->cam_floor->norm_actual = vec_norm(map->cam_floor->cam_actual);
 		if (map->cam_floor->norm_actual > map->cam_floor->norm_dist_first)
 			env->cam.stats.onfloor = 0;
+		
 	}
 	if (env->cam.stats.onroof == 1)
 	{
@@ -58,7 +60,7 @@ void		scan_actuall_collide(t_env *env, t_map *map)
 
 void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if (c->cam_mesh_first.y > 0 && env->cam.stats.onfloor == 0)
+	if (c->cam_mesh_first.y > 0 &&   env->cam.stats.onfloor == 0)
 	{
 		map->cam_floor = c;
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);

@@ -29,7 +29,7 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map)
 		type_of_plan(env, c, map);
 		i++;
 	}
-	if ((env->cam.stats.onwall == 0 && env->cam.stats.onfloor == 0) || (i == 0))
+	if ((env->cam.stats.onfloor == 0) || (i == 0))
 	{
 		env->cam.stats.onfloor = 0;
 		phy_gravitax_cam(env, cam);

@@ -96,10 +96,13 @@ void			phy_move(t_env *env, bool keys[NB_KEYS], t_map *maps)
 	if (handle_key_move(keys) && env->cam.stats.onfloor == 1)
 	{
 		f = phy_handle_key(f, r, keys);
-		if (keys[KEY_SPACE])
+		if (keys[KEY_SPACE] && env->cam.stats.onwall == 0)
 			f.y += 0.3;
 		if (f.y > 0 && env->cam.stats.onroof == 1)
+		{
 			f.y = 0.1;
+			env->cam.stats.onfloor = 0;
+		}
 		if (env->cam.stats.onwall == 1)
 			f = test_dist_wall(env, maps->cam_wall, f);
 		cam->corp.v = f;
