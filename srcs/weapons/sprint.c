@@ -14,14 +14,19 @@
 
 static bool	do_sprint(t_env *env)
 {
+	bool	ret;
+
+	ret = true;
 	if (env->player.current->reloading > 0
 		|| env->player.current->shooting > 0)
-		return (false);
+		ret = false;
 	if (env->edit_env.map.cam.corp.v.x == 0
 		&& env->edit_env.map.cam.corp.v.y == 0
 		&& env->edit_env.map.cam.corp.v.z == 0)
-		return (false);
-	return (true);
+		ret = false;
+	if (ret == false)
+		sound_system(env, SA_STEP, sp_stop());
+	return (ret);
 }
 
 static bool	move_keys(t_env *env)
@@ -44,7 +49,7 @@ static int	step_sound(t_env *env)
 		if (move_keys(env) && sound_system(env, SA_STEP,
 			sp_play(env->sound.volume / 1.8f, PITCH, pos)))
 			return (-1);
-		delay = env->events.keys[KEY_SHIFT_LEFT] ? 5 : 10;
+		delay = env->events.keys[KEY_SHIFT_LEFT] ? 4 : 8;
 	}
 	if (env->events.keys[KEY_SPACE] && sound_system(env, SA_STEP, sp_stop()))
 		return (-1);
