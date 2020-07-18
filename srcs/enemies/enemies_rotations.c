@@ -17,11 +17,9 @@ void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
 {
 	int			i;
 	int			j;
-	t_vec3d		middle;
 	t_mesh		*mesh;
 	t_triangle	*tri;
 
-	middle = vec_add(mob->pos, mob->offset);
 	rotation(&mob->head, zero_vector(), fcos, fsin);
 	i = mob->map_start - 1;
 	while (++i < mob->map_end)
@@ -31,9 +29,9 @@ void			enemies_rotate_mob(t_enemy *mob, float fcos, float fsin,
 		while (++j < mesh->tris.nb_cells)
 		{
 			tri = dyacc(&mesh->tris, j);
-			rotation(&tri->points[0], middle, fcos, fsin);
-			rotation(&tri->points[1], middle, fcos, fsin);
-			rotation(&tri->points[2], middle, fcos, fsin);
+			rotation(&tri->points[0], mob->pos, fcos, fsin);
+			rotation(&tri->points[1], mob->pos, fcos, fsin);
+			rotation(&tri->points[2], mob->pos, fcos, fsin);
 		}
 	}
 }
