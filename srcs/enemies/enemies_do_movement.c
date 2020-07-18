@@ -26,7 +26,6 @@ void			enemies_goals(t_enemy *mob)
 	mob->pitch.x = (goal.x - mob->pos.x) * mob->speed;
 	mob->pitch.y = (goal.y - mob->pos.y) * mob->speed;
 	mob->pitch.z = (goal.z - mob->pos.z) * mob->speed;
-	goal = vec_add(mob->end->pos, mob->end->pos);
 	goal = vec_sub(goal, mob->pos);
 	mob->yaw = xz_angle(mob->head, goal) * mob->speed;
 	mob->yaw = mob->yaw < -0.1f ? -0.1f : mob->yaw;
@@ -45,14 +44,6 @@ static void		enemies_get_goal(t_enemy *mob)
 		}
 		if (mob->end->parent->i == mob->goal->i)
 		{
-			// if (vec3d_dist(vec_add(mob->end->pos, mob->end->pos),
-			// 	mob->pos) > 5)
-			// {
-			// 	printf("test %f\n", vec3d_dist(vec_add(mob->end->pos, mob->end->pos),
-			// 	mob->pos));
-			// 	mob->end = mob->goal;
-			// 	return ;
-			// }
 			mob->goal = mob->end;
 			enemies_goals(mob);
 			return ;
@@ -77,10 +68,15 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 	pos = vec_add(mob->pos, mob->pitch);
 	if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), pos))
 	{
-		mob->end = NULL;
+		mob->dead = true;
+		mob->hp = 0;
+		printf("outrange\n");
+		printf("outrange\n");
+		printf("outrange\n");
 		return (0);
 	}
 	mob->pos = pos;
+	mob->goal->bobstacle = 1;
 	fcos = cos(mob->yaw);
 	fsin = sin(mob->yaw);
 	enemies_rotate_mob(mob, fcos, fsin, rotate_y);
@@ -95,20 +91,22 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 
 int				enemies_do_movement(t_env *env, t_enemy *mob)
 {
+	int		moula;
 	t_vec3d	goal;
 
 	if (mob->i == mob->end->i || mob->end == NULL)
 		return (0);
 	mob->goal->bobstacle = 0;
-	if (mob->i == mob->goal->i || mob->goal == NULL)
-		enemies_get_goal(mob);
-	if (mob->end == NULL)
-		return (0);
-	if (enemies_actions(env, mob))
-		return (-1);
+	if (mob->goal == NULL)
+		mob->goal = env->astar.start;
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (vec3d_dist(goal, mob->pos) < 0.1f)
 		mob->i = mob->goal->i;
-	mob->goal->bobstacle = 1;
-	return (0);
+	moula = env->custom_env.game.moula;
+	if (mob->i == mob->goal->i)
+		enemies_get_goal(mob);
+	env->custom_env.game.moula = moula;
+	if (mob->end == NULL)
+		return (0);
+	return (enemies_actions(env, mob));
 }
