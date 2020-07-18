@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 20:10:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/18 20:10:24 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/18 20:17:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		physic_engine(t_env *env, t_map *maps)
 
 	cam = &maps->cam;
 	e = &env->events;
-	report_cam_collisions(env, maps);
+	if (report_cam_collisions(env, maps))
+		return (-1);
 	update_speeds_collide_cam(env, cam, maps);
 	update_positions_cam(env, maps, cam);
 	stop_position_cam(env, maps, cam);
