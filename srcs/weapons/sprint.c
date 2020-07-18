@@ -17,6 +17,10 @@ static bool	do_sprint(t_env *env)
 	if (env->player.current->reloading > 0
 		|| env->player.current->shooting > 0)
 		return (false);
+	if (env->edit_env.map.cam.corp.v.x == 0
+		&& env->edit_env.map.cam.corp.v.y == 0
+		&& env->edit_env.map.cam.corp.v.z == 0)
+		return (false);
 	return (true);
 }
 

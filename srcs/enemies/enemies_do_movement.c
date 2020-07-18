@@ -28,8 +28,6 @@ void			enemies_goals(t_enemy *mob)
 	mob->pitch.z = (goal.z - mob->pos.z) * mob->speed;
 	goal = vec_sub(goal, mob->pos);
 	mob->yaw = xz_angle(mob->head, goal) * mob->speed;
-	mob->yaw = mob->yaw < -0.1f ? -0.1f : mob->yaw;
-	mob->yaw = mob->yaw > 0.1f ? 0.1f : mob->yaw;
 }
 
 static void		enemies_get_goal(t_enemy *mob)
@@ -84,7 +82,6 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 
 int				enemies_do_movement(t_env *env, t_enemy *mob)
 {
-	int		moula;
 	t_vec3d	goal;
 
 	if (mob->i == mob->end->i || mob->end == NULL)
@@ -95,10 +92,8 @@ int				enemies_do_movement(t_env *env, t_enemy *mob)
 	goal = vec_add(mob->goal->pos, mob->goal->pos);
 	if (vec3d_dist(goal, mob->pos) < 0.1f)
 		mob->i = mob->goal->i;
-	moula = env->custom_env.game.moula;
 	if (mob->i == mob->goal->i)
 		enemies_get_goal(mob);
-	env->custom_env.game.moula = moula;
 	if (mob->end == NULL)
 		return (0);
 	return (enemies_actions(env, mob));
