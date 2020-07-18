@@ -17,17 +17,14 @@ int			custom_menu_to_play(t_env *env)
 	static bool	first = true;
 	t_map		*map;
 
-	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
-		return (-1);
-	if (sound_system(env, SA_BUTTON,
-		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
-		return (-1);
 	map = &env->edit_env.map;
-	if (map_to_scene(env) || parse_events_blocks(env)
+	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop()))
+		|| map_to_scene(env) || parse_events_blocks(env)
 		|| init_dynarray(&env->custom_env.mobs, sizeof(t_enemy), MAX_ENEMIES)
 		|| astar_init(env) || init_map_physics(&env->edit_env.map)
 		|| (init_cameras_mesh(map, &map->cam)) || init_sky(env)
-		|| init_loots(env))
+		|| init_loots(env) || sound_system(env, SA_BUTTON,
+			sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	set_game_stats(env);
 	if (first)
