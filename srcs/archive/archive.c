@@ -6,17 +6,33 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:54:03 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/17 15:35:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/18 17:48:40 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		concatFiles(char *path, int fd_archi)
+static void			strcat_path(char *s1, char *s2, char *s3)
 {
-	int fd_file;
-	int len;
-	char *contain;
+	int		i;
+	int		j;
+
+	i = ft_strlen(s1);
+	j = 0;
+	while (s2[j++] != '\0')
+		s1[i + j] = s2[j];
+	s1[i + j] = '/';
+	while (s3[++j] != '\0')
+		s1[i + j] = s3[j];
+	s1[i + j] = '\0';
+	return (s1);
+}
+
+static int			concatFiles(char *path, int fd_archi)
+{
+	int		fd_file;
+	int		len;
+	char	*contain;
 
 	write(fd_archi, BOUNDARY, ft_strlen(BOUNDARY));
 	write(fd_archi, "\n", 1);
@@ -25,7 +41,7 @@ int		concatFiles(char *path, int fd_archi)
 	if ((fd_file = open(path, O_RDONLY)) < 0)
 		return (-1);
 	if (!(contain = read_file(fd_file, &len)))
-		return(free_stuff((void*[4]){NULL, NULL, &fd_file, NULL}));
+		return (free_stuff((void*[4]){NULL, NULL, &fd_file, NULL}));
 	close(fd_file);
 	unlink(path);
 	if (len)
@@ -36,11 +52,11 @@ int		concatFiles(char *path, int fd_archi)
 	return (0);
 }
 
-int		readFolder(char *dir_path, int fd_archi)
+static int			readFolder(char *dir_path, int fd_archi)
 {
-	DIR* dir;
-	struct dirent* dirent;
-	char *path;
+	DIR				*dir;
+	struct dirent	*dirent;
+	char			*path;
 
 	errno = 0;
 	if (!(dir = opendir(dir_path)))
@@ -48,18 +64,16 @@ int		readFolder(char *dir_path, int fd_archi)
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		if (!(path = ft_strnew(ft_strlen(dir_path) + dirent->d_namlen + 2)))
-			return(free_stuff((void*[4]){dir, &fd_archi, NULL, NULL}));
-		ft_strcat(path, dir_path);
-		ft_strcat(path, "/");
-		ft_strcat(path, dirent->d_name);
+			return (free_stuff((void*[4]){dir, &fd_archi, NULL, NULL}));
+		strcat_path(path, dir_path, dirent->d_name);
 		if ((dirent->d_type == DT_REG) && (*dirent->d_name == '.'))
 			unlink(path);
 		else if (dirent->d_type == DT_REG && concatFiles(path, fd_archi))
-			return(free_stuff((void*[4]){dir, &fd_archi, NULL, path}));
+			return (free_stuff((void*[4]){dir, &fd_archi, NULL, path}));
 		else if (dirent->d_type == DT_DIR && (*dirent->d_name != '.'))
 		{
-				readFolder(path, fd_archi);
-				rmdir(path);
+			readFolder(path, fd_archi);
+			rmdir(path);
 		}
 		free(path);
 	}
@@ -67,14 +81,14 @@ int		readFolder(char *dir_path, int fd_archi)
 	return (errno == 0 ? 0 : -1);
 }
 
-int		archive_directory(char *dir_path)
+int				archive_directory(char *dir_path)
 {
-	int fd_archi;
+	int	fd_archi;
 
 	if ((fd_archi = open(ARCHIVE, O_CREAT | O_WRONLY | O_TRUNC, 0666)) < 0)
 	{
 		perror(strerror(errno));
-		return(-1);
+		return (-1);
 	}
 	if (readFolder(dir_path, fd_archi))
 		return (-1);

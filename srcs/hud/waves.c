@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   waves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/18 17:24:36 by grudler           #+#    #+#             */
+/*   Updated: 2020/07/18 17:25:01 by grudler          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void		animate_position(t_point *pos, float time)
@@ -8,7 +20,7 @@ static void		animate_position(t_point *pos, float time)
 		pos->x++;
 }
 
-int		print_countdown(t_env *env, float time)
+int				print_countdown(t_env *env, float time)
 {
 	t_ttf_config	*conf;
 	static t_point	pos = {-100, 300};
@@ -34,7 +46,7 @@ int		print_countdown(t_env *env, float time)
 	return (0);
 }
 
-int		draw_wave(t_env *env)
+int				draw_wave(t_env *env)
 {
 	t_ttf_config	*conf;
 	char			*str;
