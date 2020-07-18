@@ -67,14 +67,7 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 		return (0);
 	pos = vec_add(mob->pos, mob->pitch);
 	if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), pos))
-	{
-		mob->dead = true;
-		mob->hp = 0;
-		printf("outrange\n");
-		printf("outrange\n");
-		printf("outrange\n");
 		return (0);
-	}
 	mob->pos = pos;
 	mob->goal->bobstacle = 1;
 	fcos = cos(mob->yaw);

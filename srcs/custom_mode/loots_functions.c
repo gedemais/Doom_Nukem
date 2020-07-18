@@ -22,9 +22,9 @@ int		loot_nuke(t_env *env)
 	{
 		mob = dyacc(&env->custom_env.mobs, i);
 		mob->hp = 0;
+		mob->dead = true;
 		i++;
 	}
-	env->custom_env.game.moula -= env->custom_env.mobs.nb_cells * KILL_REWARD;
 	if (sound_system(env, SA_LNUKE,
 		sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
 		return (-1);

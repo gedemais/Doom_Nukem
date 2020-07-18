@@ -26,10 +26,9 @@
 # define MOB_START_SPEED 0.05f
 # define MOB_LSTART 6
 # define MOB_PV_COEFF 1.1f
-# define MOB_SPEED_COEFF 1.05f
 # define MOB_NB_ADD 4
 
-# define MAX_ENEMIES 12
+# define MAX_ENEMIES 14
 # define LOOT_FREQ 7
 # define LOOT_LIFETIME 25
 
