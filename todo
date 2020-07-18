@@ -9,12 +9,6 @@ bebosson:
 Adoucir le crouch, pas d'a coups
 Proteger les chaines d'erreurs du moteur physique
 
-gedemais:
-normer le custom + le reste
-son save maped
-
-Proteger les switchers de contexts et sub_contexts
-
 Bebosson:
 Reparer toutes les chaines d'erreur dans le moteur physique
 Proteger les appels a sound_system dans le moteur physique
