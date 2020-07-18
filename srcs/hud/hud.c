@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 16:11:40 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/18 19:26:28 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/18 19:29:39 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			draw_hud(t_env *env)
 		return (-1);
 	if (env->data.time.tv_sec <= env->hud.timephysic + 2)
 		draw_physic(env);
-	if (env->data.time.tv_sec <= env->hud.timeWave + 3)
+	if (env->data.time.tv_sec <= env->hud.timewave + 3)
 		map_sprite(env->mlx.img_data, env->sprites[SP_NEW_WAVE],
 			(t_point){env->data.third_wdt, 100});
 	return (0);
