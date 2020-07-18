@@ -71,9 +71,14 @@ static int		spawn_mob(t_env *env)
 		return (0);
 	index = rand() % game->nb_spawners + 1;
 	find_random_spawner(&env->custom_env.events, p, index);
-	pos.x = p[0] * 2;
-	pos.y = p[1] * 2;
-	pos.z = p[2] * 2;
+	pos.x = p[0] + p[0];
+	pos.y = p[1] + p[1];
+	pos.z = p[2] + p[2];
+	pos.x = (int)pos.x % 2 ? pos.x + 1 : pos.x;
+	pos.y = (int)pos.y % 2 ? pos.y + 1 : pos.y;
+	pos.z = (int)pos.z % 2 ? pos.z + 1 : pos.z;
+	if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), pos))
+		return (0);
 	game->current_lmob--;
 	return (create_mob(env, &env->edit_env.map, enemy_wave(env), pos));
 }

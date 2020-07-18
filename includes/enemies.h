@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/17 20:57:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/18 16:41:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@
 # define MOB_START_SPEED 0.05f
 # define MOB_LSTART 6
 # define MOB_PV_COEFF 1.1f
-# define MOB_SPEED_COEFF 1.05f
 # define MOB_NB_ADD 4
 
-# define MAX_ENEMIES 12
-# define LOOT_FREQ 100000
+# define MAX_ENEMIES 14
+# define LOOT_FREQ 7
 # define LOOT_LIFETIME 25
 
 # define RESPAWN_DELAY 3.0f

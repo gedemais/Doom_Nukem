@@ -75,7 +75,6 @@ void		handle_waves(t_env *env)
 			game->wave++;
 			env->hud.timeWave = env->data.time.tv_sec;
 			game->mobs_pv *= MOB_PV_COEFF;
-			game->mobs_speed *= MOB_SPEED_COEFF;
 			game->lmob += MOB_NB_ADD;
 			game->current_lmob = game->lmob;
 			game->spawn_speed -= SPAWN_SPEED_SUB;

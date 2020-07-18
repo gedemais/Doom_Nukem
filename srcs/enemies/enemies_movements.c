@@ -46,31 +46,26 @@ static int		enemies_get_closer_end(t_pf *a, t_enemy *mob)
 	return (mob->end->bobstacle);
 }
 
-static void		enemies_get_end(t_pf *a, t_enemy *mob, t_vec3d cam)
+static int		enemies_astar(t_pf *a, t_enemy *mob, t_vec3d cam)
 {
 	a->end = NULL;
 	mob->end = NULL;
+	mob->goal = a->start;
 	if (mob->goal == NULL)
-		return ;
+		return (0);
 	cam.x = (int)cam.x / 2;
 	cam.y = (int)cam.y / 2;
 	cam.z = (int)cam.z / 2;
 	if (vec_outrange(a->dim, cam))
-		return ;
+		return (0);
 	if (vec3d_dist(a->start->pos, cam) < DIST_TO_PLAYER)
-		return ;
+		return (0);
 	mob->end = dyacc(&a->d_nodes, nodes_3d_1d(a->dim, cam));
 	if (mob->end == NULL)
-		return ;
+		return (0);
 	if (enemies_get_closer_end(a, mob))
 		mob->end = NULL;
 	a->end = mob->end;
-}
-
-static int		enemies_astar(t_env *env, t_pf *a, t_enemy *mob)
-{
-	mob->goal = a->start;
-	enemies_get_end(a, mob, env->cam.stats.pos);
 	return (astar(a));
 }
 
@@ -88,7 +83,7 @@ int				enemies_movements(t_env *env, t_pf *a)
 		a->start = dyacc(&a->d_nodes, mob->i);
 		if (mob->end == NULL || mob->i == mob->end->i)
 		{
-			if (enemies_astar(env, a, mob))
+			if (enemies_astar(a, mob, env->cam.stats.pos))
 				return (-1);
 			if (a->end == NULL || mob->end == NULL || mob->goal == NULL)
 			{
