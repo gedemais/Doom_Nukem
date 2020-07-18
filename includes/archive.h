@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONCAT_H
-# define CONCAT_H
+#ifndef ARCHIVE_H
+# define ARCHIVE_H
 
 # define BOUNDARY "=#=#=#=#=#=#=#=#=#=#"
 # define ARCHIVE "./resources.archi"

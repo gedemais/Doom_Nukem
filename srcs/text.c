@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   text.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 static void	map_letter(char *img, FT_Bitmap bmp, int size, t_point o)
@@ -108,11 +120,13 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 	i = 0;
 	conf = ttf_config();
 	ttf = &env->ttfs;
-	FT_Set_Char_Size(ttf->faces[font], conf->size * 96, conf->size * 64, 160, 80);
+	FT_Set_Char_Size(ttf->faces[font],
+		conf->size * 96, conf->size * 64, 160, 80);
 	while (conf->s[i])
 	{
 		if (i == 0 || conf->s[i - 1] != conf->s[i])
-			if (FT_Load_Char(ttf->faces[font], conf->s[i], FT_LOAD_RENDER) && ++i)
+			if (FT_Load_Char(ttf->faces[font],
+				conf->s[i], FT_LOAD_RENDER) && ++i)
 				continue ;
 		slot = ttf->faces[font]->glyph;
 		if (conf->s[i] == 'j')
@@ -122,7 +136,8 @@ void		my_string_put(t_env *env, char *img, t_point o, int font)
 		if (conf->s[i] == ' ')
 			o.x += conf->size;
 		else
-			o.x += slot->bitmap.width * ttf->kernings[font].right_pad[(int)conf->s[i]] + conf->size / 3;
+			o.x += slot->bitmap.width
+			* ttf->kernings[font].right_pad[(int)conf->s[i]] + conf->size / 3;
 		o.y += slot->advance.y >> 6;
 		i++;
 	}
@@ -132,7 +147,7 @@ void		textual_hint(t_env *env, char *button, char *action, int index)
 {
 	t_ttf_config	*conf;
 	t_point			o;
-	int				x_offset; // Centrer le texte
+	int				x_offset;
 
 	conf = ttf_config();
 	conf->size = 20;
@@ -140,11 +155,9 @@ void		textual_hint(t_env *env, char *button, char *action, int index)
 	ft_strncat((char*)conf->s, button, 1);
 	ft_strcat((char*)conf->s, " to ");
 	ft_strcat((char*)conf->s, action);
-
 	x_offset = (ft_strlen((char*)conf->s)) / 2 * conf->size;
 	o.x = env->data.half_wdt - x_offset;
 	o.y = HGT / 3 + (index * conf->size * 2);
-
 	my_string_put(env, env->mlx.img_data, o, FONT_TXT_HINT);
 }
 

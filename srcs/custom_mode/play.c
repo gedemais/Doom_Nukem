@@ -62,12 +62,12 @@ static int	handle_keys(t_env *env, t_events *e)
 	if (e->keys[KEY_T])
 	{
 		env->phy_env.type_move = false;
-		env->hud.timePhysic = env->data.time.tv_sec;
+		env->hud.timephysic = env->data.time.tv_sec;
 	}
 	if (e->keys[KEY_Y])
 	{
 		env->phy_env.type_move = true;
-		env->hud.timePhysic = env->data.time.tv_sec;
+		env->hud.timephysic = env->data.time.tv_sec;
 	}
 	if (e->keys[KEY_M])
 		if (switch_custom_context(env, CUSTOM_SC_MENU))

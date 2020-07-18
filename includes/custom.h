@@ -59,7 +59,7 @@ enum				e_block_events
 	BE_MAX
 };
 
-enum	e_go_button_id
+enum				e_go_button_id
 {
 	GO_BUTTON_YES,
 	GO_BUTTON_NO,
@@ -93,20 +93,19 @@ struct				s_custom_game
 {
 	float		spawn_speed;
 	int			nb_spawners;
-	int			wave; // index de la vague en cours
+	int			wave;
 	float		mobs_speed;
-	int			mobs_pv; // PV des mobs qui spawnent pdt cette vague
+	int			mobs_pv;
 	int			lmob;
-	int			current_lmob; // Nombre de mobs a faire spawn avant la prochaine vague
 	int			moula;
-	int 		kill_count;
-	int 		kill_delay;
+	int			current_lmob;
+	int			kill_count;
+	int			kill_delay;
 	int			kills;
 	float		countdown;
-	char		music; // ID (sound.h) de la musique jouee (-1 si aucune)
 };
 
-struct	s_go_env
+struct				s_go_env
 {
 	void			*env;
 	t_button		buttons[GO_BUTTON_MAX];
@@ -120,8 +119,8 @@ struct				s_custom_env
 	t_scroll		scroll;
 	t_dynarray		events;
 	t_mesh			*moon;
-	t_node          *start;
-    t_node          *end;
+	t_node			*start;
+	t_node			*end;
 	t_env			*env;
 	t_loot			loot;
 	t_mesh			*loots[LOOT_MAX];
@@ -137,7 +136,8 @@ int					set_game_stats(t_env *env);
 int					init_custom_door(t_custom_env *c, t_event_block *block);
 
 int					init_loots(t_env *env);
-int					copy_triangles(t_map *map, t_map *mob, t_mesh *m, t_mesh *new);
+int					copy_triangles(t_map *map,
+						t_map *mob, t_mesh *m, t_mesh *new);
 t_mesh				*copy_to_scene(t_map *dest, t_map *src, t_vec3d pos);
 
 t_vec3d				get_block_center(t_event_block *block);
@@ -161,7 +161,6 @@ int					mouse_release_custom(int button, int x, int y, void *param);
 int					mouse_position_custom(int x, int y, void *param);
 int					render_custom(void *param);
 
-// Subcontexts functions
 int					custom_menu(t_env *env);
 int					custom_play(t_env *env);
 
@@ -169,7 +168,6 @@ int					init_custom_scroll_file(t_env *env);
 int					setup_custom(t_env *env);
 int					switch_custom_context(t_env *env, unsigned int i);
 
-// Routines
 int					custom_menu_to_play(t_env *env);
 int					custom_play_to_menu(t_env *env);
 int					custom_play_to_game_over(t_env *env);

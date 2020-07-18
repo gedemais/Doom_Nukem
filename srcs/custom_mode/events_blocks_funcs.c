@@ -15,15 +15,15 @@
 static int		jukeboxs_play_sound(t_env *env)
 {
 	t_events	*e;
-	static int	ambient = 0;
+	static int	ambient = 2;
 	static int	delay = 0;
 
 	e = &env->events;
 	if (e->keys[KEY_F] && env->custom_env.game.moula >= 500 && delay == 0)
 	{
 		delay = 40;
-		if (ambient < 0 || ambient > SA_MAPED)
-			ambient = 0;
+		if (ambient < SA_GAME1 || ambient > SA_MAPED)
+			ambient = SA_GAME1;
 		if (sound_system(env, ambient, sp_overall(0, SA_MAPED,
 			sp_play(env->sound.volume, PITCH, env->cam.stats.pos))))
 			return (-1);
@@ -33,8 +33,8 @@ static int		jukeboxs_play_sound(t_env *env)
 	{
 		delay = 5;
 		ambient = e->keys[KEY_LEFT] ? ambient - 1 : ambient + 1;
-		ambient = ambient < 0 ? SA_MAPED : ambient;
-		ambient = ambient > SA_MAPED ? 0 : ambient;
+		ambient = ambient < SA_GAME1 ? SA_MAPED : ambient;
+		ambient = ambient > SA_MAPED ? SA_GAME1 : ambient;
 	}
 	delay = delay > 0 ? delay - 1 : delay;
 	return (ambient);
@@ -51,7 +51,7 @@ int				handle_jukeboxs(t_env *env, t_event_block *block)
 		textual_hint(env, "F", "PLAY ( 500)", 0);
 		textual_hint(env, "{", "PREVIOUS", 1);
 		textual_hint(env, "}", "NEXT", 2);
-		if (!(current = ft_itoa(jukeboxs_play_sound(env))))
+		if (!(current = ft_itoa(jukeboxs_play_sound(env) - 2)))
 			return (-1);
 		textual_hint(env, current, "current track", 3);
 		ft_strdel(&current);

@@ -57,9 +57,9 @@ int		draw_hud(t_env *env)
 	if (draw_wave(env) || draw_health(env)
 		|| print_countdown(env, env->custom_env.game.countdown))
 		return (-1);
-	if (env->data.time.tv_sec <= env->hud.timePhysic + 2)
+	if (env->data.time.tv_sec <= env->hud.timephysic + 2)
 		draw_physic(env);
-	if (env->data.time.tv_sec <= env->hud.timeWave + 3)
+	if (env->data.time.tv_sec <= env->hud.timewave + 3)
 		map_sprite(env->mlx.img_data, env->sprites[SP_NEW_WAVE], (t_point){env->data.third_wdt, 100});
 	return(0);
 }

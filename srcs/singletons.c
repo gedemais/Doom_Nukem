@@ -12,21 +12,21 @@
 
 #include "main.h"
 
-bool	*init_parser(void)
+bool			*init_parser(void)
 {
 	static bool		val = false;
 
 	return (&val);
 }
 
-t_map	**current_map(void)
+t_map			**current_map(void)
 {
 	static t_map	*map = NULL;
 
 	return (&map);
 }
 
-t_ttf_config	*ttf_config()
+t_ttf_config	*ttf_config(void)
 {
 	static t_ttf_config	conf = {"", 24};
 

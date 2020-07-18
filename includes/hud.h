@@ -46,14 +46,13 @@
 
 struct	s_hud
 {
-	long timePhysic;
-	long timeWave;
+	long timephysic;
+	long timewave;
 };
 
 int		draw_hud(t_env *env);
 int		draw_health(t_env *env);
 void	draw_compass(t_env *env);
 int		draw_physic(t_env *env);
-
 
 #endif
