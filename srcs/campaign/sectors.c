@@ -7,6 +7,7 @@ void	init_sectors(t_env *env)
 	cmp_env = &env->cmp_env;
 	cmp_env->sectors[SECTOR_AXIS].map = SCENE_AXIS;
 	cmp_env->sectors[SECTOR_HOUSE].map = SCENE_HOUSE;
+	cmp_env->sectors[SECTOR_START_ROOM].map = SCENE_START_ROOM;
 	//cmp_env->sectors[SECTOR_].map = SCENE_;
 }
 

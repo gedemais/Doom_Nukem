@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/13 20:23:01 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/18 16:23:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum	e_sector_id
 {
 	SECTOR_AXIS,
 	SECTOR_HOUSE,
+	SECTOR_START_ROOM,
 	SECTOR_MAX
 };
 

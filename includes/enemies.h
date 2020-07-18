@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/17 20:57:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MOB_NB_ADD 4
 
 # define MAX_ENEMIES 12
-# define LOOT_FREQ 7
+# define LOOT_FREQ 100000
 # define LOOT_LIFETIME 25
 
 # define RESPAWN_DELAY 3.0f

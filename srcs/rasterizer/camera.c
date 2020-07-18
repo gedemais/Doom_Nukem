@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 21:26:22 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/12 21:32:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/17 21:50:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				init_camera(t_env *env, t_cam *cam)
 	cam->stats.aspect_ratio = (float)HGT / (float)WDT;
 	cam->stats.fnear = 0.01f;
 	cam->stats.ffar = 1000.0f;
-	cam->stats.fovd = 70.0f;
+	cam->stats.fovd = 80.0f;
 	cam->stats.fovr = 1.0f / tan(cam->stats.fovd * 0.5f / 180.0f * 3.14159f);
 	cam->stats.fdelta = cam->stats.ffar - cam->stats.fnear;
 	cam->stats.pos = (t_vec3d){0, 0, 0, 0};
