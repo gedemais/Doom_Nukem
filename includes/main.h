@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 15:33:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/18 19:42:57 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 # define WINDOW_NAME "Doom-Nukem"
 
 # define SENSI 0.1f
-# define WALK_SPEED 0.1f
+# define WALK_SPEED 0.025f
 # define WSPEED 3.0f
 # define PLAYER_SIZE 3.0f
 

@@ -28,7 +28,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/goule.obj",
 										"resources/maps/house.obj",
 										"resources/maps/key.obj",
-										"resources/maps/start_room.obj"};
+										"resources/maps/start_room.obj",
+										"resources/maps/dust.obj"};
 
 	return (paths[index]);
 }

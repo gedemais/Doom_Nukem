@@ -1,0 +1,38 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+33_de_dust2|{}|[]|true|(resources/textures/dust/de_dust2_material_33.xpm)|
+0_de_dust2.002|{}|[]|true|(resources/textures/dust/de_dust2_material_0.xpm)|
+1_de_dust2.003|{}|[]|true|(resources/textures/dust/de_dust2_material_1.xpm)|
+2_de_dust2.004|{}|[]|true|(resources/textures/dust/de_dust2_material_2.xpm)|
+4_de_dust2.005|{}|[]|true|(resources/textures/dust/de_dust2_material_4.xpm)|
+5_de_dust2.006|{}|[]|true|(resources/textures/dust/de_dust2_material_5.xpm)|
+6_de_dust2.007|{}|[]|true|(resources/textures/dust/de_dust2_material_6.xpm)|
+7_de_dust2.008|{}|[]|true|(resources/textures/dust/de_dust2_material_7.xpm)|
+8_de_dust2.009|{}|[]|true|(resources/textures/dust/de_dust2_material_8.xpm)|
+9.001_de_dust2.010|{}|[]|true|(resources/textures/dust/de_dust2_material_9.xpm)|
+10_de_dust2.011|{}|[]|true|(resources/textures/dust/de_dust2_material_10.xpm)|
+11_de_dust2.012|{}|[]|true|(resources/textures/dust/de_dust2_material_11.xpm)|
+12_de_dust2.013|{}|[]|true|(resources/textures/dust/de_dust2_material_12.xpm)|
+13_de_dust2.014|{}|[]|true|(resources/textures/dust/de_dust2_material_13.xpm)|
+14_de_dust2.015|{}|[]|true|(resources/textures/dust/de_dust2_material_14.xpm)|
+15_de_dust2.016|{}|[]|true|(resources/textures/dust/de_dust2_material_15.xpm)|
+16_de_dust2.017|{}|[]|true|(resources/textures/dust/de_dust2_material_16.xpm)|
+17_de_dust2.018|{}|[]|true|(resources/textures/dust/de_dust2_material_17.xpm)|
+18_de_dust2.019|{}|[]|true|(resources/textures/dust/de_dust2_material_18.xpm)|
+19_de_dust2.020|{}|[]|true|(resources/textures/dust/de_dust2_material_19.xpm)|
+20_de_dust2.021|{}|[]|true|(resources/textures/dust/de_dust2_material_20.xpm)|
+21_de_dust2.022|{}|[]|true|(resources/textures/dust/de_dust2_material_21.xpm)|
+22_de_dust2.023|{}|[]|true|(resources/textures/dust/de_dust2_material_22.xpm)|
+23_de_dust2.024|{}|[]|true|(resources/textures/dust/de_dust2_material_23.xpm)|
+25_de_dust2.025|{}|[]|true|(resources/textures/dust/de_dust2_material_25.xpm)|
+26_de_dust2.026|{}|[]|true|(resources/textures/dust/de_dust2_material_26.xpm)|
+27_de_dust2.027|{}|[]|true|(resources/textures/dust/de_dust2_material_27.xpm)|
+28_de_dust2.028|{}|[]|true|(resources/textures/dust/de_dust2_material_28.xpm)|
+29_de_dust2.029|{}|[]|true|(resources/textures/dust/de_dust2_material_29.xpm)|
+30_de_dust2.030|{}|[]|true|(resources/textures/dust/de_dust2_material_30.xpm)|
+31_de_dust2.031|{}|[]|true|(resources/textures/dust/de_dust2_material_31.xpm)|
+32_de_dust2.032|{}|[]|true|(resources/textures/dust/de_dust2_material_32.xpm)|
