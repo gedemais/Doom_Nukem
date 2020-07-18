@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.c                                           :+:      :+:    :+:   */
+/*   phy_tool3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/18 20:10:21 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/18 20:10:24 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/18 20:11:46 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/18 20:11:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int		physic_engine(t_env *env, t_map *maps)
+t_vec3d		phy_handle_space(t_env *e, bool k[NB_KEYS], t_vec3d f)
 {
-	t_events	*e;
-	t_mesh		*cam;
+	if (k[KEY_SPACE] && e->cam.stats.onwall == 0)
+		f.y += 0.3;
+	if (f.y > 0 && e->cam.stats.onroof == 1)
+	{
+		f.y = 0.1;
+		e->cam.stats.onfloor = 0;
+	}
+	return (f);
+}
 
-	cam = &maps->cam;
-	e = &env->events;
-	report_cam_collisions(env, maps);
-	update_speeds_collide_cam(env, cam, maps);
-	update_positions_cam(env, maps, cam);
-	stop_position_cam(env, maps, cam);
-	clear_dynarray(&env->phy_env.collides_cam);
-	env->custom_env.game.moula < 0 ? env->custom_env.game.moula = 0 : 0;
-	return (0);
+void		scan_collide(t_collide *c, int i)
+{
+	c->cam_mesh_first = vec_sub(c->b->corp.pos, c->a->corp.pos);
+	c->norm_dist_first = vec_norm(c->cam_mesh_first);
+	c->i_a = i;
 }

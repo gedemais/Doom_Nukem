@@ -35,6 +35,10 @@ int			custom_menu_to_play(t_env *env)
 	env->data.wireframe = false;
 	first = false;
 	mlx_mouse_hide();
+	env->phy_env.type_move = true;
+	env->cam.stats.onfloor = 0;
+	env->cam.stats.onroof = 0;
+	env->cam.stats.onwall = 0;
 	return (0);
 }
 

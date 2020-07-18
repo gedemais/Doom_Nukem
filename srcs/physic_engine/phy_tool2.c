@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phy_tool2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji_code <benji_code@student.42.fr>      +#+  +:+       +#+        */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/14 20:18:33 by benji_code        #+#    #+#             */
-/*   Updated: 2020/07/16 22:34:02 by gedemais         ###   ########.fr       */
+/*   Created: 2020/07/18 20:11:40 by gedemais          #+#    #+#             */
+/*   Updated: 2020/07/18 20:11:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 	}
 	if (c->cam_mesh_first.y < 2
-			&& c->cam_mesh_first.y > -1)
+			&& c->cam_mesh_first.y > -2)
 	{
 		env->cam.stats.onwall = !is_mesh_mob(env, c->a);
 		map->cam_wall = c;
@@ -79,12 +79,13 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 void		fall_damage(t_env *env, t_mesh *cam)
 {
 	float dam;
-	
+
 	dam = 0.0f;
 	if (vec_norm(cam->corp.v) > 0.9f && cam->corp.v.y < 0)
 	{
 		dam = (1.0f - vec_norm(cam->corp.v)) * 100;
-		env->player.hp += dam;
+		if (env->player.hp < 200)
+			env->player.hp += dam;
 		sound_system(env, SA_PLAYER_DAMAGE,
 			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	}
@@ -97,7 +98,7 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	move = 0.0f;
 	if (env->cam.stats.pos.y > -10 && env->cam.stats.onfloor == 0)
 		return ;
-	fall_damage(env, cam);	
+	fall_damage(env, cam);
 	env->phy_env.tps = 0;
 	cam->corp.v.y = 0;
 	cam->corp.v = vec_fmult(cam->corp.v, 0.4);
@@ -118,9 +119,3 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	}
 }
 
-void		scan_collide(t_collide *c, int i)
-{
-	c->cam_mesh_first = vec_sub(c->b->corp.pos, c->a->corp.pos);
-	c->norm_dist_first = vec_norm(c->cam_mesh_first);
-	c->i_a = i;
-}

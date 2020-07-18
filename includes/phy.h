@@ -6,7 +6,7 @@
 /*   By: bebosson <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by bebosson          #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by bebosson         ###   ########.fr       */
+/*   Updated: 2020/07/18 20:09:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ struct	s_physics
 	unsigned int	tps;
 	float			gravity;
 	t_vec3d			gravitax;
-	unsigned int	squat;
+	float			crch;
+	float			crch_v;
 };
 
 void	scan_actuall_collide(t_env *env, t_map *map);
@@ -89,5 +90,5 @@ void	stop_position_cam(t_env *env, t_map *maps, t_mesh *cam);
 bool	key_move(bool keys[NB_KEYS]);
 void	scan_collide(t_collide *c, int i);
 void	print_info_phy(t_env *env, t_mesh *cam, t_map *maps);
-
+t_vec3d	phy_handle_space(t_env *e, bool k[NB_KEYS], t_vec3d f);
 #endif
