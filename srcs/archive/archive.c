@@ -6,29 +6,21 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 01:54:03 by grudler           #+#    #+#             */
-/*   Updated: 2020/07/18 17:48:40 by grudler          ###   ########.fr       */
+/*   Updated: 2020/07/18 18:09:04 by grudler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static void			strcat_path(char *s1, char *s2, char *s3)
+static char			*strcat_path(char *s1, char *s2, char *s3)
 {
-	int		i;
-	int		j;
-
-	i = ft_strlen(s1);
-	j = 0;
-	while (s2[j++] != '\0')
-		s1[i + j] = s2[j];
-	s1[i + j] = '/';
-	while (s3[++j] != '\0')
-		s1[i + j] = s3[j];
-	s1[i + j] = '\0';
+	ft_strcat(s1, s2);
+	ft_strcat(s1, "/");
+	ft_strcat(s1, s3);
 	return (s1);
 }
 
-static int			concatFiles(char *path, int fd_archi)
+static int			concat_files(char *path, int fd_archi)
 {
 	int		fd_file;
 	int		len;
@@ -52,7 +44,7 @@ static int			concatFiles(char *path, int fd_archi)
 	return (0);
 }
 
-static int			readFolder(char *dir_path, int fd_archi)
+static int			read_folder(char *dir_path, int fd_archi)
 {
 	DIR				*dir;
 	struct dirent	*dirent;
@@ -68,11 +60,11 @@ static int			readFolder(char *dir_path, int fd_archi)
 		strcat_path(path, dir_path, dirent->d_name);
 		if ((dirent->d_type == DT_REG) && (*dirent->d_name == '.'))
 			unlink(path);
-		else if (dirent->d_type == DT_REG && concatFiles(path, fd_archi))
+		else if (dirent->d_type == DT_REG && concat_files(path, fd_archi))
 			return (free_stuff((void*[4]){dir, &fd_archi, NULL, path}));
 		else if (dirent->d_type == DT_DIR && (*dirent->d_name != '.'))
 		{
-			readFolder(path, fd_archi);
+			read_folder(path, fd_archi);
 			rmdir(path);
 		}
 		free(path);
@@ -81,7 +73,7 @@ static int			readFolder(char *dir_path, int fd_archi)
 	return (errno == 0 ? 0 : -1);
 }
 
-int				archive_directory(char *dir_path)
+int					archive_directory(char *dir_path)
 {
 	int	fd_archi;
 
@@ -90,7 +82,7 @@ int				archive_directory(char *dir_path)
 		perror(strerror(errno));
 		return (-1);
 	}
-	if (readFolder(dir_path, fd_archi))
+	if (read_folder(dir_path, fd_archi))
 		return (-1);
 	close(fd_archi);
 	rmdir(dir_path);
