@@ -25,7 +25,7 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map)
 		scan_actuall_collide(env, map);
 	while (i < env->phy_env.collides_cam.nb_cells)
 	{
-		c = dyacc(&env->phy_env.collides_cam, i);	
+		c = dyacc(&env->phy_env.collides_cam, i);
 		type_of_plan(env, c, map);
 		i++;
 	}
@@ -39,7 +39,8 @@ void	update_speeds_collide_cam(t_env *env, t_mesh *cam, t_map *map)
 void	update_positions_cam(t_env *env, t_map *map, t_mesh *cam)
 {
 	if (env->cam.stats.onfloor == 1)
-		cam->corp.v = vec_add(cam->corp.v, vec_fmult((t_vec3d){0, env->phy_env.crch_v, 0, 0}, 0.1));
+		cam->corp.v = vec_add(cam->corp.v,
+				vec_fmult((t_vec3d){0, env->phy_env.crch_v, 0, 0}, 0.1));
 	translate_mesh(map, cam, cam->corp.v);
 	env->cam.stats.pos = vec_add(env->cam.stats.pos, cam->corp.v);
 	cam->corp.o = vec_sub(env->cam.stats.pos, vec_fdiv(cam->corp.dims,

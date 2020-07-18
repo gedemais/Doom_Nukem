@@ -12,7 +12,6 @@
 
 #include "main.h"
 
-
 static bool	is_mesh_mob(t_env *env, t_mesh *m)
 {
 	t_enemy	*mob;
@@ -46,7 +45,6 @@ void		scan_actuall_collide(t_env *env, t_map *map)
 		map->cam_floor->norm_actual = vec_norm(map->cam_floor->cam_actual);
 		if (map->cam_floor->norm_actual > map->cam_floor->norm_dist_first)
 			env->cam.stats.onfloor = 0;
-		
 	}
 	if (env->cam.stats.onroof == 1)
 	{
@@ -60,7 +58,7 @@ void		scan_actuall_collide(t_env *env, t_map *map)
 
 void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 {
-	if (c->cam_mesh_first.y > 0 &&   env->cam.stats.onfloor == 0)
+	if (c->cam_mesh_first.y > 0 && env->cam.stats.onfloor == 0)
 	{
 		map->cam_floor = c;
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
@@ -77,15 +75,17 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onroof = !is_mesh_mob(env, c->a);
 	}
 }
+
 void		fall_damage(t_env *env, t_mesh *cam)
 {
 	float dam;
-	
+
 	dam = 0.0f;
 	if (vec_norm(cam->corp.v) > 0.9f && cam->corp.v.y < 0)
 	{
 		dam = (1.0f - vec_norm(cam->corp.v)) * 100;
-		env->player.hp += dam;
+		if (env->player.hp < 200)
+			env->player.hp += dam;
 		sound_system(env, SA_PLAYER_DAMAGE,
 			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos));
 	}
@@ -98,7 +98,7 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	move = 0.0f;
 	if (env->cam.stats.pos.y > -10 && env->cam.stats.onfloor == 0)
 		return ;
-	fall_damage(env, cam);	
+	fall_damage(env, cam);
 	env->phy_env.tps = 0;
 	cam->corp.v.y = 0;
 	cam->corp.v = vec_fmult(cam->corp.v, 0.4);
@@ -119,9 +119,3 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 	}
 }
 
-void		scan_collide(t_collide *c, int i)
-{
-	c->cam_mesh_first = vec_sub(c->b->corp.pos, c->a->corp.pos);
-	c->norm_dist_first = vec_norm(c->cam_mesh_first);
-	c->i_a = i;
-}
