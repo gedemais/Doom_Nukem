@@ -15,16 +15,51 @@
 static	t_vec3d	phy_handle_key(t_vec3d f, t_vec3d r, bool k[NB_KEYS])
 {
 	if (k[KEY_W])
+	{
 		f = vec_add(f, vec_fmult(f, 3.0f));
+		if (k[KEY_S])
+			f = zero_vector();
+	}
 	if (k[KEY_S])
-		f = vec_add(f, vec_fmult(f, -4.0f));
+		f = vec_add(f, vec_fmult(f, -3.0f));
 	if (k[KEY_A])
 		f = vec_add(f, vec_fmult(r, 3.0f));
 	if (k[KEY_D])
 		f = vec_add(f, vec_fmult(r, -3.0f));
+	if (k[KEY_D] && k[KEY_A])
+		f = zero_vector(); 
 	if (!k[KEY_W] && !k[KEY_S] && !k[KEY_D] && !k[KEY_A])
 		f = zero_vector();
 	return (f);
+}
+
+static int		phy_crouch_move(t_env *e, float move, bool k)
+{
+	if (e->cam.stats.crouch == 0 && k)
+	{
+		if (move < 3.5)
+			return (1);
+		else
+		{
+			e->phy_env.crch_v = -2;
+			return (0);
+		}
+	}
+	else if (e->cam.stats.crouch == 1 && !k && e->cam.stats.onroof == 0)
+	{
+		if (move > 3.6)
+			return (0);
+		else
+		{
+			e->phy_env.crch_v = 2;
+			return (1);
+		}
+	}
+	else
+	{
+		e->phy_env.crch_v = 0;
+		return (e->cam.stats.crouch);
+	}
 }
 
 static	int		phy_crouch(t_env *env, bool key, t_map *maps)
@@ -32,37 +67,8 @@ static	int		phy_crouch(t_env *env, bool key, t_map *maps)
 	float move;
 
 	move = env->cam.stats.pos.y - maps->cam_floor->a->corp.pos.y;
-	printf("move = %f \n", move);
 	if (env->cam.stats.onfloor == 1)
-	{
-		if (env->cam.stats.crouch == 0 && key)
-		{
-			if (move < 3.8) 
-				return (1);
-			else
-			{
-				env->phy_env.crch_v = -2;
-				return (0);
-			}
-		}
-		else if (env->cam.stats.crouch == 1
-		&& !key && env->cam.stats.onroof == 0)
-		{
-			if (move > 3.9) 
-				return (0);
-			else
-			{
-				env->phy_env.crch_v = 2;
-				return (1);
-			}
-
-		}
-		else
-		{
-			env->phy_env.crch_v = 0;
-			return (env->cam.stats.crouch);
-		}
-	}
+		return (phy_crouch_move(env, move, key));
 	else
 		return (0);
 }

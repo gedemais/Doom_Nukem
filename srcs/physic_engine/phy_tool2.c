@@ -64,7 +64,7 @@ void		type_of_plan(t_env *env, t_collide *c, t_map *map)
 		env->cam.stats.onfloor = !is_mesh_mob(env, c->a);
 	}
 	if (c->cam_mesh_first.y < 2
-			&& c->cam_mesh_first.y > -1)
+			&& c->cam_mesh_first.y > -2)
 	{
 		env->cam.stats.onwall = !is_mesh_mob(env, c->a);
 		map->cam_wall = c;
