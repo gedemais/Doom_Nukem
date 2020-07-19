@@ -2,7 +2,7 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
+spawn|{-9.430809, 1.934265, 7.880144}
 orientation|{0.0, 0.0}
 33_de_dust2|{}|[]|true|(resources/textures/dust/de_dust2_material_33.xpm)|
 0_de_dust2.002|{}|[]|true|(resources/textures/dust/de_dust2_material_0.xpm)|

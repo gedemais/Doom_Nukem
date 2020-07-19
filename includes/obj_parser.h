@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/18 19:31:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 21:44:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ enum				e_scene_id
 	SCENE_MAGE,
 	SCENE_LOOT,
 	SCENE_GOULE,
-	SCENE_HOUSE,
-	SCENE_KEY,
 	SCENE_START_ROOM,
 	SCENE_DUST,
 	SCENE_MAX

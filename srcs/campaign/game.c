@@ -45,14 +45,13 @@ int		cmp_game(t_env *env)
 	cmp_env = &env->cmp_env;
 	if (sound_manager(env, SA_GAME1))
 		return (-1);
+	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
 	camera_aim(env);
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	if (rasterizer(env, &env->maps[env->scene], false))
-		return (-1);
-	handle_key(env);
-	if (handle_countdown(env, (t_point){200, 200}))
+	if (rasterizer(env, &env->maps[env->scene], false)
+		|| handle_countdown(env, (t_point){200, 200}))
 		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

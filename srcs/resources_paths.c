@@ -26,8 +26,6 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/mage.obj",
 										"resources/maps/loot.obj",
 										"resources/maps/goule.obj",
-										"resources/maps/house.obj",
-										"resources/maps/key.obj",
 										"resources/maps/start_room.obj",
 										"resources/maps/dust.obj"};
 
@@ -180,7 +178,9 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/loots/cash.wav",
 					"resources/samples/loots/god_end.wav",
 					"resources/samples/loots/god_start.wav",
-					"resources/samples/voices/player_damage.wav"};
+					"resources/samples/voices/player_damage.wav",
+					"resources/samples/intro_music.wav",
+					"resources/samples/snow.wav"};
 
 	return (paths[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 17:13:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 21:45:50 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CAMPAIGN_H
 
 # define COUNTDOWN 260
-# define INTRO_LIST_SIZE 10
+# define INTRO_LIST_SIZE 8
 
 enum			e_cmp_sub_contexts
 {
@@ -33,8 +33,6 @@ enum			e_cmp_menu_buttons_id
 
 enum			e_sector_id
 {
-	SECTOR_AXIS,
-	SECTOR_HOUSE,
 	SECTOR_START_ROOM,
 	SECTOR_DUST,
 	SECTOR_MAX
@@ -74,7 +72,6 @@ struct			s_camp_env
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];
 	t_sector	sectors[SECTOR_MAX];
-	t_mesh		*key[SECTOR_MAX];
 	float		countdown;
 	bool		have_key;
 	int			sector;
@@ -100,7 +97,6 @@ int				handle_countdown(t_env *env, t_point pos);
 */
 void			init_sectors(t_env *env);
 void			check_doors(t_env *env, t_camp_env *cmp_env);
-int				handle_key(t_env *env);
 
 /*
 ** Sub_contexts functions

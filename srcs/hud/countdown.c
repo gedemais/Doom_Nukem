@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 12:45:35 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 15:38:33 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 21:48:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ int		handle_countdown(t_env *env, t_point pos)
 	put_section(env, seconds, (t_point){pos.x + length, pos.y}, true);
 	length += ft_strlen((char*)((t_ttf_config*)ttf_config())->s) * 20;
 	put_section(env, tenth, (t_point){pos.x + length, pos.y}, false);
-	printf("%d:%d:%d\n", mins, seconds, tenth);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/19 21:41:45 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ enum	e_sample_id
 	SA_LGODSTART,
 	SA_LGODEND,
 	SA_PLAYER_DAMAGE,
+	SA_CMP_INTRO,
+	SA_SNOW,
 	SA_MAX
 };
 

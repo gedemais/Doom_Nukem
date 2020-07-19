@@ -2,12 +2,12 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
+spawn|{2.950326, 2.984138, 0.376825}
 orientation|{0.0, 0.0}
 floor_Cylinder|{}|[]|true|()|
 Cube_Cube.001|{}|[]|true|()|
 TV.001_television.001|{}|[]|true|()|
-screen_Plane|{}|[]|true|()|
+screen_Plane|{}|[]|true|(resources/textures/campaign/dust_map.xpm)|
 Wall-1_Cube.004|{}|[]|true|()|
 Wall-1.001_Cube.003|{}|[]|true|()|
 Wall-1.002_Cube.007|{}|[]|true|()|
@@ -18,3 +18,8 @@ LEDs_Sphere.002|{}|[]|true|()|
 DoorBoddy_Cube.001|{}|[]|true|(resources/textures/start_room/door.xpm)|
 Locker_Cube.003|{}|[]|true|()|
 DoorBoddy_Cube.002|{}|[]|true|(resources/textures/start_room/door.xpm)|
+LEDs.001_Sphere.000|{}|[]|true|()|
+LEDs.002_Sphere.001|{}|[]|true|()|
+LEDs.003_Sphere.003|{}|[]|true|()|
+LEDs.004_Sphere.004|{}|[]|true|()|
+LEDs.005_Sphere.005|{}|[]|true|()|
