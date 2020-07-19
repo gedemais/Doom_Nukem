@@ -2,6 +2,7 @@
 
 void	cmp_menu_to_game(t_env *env)
 {
+	env->cmp_env.countdown = COUNTDOWN;
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
 		exit_doom(env, "error sound_system", 0, -1);
 	if (sound_system(env, SA_BUTTON, sp_play(1, PITCH, env->cam.stats.pos)))

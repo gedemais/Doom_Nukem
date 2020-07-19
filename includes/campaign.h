@@ -6,12 +6,14 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/18 19:32:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 13:17:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMPAIGN_H
 # define CAMPAIGN_H
+
+# define COUNTDOWN 260
 
 enum			e_cmp_sub_contexts
 {
@@ -71,6 +73,7 @@ struct			s_camp_env
 	t_point		pos[CMP_BUTTON_MAX];
 	t_sector	sectors[SECTOR_MAX];
 	t_mesh		*key[SECTOR_MAX];
+	float		countdown;
 	bool		have_key;
 	int			sector;
 	int			sub_context;
@@ -84,6 +87,11 @@ int				mouse_press_camp(int button, int x, int y, void *param);
 int				mouse_release_camp(int button, int x, int y, void *param);
 int				mouse_position_camp(int x, int y, void *param);
 int				render_camp(void *param);
+
+/*
+** Campaign
+*/
+int				handle_countdown(t_env *env, t_point pos);
 
 /*
 ** Sectors
