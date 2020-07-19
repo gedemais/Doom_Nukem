@@ -83,7 +83,15 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/no_on.xpm",
 					"resources/sprites/coins.xpm",
 					"resources/sprites/new_wave.xpm",
-					"resources/sprites/key.xpm"};
+					"resources/sprites/key.xpm",
+					"resources/sprites/campaign/1.xpm",
+					"resources/sprites/campaign/2.xpm",
+					"resources/sprites/campaign/3.xpm",
+					"resources/sprites/campaign/4.xpm",
+					"resources/sprites/campaign/5.xpm",
+					"resources/sprites/campaign/6.xpm",
+					"resources/sprites/campaign/7.xpm",
+					"resources/sprites/campaign/8.xpm"};
 
 	return (paths[index]);
 }

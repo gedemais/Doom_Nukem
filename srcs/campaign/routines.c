@@ -19,3 +19,15 @@ void	cmp_game_to_menu(t_env *env)
 		exit_doom(env, "error sound_system", 0, -1);
 	mlx_mouse_show();
 }
+
+void	cmp_menu_to_intro(t_env *env)
+{
+	(void)env;
+	mlx_mouse_hide();
+}
+
+void	cmp_intro_to_game(t_env *env)
+{
+	(void)env;
+	mlx_mouse_hide();
+}

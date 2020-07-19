@@ -1,0 +1,20 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{0.0, 0.0, 0.0}
+orientation|{0.0, 0.0}
+floor_Cylinder|{}|[]|true|()|
+Cube_Cube.001|{}|[]|true|()|
+TV.001_television.001|{}|[]|true|()|
+screen_Plane|{}|[]|true|()|
+Wall-1_Cube.004|{}|[]|true|()|
+Wall-1.001_Cube.003|{}|[]|true|()|
+Wall-1.002_Cube.007|{}|[]|true|()|
+Wall-1.003_Cube.008|{}|[]|true|()|
+Wall-1.004_Cube.009|{}|[]|true|()|
+Wall-1.005_Cube.010|{}|[]|true|()|
+LEDs_Sphere.002|{}|[]|true|()|
+DoorBoddy_Cube.001|{}|[]|true|(resources/textures/start_room/door.xpm)|
+Locker_Cube.003|{}|[]|true|()|
+DoorBoddy_Cube.002|{}|[]|true|(resources/textures/start_room/door.xpm)|

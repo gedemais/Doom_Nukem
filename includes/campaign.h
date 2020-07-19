@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 13:17:18 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 17:13:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define CAMPAIGN_H
 
 # define COUNTDOWN 260
+# define INTRO_LIST_SIZE 10
 
 enum			e_cmp_sub_contexts
 {
 	CMP_SC_MENU,
 	CMP_SC_GAME,
+	CMP_SC_INTRO,
 	CMP_SC_MAX
 };
 
@@ -104,13 +106,16 @@ int				handle_key(t_env *env);
 ** Sub_contexts functions
 */
 int				switch_campaign_subcontext(t_env *env, unsigned int i);
-int				cmp_menu(void *param);
-int				cmp_game(void *param);
+int				cmp_menu(t_env *env);
+int				cmp_game(t_env *env);
+int				cmp_intro(t_env *env);
 
 /*
 ** Routines
 */
 void			cmp_menu_to_game(t_env *env);
 void			cmp_game_to_menu(t_env *env);
+void			cmp_menu_to_intro(t_env *env);
+void			cmp_intro_to_game(t_env *env);
 
 #endif

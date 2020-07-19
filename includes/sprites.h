@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/19 17:30:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ enum		e_sprite_id
 	SP_COIN,
 	SP_NEW_WAVE,
 	SP_CMP_KEY,
+	SP_CMP_1,
+	SP_CMP_2,
+	SP_CMP_3,
+	SP_CMP_4,
+	SP_CMP_5,
+	SP_CMP_6,
+	SP_CMP_7,
+	SP_CMP_8,
 	SP_MAX
 };
 

@@ -38,12 +38,10 @@ static void	cmp_game_handle_events(t_env *env)
 	handle_mouse(env, e);
 }
 
-int		cmp_game(void *param)
+int		cmp_game(t_env *env)
 {
-	t_env		*env;
 	t_camp_env	*cmp_env;
 
-	env = (t_env*)param;
 	cmp_env = &env->cmp_env;
 	if (sound_manager(env, SA_GAME1))
 		return (-1);

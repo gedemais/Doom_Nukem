@@ -30,7 +30,7 @@ static int				handle_events_cmp_menu(t_env *env)
 					&& switch_context(env, C_TITLE_SCREEN))
 					return (-1);
 				else if (i == CMP_BUTTON_NEW_GAME
-					&& switch_campaign_subcontext(env, CMP_SC_GAME))
+					&& switch_campaign_subcontext(env, CMP_SC_INTRO))
 					return (-1);
 				clic = false;
 				return (1);
@@ -49,11 +49,8 @@ static void	render_buttons_cmp_menu(t_env *env)
 	render_button(env, env->cmp_env.buttons[CMP_BUTTON_NEW_GAME]);
 }
 
-int			cmp_menu(void *param)
+int			cmp_menu(t_env *env)
 {
-	t_env *env;
-
-	env = (t_env*)param;
 	if (sound_manager(env, SA_TITLE_SCREEN_L))
 		return (-1);
 	if (handle_events_cmp_menu(env))

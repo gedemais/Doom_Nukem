@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 12:45:35 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 15:24:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/19 15:38:33 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		handle_countdown(t_env *env, t_point pos)
 	tmp *= 10.0f;
 	tenth = tmp;
 	length = ft_nb_len(mins) * 24;
-	draw_rectangle(env->mlx.img_data, (t_point){200, 200}, (t_point){200, 2}, 0);
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x - 20, pos.y - 24}, (t_point){150, 26}, 0x888888);
 	put_section(env, mins, pos, true);
 	length = ft_strlen((char*)((t_ttf_config*)ttf_config())->s) * 20;
 	put_section(env, seconds, (t_point){pos.x + length, pos.y}, true);
