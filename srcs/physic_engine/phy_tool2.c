@@ -118,4 +118,3 @@ void		stop_position_cam(t_env *env, t_map *maps, t_mesh *cam)
 			: translate_mesh(maps, cam, vec_sub(maps->spawn, cam->corp.pos));
 	}
 }
-
