@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 19:16:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:35:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	init_buzzers(t_env *e)
 	env->buzzers[3].start = dyacc(&e->maps[SCENE_DUST].meshs, 3);
 	env->buzzers[4].start = dyacc(&e->maps[SCENE_DUST].meshs, 4);
 	env->buzzers[5].start = dyacc(&e->maps[SCENE_DUST].meshs, 11);
-	env->buzzers[0].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 14);
-	env->buzzers[1].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 15);
-	env->buzzers[2].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 16);
-	env->buzzers[3].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 13);
-	env->buzzers[4].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 17);
-	env->buzzers[5].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 18);
+	env->buzzers[0].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 19);
+	env->buzzers[1].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 20);
+	env->buzzers[2].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 21);
+	env->buzzers[3].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 15);
+	env->buzzers[4].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 22);
+	env->buzzers[5].buzzer = dyacc(&e->maps[SCENE_START_ROOM].meshs, 23);
 	env->buzzers[0].pos = (t_vec3d){-1, 1, -14, 0};
 	env->buzzers[1].pos = (t_vec3d){2, 0.3, -4.5, 0};
 	env->buzzers[2].pos = (t_vec3d){-0.4, 0.5, 6.15, 0};
