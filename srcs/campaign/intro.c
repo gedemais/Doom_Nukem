@@ -22,30 +22,30 @@ static void	get_step(t_env *env, float left_time, int *step)
 	if (t == INFINITY)
 		t = left_time;
 	t -= env->data.spent;
+	if (*step == 0)
+	{
+		if (sound_system(env, SA_SNOW, sp_stop()))
+			exit_doom(env, "error sound_system", 0, -1);
+		if (sound_system(env, SA_CMP_INTRO,
+			sp_play(env->sound.volume, 1, env->cam.stats.pos)))
+			exit_doom(env, "error sound_system", 0, -1);
+	}
 	if (t <= 0)
 	{
 		*step += 1;
-		if (*step == 1)
-		{
-			if (sound_system(env, SA_SNOW, sp_stop()))
-				exit_doom(env, "error sound_system", 0, -1);
-			if (sound_system(env, SA_CMP_INTRO,
-				sp_play(env->sound.volume, 1, env->cam.stats.pos)))
-				exit_doom(env, "error sound_system", 0, -1);
-		}
 		t = INFINITY;
 	}
 }
 
 int			cmp_intro(t_env *env)
 {
-	static float	time_list[INTRO_LIST_SIZE] = {1.5f, 4, 6, 6, 6, 7, 4, 5};
+	static float	time_list[INTRO_LIST_SIZE] = {1.5f, 4, 6, 6, 6, 7, 4, 6, 1.5f};
 	static int		step = 0;
 
 	if (sound_manager(env, SA_MAX))
 		return (-1);
 	ft_bzero(env->mlx.img_data, env->data.data_size);
-	if ((step == INTRO_LIST_SIZE + 1 || env->events.keys[KEY_P])
+	if ((step == INTRO_LIST_SIZE || env->events.keys[KEY_P])
 		&& !(step = 0) && switch_campaign_subcontext(env, CMP_SC_GAME))
 		return (-1);
 //	if (sound_system(env, SA_SNOW,

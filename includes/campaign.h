@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 21:45:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:26:40 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CAMPAIGN_H
 
 # define COUNTDOWN 260
-# define INTRO_LIST_SIZE 8
+# define INTRO_LIST_SIZE 9
 
 enum			e_cmp_sub_contexts
 {
