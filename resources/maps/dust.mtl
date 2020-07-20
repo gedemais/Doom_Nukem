@@ -1,5 +1,125 @@
 # Blender MTL File: 'None'
-# Material Count: 32
+# Material Count: 44
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.002
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.003
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.004
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.005
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.006
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.007
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.008
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.009
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.010
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.011
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.002280 0.005325
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.012
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
 
 newmtl material_0
 Ns 0.000000
@@ -10,7 +130,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_0.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_0.tga
 
 newmtl material_1
 Ns 0.000000
@@ -21,7 +141,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_1.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_1.tga
 
 newmtl material_10
 Ns 0.000000
@@ -32,7 +152,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_10.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_10.tga
 
 newmtl material_11
 Ns 0.000000
@@ -43,7 +163,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_11.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_11.tga
 
 newmtl material_12
 Ns 0.000000
@@ -54,7 +174,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_12.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_12.tga
 
 newmtl material_13
 Ns 0.000000
@@ -65,7 +185,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_13.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_13.tga
 
 newmtl material_14
 Ns 0.000000
@@ -76,7 +196,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_14.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_14.tga
 
 newmtl material_15
 Ns 0.000000
@@ -87,7 +207,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_15.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_15.tga
 
 newmtl material_16
 Ns 0.000000
@@ -98,7 +218,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_16.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_16.tga
 
 newmtl material_17
 Ns 0.000000
@@ -109,7 +229,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_17.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_17.tga
 
 newmtl material_18
 Ns 0.000000
@@ -120,7 +240,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_18.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_18.tga
 
 newmtl material_19
 Ns 0.000000
@@ -131,7 +251,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_19.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_19.tga
 
 newmtl material_2
 Ns 0.000000
@@ -142,7 +262,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_2.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_2.tga
 
 newmtl material_20
 Ns 0.000000
@@ -153,7 +273,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_20.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_20.tga
 
 newmtl material_21
 Ns 0.000000
@@ -164,7 +284,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_21.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_21.tga
 
 newmtl material_22
 Ns 0.000000
@@ -175,7 +295,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_22.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_22.tga
 
 newmtl material_23
 Ns 0.000000
@@ -186,7 +306,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_23.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_23.tga
 
 newmtl material_25
 Ns 0.000000
@@ -197,7 +317,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_25.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_25.tga
 
 newmtl material_26
 Ns 0.000000
@@ -208,7 +328,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_26.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_26.tga
 
 newmtl material_27
 Ns 0.000000
@@ -219,7 +339,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_27.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_27.tga
 
 newmtl material_28
 Ns 0.000000
@@ -230,7 +350,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_28.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_28.tga
 
 newmtl material_29
 Ns 0.000000
@@ -241,7 +361,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_29.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_29.tga
 
 newmtl material_30
 Ns 0.000000
@@ -252,7 +372,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_30.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_30.tga
 
 newmtl material_31
 Ns 0.000000
@@ -263,7 +383,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_31.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_31.tga
 
 newmtl material_32
 Ns 0.000000
@@ -274,7 +394,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_32.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_32.tga
 
 newmtl material_33
 Ns 0.000000
@@ -285,7 +405,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_33.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_33.tga
 
 newmtl material_4
 Ns 0.000000
@@ -296,7 +416,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_4.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_4.tga
 
 newmtl material_5
 Ns 0.000000
@@ -307,7 +427,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_5.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_5.tga
 
 newmtl material_6
 Ns 0.000000
@@ -318,7 +438,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_6.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_6.tga
 
 newmtl material_7
 Ns 0.000000
@@ -329,7 +449,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_7.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_7.tga
 
 newmtl material_8
 Ns 0.000000
@@ -340,7 +460,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_8.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_8.tga
 
 newmtl material_9
 Ns 0.000000
@@ -351,4 +471,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /Users/gedemais/Desktop/de_dust2-cs-map (1)/source/de_dust2/de_dust2_material_9.tga
+map_Kd (1)/source/de_dust2/de_dust2_material_9.tga

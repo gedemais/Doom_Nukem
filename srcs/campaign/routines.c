@@ -30,7 +30,6 @@ void	cmp_menu_to_intro(t_env *env)
 
 void	cmp_intro_to_game(t_env *env)
 {
-	(void)env;
 	rasterizer(env, &env->maps[SCENE_START_ROOM], false);
 	rasterizer(env, &env->maps[SCENE_DUST], false);
 	mlx_mouse_hide();
