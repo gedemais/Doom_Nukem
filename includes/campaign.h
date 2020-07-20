@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 17:08:52 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:47:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ struct			s_camp_env
 	t_sector	sectors[SECTOR_MAX];
 	t_buzzer	buzzers[NB_BUZZERS];
 	float		countdown;
-	bool		have_key;
 	int			sector;
+	bool		done;
 	int			sub_context;
 };
 
@@ -121,7 +121,6 @@ int				cmp_intro(t_env *env);
 /*
 ** Routines
 */
-void			cmp_menu_to_game(t_env *env);
 void			cmp_game_to_menu(t_env *env);
 void			cmp_menu_to_intro(t_env *env);
 void			cmp_intro_to_game(t_env *env);

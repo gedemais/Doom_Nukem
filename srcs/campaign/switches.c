@@ -43,6 +43,25 @@ static t_buzzer	*get_closest_switch(t_env *env, float *d)
 	return (&env->cmp_env.buzzers[index]);
 }
 
+void	handle_enigma(t_env *env)
+{
+	static bool		answer[NB_BUZZERS] = {1, 0, 1, 0, 1, 0};
+	bool			try[NB_BUZZERS];
+	int				i;
+
+	i = 0;
+	while (i < NB_BUZZERS)
+	{
+		try[i] = env->cmp_env.buzzers[i].on;
+		i++;
+	}
+	if (!ft_memcmp(answer, try, NB_BUZZERS))
+	{
+		env->cmp_env.sector = SECTOR_START_ROOM;
+		env->cmp_env.done = true;
+	}
+}
+
 int				handle_switches(t_env *env)
 {
 	static float	delay = 0;

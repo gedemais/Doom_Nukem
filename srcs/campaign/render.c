@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 16:42:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:46:58 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	init_cmp_routines(void (*cmp_routines[CMP_SC_MAX][CMP_SC_MAX])(t_env*))
 {
-	cmp_routines[CMP_SC_MENU][CMP_SC_GAME] = cmp_menu_to_game;
 	cmp_routines[CMP_SC_GAME][CMP_SC_MENU] = cmp_game_to_menu;
 	cmp_routines[CMP_SC_MENU][CMP_SC_INTRO] = cmp_menu_to_intro;
 	cmp_routines[CMP_SC_INTRO][CMP_SC_GAME] = cmp_intro_to_game;
