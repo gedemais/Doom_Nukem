@@ -24,6 +24,10 @@ void	switch_bit(t_buzzer *b)
 
 int		handle_switches(t_env *env)
 {
-	(void)env;
+	t_buzzer	*buzz;
+
+	if (!(buzz = get_closest_switch(env)))
+		return (0);
+	if (buzz->)
 	return (0);
 }
