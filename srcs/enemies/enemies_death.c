@@ -94,7 +94,7 @@ int
 		if (vec_outrange(dim, mob->pos))
 		{
 			mob->hp = 0;
-			env->custom_env.game.moula -= KILL_REWARD;
+			mob->dead = true;
 		}
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))
