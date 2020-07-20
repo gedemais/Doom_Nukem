@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 11:26:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:08:52 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ struct			s_player
 
 struct			s_buzzer
 {
+	t_vec3d	pos;
 	t_mesh	*start;
 	t_mesh	*buzzer;
 	bool	on;

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	switch_bit(t_buzzer *b)
+void			switch_bit(t_buzzer *b)
 {
 	t_triangle	*t;
 	int			i;
@@ -22,12 +22,46 @@ void	switch_bit(t_buzzer *b)
 	}
 }
 
-int		handle_switches(t_env *env)
+static t_buzzer	*get_closest_switch(t_env *env, float *d)
 {
-	t_buzzer	*buzz;
+	int			index;
+	float		tmp;
+	int			i;
 
-	if (!(buzz = get_closest_switch(env)))
+	i = 0;
+	*d = INFINITY;
+	while (i < NB_BUZZERS)
+	{
+		tmp = vec3d_dist(env->cam.stats.pos, env->cmp_env.buzzers[i].pos);
+		if (tmp < *d)
+		{
+			index = i;
+			*d = tmp;
+		}
+		i++;
+	}
+	return (&env->cmp_env.buzzers[index]);
+}
+
+int				handle_switches(t_env *env)
+{
+	static float	delay = 0;
+	t_buzzer		*buzz;
+	float			dist;
+
+	delay -= env->data.spent;
+	if (env->scene != SCENE_DUST
+		|| delay > 0 || !(buzz = get_closest_switch(env, &dist)))
 		return (0);
-	if (buzz->)
+	if (dist < 1)
+	{
+		textual_hint(env, "F",
+			buzz->on ? "switch bit off" : "switch bit on", 0);
+		if (env->events.keys[KEY_F])
+		{
+			delay = 0.5f;
+			switch_bit(buzz);
+		}
+	}
 	return (0);
 }
