@@ -76,4 +76,8 @@ void			textual_hint(t_env *env, char *button, char *action, int index);
 int				input_fields(t_env *env, bool refresh, bool free);
 t_ttf_config	*ttf_config();
 
+void			get_glyph_pads(float *left, float *right, FT_Bitmap bmp);
+int				compute_kernings(t_ttf *ttf, FT_Face face, int font);
+void			map_letter(char *img, FT_Bitmap bmp, int size, t_point o);
+
 #endif

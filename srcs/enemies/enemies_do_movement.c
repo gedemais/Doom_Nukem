@@ -64,8 +64,6 @@ static int		enemies_actions(t_env *env, t_enemy *mob)
 	if (mob->i == mob->end->i || mob->i == mob->goal->i)
 		return (0);
 	pos = vec_add(mob->pos, mob->pitch);
-	if (vec_outrange(vec_add(env->astar.dim, env->astar.dim), pos))
-		return (0);
 	mob->pos = pos;
 	mob->goal->bobstacle = 1;
 	fcos = cos(mob->yaw);

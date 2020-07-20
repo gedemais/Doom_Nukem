@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   resources_paths.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
+/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 char	*maps_paths(unsigned int index)
@@ -204,6 +216,7 @@ char	*icones_paths(unsigned int index)
 										"lava_ico.xpm",
 										"spawner_ico.xpm",
 										"mob_spawner_ico.xpm"};
+
 	return (paths[index]);
 }
 

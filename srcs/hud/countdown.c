@@ -45,7 +45,8 @@ int		handle_countdown(t_env *env, t_point pos)
 	tmp *= 10.0f;
 	tenth = tmp;
 	length = ft_nb_len(mins) * 24;
-	draw_rectangle(env->mlx.img_data, (t_point){200, 200}, (t_point){200, 2}, 0);
+	draw_rectangle(env->mlx.img_data,
+		(t_point){200, 200}, (t_point){200, 2}, 0);
 	put_section(env, mins, pos, true);
 	length = ft_strlen((char*)((t_ttf_config*)ttf_config())->s) * 20;
 	put_section(env, seconds, (t_point){pos.x + length, pos.y}, true);
