@@ -15,6 +15,7 @@
 
 # define COUNTDOWN 260
 # define INTRO_LIST_SIZE 9
+# define NB_BUZZERS 6
 
 enum			e_cmp_sub_contexts
 {
@@ -66,12 +67,20 @@ struct			s_player
 	bool		hover;
 };
 
+struct			s_buzzer
+{
+	t_mesh	*start;
+	t_mesh	*buzzer;
+	bool	on;
+};
+
 struct			s_camp_env
 {
 	t_env		*env;
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];
 	t_sector	sectors[SECTOR_MAX];
+	t_buzzer	buzzers[NB_BUZZERS];
 	float		countdown;
 	bool		have_key;
 	int			sector;
@@ -90,6 +99,8 @@ int				render_camp(void *param);
 /*
 ** Campaign
 */
+int				handle_switches(t_env *env);
+void			switch_bit(t_buzzer *b);
 int				handle_countdown(t_env *env, t_point pos);
 
 /*
