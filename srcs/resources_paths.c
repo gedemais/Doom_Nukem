@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resources_paths.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/20 19:50:38 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,37 +49,37 @@ char	*maps_paths(unsigned int index)
 char	*sprites_paths(unsigned int index)
 {
 	static char		*paths[SP_MAX] = {
-					"resources/sprites/buttons/campaign_clic.XPM",
-					"resources/sprites/buttons/campaign_hover.XPM",
-					"resources/sprites/buttons/campaign_off.XPM",
-					"resources/sprites/buttons/custom_clic.XPM",
-					"resources/sprites/buttons/custom_hover.XPM",
-					"resources/sprites/buttons/custom_off.XPM",
-					"resources/sprites/buttons/map_editor_clic.XPM",
-					"resources/sprites/buttons/map_editor_hover.XPM",
-					"resources/sprites/buttons/map_editor_off.XPM",
-					"resources/sprites/buttons/quit_clic.XPM",
-					"resources/sprites/buttons/quit_hover.XPM",
-					"resources/sprites/buttons/quit_off.XPM",
-					"resources/sprites/logo.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_1C.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_1H.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_1O.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_2C.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_2H.XPM",
-					"resources/sprites/buttons/SP_CP_BUTTON_2O.XPM",
-					"resources/sprites/buttons/SP_ME_BUTTON_2C.XPM",
-					"resources/sprites/buttons/SP_ME_BUTTON_2H.XPM",
-					"resources/sprites/buttons/SP_ME_BUTTON_2O.XPM",
+					"resources/sprites/buttons/campaign_clic.xpm",
+					"resources/sprites/buttons/campaign_hover.xpm",
+					"resources/sprites/buttons/campaign_off.xpm",
+					"resources/sprites/buttons/custom_clic.xpm",
+					"resources/sprites/buttons/custom_hover.xpm",
+					"resources/sprites/buttons/custom_off.xpm",
+					"resources/sprites/buttons/map_editor_clic.xpm",
+					"resources/sprites/buttons/map_editor_hover.xpm",
+					"resources/sprites/buttons/map_editor_off.xpm",
+					"resources/sprites/buttons/quit_clic.xpm",
+					"resources/sprites/buttons/quit_hover.xpm",
+					"resources/sprites/buttons/quit_off.xpm",
+					"resources/sprites/logo.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_1C.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_1H.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_1O.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_2C.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_2H.xpm",
+					"resources/sprites/buttons/SP_CP_BUTTON_2O.xpm",
+					"resources/sprites/buttons/SP_ME_BUTTON_2C.xpm",
+					"resources/sprites/buttons/SP_ME_BUTTON_2H.xpm",
+					"resources/sprites/buttons/SP_ME_BUTTON_2O.xpm",
 					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1C.xpm",
 					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1H.xpm",
 					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1O.xpm",
 					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2C.xpm",
 					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2H.xpm",
 					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2O.xpm",
-					"resources/sprites/ts_background.XPM",
-					"resources/sprites/cmp_ts_background.XPM",
-					"resources/sprites/main_txt_loader_campaign.XPM",
+					"resources/sprites/ts_background.xpm",
+					"resources/sprites/cmp_ts_background.xpm",
+					"resources/sprites/main_txt_loader_campaign.xpm",
 					"resources/sprites/map_editor_background.xpm",
 					"resources/sprites/me_new_map_background.xpm",
 					"resources/sprites/map_editor_menu_title.xpm",
