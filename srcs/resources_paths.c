@@ -184,7 +184,8 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/snow.wav",
 					"resources/samples/campaign/door.wav",
 					"resources/samples/campaign/button.wav",
-					"resources/samples/campaign/beep.wav"};
+					"resources/samples/campaign/beep.wav",
+					"resources/samples/campaign/boom.wav"};
 
 	return (paths[index]);
 }

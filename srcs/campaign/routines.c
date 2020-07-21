@@ -48,5 +48,5 @@ void	cmp_end_to_menu(t_env *env)
 	// stop la musique de fin, reprendre celle du menu
 	(void)env;
 	mlx_mouse_show();
+	mlx_mouse_show();
 }
-

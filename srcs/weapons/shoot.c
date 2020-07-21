@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 14:40:20 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/16 22:22:23 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:54:19 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static int	stop_n_play(t_env *env, int source)
 {
 	if (sound_system(env, source, sp_stop())
 		|| sound_system(env, source,
-		sp_play(env->sound.volume, PITCH, env->cam.stats.pos)))
+		sp_play(env->sound.volume, PITCH,
+		vec_add(env->cam.stats.pos, env->cam.stats.acc))))
 		return (-1);
 	return (0);
 }

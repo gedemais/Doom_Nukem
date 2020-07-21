@@ -7,6 +7,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 	t_vec3d		r;
 
 	coeff = WALK_SPEED;
+	env->cam.stats.acc = env->cam.stats.pos;
 	if (env->cmp_env.sector == SECTOR_START_ROOM)
 		coeff *= 2;
 	if (env->events.keys[KEY_SHIFT_LEFT])
@@ -26,6 +27,7 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cmp_env.sector = SECTOR_START_ROOM;
 		env->cmp_env.hint_t = 2;
 	}
+	env->cam.stats.acc = vec_sub(env->cam.stats.acc, env->cam.stats.pos);
 }
 
 static int	beep_bomb(t_env *env)
@@ -58,7 +60,7 @@ static int	handle_door(t_env *env)
 		if (env->events.keys[KEY_E])
 		{
 			if (sound_system(env, SA_CMP_DOOR,
-				sp_fork(env->sound.volume, 1, env->cmp_env.door)))
+				sp_fork(env->sound.volume * 2, 1, env->cmp_env.door)))
 				return (-1);
 			env->cmp_env.sector = SECTOR_DUST;
 		}
@@ -69,12 +71,16 @@ static int	handle_door(t_env *env)
 static int	handle_end(t_env *env)
 {
 	env->cmp_env.failed = (env->cmp_env.countdown <= 0);
-	printf("%d %d\n", env->cmp_env.done, env->cmp_env.failed);
 	if (env->cmp_env.done)
 		env->cmp_env.sector = SECTOR_START_ROOM;
 	if (env->cmp_env.done || env->cmp_env.failed)
+	{
+		if (env->cmp_env.failed && sound_system(env, SA_CMP_BOOM,
+			sp_fork(env->sound.volume, 1, env->cam.stats.pos)))
+			return (-1);
 		if (switch_campaign_subcontext(env, CMP_SC_END))
 			return (-1);
+	}
 	return (0);
 }
 
@@ -85,8 +91,6 @@ int			cmp_game(t_env *env)
 	cmp_env = &env->cmp_env;
 	if (sound_manager(env, SA_GAME1))
 		return (-1);
-	printf("%f %f %f\n", env->cam.stats.pos.x, env->cam.stats.pos.y, env->cam.stats.pos.z);
-	printf("%f %f\n", env->cam.stats.yaw, env->cam.stats.pitch);
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
 	move(env, env->events.keys);
 	camera_aim(env);

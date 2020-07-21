@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/21 14:22:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 17:52:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ enum	e_sample_id
 	SA_CMP_DOOR,
 	SA_CMP_BUTTON,
 	SA_CMP_BEEP,
+	SA_CMP_BOOM,
 	SA_MAX
 };
 
