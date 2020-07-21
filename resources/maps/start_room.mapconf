@@ -2,12 +2,11 @@
 #          nom     position  vitesse   static/not texture_path
 # champ vide : valeur inchangee / 0 0 0
 # Coordonnees d'apparition sur la map 
-spawn|{0.0, 0.0, 0.0}
+spawn|{1.928437, 2.758090, 0.387751}
 orientation|{0.0, 0.0}
 reflet1_Cube.001|{}|[]|true|()|
 reflet2_Cube.002|{}|[]|true|()|
 reflet3_Cube.003|{}|[]|true|()|
-reflet4_Cube.004|{}|[]|true|()|
 refelt5_Cube.006|{}|[]|true|()|
 floor_Cylinder|{}|[]|true|()|
 Cube_Cube.001|{}|[]|true|()|
@@ -42,9 +41,7 @@ reflet4.002_Cube.017|{}|[]|true|()|
 Cube_Cube.018|{}|[]|true|()|
 Cube.001_Cube.019|{}|[]|true|()|
 Cube.002_Cube.020|{}|[]|true|()|
-Cube.003_Cube.021|{}|[]|true|()|
 Cube.004_Cube.022|{}|[]|true|()|
 Cube.005_Cube.023|{}|[]|true|()|
 Cube.006_Cube.024|{}|[]|true|()|
 Cube.007_Cube.025|{}|[]|true|()|
-Cube.008_Cube.026|{}|[]|true|()|

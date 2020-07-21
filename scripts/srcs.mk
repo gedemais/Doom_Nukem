@@ -16,6 +16,7 @@ SRCS_NAME =	main.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
+			campaign/end.c\
 			campaign/setup_cmp.c\
 			campaign/menu.c\
 			campaign/game.c\

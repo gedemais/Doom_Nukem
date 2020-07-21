@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/19 21:41:45 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 14:22:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ enum	e_sample_id
 	SA_PLAYER_DAMAGE,
 	SA_CMP_INTRO,
 	SA_SNOW,
+	SA_CMP_DOOR,
+	SA_CMP_BUTTON,
+	SA_CMP_BEEP,
 	SA_MAX
 };
 

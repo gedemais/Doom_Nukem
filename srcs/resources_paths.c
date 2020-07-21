@@ -88,7 +88,9 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/campaign/5.xpm",
 					"resources/sprites/campaign/6.xpm",
 					"resources/sprites/campaign/7.xpm",
-					"resources/sprites/campaign/8.xpm"};
+					"resources/sprites/campaign/8.xpm",
+					"resources/sprites/campaign/game_over.xpm",
+					"resources/sprites/campaign/victory.xpm"};
 
 	return (paths[index]);
 }
@@ -179,7 +181,10 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/loots/god_start.wav",
 					"resources/samples/voices/player_damage.wav",
 					"resources/samples/intro_music.wav",
-					"resources/samples/snow.wav"};
+					"resources/samples/snow.wav",
+					"resources/samples/campaign/door.wav",
+					"resources/samples/campaign/button.wav",
+					"resources/samples/campaign/beep.wav"};
 
 	return (paths[index]);
 }

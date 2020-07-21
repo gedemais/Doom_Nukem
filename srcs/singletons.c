@@ -6,13 +6,20 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:15:32 by gedemais          #+#    #+#             */
-/*   Updated: 2020/04/28 13:56:09 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 14:00:54 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 bool			*init_parser(void)
+{
+	static bool		val = false;
+
+	return (&val);
+}
+
+bool			*snow_play(void)
 {
 	static bool		val = false;
 

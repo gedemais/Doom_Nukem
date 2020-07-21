@@ -6,7 +6,7 @@
 /*   By: grudler <grudler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:37:38 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/18 19:42:57 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 14:01:06 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,6 @@ int				init_scroll_file(t_env *env, char *path, char *extension);
 ** Singletons
 */
 bool			*init_parser(void);
+bool			*snow_play(void);
 
 #endif
