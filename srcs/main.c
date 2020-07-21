@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 19:50:36 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 18:08:30 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			exit_doom(t_env *env, char *msg, int fd, int code)
 {
 	if (msg)
 		ft_putendl_fd(msg, fd);
-	//free_env(env);
+	free_env(env);
 	if (sound_system(env, -1, sp_stop()))
 		return (-1);
 	// if (archive_directory("./resources"))
