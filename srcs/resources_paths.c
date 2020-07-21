@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/21 22:54:05 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 22:54:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char	*blocs_txt_paths(unsigned int index)
 "resources/textures/blocs/dirt.xpm", "resources/textures/blocs/dirt_grass.xpm",
 "resources/textures/blocs/dirt_snow.xpm", "resources/textures/blocs/glace.xpm",
 "resources/textures/blocs/gold.xpm", "resources/textures/blocs/iron.xpm",
-		"resources/textures/blocs/light.xpm",
-		"resources/textures/blocs/obsidienne.xpm",
+"resources/textures/blocs/light.xpm", "resources/textures/blocs/obsidienne.xpm",
 		"resources/textures/blocs/sand.xpm",
 		"resources/textures/blocs/stone.xpm",
 		"resources/textures/blocs/wood_a.xpm",
