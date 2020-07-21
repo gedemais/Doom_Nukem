@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buttons.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 04:02:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/12 21:17:58 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:14:44 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_button(t_button *button, t_point o, t_sprite *sp[3])
 {
+	if (!sp || !sp[0] || !sp[1] || !sp[2])
+		return ;
 	button->l_up.x = o.x;
 	button->l_up.y = o.y;
 	button->r_up.x = o.x + sp[0]->wdt;

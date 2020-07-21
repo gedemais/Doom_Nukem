@@ -17,7 +17,6 @@ int		key_press_camp(int key, void *param)
 	t_env		*env;
 
 	env = ((t_env*)param);
-
 	if (key == KEY_SPACE)
 	{
 		env->cmp_env.sector++;
@@ -34,7 +33,6 @@ int		key_release_camp(int key, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)key;
 	return (0);
 }
@@ -44,7 +42,6 @@ int		mouse_press_camp(int button, int x, int y, void *param)
 	t_camp_env	*env;
 
 	env = &((t_env*)param)->cmp_env;
-	
 	(void)x;
 	(void)y;
 	(void)button;
@@ -56,7 +53,6 @@ int		mouse_release_camp(int button, int x, int y, void *param)
 	t_env	*env;
 
 	env = ((t_env*)param);
-	
 	(void)button;
 	(void)x;
 	(void)y;

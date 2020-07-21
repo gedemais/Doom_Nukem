@@ -1,10 +1,12 @@
 SRCS_NAME =	main.c\
 			free.c\
+			free2.c\
 			openal.c\
 			resources_paths.c\
 			setup.c\
 			singletons.c\
 			text.c\
+			text2.c\
 			scroll_file.c\
 			\
 			sound_system/sound_system.c\

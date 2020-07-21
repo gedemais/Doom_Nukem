@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 15:15:25 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 15:15:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:08:44 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ int			custom_menu_to_play(t_env *env)
 int			custom_play_to_menu(t_env *env)
 {
 	if (sound_system(env, 0, sp_overall(0, SA_MAX, sp_stop())))
-		return (-1);
-	if (sound_system(env, SA_BUTTON,
-		sp_play(env->sound.volume * 2, PITCH, env->cam.stats.pos)))
 		return (-1);
 	mlx_mouse_show();
 	ft_strdel(&env->custom_env.map_path);

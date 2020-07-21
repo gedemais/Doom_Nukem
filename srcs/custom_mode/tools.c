@@ -12,6 +12,19 @@
 
 #include "main.h"
 
+int		lava_sound(t_env *env, t_event_block *block)
+{
+	t_vec3d	center;
+
+	if (block->id != BE_LAVA)
+		return (0);
+	center = get_block_center(block);
+	if (sound_system(env, SA_LAVA,
+			sp_play(env->sound.volume / 1.8f, PITCH, center)))
+		return (-1);
+	return (0);
+}
+
 int		add_random_weapon(t_env *env)
 {
 	t_weapon	*w;

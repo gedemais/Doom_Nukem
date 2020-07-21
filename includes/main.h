@@ -186,4 +186,11 @@ int				init_scroll_file(t_env *env, char *path, char *extension);
 */
 bool			*init_parser(void);
 
+void			free_custom(t_env *env);
+void			free_cmp(t_env *env);
+void			free_player(t_player *p);
+void			free_fields(t_env *env);
+void			free_cam(t_cam *cam);
+void			free_map(t_map *map);
+
 #endif

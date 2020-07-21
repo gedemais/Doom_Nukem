@@ -93,8 +93,8 @@ int
 		mob = dyacc(mobs, i);
 		if (vec_outrange(dim, mob->pos))
 		{
-			mob->dead = 1;
 			mob->hp = 0;
+			mob->dead = true;
 		}
 		if (mob->hp < 1)
 			if (enemies_death_animation(mob, 0.1f))

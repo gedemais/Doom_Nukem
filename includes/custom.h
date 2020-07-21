@@ -174,4 +174,6 @@ int					custom_play_to_game_over(t_env *env);
 int					custom_game_over_to_play(t_env *env);
 int					custom_game_over_to_menu(t_env *env);
 
+int					lava_sound(t_env *env, t_event_block *block);
+
 #endif
