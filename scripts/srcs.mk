@@ -19,6 +19,7 @@ SRCS_NAME =	main.c\
 			campaign/setup_cmp.c\
 			campaign/menu.c\
 			campaign/game.c\
+			campaign/switches.c\
 			campaign/intro.c\
 			campaign/routines.c\
 			campaign/sectors.c\

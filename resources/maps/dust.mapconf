@@ -4,6 +4,18 @@
 # Coordonnees d'apparition sur la map 
 spawn|{-9.430809, 1.934265, 7.880144}
 orientation|{0.0, 0.0}
+socle_a_AnyConv.com__easy_button|{}|[]|true|()|
+buzzer_a_AnyConv.com__easy_button.001|{}|[]|true|()|
+socle_d_AnyConv.com__easy_button.003|{}|[]|true|()|
+buzzer_d_AnyConv.com__easy_button.002|{}|[]|true|()|
+buzzer_e_AnyConv.com__easy_button.005|{}|[]|true|()|
+socle_e_AnyConv.com__easy_button.004|{}|[]|true|()|
+socle_b_AnyConv.com__easy_button.007|{}|[]|true|()|
+buzzer_b_AnyConv.com__easy_button.006|{}|[]|true|()|
+buzzer_c_AnyConv.com__easy_button.009|{}|[]|true|()|
+socle_c_AnyConv.com__easy_button.008|{}|[]|true|()|
+socle_f_AnyConv.com__easy_button.011|{}|[]|true|()|
+buzzer_f_AnyConv.com__easy_button.010|{}|[]|true|()|
 33_de_dust2|{}|[]|true|(resources/textures/dust/de_dust2_material_33.xpm)|
 0_de_dust2.002|{}|[]|true|(resources/textures/dust/de_dust2_material_0.xpm)|
 1_de_dust2.003|{}|[]|true|(resources/textures/dust/de_dust2_material_1.xpm)|

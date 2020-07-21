@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:54:42 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 11:26:40 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:47:18 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define COUNTDOWN 260
 # define INTRO_LIST_SIZE 9
+# define NB_BUZZERS 6
 
 enum			e_cmp_sub_contexts
 {
@@ -66,15 +67,24 @@ struct			s_player
 	bool		hover;
 };
 
+struct			s_buzzer
+{
+	t_vec3d	pos;
+	t_mesh	*start;
+	t_mesh	*buzzer;
+	bool	on;
+};
+
 struct			s_camp_env
 {
 	t_env		*env;
 	t_button	buttons[CMP_BUTTON_MAX];
 	t_point		pos[CMP_BUTTON_MAX];
 	t_sector	sectors[SECTOR_MAX];
+	t_buzzer	buzzers[NB_BUZZERS];
 	float		countdown;
-	bool		have_key;
 	int			sector;
+	bool		done;
 	int			sub_context;
 };
 
@@ -90,6 +100,8 @@ int				render_camp(void *param);
 /*
 ** Campaign
 */
+int				handle_switches(t_env *env);
+void			switch_bit(t_buzzer *b);
 int				handle_countdown(t_env *env, t_point pos);
 
 /*
@@ -109,7 +121,6 @@ int				cmp_intro(t_env *env);
 /*
 ** Routines
 */
-void			cmp_menu_to_game(t_env *env);
 void			cmp_game_to_menu(t_env *env);
 void			cmp_menu_to_intro(t_env *env);
 void			cmp_intro_to_game(t_env *env);

@@ -51,7 +51,8 @@ int		cmp_game(t_env *env)
 	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
 	if (rasterizer(env, &env->maps[env->scene], false)
-		|| handle_countdown(env, (t_point){200, 200}))
+		|| handle_countdown(env, (t_point){200, 200})
+		|| handle_switches(env))
 		return (-1);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
