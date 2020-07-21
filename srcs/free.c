@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/21 19:27:23 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 22:51:41 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ int				free_env(t_env *env)
 	}
 	if (free_context[env->context])
 		free_context[env->context](env);
-	system("leaks doom-nukem");
 	return (0);
 }

@@ -1,0 +1,47 @@
+# Format : example|{0, 0, 0}|[0, 0, 0]|true/false|(path/img.xpm)
+#          nom     position  vitesse   static/not texture_path
+# champ vide : valeur inchangee / 0 0 0
+# Coordonnees d'apparition sur la map 
+spawn|{1.928437, 2.758090, 0.387751}
+orientation|{0.0, 0.0}
+reflet1_Cube.001|{}|[]|true|()|
+reflet2_Cube.002|{}|[]|true|()|
+reflet3_Cube.003|{}|[]|true|()|
+refelt5_Cube.006|{}|[]|true|()|
+floor_Cylinder|{}|[]|true|()|
+Cube_Cube.001|{}|[]|true|()|
+TV.001_television.001|{}|[]|true|()|
+screen_Plane|{}|[]|true|(resources/textures/campaign/dust_map.xpm)|
+Wall-1_Cube.004|{}|[]|true|()|
+Wall-1.001_Cube.003|{}|[]|true|()|
+Wall-1.002_Cube.007|{}|[]|true|()|
+Wall-1.003_Cube.008|{}|[]|true|()|
+Wall-1.004_Cube.009|{}|[]|true|()|
+Wall-1.005_Cube.010|{}|[]|true|()|
+LEDs_Sphere.002|{}|[]|true|()|
+DoorBoddy_Cube.001|{}|[]|true|(resources/textures/start_room/door.xpm)|
+Locker_Cube.003|{}|[]|true|()|
+DoorBoddy_Cube.002|{}|[]|true|(resources/textures/start_room/door.xpm)|
+LEDs.001_Sphere.000|{}|[]|true|()|
+LEDs.002_Sphere.001|{}|[]|true|()|
+LEDs.003_Sphere.003|{}|[]|true|()|
+LEDs.004_Sphere.004|{}|[]|true|()|
+LEDs.005_Sphere.005|{}|[]|true|()|
+Cube_Cube.003|{}|[]|true|()|
+reflet2.001_Cube.007|{}|[]|true|()|
+reflet1.001_Cube.008|{}|[]|true|()|
+reflet3.001_Cube.009|{}|[]|true|()|
+reflet4.001_Cube.010|{}|[]|true|()|
+refelt5.001_Cube.011|{}|[]|true|()|
+reflet2.002_Cube.012|{}|[]|true|()|
+reflet1.002_Cube.013|{}|[]|true|()|
+reflet3.003_Cube.015|{}|[]|true|()|
+refelt5.002_Cube.016|{}|[]|true|()|
+reflet4.002_Cube.017|{}|[]|true|()|
+Cube_Cube.018|{}|[]|true|()|
+Cube.001_Cube.019|{}|[]|true|()|
+Cube.002_Cube.020|{}|[]|true|()|
+Cube.004_Cube.022|{}|[]|true|()|
+Cube.005_Cube.023|{}|[]|true|()|
+Cube.006_Cube.024|{}|[]|true|()|
+Cube.007_Cube.025|{}|[]|true|()|

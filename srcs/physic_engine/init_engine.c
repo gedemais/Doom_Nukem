@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 20:10:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/18 20:10:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 22:51:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				init_physic_engine(t_env *env)
 	int			i;
 
 	i = 0;
-	ft_putendl("Init physic_engine :");
 	while (i < SCENE_MAX)
 	{
 		if (init_map_physics(&env->maps[i]))

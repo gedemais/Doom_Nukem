@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 12:45:35 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/19 15:24:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 22:33:59 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,19 @@ int		put_section(t_env *env, int var, t_point pos, bool sep)
 	return (0);
 }
 
-int		handle_countdown(t_env *env, t_point pos)
+static void	draw_case(t_env *env, t_point pos)
+{
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x - 20, pos.y - 24},
+		(t_point){150, 2}, 0xffffff);
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x - 20, pos.y + 2},
+		(t_point){150, 2}, 0xffffff);
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x - 20, pos.y - 24},
+		(t_point){2, 26}, 0xffffff);
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x + 128, pos.y - 24},
+		(t_point){2, 26}, 0xffffff);
+}
+
+int			handle_countdown(t_env *env, t_point pos)
 {
 	float	tmp;
 	int		mins;
@@ -45,13 +57,13 @@ int		handle_countdown(t_env *env, t_point pos)
 	tmp *= 10.0f;
 	tenth = tmp;
 	length = ft_nb_len(mins) * 24;
-	draw_rectangle(env->mlx.img_data,
-		(t_point){200, 200}, (t_point){200, 2}, 0);
+	draw_rectangle(env->mlx.img_data, (t_point){pos.x - 20, pos.y - 24},
+		(t_point){150, 26}, 0x8888aa);
+	draw_case(env, pos);
 	put_section(env, mins, pos, true);
 	length = ft_strlen((char*)((t_ttf_config*)ttf_config())->s) * 20;
 	put_section(env, seconds, (t_point){pos.x + length, pos.y}, true);
 	length += ft_strlen((char*)((t_ttf_config*)ttf_config())->s) * 20;
 	put_section(env, tenth, (t_point){pos.x + length, pos.y}, false);
-	printf("%d:%d:%d\n", mins, seconds, tenth);
 	return (0);
 }

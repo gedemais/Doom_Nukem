@@ -50,7 +50,7 @@ IFREETYPE = -Ifreetype-2.10.1/include/
 LPNG = $(shell pkg-config --libs libpng)
 IPNG = $(shell pkg-config --cflags libpng)
 
-LBZ2 = $(shell find ~/.brew/ -iname libbz2.a)
+LBZ2 = $(shell find ~/.brew -iname libbz2.a)
 IBZ2 = -I$(shell find ~/.brew -iname include | grep bzip2)
 
 ##########################################################

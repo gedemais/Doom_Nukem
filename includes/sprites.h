@@ -6,7 +6,7 @@
 /*   By: maboye <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/13 14:22:38 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 15:03:30 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ enum		e_sprite_id
 	SP_NM_BUTTON_MAPED_2H,
 	SP_TS_BACKGROUND,
 	SP_CMP_TS_BACKGROUND,
-	SP_CMP_MENU_TXT,
 	SP_ME_BACKGROUND,
 	SP_ME_NEW_MAP_BACKGROUND,
 	SP_ME_MENU_TITLE,
@@ -72,6 +71,16 @@ enum		e_sprite_id
 	SP_COIN,
 	SP_NEW_WAVE,
 	SP_CMP_KEY,
+	SP_CMP_1,
+	SP_CMP_2,
+	SP_CMP_3,
+	SP_CMP_4,
+	SP_CMP_5,
+	SP_CMP_6,
+	SP_CMP_7,
+	SP_CMP_8,
+	SP_CMP_GAME_OVER,
+	SP_CMP_VICTORY,
 	SP_MAX
 };
 

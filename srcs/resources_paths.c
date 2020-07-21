@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/21 18:39:05 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 22:54:05 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 char	*maps_paths(unsigned int index)
 {
 	static char	*paths[SCENE_MAX] = {	"resources/maps/famas.obj",
-										"resources/maps/ak47.obj",
-										"resources/maps/sawed-off.obj",
-										"resources/maps/glock-18.obj",
-										"resources/maps/aug.obj",
-										"resources/maps/ump45.obj",
-										"resources/maps/mag-7.obj",
+			"resources/maps/ak47.obj", "resources/maps/sawed-off.obj",
+			"resources/maps/glock-18.obj", "resources/maps/aug.obj",
+			"resources/maps/ump45.obj", "resources/maps/mag-7.obj",
 										"resources/maps/galil.obj",
 										"resources/maps/negev.obj",
 										"resources/maps/tec-9.obj",
@@ -38,64 +35,8 @@ char	*maps_paths(unsigned int index)
 										"resources/maps/mage.obj",
 										"resources/maps/loot.obj",
 										"resources/maps/goule.obj",
-										"resources/maps/house.obj",
-										"resources/maps/key.obj",
 										"resources/maps/start_room.obj",
 										"resources/maps/dust.obj"};
-
-	return (paths[index]);
-}
-
-char	*sprites_paths(unsigned int index)
-{
-	static char		*paths[SP_MAX] = {
-					"resources/sprites/buttons/campaign_clic.xpm",
-					"resources/sprites/buttons/campaign_hover.xpm",
-					"resources/sprites/buttons/campaign_off.xpm",
-					"resources/sprites/buttons/custom_clic.xpm",
-					"resources/sprites/buttons/custom_hover.xpm",
-					"resources/sprites/buttons/custom_off.xpm",
-					"resources/sprites/buttons/map_editor_clic.xpm",
-					"resources/sprites/buttons/map_editor_hover.xpm",
-					"resources/sprites/buttons/map_editor_off.xpm",
-					"resources/sprites/buttons/quit_clic.xpm",
-					"resources/sprites/buttons/quit_hover.xpm",
-					"resources/sprites/buttons/quit_off.xpm",
-					"resources/sprites/logo.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_1C.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_1H.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_1O.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_2C.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_2H.xpm",
-					"resources/sprites/buttons/SP_CP_BUTTON_2O.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_2C.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_2H.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_2O.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1C.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1H.xpm",
-					"resources/sprites/buttons/SP_ME_BUTTON_CREATE_1O.xpm",
-					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2C.xpm",
-					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2H.xpm",
-					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2O.xpm",
-					"resources/sprites/ts_background.xpm",
-					"resources/sprites/cmp_ts_background.xpm",
-					"resources/sprites/main_txt_loader_campaign.xpm",
-					"resources/sprites/map_editor_background.xpm",
-					"resources/sprites/me_new_map_background.xpm",
-					"resources/sprites/map_editor_menu_title.xpm",
-					"resources/sprites/map_editor_new_map_title.xpm",
-					"resources/sprites/custom_background.xpm",
-					"resources/sprites/hitmarker.xpm",
-					"resources/sprites/game_over.xpm",
-					"resources/sprites/buttons/yes_off.xpm",
-					"resources/sprites/buttons/yes_hover.xpm",
-					"resources/sprites/buttons/yes_on.xpm",
-					"resources/sprites/buttons/no_off.xpm",
-					"resources/sprites/buttons/no_hover.xpm",
-					"resources/sprites/buttons/no_on.xpm",
-					"resources/sprites/coins.xpm",
-					"resources/sprites/new_wave.xpm",
-					"resources/sprites/key.xpm"};
 
 	return (paths[index]);
 }
@@ -106,12 +47,9 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/brique.xpm",
 		"resources/textures/blocs/brique_dark.xpm",
 		"resources/textures/blocs/clean_stone.xpm",
-		"resources/textures/blocs/dirt.xpm",
-		"resources/textures/blocs/dirt_grass.xpm",
-		"resources/textures/blocs/dirt_snow.xpm",
-		"resources/textures/blocs/glace.xpm",
-		"resources/textures/blocs/gold.xpm",
-		"resources/textures/blocs/iron.xpm",
+"resources/textures/blocs/dirt.xpm", "resources/textures/blocs/dirt_grass.xpm",
+"resources/textures/blocs/dirt_snow.xpm", "resources/textures/blocs/glace.xpm",
+"resources/textures/blocs/gold.xpm", "resources/textures/blocs/iron.xpm",
 		"resources/textures/blocs/light.xpm",
 		"resources/textures/blocs/obsidienne.xpm",
 		"resources/textures/blocs/sand.xpm",
@@ -126,8 +64,7 @@ char	*blocs_txt_paths(unsigned int index)
 		"resources/textures/blocs/wood_d_cut.xpm",
 		"resources/textures/blocs/jukebox.xpm",
 		"resources/textures/blocs/mystery_box.xpm",
-		"resources/textures/blocs/door.xpm",
-		"resources/textures/blocs/lava.xpm",
+"resources/textures/blocs/door.xpm", "resources/textures/blocs/lava.xpm",
 		"resources/textures/blocs/spawner.xpm",
 		"resources/textures/blocs/mob_spawner.xpm"};
 
@@ -184,7 +121,13 @@ char	*samples_paths(unsigned int index)
 					"resources/samples/loots/cash.wav",
 					"resources/samples/loots/god_end.wav",
 					"resources/samples/loots/god_start.wav",
-					"resources/samples/voices/player_damage.wav"};
+					"resources/samples/voices/player_damage.wav",
+					"resources/samples/intro_music.wav",
+					"resources/samples/snow.wav",
+					"resources/samples/campaign/door.wav",
+					"resources/samples/campaign/button.wav",
+					"resources/samples/campaign/beep.wav",
+					"resources/samples/campaign/boom.wav"};
 
 	return (paths[index]);
 }

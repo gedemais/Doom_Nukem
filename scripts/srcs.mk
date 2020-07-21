@@ -3,6 +3,7 @@ SRCS_NAME =	main.c\
 			free2.c\
 			openal.c\
 			resources_paths.c\
+			resources_paths_a.c\
 			setup.c\
 			singletons.c\
 			text.c\
@@ -18,10 +19,12 @@ SRCS_NAME =	main.c\
 			\
 			campaign/render.c\
 			campaign/events.c\
-			campaign/key.c\
+			campaign/end.c\
 			campaign/setup_cmp.c\
 			campaign/menu.c\
 			campaign/game.c\
+			campaign/switches.c\
+			campaign/intro.c\
 			campaign/routines.c\
 			campaign/sectors.c\
 			\

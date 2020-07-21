@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 15:36:55 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/17 15:56:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 11:54:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static int		check_export(t_env *env, char *data)
 		return (-1);
 	else if (env->events.keys[KEY_P])
 	{
-		if (sound_system(env, SA_CHANGE,
-			sp_fork(env->sound.volume, PITCH, env->cam.stats.pos)))
-			return (-1);
 		ret = export_maped_map(&env->edit_env);
 		err_time = EXPORT_ERR_TIME;
+		if (!ret && sound_system(env, SA_CHANGE,
+			sp_fork(env->sound.volume, 2, env->cam.stats.pos)))
+			return (-1);
 	}
 	if (err_time > 0)
 	{

@@ -2,10 +2,17 @@
 
 static void	move(t_env *env, bool keys[NB_KEYS])
 {
+	float		coeff;
 	t_vec3d		f;
 	t_vec3d		r;
 
-	f = vec_fmult(env->cam.stats.dir, WALK_SPEED);
+	coeff = WALK_SPEED;
+	env->cam.stats.acc = env->cam.stats.pos;
+	if (env->cmp_env.sector == SECTOR_START_ROOM)
+		coeff *= 2;
+	if (env->events.keys[KEY_SHIFT_LEFT])
+		coeff *= 2;
+	f = vec_fmult(env->cam.stats.dir, coeff);
 	r = (t_vec3d){f.z, 0, -f.x, f.w};
 	if (keys[KEY_W])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(f, 3.0f));
@@ -15,47 +22,87 @@ static void	move(t_env *env, bool keys[NB_KEYS])
 		env->cam.stats.pos = vec_add(env->cam.stats.pos, vec_fmult(r, 3.0f));
 	if (keys[KEY_D])
 		env->cam.stats.pos = vec_sub(env->cam.stats.pos, vec_fmult(r, 3.0f));
+	if (keys[KEY_H])
+	{
+		env->cmp_env.sector = SECTOR_START_ROOM;
+		env->cmp_env.hint_t = 2;
+	}
+	env->cam.stats.acc = vec_sub(env->cam.stats.acc, env->cam.stats.pos);
 }
 
-static void	handle_keys(t_env *env, t_events *e)
+static int	beep_bomb(t_env *env)
 {
-	if ((e->keys[KEY_W] || e->keys[KEY_S] || e->keys[KEY_A] || e->keys[KEY_D]))
-		move(env, e->keys);
+	static float	left = 0;
+
+	if (left <= 0)
+	{
+		if (sound_system(env, SA_CMP_BEEP,
+			sp_fork(env->sound.volume, 1, env->cam.stats.pos)))
+			return (-1);
+		left = env->cmp_env.countdown / 10;
+	}
+	left -= env->data.spent;
+	return (0);
 }
 
-static void	handle_mouse(t_env *env, t_events *e)
+static int	handle_door(t_env *env)
 {
-	(void)env;
-	(void)e;
+	if (env->cmp_env.sector != SECTOR_START_ROOM)
+	{
+		if (env->cmp_env.hint_t > 0)
+			textual_hint(env, "H", "come back to hub", 0);
+		env->cmp_env.hint_t -= env->data.spent;
+		return (0);
+	}
+	if (vec3d_dist(env->cam.stats.pos, env->cmp_env.door) < 2)
+	{
+		textual_hint(env, "E", "open the door", 0);
+		if (env->events.keys[KEY_E])
+		{
+			if (sound_system(env, SA_CMP_DOOR,
+				sp_fork(env->sound.volume * 2, 1, env->cmp_env.door)))
+				return (-1);
+			env->cmp_env.sector = SECTOR_DUST;
+		}
+	}
+	return (0);
 }
 
-static void	cmp_game_handle_events(t_env *env)
+static int	handle_end(t_env *env)
 {
-	t_events	*e;
-
-	e = &env->events;
-	handle_keys(env, e);
-	handle_mouse(env, e);
+	env->cmp_env.failed = (env->cmp_env.countdown <= 0);
+	if (env->cmp_env.done)
+		env->cmp_env.sector = SECTOR_START_ROOM;
+	if (env->cmp_env.done || env->cmp_env.failed)
+	{
+		if (env->cmp_env.failed && sound_system(env, SA_CMP_BOOM,
+			sp_fork(env->sound.volume, 1, env->cam.stats.pos)))
+			return (-1);
+		if (switch_campaign_subcontext(env, CMP_SC_END))
+			return (-1);
+	}
+	return (0);
 }
 
-int		cmp_game(void *param)
+int			cmp_game(t_env *env)
 {
-	t_env		*env;
 	t_camp_env	*cmp_env;
 
-	env = (t_env*)param;
 	cmp_env = &env->cmp_env;
 	if (sound_manager(env, SA_GAME1))
 		return (-1);
 	env->scene = cmp_env->sectors[cmp_env->sector].map;
+	move(env, env->events.keys);
 	camera_aim(env);
-	cmp_game_handle_events(env);
 	clear_screen_buffers(env);
-	if (rasterizer(env, &env->maps[env->scene], false))
+	if (rasterizer(env, &env->maps[env->scene], false)
+		|| handle_countdown(env, (t_point){485, 50})
+		|| handle_switches(env)
+		|| beep_bomb(env))
 		return (-1);
-	handle_key(env);
-	if (handle_countdown(env, (t_point){200, 200}))
-		return (-1);
+	handle_enigma(env);
+	handle_door(env);
+	handle_end(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }
