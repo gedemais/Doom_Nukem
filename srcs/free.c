@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 05:31:43 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/09 15:03:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:27:23 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ int				free_env(t_env *env)
 	{
 		if (i < SCENE_MAX)
 			free_map(&env->maps[i]);
-		mlx_destroy_image(env->mlx.mlx_ptr, env->sprites[i].img_ptr);
+		if (env->sprites)
+			mlx_destroy_image(env->mlx.mlx_ptr, env->sprites[i].img_ptr);
 		i++;
 	}
 	if (free_context[env->context])
 		free_context[env->context](env);
+	system("leaks doom-nukem");
 	return (0);
 }

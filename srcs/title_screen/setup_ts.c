@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_ts.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 01:58:00 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/15 16:50:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:16:48 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void		init_buttons(t_env *env)
 
 	i = 0;
 	sp = env->sprites;
+	if (sp == NULL)
+		exit_doom(env, "error", 2, -1);
 	y_offset = -100;
 	while (i < TS_BUTTON_MAX)
 	{

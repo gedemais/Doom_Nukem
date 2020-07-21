@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:50:02 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/21 18:08:30 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 19:18:18 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	doom_nukem(t_env *env)
 {
 	srand(time(NULL));
 	if (setup(env))
-		return (-1);
+		exit_doom(env, "error", 2, -1);
 	env->context = C_TITLE_SCREEN;
 	env->scene = 0;
 	mlx_mouse_move(env->mlx.mlx_win, WDT / 2, HGT / 2);

@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 07:15:58 by gedemais          #+#    #+#             */
-/*   Updated: 2020/07/20 19:50:50 by maboye           ###   ########.fr       */
+/*   Updated: 2020/07/21 19:19:19 by maboye           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,29 +98,46 @@ int			load_texture(t_mlx *mlx, char *path, t_sprite *txt, bool rev)
 	return (0);
 }
 
+t_sprite	*free_sprites(t_sprite *dest, int size)
+{
+	int	i;
+
+	i = -1;
+	while (dest && ++i < size)
+	{
+		if (dest[i].img_ptr)
+			free(dest[i].img_ptr);
+		if (dest[i].img_data)
+			ft_strdel(&dest[i].img_data);
+	}
+	free(dest);
+	dest = NULL;
+	return (dest);
+}
+
 t_sprite	*load_sprites(t_mlx *mlx)
 {
 	unsigned int		i;
 	int					t;
+	int					error;
 	t_sprite			*dest;
 
-	i = 0;
+	error = 0;
+	i = -1;
 	if (!(dest = (t_sprite*)malloc(sizeof(t_sprite) * SP_MAX)))
 		return (NULL);
 	ft_putendl("Loading sprites...");
-	while (i < SP_MAX)
+	while (error == 0 && ++i < SP_MAX)
 	{
 		loading_bar(i, SP_MAX, false);
-		if (!(dest[i].img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
-			sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
-			return (NULL);
-		if (!(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr,
-																&t, &t, &t)))
-			return (NULL);
-		if (i < SP_MAX - 1)
-			ft_putchar('\r');
-		i++;
+		if (error == 0 && !(dest[i].img_ptr = mlx_xpm_file_to_image(
+			mlx->mlx_ptr, sprites_paths(i), &dest[i].wdt, &dest[i].hgt)))
+			error = 1;
+		if (error == 0 && !(dest[i].img_data = mlx_get_data_addr(dest[i].img_ptr,
+			&t, &t, &t)))
+			error = 1;
+		i < SP_MAX - 1 ? ft_putchar('\r') : 0;
 	}
 	loading_bar(i, SP_MAX, true);
-	return (dest);
+	return (error ? free_sprites(dest, i) : dest);
 }
