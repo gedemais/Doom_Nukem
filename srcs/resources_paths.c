@@ -6,7 +6,7 @@
 /*   By: maboye <maboye@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 01:53:49 by maboye            #+#    #+#             */
-/*   Updated: 2020/07/21 22:54:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2020/07/21 22:55:10 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,7 @@ char	*icones_paths(unsigned int index)
 										"wood_d_cut_ico.xpm",
 										"jukebox_ico.xpm",
 										"mystery_box_ico.xpm",
-										"door_ico.xpm",
-										"lava_ico.xpm",
+										"door_ico.xpm", "lava_ico.xpm",
 										"spawner_ico.xpm",
 										"mob_spawner_ico.xpm"};
 
