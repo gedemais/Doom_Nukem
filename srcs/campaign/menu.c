@@ -56,7 +56,6 @@ int			cmp_menu(t_env *env)
 	if (handle_events_cmp_menu(env))
 		return (0);
 	map_sprite(env->mlx.img_data, env->sprites[SP_CMP_TS_BACKGROUND], (t_point){0, 0});
-	map_sprite(env->mlx.img_data, env->sprites[SP_CMP_MENU_TXT], (t_point){0, 0});
 	render_buttons_cmp_menu(env);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);

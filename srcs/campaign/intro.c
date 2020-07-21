@@ -45,9 +45,14 @@ int			cmp_intro(t_env *env)
 	if (sound_manager(env, SA_MAX))
 		return (-1);
 	ft_bzero(env->mlx.img_data, env->data.data_size);
-	if ((step == INTRO_LIST_SIZE || env->events.keys[KEY_P])
-		&& !(step = 0) && switch_campaign_subcontext(env, CMP_SC_GAME))
-		return (-1);
+	get_step(env, time_list[step], &step);
+	if (step == INTRO_LIST_SIZE || env->events.keys[KEY_P])
+	{
+		if (sound_system(env, SA_CMP_INTRO, sp_stop()))
+			exit_doom(env, "error sound_system", 0, -1);
+		if (!(step = 0) && switch_campaign_subcontext(env, CMP_SC_GAME))
+			return (-1);
+	}
 //	if (sound_system(env, SA_SNOW,
 //		sp_play(env->sound.volume, 1, env->cam.stats.pos)))
 //		exit_doom(env, "error sound_system", 0, -1);
@@ -56,7 +61,6 @@ int			cmp_intro(t_env *env)
 	else
 		map_sprite(env->mlx.img_data,
 			env->sprites[SP_CMP_KEY + step], (t_point){0, 0});
-	get_step(env, time_list[step], &step);
 	mlx_put_image_to_window(env->mlx.mlx_ptr, env->mlx.mlx_win, env->mlx.img_ptr, 0, 0);
 	return (0);
 }

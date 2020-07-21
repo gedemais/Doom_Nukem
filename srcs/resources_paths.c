@@ -65,7 +65,6 @@ char	*sprites_paths(unsigned int index)
 					"resources/sprites/buttons/SP_NM_BUTTON_MAPED_2O.xpm",
 					"resources/sprites/ts_background.XPM",
 					"resources/sprites/cmp_ts_background.XPM",
-					"resources/sprites/main_txt_loader_campaign.XPM",
 					"resources/sprites/map_editor_background.xpm",
 					"resources/sprites/me_new_map_background.xpm",
 					"resources/sprites/map_editor_menu_title.xpm",
